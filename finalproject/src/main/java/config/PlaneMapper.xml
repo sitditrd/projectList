@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="plane">
+	<select id="search" parameterType="int" resultType="dto.PlaneDTO">
+		select flight_name, airplane_model from plane where plane_code = #{plane_code}
+	</select>
+	
+	<select id="find_airline_name" parameterType="String" resultType="String">
+		select airline_name from plane where flight_name = #{flight_name}
+	</select>
+</mapper>

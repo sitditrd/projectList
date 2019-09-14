@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="member">
+	<insert id="register" parameterType="dto.MemberDTO">
+		insert into Customer values(Customer_seq.nextval, #{member_id}, #{member_pwd}, #{member_name}, #{member_birth}, #{member_tel}, #{member_email}, #{member_addr})
+	</insert>
+	
+	<select id="memchk" parameterType="dto.MemberDTO" resultType="int">
+		select count(*) from Customer where member_id=#{member_id} and member_pwd=#{member_pwd}
+	</select>
+	
+	<select id="search" parameterType="String" resultType="int">
+		select count(*) from Customer where member_id=#{member_id} 
+	</select>
+	
+	<select id="searchid" parameterType="dto.MemberDTO" resultType="dto.MemberDTO">
+		select member_id from Customer where member_name=#{member_name} and member_tel=#{member_tel} 
+	</select>
+	
+	<select id="searchpwd" parameterType="dto.MemberDTO" resultType="dto.MemberDTO">
+		select member_pwd from Customer where member_id=#{member_id} and member_email=#{member_email}
+	</select>
+	
+	<select id="searchcontent" parameterType="string" resultType="dto.MemberDTO">
+		select * from Customer where member_id = #{user_id}
+	</select>
+	
+	<delete id="delete" parameterType="String">
+		delete from Customer where member_id = #{user_id}
+	</delete>
+	
+	<update id="update" parameterType="dto.MemberDTO">
+		update Customer set member_pwd = #{member_pwd} , member_birth = #{member_birth} , member_tel = #{member_tel} , member_email = #{member_email} , member_addr = #{member_addr}, member_name = #{member_name} where member_id = #{member_id}
+	</update>
+	
+	<delete id="reserve_delete" parameterType="String">
+		delete from reserve where member_id = #{member_id}
+	</delete>
+
+	<select id="memlist" resultType="dto.MemberDTO">
+		select * from Customer
+	</select>
+	
+	<!-- member pagenation -->
+	<select id="count" resultType="int">
+		select count(*) from Customer
+	</select>
+
+	<select id="list" parameterType="dto.ReservePageDTO" resultType="dto.MemberDTO">
+		select b.* from
+		(select rownum as rm, a.* from(
+		select * from Customer
+		
+		<![CDATA[
+		order by member_code desc)a)b
+		 where b.rm >= #{startRow} and b.rm <= #{endRow}
+		]]>
+	</select>
+	
+	<select id="extract_info" parameterType="int" resultType="dto.MemberDTO">
+		select * from Customer where member_code = #{member_code}
+	</select>
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+ 
+ 
+ 
+ 
+ 
+ 
