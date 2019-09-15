@@ -254,7 +254,7 @@
 
 	<!-- interceptor -->
 	<mvc:interceptors>
-		<!-- noticeList.do가 실행되기 전에 무조건 part02.interceptor.LoginInterceptor가 먼저 
+		<!-- boardlist.do가 실행되기 전에 무조건 interceptor.LoginInterceptor가 먼저 
 			실행된다. -->
 		<mvc:interceptor>
 			<mvc:mapping path="/boardlist.do" />

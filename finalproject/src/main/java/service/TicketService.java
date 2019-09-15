@@ -9,4 +9,6 @@ import dto.TicketPageDTO;
 public interface TicketService {
 	public int countProcess(HashMap<String, Object> map);
 	public List<TicketDTO> listProcess(TicketPageDTO pv);
+	public List<TicketDTO> aListProcess();
+	public void listInit(HashMap<String, Object> map);
 }

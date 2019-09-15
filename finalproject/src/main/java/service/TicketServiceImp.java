@@ -26,4 +26,14 @@ public class TicketServiceImp implements TicketService {
 	public List<TicketDTO> listProcess(TicketPageDTO pv) {
 		return ticketdao.listMethod(pv);
 	}
+
+	@Override
+	public List<TicketDTO> aListProcess() {
+		return ticketdao.aList();
+	}
+
+	@Override
+	public void listInit(HashMap<String, Object> map) {
+		ticketdao.listInit(map);
+	}
 }

@@ -4,6 +4,15 @@
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="ticket">
+
+	<select id="aList" resultType="dto.TicketDTO">
+		select * from ROUTE
+	</select>
+	
+	<update id="listInit" parameterType="java.util.Map">
+		update ROUTE set ROUTE_DEPART_REGION = #{depart_region}, ROUTE_ARRIVE_REGION = #{arrive_region}, ROUTE_DEPART_DAY = #{Date}, DEPART_TIME = #{Depart_time}, ARRIVE_TIME = #{Arrive_time} WHERE ROUTE_CODE = #{Code}
+	</update>
+	
 	<select id="count" parameterType="java.util.Map" resultType="int">
 		select count(*) from route where route_depart_day = #{startDate} and route_depart_region = #{depart_region} and route_arrive_region = #{arrive_region}
 		<choose>
@@ -23,96 +32,97 @@
 			<when test="airline_name != 'all'">
 				and airline_name = #{airline_name}
 			</when>
+			
 		</choose>
 	    
-	     order by 
+	    )a)b 
 	     
+	    <![CDATA[
+	    	where b.rm >= #{startRow} and b.rm <= #{endRow}
+		]]>
+		
 	    <choose>
 	  		<!-- 항공사 8개 필터링이 되지 않은 경우 -->
 	   		<when test="airline_name == 'all' and searchKey =='all'">
-				route_code asc)a)b
+				order by b.route_code asc
 			</when>
 			
 	    	<when test="airline_name == 'all' and searchKey =='전체보기'">
-				route_code asc)a)b
+				order by b.route_code asc
 			</when>
 			
 			<when test="airline_name == 'all' and searchKey =='최저가'">
-				route_charge asc)a)b
+				order by b.route_charge asc
 			</when>
 			
 			<when test="airline_name == 'all' and searchKey =='최고가'">
-				route_charge desc)a)b
+				order by b.route_charge desc
 			</when>
 			
 			<when test="airline_name == 'all' and searchKey =='최단시간'">
-				route_estimate_time asc)a)b
+				order by b.route_estimate_time asc
 			</when>
 			
 			<when test="airline_name == 'all' and searchKey =='최장시간'">
-				route_estimate_time desc)a)b
+				order by b.route_estimate_time desc
 			</when>
 			
 			<when test="airline_name == 'all' and searchKey =='빠른 출발순'">
-				depart_time asc)a)b
+				order by b.depart_time asc
 			</when>
 			
 			<when test="airline_name == 'all' and searchKey =='늦은 출발순'">
-				depart_time desc)a)b
+				order by b.depart_time desc
 			</when>
 			
 			<when test="airline_name == 'all' and searchKey =='빠른 도착순'">
-				arrive_time asc)a)b
+				order by b.arrive_time asc
 			</when>
 			
 			<when test="airline_name == 'all' and searchKey =='늦은 도착순'">
-				arrive_time desc)a)b
+				order by b.arrive_time desc
 			</when>
 			
 			<!-- 항공사 8개 필터링이 된 경우-->
 			<when test="airline_name != 'all' and searchKey =='all'">
-				route_code asc)a)b
+				order by b.route_code asc
 			</when>
 			
 	    	<when test="airline_name != 'all' and searchKey =='전체보기'">
-				route_code asc)a)b
+				order by b.route_code asc
 			</when>
 			
 			<when test="airline_name != 'all' and searchKey =='최저가'">
-				route_charge asc)a)b
+				order by b.route_charge asc
 			</when>
 			
 			<when test="airline_name != 'all' and searchKey =='최고가'">
-				route_charge desc)a)b
+				order by b.route_charge desc
 			</when>
 			
 			<when test="airline_name != 'all' and searchKey =='최단시간'">
-				route_estimate_time asc)a)b
+				order by b.route_estimate_time asc
 			</when>
 			
 			<when test="airline_name != 'all' and searchKey =='최장시간'">
-				route_estimate_time desc)a)b
+				order by b.route_estimate_time desc
 			</when>
 			
 			<when test="airline_name != 'all' and searchKey =='빠른 출발순'">
-				depart_time asc)a)b
+				order by b.depart_time asc
 			</when>
 			
 			<when test="airline_name != 'all' and searchKey =='늦은 출발순'">
-				depart_time desc)a)b
+				order by b.depart_time desc
 			</when>
 			
 			<when test="airline_name != 'all' and searchKey =='빠른 도착순'">
-				arrive_time asc)a)b
+				order by b.arrive_time asc
 			</when>
 			
 			<when test="airline_name != 'all' and searchKey =='늦은 도착순'">
-				arrive_time desc)a)b
+				order by b.arrive_time desc
 			</when>
 		</choose>
-		
-	    <![CDATA[
-	     where b.rm >= #{startRow} and b.rm <= #{endRow}
-		]]>
 	</select>
 </mapper>

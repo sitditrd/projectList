@@ -28,4 +28,14 @@ public class TicketDaoImp implements TicketDAO {
 	public List<TicketDTO> listMethod(TicketPageDTO pv) {
 		return sqlSession.selectList("ticket.list", pv);
 	}
+
+	@Override
+	public List<TicketDTO> aList() {
+		return sqlSession.selectList("ticket.aList");
+	}
+
+	@Override
+	public void listInit(HashMap<String, Object> map) {
+		sqlSession.update("ticket.listInit", map);
+	}
 }

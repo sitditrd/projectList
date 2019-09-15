@@ -386,7 +386,6 @@ public class ReservationController {
 			System.out.println("=============================================================================================================");
 		}
 		
-		
 		//사용자가 티켓에 대하여 원하는 정보를 기재하고 검색한 조건들
 		System.out.println("티켓에 대한 사용자 정보 flighttype : " + flighttype); //왕복,편도 구분 <왕복 : 1, 편도 : 2>
 		System.out.println("티켓에 대한 사용자 정보 depart_region : " + arrive_region); //출발지

@@ -247,14 +247,23 @@
 
 									<div class="flight-info J_FlightInfo" id="divFlightInfo"
 										style="display: block;">
-										<div class="flight-tit clearfix">
-											<!-- <a href="javascript:;" class="policy J_PolicyShowBtn"
-												id="policy" > 수하물 규정&amp;항공권 규정 </a> -->
-											<h2 class="tit">
-												${goDTO.go_Depart_Nation} <i class="f-icon-s icon-round-trip"></i> ${goDTO.go_Arrive_Nation}
-											</h2>
-										</div>
-
+										
+										<c:if test="${flighttype == '1'}">
+											<div class="flight-tit clearfix">
+												<h2 class="tit">
+													${goDTO.go_Depart_Nation} <i class="f-icon-s icon-round-trip"></i> ${goDTO.go_Arrive_Nation}
+												</h2>
+											</div>
+										</c:if>
+										
+										<c:if test="${flighttype == '2'}">
+											<div class="flight-tit clearfix">
+												<h2 class="tit">
+													${goDTO.go_Arrive_Nation} <i class="f-icon-s icon-round-trip"></i> ${goDTO.go_Depart_Nation}
+												</h2>
+											</div>
+										</c:if>
+										
 										<div class="flight-result">
 											<div class="flight-item clearfix">
 												<div class="flight-item-hd clearfix">

@@ -122,7 +122,6 @@ td {
 	});
 	
 	function searchBtn() {
-		
 		if(!($('#airline_name').val())) { //값이 없을 때
 			$('#airline_name').val(('${map.airline_name}')); 
 		//hidden input요소에 값이 없을 때만 //mav.addObject("map", map);에 저장된 것을 불러와 저장한다. (bxslider선택 후 select option 선택시 airline_name값은 비어있어서  map.airline_name로 다시 저장시키고 action처리한다.) 
@@ -132,6 +131,7 @@ td {
 			$('#searchKey').val(('${map.searchKey}'));
 		//hidden input요소에 값이 없을 때만 //mav.addObject("map", map);에 저장된 것을 불러와 저장한다. (bxslider선택 후 select option 선택시 airline_name값은 비어있어서  map.airline_name로 다시 저장시키고 action처리한다.)
 		}
+		
 		$('#gcw-flights-form-flp').attr('action', 'ticketlist.do').submit();
 	}
 	

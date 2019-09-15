@@ -53,7 +53,7 @@ public class TicketController {
 	public ModelAndView TicketSearchProcess(String flighttype, String depart_region, String arrive_region,
 			String startDate, String endDate, String adult, String children, String laporseat, String airline_name,
 			TicketPageDTO pv, String seat_grade) {
-
+		
 		int count = 0;
 		int seat_option = 0;
 		
@@ -113,7 +113,7 @@ public class TicketController {
 		if (count == 0) {
 			res_startDate = startDate;
 		}
-
+		
 		count = 0; // count 초기화
 
 		///////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -142,7 +142,93 @@ public class TicketController {
 
 		count = 0; // count 초기화
 		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		List<TicketDTO> aList = service.aListProcess();
+		
+		String tStartDate = res_startDate + " ";
+		String tEndDate = endDate + " ";
+		
+		System.out.println("flighttype : " + flighttype);
+		System.out.println("depart_region : " + res_depart_region);
+		System.out.println("arrive_region : " + arrive_region);
+		System.out.println("startDate : " + res_startDate);
+		System.out.println("endDate : " + endDate);
+		System.out.println("airline_name : " + airline_name);
+		System.out.println("searchKey : " + pv.getSearchKey());
+		
+		if(flighttype.equals("1"))
+		{
+			for(int i=0; i<aList.size(); i++)
+			{
+				if(i < 22)
+				{
+					System.out.println(res_depart_region);
+					System.out.println(aList.get(i).getRoute_arrive_region());
+					System.out.println(res_startDate);
+					String oldDepartTime = aList.get(i).getDepart_time().split("/")[0];
+					System.out.println(aList.get(i).getDepart_time().replace(oldDepartTime, tStartDate));
+					String oldArriveTime = aList.get(i).getArrive_time().split("/")[0];
+					System.out.println(aList.get(i).getArrive_time().replace(oldArriveTime, tStartDate));
+					
+					HashMap<String, Object> initMap = new HashMap<String, Object>();
+					initMap.put("depart_region", res_depart_region); 
+					initMap.put("arrive_region", arrive_region); 
+					initMap.put("Date", res_startDate);
+					initMap.put("Depart_time", aList.get(i).getDepart_time().replace(oldDepartTime, tStartDate));
+					initMap.put("Arrive_time", aList.get(i).getArrive_time().replace(oldArriveTime, tStartDate)); 
+					initMap.put("Code", i+1);
+					
+					service.listInit(initMap);
+				}
+				else
+				{
+					System.out.println(aList.get(i).getRoute_depart_region());
+					System.out.println(aList.get(i).getRoute_arrive_region());
+					System.out.println(endDate);
+					String oldDepartTime = aList.get(i).getDepart_time().split("/")[0];
+					System.out.println(aList.get(i).getDepart_time().replace(oldDepartTime, tEndDate));
+					String oldArriveTime = aList.get(i).getArrive_time().split("/")[0];
+					System.out.println(aList.get(i).getArrive_time().replace(oldArriveTime, tEndDate));
 
+					HashMap<String, Object> initMap = new HashMap<String, Object>();
+					initMap.put("depart_region", arrive_region); 
+					initMap.put("arrive_region", res_depart_region); 
+					initMap.put("Date", endDate);
+					initMap.put("Depart_time", aList.get(i).getDepart_time().replace(oldDepartTime, tEndDate));
+					initMap.put("Arrive_time", aList.get(i).getArrive_time().replace(oldArriveTime, tEndDate)); 
+					initMap.put("Code", i+1);
+					
+					service.listInit(initMap);
+				}
+			}
+		}
+		else
+		{
+			for(int i=0; i<aList.size(); i++)
+			{
+				if(i < 22)
+				{
+					System.out.println(res_depart_region);
+					System.out.println(aList.get(i).getRoute_arrive_region());
+					System.out.println(res_startDate);
+					String oldDepartTime = aList.get(i).getDepart_time().split("/")[0];
+					System.out.println(aList.get(i).getDepart_time().replace(oldDepartTime, tStartDate));
+					String oldArriveTime = aList.get(i).getArrive_time().split("/")[0];
+					System.out.println(aList.get(i).getArrive_time().replace(oldArriveTime, tStartDate));
+					
+					HashMap<String, Object> initMap = new HashMap<String, Object>();
+					initMap.put("depart_region", res_depart_region); 
+					initMap.put("arrive_region", arrive_region); 
+					initMap.put("Date", res_startDate);
+					initMap.put("Depart_time", aList.get(i).getDepart_time().replace(oldDepartTime, tStartDate));
+					initMap.put("Arrive_time", aList.get(i).getArrive_time().replace(oldArriveTime, tStartDate)); 
+					initMap.put("Code", i+1);
+					
+					service.listInit(initMap);
+				}
+			}
+		}
+		
+		
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		// 항공사별 검색 정렬 옵션
 		map.put("depart_region", res_depart_region); // 출발지역
@@ -182,7 +268,7 @@ public class TicketController {
 			// 페이징기법을 처리할때마다 list값을 받아와서 아래와 같이 조인하여 원하는 값을 받아오도록 한다.
 			List<TicketDTO> ticketList = service.listProcess(pdto);
 
-			// route table의 plane_code열로 plane table의 flight_name과 airplane_model열을 추출.
+			//route table의 plane_code열로 plane table의 flight_name과 airplane_model열을 추출.
 			for (int i = 0; i < ticketList.size(); i++) {
 				ticketList.get(i).setFlight_name(
 						planeservice.searchMethodProcess(ticketList.get(i).getPlane_code()).getFlight_name());
@@ -194,7 +280,6 @@ public class TicketController {
 				seatOption.put("grade_code", seat_option);
 				
 				ticketList.get(i).setSeat_capacity(planemodelservice.find_Seat_Method_Process(seatOption)); //plane_code와 seat_grade에 해당하는 좌석수가 리스트 돌아갈때마다 담긴다.
-				
 				// requestScope의 seatOption영역에 seatOption을 저장
 			}
 
@@ -245,18 +330,18 @@ public class TicketController {
 		int item = 0;
 		
 		/*
-		System.out.println("stopover_code : " + stopoverDTO.getStopover_code());
-		System.out.println("airline_name : " + stopoverDTO.getAirline_name());
-		System.out.println("airline_nation : " + stopoverDTO.getAirline_nation());
-		System.out.println("airline_site : " + stopoverDTO.getAirline_site());
-		System.out.println("route_dapart_region : " + stopoverDTO.getRoute_depart_region());
-		System.out.println("route_arrive_region : " + stopoverDTO.getRoute_arrive_region());
-		System.out.println("arrive_time : " + stopoverDTO.getArrive_time());
-		System.out.println("depart_time : " + stopoverDTO.getDepart_time());
-		System.out.println("route_before_estimate_time : " + stopoverDTO.getRoute_before_estimate_time());
-		System.out.println("route_estimate_time : " + stopoverDTO.getRoute_estimate_time());
-		System.out.println("route_after_estimate_time : " + stopoverDTO.getRoute_after_estimate_time());
-		System.out.println("route_flight_name : " + stopoverDTO.getRoute_flight_name());
+			System.out.println("stopover_code : " + stopoverDTO.getStopover_code());
+			System.out.println("airline_name : " + stopoverDTO.getAirline_name());
+			System.out.println("airline_nation : " + stopoverDTO.getAirline_nation());
+			System.out.println("airline_site : " + stopoverDTO.getAirline_site());
+			System.out.println("route_dapart_region : " + stopoverDTO.getRoute_depart_region());
+			System.out.println("route_arrive_region : " + stopoverDTO.getRoute_arrive_region());
+			System.out.println("arrive_time : " + stopoverDTO.getArrive_time());
+			System.out.println("depart_time : " + stopoverDTO.getDepart_time());
+			System.out.println("route_before_estimate_time : " + stopoverDTO.getRoute_before_estimate_time());
+			System.out.println("route_estimate_time : " + stopoverDTO.getRoute_estimate_time());
+			System.out.println("route_after_estimate_time : " + stopoverDTO.getRoute_after_estimate_time());
+			System.out.println("route_flight_name : " + stopoverDTO.getRoute_flight_name());
 		*/
 		
 		ModelAndView mav = new ModelAndView();
@@ -370,10 +455,10 @@ public class TicketController {
 		
 		//requestScope의 FirstInfo영역에 FirstInfo을 저장
 		mav.addObject("FirstInfo", FirstInfo);
-				
+		
 		//첫번째 티켓과 두번째 티켓(왕복에 대한 경우)에서 처음 사용자가 지정한 정보를 dto로 map으로 저장후 ticketlistround.jsp에서 resForm.jsp로 전달한다.
 		HashMap<String, Object> map = new HashMap<String, Object>();
-		
+	
 		// 항공사별 검색 정렬 옵션
 		map.put("depart_region", res_depart_region); // 출발지역
 		map.put("arrive_region", arrive_region); // 도착지역
