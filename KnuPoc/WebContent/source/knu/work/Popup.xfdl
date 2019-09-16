@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.0">
+  <Form id="Popup" width="400" height="400" titletext="New Form" onload="Popup_onload">
+    <Layouts>
+      <Layout height="400" mobileorientation="landscape" width="400">
+        <Grid id="Grid00" taborder="0" left="10" top="69" binddataset="dsUser" oncelldblclick="Grid00_oncelldblclick" right="10" bottom="54">
+          <Formats>
+            <Format id="default"/>
+          </Formats>
+        </Grid>
+        <Button id="Button00" taborder="1" text="닫기" left="34.25%" onclick="Button00_onclick" escapebutton="true" right="37.5%" cssclass="btn_WF_btnR" height="34" bottom="10"/>
+        <Static id="Static00" taborder="2" text="학생정보" left="10" top="10" height="54" cssclass="sta_WF_title" right="10"/>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="dsUser" onload="dsUser_onload"/>
+    </Objects>
+    <Script type="xscript5.1"><![CDATA[include "Script::CommUtil.xjs";
+include "Script::ext_CommEco.xjs";
+
+this.Popup_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
+{
+	this.dsUser.assign(this.parent.CheckUser);
+	this.Grid00.createFormat();
+};
+
+this.Grid00_oncelldblclick = function(obj:nexacro.Grid,e:nexacro.GridClickEventInfo)
+{
+	this.fnReturnOne(this.dsUser.rowposition);
+};
+
+this.Button00_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.close();
+};
+
+this.fnReturnOne = function(row)
+{
+	var dsReturn = new nexacro.Dataset();
+	dsReturn.assign(this.dsUser);
+	dsReturn.clearData();
+	var newrow = dsReturn.addRow();
+	dsReturn.copyRow(newrow, this.dsUser, row);
+	this.commUtil.popupClose(dsReturn);
+}]]></Script>
+  </Form>
+</FDL>

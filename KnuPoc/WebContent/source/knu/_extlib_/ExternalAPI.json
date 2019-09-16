@@ -1,0 +1,12 @@
+﻿{
+    "name": "ExternalAPI",
+    "version": "17.0.0.1",
+    "description": "nexacro platform 17 External Library",
+    "license": "",
+    "scripts": [
+        "ExternalAPI/papaparse.js",
+        "ExternalAPI/JsonToDataset.js",
+        "ExternalAPI/NexaTrans.js"
+    ]
+}
+//# sourceURL=ExternalAPI.json

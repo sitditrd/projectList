@@ -1,0 +1,615 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.0">
+  <Form id="poc01" width="1024" height="708" titletext="조회화면" onload="poc01_onload">
+    <Layouts>
+      <Layout height="708" mobileorientation="landscape" width="1024" screenid="Desktop_screen">
+        <Static id="Static00" taborder="0" text="연구비신청" left="10" top="0" height="34" right="10" cssclass="sta_WF_title"/>
+        <Div id="Div00" taborder="1" left="10" top="34" height="126" right="10" cssclass="div_WF_box01" text="" formscrollbartype="none none">
+          <Layouts>
+            <Layout>
+              <Static id="Static01" taborder="0" text="연구책임자 " left="11" top="11" width="80" height="30" cssclass="sta_WF_label01LB"/>
+              <Edit id="Edit00" taborder="30" left="87" top="11" height="30" value="김성민" text="김성민" cssclass="edit_WF_basic" width="94"/>
+              <Button id="Button00" taborder="1" left="181" top="11" width="30" height="30" cssclass="btn_WF_SchSmall"/>
+              <Edit id="Edit01" taborder="3" left="Button00:3" top="11" height="30" value="20090095" text="20090095" cssclass="edit_WF_basic" width="93"/>
+              <Button id="Button02" taborder="2" left="306" top="11" width="30" height="30" cssclass="btn_WF_refresh"/>
+              <Static id="Static00" taborder="4" text="직급" top="11" width="48" height="30" cssclass="sta_WF_label01LB" left="379"/>
+              <Static id="Static02" taborder="5" text="교수" top="11" width="62" height="30" cssclass="sta_WF_output" left="417"/>
+              <Static id="Static04" taborder="7" text="소속" top="11" width="48" height="30" cssclass="sta_WF_label01LB" left="490"/>
+              <Static id="Static03" taborder="6" text="서울캠퍼스" top="11" width="85" height="30" cssclass="sta_WF_output" left="554"/>
+              <Static id="Static05" taborder="8" text="의생명공학과" top="11" width="100" height="30" cssclass="sta_WF_output" font="normal/normal &quot;Arial&quot;" left="641"/>
+              <Static id="Static07" taborder="9" text="연구과제" left="11" top="46" width="68" height="30" cssclass="sta_WF_label01LB"/>
+              <Edit id="Edit02" taborder="11" left="87" top="46" height="30" value="S-2018-A0435-00015" text="S-2018-A0435-00015" cssclass="edit_WF_basic" width="139"/>
+              <Button id="Button01" taborder="10" left="226" top="46" width="30" height="30" cssclass="btn_WF_SchSmall" text=""/>
+              <Static id="Static08" taborder="12" text="의료기기 등 안전관리를 위한 기획연구" left="259" top="46" width="220" height="30" cssclass="sta_WF_output"/>
+              <Static id="Static10" taborder="13" text="과제기간" top="46" width="70" height="30" cssclass="sta_WF_label01LB" left="490"/>
+              <Static id="Static11" taborder="14" text="2018-02-01" top="46" width="85" height="30" cssclass="sta_WF_output" left="554"/>
+              <Static id="Static13" taborder="16" text="~" top="46" width="23" height="30" left="643"/>
+              <Static id="Static12" taborder="15" text="2018-02-01" top="46" width="83" height="30" cssclass="sta_WF_output" left="658"/>
+              <Static id="Static15" taborder="17" text="과제년도" top="46" width="70" height="30" cssclass="sta_WF_label01LB" right="47"/>
+              <Static id="Static16" taborder="18" text="2018" top="46" height="30" cssclass="sta_WF_output" right="10" width="45"/>
+              <Static id="Static17" taborder="19" text="지원기관" left="11" top="81" width="67" height="30" cssclass="sta_WF_label01LB"/>
+              <Static id="Static18" taborder="20" text="A0435" left="87" top="81" width="52" height="30" cssclass="sta_WF_output"/>
+              <Static id="Static20" taborder="21" text="식품의약품안전처" left="142" top="81" width="127" height="30" cssclass="sta_WF_output"/>
+              <Static id="Static21" taborder="22" text="지원사업 " top="81" width="67" height="30" cssclass="sta_WF_label01LB" left="299"/>
+              <Static id="Static22" taborder="23" text="00940" top="81" width="52" height="30" cssclass="sta_WF_output" left="362"/>
+              <Static id="Static23" taborder="24" text="연구용역" top="81" width="62" height="30" cssclass="sta_WF_output" left="417"/>
+              <Static id="Static25" taborder="25" text="승인상태" top="81" width="67" height="30" cssclass="sta_WF_label01LB" left="490"/>
+              <Combo id="Combo00" taborder="26" text="Combo00" top="81" width="85" height="30" index="-1" left="554"/>
+              <Static id="Static26" taborder="27" text="보관철번호" top="81" width="80" height="30" cssclass="sta_WF_label01LB" right="168"/>
+              <Edit id="Edit03" taborder="29" top="81" width="100" height="30" value="2017-1664-00" text="2017-1664-00" cssclass="edit_WF_basic" right="73"/>
+              <Button id="btn_detail" taborder="28" top="81" height="30" cssclass="btn_WF_btnY" text="상세검색" right="10" width="61" onclick="fn_comBtnOnClick"/>
+            </Layout>
+            <Layout name="Layout0">
+              <Static id="Static25" left="10" top="187" width="67" height="30"/>
+              <Combo id="Combo00" left="Static25:13" top="187" width="35.12%" height="30"/>
+              <Static id="Static26" top="187" width="80" height="30" left="Combo00:16"/>
+              <Button id="btn_detail" top="187" height="30" cssclass="btn_WF_btnY" left="Edit03:3" right="10"/>
+              <Edit id="Edit03" top="187" width="21.98%" height="30" left="Static26:4"/>
+              <Static id="Static17" top="152" width="80" height="30" left="10"/>
+              <Static id="Static18" top="152" width="17.43%" height="30" left="Static17:-1"/>
+              <Static id="Static20" top="152" width="17.43%" height="30" left="Static18:2"/>
+              <Static id="Static21" left="Static20:16" top="152" width="80" height="30"/>
+              <Static id="Static22" left="Static21:5" top="152" width="97" height="30"/>
+              <Static id="Static23" top="152" height="30" text="연구용역" left="Static22:3" right="10"/>
+              <Static id="Static15" left="Static12:16" top="117" width="80" height="30"/>
+              <Static id="Static16" top="117" height="30" text="2018" left="Static15:5" right="10"/>
+              <Static id="Static10" left="10" top="117" width="80" height="30"/>
+              <Static id="Static11" left="Static10:-1" top="117" width="16.09%" height="30"/>
+              <Static id="Static12" left="Static11:18.33%" top="117" width="16.09%" height="30"/>
+              <Static id="Static13" left="Static11:-1" top="117" width="23" height="30" textAlign="center"/>
+              <Static id="Static01" left="10" top="12" width="80" height="30"/>
+              <Static id="Static07" left="10" top="47" width="80" height="30"/>
+              <Static id="Static00" left="10" top="82" width="80" height="30"/>
+              <Static id="Static02" left="Static00:-1" top="82" width="35.25%" height="30"/>
+              <Static id="Static03" top="82" width="13.00%" height="30" left="Static04:5"/>
+              <Static id="Static04" top="82" width="80" height="30" left="Static02:16"/>
+              <Static id="Static05" top="82" height="30" left="Static03:3" right="10"/>
+              <Edit id="Edit02" left="Static07:-1" top="47" height="30" width="31.23%"/>
+              <Static id="Static08" top="47" height="30" left="Button01:3" right="10"/>
+              <Button id="Button00" height="30" left="Edit00:0" top="12" width="30"/>
+              <Edit id="Edit01" height="30" top="12" width="31.23%" left="Button00:3"/>
+              <Button id="Button02" height="30" left="Edit01:-1" top="12" width="30"/>
+              <Button id="Button01" height="30" left="Edit02:0" top="47" width="30"/>
+              <Edit id="Edit00" left="Static01:-1" top="12" width="31.23%" height="30"/>
+            </Layout>
+            <Layout name="Layout1">
+              <Static id="Static00" left="11" top="105" width="80" height="40"/>
+              <Static id="Static02" left="Static00:10" top="105" height="40" right="10"/>
+              <Static id="Static03" top="155" width="168" height="40" left="Static04:10"/>
+              <Static id="Static04" top="155" height="40" width="80" left="11"/>
+              <Static id="Static05" top="155" height="40" maxwidth="" left="Static03:3" right="10"/>
+              <Static id="Static07" left="11" top="205" width="80" height="40"/>
+              <Button id="Button01" top="205" height="40" right="10" width="40"/>
+              <Static id="Static08" left="Static07:10" top="250" height="40" right="10"/>
+              <Static id="Static10" left="11" top="300" width="80" height="40"/>
+              <Static id="Static11" left="Static10:10" top="300" height="40" width="32.75%"/>
+              <Static id="Static12" top="300" height="40" left="Static13:1" right="10"/>
+              <Static id="Static13" left="Static11:14" top="300" width="23" height="40"/>
+              <Static id="Static15" left="11" top="350" width="80" height="40"/>
+              <Static id="Static16" top="350" height="40" left="Static15:10" right="10"/>
+              <Edit id="Edit02" left="Static07:10" top="205" height="40" right="50"/>
+              <Static id="Static17" left="11" top="400" width="80" height="40"/>
+              <Static id="Static18" left="101" top="400" width="80" height="40"/>
+              <Static id="Static20" top="400" height="40" left="184" right="10"/>
+              <Static id="Static21" left="11" top="450" width="80" height="40"/>
+              <Static id="Static22" left="Static21:10" top="450" width="80" height="40"/>
+              <Static id="Static23" left="Static22:3" top="450" height="40" right="10"/>
+              <Static id="Static25" left="11" top="500" width="80" height="40"/>
+              <Combo id="Combo00" top="500" height="40" left="Static25:10" right="10"/>
+              <Static id="Static26" left="11" top="550" width="80" height="40" text="보관철번호"/>
+              <Button id="btn_detail" top="550" width="61" height="40" right="10" cssclass="btn_WF_btnY"/>
+              <Edit id="Edit03" left="101" top="550" height="40" right="75"/>
+              <Button id="Button00" top="10" width="40" right="10" height="40"/>
+              <Edit id="Edit01" height="40" top="55" left="101" right="49"/>
+              <Button id="Button02" height="40" top="55" right="10" width="40"/>
+              <Static id="Static01" height="40" left="11" top="10" width="80" cssclass="sta_WF_label01LB"/>
+              <Edit id="Edit00" left="101" top="10" height="40" right="50"/>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Button id="btn_expand" taborder="4" left="50.00%" top="159" width="24" height="24" visible="false" onclick="fn_comBtnOnClick"/>
+        <Div id="Div01" taborder="2" text="Div01" left="10" top="170" height="106" right="10">
+          <Layouts>
+            <Layout>
+              <Static id="Static01" taborder="0" text="총연구비" left="0" top="0" width="16.63%" height="34" cssclass="sta_WF_label01T"/>
+              <Static id="Static05" taborder="1" text="100,000,000" left="Static01:-1" top="0" width="16.63%" height="34" cssclass="sta_WF_output01"/>
+              <Static id="Static02" taborder="2" text="미사용잔액①" left="Static05:-1" top="0" width="16.63%" height="34" cssclass="sta_WF_label01T"/>
+              <Static id="Static06" taborder="3" text="0" left="Static02:-1" top="0" width="16.63%" height="34" cssclass="sta_WF_output01"/>
+              <Static id="Static03" taborder="4" text="이자수입액②" left="Static06:-1" top="0" width="167" height="34" cssclass="sta_WF_label01T"/>
+              <Static id="Static07" taborder="5" text="17,058" top="0" height="34" cssclass="sta_WF_output01" left="Static03:-1" right="0"/>
+              <Static id="Static04" taborder="6" text="기타수입액③" left="0" top="33" width="16.63%" height="34" cssclass="sta_WF_label01T"/>
+              <Static id="Static08" taborder="7" text="0" left="Static04:-1" top="33" width="16.63%" height="34" cssclass="sta_WF_output01"/>
+              <Static id="Static00" taborder="8" text="입금총액④" left="Static08:-1" top="33" width="16.63%" height="34" cssclass="sta_WF_label01T"/>
+              <Static id="Static09" taborder="9" text="100,000,000" left="Static00:-1" top="33" width="16.63%" height="34" cssclass="sta_WF_outputBlue"/>
+              <Static id="Static10" taborder="10" text="집행액⑤" left="Static09:-1" top="33" width="167" height="34" cssclass="sta_WF_label01T"/>
+              <Static id="Static11" taborder="11" text="91,406,147" top="33" height="34" cssclass="sta_WF_outputRed" left="Static10:-1" right="0"/>
+              <Static id="Static12" taborder="12" text="집행대기액⑥" left="0" top="66" width="16.63%" height="34" cssclass="sta_WF_label01T"/>
+              <Static id="Static13" taborder="13" text="-479,998" left="Static12:-1" top="66" width="16.63%" height="34" cssclass="sta_WF_outputRed"/>
+              <Static id="Static14" taborder="14" text="부가세⑦" left="Static13:-1" top="66" width="16.63%" height="34" cssclass="sta_WF_label01T"/>
+              <Static id="Static15" taborder="15" text="9,090,909" left="Static14:-1" top="66" width="16.63%" height="34" cssclass="sta_WF_outputRed"/>
+              <Static id="Static16" taborder="16" text="잔액&#13;&#10;(①+②+③+④-⑤-⑥-⑦)" left="Static15:-1" top="66" height="34" cssclass="sta_WF_label01R" width="167"/>
+              <Static id="Static17" taborder="17" text="0" top="66" height="34" cssclass="sta_WF_outputRed" left="Static16:-1" right="0"/>
+            </Layout>
+            <Layout name="Layout0">
+              <Static id="Static16" left="0" top="148" width="186" height="38"/>
+              <Static id="Static17" top="148" height="38" left="Static16:-1" right="0"/>
+              <Static id="Static04" left="Static07:-1" top="37" width="24.87%" height="38"/>
+              <Static id="Static08" top="37" height="38" text="0" left="Static04:-1" right="0"/>
+              <Static id="Static00" left="0" top="74" width="186" height="38"/>
+              <Static id="Static09" left="Static00:-1" top="74" width="25.00%" height="38" text="100,000,000"/>
+              <Static id="Static10" left="Static09:-1" top="74" width="24.87%" height="38"/>
+              <Static id="Static11" top="74" height="38" left="Static10:-1" right="0" text="0"/>
+              <Static id="Static12" left="0" top="111" width="186" height="38"/>
+              <Static id="Static13" left="Static12:-1" top="111" width="25.00%" height="38"/>
+              <Static id="Static14" left="Static13:-1" top="111" width="24.87%" height="38"/>
+              <Static id="Static15" top="111" height="38" left="Static14:-1" right="0"/>
+              <Static id="Static03" left="0" top="37" width="186" height="38"/>
+              <Static id="Static07" left="Static03:-1" top="37" height="38" width="25.00%"/>
+              <Static id="Static06" text="0" top="0" height="38" left="Static02:-1" right="0"/>
+              <Static id="Static02" left="Static05:-1" top="0" width="24.87%" height="38"/>
+              <Static id="Static05" width="25.13%" left="Static01:-1" top="0" height="38"/>
+              <Static id="Static01" width="186" left="0" top="0" height="38"/>
+            </Layout>
+            <Layout name="Layout1">
+              <Static id="Static03" left="0" top="39" width="115" height="40" text="이자수입액②"/>
+              <Static id="Static07" left="Static03:-1" top="39" height="40" width="25.00%" text="17,058"/>
+              <Static id="Static10" left="Static09:-1" top="78" width="25.00%" height="40" text="집행액⑤"/>
+              <Static id="Static11" top="78" height="40" left="Static10:-1" right="0" text="91,406,147"/>
+              <Static id="Static16" left="0" top="156" width="115" height="40"/>
+              <Static id="Static17" left="Static16:-1" top="156" height="40" right="0" text="0"/>
+              <Static id="Static06" top="0" height="40" left="Static02:-1" right="0"/>
+              <Static id="Static09" left="Static00:-1" top="78" height="40" width="25.00%" text="100,000,000"/>
+              <Static id="Static15" top="117" height="40" text="" left="Static14:-1" right="0"/>
+              <Static id="Static02" left="Static05:-1" top="0" width="25%" height="40"/>
+              <Static id="Static00" left="0" top="78" width="115" height="40"/>
+              <Static id="Static14" left="Static13:-1" top="117" width="25.00%" height="40" text="부가세⑦"/>
+              <Static id="Static05" left="Static01:-1" top="0" width="25%" height="40"/>
+              <Static id="Static08" top="39" height="40" left="Static04:-1" right="0" text="0"/>
+              <Static id="Static13" left="Static12:-1" top="117" width="25.00%" height="40" text="17,058"/>
+              <Static id="Static01" width="115" left="0" top="0" height="40"/>
+              <Static id="Static04" width="25.00%" left="Static07:-1" top="39" height="40"/>
+              <Static id="Static12" width="115" left="0" top="117" height="40"/>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Div id="Div03" taborder="5" text="Div03" left="0" top="282" height="40" right="0">
+          <Layouts>
+            <Layout>
+              <Button id="btn_tab03" taborder="0" text="잔액조회" left="394" top="0" width="193" height="40" cssclass="btn_WF_tab," onclick="fn_comBtnOnClick"/>
+              <Button id="btn_tab02" taborder="1" text="신청상세" left="202" top="0" width="193" height="40" cssclass="btn_WF_tab," onclick="fn_comBtnOnClick"/>
+              <Button id="btn_tab01" taborder="2" text="신청차수" left="10" top="0" width="193" height="40" cssclass="btn_WF_tabA" onclick="fn_comBtnOnClick"/>
+            </Layout>
+            <Layout name="Layout0"/>
+            <Layout name="Layout1">
+              <Button id="btn_tab01" left="10" top="0" height="40" right="btn_tab02:-1"/>
+              <Button id="btn_tab02" left="157" top="0" height="40" right="btn_tab03:-1" cssclass="btn_WF_tab"/>
+              <Button id="btn_tab03" top="0" right="10" width="32.5%" height="40" cssclass="btn_WF_tab"/>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Div id="Div02" taborder="3" left="10" height="377" right="10" cssclass="div_WF_tabBorder" bottom="10" formscrollbartype="none none">
+          <Layouts>
+            <Layout>
+              <Grid id="Grid00" taborder="0" left="10" top="50" height="274" binddataset="ds_grd" autosizingtype="none" autofittype="col" right="10">
+                <Formats>
+                  <Format id="default">
+                    <Columns>
+                      <Column size="76"/>
+                      <Column size="80"/>
+                      <Column size="80"/>
+                      <Column size="80"/>
+                      <Column size="80"/>
+                    </Columns>
+                    <Rows>
+                      <Row size="34" band="head"/>
+                      <Row size="34" band="head"/>
+                      <Row size="34"/>
+                      <Row size="34"/>
+                      <Row size="34" band="summ"/>
+                    </Rows>
+                    <Band id="head">
+                      <Cell text="chk" displaytype="checkboxcontrol" edittype="checkbox"/>
+                      <Cell col="1" text="No"/>
+                      <Cell col="2" text="지급유형"/>
+                      <Cell col="3" text="내역서식"/>
+                      <Cell col="4" text="예산비목"/>
+                      <Cell row="1" text="지급처구분"/>
+                      <Cell row="1" col="1" text="지급처"/>
+                      <Cell row="1" col="2" text="증빙금액"/>
+                      <Cell row="1" col="3" text="사용일자"/>
+                      <Cell row="1" col="4" text="전송여부"/>
+                    </Band>
+                    <Band id="body">
+                      <Cell text="bind:chk" displaytype="checkboxcontrol" edittype="checkbox"/>
+                      <Cell col="1" text="bind:No"/>
+                      <Cell col="2" text="bind:지급유형"/>
+                      <Cell col="3" text="bind:내역서식"/>
+                      <Cell col="4" text="bind:예산비목"/>
+                      <Cell row="1" text="bind:지급처구분"/>
+                      <Cell row="1" col="1" text="bind:지급처"/>
+                      <Cell row="1" col="2" text="bind:증빙금액"/>
+                      <Cell row="1" col="3" text="bind:사용일자"/>
+                      <Cell row="1" col="4" text="bind:전송여부"/>
+                    </Band>
+                    <Band id="summary">
+                      <Cell text="신청총액"/>
+                      <Cell col="1"/>
+                      <Cell col="2"/>
+                      <Cell col="3"/>
+                      <Cell col="4"/>
+                    </Band>
+                  </Format>
+                  <Format id="format00">
+                    <Columns>
+                      <Column size="114"/>
+                      <Column size="114"/>
+                      <Column size="114"/>
+                      <Column size="114"/>
+                      <Column size="114"/>
+                    </Columns>
+                    <Rows>
+                      <Row size="24" band="head"/>
+                      <Row size="24" band="head"/>
+                      <Row size="24"/>
+                      <Row size="24"/>
+                    </Rows>
+                    <Band id="head">
+                      <Cell displaytype="checkboxcontrol" edittype="checkbox"/>
+                      <Cell col="1" text="NO"/>
+                      <Cell col="2" text="지급유형상세"/>
+                      <Cell col="3" text="내역서식상세"/>
+                      <Cell col="4" text="예산비목상세"/>
+                      <Cell row="1" text="지급처구분"/>
+                      <Cell row="1" col="1" text="지급처상세"/>
+                      <Cell row="1" col="2" text="증빙금액상세"/>
+                      <Cell row="1" col="3" text="사용일자상세"/>
+                      <Cell row="1" col="4" text="전송여부상세"/>
+                    </Band>
+                    <Band id="body">
+                      <Cell text="bind:chk"/>
+                      <Cell col="1" text="bind:No"/>
+                      <Cell col="2" text="bind:지급유형"/>
+                      <Cell col="3" text="bind:내역서식"/>
+                      <Cell col="4" text="bind:예산비목"/>
+                      <Cell row="1" text="bind:지급처구분"/>
+                      <Cell row="1" col="1" text="bind:지급처"/>
+                      <Cell row="1" col="2" text="bind:증빙금액"/>
+                      <Cell row="1" col="3" text="bind:사용일자"/>
+                      <Cell row="1" col="4" text="bind:전송여부"/>
+                    </Band>
+                  </Format>
+                  <Format id="format01">
+                    <Columns>
+                      <Column size="40"/>
+                      <Column size="131"/>
+                      <Column size="131"/>
+                      <Column size="131"/>
+                      <Column size="131"/>
+                    </Columns>
+                    <Rows>
+                      <Row size="24" band="head"/>
+                      <Row size="24"/>
+                    </Rows>
+                    <Band id="head">
+                      <Cell text="No"/>
+                      <Cell col="1" text="지급처구분"/>
+                      <Cell col="2" text="지급처"/>
+                      <Cell col="3" text="증빙금액"/>
+                      <Cell col="4" text="예산비목"/>
+                    </Band>
+                    <Band id="body">
+                      <Cell expr="currow + 1"/>
+                      <Cell col="1" text="bind:지급처구분"/>
+                      <Cell col="2" text="bind:지급처"/>
+                      <Cell col="3" text="bind:증빙금액" displaytype="number"/>
+                      <Cell col="4" text="bind:예산비목" displaytype="number"/>
+                    </Band>
+                  </Format>
+                </Formats>
+              </Grid>
+              <Button id="Button00" taborder="1" text="계좌이체" left="10" top="334" width="70" height="30" cssclass="btn_WF_blue01"/>
+              <Button id="Button01" taborder="2" text="RND카드" left="83" top="334" width="70" height="30" cssclass="btn_WF_blue01"/>
+              <Button id="Button02" taborder="3" text="문헌구입비" left="156" top="334" width="70" height="30" cssclass="btn_WF_blue01"/>
+              <Button id="Button03" taborder="4" text="회의비" left="229" top="334" width="70" height="30" cssclass="btn_WF_blue01"/>
+              <Button id="Button04" taborder="5" text="기타수당" left="302" top="334" width="70" height="30" cssclass="btn_WF_blue01"/>
+              <Button id="Button05" taborder="6" text="여비" left="375" top="334" width="70" height="30" cssclass="btn_WF_blue01"/>
+              <Button id="Button06" taborder="7" text="선출장여비" left="448" top="334" width="70" height="30" cssclass="btn_WF_blue01"/>
+              <Button id="Button07" taborder="8" text="교육훈련비" left="521" top="334" width="70" height="30" cssclass="btn_WF_blue01"/>
+              <Button id="Button08" taborder="9" text="야근및특근식대" left="594" top="334" width="90" height="30" cssclass="btn_WF_blue01"/>
+              <Static id="Static00" taborder="10" text="신청번호/상태 :" left="10" top="10" width="92" height="30"/>
+              <Static id="Static01" taborder="11" text="S-2-2018-03-1892" left="103" top="10" width="106" height="30"/>
+              <Static id="Static02" taborder="12" text="8차" left="213" top="10" width="22" height="30"/>
+              <Combo id="Combo00" taborder="13" text="Combo00" left="249" top="10" width="74" height="30"/>
+              <Combo id="Combo01" taborder="14" text="Combo00" left="326" top="10" width="164" height="30"/>
+              <Combo id="Combo02" taborder="15" text="Combo00" left="493" top="10" width="74" height="30"/>
+              <Button id="Button09" taborder="16" top="10" width="30" height="30" right="271" cssclass="btn_WF_prev"/>
+              <Button id="Button10" taborder="17" top="10" width="30" height="30" right="239" cssclass="btn_WF_next"/>
+              <Button id="btn_tabSrch01" taborder="18" top="10" width="80" height="30" text="전자증빙출력" right="154" cssclass="btn_WF_btnY" onclick="fn_comBtnOnClick"/>
+              <Button id="btn_tabSrch02" taborder="19" top="10" width="48" height="30" text="출력" right="103" cssclass="btn_WF_btnY" onclick="fn_comBtnOnClick"/>
+              <Button id="btn_tabSrch03" taborder="20" top="10" height="30" text="영수증첨부지" right="10" width="90" cssclass="btn_WF_btnY" onclick="fn_comBtnOnClick"/>
+            </Layout>
+            <Layout name="Layout0">
+              <Static id="Static02" left="220" top="5" width="48" height="30"/>
+              <Combo id="Combo00" left="10" top="42" width="74" height="30"/>
+              <Combo id="Combo01" left="87" top="42" width="130" height="30"/>
+              <Combo id="Combo02" left="220" top="42" width="74" height="30"/>
+              <Button id="Button09" top="42" width="30" height="30" right="255"/>
+              <Button id="Button10" top="42" width="30" height="30" right="223"/>
+              <Button id="btn_tabSrch01" top="42" width="80" height="30" right="140"/>
+              <Button id="btn_tabSrch02" top="42" width="48" height="30" right="90"/>
+              <Button id="btn_tabSrch03" top="42" width="78" height="30" right="10"/>
+              <Grid id="Grid00" left="10" top="80" height="280" right="10"/>
+              <Button id="Button00" left="11" top="371" width="100" height="30"/>
+              <Button id="Button01" left="114" top="371" width="100" height="30"/>
+              <Button id="Button02" left="217" top="371" width="100" height="30"/>
+              <Button id="Button03" left="320" top="371" width="100" height="30"/>
+              <Button id="Button04" left="423" top="371" width="100" height="30"/>
+              <Button id="Button05" left="11" top="404" width="100" height="30"/>
+              <Button id="Button06" left="114" top="404" width="100" height="30"/>
+              <Button id="Button07" left="217" top="404" width="100" height="30"/>
+              <Button id="Button08" left="320" top="404" width="100" height="30"/>
+              <Static id="Static00" left="10" top="5" width="92" height="30"/>
+              <Static id="Static01" left="103" top="5" width="106" height="30" text="S-2-2018-03-1892"/>
+            </Layout>
+            <Layout name="Layout1">
+              <Grid id="Grid00" left="10" top="162" height="421" right="10"/>
+              <Button id="Button00" left="10" top="593" width="30.57%" height="40"/>
+              <Button id="Button01" left="Button00:3" top="593" width="31.66%" height="40" text="RND카드"/>
+              <Button id="Button02" top="593" height="40" text="문헌구입비" left="Button01:3" right="10"/>
+              <Button id="Button03" left="10" top="638" width="30.57%" height="40" text="회의비"/>
+              <Button id="Button04" left="Button03:3" top="638" width="31.66%" height="40" text="기타수당"/>
+              <Button id="Button05" top="638" height="40" left="Button04:3" right="10"/>
+              <Button id="Button06" left="10" top="683" width="30.57%" height="40"/>
+              <Button id="Button07" left="Button06:3" top="683" width="31.66%" height="40" minwidth="66" maxwidth=""/>
+              <Static id="Static00" left="10" top="15" width="80" height="30" cssclass="sta_WF_boldTxt" text="신청번호/상태"/>
+              <Static id="Static01" left="Static00:13" top="15" width="80" height="30" cssclass="sta_WF_basicTxt" text="S-2-2018-03"/>
+              <Button id="Button08" top="683" height="40" minwidth="88" maxwidth="" left="Button07:3" right="10"/>
+              <Button id="Button09" top="110" width="40" height="40" left="10"/>
+              <Button id="Button10" top="110" width="40" height="40" right="365"/>
+              <Button id="btn_tabSrch01" top="110" width="95" height="40" right="185"/>
+              <Button id="btn_tabSrch02" top="110" width="69" height="40" right="113"/>
+              <Button id="btn_tabSrch03" top="110" width="100" height="40" right="10"/>
+              <Combo id="Combo00" left="10" top="60" height="40" width="47.82%"/>
+              <Combo id="Combo01" top="60" height="40" left="Combo00:3" right="10"/>
+              <Combo id="Combo02" top="10" height="40" right="10" width="31.66%"/>
+              <Static id="Static02" left="Static01:10" top="15" width="30" height="30" cssclass="sta_WF_basicTxt"/>
+            </Layout>
+          </Layouts>
+        </Div>
+      </Layout>
+      <Layout name="Layout0" width="768" height="974" mobileorientation="landscape" screenid="Desktop_screen,Tablet_screen">
+        <Div id="Div02" left="10" top="509" right="10" bottom="10"/>
+        <Div id="Div01" left="10" top="274" height="192" right="10"/>
+        <Div id="Div00" left="10" top="34" height="230" right="10" text=""/>
+        <Button id="btn_expand" visible="false" left="48.44%" top="263" width="24" height="24"/>
+        <Div id="Div03" left="0" top="470" height="40" right="0"/>
+      </Layout>
+      <Layout name="Layout1" width="480" height="1690" mobileorientation="landscape" titletext="여비등록" screenid="Phone_screen,Desktop_screen,Tablet_screen" scrollbartype="autoindicator">
+        <Div id="Div01" left="10" top="btn_expand:9" height="204" right="10" text="Div01"/>
+        <Div id="Div02" left="10" top="Div03:0" text="" right="10" height="748"/>
+        <Button id="btn_expand" left="45.63%" top="Div00:-1" width="40" height="28" visible="true" cssclass="btn_WF_expand"/>
+        <Div id="Div00" left="10" top="45" height="604" right="10" text=""/>
+        <Static id="Static00" height="45" left="10" top="0" right="10"/>
+        <Div id="Div03" left="0" right="0" text="Div03" height="40" top="Div01:3"/>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="ds_lst">
+        <ColumnInfo>
+          <Column id="code" type="STRING" size="256"/>
+          <Column id="data" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="code">1</Col>
+            <Col id="data">계좌이체</Col>
+          </Row>
+          <Row>
+            <Col id="code">2</Col>
+            <Col id="data">RND카드</Col>
+          </Row>
+          <Row>
+            <Col id="code">3</Col>
+            <Col id="data">문헌구입비</Col>
+          </Row>
+          <Row>
+            <Col id="code">4</Col>
+            <Col id="data">회의비</Col>
+          </Row>
+          <Row>
+            <Col id="code">5</Col>
+            <Col id="data">기타수당</Col>
+          </Row>
+          <Row>
+            <Col id="data">여비</Col>
+            <Col id="code">6</Col>
+          </Row>
+          <Row>
+            <Col id="data">선출장여비</Col>
+            <Col id="code">7</Col>
+          </Row>
+          <Row>
+            <Col id="data">교육훈련비</Col>
+            <Col id="code">8</Col>
+          </Row>
+          <Row>
+            <Col id="data">야근및특근식대</Col>
+            <Col id="code">9</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="ds_grd">
+        <ColumnInfo>
+          <Column id="chk" type="STRING" size="256"/>
+          <Column id="No" type="STRING" size="256"/>
+          <Column id="지급유형" type="STRING" size="256"/>
+          <Column id="내역서식" type="STRING" size="256"/>
+          <Column id="예산비목" type="STRING" size="256"/>
+          <Column id="지급처구분" type="STRING" size="256"/>
+          <Column id="지급처" type="STRING" size="256"/>
+          <Column id="증빙금액" type="STRING" size="256"/>
+          <Column id="사용일자" type="STRING" size="256"/>
+          <Column id="전송여부" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="chk"/>
+            <Col id="No">1</Col>
+            <Col id="지급유형">RND카드</Col>
+            <Col id="내역서식">회의비</Col>
+            <Col id="예산비목">회의비</Col>
+            <Col id="지급처구분">거래처</Col>
+            <Col id="지급처">포램풍동점</Col>
+            <Col id="증빙금액">65,000</Col>
+            <Col id="사용일자">2018-03-06</Col>
+          </Row>
+          <Row>
+            <Col id="chk"/>
+            <Col id="No">2</Col>
+            <Col id="지급유형">RND카드</Col>
+            <Col id="내역서식">회의비</Col>
+            <Col id="예산비목">회의비</Col>
+            <Col id="지급처구분">거래처</Col>
+            <Col id="지급처">일산수산물시장</Col>
+            <Col id="증빙금액">200,000</Col>
+            <Col id="사용일자">2018-03-07</Col>
+          </Row>
+          <Row>
+            <Col id="chk"/>
+            <Col id="No">3</Col>
+            <Col id="지급유형">RND카드</Col>
+            <Col id="내역서식">회의비</Col>
+            <Col id="예산비목">회의비</Col>
+            <Col id="지급처구분">거래처</Col>
+            <Col id="지급처">(주)스타럭스 교토</Col>
+            <Col id="증빙금액">47,800</Col>
+            <Col id="사용일자">2018-03-15</Col>
+          </Row>
+          <Row>
+            <Col id="chk"/>
+            <Col id="No">4</Col>
+            <Col id="지급유형">RND카드</Col>
+            <Col id="내역서식">회의비</Col>
+            <Col id="예산비목">회의비</Col>
+            <Col id="지급처구분">거래처</Col>
+            <Col id="지급처">훈장골</Col>
+            <Col id="증빙금액">170,000</Col>
+            <Col id="사용일자">2018-03-19</Col>
+          </Row>
+          <Row>
+            <Col id="chk"/>
+            <Col id="No">5</Col>
+            <Col id="지급유형">RND카드</Col>
+            <Col id="내역서식">회의비</Col>
+            <Col id="예산비목">회의비</Col>
+            <Col id="지급처구분">거래처</Col>
+            <Col id="지급처">(주)송담 추어탕</Col>
+            <Col id="증빙금액">45,000</Col>
+            <Col id="사용일자">2018-03-20</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="ds_Total">
+        <ColumnInfo>
+          <Column id="지급처구분" type="STRING" size="256"/>
+          <Column id="지급처" type="STRING" size="256"/>
+          <Column id="증빙금액" type="STRING" size="256"/>
+          <Column id="예산비목" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="지급처구분">거래처</Col>
+            <Col id="지급처">(주)스타벅스 교토</Col>
+            <Col id="증빙금액">650000</Col>
+            <Col id="예산비목">650000</Col>
+          </Row>
+          <Row>
+            <Col id="지급처구분">거래처</Col>
+            <Col id="지급처">(주)스타벅스 교토</Col>
+            <Col id="증빙금액">650000</Col>
+            <Col id="예산비목">650000</Col>
+          </Row>
+          <Row>
+            <Col id="지급처구분">거래처</Col>
+            <Col id="지급처">(주)스타벅스 교토</Col>
+            <Col id="증빙금액">2000000</Col>
+            <Col id="예산비목">478000</Col>
+          </Row>
+          <Row>
+            <Col id="지급처구분">거래처</Col>
+            <Col id="지급처">포램풍동점</Col>
+            <Col id="증빙금액">478000</Col>
+            <Col id="예산비목">2000000</Col>
+          </Row>
+          <Row>
+            <Col id="지급처구분">거래처</Col>
+            <Col id="지급처">일산수산물시장</Col>
+            <Col id="증빙금액">200500</Col>
+            <Col id="예산비목">200500</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.1"><![CDATA[this.poc01_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
+{
+	this.Div00.set_height(200);
+	this.resetScroll();
+};
+
+this.fn_comBtnOnClick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	var objGrid = this.Div02.form.Grid00;
+	
+	switch (obj.name)
+	{
+		case "btn_expand" :
+			var sFlag = obj.cssclass;
+			
+			if (sFlag == "btn_WF_expand") {
+				this.Div00.set_height(604);
+				obj.set_cssclass("btn_WF_expandUp");
+			} else {
+				this.Div00.set_height(200);
+				obj.set_cssclass("btn_WF_expand");
+			}
+			
+			this.resetScroll();
+			break;
+			
+		case "btn_detail" :
+		case "btn_tabSrch01" :
+		case "btn_tabSrch02" :
+		case "btn_tabSrch03" :
+			alert(obj.text + "은(는) 개발 예정입니다.");
+			break;
+			
+		case "btn_tab01" :
+			this.Div03.form.btn_tab01.set_cssclass("btn_WF_tabA");
+			this.Div03.form.btn_tab02.set_cssclass("btn_WF_tab,");
+			this.Div03.form.btn_tab03.set_cssclass("btn_WF_tab,");
+		
+			objGrid.set_formatid("default");
+			objGrid.set_binddataset("ds_grd");			
+			break;
+			
+		case "btn_tab02" :
+			this.Div03.form.btn_tab01.set_cssclass("btn_WF_tab");
+			this.Div03.form.btn_tab02.set_cssclass("btn_WF_tabA,");
+			this.Div03.form.btn_tab03.set_cssclass("btn_WF_tab,");		
+		
+			objGrid.set_formatid("format00");
+			objGrid.set_binddataset("ds_grd");		
+			break;
+			
+		case "btn_tab03" :
+			this.Div03.form.btn_tab01.set_cssclass("btn_WF_tab");
+			this.Div03.form.btn_tab02.set_cssclass("btn_WF_tab,");
+			this.Div03.form.btn_tab03.set_cssclass("btn_WF_tabA,");		
+		
+			objGrid.set_formatid("format01");
+			objGrid.set_binddataset("ds_Total");		
+			break;
+	}
+};]]></Script>
+  </Form>
+</FDL>

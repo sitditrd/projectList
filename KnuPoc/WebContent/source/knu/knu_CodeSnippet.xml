@@ -1,0 +1,293 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Snippets version="2.0">
+  <Script>
+    <Snippet name="/*" shortcut="" description="">/*
+ *	$end$
+ */
+ </Snippet>
+    <Snippet name="/**" shortcut="" description="">/************************************************************************
+ * $end$
+ ************************************************************************/
+</Snippet>
+    <Snippet name="///" shortcut="" description="">//////////////////////////////////////////////////////////////////////////</Snippet>
+    <Snippet name="alert();" shortcut="al" description="">alert($end$);</Snippet>
+    <Snippet name="do { } while();" shortcut="do" description="">do {
+$tab$$end$
+} while();</Snippet>
+    <Snippet name="File header" shortcut="" description="">/********************************************************************
+    created:	  $DATE$
+    filename: 	$FILE$
+    file path:	$FILE_PATH$
+    file base: 	$FILE_BASE$
+    file ext:	  $FILE_EXT$
+    author:		  
+
+    purpose:	  $end$
+*********************************************************************/
+</Snippet>
+    <Snippet name="fn_Callback()" shortcut="fn_Callback" description="Transacition 결과를 받을 때 호출 할 Callback 함수">/*******************************************************************************&#13;
+ * Function Name: fn_Callback&#13;
+ * Description  : Transacion 통신 후 CallBack 함수&#13;
+ * Arguments    : svcID : Service ID, errorCode : 에러코드, errorMsg : 에러메세지&#13;
+ * Return       : &#13;
+ ******************************************************************************/&#13;
+this.fn_Callback = function(svcID, errorCode, errorMsg)&#13;
+{&#13;
+	if(errorCode &lt; 0)&#13;
+	{&#13;
+		trace("errMsg :::" + errorMsg);&#13;
+		return false;&#13;
+	}else{&#13;
+		if(svcID == 'comCode')&#13;
+		{&#13;
+			trace(this.gds_comCode.saveXML());&#13;
+			var CampusDs = new Dataset();&#13;
+			this.gds_comCode.filter("CM_CODE == 'CAMPUS_CODE'");&#13;
+			CampusDs.copyData(this.gds_comCode, true);&#13;
+			this.Div01.form.Combo00.set_innerdataset(CampusDs);&#13;
+			this.Div01.form.Combo00.set_codecolumn("CD_CODE");&#13;
+			this.Div01.form.Combo00.set_datacolumn("CAPTION");&#13;
+			&#13;
+			var AcadeMicDs = new Dataset();&#13;
+			this.gds_comCode.filter("CM_CODE == 'ACADEMIC_STATUS_CODE'");&#13;
+			AcadeMicDs.copyData(this.gds_comCode, true);&#13;
+			this.Div01.form.Combo01.set_innerdataset(AcadeMicDs);&#13;
+			this.Div01.form.Combo01.set_codecolumn("CD_CODE");&#13;
+			this.Div01.form.Combo01.set_datacolumn("CAPTION");&#13;
+			&#13;
+		} else if(svcID == 'search')&#13;
+		{&#13;
+			var sArguments =&#13;
+			{&#13;
+				CheckUser : this.gds_stuInfo&#13;
+			};&#13;
+			&#13;
+			if(this.gds_stuInfo.rowcount &gt; 1)&#13;
+			{&#13;
+				this.commUtil.popup(this, "OpenPopup", "work::Popup.xfdl", -1, -1, 400, 400, true, false, false, sArguments, "fnPopupCallBack");&#13;
+			}&#13;
+			else if(this.gds_stuInfo.rowcount == 1)&#13;
+			{&#13;
+				this.fn_LectureSearch();&#13;
+				&#13;
+			}&#13;
+		}else if (svcID == 'save')&#13;
+		{&#13;
+			this.alert("저장완료");&#13;
+			this.gds_stuInfo.clearData();&#13;
+			this.reload();&#13;
+		}&#13;
+		else if(svcID == 'lecture')&#13;
+		{&#13;
+		this.Div00.form.Edit00.set_value("");&#13;
+		this.Div00.form.Edit01.set_value("");&#13;
+		this.Div01.form.Edit00.set_value(this.gds_stuInfo.getColumn(0, "STUDENT_NO"));&#13;
+		this.Div01.form.Edit01.set_value(this.gds_stuInfo.getColumn(0, "STUDENT_NAME_KOR"));&#13;
+		this.Div01.form.Edit02.set_value(this.gds_stuInfo.getColumn(0, "STUDENT_NAME_ENG"));&#13;
+		this.Div01.form.Edit03.set_value(this.gds_stuInfo.getColumn(0, "STUDENT_NAME_HAN"));&#13;
+		this.Tab00.Tabpage1.form.Tab00.Tabpage1.form.Div00.form.Combo00.set_enable(true);&#13;
+&#13;
+		this.gds_comCode.filter("");&#13;
+		&#13;
+		var strDepCdData = this.gds_comCode.lookup("CD_CODE", this.gds_stuInfo.getColumn(0, "DEPARTMENT_CODE"), "CAPTION");&#13;
+		var strMajCdData = this.gds_comCode.lookup("CD_CODE", this.gds_stuInfo.getColumn(0, "MAJOR_CODE"), "CAPTION");&#13;
+		var strDiviCdData = this.gds_comCode.lookup("CD_CODE", this.gds_stuInfo.getColumn(0, "DIVIDE_CLASS_CODE"), "CAPTION");&#13;
+		this.Div01.form.Edit05.set_value(strDepCdData);&#13;
+		this.Div01.form.Edit07.set_value(strMajCdData);&#13;
+		this.Div01.form.Edit09.set_value(strDiviCdData);&#13;
+			&#13;
+		if(this.fn_IsNull(this.gds_stuInfo.getColumn(0, "FILE_NAME")))&#13;
+		{&#13;
+			this.Div01.form.Div04.form.ImageViewer00.set_image("http://14.63.224.112/KnuPoc/knuImage/default.png");&#13;
+		}&#13;
+		else&#13;
+		{&#13;
+			this.Div01.form.Div04.form.ImageViewer00.set_image("http://14.63.224.112/KnuPoc/knuImage/" + this.gds_stuInfo.getColumn(0, "FILE_NAME"));&#13;
+		}&#13;
+			this.Div01.form.Div04.form.staHelpMessage.set_text("");&#13;
+			this.Div01.form.Div04.form.ImageViewer00.set_border("none");&#13;
+		}	&#13;
+	}&#13;
+};</Snippet>
+    <Snippet name="fn_comCode()" shortcut="fn_comCode" description="필요한 공통 코드들을 데이터셋에 저장하는 함수">/*******************************************************************************&#13;
+ * Function Name: fn_comCode&#13;
+ * Description  : 필요한 공통 코드들을 데이터셋에 저장하는 함수&#13;
+ ******************************************************************************/&#13;
+this.fn_comCode = function()&#13;
+{&#13;
+		var strSvcId = "comCode"; // Service ID&#13;
+		var strScvUrl = "http://14.63.224.112/KnuPoc/service/select.jsp?keywords=comCode"; // URL&#13;
+		var strInDs = ""; //InputDataSet&#13;
+		var strOutDs = "gds_comCode=comCode"; // OutputDataSet&#13;
+		var strArg = ""; // Argument&#13;
+		var strCallBackFunc = "fn_Callback"; // CallBack Function&#13;
+		var bAsync = true; //Async&#13;
+		this.transaction(strSvcId, strScvUrl, strInDs, strOutDs, strArg, strCallBackFunc, bAsync);&#13;
+}</Snippet>
+    <Snippet name="fn_commClick()" shortcut="" description="버튼 클릭 공통함수(조회, 추가, 삭제, 저장)">/*******************************************************************************&#13;
+ * Function Name: fn_commClick&#13;
+ * Description  : 버튼 클릭 공통함수(조회, 추가, 삭제, 저장)&#13;
+ ******************************************************************************/&#13;
+this.fn_commClick = function(obj:nexacro.Button,e:nexacro.MouseEventInfo)&#13;
+{&#13;
+	var sType = obj.id;&#13;
+	trace("sType :" + sType);&#13;
+	switch(sType)&#13;
+	{&#13;
+		case "search":&#13;
+		this.fn_Transactions("search")&#13;
+		break;&#13;
+		case "add":&#13;
+		this.Dataset00.addRow();&#13;
+		break;&#13;
+		case "del":&#13;
+		this.Dataset00.deleteRow(this.Dataset00.rowposition);&#13;
+		break;&#13;
+		case "save":&#13;
+		this.fn_Transactions("save")&#13;
+		break;&#13;
+	}&#13;
+}</Snippet>
+    <Snippet name="fn_LectureSearch()" shortcut="fn_LectureSearch" description="학생 수강신청 정보 조회 함수">/*******************************************************************************&#13;
+ * Function Name: fn_LectureSearch&#13;
+ * Description  : 학생 수강신청 정보를 조회하기 위해 호출하는 함수&#13;
+ * Arguments    : strNo : 학번&#13;
+ ******************************************************************************/&#13;
+this.fn_LectureSearch = function()&#13;
+{&#13;
+	var strSvcId = "lecture"; // Service ID&#13;
+	var strScvUrl = "http://14.63.224.112/KnuPoc/service/select.jsp?keywords=lecture"; // URL&#13;
+	var strInDs = ""; //InputDataSet&#13;
+	var strOutDs = "dsLectureInfo=Lecture"; // OutputDataSet&#13;
+	var strArg = "strNo=" +this.gds_stuInfo.getColumn(0, "STUDENT_NO"); // Argument&#13;
+	var strCallBackFunc = "fn_Callback"; // CallBack Function&#13;
+	var bAsync = true; //Async&#13;
+	this.transaction(strSvcId, strScvUrl, strInDs, strOutDs, strArg, strCallBackFunc, bAsync);&#13;
+}</Snippet>
+    <Snippet name="fn_Save()" shortcut="fn_Save" description="학생 정보 변경 저장 함수">/*******************************************************************************&#13;
+ * Function Name: fn_Save&#13;
+ * Description  : 학생 정보 변경을 저장하기 위해 호출하는 함수&#13;
+ * Arguments    : &#13;
+******************************************************************************/&#13;
+this.fn_Save = function ()&#13;
+{&#13;
+	var strSvcId = "save"; // Service ID&#13;
+	var strScvUrl = "http://14.63.224.112/KnuPoc/service/save.jsp?path=knuImage"; // URL&#13;
+	var strInDs = "InputDs=gds_stuInfo:U InputLecDs=dsLectureInfo:U"; //InputDataSet&#13;
+	var strCallBackFunc = "fn_Callback"; // CallBack Function&#13;
+	var bAsync = true; //Async&#13;
+	this.transaction(strSvcId, strScvUrl, strInDs, "", "", strCallBackFunc, bAsync);&#13;
+};</Snippet>
+    <Snippet name="fn_Search()" shortcut="fn_Search" description="학생 정보 조회 함수">/*******************************************************************************&#13;
+ * Function Name: fn_Search&#13;
+ * Description  : 학생 정보를 조회하기 위해 호출하는 함수&#13;
+ * Arguments    : strNo : 학번, strNm : 이름&#13;
+ ******************************************************************************/&#13;
+this.fn_Search = function()&#13;
+{&#13;
+		var strSvcId = "search"; // Service ID&#13;
+		var strScvUrl = "http://14.63.224.112/KnuPoc/service/select.jsp?keywords=search"; // URL&#13;
+		var strInDs = ""; //InputDataSet&#13;
+		var strOutDs = "gds_stuInfo=UserInfo"; // OutputDataSet&#13;
+		var strArg = "strNo=" + this.Div00.form.Edit00.value + " strNm="+this.Div00.form.Edit01.value; // Argument&#13;
+		var strCallBackFunc = "fn_Callback"; // CallBack Function&#13;
+		var bAsync = true; //Async&#13;
+		this.transaction(strSvcId, strScvUrl, strInDs, strOutDs, strArg, strCallBackFunc, bAsync);&#13;
+}</Snippet>
+    <Snippet name="fn_TestCallback()" shortcut="fn_TestCallback" description="Transacion 통신 완료 후 실행되는 CallBack 함수">/*******************************************************************************&#13;
+ * Function Name: fn_TestCallback&#13;
+ * Description  : Transacion 통신 후 CallBack 함수&#13;
+ * Arguments    : svcID : Service ID, errorCode : 에러코드, errorMsg : 에러메세지&#13;
+ * Return       : &#13;
+ ******************************************************************************/&#13;
+this.fn_TestCallback = function(svcID, errorCode, errorMsg)&#13;
+{&#13;
+	if(errorCode &lt; 0)&#13;
+	{&#13;
+		trace("errMsg ::" + errorMsg);&#13;
+	}else&#13;
+	{&#13;
+		if(svcID =="")&#13;
+		{&#13;
+		&#13;
+		}else if(svcID=="")&#13;
+		{&#13;
+			&#13;
+		}&#13;
+	}&#13;
+}</Snippet>
+    <Snippet name="fn_Transaction()" shortcut="fn_Transaction" description="Dataset의 갱신된 데이터를 위한 &#13;&#10;서비스를 호출하고 완료되면 strCallBackFunc 실행">/*******************************************************************************&#13;
+ * Function Name: fn_Transaction&#13;
+ * Description  : Dataset의 갱신된 데이터를 위한 서비스를 호출하고 완료되면 strCallBackFunc 실행&#13;
+ * Arguments    : &#13;
+				 strSvcId - Service ID&#13;
+				 strScvUrl - Service URL&#13;
+				 strInDs - InputDataSet&#13;
+				 strOutDs - OutputDataSet&#13;
+				 strArg - Argument&#13;
+				 strCallBackFunc - CallBack Function&#13;
+				 bAsync - Async &#13;
+ ******************************************************************************/&#13;
+this.fn_Transaction = function(flag)&#13;
+{&#13;
+	var strSvcId = "";&#13;
+	var strScvUrl = ""; &#13;
+	var strInDs = ""; &#13;
+	var strOutDs = ""; &#13;
+	if(flag=="search")&#13;
+	{&#13;
+		strScvUrl = "http://14.63.224.112/KnuPoc/service/sel_common.jsp";&#13;
+		strOutDs = "Dataset00=CodeData"; &#13;
+	}&#13;
+	else if(flag=="save"){&#13;
+		strScvUrl = "http://14.63.224.112/KnuPoc/service/save_common.jsp";&#13;
+		strInDs = "InputDs=Dataset00"; &#13;
+	}&#13;
+	var strArg = ""; &#13;
+	var strCallBackFunc = "fn_TestCallback"; &#13;
+	var bAsync = true; &#13;
+	this.transaction(strSvcId, strScvUrl, strInDs, strOutDs, strArg, strCallBackFunc, bAsync);&#13;
+}</Snippet>
+    <Snippet name="fnPopupCallBack()" shortcut="fnPopupCallBack" description="팝업을 닫은 후 결과를 받는 Callback 함수">this.fnPopupCallBack = function (popupId, popupArg)&#13;
+{&#13;
+	popupArg = this.commUtil.popupReturn();&#13;
+	&#13;
+	switch(popupId)&#13;
+	{&#13;
+		case "OpenPopup" :&#13;
+		this.gds_stuInfo.loadXML(popupArg);&#13;
+		this.Div00.form.Edit00.set_value(this.gds_stuInfo.getColumn(0, "STUDENT_NO"));&#13;
+		this.Div00.form.Edit01.set_value(this.gds_stuInfo.getColumn(0, "STUDENT_NAME_KOR"));&#13;
+		this.fn_LectureSearch();&#13;
+			break;&#13;
+	}&#13;
+}</Snippet>
+    <Snippet name="function() {}" shortcut="func" description="">function ($end$)
+{
+$tab$
+};</Snippet>
+    <Snippet name="if () {}" shortcut="if" description="">if ($end$)
+{
+$tab$
+}</Snippet>
+    <Snippet name="if () {} else {}" shortcut="ifel" description="">if ($end$)
+{
+$tab$
+}
+else
+{
+$tab$
+}</Snippet>
+    <Snippet name="switch() { case : break..." shortcut="switch" description="">switch($end$) {
+case :
+$tab$break;
+case :
+$tab$break;
+default:
+}</Snippet>
+    <Snippet name="while () {}" shortcut="while" description="">while ($end$)
+{
+$tab$
+}</Snippet>
+  </Script>
+</Snippets>

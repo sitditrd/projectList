@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.0">
+  <Form id="poc_main" width="1024" height="718" titletext="New Form">
+    <Layouts>
+      <Layout height="718" mobileorientation="landscape" width="1024">
+        <Static id="Static00" taborder="0" left="0" top="284" right="0" cssclass="sta_WF_mainLogo" height="150"/>
+        <Static id="Static01" taborder="1" text="TOTAL SYSTEM" left="0" top="Static00:0" right="0" cssclass="sta_main_title" visible="true" height="60"/>
+      </Layout>
+      <Layout name="Layout0" width="480" height="680" mobileorientation="landscape" screenid="Phone_screen">
+        <Static id="Static00" left="0" top="32.35%" right="0" bottom="45.59%"/>
+        <Static id="Static01" left="19" top="367" height="60" right="21" text="TOTAL ADMIN SYSTEM" visible="false"/>
+      </Layout>
+      <Layout name="Layout1" width="768" height="974" mobileorientation="landscape">
+        <Static id="Static00" left="0" top="160" right="0" bottom="384" text=""/>
+        <Static id="Static01" left="0" top="470" height="60" right="0"/>
+      </Layout>
+    </Layouts>
+  </Form>
+</FDL>
