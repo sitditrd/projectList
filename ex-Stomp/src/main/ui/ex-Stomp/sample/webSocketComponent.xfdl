@@ -1,0 +1,143 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.0">
+  <Form id="webSocketComponent" width="1280" height="720" titletext="New Form" onload="webSocketComponent_onload">
+    <Layouts>
+      <Layout height="720" mobileorientation="landscape" width="1280">
+        <Static id="Static00" taborder="0" text="" left="8" top="8" height="90" background="gray" right="8"/>
+        <TextArea id="TextArea00" taborder="1" top="98" width="252" right="8" bottom="97" onkeydown="TextArea01_onkeydown"/>
+        <TextArea id="TextArea01" taborder="2" left="8" top="98" right="TextArea00:0" bottom="97" wordWrap="english" onkeydown="TextArea01_onkeydown"/>
+        <Static id="Static01" taborder="3" text="" left="8" height="90" background="gray" right="8" bottom="8"/>
+        <Edit id="Edit00" taborder="4" left="16" top="TextArea01:23" height="42" right="268" onkeydown="Edit00_onkeydown"/>
+        <Button id="Button00" taborder="5" text="전송" left="Edit00:41" top="TextArea00:21" width="188" height="46" onclick="Button00_onclick"/>
+        <Static id="Static09" taborder="6" text="현재 참여자" left="28" top="31" width="65" height="45" color="black"/>
+        <Static id="Static02" taborder="7" text="( )" left="101" top="31" width="25" height="45" color="black"/>
+        <Static id="Static04" taborder="8" text="|" left="142" top="31" width="9" height="45" color="black"/>
+        <Static id="Static06" taborder="9" text="" left="159" top="31" width="1096" height="45" color="black"/>
+      </Layout>
+    </Layouts>
+    <Script type="xscript5.1"><![CDATA[this.webSocketComponent_onload = function(obj,e)
+{	
+	this.webSocketComponent00.connect();
+	this.Edit00.setFocus();
+};
+
+this.webSocketComponent00_getMessage = function(obj, e)
+{	
+	var arrList = new Array();
+	var arrList2 = new Array();
+	
+	var strRtn = e.message;
+	var entryId = "";
+	var exitId = "";
+	
+	var strTemp = "";
+	var resTemp = "";
+	
+	arrList = strRtn.split(":");
+	
+	if(arrList[0] == "userSize")
+	{
+		//인원 수, 사용자 ID 지정
+		arrList2 = arrList[1].split(",");
+		
+		//입장 ID 지정
+		entryId = arrList2[0];
+		
+		//인원 수 지정
+		this.Static02.set_text("( "+arrList2[1]+" )");
+		
+		//사용자 ID 지정
+		this.Static06.set_text(arrList2[2]);
+		
+		//TextArea00 초기화 작업
+		this.TextArea00.set_value("");
+		
+		this.TextArea01.insertText(entryId + " 님이 연결되었습니다.\n");
+		
+		strTemp = arrList2[2];
+		
+		for(var i=0; i<strTemp.length; i++) 
+		{
+			if(strTemp.charAt(i) == " ") 
+			{
+				this.TextArea00.insertText(resTemp + " 님\n");
+				resTemp = "";
+			}
+			else
+			{
+				resTemp += strTemp.charAt(i);
+			}
+		}
+		
+	} 
+	else if(arrList[0] == "delete") 
+	{
+		strTemp = "";
+		resTemp = "";
+		
+		//인원 수, 사용자 ID 지정
+		arrList2 = arrList[1].split(",");
+		
+		//입장 ID 지정
+		exitId = arrList2[0];
+		
+		//인원 수 지정
+		this.Static02.set_text("( "+arrList2[1]+" )");
+		
+		//사용자 ID 지정
+		this.Static06.set_text(arrList2[2]);
+		
+		//TextArea00 초기화 작업
+		this.TextArea00.set_value("");
+		
+		this.TextArea01.insertText(exitId + " 님이 퇴장하셨습니다.\n");
+		
+		strTemp = arrList2[2];
+		
+		for(var i=0; i<strTemp.length; i++) 
+		{
+			if(strTemp.charAt(i) == " ")
+			{
+				this.TextArea00.insertText(resTemp + " 님\n");
+				resTemp = "";
+			}
+			else 
+			{
+				resTemp += strTemp.charAt(i);
+			}
+		}
+		
+	} 
+	else if(arrList[0] == "userMessage") 
+	{
+		this.TextArea01.insertText(arrList[1] + " : " + arrList[2] + "\n");
+		this.TextArea01.setFocus(); //자동개행 효과.
+	}
+};
+
+this.Button00_onclick = function(obj,e)
+{
+	var textMessage = this.Edit00.value;
+	this.webSocketComponent00.textMessage(textMessage);
+	this.Edit00.set_value("");
+};
+
+this.Edit00_onkeydown = function(obj,e)
+{
+	if(e.keycode == 13) {
+		var textMessage = this.Edit00.value;
+		this.webSocketComponent00.textMessage(textMessage);
+		this.Edit00.set_value("");
+	}
+};
+
+this.TextArea01_onkeydown = function(obj:nexacro.TextArea,e:nexacro.KeyEventInfo)
+{
+	this.Edit00.setFocus();
+};
+]]></Script>
+    <Objects>
+      <webSocketComponent id="webSocketComponent00" getMessage="webSocketComponent00_getMessage" url="ws://localhost:8080/ex-Stomp/chat-ws"/>
+    </Objects>
+  </Form>
+</FDL>

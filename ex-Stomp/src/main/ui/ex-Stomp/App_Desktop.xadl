@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ADL version="2.0">
+  <Application id="App_Desktop" screenid="Desktop_screen">
+    <Layout>
+      <MainFrame id="mainframe" showtitlebar="false" showstatusbar="false" width="1280" height="720" resizable="false">
+        <ChildFrame id="ChildFrame00" formurl="sample::webSocketComponent.xfdl" showtitlebar="false" showtitleicon="false" dragmovetype="none"/>
+      </MainFrame>
+    </Layout>
+  </Application>
+  <Script type="xscript5.1"><![CDATA[]]></Script>
+</ADL>
