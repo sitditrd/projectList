@@ -1,0 +1,379 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Script type="xscript5.1"><![CDATA[this.gfn_todayTime = function ()
+{
+	var sToday = "";
+	var objDate = new Date();
+	var sToday = objDate.getFullYear() + "";
+	var sMonth = objDate.getMonth() + 1;
+	var sDate = objDate.getDate();
+	var sHours = objDate.getHours();
+	var sMinutes = objDate.getMinutes();
+
+	if (sMonth.toString().length == 1) 
+	{
+		sMonth = "0" + sMonth;
+	}
+
+	if (sDate.toString().length == 1) 
+	{
+		sDate = "0" + sDate;
+	}
+
+	sToday = sToday + "." + sMonth + "." + sDate + " " + sHours + ":" + sMinutes;
+
+	return sToday;
+};
+
+/*********************************************************************
+ * 함 수 명 	: gfn_IsNull
+ * 함수설명 	: NULL 여부 체크
+ * 입    력 	: 문자열 
+ * 결    과 	: Boolean형의 여부	- null = true, Not Null = false
+ *********************************************************************/
+this.gfn_IsNull = function(sValue)
+{
+    if (new String(sValue).valueOf() == "undefined") return true;
+    if (sValue == null) return true;
+    
+	var v_ChkStr = new String(sValue);
+	
+    if (v_ChkStr == null) return true;
+    if (v_ChkStr.toString().length == 0) return true;
+
+    return false;
+}
+
+
+/************************************************************************************************
+ * Function Name : gfn_isNull
+ * Description   : 입력값이 null에 해당하는 경우 모두를 한번에 체크한다.
+ * Arguments     : sValue - 체크할 문자열( 예 : null 또는 undefined 또는 "" 또는 "abc" )
+ * Return        : Boolean sValue이 undefined, null, NaN, "", Array.length = 0인 경우 true
+ *************************************************************************************************/
+this.gfn_isNull = function (sValue)
+{
+	if (new String(sValue).valueOf() == "undefined") 
+	{
+		return true;
+	}
+	if (sValue == null) 
+	{
+		return true;
+	}
+
+	var v_ChkStr = new String(sValue);
+
+	if (v_ChkStr == null) 
+	{
+		return true;
+	}
+	if (v_ChkStr.toString().length == 0) 
+	{
+		return true;
+	}
+
+	return false;
+};
+
+/************************************************************************************************
+ * Function Name: gfn_lPad
+ * Description  : 자리수 만큼 왼쪽에 문자열 추가
+ * Arguments    : sOrg - 원래 문자열
+ sPad - Pad할 문자열
+ nCnt - 자리수
+ * Return       : String Pad된 문자열
+ *************************************************************************************************/
+this.gfn_lPad = function (sOrg, sPad, nCnt)
+{
+	var i;
+	var nLength;
+	var sRet = "";
+
+	if (this.gfn_isNull(sOrg)) 
+	{
+		return "";
+	}
+
+	if (this.gfn_isNull(sPad)) 
+	{
+		sPad = " ";
+	}
+
+	if (this.gfn_isNull(nCnt)) 
+	{
+		nCnt = 1;
+	}
+
+	for (i = 0; i < nCnt; i++) 
+	{
+		sRet += sPad;
+	}
+
+	sRet += sOrg;
+
+	nLength = this.gfn_length(sOrg) > nCnt ? this.gfn_length(sOrg) : nCnt;
+
+	return this.gfn_right(sRet, nLength);
+};
+
+/************************************************************************************************
+ * Function Name: gfn_length
+ * Description  : 입력값 형태에 따라서 길이 또는 범위를 구하는 함수
+ * Arguments    : Val - 문자열
+ * Return       : Integer Type에 따라 구해진 길이
+ *************************************************************************************************/
+this.gfn_length = function (Val)
+{
+	return this.gfn_toString(Val).length;
+};
+
+/************************************************************************************************
+ * Function Name: gfn_left
+ * Description  : 문자열의 왼쪽부분을 지정한 길이만큼 Return
+ * Arguments    : Val - 왼쪽 부분을 얻어올 원본 문자열
+ nSize - 얻어올 크기. [Default Value = 0]
+ * Return       : String 문자열
+ *************************************************************************************************/
+this.gfn_left = function (Val, nSize)
+{
+	return this.gfn_toString(Val).substr(0, nSize);
+};
+
+/************************************************************************************************
+ * Function Name: gfn_right
+ * Description  : 문자열의 오른쪽부분을 지정한 길이만큼 Return
+ * Arguments    : Val - 오른 부분을 얻어올 원본 문자열
+ nSize - 얻어올 크기. [Default Value = 0]
+ * Return       : String 문자열
+ *************************************************************************************************/
+this.gfn_right = function (Val, nSize)
+{
+	var nStart = this.gfn_toString(Val).length;
+	var nEnd = Number(nStart) - Number(nSize);
+	var rtnVal = Val.substring(nStart, nEnd);
+
+	return rtnVal;
+};
+
+/************************************************************************************************
+ * Function Name: gfn_toString
+ * Description  : 입력값을 String으로 변경
+ * Arguments    : Val - 문자열
+ * Return       : String 문자열
+ *************************************************************************************************/
+this.gfn_toString = function (Val)
+{
+	if (this.gfn_isNull(Val)) 
+	{
+		return new String();
+	}
+
+	return new String(Val);
+};
+
+/************************************************************************************************
+ * Function Name: gfn_today
+ * Description  : 해당 PC의 오늘 날짜를 가져온다.
+ * Arguments    :
+ * Return       : string 오늘 날짜
+ *************************************************************************************************/
+this.gfn_today = function ()
+{
+	var sToday = "";
+	var objDate = new Date();
+	var sToday = objDate.getFullYear() + "";
+	var sMonth = objDate.getMonth() + 1;
+	var sDate = objDate.getDate();
+
+	if (sMonth.toString().length == 1) 
+	{
+		sMonth = "0" + sMonth;
+	}
+
+	if (sDate.toString().length == 1) 
+	{
+		sDate = "0" + sDate;
+	}
+
+	sToday = sToday + sMonth + sDate;
+
+	return sToday;
+};
+
+/************************************************************************************************
+ * Function Name: gfn_addDate
+ * Description  : 입력된 날자에 OffSet 으로 지정된 만큼의 일을 더한다.
+ * Arguments    : sDate   - 일자(yyyyMMdd)
+ nOffSet - 날짜로부터 증가 감소값. 지정하지 않으면 Default Value = 1 로 적용
+ * Return       : string Date에 nOffset이 더해진 결과를 'yyyyMMdd'로 표현된 날자
+ *************************************************************************************************/
+this.gfn_addDate = function (sDate, nOffSet)
+{
+	var nYear = parseInt(sDate.substr(0, 4));
+	var nMonth = parseInt(sDate.substr(4, 2));
+	var nDate = parseInt(sDate.substr(6, 2)) + nOffSet;
+
+	return this.gfn_dateTime(nYear, nMonth, nDate);
+};
+
+/************************************************************************************************
+ * Function Name: gfn_addMonth
+ * Description  : 입력된 날자에 OffSet 으로 지정된 만큼의 달을 더한다.
+ * Arguments    : sDate  - 일자(yyyyMMdd)
+ nOffSet  - 날짜로부터 증가 감소값. 지정하지 않으면 Default Value = 1 로 적용
+ * Return       : string Date에 nOffset이 더해진 결과를 'yyyyMMdd'로 표현된 날자
+ *************************************************************************************************/
+this.gfn_addMonth = function (sDate, nOffSet)
+{
+	var nYear = parseInt(sDate.substr(0, 4));
+	var nMonth = parseInt(sDate.substr(4, 2)) + nOffSet;
+	var nDate = parseInt(sDate.substr(6, 2));
+
+	return this.gfn_dateTime(nYear, nMonth, nDate);
+};
+
+/************************************************************************************************
+ * Function Name: gfn_dateTime
+ * Description  : MiPlatform에서 사용하던 Datetime형식으로 변환 Date Type을 String으로 변환
+ * Arguments    : nYear  - nYear (년도)
+ nMonth - nMonth (월)
+ nDate  - nDate (일)
+ * Return       : string 조합한 날짜를 리턴
+ *************************************************************************************************/
+this.gfn_dateTime = function (nYear, nMonth, nDate)
+{
+	if (nYear.toString().trim().length >= 5) 
+	{
+		var sDate = new String(nYear);
+		var nYear = sDate.substr(0, 4);
+		var nMonth = sDate.substr(4, 2);
+		var nDate = ((sDate.substr(6, 2) == "") ? 1 : sDate.substr(6, 2));
+		var nHours = ((sDate.substr(8, 2) == "") ? 0 : sDate.substr(8, 2));
+		var nMinutes = ((sDate.substr(10, 2) == "") ? 0 : sDate.substr(10, 2));
+		var nSeconds = ((sDate.substr(12, 2) == "") ? 0 : sDate.substr(12, 2));
+		var objDate = new Date(parseInt(nYear), parseInt(nMonth) - 1, parseInt(nDate), parseInt(nHours), parseInt(nMinutes), parseInt(nSeconds));
+	}
+	else 
+	{
+		var objDate = new Date(parseInt(nYear), parseInt(nMonth) - 1, parseInt(((nDate == null) ? 1 : nDate)));
+	}
+
+	var strYear = (objDate.getYear()).toString();
+	var strMonth = (objDate.getMonth() + 1).toString();
+	var strDate = objDate.getDate().toString();
+
+	if (strYear.length == 1) 
+	{
+		strYear = "0" + strYear;
+	}
+
+	if (strMonth.length == 1) 
+	{
+		strMonth = "0" + strMonth;
+	}
+
+	if (strDate.length == 1) 
+	{
+		strDate = "0" + strDate;
+	}
+
+	return strYear + strMonth + strDate;
+};
+
+/************************************************************************************************
+ * Function Name: gfn_getDiffDay
+ * Description  : 2개의 날짜간의 Day count
+ * Arguments    : sFdate - 시작일자
+ sTdate - 종료일자
+ * Return       : string 양 일자간의 Day count
+ *************************************************************************************************/
+this.gfn_getDiffDay = function (sFdate, sTdate)
+{
+	sFdate = new String(sFdate);
+	sFdate = sFdate.split(" ").join("").split("-").join("").split("/").join("");
+	sTdate = new String(sTdate);
+	sTdate = sTdate.split(" ").join("").split("-").join("").split("/").join("");
+
+	sFdate = this.gfn_left(sFdate, 8);
+	sTdate = this.gfn_left(sTdate, 8);
+
+	if (sFdate.length != 8 || sTdate.length != 8
+		 || nexacro.isNumeric(sFdate) == false || nexacro.isNumeric(sTdate) == false
+		 || this.gfn_getDay(sFdate) == -1 || this.gfn_getDay(sTdate) == -1) 
+	{
+		return null;
+	}
+
+	var nDiffDate = this.gfn_strToDate(sTdate) - this.gfn_strToDate(sFdate);
+	var nDay = 1000 * 60 * 60 * 24;
+
+	nDiffDate = parseInt(nDiffDate / nDay);
+
+	if (nDiffDate < 0) 
+	{
+		nDiffDate = nDiffDate - 1;
+	}
+	else 
+	{
+		nDiffDate = nDiffDate + 1;
+	}
+
+	return nDiffDate;
+};
+
+/************************************************************************************************
+ * Function Name: gfn_strToDate
+ * Description  : String 타입의 형식을 날짜형식으로 변환
+ * Arguments    : sDate  - 일자(yyyyMMdd)
+ * Return       : Date 날자
+ *************************************************************************************************/
+this.gfn_strToDate = function (sDate)
+{
+	var nYear = parseInt(sDate.substr(0, 4));
+	var nMonth = parseInt(sDate.substr(4, 2)) - 1;
+	var nDate = parseInt(sDate.substr(6, 2));
+
+	return new Date(nYear, nMonth, nDate);
+};
+
+/************************************************************************************************
+ * Function Name: gfn_getYearMonth
+ * Description  : 해당년월 구하기
+ * Arguments    : sDate  - 일자(yyyyMMdd)
+ * Return       : string yyyyMM형태의 년월 ( 예 : "201211" )
+ *************************************************************************************************/
+this.gfn_getYearMonth = function (sDate)
+{
+	if (this.gfn_isNull(sDate)) 
+	{
+		sDate = this.gfn_today();
+	}
+
+	return sDate.substr(0, 6);
+};
+
+/************************************************************************************************
+ * Function Name: gfn_getDay
+ * Description  : 입력된 날자로부터 요일을 구함
+ * Arguments    : sDate  - 일자(yyyyMMdd)
+ * Return       : Integer 요일에 따른 숫자
+ *************************************************************************************************/
+this.gfn_getDay = function (sDate)
+{
+	var objDate = this.gfn_strToDate(sDate);
+
+	return objDate.getDay();
+};
+
+this.getWeekOfYear = function(date)
+{
+	date = this.gfn_strToDate(date);
+	
+	var onejan = new Date();
+	
+	onejan.setYear(date.getFullYear());
+	onejan.setMonth(0);
+	onejan.setDate(1);	
+							
+	return Math.ceil((((date - onejan) / 86400000) + onejan.getDay()+1)/7);
+}]]></Script>

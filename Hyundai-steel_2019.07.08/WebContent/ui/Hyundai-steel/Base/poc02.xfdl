@@ -1,0 +1,633 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.0">
+  <Form id="poc01" width="1024" height="1230" titletext="여비등록">
+    <Layouts>
+      <Layout height="1230" mobileorientation="landscape" width="1024" screenid="Desktop_screen">
+        <Static id="Static00" taborder="0" text="출장정보입력" left="10" top="5" height="34" right="10" cssclass="sta_WF_title"/>
+        <Div id="Div00" taborder="1" left="10" top="44" height="360" right="10" cssclass="div_WF_box01" text="">
+          <Layouts>
+            <Layout>
+              <Static id="Static04" taborder="0" text="출장구분" left="10" top="10" width="120" height="41" cssclass="sta_WF_table_required"/>
+              <Static id="Static09" taborder="1" left="Static04:-1" top="10" width="37.13%" height="41" cssclass="sta_WF_tablebg"/>
+              <Radio id="Radio00" taborder="2" left="145" top="15" width="184" height="30" innerdataset="ds_rdo01" codecolumn="code" datacolumn="data" direction="horizontal" columncount="2" index="1" text="Female" value="2"/>
+              <Static id="Static00" taborder="3" text="출장장소" left="10" top="50" width="120" height="41" cssclass="sta_WF_table_required"/>
+              <Static id="Static01" taborder="4" left="Static00:-1" top="50" width="37.13%" height="41" cssclass="sta_WF_tablebg"/>
+              <Radio id="Radio01" taborder="5" left="145" top="55" width="184" height="30" innerdataset="ds_rdo02" codecolumn="code" datacolumn="data" direction="horizontal" columncount="2" index="1" text="Female" value="2"/>
+              <Static id="Static02" taborder="6" text="출장기간" left="Static09:-1" top="10" width="120" height="41" cssclass="sta_WF_table_required"/>
+              <Static id="Static07" taborder="7" top="10" height="41" cssclass="sta_WF_tablebg" left="Static02:-1" right="10"/>
+              <Combo id="Combo00" taborder="8" text="" left="Static02:5" top="14" width="126" height="33" innerdataset="Dataset01" index="-1" displaynulltext="2018-03-20"/>
+              <Static id="Static03" taborder="9" text="~" left="Combo00:5" top="14" width="9" height="33"/>
+              <Combo id="Combo01" taborder="10" left="Combo00:20" top="14" width="126" height="33" innerdataset="Dataset01" displaynulltext="2018-03-20"/>
+              <Static id="Static05" taborder="11" text="출장지" left="Static01:-1" top="50" width="120" height="41" cssclass="sta_WF_table_required"/>
+              <Static id="Static06" taborder="12" top="50" height="41" cssclass="sta_WF_tablebg" left="Static05:-1" right="10"/>
+              <Edit id="Edit02" taborder="13" left="Static05:5" top="56" width="19.36%" height="31" value="수원 성균관대학교" text="수원 성균관대학교"/>
+              <Static id="Static08" taborder="14" text="출장목적" left="10" top="90" width="120" height="41" cssclass="sta_WF_table_required"/>
+              <Static id="Static10" taborder="15" top="90" height="41" cssclass="sta_WF_tablebg" left="Static08:-1" right="10"/>
+              <Edit id="Edit03" taborder="16" left="Static08:5" top="95" height="31" value="기획연구 전반적인 추진체계 및 연구 범위 최종 점검, 보건의료 &amp; 의료기기 분야 메카트렌드 도출 효율화 방안 모색" text="기획연구 전반적인 추진체계 및 연구 범위 최종 점검, 보건의료 &amp; 의료기기 분야 메카트렌드 도출 효율화 방안 모색" right="16"/>
+              <Static id="Static11" taborder="17" text="1일차 출장내용" left="10" top="130" width="120" height="41" cssclass="sta_WF_tablelabel"/>
+              <Static id="Static12" taborder="18" top="130" width="37.23%" height="41" cssclass="sta_WF_tablebg" left="Static11:-1"/>
+              <Static id="Static14" taborder="22" text="2일차 출장내용" left="Static12:-1" top="130" width="120" height="41" cssclass="sta_WF_tablelabel"/>
+              <Edit id="Edit04" taborder="19" left="135" top="135" width="Static12:96.78%" height="31" text="HSY"/>
+              <Static id="Static13" taborder="20" top="130" height="41" cssclass="sta_WF_tablebg" left="Static14:-1" right="10"/>
+              <Edit id="Edit05" taborder="21" left="Static14:4" top="135" height="31" text="HSY" right="16"/>
+              <Static id="Static15" taborder="23" text="3일차 출장내용" left="10" top="170" width="120" height="41" cssclass="sta_WF_tablelabel"/>
+              <Static id="Static16" taborder="24" top="170" width="37.23%" height="41" cssclass="sta_WF_tablebg" left="Static15:-1"/>
+              <Static id="Static18" taborder="28" text="4일차 출장내용" left="Static16:-1" top="170" width="120" height="41" cssclass="sta_WF_tablelabel"/>
+              <Edit id="Edit06" taborder="25" left="135" top="175" width="Static16:96.78%" height="31" text="HSY"/>
+              <Static id="Static17" taborder="26" top="170" height="41" cssclass="sta_WF_tablebg" left="Static18:-1" right="10"/>
+              <Edit id="Edit07" taborder="27" left="Static18:4" top="175" height="31" text="HSY" right="16"/>
+              <Static id="Static19" taborder="29" text="5일차 출장내용" left="10" top="210" width="120" height="41" cssclass="sta_WF_tablelabel"/>
+              <Static id="Static20" taborder="30" top="210" width="37.23%" height="41" cssclass="sta_WF_tablebg" left="Static19:-1"/>
+              <Static id="Static22" taborder="34" text="6일차 출장내용" left="Static20:-1" top="210" width="120" height="41" cssclass="sta_WF_tablelabel"/>
+              <Edit id="Edit08" taborder="31" left="135" top="215" width="Static20:96.78%" height="31" text="HSY"/>
+              <Static id="Static21" taborder="32" top="210" height="41" cssclass="sta_WF_tablebg" left="Static22:-1" right="10"/>
+              <Edit id="Edit09" taborder="33" left="Static22:4" top="215" height="31" text="HSY" right="16"/>
+              <Static id="Static23" taborder="35" text="7일차 출장내용" left="10" top="250" width="120" height="57" cssclass="sta_WF_tablelabel"/>
+              <Static id="Static24" taborder="36" top="250" height="57" cssclass="sta_WF_tablebg" left="Static23:-1" right="10"/>
+              <TextArea id="TextArea00" taborder="37" left="Static23:5" top="255" height="47" right="16"/>
+              <Static id="Static26" taborder="40" text="기등록여부" left="10" top="306" width="120" height="41" cssclass="sta_WF_tablelabel"/>
+              <Static id="Static25" taborder="38" left="Static26:-1" top="306" height="41" cssclass="sta_WF_tablebg" right="10"/>
+              <CheckBox id="CheckBox00" taborder="39" left="145" top="312" width="232" height="30" value="false" visible="true"/>
+              <Static id="Static27" taborder="41" text="※ 지역명을 입력" left="Edit02:10" top="56" width="100" height="31" cssclass="sta_WF_helpTxt"/>
+            </Layout>
+            <Layout name="Layout0">
+              <Static id="Static26" left="10" top="384" width="120" height="41"/>
+              <Static id="Static25" left="Static26:-1" top="384" height="41" right="10"/>
+              <CheckBox id="CheckBox00" left="145" top="390" width="232" height="30"/>
+              <Static id="Static23" left="10" top="328" width="120" height="57"/>
+              <Static id="Static24" left="Static23:-1" top="328" height="57" right="10"/>
+              <TextArea id="TextArea00" left="Static23:5" top="333" height="47" right="16"/>
+              <Static id="Static22" left="Static20:-1" top="288" width="120" height="41"/>
+              <Static id="Static21" top="288" height="41" right="10" left="Static22:-1"/>
+              <Edit id="Edit09" left="Static22:4" top="293" height="31" right="16"/>
+              <Static id="Static19" left="10" top="288" width="120" height="41"/>
+              <Static id="Static20" left="Static19:-1" top="288" width="32.17%" height="41"/>
+              <Edit id="Edit08" left="135" top="293" height="31" right="Static22:5"/>
+              <Static id="Static18" left="Static16:-1" top="248" width="120" height="41"/>
+              <Static id="Static17" top="248" height="41" left="Static18:-1" right="10"/>
+              <Edit id="Edit07" left="Static18:4" top="253" height="31" right="16"/>
+              <Static id="Static15" left="10" top="248" width="120" height="41"/>
+              <Static id="Static16" left="Static15:-1" top="248" width="32.17%" height="41"/>
+              <Edit id="Edit06" left="135" top="253" height="31" right="Static18:5"/>
+              <Static id="Static14" left="Static12:-1" top="208" width="120" height="41"/>
+              <Static id="Static13" top="208" height="41" left="Static14:-1" right="10"/>
+              <Edit id="Edit05" left="Static14:4" top="213" height="31" right="16"/>
+              <Static id="Static09" width="32.17%" left="Static04:-1" top="10" height="80"/>
+              <Static id="Static01" width="32.17%" left="Static00:-1" top="89" height="80"/>
+              <Static id="Static05" left="Static01:-1" top="89" width="120" height="80"/>
+              <Radio id="Radio00" left="137" top="35" width="184" height="30"/>
+              <Radio id="Radio01" left="137" top="114" width="184" height="30"/>
+              <Static id="Static12" left="Static11:-1" top="208" width="32.17%" height="41"/>
+              <Edit id="Edit04" right="Static14:5" left="135" top="213" height="31"/>
+              <Static id="Static08" left="10" top="168" width="120" height="41"/>
+              <Static id="Static10" left="Static08:-1" top="168" height="41" right="10"/>
+              <Edit id="Edit03" left="Static08:5" top="173" height="31" right="16"/>
+              <Static id="Static11" left="10" top="208" width="120" height="41"/>
+              <Static id="Static00" left="10" top="89" width="120" height="80"/>
+              <Static id="Static06" top="89" height="80" left="Static05:-1" right="10"/>
+              <Edit id="Edit02" top="95" height="31" left="Static05:4" right="16"/>
+              <Static id="Static27" left="Static05:4" top="130" height="31" right="16"/>
+              <Static id="Static04" left="10" top="10" width="120" height="80"/>
+              <Static id="Static02" left="Static09:-1" top="10" width="120" height="80"/>
+              <Static id="Static07" top="10" height="80" left="Static02:-1" right="10"/>
+              <Combo id="Combo01" left="Static02:4" top="52" width="Static07:82.80%" height="33"/>
+              <Combo id="Combo00" left="Static02:4" top="14" width="Static07:82.80%" height="33"/>
+              <Static id="Static03" left="Combo00:5" top="14" height="33" right="16"/>
+            </Layout>
+            <Layout name="Layout1">
+              <Static id="Static23" left="10" top="450" width="130" height="57"/>
+              <Static id="Static24" left="Static23:-1" top="450" height="57" right="10"/>
+              <TextArea id="TextArea00" left="Static23:5" top="455" height="47" right="16"/>
+              <Static id="Static26" left="10" top="506" width="130" height="41"/>
+              <Static id="Static25" left="Static26:-1" top="506" height="41" right="10"/>
+              <CheckBox id="CheckBox00" left="Static26:5" top="512" width="232" height="30"/>
+              <Static id="Static22" left="10" top="410" width="130" height="41"/>
+              <Static id="Static21" left="Static22:-1" top="410" height="41" right="10"/>
+              <Edit id="Edit09" left="Static22:4" top="415" height="31" right="16"/>
+              <Static id="Static19" left="10" top="370" width="130" height="41"/>
+              <Static id="Static20" left="Static19:-1" top="370" height="41" right="10"/>
+              <Edit id="Edit08" left="Static19:4" top="375" height="31" right="16"/>
+              <Static id="Static18" left="10" top="330" width="130" height="41"/>
+              <Static id="Static17" left="Static18:-1" top="330" height="41" right="10"/>
+              <Edit id="Edit07" left="Static18:4" top="335" height="31" right="16"/>
+              <Static id="Static15" left="10" top="290" width="130" height="41"/>
+              <Static id="Static16" left="Static15:-1" top="290" height="41" right="10"/>
+              <Edit id="Edit06" left="Static15:4" top="295" height="31" right="16"/>
+              <Static id="Static14" left="10" top="250" width="130" height="41"/>
+              <Static id="Static13" left="Static14:-1" top="250" height="41" right="10"/>
+              <Edit id="Edit05" left="Static14:4" top="255" height="31" right="16"/>
+              <Static id="Static11" left="10" top="210" width="130" height="41"/>
+              <Static id="Static12" left="Static11:-1" top="210" height="41" right="10"/>
+              <Edit id="Edit04" left="Static11:4" top="215" height="31" right="16"/>
+              <Static id="Static08" left="10" top="170" width="130" height="41"/>
+              <Static id="Static10" left="Static08:-1" top="170" height="41" right="10"/>
+              <Edit id="Edit03" left="Static08:5" top="175" height="31" right="16"/>
+              <Static id="Static05" left="10" top="130" width="130" height="41" text="출장지"/>
+              <Static id="Static06" left="Static05:-1" top="130" height="41" right="10"/>
+              <Edit id="Edit02" left="Static05:5" top="136" width="31.88%" height="31"/>
+              <Static id="Static27" left="Edit02:7" top="136" height="31" right="16"/>
+              <Static id="Static00" left="10" top="90" width="130" height="41"/>
+              <Static id="Static01" left="Static00:-1" top="90" height="41" right="10"/>
+              <Radio id="Radio01" left="155" top="95" width="184" height="30"/>
+              <Static id="Static02" left="10" top="50" width="130" height="41"/>
+              <Static id="Static07" left="Static02:-1" top="50" height="41" right="10"/>
+              <Combo id="Combo00" text="" left="Static02:5" top="54" width="28.6%" height="33"/>
+              <Combo id="Combo01" left="Static03:14" top="54" height="33" right="16"/>
+              <Static id="Static03" left="Combo00:11" top="53" width="9" height="33"/>
+              <Static id="Static09" left="Static04:-1" top="10" height="41" right="10"/>
+              <Static id="Static04" left="10" top="10" width="130" height="41"/>
+              <Radio id="Radio00" left="155" top="15" width="184" height="30"/>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Div id="Div02" taborder="2" left="10" top="870" height="320" right="10">
+          <Layouts>
+            <Layout>
+              <Grid id="Grid00" taborder="0" left="0" top="0" height="270" binddataset="ds_grd01" autosizingtype="none" autofittype="col" right="0">
+                <Formats>
+                  <Format id="default">
+                    <Columns>
+                      <Column size="116"/>
+                      <Column size="65"/>
+                      <Column size="92"/>
+                      <Column size="80"/>
+                    </Columns>
+                    <Rows>
+                      <Row size="30" band="head"/>
+                      <Row size="30" band="head"/>
+                      <Row size="30"/>
+                      <Row size="30"/>
+                    </Rows>
+                    <Band id="head">
+                      <Cell text="예산비목"/>
+                      <Cell col="1" text="지급처"/>
+                      <Cell col="2" text="증빙금액"/>
+                      <Cell col="3" text="지급은행"/>
+                      <Cell row="1" text="계좌번호"/>
+                      <Cell row="1" col="1" text="예금주"/>
+                      <Cell row="1" col="2" text="여비기준"/>
+                      <Cell row="1" col="3" text="일정변경여부"/>
+                    </Band>
+                    <Band id="body">
+                      <Cell text="bind:예산비목"/>
+                      <Cell col="1" text="bind:지급처"/>
+                      <Cell col="2" text="bind:증빙금액"/>
+                      <Cell col="3" text="bind:지급은행"/>
+                      <Cell row="1" text="bind:계좌번호"/>
+                      <Cell row="1" col="1" text="bind:예금주"/>
+                      <Cell row="1" col="2" text="bind:여비기준"/>
+                      <Cell row="1" col="3" text="bind:일정변경여부"/>
+                    </Band>
+                  </Format>
+                </Formats>
+              </Grid>
+              <Button id="btn_save" taborder="1" text="저장" top="280" width="70" height="30" cssclass="btn_WF_btnR" right="146" onclick="fn_comBtnOnClick"/>
+              <Button id="btn_delete" taborder="2" text="삭제" top="280" width="70" height="30" cssclass="btn_WF_btnR" right="73" onclick="fn_comBtnOnClick"/>
+              <Button id="btn_close" taborder="3" text="닫기" top="280" width="70" height="30" right="0" cssclass="btn_WF_btnGr" onclick="fn_comBtnOnClick"/>
+            </Layout>
+            <Layout name="Layout0">
+              <Grid id="Grid00" left="0" top="0" height="280" right="0"/>
+              <Button id="btn_save" top="294" width="70" height="26" right="146"/>
+              <Button id="btn_delete" top="294" width="70" height="26" right="73"/>
+              <Button id="btn_close" top="294" width="70" height="26" right="0"/>
+            </Layout>
+            <Layout name="Layout1">
+              <Grid id="Grid00" left="0" top="0" height="293" right="0"/>
+              <Button id="btn_save" top="303" width="90" height="40" right="186"/>
+              <Button id="btn_delete" top="303" width="90" height="40" right="93"/>
+              <Button id="btn_close" top="303" width="90" height="40" right="0"/>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Static id="Static01" taborder="3" text="여비신청정보" left="10" top="410" height="34" right="10" cssclass="sta_WF_title"/>
+        <Div id="Div01" taborder="4" left="10" top="449" height="381" right="10" cssclass="div_WF_box01" text="">
+          <Layouts>
+            <Layout>
+              <Static id="Static04" taborder="0" text="지급유형" left="10" top="10" width="120" height="41" cssclass="sta_WF_table_required"/>
+              <Static id="Static09" taborder="1" left="Static04:-1" top="10" width="37.13%" height="41" cssclass="sta_WF_tablebg"/>
+              <Static id="Static00" taborder="2" text="출장기간" left="10" top="50" width="120" height="41" cssclass="sta_WF_table_required"/>
+              <Static id="Static01" taborder="3" left="Static00:-1" top="50" width="37.13%" height="41" cssclass="sta_WF_tablebg"/>
+              <Static id="Static02" taborder="4" text="일정" top="10" width="120" height="41" cssclass="sta_WF_table_required" left="Static09:-1"/>
+              <Static id="Static07" taborder="5" top="10" height="41" cssclass="sta_WF_tablebg" left="Static02:-1" right="10"/>
+              <Edit id="Edit00" taborder="6" left="Static02:5" top="14" width="40" height="33" value="0" text="0"/>
+              <Static id="Static03" taborder="7" text="박" left="Edit00:6" top="14" width="12" height="33"/>
+              <Static id="Static05" taborder="8" text="출장비목" top="50" width="120" height="41" cssclass="sta_WF_table_required" left="Static01:-1"/>
+              <Static id="Static06" taborder="9" top="50" height="41" cssclass="sta_WF_tablebg" left="Static05:-1" right="10"/>
+              <Edit id="Edit01" taborder="10" left="Static03:8" top="14" width="40" height="33" value="1" text="1"/>
+              <Static id="Static28" taborder="11" text="일" left="Edit01:6" top="14" width="12" height="33"/>
+              <CheckBox id="CheckBox01" taborder="12" text="일정변경" left="Edit01:44" top="15" width="84" height="30" value="false" visible="true"/>
+              <Combo id="Combo00" taborder="13" left="135" top="54" width="110" height="33" innerdataset="Dataset01" displaynulltext="2018-03-20"/>
+              <Static id="Static29" taborder="14" text="~" left="251" top="54" width="9" height="33"/>
+              <Combo id="Combo01" taborder="15" left="266" top="54" width="110" height="33" innerdataset="Dataset01" displaynulltext="2018-03-20"/>
+              <Combo id="Combo02" taborder="16" text="국내출장" left="Static05:5" top="54" height="33" innerdataset="innerdataset" codecolumn="codecolumn" datacolumn="datacolumn" right="16" index="0" value="1">
+                <Dataset id="innerdataset">
+                  <ColumnInfo>
+                    <Column id="codecolumn" size="256"/>
+                    <Column id="datacolumn" size="256"/>
+                  </ColumnInfo>
+                  <Rows>
+                    <Row>
+                      <Col id="codecolumn">1</Col>
+                      <Col id="datacolumn">국내출장</Col>
+                    </Row>
+                    <Row>
+                      <Col id="codecolumn">2</Col>
+                      <Col id="datacolumn">국외출장</Col>
+                    </Row>
+                  </Rows>
+                </Dataset>
+              </Combo>
+              <Static id="Static08" taborder="17" text="지급처구분" left="10" top="90" width="120" height="41" cssclass="sta_WF_tablelabel"/>
+              <Static id="Static10" taborder="18" left="Static08:-1" top="90" width="37.13%" height="41" cssclass="sta_WF_tablebg"/>
+              <Combo id="Combo03" taborder="19" left="Static08:5" top="94" width="Static10:29.57%" height="33" innerdataset="Dataset01"/>
+              <Static id="Static27" taborder="72" text="영수증구분" top="94" height="33" width="60" left="Combo03:78"/>
+              <Static id="Static31" taborder="21" text="지급처" top="90" width="120" height="41" cssclass="sta_WF_tablelabel" left="Static10:-1"/>
+              <Combo id="Combo04" taborder="20" top="94" height="33" innerdataset="Dataset01" left="Static27:8" right="Static31:5"/>
+              <Static id="Static32" taborder="22" top="90" height="41" cssclass="sta_WF_tablebg" left="Static31:-1" right="10"/>
+              <Combo id="Combo06" taborder="25" text="지급처1" left="Static31:5" top="94" width="18.46%" height="33" innerdataset="innerdataset" codecolumn="codecolumn" datacolumn="datacolumn" index="0" value="1">
+                <Dataset id="innerdataset">
+                  <ColumnInfo>
+                    <Column id="codecolumn" size="256"/>
+                    <Column id="datacolumn" size="256"/>
+                  </ColumnInfo>
+                  <Rows>
+                    <Row>
+                      <Col id="codecolumn">1</Col>
+                      <Col id="datacolumn">지급처1</Col>
+                    </Row>
+                    <Row>
+                      <Col id="codecolumn">2</Col>
+                      <Col id="datacolumn">지급처2</Col>
+                    </Row>
+                    <Row>
+                      <Col id="codecolumn">3</Col>
+                      <Col id="datacolumn">지급처3</Col>
+                    </Row>
+                  </Rows>
+                </Dataset>
+              </Combo>
+              <Edit id="Edit03" taborder="23" left="Combo06:2" top="94" height="33" text="HSY" right="16"/>
+              <Combo id="Combo05" taborder="24" text="지급유형1" left="135" top="14" width="Static09:97.04%" height="33" innerdataset="innerdataset" codecolumn="codecolumn" datacolumn="datacolumn" index="0" value="1">
+                <Dataset id="innerdataset">
+                  <ColumnInfo>
+                    <Column id="codecolumn" size="256"/>
+                    <Column id="datacolumn" size="256"/>
+                  </ColumnInfo>
+                  <Rows>
+                    <Row>
+                      <Col id="codecolumn">1</Col>
+                      <Col id="datacolumn">지급유형1</Col>
+                    </Row>
+                    <Row>
+                      <Col id="codecolumn">2</Col>
+                      <Col id="datacolumn">지급유형2</Col>
+                    </Row>
+                    <Row>
+                      <Col id="codecolumn">3</Col>
+                      <Col id="datacolumn">지급유형3</Col>
+                    </Row>
+                    <Row>
+                      <Col id="codecolumn">4</Col>
+                      <Col id="datacolumn">지급유형4</Col>
+                    </Row>
+                    <Row>
+                      <Col id="codecolumn">5</Col>
+                      <Col id="datacolumn">지급유형5</Col>
+                    </Row>
+                  </Rows>
+                </Dataset>
+              </Combo>
+              <Static id="Static11" taborder="26" text="지급은행" left="10" top="130" width="120" height="41" cssclass="sta_WF_tablelabel"/>
+              <Static id="Static12" taborder="27" left="Static11:-1" top="130" width="37.13%" height="41" cssclass="sta_WF_tablebg"/>
+              <Static id="Static13" taborder="29" text="계좌번호/예금주" top="130" width="120" height="41" cssclass="sta_WF_tablelabel" left="Static12:-1"/>
+              <Combo id="Combo07" taborder="28" text="국민은행" left="135" top="134" width="Static12:97.04%" height="33" innerdataset="innerdataset" codecolumn="codecolumn" datacolumn="datacolumn" index="0" value="1">
+                <Dataset id="innerdataset">
+                  <ColumnInfo>
+                    <Column id="codecolumn" size="256"/>
+                    <Column id="datacolumn" size="256"/>
+                  </ColumnInfo>
+                  <Rows>
+                    <Row>
+                      <Col id="codecolumn">1</Col>
+                      <Col id="datacolumn">국민은행</Col>
+                    </Row>
+                    <Row>
+                      <Col id="codecolumn">2</Col>
+                      <Col id="datacolumn">우리은행</Col>
+                    </Row>
+                    <Row>
+                      <Col id="codecolumn">3</Col>
+                      <Col id="datacolumn">신한은행</Col>
+                    </Row>
+                    <Row>
+                      <Col id="codecolumn">4</Col>
+                      <Col id="datacolumn">기업은행</Col>
+                    </Row>
+                    <Row>
+                      <Col id="codecolumn">5</Col>
+                      <Col id="datacolumn">카카오뱅크</Col>
+                    </Row>
+                  </Rows>
+                </Dataset>
+              </Combo>
+              <Static id="Static14" taborder="30" top="130" height="41" cssclass="sta_WF_tablebg" left="Static13:-1" right="10"/>
+              <Combo id="Combo08" taborder="31" left="Static13:5" top="134" width="27.15%" height="33" innerdataset="Dataset01"/>
+              <Edit id="Edit02" taborder="32" left="Combo08:2" top="134" height="33" text="HSY" right="16"/>
+              <Static id="Static15" taborder="33" text="일비" left="10" top="170" width="120" height="41" cssclass="sta_WF_tablelabel"/>
+              <Static id="Static16" taborder="34" top="170" width="37.13%" height="41" cssclass="sta_WF_tablebg" left="Static15:-1"/>
+              <Edit id="Edit04" taborder="35" left="Static15:5" top="174" width="Static16:29.57%" height="33" value="20,000" text="20,000"/>
+              <Edit id="Edit05" taborder="37" left="Edit04:2" top="174" width="40" height="33" value="1" text="1"/>
+              <Static id="Static17" taborder="36" text="x" left="Edit05:8" top="174" width="12" height="33"/>
+              <Static id="Static18" taborder="39" text="여비기준" top="170" width="120" height="41" cssclass="sta_WF_tablelabel" left="Static16:-1"/>
+              <Edit id="Edit06" taborder="38" left="Static17:3" top="174" height="33" value="20,000" text="20,000" right="Static18:5"/>
+              <Static id="Static19" taborder="40" top="170" height="41" cssclass="sta_WF_tablebg" left="Static18:-1" right="10"/>
+              <Radio id="Radio01" taborder="41" left="Static18:15" top="175" width="220" height="30" innerdataset="ds_rdo03" codecolumn="code" datacolumn="data" direction="horizontal" columncount="2" index="1" text="Female" value="2"/>
+              <Static id="Static20" taborder="42" text="숙박료" left="10" top="210" width="120" height="41" cssclass="sta_WF_tablelabel"/>
+              <Static id="Static21" taborder="43" top="210" width="37.13%" height="41" cssclass="sta_WF_tablebg" left="Static20:-1"/>
+              <Edit id="Edit07" taborder="44" left="20.96%" top="214" width="Static21:29.57%" height="33" value="100,000" text="100,000"/>
+              <Edit id="Edit08" taborder="46" left="Edit07:2" top="214" width="40" height="33" value="0" text="0"/>
+              <Static id="Static22" taborder="45" text="x" left="Edit08:8" top="214" width="12" height="33"/>
+              <Static id="Static41" taborder="69" text="첨부문서" top="210" width="120" height="41" cssclass="sta_WF_tablelabel" left="Static21:-1"/>
+              <Edit id="Edit09" taborder="47" left="Static22:3" top="214" height="33" value="0" text="0" right="Static41:5"/>
+              <Static id="Static26" taborder="52" top="250" width="37.13%" height="41" cssclass="sta_WF_tablebg" left="129"/>
+              <Static id="Static23" taborder="48" text="근거규정" top="250" width="120" height="41" cssclass="sta_WF_tablelabel" left="Static26:-1"/>
+              <Static id="Static24" taborder="49" top="250" height="41" cssclass="sta_WF_tablebg" left="Static23:-1" right="10"/>
+              <TextArea id="TextArea00" taborder="50" left="Static23:5" top="254" height="33" right="16"/>
+              <Static id="Static25" taborder="51" text="식비" left="10" top="250" width="120" height="41" cssclass="sta_WF_tablelabel"/>
+              <Combo id="Combo09" taborder="57" left="Static25:5" top="254" width="Static26:19.62%" height="33" innerdataset="Dataset01"/>
+              <Edit id="Edit10" taborder="53" left="Combo09:2" top="254" width="Static21:29.57%" height="33" value="100,000" text="100,000"/>
+              <Edit id="Edit11" taborder="55" left="Edit10:2" top="254" width="40" height="33" value="0" text="0"/>
+              <Static id="Static33" taborder="54" text="x" left="Edit11:8" top="254" width="12" height="33"/>
+              <Edit id="Edit12" taborder="56" left="Static33:3" top="254" height="33" value="0" text="0" right="Static23:5"/>
+              <Static id="Static34" taborder="58" text="교통비" left="10" top="290" width="120" height="41" cssclass="sta_WF_tablelabel"/>
+              <Static id="Static35" taborder="59" top="290" width="37.13%" height="41" cssclass="sta_WF_tablebg" left="Static34:-1"/>
+              <Edit id="Edit13" taborder="60" left="135" top="295" width="185" height="31" value="0" text="0"/>
+              <Static id="Static36" taborder="61" text="※ 왕복합계액 표기" left="Edit13:10" top="295" width="104" height="31" cssclass="sta_WF_helpTxt"/>
+              <Static id="Static37" taborder="62" text="합계/신청액" left="10" top="330" width="120" height="41" cssclass="sta_WF_table_required"/>
+              <Static id="Static38" taborder="63" top="330" width="37.13%" height="41" cssclass="sta_WF_tablebg" left="Static37:-1"/>
+              <Edit id="Edit14" taborder="64" left="Static37:5" top="335" width="Static38:47.58%" height="31" value="26,000" text="26,000"/>
+              <Static id="Static39" taborder="66" text="사용내역" top="290" width="120" height="81" cssclass="sta_WF_tablelabel" left="Static35:-1"/>
+              <Edit id="Edit15" taborder="65" left="Edit14:2" top="335" width="Static38:48.92%" height="31" value="26,000" text="26,000"/>
+              <Static id="Static40" taborder="67" top="290" height="81" cssclass="sta_WF_tablebg" left="Static39:-1" right="10"/>
+              <TextArea id="TextArea01" taborder="68" left="Static39:5" top="296" height="68" right="16"/>
+              <Static id="Static42" taborder="70" top="210" height="41" cssclass="sta_WF_tablebg" left="Static41:-1" right="10"/>
+              <FileUpload id="FileUpload00" taborder="71" left="Static41:5" top="214" height="35" onitemchanged="Div01_FileUpload00_onitemchanged" buttonsize="80" itemheight="33" right="23"/>
+            </Layout>
+            <Layout name="Layout0">
+              <Static id="Static25" text="식비"/>
+              <Static id="Static18" text="여비기준"/>
+              <Edit id="Edit13" width="117" left="135" top="295" height="31"/>
+              <Edit id="Edit15" left="Edit14:2" top="335" height="31" right="Static39:5"/>
+              <Combo id="Combo05" left="Static04:5" top="14" height="33" right="Static02:5"/>
+              <Static id="Static01" left="Static00:-1" top="50" height="41" width="33.78%"/>
+              <Combo id="Combo04" top="94" height="33" left="276" right="Static31:5"/>
+              <Static id="Static09" left="Static04:-1" top="10" width="33.78%" height="41"/>
+              <Static id="Static10" left="Static08:-1" top="90" width="33.78%" height="41"/>
+              <Static id="Static12" left="Static11:-1" top="130" width="33.78%" height="41"/>
+              <Static id="Static16" left="Static15:-1" top="170" width="33.78%" height="41"/>
+              <Static id="Static21" left="Static20:-1" top="210" width="33.78%" height="41"/>
+              <Static id="Static26" left="129" top="250" width="33.78%" height="41"/>
+              <Static id="Static35" left="Static34:-1" top="290" width="33.78%" height="41"/>
+              <Static id="Static38" left="Static37:-1" top="330" width="33.78%" height="41"/>
+              <Static id="Static36" text="※ 왕복합계액&#13;&#10;    표기" left="Edit13:10" top="297" width="104" height="31"/>
+              <Static id="Static27" text="영수증&#13;&#10;구분" top="96" width="41" height="33" left="Combo03:12"/>
+              <Edit id="Edit14" width="Static38:117" left="Static37:5" top="335" height="31"/>
+              <Edit id="Edit11" left="Edit10:2" top="254" width="Static26:18.33%" height="33"/>
+              <Static id="Static33" left="Edit11:5" top="254" width="12" height="33"/>
+              <Edit id="Edit12" left="Static33:1" top="254" height="33" right="Static23:5"/>
+              <Combo id="Combo07" right="Static13:5" left="135" top="134" height="33"/>
+              <Combo id="Combo01" right="Static05:5" left="266" top="54" height="33"/>
+              <Edit id="Edit04" top="174" height="33" left="Static15:5" width="Static16:37.05%"/>
+              <Edit id="Edit07" top="214" height="33" left="Static20:5" width="Static21:37.05%"/>
+              <Combo id="Combo03" left="Static08:5" top="94" height="33" width="Static10:88"/>
+              <Edit id="Edit08" width="40" left="Edit07:3" top="214" height="33"/>
+              <Edit id="Edit05" width="40" left="Edit04:3" top="174" height="33"/>
+              <Edit id="Edit06" left="Static17:3" top="174" height="33" right="Static18:5"/>
+              <Edit id="Edit09" left="Static22:3" top="214" height="33" right="Static41:5"/>
+              <Radio id="Radio01" left="Static18:15" top="175" width="Static19:89.92%" height="30"/>
+              <Combo id="Combo08" left="Static13:5" top="134" width="18.36%" height="33"/>
+              <Static id="Static42" left="Static41:-1" top="210" height="41" right="10"/>
+              <CheckBox id="CheckBox01" left="Edit01:20" top="15" width="84" height="30"/>
+              <Static id="Static31" left="Static10:-1" top="90" width="120" height="41"/>
+            </Layout>
+            <Layout name="Layout1">
+              <Static id="Static36" left="Edit13:10" top="455" width="Static35:35.92%" height="31"/>
+              <Static id="Static39" left="10" top="650" width="130" bottom="10"/>
+              <Static id="Static40" left="Static39:-1" top="650" right="10" bottom="10"/>
+              <TextArea id="TextArea01" left="Static39:5" top="655" right="16" bottom="15"/>
+              <Static id="Static23" left="10" top="610" width="130" height="41"/>
+              <Static id="Static24" left="Static23:-1" top="610" height="41" right="11"/>
+              <TextArea id="TextArea00" left="Static23:5" top="614" height="33" right="16"/>
+              <Edit id="Edit12" left="Static33:3" top="414" height="33" right="16"/>
+              <Static id="Static41" left="10" top="570" width="130" height="41"/>
+              <Static id="Static42" left="Static41:-1" top="570" height="41" right="10"/>
+              <FileUpload id="FileUpload00" left="Static41:5" top="574" height="35" right="18"/>
+              <Edit id="Edit09" left="Static22:3" top="374" height="33" right="16"/>
+              <Static id="Static18" left="10" top="530" width="130" height="41"/>
+              <Static id="Static19" left="Static18:-1" top="530" height="41" right="10"/>
+              <Radio id="Radio01" left="Static18:9" top="535" width="Static19:68.97%" height="30"/>
+              <Edit id="Edit06" left="Static17:3" top="334" height="33" right="16"/>
+              <Static id="Static37" left="10" top="490" width="130" height="41"/>
+              <Static id="Static38" left="Static37:-1" top="490" height="41" right="10"/>
+              <Edit id="Edit14" left="Static37:5" top="495" width="Static38:46.25%" height="31"/>
+              <Edit id="Edit15" left="Edit14:4" top="495" height="31" right="16"/>
+              <Static id="Static34" left="10" top="450" width="130" height="41"/>
+              <Static id="Static35" left="Static34:-1" top="450" height="41" right="10"/>
+              <Edit id="Edit13" left="Static34:5" top="455" width="Static35:50%" height="31"/>
+              <Static id="Static20" text="숙박료" left="10" top="370" width="130" height="41"/>
+              <Static id="Static26" left="129" top="410" height="41" right="10"/>
+              <Static id="Static25" left="10" top="410" width="130" height="41"/>
+              <Combo id="Combo09" left="Static25:5" top="414" width="Static26:27.90%" height="33"/>
+              <Edit id="Edit10" left="Combo09:5" top="414" width="Static21:28.13%" height="33"/>
+              <Edit id="Edit11" left="Edit10:5" top="414" width="Static26:15.67%" height="33"/>
+              <Static id="Static33" left="Edit11:5" top="414" width="12" height="33"/>
+              <Static id="Static15" left="10" top="330" width="130" height="41" text="일비"/>
+              <Static id="Static16" left="Static15:-1" top="330" height="41" right="10"/>
+              <Edit id="Edit04" left="Static15:5" top="334" width="Static16:28.13%" height="33"/>
+              <Edit id="Edit05" left="Edit04:8" top="334" width="40" height="33"/>
+              <Static id="Static17" left="Edit05:8" top="334" width="12" height="33"/>
+              <Static id="Static21" left="Static20:-1" top="370" height="41" right="10"/>
+              <Edit id="Edit07" left="Static20:5" top="374" width="Static21:28.13%" height="33"/>
+              <Edit id="Edit08" left="Edit07:8" top="374" width="40" height="33"/>
+              <Static id="Static22" left="Edit08:8" top="374" height="33" width="12"/>
+              <Static id="Static13" left="10" top="290" width="130" height="41"/>
+              <Static id="Static14" left="Static13:-1" top="290" height="41" right="10"/>
+              <Combo id="Combo08" left="Static13:5" top="294" width="34.28%" height="33"/>
+              <Edit id="Edit02" left="Combo08:3" top="294" height="33" right="16"/>
+              <Static id="Static11" left="10" top="250" width="130" height="41"/>
+              <Static id="Static12" left="Static11:-1" top="250" height="41" right="10"/>
+              <Combo id="Combo07" left="Static11:5" top="254" height="33" right="16"/>
+              <Static id="Static31" left="10" top="210" width="130" height="41"/>
+              <Static id="Static32" left="Static31:-1" top="210" height="41" right="10"/>
+              <Combo id="Combo04" right="17" top="174" width="Static10:32.60%" height="33"/>
+              <Combo id="Combo06" left="Static31:5" top="214" width="34.28%" height="33"/>
+              <Edit id="Edit03" left="Combo06:5" top="214" height="33" right="16"/>
+              <Static id="Static08" left="10" top="170" width="130" height="41"/>
+              <Static id="Static10" left="Static08:-1" top="170" height="41" right="10"/>
+              <Combo id="Combo03" left="Static08:5" top="174" width="Static10:28.13%" height="33"/>
+              <Static id="Static27" top="174" width="Static10:22.65%" height="33" right="125" cssclass="sta_WF_basicTxt"/>
+              <Static id="Static05" left="10" top="130" width="130" height="41"/>
+              <Static id="Static06" left="Static05:-1" top="130" height="41" right="10"/>
+              <Combo id="Combo02" left="Static05:5" top="134" height="33" right="16"/>
+              <Static id="Static00" left="10" top="90" width="130" height="41"/>
+              <Static id="Static01" left="Static00:-1" top="90" height="41" right="10"/>
+              <Combo id="Combo00" left="Static00:5" top="94" width="Static01:45.14%" height="33" displaynulltext="2018-03-20"/>
+              <Static id="Static29" left="Combo00:6" top="94" width="9" height="33"/>
+              <Combo id="Combo01" left="Static29:6" top="94" height="33" right="16" displaynulltext="2018-03-20"/>
+              <Static id="Static02" left="10" top="50" width="130" height="41"/>
+              <Static id="Static07" left="Static02:-1" top="50" height="41" right="10"/>
+              <Edit id="Edit00" left="Static02:5" top="54" width="40" height="33"/>
+              <CheckBox id="CheckBox01" text="일정변경" top="55" height="30" right="16" width="87"/>
+              <Static id="Static28" left="Edit01:6" top="54" width="12" height="33"/>
+              <Static id="Static03" left="Edit00:6" top="54" width="12" height="33"/>
+              <Edit id="Edit01" left="Static03:5" top="54" width="40" height="33"/>
+              <Static id="Static09" right="10" left="Static04:-1" top="10" height="41"/>
+              <Combo id="Combo05" left="Static04:5" top="14" height="33" right="16"/>
+              <Static id="Static04" width="130" left="10" top="10" height="41"/>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Static id="Static02" taborder="5" text="여비신청내역" left="10" top="833" height="34" right="10" cssclass="sta_WF_title"/>
+      </Layout>
+      <Layout name="Layout0" width="768" height="1350" mobileorientation="landscape" screenid="Desktop_screen" scrollbartype="autoindicator">
+        <Div id="Div02" left="10" top="970" height="350" right="10"/>
+        <Div id="Div00" left="10" top="44" height="436" right="10"/>
+        <Static id="Static02" left="10" top="933" height="34" right="10"/>
+        <Div id="Div01" left="10" top="529" height="401" right="10"/>
+        <Static id="Static01" left="10" top="490" height="34" right="10"/>
+        <Static id="Static00" left="10" top="5" height="34" right="10"/>
+      </Layout>
+      <Layout name="Layout1" width="480" height="810" mobileorientation="landscape" stepcount="3" screenid="Desktop_screen">
+        <Div id="Div02" left="10" top="45" height="526" right="10" positionstep="2" text=""/>
+        <Div id="Div00" left="10" top="45" right="10" text="" bottom="30"/>
+        <Static id="Static01" positionstep="1" left="10" top="0" height="45" right="10"/>
+        <Div id="Div01" positionstep="1" left="10" top="45" right="10" bottom="30" formscrollbartype="autoindicator"/>
+        <Static id="Static02" left="13" top="0" height="45" right="7" positionstep="2"/>
+        <Static id="Static00" left="10" top="0" height="45" right="10" text="출장정보입력"/>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="ds_grd">
+        <ColumnInfo>
+          <Column id="예산비목" type="STRING" size="256"/>
+          <Column id="지급처" type="STRING" size="256"/>
+          <Column id="증빙금액" type="STRING" size="256"/>
+          <Column id="지급은행" type="STRING" size="256"/>
+          <Column id="계좌번호" type="STRING" size="256"/>
+          <Column id="예금주" type="STRING" size="256"/>
+          <Column id="여비기준" type="STRING" size="256"/>
+          <Column id="일정변경유무" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row/>
+          <Row/>
+          <Row/>
+          <Row/>
+          <Row/>
+          <Row/>
+        </Rows>
+      </Dataset>
+      <Dataset id="ds_rdo01">
+        <ColumnInfo>
+          <Column id="code" type="STRING" size="256"/>
+          <Column id="data" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="code">1</Col>
+            <Col id="data">국내</Col>
+          </Row>
+          <Row>
+            <Col id="code">2</Col>
+            <Col id="data">국외</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="ds_rdo02">
+        <ColumnInfo>
+          <Column id="code" type="STRING" size="256"/>
+          <Column id="data" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="code">1</Col>
+            <Col id="data">시내</Col>
+          </Row>
+          <Row>
+            <Col id="code">2</Col>
+            <Col id="data">시외</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="ds_rdo03">
+        <ColumnInfo>
+          <Column id="code" type="STRING" size="256"/>
+          <Column id="data" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="code">1</Col>
+            <Col id="data">교비기준</Col>
+          </Row>
+          <Row>
+            <Col id="code">2</Col>
+            <Col id="data">별도기준</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="ds_grd01">
+        <ColumnInfo>
+          <Column id="예산비목" type="STRING" size="256"/>
+          <Column id="지급처" type="STRING" size="256"/>
+          <Column id="증빙금액" type="STRING" size="256"/>
+          <Column id="지급은행" type="STRING" size="256"/>
+          <Column id="계좌번호" type="STRING" size="256"/>
+          <Column id="예금주" type="STRING" size="256"/>
+          <Column id="여비기준" type="STRING" size="256"/>
+          <Column id="일정변경여부" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="예산비목">국내여비</Col>
+            <Col id="지급처">김성민</Col>
+            <Col id="증빙금액">26,000</Col>
+            <Col id="지급은행">신한(구조흥)</Col>
+            <Col id="계좌번호">918-04-694945</Col>
+            <Col id="예금주">김성민</Col>
+            <Col id="여비기준">별도기준</Col>
+          </Row>
+          <Row>
+            <Col id="예산비목">국내여비</Col>
+            <Col id="지급처">이윤주</Col>
+            <Col id="증빙금액">26,000</Col>
+            <Col id="지급은행">신한은행</Col>
+            <Col id="계좌번호">110357403844</Col>
+            <Col id="예금주">이윤주</Col>
+            <Col id="여비기준">별도기준</Col>
+          </Row>
+          <Row>
+            <Col id="예산비목">국내여비</Col>
+            <Col id="지급처">김정호</Col>
+            <Col id="증빙금액">26,000</Col>
+            <Col id="지급은행">신한은행</Col>
+            <Col id="계좌번호">110380234360</Col>
+            <Col id="예금주">김정호</Col>
+            <Col id="여비기준">별도기준</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.1"><![CDATA[this.fn_comBtnOnClick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	switch (obj.name)
+	{
+		case "btn_save" :
+		case "btn_delete" :
+		case "btn_close" :
+			alert(obj.text + "은(는) 개발 예정입니다.");
+			break;
+	}
+};
+]]></Script>
+  </Form>
+</FDL>
