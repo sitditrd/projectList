@@ -1,0 +1,13 @@
+﻿{
+    "name": "nxlib",
+    "version": "1.0.0.1",
+    "description": "nxlib",
+    "license": "",
+    "scripts": [
+        "nxlib/Common.js",
+		"nxlib/Override.js",
+    ],
+
+    "objInfo": []
+}
+//@ sourceURL=nxlib.json

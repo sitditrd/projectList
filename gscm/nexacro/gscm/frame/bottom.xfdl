@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.0">
+  <Form id="bottom" width="1280" height="30" titletext="New Form">
+    <Layouts>
+      <Layout height="30" mobileorientation="landscape" width="1280">
+        <Static id="Static00" taborder="0" left="0" top="0" height="30" cssclass="sta_BT_bg01" right="0"/>
+        <Static id="Static01" taborder="1" text="알림메세지 총 &lt;b v='true'&gt;&lt;/fc v='#3366cc'&gt;5 건&lt;/fc&gt;&lt;/b&gt;이 있습니다. " left="10" top="0" width="330" height="30" cssclass="sta_BT_alarm" usedecorate="true"/>
+      </Layout>
+    </Layouts>
+  </Form>
+</FDL>

@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project type="module" version="2.0">
+  <ObjInfo>
+    <File url="metainfo\CalendarWeekSingle.info"/>
+  </ObjInfo>
+  <Scripts>
+    <File url="CalendarWeekSingle.js"/>
+  </Scripts>
+  <DesignScripts>
+    <File url="Design\DesignCalendarWeekSingle.js"/>
+  </DesignScripts>
+  <CSSInfo>
+    <PropertyInfo/>
+  </CSSInfo>
+  <StatusInfo/>
+  <MethodInfo/>
+  <EventHandlerInfo/>
+  <CommonInfo/>
+  <Resource url=".\Resources\"/>
+  <Help url=".\_help_\"/>
+  <License url=".\_license_\"/>
+</Project>

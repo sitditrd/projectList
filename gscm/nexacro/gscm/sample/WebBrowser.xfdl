@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.0">
+  <Form id="WebBrowser" width="1010" height="691" titletext="PDF 미리보기" onload="WebBrowser_onload">
+    <Layouts>
+      <Layout height="691" mobileorientation="landscape" width="1010">
+        <Static id="stVal1" taborder="1" text="PDF 미리보기" cssclass="sta_WF_title01" left="10" top="0" width="421" height="50"/>
+        <Grid id="grid_List" taborder="1" left="10" top="90" width="270" bottom="10" binddataset="dsList" autofittype="col" oncellclick="grid_List_oncellclick">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="30"/>
+                <Column size="200"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="No"/>
+                <Cell col="1" text="파일명"/>
+              </Band>
+              <Band id="body">
+                <Cell text="expr:currow + 1" textAlign="right"/>
+                <Cell col="1" text="bind:Column0"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <WebBrowser id="web_pdfPreView" taborder="2" left="290" top="90" right="10" bottom="10"/>
+        <Static id="Static02" taborder="3" text="파일 리스트" cssclass="sta_WF_title02" left="10" top="50" width="100" height="30"/>
+        <Static id="Static00" taborder="4" text="PDF PreView" cssclass="sta_WF_title02" left="290" top="50" width="100" height="30"/>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="dsList">
+        <ColumnInfo>
+          <Column id="Column0" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="Column0">개발_가이드</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">개발도구_가이드</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">고급_개발_가이드</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">넥사크로플랫폼_17_교육교재</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">배포_가이드</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">서버_설정_가이드</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">제품_정보</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">초보자를_위한_자습서</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.1"><![CDATA[this.WebBrowser_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
+{
+};
+
+this.grid_List_oncellclick = function(obj:nexacro.Grid,e:nexacro.GridClickEventInfo)
+{
+	var nRowPos = this.dsList.rowposition;
+	var sUrl = "http://14.63.224.112/PoC/gscmSDS/service/file/";
+	var sFileNm = this.dsList.getColumn(nRowPos, "Column0");
+	var fullURl = sUrl + sFileNm + ".pdf";
+	
+	this.web_pdfPreView.set_url(fullURl);
+};]]></Script>
+  </Form>
+</FDL>

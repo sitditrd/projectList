@@ -1,0 +1,107 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.0">
+  <Form id="left" width="160" height="720" titletext="New Form">
+    <Layouts>
+      <Layout height="720" mobileorientation="landscape" width="160">
+        <Static id="Static00" taborder="0" left="0" top="0" width="160" bottom="0" cssclass="sta_LF_bg01"/>
+        <Static id="Static01" taborder="1" left="0" top="0" width="160" height="135" cssclass="sta_LF_pic" text="Kim Han Kook"/>
+        <Static id="Static02" taborder="2" left="0" top="134" width="54" height="35" cssclass="sta_LF_icon01"/>
+        <Static id="Static03" taborder="3" left="53" top="134" width="54" height="35" cssclass="sta_LF_icon02"/>
+        <Static id="Static04" taborder="4" left="106" top="134" width="54" height="35" cssclass="sta_LF_icon03"/>
+        <Button id="Button00" taborder="5" text="Button00" left="0" top="169" width="159" height="31" cssclass="btn_LF_menu"/>
+        <Button id="Button01" taborder="6" text="Button00" left="0" top="200" width="159" height="31" cssclass="btn_LF_menu"/>
+        <Button id="Button02" taborder="7" text="Button00" left="0" top="261" width="159" height="31" cssclass="btn_LF_menu"/>
+        <Button id="Button03" taborder="8" text="Button00" left="0" top="231" width="159" height="31" cssclass="btn_LF_menu"/>
+        <Button id="Button04" taborder="9" text="Button00" left="0" top="382" width="159" height="31" cssclass="btn_LF_menu" enable="false"/>
+        <Button id="Button05" taborder="10" text="Button00" left="0" top="352" width="159" height="31" cssclass="btn_LF_menu"/>
+        <Button id="Button06" taborder="11" text="Button00" left="0" top="322" width="159" height="31" cssclass="btn_LF_menu"/>
+        <Button id="Button07" taborder="12" text="Button00" left="0" top="292" width="159" height="31" cssclass="btn_LF_menu"/>
+        <Grid id="Grid00" taborder="13" left="0" top="413" width="159" height="277" binddataset="Dataset00" autofittype="col" cssclass="grd_LF_menu" treeusecheckbox="false">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="80"/>
+              </Columns>
+              <Rows>
+                <Row size="31"/>
+              </Rows>
+              <Band id="body">
+                <Cell text="bind:Column0" displaytype="treeitemcontrol" treelevel="bind:Column1" edittype="tree"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="Dataset00">
+        <ColumnInfo>
+          <Column id="Column0" type="STRING" size="256"/>
+          <Column id="Column1" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="Column1">0</Col>
+            <Col id="Column0">대메뉴01</Col>
+          </Row>
+          <Row>
+            <Col id="Column1">0</Col>
+            <Col id="Column0">대메뉴02</Col>
+          </Row>
+          <Row>
+            <Col id="Column1">1</Col>
+            <Col id="Column0">중메뉴01</Col>
+          </Row>
+          <Row>
+            <Col id="Column1">2</Col>
+            <Col id="Column0">소메뉴01</Col>
+          </Row>
+          <Row>
+            <Col id="Column1">2</Col>
+            <Col id="Column0">소메뉴02</Col>
+          </Row>
+          <Row>
+            <Col id="Column1">2</Col>
+            <Col id="Column0">소메뉴03</Col>
+          </Row>
+          <Row>
+            <Col id="Column1">1</Col>
+            <Col id="Column0">중메뉴02</Col>
+          </Row>
+          <Row>
+            <Col id="Column1">2</Col>
+            <Col id="Column0">소메뉴04</Col>
+          </Row>
+          <Row>
+            <Col id="Column1">2</Col>
+            <Col id="Column0">소메뉴05</Col>
+          </Row>
+          <Row>
+            <Col id="Column1">2</Col>
+            <Col id="Column0">소메뉴06</Col>
+          </Row>
+          <Row>
+            <Col id="Column1">2</Col>
+            <Col id="Column0">소메뉴06</Col>
+          </Row>
+          <Row>
+            <Col id="Column1">0</Col>
+            <Col id="Column0">대메뉴02</Col>
+          </Row>
+          <Row>
+            <Col id="Column1">0</Col>
+            <Col id="Column0">대메뉴03</Col>
+          </Row>
+          <Row>
+            <Col id="Column1">0</Col>
+            <Col id="Column0">대메뉴04</Col>
+          </Row>
+          <Row>
+            <Col id="Column1">0</Col>
+            <Col id="Column0">대메뉴05</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+    </Objects>
+  </Form>
+</FDL>

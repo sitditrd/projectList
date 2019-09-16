@@ -1,0 +1,268 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.0">
+  <Form id="rMateChart2" width="1010" height="691" titletext="rChart연동" onload="rMateChart2_onload">
+    <Layouts>
+      <Layout height="691" mobileorientation="landscape" width="1010">
+        <WebBrowser id="WebBrowser00" taborder="0" left="10" top="10" height="328" right="10"/>
+        <Grid id="grdList" taborder="1" left="10" top="347" binddataset="dsList" right="10" bottom="10" autofittype="col">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="Month"/>
+                <Cell col="1" text="Profit"/>
+                <Cell col="2" text="Cost"/>
+                <Cell col="3" text="Revenue"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:Month"/>
+                <Cell col="1" text="bind:Profit" edittype="normal"/>
+                <Cell col="2" text="bind:Cost" edittype="normal"/>
+                <Cell col="3" text="bind:Revenue" edittype="normal"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="dsList" firefirstcount="0" firenextcount="0" useclientlayout="false" updatecontrol="true" enableevent="true" loadkeymode="keep" loadfiltermode="keep" reversesubsum="false" oncolumnchanged="dsList_oncolumnchanged">
+        <ColumnInfo>
+          <Column id="Month" type="STRING" size="20"/>
+          <Column id="Profit" type="BIGDECIMAL" size="256"/>
+          <Column id="Cost" type="BIGDECIMAL" size="256"/>
+          <Column id="Revenue" type="BIGDECIMAL" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="Month">Jan</Col>
+            <Col id="Profit">900</Col>
+            <Col id="Cost">1500</Col>
+            <Col id="Revenue">2300</Col>
+          </Row>
+          <Row>
+            <Col id="Month">Feb</Col>
+            <Col id="Profit">1400</Col>
+            <Col id="Cost">1400</Col>
+            <Col id="Revenue">1200</Col>
+          </Row>
+          <Row>
+            <Col id="Month">Mar</Col>
+            <Col id="Profit">1500</Col>
+            <Col id="Cost">1200</Col>
+            <Col id="Revenue">1600</Col>
+          </Row>
+          <Row>
+            <Col id="Month">Apr</Col>
+            <Col id="Profit">1900</Col>
+            <Col id="Cost">1300</Col>
+            <Col id="Revenue">1300</Col>
+          </Row>
+          <Row>
+            <Col id="Month">May</Col>
+            <Col id="Profit">1400</Col>
+            <Col id="Cost">900</Col>
+            <Col id="Revenue">1000</Col>
+          </Row>
+          <Row>
+            <Col id="Month">Jun</Col>
+            <Col id="Profit">2000</Col>
+            <Col id="Cost">1000</Col>
+            <Col id="Revenue">1200</Col>
+          </Row>
+          <Row>
+            <Col id="Month">Jul</Col>
+            <Col id="Profit">1800</Col>
+            <Col id="Cost">1500</Col>
+            <Col id="Revenue">2300</Col>
+          </Row>
+          <Row>
+            <Col id="Month">Aug</Col>
+            <Col id="Profit">2500</Col>
+            <Col id="Cost">1400</Col>
+            <Col id="Revenue">1200</Col>
+          </Row>
+          <Row>
+            <Col id="Month">Sep</Col>
+            <Col id="Profit">3000</Col>
+            <Col id="Cost">1200</Col>
+            <Col id="Revenue">1600</Col>
+          </Row>
+          <Row>
+            <Col id="Month">Oct</Col>
+            <Col id="Profit">2000</Col>
+            <Col id="Cost">1300</Col>
+            <Col id="Revenue">1300</Col>
+          </Row>
+          <Row>
+            <Col id="Month">Nov</Col>
+            <Col id="Profit">2100</Col>
+            <Col id="Cost">900</Col>
+            <Col id="Revenue">1000</Col>
+          </Row>
+          <Row>
+            <Col id="Month">Dec</Col>
+            <Col id="Profit">1700</Col>
+            <Col id="Cost">1000</Col>
+            <Col id="Revenue">1200</Col>
+          </Row>
+          <Row>
+            <Col id="Month">Jan</Col>
+            <Col id="Profit">900</Col>
+            <Col id="Cost">1500</Col>
+            <Col id="Revenue">2300</Col>
+          </Row>
+          <Row>
+            <Col id="Month">Feb</Col>
+            <Col id="Profit">1400</Col>
+            <Col id="Cost">1400</Col>
+            <Col id="Revenue">1200</Col>
+          </Row>
+          <Row>
+            <Col id="Month">Mar</Col>
+            <Col id="Profit">1500</Col>
+            <Col id="Cost">1200</Col>
+            <Col id="Revenue">1600</Col>
+          </Row>
+          <Row>
+            <Col id="Month">Apr</Col>
+            <Col id="Profit">1900</Col>
+            <Col id="Cost">1300</Col>
+            <Col id="Revenue">1300</Col>
+          </Row>
+          <Row>
+            <Col id="Month">May</Col>
+            <Col id="Profit">1400</Col>
+            <Col id="Cost">900</Col>
+            <Col id="Revenue">1000</Col>
+          </Row>
+          <Row>
+            <Col id="Month">Jun</Col>
+            <Col id="Profit">2000</Col>
+            <Col id="Cost">1000</Col>
+            <Col id="Revenue">1200</Col>
+          </Row>
+          <Row>
+            <Col id="Month">Jul</Col>
+            <Col id="Profit">1800</Col>
+            <Col id="Cost">1500</Col>
+            <Col id="Revenue">2300</Col>
+          </Row>
+          <Row>
+            <Col id="Month">Aug</Col>
+            <Col id="Profit">2500</Col>
+            <Col id="Cost">1400</Col>
+            <Col id="Revenue">1200</Col>
+          </Row>
+          <Row>
+            <Col id="Month">Sep</Col>
+            <Col id="Profit">3000</Col>
+            <Col id="Cost">1200</Col>
+            <Col id="Revenue">1600</Col>
+          </Row>
+          <Row>
+            <Col id="Month">Oct</Col>
+            <Col id="Profit">2000</Col>
+            <Col id="Cost">1300</Col>
+            <Col id="Revenue">1300</Col>
+          </Row>
+          <Row>
+            <Col id="Month">Nov</Col>
+            <Col id="Profit">2100</Col>
+            <Col id="Cost">900</Col>
+            <Col id="Revenue">1000</Col>
+          </Row>
+          <Row>
+            <Col id="Month">Dec</Col>
+            <Col id="Profit">1700</Col>
+            <Col id="Cost">1000</Col>
+            <Col id="Revenue">1200</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.1"><![CDATA[include "lib::rMateChartH5.xjs";
+include "lib::rMateChartH5License.xjs";
+
+this.layoutStr = '\
+<rMateChart backgroundColor="0xFFFFFF" borderStyle="none" cornerRadius="5">\
+	<Options>\
+		<Caption text="Annual Report"/>\
+		<DataEditor showOnInit="true"  useCloseButton="false" editorHeight="94" reverseRow="true" textAlign="right"/>\
+	</Options>\
+	<Column3DChart showDataTips="true" dataTipJsFunction="dataTipFunc">\
+		/* \
+			dataTipJsFunction : Column3DChart 시리즈에 마우스 오버될 때 실행되는 Javascript함수로 \
+			html파일과 Form 내에 정의한 Javascript함수로 데이터를 보낸 후 Javascript 에서 반환되는 값을 Tooltip에 보여줍니다. \
+			** HTML5모드만을 사용할 경우 dataTipFunc를 window.NEXACROWEBBROWSER.parent.dataTipFunc 로 주시면 이 Form의 dataTipFunc가 실행됩니다. \
+		*/ \
+		<horizontalAxis>\
+			<CategoryAxis categoryField="Month" displayName="날짜"/>\
+		</horizontalAxis>\
+		<verticalAxis>\
+			<LinearAxis displayName="금액"/>\
+		</verticalAxis>\
+		<series>\
+			<Column3DSeries id="series1" yField="Profit" displayName="Profit">\
+				<showDataEffect>\
+					<SeriesInterpolate/>\
+				</showDataEffect>\
+			</Column3DSeries>\
+			<Column3DSeries id="series2" yField="Cost" displayName="Cost">\
+				<showDataEffect>\
+					<SeriesInterpolate/>\
+				</showDataEffect>\
+			</Column3DSeries>\
+			<Column3DSeries id="series3" yField="Revenue" displayName="Revenue">\
+				<showDataEffect>\
+					<SeriesInterpolate/>\
+				</showDataEffect>\
+			</Column3DSeries>\
+		</series>\
+	</Column3DChart>\
+</rMateChart>\
+';
+
+this.rMateChart2_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
+{
+	//var webRoot = nexacro.getApplication().gvWebRootURL;
+	var webRoot = "http://14.63.224.112/gscm/service";
+	var htmlUrl = webRoot + "/rChart/rChartSample.html"; // 차트를 그릴 html의 url
+	var scriptRootUrl = webRoot + "/rChart/rMateChartH5"; // rMateChartH5의 assets과 js가 저장된 url (이 디렉토리의 아래에 JS/ 와 Assets/ 디렉토리가 있어야 함)
+	
+	// Form이 완선된 후 차트를 생성합니다.
+	this.rMateChartCreate(this.WebBrowser00, scriptRootUrl, htmlUrl, this.makeChartVars());
+};
+
+this.makeChartVars = function()
+{
+	var chartVars = "";
+
+	var rMateOnLoadCallFunction = "rMateChartOnLoad";
+	chartVars += "rMateOnLoadCallFunction="+rMateOnLoadCallFunction;
+
+	return chartVars;
+};
+
+this.rMateChartOnLoad = function()
+{
+	this.rMateChartSetLayout(this.WebBrowser00, this.layoutStr);
+	this.rMateChartSetData(this.WebBrowser00, this.rMateChartDataSetToXml(this.dsList));
+};
+
+this.dsList_oncolumnchanged = function(obj:nexacro.NormalDataset,e:nexacro.DSColChangeEventInfo)
+{
+	this.rMateChartSetData(this.WebBrowser00, this.rMateChartDataSetToXmlWithColumn(this.dsList, "Month,Profit,Cost,Revenue"));
+};
+]]></Script>
+  </Form>
+</FDL>

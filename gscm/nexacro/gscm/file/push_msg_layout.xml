@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<message_layout> 
+	<message type="TEST"> 
+		<field id="msgId" type="STRING" size="256" key="true"/>
+		<field id="beforeVal" type="STRING" size="256"/>
+		<field id="currVal" type="STRING" size="256"/>
+		<field id="upDnVal" type="STRING" size="256"/>
+		<field id="upDnRate" type="STRING" size="256"/>
+		<field id="sellHo" type="STRING" size="256"/>
+		<field id="buyHo" type="STRING" size="256"/>
+	</message>
+	
+	<message type="ALRM"> 
+		<field id="msgId" type="STRING" size="256" key="true"/>
+		<field id="msg" type="STRING" size="256"/>
+	</message>
+</message_layout>

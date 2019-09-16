@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ENV version="2.1">
+  <Environment themeid="theme::temp01">
+    <ScreenDefinition>
+      <Screen id="Desktop_screen" type="desktop" themeid="theme::temp01" httptimeout="1000"/>
+    </ScreenDefinition>
+    <Variables/>
+    <Cookies/>
+    <httpheader/>
+  </Environment>
+</ENV>

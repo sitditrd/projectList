@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.0">
+  <Form id="filter_std" width="200" height="392" titletext="New Form" onload="filter_std_onload">
+    <Layouts>
+      <Layout height="392" mobileorientation="landscape" width="200">
+        <Button id="btn_week" taborder="0" text="Week" top="5" width="43" height="23" cssclass="btn_WF_basic03" left="5" onclick="btn_week_onclick"/>
+        <Button id="btn_sum" taborder="1" text="Sum" top="5" width="43" height="23" cssclass="btn_WF_basic03" left="53" onclick="btn_sum_onclick"/>
+        <Button id="btn_omit" taborder="2" text="Omit 0" top="5" width="43" height="23" cssclass="btn_WF_basic03" left="101" onclick="btn_omit_onclick"/>
+        <Button id="btn_na" taborder="3" text="N/A" top="5" width="43" height="23" cssclass="btn_WF_basic03" left="149" onclick="btn_na_onclick"/>
+        <Div id="divFilter" taborder="4" left="5" top="33" right="5" bottom="5"/>
+      </Layout>
+    </Layouts>
+    <Script type="xscript5.1"><![CDATA[
+this.filter_std_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
+{
+	this.divFilter.form.fv_objBizForm = this.parent.parent.divWork.form;
+};
+
+this.btn_week_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	var form = this.divFilter.form;
+	
+	form["fn_onclickByWeek"] && form["fn_onclickByWeek"].call(form, obj, e);
+};
+
+this.btn_sum_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	var form = this.divFilter.form;
+	
+	form["fn_onclickBySum"] && form["fn_onclickBySum"].call(form, obj, e);
+};
+
+this.btn_omit_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	var form = this.divFilter.form;
+	
+	form["fn_onclickByOmit"] && form["fn_onclickByOmit"].call(form, obj, e);
+};
+
+this.btn_na_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	var form = this.divFilter.form;
+	
+	form["fn_onclickByNA"] && form["fn_onclickByNA"].call(form, obj, e);
+};
+]]></Script>
+    <Objects>
+      <Dataset id="_ds_param">
+        <ColumnInfo>
+          <Column id="dummy" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row/>
+        </Rows>
+      </Dataset>
+    </Objects>
+  </Form>
+</FDL>

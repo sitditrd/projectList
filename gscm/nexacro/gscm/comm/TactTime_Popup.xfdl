@@ -1,0 +1,346 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.0">
+  <Form id="Multi_Popup" width="800" height="680" titletext="팝업화면" scrolltype="none" scrollbartype="none none" onload="Multi_Popup_onload">
+    <Layouts>
+      <Layout height="680" mobileorientation="landscape" width="800">
+        <Static id="Static01" taborder="4" text="" left="0" top="649" right="0" height="32" background="#c4c4c4" color="white" font="normal 700 16pt/normal &quot;Baskerville Old Face&quot;"/>
+        <Static id="Static00" taborder="0" text="  MultiTactPopup" left="0" top="0" right="0" height="36" background="#2918a9" color="white" font="normal 700 16pt/normal &quot;Baskerville Old Face&quot;"/>
+        <Button id="btn_Close" taborder="1" text="닫기" top="653" width="72" height="22" right="6" escapebutton="false" onclick="comm_Click"/>
+        <Button id="btn_Confirm" taborder="2" text="확인" top="653" width="72" height="22" right="86" onclick="comm_Click"/>
+        <Button id="btn_Exit" taborder="3" text="x" top="5" width="24" height="22" right="8" escapebutton="true" onclick="comm_Click" font="normal 700 13pt/normal &quot;Arial&quot;" background="transparent"/>
+        <Static id="Static02" taborder="5" text="Manager_ID" left="8" top="44" width="103" height="30"/>
+        <Static id="Static03" taborder="6" text="Department_ID" left="8" top="82" width="103" height="30"/>
+        <Grid id="grd_First_Name" taborder="7" left="4" top="120" width="385" height="525" binddataset="dsOutput3" autofittype="col" onheadclick="grd_First_Name_onheadclick">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="335"/>
+                <Column size="48"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="FIRST_NAME"/>
+                <Cell col="1" displaytype="checkboxcontrol" edittype="checkbox" text="0"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:FIRST_NAME"/>
+                <Cell col="1" displaytype="checkboxcontrol" edittype="checkbox" text="bind:CHK"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Grid id="grd_Last_Name" taborder="8" left="398" top="158" width="398" height="487" autofittype="col" binddataset="dsOutput4" onheadclick="grd_Last_Name_onheadclick">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="349"/>
+                <Column size="48"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="LAST_NAME"/>
+                <Cell col="1" displaytype="checkboxcontrol" edittype="checkbox"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:LAST_NAME"/>
+                <Cell col="1" displaytype="checkboxcontrol" edittype="checkbox" text="bind:CHK"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Static id="Static04" taborder="9" text="ExecuteTime" left="398" top="82" width="103" height="30"/>
+        <Static id="Static05" taborder="10" text="TactTime" left="398" top="44" width="103" height="30"/>
+        <Static id="Static06" taborder="11" text="Priority" left="620" top="44" width="63" height="30"/>
+        <Edit id="edt_ExecuteTime" taborder="12" left="509" top="82" height="30" width="287" enable="true"/>
+        <Static id="Static07" taborder="13" text="Last_Name_Search" left="398" top="120" width="114" height="30"/>
+        <Edit id="edt_Filter" taborder="14" left="517" top="120" width="244" height="29" inputtype="number" onkeydown="edt_Filter_onkeydown" onkeyup="edt_Filter_onkeyup"/>
+        <Button id="btn_Filter" taborder="15" left="765" top="119" height="30" width="31" background="url('imagerc::btn_WF_search02.png') no-repeat center center" border="1px solid" onclick="btn_Filter_onclick"/>
+        <Edit id="edt_Tacttime" taborder="16" left="509" top="44" width="103" height="30" inputtype="number" onkeyup="edt_Tacttime_onkeyup"/>
+        <Edit id="edt_Priority" taborder="17" left="691" top="44" height="30" width="105" inputtype="number"/>
+        <Combo id="cmb_First_Name" taborder="18" text="" left="119" top="44" width="270" height="30" innerdataset="dsOutput" codecolumn="CODE" datacolumn="CAPTION" onitemchanged="Combo_onitemchanged"/>
+        <Combo id="cmb_Last_Name" taborder="19" text="" left="119" top="81" width="270" height="30" innerdataset="dsOutput2" codecolumn="CODE" datacolumn="CAPTION" onitemchanged="Combo_onitemchanged"/>
+      </Layout>
+    </Layouts>
+    <Script type="xscript5.1"><![CDATA[/************************************************************************************************
+* 01. 업무구분 : 공통 - 공통
+* 02. 화면명   : 다중삽입 ()
+* 03. 화면설명 : 
+* 04. 작성일   : 2019.06.12
+* 05. 작성자   : 안주환
+* 06. 수정이력 :
+***********************************************************************************************
+*     수정일          이  름    사유
+***********************************************************************************************
+*     
+************************************************************************************************/
+
+/************************************************************************************************
+* 공통 라이브러리 INCLUDE 영역
+************************************************************************************************/
+include "Script::CommUtil.xjs"; 	
+include "Script::ext_CommEco.xjs";
+
+/************************************************************************************************
+* 전역 변수 영역
+************************************************************************************************/
+
+/************************************************************************************************
+* FORM 영역
+************************************************************************************************/
+this.Multi_Popup_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
+{
+	this.fnInitForm();
+};
+
+this.fnValidation = function()
+{
+	var msgAry = new Array();
+	
+	if(!this.dsOutput3.getCaseCount("CHK == 1") > 0)
+		msgAry.push("FIRST_NAME을 선택해 주십시오.\n");
+	if(!this.dsOutput4.getCaseCount("CHK == 1") > 0)
+		msgAry.push("LAST_NAME을 선택해 주십시오.\n");
+	if(this.gfnIsEmpty(this.edt_Tacttime.value))
+		msgAry.push("TactTime을 지정해 주십시오.\n");
+	if(this.gfnIsEmpty(this.edt_Priority.value))
+		msgAry.push("Priority을 지정해 주십시오.\n");
+		
+	return msgAry.join(", ");
+};
+
+/************************************************************************************************
+* FORM 공통 FUNCTION 영역
+************************************************************************************************/
+this.fnInitForm = function()
+{
+	this.fnSearch();
+};
+
+this.fnGetReturn = function()
+{
+	var ds_FIRST_NAME = new nexacro.Dataset();
+	var ds_LAST_NAME = new nexacro.Dataset();	
+	
+	ds_FIRST_NAME.addColumn("FIRST_NAME", "STRING", 256);
+	ds_FIRST_NAME.addColumn("MANAGER_ID", "STRING", 256);
+	ds_FIRST_NAME.addColumn("CHK", "STRING", 256);
+	
+	for(var i=0; i<this.dsOutput3.rowcount; i++)
+	{
+		if(this.dsOutput3.getColumn(i, "CHK") == 1)
+		{
+			var nRow = ds_FIRST_NAME.addRow();
+			ds_FIRST_NAME.copyRow(nRow, this.dsOutput3, i);
+		}
+	}
+	
+	ds_LAST_NAME.addColumn("LAST_NAME", "STRING", 256);
+	ds_LAST_NAME.addColumn("DEPARTMENT_ID", "STRING", 256);
+	ds_LAST_NAME.addColumn("CHK", "STRING", 256);
+	
+	for(var i=0; i<this.dsOutput4.rowcount; i++)
+	{
+		if(this.dsOutput4.getColumn(i, "CHK") == 1)
+		{
+			var nRow = ds_LAST_NAME.addRow();
+			ds_LAST_NAME.copyRow(nRow, this.dsOutput4, i);
+		}
+	}
+				 
+	var sArgument = {	
+						ds_FIRST_NAME : ds_FIRST_NAME,
+					    ds_LAST_NAME : ds_LAST_NAME,
+					    "p_RowIndex" : this.parent.p_RowIndex
+				 	}; 
+					
+	this.commUtil.popupClose(sArgument);
+};
+
+/************************************************************************************************
+* TRANSACTION 및 추가 FUNCTION 영역
+************************************************************************************************/
+this.fnSearch = function()
+{
+	this.transaction
+	(
+		"Select",
+		"http://14.63.224.112/gscm/service/poc/poc_02_TactTimePopup.jsp",
+		"",
+		"dsOutput=dsOutput dsOutput2=dsOutput2 dsOutput3=dsOutput3 dsOutput4=dsOutput4",
+		"",
+		"fnCallBack"
+	)
+};
+
+this.fnCallBack = function(svcId, errCode, errMsg)
+{
+	if(errCode < 0)
+	{
+		this.alert("errCode : " + errCode + "\n" + errMsg + "errMsg");
+	}
+	else
+	{
+		if(svcId == "Select")
+		{
+			
+		}
+	}
+};
+
+/************************************************************************************************
+* 각 COMPONENT 별 EVENT 영역
+************************************************************************************************/
+this.comm_Click = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	switch(obj.name)
+	{
+		case "btn_Confirm" :
+			var valiCheck = this.fnValidation();
+			
+			if(valiCheck.length > 0)
+				alert(valiCheck);
+			else
+				this.fnGetReturn();
+				
+			break;
+			
+		case "btn_Close" : 
+			this.commUtil.popupClose("");
+			break;
+			
+		case "btn_Exit" : 
+			this.commUtil.popupClose("");
+			break;
+	}
+};
+
+this.Combo_onitemchanged = function(obj:nexacro.Combo,e:nexacro.ItemChangeEventInfo)
+{
+	switch(obj.name)
+	{
+		case "cmb_First_Name" : 
+			//초기화
+			this.dsOutput3.filter("");
+			//FilterSettings
+			this.dsOutput3.filter("MANAGER_ID == '" + obj.text + "'");
+			break;
+		case "cmb_Last_Name" : 
+			//초기화
+			this.dsOutput4.filter("");
+			//FilterSettings
+			this.dsOutput4.filter("DEPARTMENT_ID == '" + obj.text + "'");
+			break
+	}
+};
+
+this.edt_Filter_onkeydown = function(obj:nexacro.Edit, e:nexacro.KeyEventInfo)
+{
+	if(e.keycode == 13)
+	{
+		if(!this.edt_Filter.text.length > 0)
+			this.dsOutput4.filter("");
+		else
+			this.dsOutput4.filter("DEPARTMENT_ID == '" + obj.text + "'");
+	}
+};
+
+this.btn_Filter_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.dsOutput4.filter("DEPARTMENT_ID == '" + obj.text + "'");
+};
+
+this.edt_Tacttime_onkeyup = function(obj:nexacro.Edit,e:nexacro.KeyEventInfo)
+{
+	if(!this.gfnIsEmpty(this.edt_Tacttime.value))
+		this.edt_ExecuteTime.set_value(parseInt(this.edt_Tacttime.value)*1000);
+	else
+		this.edt_ExecuteTime.set_value("");
+};
+
+//FIRST_NAME 전체선택
+this.grd_First_Name_onheadclick = function(obj:nexacro.Grid,e:nexacro.GridClickEventInfo)
+{
+	if(e.col == 1)
+	{
+		var chk = this.grd_First_Name.getCellPropertyValue(e.row, e.cell, "text");
+		
+		if(chk == 0)
+		{
+			this.grd_First_Name.setCellProperty("head", e.cell, "text", 1);
+			
+			for(var i=0; i<this.dsOutput3.rowcount; i++)
+			{
+				this.dsOutput3.setColumn(i, "CHK", 1);
+			}
+		}
+		else
+		{
+			this.grd_First_Name.setCellProperty("head", e.cell, "text", 0);
+			
+			for(var i=0; i<this.dsOutput3.rowcount; i++)
+			{
+				this.dsOutput3.setColumn(i, "CHK", 0);
+			}
+		}
+	}	
+};
+
+//LAST_NAME 전체선택
+this.grd_Last_Name_onheadclick = function(obj:nexacro.Grid,e:nexacro.GridClickEventInfo)
+{
+	if(e.col == 1)
+	{
+		var chk = this.grd_Last_Name.getCellPropertyValue(e.row, e.cell, "text");
+		
+		if(chk == 0)
+		{
+			this.grd_Last_Name.setCellProperty("head", e.cell, "text", 1);
+			
+			for(var i=0; i<this.dsOutput4.rowcount; i++)
+			{
+				this.dsOutput4.setColumn(i, "CHK", 1);
+			}
+		}
+		else
+		{
+			this.grd_Last_Name.setCellProperty("head", e.cell, "text", 0);
+			
+			for(var i=0; i<this.dsOutput4.rowcount; i++)
+			{
+				this.dsOutput4.setColumn(i, "CHK", 0);
+			}
+		}
+	}	
+};
+
+this.edt_Filter_onkeyup = function(obj:nexacro.Edit,e:nexacro.KeyEventInfo)
+{
+	this.dsOutput4.filter("String(DEPARTMENT_ID).indexOf('" + obj.text + "') >= 0");
+};
+]]></Script>
+    <Objects>
+      <Dataset id="dsOutput3">
+        <ColumnInfo>
+          <Column id="FIRST_NAME" type="STRING" size="256"/>
+          <Column id="MANAGER_ID" type="STRING" size="256"/>
+          <Column id="CHK" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="dsOutput4">
+        <ColumnInfo>
+          <Column id="LAST_NAME" type="STRING" size="256"/>
+          <Column id="DEPARTMENT_ID" type="STRING" size="256"/>
+          <Column id="CHK" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="dsOutput2"/>
+      <Dataset id="dsOutput"/>
+    </Objects>
+  </Form>
+</FDL>

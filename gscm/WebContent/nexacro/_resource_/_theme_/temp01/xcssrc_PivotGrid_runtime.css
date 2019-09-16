@@ -1,0 +1,826 @@
+﻿
+        
+.nexainput.nexaleftalign
+{
+  text-align:left;
+}
+.nexainput.nexarightalign
+{
+  text-align:right;
+}
+.nexainput.nexacenteralign
+{
+  text-align:center;
+}
+
+.nexacontentsbox.nexaleftalign
+{
+  text-align:left;
+}
+.nexacontentsbox.nexarightalign
+{
+  text-align:right;
+}
+.nexacontentsbox.nexacenteralign
+{
+  text-align:center;
+}
+.celltreeline
+{
+  border : 1px dotted #999999;
+}
+.Edit, .MaskEdit, .TextArea, .EditControl, .MaskEditControl, .TextAreaControl
+{
+  cursor:text;
+}
+.Button .nexacontentsbox, .ButtonControl .nexacontentsbox
+{
+  text-align:center;
+}
+
+.FileDownload  .nexacontentsbox, .FileDownloadControl .nexacontentsbox
+{
+  text-align:center;
+}
+
+.IconTextControl .nexacontentsbox, .IconControl .nexacontentsbox
+{
+  text-align:center;
+}
+
+.DatePickerDayItemControl .nexacontentsbox, .DatePickerWeekItemControl .nexacontentsbox, .TitleBarButtonControl .nexacontentsbox
+{
+  text-align:center;
+}
+
+.MainFrame, .VScrollBarControl, .HScrollBarControl
+{
+  cursor:default;
+}
+.nexainput
+{
+  cursor:inherit;
+}
+
+.Static.sta_WF_lable
+{
+	background : #3d5287;
+	border : 1px solid #000e33;
+	border-radius : 0px;
+	font : bold 10pt Malgun gothic,Arial,Gulim;
+	color : #ffffff;
+}
+.Static.sta_WF_lable .nexacontentsbox
+{
+	text-align : center;
+	vertical-align : middle;
+}
+.Static.sta_WF_track
+{
+	background : #3d5287;
+	border : 1px solid #000e33;
+	border-radius : 0px;
+	font : bold 10pt Malgun gothic,Arial,Gulim;
+	color : #ffffff;
+}
+.Static.sta_WF_track .nexacontentsbox
+{
+	text-align : center;
+	vertical-align : middle;
+}
+.Static.sta_WF_Measures
+{
+	background : url('./../../../_resource_/_images_/WF_sta_Measures_O.png') no-repeat right center rgba(244,109,0,1);
+	border : 1px solid #ff4848;
+	border-radius : 3px;
+	font : bold 10pt Malgun gothic,Arial,Gulim;
+	color : #ffffff;
+	cursor : move;
+}
+.Static.sta_WF_Measures .nexacontentsbox
+{
+	text-align : center;
+	vertical-align : middle;
+}
+.Static.sta_WF_Measures_D
+{
+	background : url('./../../../_resource_/_images_/WF_sta_Measures_O.png') no-repeat right center #ff9900;
+	border : 2px dotted #ffffff;
+	border-radius : 5px;
+	font : bold 10pt Malgun gothic,Arial,Gulim;
+	color : #ffffff;
+	cursor : move;
+}
+.Static.sta_WF_Measures_D .nexacontentsbox
+{
+	text-align : center;
+	vertical-align : middle;
+}
+.Static.sta_WF_Dimensions
+{
+	background : url('./../../../_resource_/_images_/WF_sta_Measures_O.png') no-repeat right center #0093f0;
+	border : 1px solid #0093f0;
+	border-radius : 3px;
+	font : bold 10pt Malgun gothic,Arial,Gulim;
+	color : #ffffff;
+	cursor : move;
+}
+.Static.sta_WF_Dimensions .nexacontentsbox
+{
+	text-align : center;
+	vertical-align : middle;
+}
+.Static.sta_WF_Dimensions_D
+{
+	background : url('./../../../_resource_/_images_/WF_sta_Measures_O.png') no-repeat right center #0bc9ff;
+	border : 2px dotted #ffffff;
+	border-radius : 5px;
+	font : bold 10pt Malgun gothic,Arial,Gulim;
+	color : #ffffff;
+	cursor : move;
+}
+.Static.sta_WF_Dimensions_D .nexacontentsbox
+{
+	text-align : center;
+	vertical-align : middle;
+}
+.Static.sta_WF_Arrow
+{
+	-nexa-edge : url('./../../../_resource_/_images_/WF_sta_Arrow.png') 0px 20px;
+	border : 0px none;
+}
+.Grid.grd_WF_Pivot
+{
+	background : #ffffff;
+	border : 0px none #717f8e;
+	border-radius : 0px;
+	color : #55555f;
+}
+.Grid.grd_WF_Pivot .head
+{
+	background : #3d5287;
+	border : 0px none, 0px none, 1px solid #a4adb6, 0px none;
+}
+.Grid.grd_WF_Pivot .head .row .cell
+{
+	background : #3d5287;
+	color : #ffffff;
+	font : bold 10pt Malgun gothic,Arial,Gulim;
+	border : 0px none, 1px solid #000e33, 1px solid #000e33, 0px none;
+}
+.Grid.grd_WF_Pivot .head .row .cell.oddcell
+{
+	background : #3d5287;
+	color : #ffffff;
+}
+.Grid.grd_WF_Pivot .body
+{
+	background : transparent;
+	border : 0px none;
+	font : bold 10pt Malgun gothic,Arial,Gulim;
+	color : #34495e;
+}
+.Grid.grd_WF_Pivot .body .row .cell
+{
+	background : #ffffff;
+	border : 1px solid #ccd1d7;
+	font : bold 10pt Malgun gothic,Arial,Gulim;
+	color : #293030;
+}
+.Grid.grd_WF_Pivot .body .row .cell .nexacontentsbox
+{
+	text-align : center;
+	vertical-align : middle;
+}
+.Grid.grd_WF_Pivot .body .row .cell.oddcell
+{
+	background : #ffffff;
+	color : #293030;
+}
+.Grid.grd_WF_Pivot .summary
+{
+	background : #132555;
+	border : 0px none;
+}
+.Grid.grd_WF_Pivot .summary .row .cell
+{
+	background : #132555;
+	color : #ffffff;
+	font : bold 10pt Malgun gothic,Arial,Gulim;
+	border : 1px solid #031440;
+}
+.Grid.grd_WF_Pivot .summary .row .cell.oddcell
+{
+	background : #132555;
+	color : #ffffff;
+}
+.Grid.grd_WF_Pivot .vscrollbar
+{
+	background : #efefef;
+}
+.Grid.grd_WF_Pivot .vscrollbar .incbutton
+{
+	background : #efefef;
+}
+.Grid.grd_WF_Pivot .vscrollbar .decbutton
+{
+	background : #efefef;
+}
+.Grid.grd_WF_Pivot .hscrollbar
+{
+	background : #efefef;
+}
+.Grid.grd_WF_Pivot .hscrollbar .incbutton
+{
+	background : #efefef;
+}
+.Grid.grd_WF_Pivot .hscrollbar .decbutton
+{
+	background : #efefef;
+}
+.Grid.grd_WF_Pivot .vscrollbar .trackbar
+{
+	background : #d7dade;
+	border : 1px solid #bdc2c8;
+}
+.Grid.grd_WF_Pivot .hscrollbar .trackbar
+{
+	background : #d7dade;
+	border : 1px solid #bdc2c8;
+}
+.PopupDiv.WF_pdiv_Grid
+{
+	background : #ffffff;
+	border : 2px solid #0859a3;
+	border-radius : 5px;
+	color : #000e33;
+	font : bold 10pt Malgun gothic,Arial,Gulim;
+}
+.CheckBox.measures_chk
+{
+	background : #132555;
+	border : 1px solid #132555;
+	border-radius : 3px;
+	font : bold 10pt Malgun gothic,Arial,Gulim;
+	color : #ffffff;
+}
+.CheckBox.measures_chk .nexacontentsbox
+{
+	text-align : left;
+	vertical-align : middle;
+}
+.Div.popupLayer_div_gray
+{
+	background : #d1d9e2;
+	border-radius : 13px;
+}
+.Static.sta_WFH_lable
+{
+	background : #313131;
+	border : 1px solid #757575;
+	border-radius : 0px;
+	font : bold 10pt Malgun gothic,Arial,Gulim;
+	color : #ffffff;
+}
+.Static.sta_WFH_lable .nexacontentsbox
+{
+	text-align : center;
+	vertical-align : middle;
+}
+.Static.sta_WFH_track
+{
+	background : #a3a3a3;
+	border : 1px solid #757575;
+	border-radius : 0px;
+	font : bold 10pt Malgun gothic,Arial,Gulim;
+	color : #ffffff;
+}
+.Static.sta_WFH_track .nexacontentsbox
+{
+	text-align : center;
+	vertical-align : middle;
+}
+.Static.sta_WFH_Measures
+{
+	background : url('./../../../_resource_/_images_/WF_sta_Measures_O.png') no-repeat right center rgba(244,109,0,1);
+	border : 1px solid #ff6e6e;
+	border-radius : 3px;
+	font : bold 10pt Malgun gothic,Arial,Gulim;
+	color : #ffffff;
+	cursor : move;
+}
+.Static.sta_WFH_Measures .nexacontentsbox
+{
+	text-align : center;
+	vertical-align : middle;
+}
+.Static.sta_WFH_Measures_D
+{
+	background : url('./../../../_resource_/_images_/WFH_sta_Measures_O.png') no-repeat right center #ff8c8c;
+	border : 2px dotted #d71e33;
+	border-radius : 5px;
+	font : bold 10pt Malgun gothic,Arial,Gulim;
+	color : #d70018;
+	cursor : move;
+}
+.Static.sta_WFH_Measures_D .nexacontentsbox
+{
+	text-align : center;
+	vertical-align : middle;
+}
+.Static.sta_WFH_Dimensions
+{
+	background : url('./../../../_resource_/_images_/WF_sta_Measures_O.png') no-repeat right center #393939;
+	border : 1px solid #2f2f2f;
+	border-radius : 3px;
+	font : bold 10pt Malgun gothic,Arial,Gulim;
+	color : #ffffff;
+	cursor : move;
+}
+.Static.sta_WFH_Dimensions .nexacontentsbox
+{
+	text-align : center;
+	vertical-align : middle;
+}
+.Static.sta_WFH_Dimensions_D
+{
+	background : url('./../../../_resource_/_images_/WFH_sta_Measures_N.png') no-repeat right center #5e5e5e;
+	border : 2px dotted #2f2f2f;
+	border-radius : 5px;
+	font : bold 10pt Malgun gothic,Arial,Gulim;
+	color : #ffcc00;
+	cursor : move;
+}
+.Static.sta_WFH_Dimensions_D .nexacontentsbox
+{
+	text-align : center;
+	vertical-align : middle;
+}
+.Static.sta_WFH_Arrow
+{
+	-nexa-edge : url('./../../../_resource_/_images_/WF_sta_Arrow.png') 0px 20px;
+	border : 0px none;
+}
+.Grid.grd_WFH_Pivot
+{
+	background : #ffffff;
+	border : 0px none #717f8e;
+	border-radius : 0px;
+	color : #55555f;
+}
+.Grid.grd_WFH_Pivot .head
+{
+	background : #717171;
+	border : 0px none, 0px none, 1px solid #515151, 0px none;
+}
+.Grid.grd_WFH_Pivot .head .row .cell
+{
+	background : #717171;
+	color : #ffffff;
+	font : bold 9pt Malgun gothic,Arial,Gulim;
+	border : 0px none, 1px solid #515151, 1px solid #515151, 0px none;
+}
+.Grid.grd_WFH_Pivot .head .row .cell.oddcell
+{
+	background : #717171;
+	color : #ffffff;
+}
+.Grid.grd_WFH_Pivot .body
+{
+	background : transparent;
+	border : 0px none;
+	font : 9pt Malgun gothic,Arial,Gulim;
+	color : #34495e;
+}
+.Grid.grd_WFH_Pivot .body .row .cell
+{
+	background : #ffffff;
+	border : 1px solid #ccd1d7;
+	font : 9pt Malgun gothic,Arial,Gulim;
+	color : #293030;
+}
+.Grid.grd_WFH_Pivot .body .row .cell .nexacontentsbox
+{
+	text-align : center;
+	vertical-align : middle;
+}
+.Grid.grd_WFH_Pivot .body .row .cell.oddcell
+{
+	background : #ffffff;
+	color : #293030;
+}
+.Grid.grd_WFH_Pivot .summary
+{
+	background : #6aa3dc;
+	border : 0px none;
+}
+.Grid.grd_WFH_Pivot .summary .row .cell
+{
+	background : #6aa3dc;
+	color : #ffffff;
+	font : 9pt Malgun gothic,Arial,Gulim;
+	border : 1px solid #ccd1d7;
+}
+.Grid.grd_WFH_Pivot .summary .row .cell.oddcell
+{
+	background : #6aa3dc;
+	color : #ffffff;
+}
+.Grid.grd_WFH_Pivot .vscrollbar
+{
+	background : #efefef;
+}
+.Grid.grd_WFH_Pivot .vscrollbar .incbutton
+{
+	background : #efefef;
+}
+.Grid.grd_WFH_Pivot .vscrollbar .decbutton
+{
+	background : #efefef;
+}
+.Grid.grd_WFH_Pivot .vscrollbar .trackbar
+{
+	background : #d7dade;
+	border : 1px solid #bdc2c8;
+}
+.Grid.grd_WFH_Pivot .hscrollbar
+{
+	background : #efefef;
+}
+.Grid.grd_WFH_Pivot .hscrollbar .incbutton
+{
+	background : #efefef;
+}
+.Grid.grd_WFH_Pivot .hscrollbar .decbutton
+{
+	background : #efefef;
+}
+.Grid.grd_WFH_Pivot .hscrollbar .trackbar
+{
+	background : #d7dade;
+	border : 1px solid #bdc2c8;
+}
+.PopupDiv.WFH_pdiv_Grid
+{
+	background : #ffffff;
+	border : 2px solid #1a70bd;
+	border-radius : 5px;
+	color : #000e33;
+	font : bold 10pt Malgun gothic,Arial,Gulim;
+}
+.Static.sta_WF_Measures[status=mouseover]
+{
+	background : url('./../../../_resource_/_images_/WF_sta_Measures_O.png') no-repeat right center rgba(244,109,0,1);
+	border : 1px solid #ffffff;
+	color : #ffffff;
+}
+.Static.sta_WF_Dimensions[status=mouseover]
+{
+	background : url('./../../../_resource_/_images_/WF_sta_Measures_O.png') no-repeat right center #0093f0;
+	border : 1px solid #ffffff;
+	color : #ffffff;
+}
+.Grid.grd_WF_Pivot .body .row .cell[status=mouseover]
+{
+	background : #0093f0;
+	font : bold 10pt Malgun gothic,Arial,Gulim;
+	color : #ffffff;
+}
+.Grid.grd_WF_Pivot .body .row .cell.oddcell[status=mouseover]
+{
+	background : #0093f0;
+	color : #ffffff;
+}
+.Grid.grd_WF_Pivot .vscrollbar[status=mouseover]
+{
+	background : #efefef;
+}
+.Grid.grd_WF_Pivot .vscrollbar .incbutton[status=mouseover]
+{
+	background : #efefef;
+}
+.Grid.grd_WF_Pivot .vscrollbar .decbutton[status=mouseover]
+{
+	background : #efefef;
+}
+.Grid.grd_WF_Pivot .hscrollbar[status=mouseover]
+{
+	background : #efefef;
+}
+.Grid.grd_WF_Pivot .hscrollbar .incbutton[status=mouseover]
+{
+	background : #efefef;
+}
+.Grid.grd_WF_Pivot .hscrollbar .decbutton[status=mouseover]
+{
+	background : #efefef;
+}
+.Grid.grd_WF_Pivot .vscrollbar .trackbar[status=focused]
+{
+	background : #d7dade;
+	border : 1px solid #bdc2c8;
+}
+.Grid.grd_WF_Pivot .vscrollbar .trackbar[status=mouseover]
+{
+	background : #d7dade;
+	border : 1px solid #bdc2c8;
+}
+.Grid.grd_WF_Pivot .hscrollbar .trackbar[status=focused]
+{
+	background : #d7dade;
+	border : 1px solid #bdc2c8;
+}
+.Grid.grd_WF_Pivot .hscrollbar .trackbar[status=mouseover]
+{
+	background : #d7dade;
+	border : 1px solid #bdc2c8;
+}
+.CheckBox.measures_chk[status=mouseover]
+{
+	border : 1px solid #ffffff;
+}
+.CheckBox.measures_chk[status=mouseover] .nexacontentsbox
+{
+	text-align : left;
+	vertical-align : middle;
+}
+.Static.sta_WFH_Measures[status=mouseover]
+{
+	background : url('./../../../_resource_/_images_/WF_sta_Measures_O.png') no-repeat right center rgba(244,109,0,1);
+	border : 1px solid #d71e33;
+	color : #ffffff;
+}
+.Static.sta_WFH_Dimensions[status=mouseover]
+{
+	background : url('./../../../_resource_/_images_/WF_sta_Measures_O.png') no-repeat right center #545454;
+	font : bold 10pt Malgun gothic,Arial,Gulim;
+	border : 1px solid #2f2f2f;
+	color : #ffffff;
+}
+.Grid.grd_WFH_Pivot .head[status=mouseover]
+{
+	background : #717171;
+	border : 0px none, 0px none, 1px solid #515151, 0px none;
+}
+.Grid.grd_WFH_Pivot .head[status=focused]
+{
+	background : #717171;
+	border : 0px none, 0px none, 1px solid #515151, 0px none;
+}
+.Grid.grd_WFH_Pivot .head .row .cell[status=mouseover]
+{
+	background : #717171;
+	color : #ffffff;
+	font : bold 9pt Malgun gothic,Arial,Gulim;
+	border : 0px none, 1px solid #515151, 1px solid #515151, 0px none;
+}
+.Grid.grd_WFH_Pivot .head .row .cell.oddcell[status=mouseover]
+{
+	background : #717171;
+	color : #ffffff;
+}
+.Grid.grd_WFH_Pivot .head .row .cell[status=focused]
+{
+	background : #717171;
+	color : #ffffff;
+	font : bold 9pt Malgun gothic,Arial,Gulim;
+	border : 0px none, 1px solid #515151, 1px solid #515151, 0px none;
+}
+.Grid.grd_WFH_Pivot .head .row .cell.oddcell[status=focused]
+{
+	background : #717171;
+	color : #ffffff;
+}
+.Grid.grd_WFH_Pivot .body[status=focused]
+{
+	background : transparent;
+	border : 0px none;
+	font : 9pt Malgun gothic,Arial,Gulim;
+	color : #34495e;
+}
+.Grid.grd_WFH_Pivot .body .row .cell[status=focused]
+{
+	background : #ffffff;
+	border : 1px solid #ccd1d7;
+	font : 9pt Malgun gothic,Arial,Gulim;
+	color : #293030;
+}
+.Grid.grd_WFH_Pivot .body .row .cell[status=focused] .nexacontentsbox
+{
+	text-align : center;
+	vertical-align : middle;
+}
+.Grid.grd_WFH_Pivot .body .row .cell.oddcell[status=focused]
+{
+	background : #ffffff;
+	color : #293030;
+}
+.Grid.grd_WFH_Pivot .body .row .cell[status=mouseover]
+{
+	background : #c7dfff;
+	font : 9pt Malgun gothic,Arial,Gulim;
+	color : #34495e;
+}
+.Grid.grd_WFH_Pivot .body .row .cell.oddcell[status=mouseover]
+{
+	background : #c7dfff;
+	color : #34495e;
+}
+.Grid.grd_WFH_Pivot .vscrollbar[status=mouseover]
+{
+	background : #efefef;
+}
+.Grid.grd_WFH_Pivot .vscrollbar .incbutton[status=mouseover]
+{
+	background : #efefef;
+}
+.Grid.grd_WFH_Pivot .vscrollbar .decbutton[status=mouseover]
+{
+	background : #efefef;
+}
+.Grid.grd_WFH_Pivot .vscrollbar .trackbar[status=focused]
+{
+	background : #d7dade;
+	border : 1px solid #bdc2c8;
+}
+.Grid.grd_WFH_Pivot .vscrollbar .trackbar[status=mouseover]
+{
+	background : #d7dade;
+	border : 1px solid #bdc2c8;
+}
+.Grid.grd_WFH_Pivot .hscrollbar[status=mouseover]
+{
+	background : #efefef;
+}
+.Grid.grd_WFH_Pivot .hscrollbar .incbutton[status=mouseover]
+{
+	background : #efefef;
+}
+.Grid.grd_WFH_Pivot .hscrollbar .decbutton[status=mouseover]
+{
+	background : #efefef;
+}
+.Grid.grd_WFH_Pivot .hscrollbar .trackbar[status=focused]
+{
+	background : #d7dade;
+	border : 1px solid #bdc2c8;
+}
+.Grid.grd_WFH_Pivot .hscrollbar .trackbar[status=mouseover]
+{
+	background : #d7dade;
+	border : 1px solid #bdc2c8;
+}
+.Grid.grd_WF_Pivot .head .row .cell[userstatus=selected]
+{
+	color : #ffffff;
+	border : 0px none, 1px solid #000e33, 1px solid #000e33, 0px none;
+}
+.Grid.grd_WF_Pivot .body .row .cell[userstatus=selected]
+{
+	background : #ff5757;
+	border : 0px none, 0px none, 1px solid #b9becc, 0px none;
+	font : bold 10pt Malgun gothic,Arial,Gulim;
+	color : #ffffff;
+}
+.Grid.grd_WF_Pivot .summary .row .cell[userstatus=selected]
+{
+	background : #8e97a0;
+	color : #ffffff;
+	border : 1px solid #031440;
+}
+.Grid.grd_WF_Pivot .vscrollbar .trackbar[userstatus=pushed]
+{
+	background : #d7dade;
+	border : 1px solid #bdc2c8;
+}
+.Grid.grd_WF_Pivot .hscrollbar .trackbar[userstatus=pushed]
+{
+	background : #d7dade;
+	border : 1px solid #bdc2c8;
+}
+.CheckBox.measures_chk[userstatus=selected]
+{
+	border : 1px solid #ffffff;
+}
+.CheckBox.measures_chk[userstatus=selected] .nexacontentsbox
+{
+	text-align : left;
+	vertical-align : middle;
+}
+.Grid.grd_WFH_Pivot .head .row .cell[userstatus=selected]
+{
+	background : #717171;
+	color : #ffffff;
+	border : 0px none, 1px solid #515151, 1px solid #515151, 0px none;
+}
+.Grid.grd_WFH_Pivot .body .row .cell[userstatus=selected]
+{
+	background : #3e8ddc;
+	border : 0px none, 0px none, 1px solid #ccd1d7, 0px none;
+	font : 9pt Malgun gothic,Arial,Gulim;
+	color : #ffffff;
+}
+.Grid.grd_WFH_Pivot .summary .row .cell[userstatus=selected]
+{
+	background : #3e8ddc;
+	color : #ffffff;
+	border : 1px solid #ccd1d7;
+}
+.Grid.grd_WFH_Pivot .vscrollbar .trackbar[userstatus=pushed]
+{
+	background : #d7dade;
+	border : 1px solid #bdc2c8;
+}
+.Grid.grd_WFH_Pivot .hscrollbar .trackbar[userstatus=pushed]
+{
+	background : #d7dade;
+	border : 1px solid #bdc2c8;
+}
+.Grid.grd_WF_Pivot .vscrollbar .incbutton[status=disabled]
+{
+	background : #efefef;
+}
+.Grid.grd_WF_Pivot .vscrollbar .decbutton[status=disabled]
+{
+	background : #efefef;
+}
+.Grid.grd_WF_Pivot .hscrollbar .incbutton[status=disabled]
+{
+	background : #efefef;
+}
+.Grid.grd_WF_Pivot .hscrollbar .decbutton[status=disabled]
+{
+	background : #efefef;
+}
+.Grid.grd_WF_Pivot .vscrollbar .trackbar[status=disabled]
+{
+	background : #d7dade;
+	border : 1px solid #bdc2c8;
+}
+.Grid.grd_WF_Pivot .hscrollbar .trackbar[status=disabled]
+{
+	background : #d7dade;
+	border : 1px solid #bdc2c8;
+}
+.CheckBox.measures_chk[status=disabled]
+{
+	background : #132555;
+	border : 1px solid #132555;
+	border-radius : 3px;
+	font : bold 10pt Malgun gothic,Arial,Gulim;
+	color : #ffffff;
+}
+.CheckBox.measures_chk[status=disabled] .nexacontentsbox
+{
+	text-align : left;
+	vertical-align : middle;
+}
+.Grid.grd_WFH_Pivot .vscrollbar .incbutton[status=disabled]
+{
+	background : #efefef;
+}
+.Grid.grd_WFH_Pivot .vscrollbar .decbutton[status=disabled]
+{
+	background : #efefef;
+}
+.Grid.grd_WFH_Pivot .vscrollbar .trackbar[status=disabled]
+{
+	background : #d7dade;
+	border : 1px solid #bdc2c8;
+}
+.Grid.grd_WFH_Pivot .hscrollbar .incbutton[status=disabled]
+{
+	background : #efefef;
+}
+.Grid.grd_WFH_Pivot .hscrollbar .decbutton[status=disabled]
+{
+	background : #efefef;
+}
+.Grid.grd_WFH_Pivot .hscrollbar .trackbar[status=disabled]
+{
+	background : #d7dade;
+	border : 1px solid #bdc2c8;
+}
+.Grid.grd_WFH_Pivot .head .row .cell[status=mouseover][userstatus=selected]
+{
+	background : #717171;
+	color : #ffffff;
+	border : 0px none, 1px solid #515151, 1px solid #515151, 0px none;
+}
+.Grid.grd_WFH_Pivot .head .row .cell[status=focused][userstatus=selected]
+{
+	background : #717171;
+	color : #ffffff;
+	border : 0px none, 1px solid #515151, 1px solid #515151, 0px none;
+}
+.Grid.grd_WFH_Pivot .body .row .cell[status=focused][userstatus=selected]
+{
+	background : #3e8ddc;
+	border : 0px none, 0px none, 1px solid #ccd1d7, 0px none;
+	font : 9pt Malgun gothic,Arial,Gulim;
+	color : #ffffff;
+}
+.Grid.grd_WFH_Pivot .body .row .cell[status=mouseover][userstatus=selected]
+{
+	font : 9pt Malgun gothic,Arial,Gulim;
+}

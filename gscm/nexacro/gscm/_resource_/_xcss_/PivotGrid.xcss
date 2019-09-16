@@ -1,0 +1,501 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<XCSS type="1.0"><![CDATA[/***** Baseball *******/
+.Static.sta_WF_lable
+{
+	-nexa-text-align			: center;
+	-nexa-vertical-align			: middle;
+	background		: #3d5287;
+	-nexa-border			: 1px solid #000e33;
+	border-radius		: 0px;
+	font            	: bold 10pt Malgun gothic,Arial,Gulim;
+	color           	: #ffffff;
+}
+.Static.sta_WF_track
+{
+	-nexa-text-align			: center;
+	-nexa-vertical-align			: middle;
+	background		: #3d5287;
+	-nexa-border			: 1px solid #000e33;
+	border-radius		: 0px;
+	font            	: bold 10pt Malgun gothic,Arial,Gulim;
+	color           	: #ffffff;
+}
+.Static.sta_WF_Measures
+{
+	-nexa-text-align           	: center;
+	-nexa-vertical-align           	: middle;
+	background		: url('imagerc::WF_sta_Measures_O.png') no-repeat right center rgba(244,109,0,1);
+	-nexa-border 			: 1px solid #ff4848;
+	border-radius		: 3px;
+	font            	: bold 10pt Malgun gothic,Arial,Gulim;
+	color           	: #ffffff;
+	-nexa-padding         	: 0px 15px 0px 0px;
+	cursor			: move;
+}
+.Static.sta_WF_Measures[status=mouseover]
+{
+	background		: url('imagerc::WF_sta_Measures_O.png') no-repeat right center rgba(244,109,0,1);
+	-nexa-border 			: 1px solid #ffffff;
+	color           	: #ffffff;
+}
+.Static.sta_WF_Measures_D
+{
+	-nexa-text-align           	: center;
+	-nexa-vertical-align           	: middle;
+	background		: url('imagerc::WF_sta_Measures_O.png') no-repeat right center #ff9900;
+	-nexa-border			: 2px dotted #ffffff;
+	border-radius		: 5px;
+	font            	: bold 10pt Malgun gothic,Arial,Gulim;
+	color           	: #ffffff;
+	-nexa-padding         	: 0px 15px 0px 0px;
+	cursor			: move;
+}
+.Static.sta_WF_Dimensions
+{
+	-nexa-text-align           	: center;
+	-nexa-vertical-align           	: middle;
+	background		: url('imagerc::WF_sta_Measures_O.png') no-repeat right center #0093f0;
+	-nexa-border 			: 1px solid #0093f0;
+	border-radius		: 3px;
+	font            	: bold 10pt Malgun gothic,Arial,Gulim;
+	color           	: #ffffff;
+	-nexa-padding         	: 0px 15px 0px 0px;
+	cursor			: move;
+}
+.Static.sta_WF_Dimensions[status=mouseover]
+{
+	background		: url('imagerc::WF_sta_Measures_O.png') no-repeat right center #0093f0;
+	-nexa-border 			: 1px solid #ffffff;
+	color           	: #ffffff;
+}
+.Static.sta_WF_Dimensions_D
+{
+	-nexa-text-align           	: center;
+	-nexa-vertical-align           	: middle;
+	background		: url('imagerc::WF_sta_Measures_O.png') no-repeat right center #0bc9ff;
+	-nexa-border			: 2px dotted #ffffff;
+	border-radius		: 5px;
+	font            	: bold 10pt Malgun gothic,Arial,Gulim;
+	color           	: #ffffff;
+	-nexa-padding         	: 0px 15px 0px 0px;
+	cursor			: move;
+}
+.Static.sta_WF_Arrow
+{
+	background : ;
+	-nexa-edge : url('imagerc::WF_sta_Arrow.png') 0px 20px;
+	-nexa-border		: 0px none;
+	-nexa-padding		: 0px 0px 0px 11px;
+}
+.Grid.grd_WF_Pivot
+{
+	background		: #ffffff;
+	-nexa-border			: 0px none #717f8e;
+	border-radius		: 0px;
+	color                   : #55555f;
+}
+.Grid.grd_WF_Pivot .body .row .cell .celltreeitem .treeitembutton[userstatus=expand]
+{
+	-nexa-icon	: URL('imagerc::ico_treeclose.png');
+}
+.Grid.grd_WF_Pivot .body .row .cell .celltreeitem .treeitembutton[userstatus=collapse]
+{
+	-nexa-icon	: URL('imagerc::ico_treeopen.png');
+}
+.Grid.grd_WF_Pivot .body .row .cell .celltreeitem .treeitemimage[userstatus=collapse]
+{
+	-nexa-icon	: ;
+}
+.Grid.grd_WF_Pivot .body .row .cell .celltreeitem .treeitemimage[userstatus=expand]
+{
+	-nexa-icon		: ;
+}
+.Grid.grd_WF_Pivot .body .row .cell .celltreeitem .treeitemimage
+{
+	-nexa-icon		: URL('imagerc::ico_treeitem.png');
+}
+.Grid.grd_WF_Pivot .head
+{
+	background		: #3d5287;
+	-nexa-border			: 0px none, 0px none, 1px solid #a4adb6, 0px none;
+}
+.Grid.grd_WF_Pivot .head .row .cell
+{
+	background		: #3d5287;
+	-nexa-background-odd		: #3d5287;
+	color		: #ffffff;
+	-nexa-color-odd		: #ffffff;
+	font		: bold 10pt Malgun gothic,Arial,Gulim;
+	-nexa-border		: 0px none, 1px solid #000e33, 1px solid #000e33, 0px none;
+}
+.Grid.grd_WF_Pivot .head .row .cell[userstatus=selected]
+{
+	color		: #ffffff;
+	-nexa-border		: 0px none, 1px solid #000e33, 1px solid #000e33, 0px none;
+}
+.Grid.grd_WF_Pivot .body
+{
+	background		: transparent;
+	-nexa-border			: 0px none;
+	font			: bold 10pt Malgun gothic,Arial,Gulim;
+	color			: #34495e;
+}
+.Grid.grd_WF_Pivot .body .row .cell
+{
+	-nexa-text-align               : center;
+	-nexa-vertical-align               : middle;
+	background		: #ffffff;
+	-nexa-background-odd		: #ffffff;
+	-nexa-border		: 1px solid #ccd1d7;
+	font		: bold 10pt Malgun gothic,Arial,Gulim;
+	color		: #293030;
+	-nexa-color-odd		: #293030;
+}
+.Grid.grd_WF_Pivot .body .row .cell[userstatus=selected]
+{
+	background	: #ff5757;
+	-nexa-border		: 0px none, 0px none, 1px solid #b9becc, 0px none;
+	font		: bold 10pt Malgun gothic,Arial,Gulim;
+	color		: #ffffff;
+}
+.Grid.grd_WF_Pivot .body[status=mouseover]
+{
+}
+.Grid.grd_WF_Pivot .body .row .cell[status=mouseover]
+{
+	background		: #0093f0;
+	-nexa-background-odd		: #0093f0;
+	font		: bold 10pt Malgun gothic,Arial,Gulim;
+	color		: #ffffff;
+	-nexa-color-odd		: #ffffff;
+}
+.Grid.grd_WF_Pivot .summary
+{
+	background		: #132555;
+	-nexa-border			: 0px none;
+}
+.Grid.grd_WF_Pivot .summary .row .cell
+{
+	background		: #132555;
+	-nexa-background-odd		: #132555;
+	color		: #ffffff;
+	-nexa-color-odd		: #ffffff;
+	font		: bold 10pt Malgun gothic,Arial,Gulim;
+	-nexa-border		: 1px solid #031440;
+}
+.Grid.grd_WF_Pivot .summary .row .cell[userstatus=selected]
+{
+	background	: #8e97a0;
+	color		: #ffffff;
+	-nexa-border		: 1px solid #031440;
+}
+.Grid.grd_WF_Pivot .vscrollbar, .Grid.grd_WF_Pivot .vscrollbar[status=mouseover]
+{
+	background		: #efefef;
+}
+.Grid.grd_WF_Pivot .vscrollbar .incbutton, .Grid.grd_WF_Pivot .vscrollbar .incbutton[status=mouseover], .Grid.grd_WF_Pivot .vscrollbar .incbutton[status=disabled]
+{
+	background		: #efefef;
+}
+.Grid.grd_WF_Pivot .vscrollbar .decbutton, .Grid.grd_WF_Pivot .vscrollbar .decbutton[status=mouseover], .Grid.grd_WF_Pivot .vscrollbar .decbutton[status=disabled]
+{
+	background		: #efefef;
+}
+.Grid.grd_WF_Pivot .hscrollbar, .Grid.grd_WF_Pivot .hscrollbar[status=mouseover]
+{
+	background		: #efefef;
+}
+.Grid.grd_WF_Pivot .hscrollbar .incbutton, .Grid.grd_WF_Pivot .hscrollbar .incbutton[status=mouseover], .Grid.grd_WF_Pivot .hscrollbar .incbutton[status=disabled]
+{
+	background		: #efefef;
+}
+.Grid.grd_WF_Pivot .hscrollbar .decbutton, .Grid.grd_WF_Pivot .hscrollbar .decbutton[status=mouseover], .Grid.grd_WF_Pivot .hscrollbar .decbutton[status=disabled]
+{
+	background		: #efefef;
+}
+.Grid.grd_WF_Pivot .vscrollbar .trackbar, .Grid.grd_WF_Pivot .vscrollbar .trackbar[status=disabled], .Grid.grd_WF_Pivot .vscrollbar .trackbar[status=focused], .Grid.grd_WF_Pivot .vscrollbar .trackbar[status=mouseover], .Grid.grd_WF_Pivot .vscrollbar .trackbar[userstatus=pushed]
+{
+	background		: #d7dade;
+	-nexa-border			: 1px solid #bdc2c8;
+}
+.Grid.grd_WF_Pivot .hscrollbar .trackbar, .Grid.grd_WF_Pivot .hscrollbar .trackbar[status=disabled], .Grid.grd_WF_Pivot .hscrollbar .trackbar[status=focused], .Grid.grd_WF_Pivot .hscrollbar .trackbar[status=mouseover], .Grid.grd_WF_Pivot .hscrollbar .trackbar[userstatus=pushed]
+{
+	background		: #d7dade;
+	-nexa-border			: 1px solid #bdc2c8;
+}
+.PopupDiv.WF_pdiv_Grid
+{
+	background	: #ffffff;
+	-nexa-border		: 2px solid #0859a3;
+	border-radius	: 5px;
+	color		: #000e33;
+	font		: bold 10pt Malgun gothic,Arial,Gulim;
+}
+.CheckBox.measures_chk, .CheckBox.measures_chk[status=disabled]
+{
+	-nexa-text-align			: left;
+	-nexa-vertical-align			: middle;
+	background		: #132555;
+	-nexa-border 			: 1px solid #132555;
+	border-radius		: 3px;
+	font            	: bold 10pt Malgun gothic,Arial,Gulim;
+	-nexa-icon-position		: right;
+	-nexa-icon		: url('imagerc::chk_ico_N.png');
+	color			: #ffffff;
+	font			: ;
+	-nexa-padding			: 0px 3px 2px 6px;
+	-nexa-text-padding		: ;
+}
+.CheckBox.measures_chk[status=mouseover],.CheckBox.measures_chk[userstatus=selected]
+{
+	-nexa-icon-position		: right;
+	-nexa-text-align			: left;
+	-nexa-vertical-align			: middle;
+	-nexa-border 			: 1px solid #ffffff;
+}
+.Div.popupLayer_div_gray
+{
+	background		: #d1d9e2;
+	border-radius		: 13px;
+}
+
+/***** Homeshoping *******/
+.Static.sta_WFH_lable
+{
+	-nexa-text-align			: center;
+	-nexa-vertical-align			: middle;
+	background		: #313131;
+	-nexa-border			: 1px solid #757575;
+	border-radius		: 0px;
+	font            	: bold 10pt Malgun gothic,Arial,Gulim;
+	color           	: #ffffff;
+}
+.Static.sta_WFH_track
+{
+	-nexa-text-align			: center;
+	-nexa-vertical-align			: middle;
+	background		: #a3a3a3;
+	-nexa-border			: 1px solid #757575;
+	border-radius		: 0px;
+	font            	: bold 10pt Malgun gothic,Arial,Gulim;
+	color           	: #ffffff;
+}
+.Static.sta_WFH_Measures
+{
+	-nexa-text-align           	: center;
+	-nexa-vertical-align           	: middle;
+	background		: url('imagerc::WF_sta_Measures_O.png') no-repeat right center rgba(244,109,0,1);
+	-nexa-border 			: 1px solid #ff6e6e;
+	border-radius		: 3px;
+	font            	: bold 10pt Malgun gothic,Arial,Gulim;
+	color           	: #ffffff;
+	-nexa-padding         	: 0px 15px 0px 0px;
+	cursor			: move;
+}
+.Static.sta_WFH_Measures[status=mouseover]
+{
+	background		: url('imagerc::WF_sta_Measures_O.png') no-repeat right center rgba(244,109,0,1);
+	-nexa-border 			: 1px solid #d71e33;
+	color           	: #ffffff;
+}
+.Static.sta_WFH_Measures_D
+{
+	-nexa-text-align           	: center;
+	-nexa-vertical-align           	: middle;
+	background		: url('imagerc::WFH_sta_Measures_O.png') no-repeat right center #ff8c8c;
+	-nexa-border			: 2px dotted #d71e33;
+	border-radius		: 5px;
+	font            	: bold 10pt Malgun gothic,Arial,Gulim;
+	color           	: #d70018;
+	-nexa-padding         	: 0px 15px 0px 0px;
+	cursor			: move;
+}
+.Static.sta_WFH_Dimensions
+{
+	-nexa-text-align           	: center;
+	-nexa-vertical-align           	: middle;
+	background		: url('imagerc::WF_sta_Measures_O.png') no-repeat right center #393939;
+	-nexa-border 			: 1px solid #2f2f2f;
+	border-radius		: 3px;
+	font            	: bold 10pt Malgun gothic,Arial,Gulim;
+	color           	: #ffffff;
+	-nexa-padding         	: 0px 15px 0px 0px;
+	cursor			: move;
+}
+.Static.sta_WFH_Dimensions[status=mouseover]
+{
+	background		: url('imagerc::WF_sta_Measures_O.png') no-repeat right center #545454;
+	font            	: bold 10pt Malgun gothic,Arial,Gulim;
+	-nexa-border 			: 1px solid #2f2f2f;
+	color           	: #ffffff;
+}
+.Static.sta_WFH_Dimensions_D
+{
+	-nexa-text-align           	: center;
+	-nexa-vertical-align           	: middle;
+	background		: url('imagerc::WFH_sta_Measures_N.png') no-repeat right center #5e5e5e;
+	-nexa-border			: 2px dotted #2f2f2f;
+	border-radius		: 5px;
+	font            	: bold 10pt Malgun gothic,Arial,Gulim;
+	color           	: #ffcc00;
+	-nexa-padding         	: 0px 15px 0px 0px;
+	cursor			: move;
+}
+.Static.sta_WFH_Arrow
+{
+	background : ;
+	-nexa-edge : url('imagerc::WF_sta_Arrow.png') 0px 20px;
+	-nexa-border		: 0px none;
+	-nexa-padding		: 0px 0px 0px 11px;
+}
+.Grid.grd_WFH_Pivot
+{
+	background		: #ffffff;
+	-nexa-border			: 0px none #717f8e;
+	border-radius		: 0px;
+	color                   : #55555f;
+}
+.Grid.grd_WFH_Pivot .body .row .cell .celltreeitem .treeitembutton[userstatus=expand]
+{
+	-nexa-icon	: ;
+}
+.Grid.grd_WFH_Pivot .body .row .cell .celltreeitem .treeitembutton[userstatus=collapse]
+{
+	-nexa-icon	: ;
+}
+.Grid.grd_WFH_Pivot .body .row .cell .celltreeitem .treeitemimage[userstatus=collapse]
+{
+	-nexa-icon	: ;
+}
+.Grid.grd_WFH_Pivot .body .row .cell .celltreeitem .treeitemimage[userstatus=expand]
+{
+	-nexa-icon		: ;
+}
+.Grid.grd_WFH_Pivot .body .row .cell .celltreeitem .treeitemimage
+{
+	-nexa-icon		: ;
+}
+.Grid.grd_WFH_Pivot .head, .Grid.grd_WFH_Pivot .head[status=mouseover],.Grid.grd_WFH_Pivot .head[status=focused]
+{
+	background		: #717171;
+	-nexa-border			: 0px none, 0px none, 1px solid #515151, 0px none;
+}
+.Grid.grd_WFH_Pivot .head .row .cell, .Grid.grd_WFH_Pivot .head .row .cell[status=mouseover],.Grid.grd_WFH_Pivot .head .row .cell[status=focused]
+{
+	background		: #717171;
+	-nexa-background-odd		: #717171;
+	color		: #ffffff;
+	-nexa-color-odd		: #ffffff;
+	font		: bold 9pt Malgun gothic,Arial,Gulim;
+	-nexa-border		: 0px none, 1px solid #515151, 1px solid #515151, 0px none;
+	-nexa-padding		: 3px 3px 3px 3px;
+}
+.Grid.grd_WFH_Pivot .head .row .cell[userstatus=selected], .Grid.grd_WFH_Pivot .head .row .cell[status=mouseover][userstatus=selected],.Grid.grd_WFH_Pivot .head .row .cell[status=focused][userstatus=selected]
+{
+	background	: #717171;
+	color		: #ffffff;
+	-nexa-border		: 0px none, 1px solid #515151, 1px solid #515151, 0px none;
+}
+.Grid.grd_WFH_Pivot .body, .Grid.grd_WFH_Pivot .body[status=focused]
+{
+	background		: transparent;
+	-nexa-border			: 0px none;
+	font			: 9pt Malgun gothic,Arial,Gulim;
+	color			: #34495e;
+}
+.Grid.grd_WFH_Pivot .body .row .cell, .Grid.grd_WFH_Pivot .body .row .cell[status=focused]
+{
+	-nexa-text-align               : center;
+	-nexa-vertical-align               : middle;
+	background		: #ffffff;
+	-nexa-background-odd		: #ffffff;
+	-nexa-border		: 1px solid #ccd1d7;
+	font		: 9pt Malgun gothic,Arial,Gulim;
+	color		: #293030;
+	-nexa-color-odd		: #293030;
+}
+.Grid.grd_WFH_Pivot .body .row .cell[userstatus=selected], .Grid.grd_WFH_Pivot .body .row .cell[status=focused][userstatus=selected]
+{
+	background	: #3e8ddc;
+	-nexa-border		: 0px none, 0px none, 1px solid #ccd1d7, 0px none;
+	font		: 9pt Malgun gothic,Arial,Gulim;
+	color		: #ffffff;
+}
+.Grid.grd_WFH_Pivot .body[status=mouseover]
+{
+}
+.Grid.grd_WFH_Pivot .body .row .cell[status=mouseover]
+{
+	background		: #c7dfff;
+	-nexa-background-odd		: #c7dfff;
+	font		: 9pt Malgun gothic,Arial,Gulim;
+	color		: #34495e;
+	-nexa-color-odd		: #34495e;
+}
+.Grid.grd_WFH_Pivot .body .row .cell[status=mouseover][userstatus=selected]
+{
+	font		: 9pt Malgun gothic,Arial,Gulim;
+}
+.Grid.grd_WFH_Pivot .summary
+{
+	background		: #6aa3dc;
+	-nexa-border			: 0px none;
+}
+.Grid.grd_WFH_Pivot .summary .row .cell
+{
+	background		: #6aa3dc;
+	-nexa-background-odd		: #6aa3dc;
+	color		: #ffffff;
+	-nexa-color-odd		: #ffffff;
+	font		: 9pt Malgun gothic,Arial,Gulim;
+	-nexa-border		: 1px solid #ccd1d7;
+	-nexa-padding		: 3px 3px 3px 3px;
+}
+.Grid.grd_WFH_Pivot .summary .row .cell[userstatus=selected]
+{
+	background	: #3e8ddc;
+	color		: #ffffff;
+	-nexa-border		: 1px solid #ccd1d7;
+}
+.Grid.grd_WFH_Pivot .vscrollbar, .Grid.grd_WFH_Pivot .vscrollbar[status=mouseover]
+{
+	background		: #efefef;
+}
+.Grid.grd_WFH_Pivot .vscrollbar .incbutton, .Grid.grd_WFH_Pivot .vscrollbar .incbutton[status=mouseover], .Grid.grd_WFH_Pivot .vscrollbar .incbutton[status=disabled]
+{
+	background		: #efefef;
+}
+.Grid.grd_WFH_Pivot .vscrollbar .decbutton, .Grid.grd_WFH_Pivot .vscrollbar .decbutton[status=mouseover], .Grid.grd_WFH_Pivot .vscrollbar .decbutton[status=disabled]
+{
+	background		: #efefef;
+}
+.Grid.grd_WFH_Pivot .vscrollbar .trackbar, .Grid.grd_WFH_Pivot .vscrollbar .trackbar[status=disabled], .Grid.grd_WFH_Pivot .vscrollbar .trackbar[status=focused], .Grid.grd_WFH_Pivot .vscrollbar .trackbar[status=mouseover], .Grid.grd_WFH_Pivot .vscrollbar .trackbar[userstatus=pushed]
+{
+	background		: #d7dade;
+	-nexa-border			: 1px solid #bdc2c8;
+}
+.Grid.grd_WFH_Pivot .hscrollbar, .Grid.grd_WFH_Pivot .hscrollbar[status=mouseover]
+{
+	background		: #efefef;
+}
+.Grid.grd_WFH_Pivot .hscrollbar .incbutton, .Grid.grd_WFH_Pivot .hscrollbar .incbutton[status=mouseover], .Grid.grd_WFH_Pivot .hscrollbar .incbutton[status=disabled]
+{
+	background		: #efefef;
+}
+.Grid.grd_WFH_Pivot .hscrollbar .decbutton, .Grid.grd_WFH_Pivot .hscrollbar .decbutton[status=mouseover], .Grid.grd_WFH_Pivot .hscrollbar .decbutton[status=disabled]
+{
+	background		: #efefef;
+}
+.Grid.grd_WFH_Pivot .hscrollbar .trackbar, .Grid.grd_WFH_Pivot .hscrollbar .trackbar[status=disabled], .Grid.grd_WFH_Pivot .hscrollbar .trackbar[status=focused], .Grid.grd_WFH_Pivot .hscrollbar .trackbar[status=mouseover], .Grid.grd_WFH_Pivot .hscrollbar .trackbar[userstatus=pushed]
+{
+	background		: #d7dade;
+	-nexa-border			: 1px solid #bdc2c8;
+}
+.PopupDiv.WFH_pdiv_Grid
+{
+	background	: #ffffff;
+	-nexa-border		: 2px solid #1a70bd;
+	border-radius	: 5px;
+	color		: #000e33;
+	font		: bold 10pt Malgun gothic,Arial,Gulim;
+}]]></XCSS>

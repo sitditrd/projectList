@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.0">
+  <Form id="InheritStyle01" width="1016" height="507" titletext="New Form" scrollbartype="none" onload="InheritStyle01_onload">
+    <Layouts>
+      <Layout height="507" mobileorientation="landscape" width="1016">
+        <Static id="stcMenuNm" taborder="0" left="20" top="0" height="40" right="20" cssclass="sta_WF_title01"/>
+        <Div id="divWork" taborder="1" left="20" top="60" right="20" bottom="20"/>
+      </Layout>
+    </Layouts>
+    <Script type="xscript5.1"><![CDATA[
+this.InheritStyle01_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
+{
+	var sWinId = this.parent.menuInfo.winId;
+	var sMenuCd = this.parent.menuInfo.menuCd;
+	var sMenuNm = this.parent.menuInfo.menuNm;
+	
+	this.stcMenuNm.set_text(sMenuNm);
+
+	nexacro._OnceCallbackTimer.callonce(this, function()
+	{
+		this.divWork.set_url(this.parent.menuInfo.menuUrl);
+	}, 10);
+};
+]]></Script>
+    <Objects>
+      <Dataset id="_ds_param">
+        <ColumnInfo>
+          <Column id="_dummy" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row/>
+        </Rows>
+      </Dataset>
+    </Objects>
+  </Form>
+</FDL>
