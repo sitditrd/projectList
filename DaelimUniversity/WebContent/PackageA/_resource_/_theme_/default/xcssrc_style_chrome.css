@@ -1,0 +1,1062 @@
+﻿/* *********************************************************************************** */
+/* application 공통 */
+/* *********************************************************************************** */
+
+html, body
+{
+  position:absolute;
+  width:100%;
+  height:100%;
+  /*font:10pt ""나눔고딕"";*/
+  font:12pt Verdana;
+
+  -moz-user-select:none;
+  -webkit-user-select:none;
+  -ms-user-select:none;
+}
+
+div
+{
+  position:absolute;
+  box-sizing:border-box;
+  overflow:hidden;
+  background-origin:padding-box;
+  background-repeat:no-repeat;
+  white-space : pre;
+  -moz-user-select:-moz-none;
+  -webkit-user-select:none;
+  -webkit-touch-callout:none;
+  -webkit-appearance:none;
+  -webkit-tap-highlight-color:rgba(0,0,0,0);
+  outline:none;
+  /*
+  transform : translate3d(0px, 0px, 0);
+  -webkit-transform : translate3d(0px, 0px, 0);
+  */
+}
+
+table
+{
+  position:absolute;
+  box-sizing:border-box;
+  overflow:hidden;
+}
+
+input
+{
+  position:absolute;
+  box-sizing:border-box;
+  overflow:hidden;
+}
+
+img
+{
+  position:absolute;
+  box-sizing:border-box;
+}
+
+textarea::-webkit-scrollbar { display: none; }
+
+/* *********************************************************************************** */
+
+/* *********************************************************************************** */
+
+.nexacontainer
+{
+  position:absolute;
+  left:0px;
+  top:0px;
+  width:100%;
+  height:100%;
+}
+.nexacontainer.withvscroll
+{
+  right:14px;
+}
+.nexacontainer.withhscroll
+{
+  bottom:14px;
+}
+.nexacontainer.withbothscroll
+{
+  right:14px;
+  bottom:14px;
+}
+
+.nexalefttop
+{
+  left:0px;
+  top:0px;
+  background-repeat:no-repeat;
+  background-position:left top;
+  font-size:1px;
+}
+.nexaleftbottom
+{
+  left:0px;
+  bottom:0px;
+  background-repeat:no-repeat;
+  background-position:left bottom;
+  font-size:1px;
+}
+.nexarightbottom
+{
+  right:0px;
+  bottom:0px;
+  background-repeat:no-repeat;
+  background-position:right bottom;
+  font-size:1px;
+}
+.nexarighttop
+{
+  right:0px;
+  top:0px;
+  background-repeat:no-repeat;
+  background-position:right top;
+}
+.nexaedge
+{
+  width:100%;
+  height:100%;
+}
+.nexamodaloverlay
+{
+  width:100%;
+  height:100%;
+}
+.nexainnercontainer
+{
+  /*
+  transform : translate3d(0px, 0px, 0);
+  -webkit-transform : translate3d(0px, 0px, 0);
+  */
+}
+
+.nexatransform
+{
+  /*
+  transform : translate3d(0px, 0px, 0);
+  -webkit-transform : translate3d(0px, 0px, 0);
+  */
+}
+
+.nexacontentsbox
+{
+  position:relative;
+  display:table-cell;
+  background-position:left center;
+  background-repeat:no-repeat;
+  vertical-align:middle;
+}
+.nexatextitem
+{
+  position:relative;
+  vertical-align:middle;
+  white-space:inherit;
+  word-wrap:inherit;
+  word-break:inherit;
+  text-decoration:inherit;
+}
+.nexaiconitem
+{
+  position:relative;
+  vertical-align:middle;
+  background-position:center center;
+  background-repeat:no-repeat;
+}
+
+.nexainput
+{
+  font:inherit;
+  color:inherit;
+  cursor:inherit;
+  letter-spacing:inherit;
+  word-spacing:inherit;
+  border:none;
+  outline:none;
+  background:transparent;
+  padding : 0px;
+  /*
+  transform : translate3d(0px, 0px, 0);
+  -webkit-transform : translate3d(0px, 0px, 0);
+  */
+}
+
+.nexatextarea
+{
+  font:inherit;
+  color:inherit;
+  cursor:inherit;
+  line-height : inherit;
+  letter-spacing:inherit;
+  word-spacing:inherit;
+  white-space:pre;
+  word-wrap:normal;
+  border:none;
+  outline:none;
+  resize:none;
+  background:transparent;
+  padding : 0px;
+}
+
+.nexaleftalign
+{
+  text-align:left;
+}
+
+.nexarightalign
+{
+  text-align:right;
+}
+
+.nexacenteralign
+{
+  text-align:center;
+}
+
+.nexamap div *
+{
+  overflow:visible;
+}
+
+/* *********************************************************************************** */
+.ProgressBar,.ProgressBarControl
+{
+  /*
+  transform : translate3d(0px, 0px, 0);
+  -webkit-transform : translate3d(0px, 0px, 0);
+  */
+}
+/* *********************************************************************************** */
+
+/* *********************************************************************************** */
+.celltreeline
+{
+  border : 1px dotted #999999;
+}
+/* *********************************************************************************** */
+
+/* *********************************************************************************** */
+.Edit, .MaskEdit, .TextArea, .EditControl, .MaskEditControl, .TextAreaControl
+{
+  cursor:text;
+}
+.Button .nexacontentsbox, .ButtonControl .nexacontentsbox
+{
+  text-align:center;
+  background-position:center center;
+}
+
+.FileDownload  .nexacontentsbox, .FileDownloadControl .nexacontentsbox
+{
+  text-align:center;
+  background-position:center center;
+}
+
+.IconTextControl .nexacontentsbox, .IconControl .nexacontentsbox
+{
+  text-align:center;
+  background-position:center center;
+}
+
+.DatePickerDayItemControl .nexacontentsbox, .DatePickerWeekItemControl .nexacontentsbox, .TitleBarButtonControl .nexacontentsbox
+{
+  text-align:center;
+  background-position:center center;
+}
+
+.MainFrame, .VScrollBarControl, .HScrollBarControl
+{
+  cursor:default;
+}
+/* *********************************************************************************** */
+
+.Static.sta_grd_move
+{
+	background : #f6f6f6;
+	border : 2px dotted #3366cc;
+	border-radius : 0px;
+	color : #555555;
+	font : 9pt Malgun Gothic,Arial,Gulim;
+}
+.Button.btn_WF_portBg07
+{
+	background : url('./images/img_WF_iconPort07.png') no-repeat left top #808080;
+	border : 0px none;
+	color : #ffffff;
+	cursor : pointer;
+	font : 11pt Malgun gothic,Arial,Gulim;
+}
+.Button.btn_WF_portBg07 .nexacontentsbox
+{
+	text-align : right;
+	background-position-x : right;
+	vertical-align : bottom;
+	background-position-y : bottom;
+}
+.Static.sta_WF_iconKorea
+{
+	font : 11pt Malgun Gothic,Arial,Gulim;
+	background : url('./images/icon_WF_korea.png') no-repeat;
+}
+.Static.sta_WF_iconKorea .nexacontentsbox
+{
+	text-align : center;
+	background-position-x : center;
+	vertical-align : bottom;
+	background-position-y : bottom;
+}
+.Static.sta_WF_iconUSA
+{
+	background : url('./images/icon_WF_usa.png') no-repeat;
+	font : 11pt Malgun Gothic,Arial,Gulim;
+}
+.Static.sta_WF_iconUSA .nexacontentsbox
+{
+	text-align : center;
+	background-position-x : center;
+	vertical-align : bottom;
+	background-position-y : bottom;
+}
+.Static.sta_WF_iconChina
+{
+	background : url('./images/icon_WF_china.png') no-repeat center top;
+	font : 11pt Malgun Gothic,Arial,Gulim;
+}
+.Static.sta_WF_iconChina .nexacontentsbox
+{
+	text-align : center;
+	background-position-x : center;
+	vertical-align : bottom;
+	background-position-y : bottom;
+}
+.Static.sta_WF_iconRussia
+{
+	background : url('./images/icon_WF_russia.png') no-repeat center top;
+	font : 11pt Malgun Gothic,Arial,Gulim;
+}
+.Static.sta_WF_iconRussia .nexacontentsbox
+{
+	text-align : center;
+	background-position-x : center;
+	vertical-align : bottom;
+	background-position-y : bottom;
+}
+.Static.sta_WF_iconCzech
+{
+	background : url('./images/icon_WF_czech.png') no-repeat center top;
+	font : 11pt Malgun Gothic,Arial,Gulim;
+}
+.Static.sta_WF_iconCzech .nexacontentsbox
+{
+	text-align : center;
+	background-position-x : center;
+	vertical-align : bottom;
+	background-position-y : bottom;
+}
+.Static.sta_WF_iconGeman
+{
+	background : url('./images/icon_WF_geman.png') no-repeat center top;
+	font : 11pt Malgun Gothic,Arial,Gulim;
+}
+.Static.sta_WF_iconGeman .nexacontentsbox
+{
+	text-align : center;
+	background-position-x : center;
+	vertical-align : bottom;
+	background-position-y : bottom;
+}
+.Static.sta_WF_iconSpain
+{
+	background : url('./images/icon_WF_spain.png') no-repeat center top;
+	font : 11pt Malgun Gothic,Arial,Gulim;
+}
+.Static.sta_WF_iconSpain .nexacontentsbox
+{
+	text-align : center;
+	background-position-x : center;
+	vertical-align : bottom;
+	background-position-y : bottom;
+}
+.Static.sta_WF_iconArabic
+{
+	background : url('./images/icon_WF_arabic.png') no-repeat center top;
+	font : 11pt Malgun Gothic,Arial,Gulim;
+}
+.Static.sta_WF_iconArabic .nexacontentsbox
+{
+	text-align : center;
+	background-position-x : center;
+	vertical-align : bottom;
+	background-position-y : bottom;
+}
+.Div.div_WF_portBox
+{
+	border : 0px none;
+	cursor : pointer;
+}
+.Div.div_WF_portBox2
+{
+	border : 2px dotted #3366cc;
+	cursor : pointer;
+}
+.Button.btn_WF_portBg08
+{
+	background : url('./images/img_WF_iconPort08.png') no-repeat left top #c0c0c0;
+	border : 0px none;
+	color : #ffffff;
+	cursor : pointer;
+	font : 11pt Malgun gothic,Arial,Gulim;
+}
+.Button.btn_WF_portBg08 .nexacontentsbox
+{
+	text-align : right;
+	background-position-x : right;
+	vertical-align : bottom;
+	background-position-y : bottom;
+}
+.Button.btn_WF_portBg03
+{
+	background : url('./images/img_WF_iconPort03.png') no-repeat right bottom #e2e2e2;
+	border : 0px none;
+	color : #ffffff;
+	cursor : pointer;
+	font : 11pt Malgun gothic,Arial,Gulim;
+}
+.Button.btn_WF_portBg03 .nexacontentsbox
+{
+	text-align : left;
+	background-position-x : left;
+	vertical-align : top;
+	background-position-y : top;
+}
+.Button.btn_WF_portMove
+{
+	background : url('./images/icon_WF_move.png') no-repeat center center;
+	border : 0px none;
+	cursor : move;
+}
+.Button.btn_WF_portBg05
+{
+	background : url('./images/img_WF_iconPort05.png') no-repeat left bottom #a4a4a4;
+	border : 0px none;
+	color : #ffffff;
+	cursor : pointer;
+	font : 11pt Malgun gothic,Arial,Gulim;
+}
+.Button.btn_WF_portBg05 .nexacontentsbox
+{
+	text-align : right;
+	background-position-x : right;
+	vertical-align : top;
+	background-position-y : top;
+}
+.Button.btn_WF_portBg02
+{
+	background : url('./images/img_WF_iconPort02.png') no-repeat right bottom #adadad;
+	border : 0px none;
+	color : #ffffff;
+	cursor : pointer;
+	font : 11pt Malgun gothic,Arial,Gulim;
+}
+.Button.btn_WF_portBg02 .nexacontentsbox
+{
+	text-align : left;
+	background-position-x : left;
+	vertical-align : top;
+	background-position-y : top;
+}
+.Button.btn_WF_portBg06
+{
+	background : url('./images/img_WF_iconPort06.png') no-repeat left bottom #989898;
+	border : 0px none;
+	color : #ffffff;
+	cursor : pointer;
+	font : 11pt Malgun gothic,Arial,Gulim;
+}
+.Button.btn_WF_portBg06 .nexacontentsbox
+{
+	text-align : right;
+	background-position-x : right;
+	vertical-align : top;
+	background-position-y : top;
+}
+.Button.btn_WF_portBg01
+{
+	background : url('./images/img_WF_iconPort01.png') no-repeat right top #7e7e7e;
+	border : 0px none;
+	color : #ffffff;
+	cursor : pointer;
+	font : 11pt Malgun gothic,Arial,Gulim;
+}
+.Button.btn_WF_portBg04
+{
+	background : url('./images/img_WF_iconPort04.png') no-repeat right bottom #c0c0c0;
+	border : 0px none;
+	color : #ffffff;
+	cursor : pointer;
+	font : 11pt Malgun gothic,Arial,Gulim;
+}
+.Button.btn_WF_portBg04 .nexacontentsbox
+{
+	text-align : left;
+	background-position-x : left;
+	vertical-align : top;
+	background-position-y : top;
+}
+#nexacontainer .Button.btn_WF_portMove[status=mouseover]
+{
+	background : url('./images/icon_WF_move.png') no-repeat center center;
+	border : 0px none;
+	cursor : move;
+}
+#nexacontainer .Button.btn_WF_portBg01[status=focused]
+{
+	background : url('./images/img_WF_iconPort01.png') no-repeat right top #7e7e7e;
+	border : 0px none;
+	color : #ffffff;
+	cursor : pointer;
+	font : 11pt Malgun gothic,Arial,Gulim;
+}
+#nexacontainer .Button.btn_WF_portBg08[status=mouseover]
+{
+	background : url('./images/img_WF_iconPort08.png') no-repeat left top #e99baa;
+	border : 0px none;
+	color : #ffffff;
+	cursor : pointer;
+}
+#nexacontainer .Button.btn_WF_portBg05[status=mouseover]
+{
+	background : url('./images/img_WF_iconPort05.png') no-repeat left bottom #c38199;
+	border : 0px none;
+	color : #ffffff;
+	cursor : pointer;
+}
+#nexacontainer .Button.btn_WF_portBg07[status=mouseover]
+{
+	background : url('./images/img_WF_iconPort07.png') no-repeat left top #a25573;
+	border : 0px none;
+	color : #ffffff;
+	cursor : pointer;
+}
+#nexacontainer .Button.btn_WF_portBg01[status=mouseover]
+{
+	background : url('./images/img_WF_iconPort01.png') no-repeat right top #cc5448;
+	border : 0px none;
+	color : #ffffff;
+	cursor : pointer;
+}
+#nexacontainer .Button.btn_WF_portBg06[status=mouseover]
+{
+	background : url('./images/work/img_WF_iconPort06.png') no-repeat left bottom #cc697b;
+	border : 0px none;
+	color : #ffffff;
+	cursor : pointer;
+}
+#nexacontainer .Button.btn_WF_portBg02[status=focused] .nexacontentsbox
+{
+	text-align : left;
+	background-position-x : left;
+	vertical-align : top;
+	background-position-y : top;
+}
+#nexacontainer .Button.btn_WF_portBg02[status=focused]
+{
+	background : url('./images/img_WF_iconPort02.png') no-repeat right bottom #adadad;
+	border : 0px none;
+	color : #ffffff;
+	cursor : pointer;
+	font : 11pt Malgun gothic,Arial,Gulim;
+}
+#nexacontainer .Button.btn_WF_portBg05[status=focused] .nexacontentsbox
+{
+	text-align : right;
+	background-position-x : right;
+	vertical-align : top;
+	background-position-y : top;
+}
+#nexacontainer .Button.btn_WF_portBg05[status=focused]
+{
+	background : url('./images/img_WF_iconPort05.png') no-repeat left bottom #a4a4a4;
+	border : 0px none;
+	color : #ffffff;
+	cursor : pointer;
+	font : 11pt Malgun gothic,Arial,Gulim;
+}
+#nexacontainer .Button.btn_WF_portBg07[status=focused] .nexacontentsbox
+{
+	text-align : right;
+	background-position-x : right;
+	vertical-align : bottom;
+	background-position-y : bottom;
+}
+#nexacontainer .Button.btn_WF_portBg07[status=focused]
+{
+	background : url('./images/img_WF_iconPort07.png') no-repeat left top #808080;
+	border : 0px none;
+	color : #ffffff;
+	cursor : pointer;
+	font : 11pt Malgun gothic,Arial,Gulim;
+}
+#nexacontainer .Button.btn_WF_portMove[status=focused]
+{
+	background : url('./images/icon_WF_move.png') no-repeat center center;
+	border : 0px none;
+	cursor : move;
+}
+#nexacontainer .Button.btn_WF_portBg02[status=mouseover]
+{
+	background : url('./images/img_WF_iconPort02.png') no-repeat right bottom #ee8a7d;
+	border : 0px none;
+	color : #ffffff;
+	cursor : pointer;
+}
+#nexacontainer .Div.div_WF_portBox2[status=focused]
+{
+	border : 2px dotted #3366cc;
+	cursor : pointer;
+}
+#nexacontainer .Button.btn_WF_portBg03[status=focused] .nexacontentsbox
+{
+	text-align : left;
+	background-position-x : left;
+	vertical-align : top;
+	background-position-y : top;
+}
+#nexacontainer .Button.btn_WF_portBg03[status=focused]
+{
+	background : url('./images/img_WF_iconPort03.png') no-repeat right bottom #e2e2e2;
+	border : 0px none;
+	color : #ffffff;
+	cursor : pointer;
+	font : 11pt Malgun gothic,Arial,Gulim;
+}
+#nexacontainer .Button.btn_WF_portBg04[status=mouseover]
+{
+	background : url('./images/img_WF_iconPort04.png') no-repeat right bottom #e99baa;
+	border : 0px none;
+	color : #ffffff;
+	cursor : pointer;
+}
+#nexacontainer .Button.btn_WF_portBg08[status=focused] .nexacontentsbox
+{
+	text-align : right;
+	background-position-x : right;
+	vertical-align : bottom;
+	background-position-y : bottom;
+}
+#nexacontainer .Button.btn_WF_portBg08[status=focused]
+{
+	background : url('./images/img_WF_iconPort08.png') no-repeat left top #c0c0c0;
+	border : 0px none;
+	color : #ffffff;
+	cursor : pointer;
+	font : 11pt Malgun gothic,Arial,Gulim;
+}
+#nexacontainer .Div.div_WF_portBox2[status=mouseover]
+{
+	border : 2px dotted #3366cc;
+	cursor : pointer;
+}
+#nexacontainer .Button.btn_WF_portBg03[status=mouseover]
+{
+	background : url('./images/img_WF_iconPort03.png') no-repeat right bottom #ffc8c1;
+	border : 0px none;
+	color : #ffffff;
+	cursor : pointer;
+}
+#nexacontainer .Button.btn_WF_portBg06[status=focused] .nexacontentsbox
+{
+	text-align : right;
+	background-position-x : right;
+	vertical-align : top;
+	background-position-y : top;
+}
+#nexacontainer .Button.btn_WF_portBg06[status=focused]
+{
+	background : url('./images/img_WF_iconPort06.png') no-repeat left bottom #989898;
+	border : 0px none;
+	color : #ffffff;
+	cursor : pointer;
+	font : 11pt Malgun gothic,Arial,Gulim;
+}
+#nexacontainer .Button.btn_WF_portBg04[status=focused] .nexacontentsbox
+{
+	text-align : left;
+	background-position-x : left;
+	vertical-align : top;
+	background-position-y : top;
+}
+#nexacontainer .Button.btn_WF_portBg04[status=focused]
+{
+	background : url('./images/img_WF_iconPort04.png') no-repeat right bottom #c0c0c0;
+	border : 0px none;
+	color : #ffffff;
+	cursor : pointer;
+	font : 11pt Malgun gothic,Arial,Gulim;
+}
+#nexacontainer .Button.btn_WF_portBg04[userstatus=selected] .nexacontentsbox
+{
+	text-align : left;
+	background-position-x : left;
+	vertical-align : top;
+	background-position-y : top;
+}
+#nexacontainer .Button.btn_WF_portBg04[userstatus=selected]
+{
+	background : url('./images/img_WF_iconPort04.png') no-repeat right bottom #c0c0c0;
+	border : 0px none;
+	color : #ffffff;
+	cursor : pointer;
+	font : 11pt Malgun gothic,Arial,Gulim;
+}
+#nexacontainer .Button.btn_WF_portBg03[userstatus=pushed] .nexacontentsbox
+{
+	text-align : left;
+	background-position-x : left;
+	vertical-align : top;
+	background-position-y : top;
+}
+#nexacontainer .Button.btn_WF_portBg03[userstatus=pushed]
+{
+	background : url('./images/img_WF_iconPort03.png') no-repeat right bottom #e2e2e2;
+	border : 0px none;
+	color : #ffffff;
+	cursor : pointer;
+	font : 11pt Malgun gothic,Arial,Gulim;
+}
+#nexacontainer .Button.btn_WF_portBg04[userstatus=pushed] .nexacontentsbox
+{
+	text-align : left;
+	background-position-x : left;
+	vertical-align : top;
+	background-position-y : top;
+}
+#nexacontainer .Button.btn_WF_portBg04[userstatus=pushed]
+{
+	background : url('./images/img_WF_iconPort04.png') no-repeat right bottom #c0c0c0;
+	border : 0px none;
+	color : #ffffff;
+	cursor : pointer;
+	font : 11pt Malgun gothic,Arial,Gulim;
+}
+#nexacontainer .Button.btn_WF_portBg03[userstatus=selected] .nexacontentsbox
+{
+	text-align : left;
+	background-position-x : left;
+	vertical-align : top;
+	background-position-y : top;
+}
+#nexacontainer .Button.btn_WF_portBg03[userstatus=selected]
+{
+	background : url('./images/img_WF_iconPort03.png') no-repeat right bottom #e2e2e2;
+	border : 0px none;
+	color : #ffffff;
+	cursor : pointer;
+	font : 11pt Malgun gothic,Arial,Gulim;
+}
+#nexacontainer .Button.btn_WF_portBg02[userstatus=pushed] .nexacontentsbox
+{
+	text-align : left;
+	background-position-x : left;
+	vertical-align : top;
+	background-position-y : top;
+}
+#nexacontainer .Button.btn_WF_portBg02[userstatus=pushed]
+{
+	background : url('./images/img_WF_iconPort02.png') no-repeat right bottom #adadad;
+	border : 0px none;
+	color : #ffffff;
+	cursor : pointer;
+	font : 11pt Malgun gothic,Arial,Gulim;
+}
+#nexacontainer .Button.btn_WF_portBg02[userstatus=selected] .nexacontentsbox
+{
+	text-align : left;
+	background-position-x : left;
+	vertical-align : top;
+	background-position-y : top;
+}
+#nexacontainer .Button.btn_WF_portBg02[userstatus=selected]
+{
+	background : url('./images/img_WF_iconPort02.png') no-repeat right bottom #adadad;
+	border : 0px none;
+	color : #ffffff;
+	cursor : pointer;
+	font : 11pt Malgun gothic,Arial,Gulim;
+}
+#nexacontainer .Button.btn_WF_portBg05[userstatus=selected] .nexacontentsbox
+{
+	text-align : right;
+	background-position-x : right;
+	vertical-align : top;
+	background-position-y : top;
+}
+#nexacontainer .Button.btn_WF_portBg05[userstatus=selected]
+{
+	background : url('./images/img_WF_iconPort05.png') no-repeat left bottom #a4a4a4;
+	border : 0px none;
+	color : #ffffff;
+	cursor : pointer;
+	font : 11pt Malgun gothic,Arial,Gulim;
+}
+#nexacontainer .Button.btn_WF_portBg01[userstatus=pushed]
+{
+	background : url('./images/img_WF_iconPort01.png') no-repeat right top #7e7e7e;
+	border : 0px none;
+	color : #ffffff;
+	cursor : pointer;
+	font : 11pt Malgun gothic,Arial,Gulim;
+}
+#nexacontainer .Button.btn_WF_portBg05[userstatus=pushed] .nexacontentsbox
+{
+	text-align : right;
+	background-position-x : right;
+	vertical-align : top;
+	background-position-y : top;
+}
+#nexacontainer .Button.btn_WF_portBg05[userstatus=pushed]
+{
+	background : url('./images/img_WF_iconPort05.png') no-repeat left bottom #a4a4a4;
+	border : 0px none;
+	color : #ffffff;
+	cursor : pointer;
+	font : 11pt Malgun gothic,Arial,Gulim;
+}
+#nexacontainer .Button.btn_WF_portBg08[userstatus=pushed] .nexacontentsbox
+{
+	text-align : right;
+	background-position-x : right;
+	vertical-align : bottom;
+	background-position-y : bottom;
+}
+#nexacontainer .Button.btn_WF_portBg08[userstatus=pushed]
+{
+	background : url('./images/img_WF_iconPort08.png') no-repeat left top #c0c0c0;
+	border : 0px none;
+	color : #ffffff;
+	cursor : pointer;
+	font : 11pt Malgun gothic,Arial,Gulim;
+}
+#nexacontainer .Button.btn_WF_portBg01[userstatus=selected]
+{
+	background : url('./images/img_WF_iconPort01.png') no-repeat right top #7e7e7e;
+	border : 0px none;
+	color : #ffffff;
+	cursor : pointer;
+	font : 11pt Malgun gothic,Arial,Gulim;
+}
+#nexacontainer .Button.btn_WF_portMove[userstatus=pushed]
+{
+	background : url('./images/icon_WF_move.png') no-repeat center center;
+	border : 0px none;
+	cursor : move;
+}
+#nexacontainer .Button.btn_WF_portBg06[userstatus=selected] .nexacontentsbox
+{
+	text-align : right;
+	background-position-x : right;
+	vertical-align : top;
+	background-position-y : top;
+}
+#nexacontainer .Button.btn_WF_portBg06[userstatus=selected]
+{
+	background : url('./images/img_WF_iconPort06.png') no-repeat left bottom #989898;
+	border : 0px none;
+	color : #ffffff;
+	cursor : pointer;
+	font : 11pt Malgun gothic,Arial,Gulim;
+}
+#nexacontainer .Button.btn_WF_portBg07[userstatus=pushed] .nexacontentsbox
+{
+	text-align : right;
+	background-position-x : right;
+	vertical-align : bottom;
+	background-position-y : bottom;
+}
+#nexacontainer .Button.btn_WF_portBg07[userstatus=pushed]
+{
+	background : url('./images/img_WF_iconPort07.png') no-repeat left top #808080;
+	border : 0px none;
+	color : #ffffff;
+	cursor : pointer;
+	font : 11pt Malgun gothic,Arial,Gulim;
+}
+#nexacontainer .Button.btn_WF_portBg06[userstatus=pushed] .nexacontentsbox
+{
+	text-align : right;
+	background-position-x : right;
+	vertical-align : top;
+	background-position-y : top;
+}
+#nexacontainer .Button.btn_WF_portBg06[userstatus=pushed]
+{
+	background : url('./images/img_WF_iconPort06.png') no-repeat left bottom #989898;
+	border : 0px none;
+	color : #ffffff;
+	cursor : pointer;
+	font : 11pt Malgun gothic,Arial,Gulim;
+}
+#nexacontainer .Button.btn_WF_portMove[userstatus=selected]
+{
+	background : url('./images/icon_WF_move.png') no-repeat center center;
+	border : 0px none;
+	cursor : move;
+}
+#nexacontainer .Grid.grd_LF_menu .body .row .cell .celltreeitem .treeitemimage[userstatus=expand]
+{
+	background : url('./images/img_WF_Treeexpand1.png') no-repeat center;
+}
+#nexacontainer .Button.btn_WF_portBg08[userstatus=selected] .nexacontentsbox
+{
+	text-align : right;
+	background-position-x : right;
+	vertical-align : bottom;
+	background-position-y : bottom;
+}
+#nexacontainer .Button.btn_WF_portBg08[userstatus=selected]
+{
+	background : url('./images/img_WF_iconPort08.png') no-repeat left top #c0c0c0;
+	border : 0px none;
+	color : #ffffff;
+	cursor : pointer;
+	font : 11pt Malgun gothic,Arial,Gulim;
+}
+#nexacontainer .Button.btn_WF_portBg07[userstatus=selected] .nexacontentsbox
+{
+	text-align : right;
+	background-position-x : right;
+	vertical-align : bottom;
+	background-position-y : bottom;
+}
+#nexacontainer .Button.btn_WF_portBg07[userstatus=selected]
+{
+	background : url('./images/img_WF_iconPort07.png') no-repeat left top #808080;
+	border : 0px none;
+	color : #ffffff;
+	cursor : pointer;
+	font : 11pt Malgun gothic,Arial,Gulim;
+}
+#nexacontainer .Grid.grd_LF_menu .body .row .cell .celltreeitem .treeitemimage[userstatus=collapse]
+{
+	background : url('./images/img_WF_Treecollapse1.png') no-repeat center;
+}
+#nexacontainer .Button.btn_WF_portBg06[status=disabled] .nexacontentsbox
+{
+	text-align : right;
+	background-position-x : right;
+	vertical-align : top;
+	background-position-y : top;
+}
+#nexacontainer .Button.btn_WF_portBg06[status=disabled]
+{
+	background : url('./images/img_WF_iconPort06.png') no-repeat left bottom #989898;
+	border : 0px none;
+	color : #ffffff;
+	cursor : pointer;
+	font : 11pt Malgun gothic,Arial,Gulim;
+}
+#nexacontainer .Button.btn_WF_portBg05[status=disabled] .nexacontentsbox
+{
+	text-align : right;
+	background-position-x : right;
+	vertical-align : top;
+	background-position-y : top;
+}
+#nexacontainer .Button.btn_WF_portBg05[status=disabled]
+{
+	background : url('./images/img_WF_iconPort05.png') no-repeat left bottom #a4a4a4;
+	border : 0px none;
+	color : #ffffff;
+	cursor : pointer;
+	font : 11pt Malgun gothic,Arial,Gulim;
+}
+#nexacontainer .Button.btn_WF_portBg04[status=disabled] .nexacontentsbox
+{
+	text-align : left;
+	background-position-x : left;
+	vertical-align : top;
+	background-position-y : top;
+}
+#nexacontainer .Button.btn_WF_portBg04[status=disabled]
+{
+	background : url('./images/img_WF_iconPort04.png') no-repeat right bottom #c0c0c0;
+	border : 0px none;
+	color : #ffffff;
+	cursor : pointer;
+	font : 11pt Malgun gothic,Arial,Gulim;
+}
+#nexacontainer .Button.btn_WF_portBg03[status=disabled] .nexacontentsbox
+{
+	text-align : left;
+	background-position-x : left;
+	vertical-align : top;
+	background-position-y : top;
+}
+#nexacontainer .Button.btn_WF_portBg03[status=disabled]
+{
+	background : url('./images/img_WF_iconPort03.png') no-repeat right bottom #e2e2e2;
+	border : 0px none;
+	color : #ffffff;
+	cursor : pointer;
+	font : 11pt Malgun gothic,Arial,Gulim;
+}
+#nexacontainer .Button.btn_WF_portBg02[status=disabled] .nexacontentsbox
+{
+	text-align : left;
+	background-position-x : left;
+	vertical-align : top;
+	background-position-y : top;
+}
+#nexacontainer .Button.btn_WF_portBg02[status=disabled]
+{
+	background : url('./images/img_WF_iconPort02.png') no-repeat right bottom #adadad;
+	border : 0px none;
+	color : #ffffff;
+	cursor : pointer;
+	font : 11pt Malgun gothic,Arial,Gulim;
+}
+#nexacontainer .Button.btn_WF_portBg08[status=disabled] .nexacontentsbox
+{
+	text-align : right;
+	background-position-x : right;
+	vertical-align : bottom;
+	background-position-y : bottom;
+}
+#nexacontainer .Button.btn_WF_portBg08[status=disabled]
+{
+	background : url('./images/img_WF_iconPort08.png') no-repeat left top #c0c0c0;
+	border : 0px none;
+	color : #ffffff;
+	cursor : pointer;
+	font : 11pt Malgun gothic,Arial,Gulim;
+}
+#nexacontainer .Button.btn_WF_portBg01[status=disabled]
+{
+	background : url('./images/img_WF_iconPort01.png') no-repeat right top #7e7e7e;
+	border : 0px none;
+	color : #ffffff;
+	cursor : pointer;
+	font : 11pt Malgun gothic,Arial,Gulim;
+}
+#nexacontainer .Button.btn_WF_portMove[status=disabled]
+{
+	background : url('./images/icon_WF_move.png') no-repeat center center;
+	border : 0px none;
+	cursor : move;
+}
+#nexacontainer .Button.btn_WF_portBg07[status=disabled] .nexacontentsbox
+{
+	text-align : right;
+	background-position-x : right;
+	vertical-align : bottom;
+	background-position-y : bottom;
+}
+#nexacontainer .Button.btn_WF_portBg07[status=disabled]
+{
+	background : url('./images/img_WF_iconPort07.png') no-repeat left top #808080;
+	border : 0px none;
+	color : #ffffff;
+	cursor : pointer;
+	font : 11pt Malgun gothic,Arial,Gulim;
+}

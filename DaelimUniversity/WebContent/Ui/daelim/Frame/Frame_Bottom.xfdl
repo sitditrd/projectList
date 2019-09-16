@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.0">
+  <Form id="Form_Bottom" width="1024" height="30">
+    <Layouts>
+      <Layout width="1024" height="30" screenid="Desktop_screen">
+        <Static id="Static00" taborder="0" text="Please select menu" left="0" top="0" right="0" bottom="0" cssclass="sta_BF_bg"/>
+      </Layout>
+    </Layouts>
+  </Form>
+</FDL>
