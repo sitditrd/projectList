@@ -1,0 +1,300 @@
+﻿
+        
+.nexainput.nexaleftalign
+{
+  text-align:left;
+}
+.nexainput.nexarightalign
+{
+  text-align:right;
+}
+.nexainput.nexacenteralign
+{
+  text-align:center;
+}
+
+.nexacontentsbox.nexaleftalign
+{
+  text-align:left;
+}
+.nexacontentsbox.nexarightalign
+{
+  text-align:right;
+}
+.nexacontentsbox.nexacenteralign
+{
+  text-align:center;
+}
+.celltreeline
+{
+  border : 1px dotted #999999;
+}
+.Edit, .MaskEdit, .TextArea, .EditControl, .MaskEditControl, .TextAreaControl
+{
+  cursor:text;
+}
+.Button .nexacontentsbox, .ButtonControl .nexacontentsbox
+{
+  text-align:center;
+}
+
+.FileDownload  .nexacontentsbox, .FileDownloadControl .nexacontentsbox
+{
+  text-align:center;
+}
+
+.IconTextControl .nexacontentsbox, .IconControl .nexacontentsbox
+{
+  text-align:center;
+}
+
+.DatePickerDayItemControl .nexacontentsbox, .DatePickerWeekItemControl .nexacontentsbox, .TitleBarButtonControl .nexacontentsbox
+{
+  text-align:center;
+}
+
+.MainFrame, .VScrollBarControl, .HScrollBarControl
+{
+  cursor:default;
+}
+.nexainput
+{
+  cursor:inherit;
+}
+
+.Grid
+{
+	background : #ffffff;
+	border : 2px solid #e0002a, 1px solid #b7b1b2, 1px solid #b7b1b2, 1px solid #b7b1b2;
+}
+.Grid .head .row .cell
+{
+	font : bold 12px Gulim;
+	color : #2f2f2f;
+	background : #f7f7f7;
+	border : 1px solid #cacaca;
+}
+.Grid .head .row .cell .nexacontentsbox
+{
+	text-align : center;
+}
+.Grid .body .row .cell
+{
+	color : #333333;
+	border : 1px solid #dbdee2;
+}
+.GroupBox .groupboxtitle
+{
+	font : bold 12px Gulim;
+	color : #e0002a;
+}
+.Static.sta_WF_boxBg
+{
+	background : #f0f0f0;
+}
+.Static.sta_WF_label
+{
+	font : bold 12px Gulim;
+}
+.Static.sta_WF_infoBox
+{
+	background : #fff7eb;
+	color : #333333;
+}
+.Static.sta_WF_logo
+{
+	background : url('./../../../_resource_/_images_/img_WF_logo.png') no-repeat left center;
+}
+.Static.sta_WF_markWhite
+{
+	background : #ffffff;
+	border : 1px solid #777777;
+	color : #333333;
+}
+.Static.sta_WF_markBlue
+{
+	background : #96ecf1;
+	border : 1px solid #209c9a;
+	color : #333333;
+}
+.Static.sta_WF_markRed
+{
+	background : #f5bab6;
+	border : 1px solid #d97069;
+	color : #333333;
+}
+.Button.btn_WF_btnWhite
+{
+	background : #ffffff;
+	border : 1px solid #777777;
+	color : #333333;
+	font : bold 12px/normal Gulim;
+	cursor : pointer;
+}
+.Button.btn_WF_btnRed
+{
+	background : #ffffff;
+	border : 1px solid #e0002a;
+	color : #555555;
+	font : bold 12px/normal Gulim;
+	cursor : pointer;
+}
+.Button.btn_WF_btnInitial
+{
+	background : url('./../../../_resource_/_images_/btn_WF_initialize.png') no-repeat left center #ffffff;
+	border : 1px solid #e0002a;
+	color : #555555;
+	font : bold 12px/normal Gulim;
+	cursor : pointer;
+}
+.Button.btn_WF_btnSearch
+{
+	background : url('./../../../_resource_/_images_/btn_WF_search.png') no-repeat left center #ffffff;
+	border : 1px solid #e0002a;
+	color : #555555;
+	font : bold 12px/normal Gulim;
+	cursor : pointer;
+}
+.Button.btn_WF_btnExp
+{
+	background : url('./../../../_resource_/_images_/btn_WF_doc.png') no-repeat left center #ffffff;
+	border : 1px solid #e0002a;
+	color : #555555;
+	font : bold 12px/normal Gulim;
+	cursor : pointer;
+}
+.Grid .body .row .cell[status=mouseover]
+{
+	background : #f8f8f8;
+}
+.Button.btn_WF_btnWhite[status=focused]
+{
+	background : #ffffff;
+	border : 1px solid #777777;
+	color : #333333;
+	font : bold 12px/normal Gulim;
+	cursor : pointer;
+}
+.Button.btn_WF_btnWhite[status=mouseover]
+{
+	border : 1px solid #585858;
+	background : #f9f9f9;
+}
+.Button.btn_WF_btnRed[status=focused]
+{
+	background : #ffffff;
+	border : 1px solid #e0002a;
+	color : #555555;
+	font : bold 12px/normal Gulim;
+	cursor : pointer;
+}
+.Button.btn_WF_btnRed[status=mouseover]
+{
+	border : 0px none;
+	background : #f9f9f9;
+}
+.Button.btn_WF_btnInitial[status=focused]
+{
+	background : url('./../../../_resource_/_images_/btn_WF_initialize.png') no-repeat left center #ffffff;
+	border : 1px solid #e0002a;
+	color : #555555;
+	font : bold 12px/normal Gulim;
+	cursor : pointer;
+}
+.Button.btn_WF_btnInitial[status=mouseover]
+{
+	background : url('./../../../_resource_/_images_/btn_WF_initialize.png') no-repeat left center #fffafb;
+	border : 1px solid #e0002a;
+}
+.Button.btn_WF_btnSearch[status=focused]
+{
+	background : url('./../../../_resource_/_images_/btn_WF_search.png') no-repeat left center #ffffff;
+	border : 1px solid #e0002a;
+	color : #555555;
+	font : bold 12px/normal Gulim;
+	cursor : pointer;
+}
+.Button.btn_WF_btnSearch[status=mouseover]
+{
+	background : url('./../../../_resource_/_images_/btn_WF_search.png') no-repeat left center #fffafb;
+	border : 1px solid #e0002a;
+}
+.Button.btn_WF_btnExp[status=focused]
+{
+	background : url('./../../../_resource_/_images_/btn_WF_doc.png') no-repeat left center #ffffff;
+	border : 1px solid #e0002a;
+	color : #555555;
+	font : bold 12px/normal Gulim;
+	cursor : pointer;
+}
+.Button.btn_WF_btnExp[status=mouseover]
+{
+	background : url('./../../../_resource_/_images_/btn_WF_doc.png') no-repeat left center #fffafb;
+	border : 1px solid #e0002a;
+}
+.Grid .body .row .cell[userstatus=selected]
+{
+	background : #fff4f5;
+}
+.Button.btn_WF_btnWhite[userstatus=pushed]
+{
+	border : 1px solid #585858;
+	background : #f9f9f9;
+}
+.Button.btn_WF_btnWhite[userstatus=selected]
+{
+	border : 1px solid #585858;
+	background : #f9f9f9;
+}
+.Button.btn_WF_btnRed[userstatus=pushed]
+{
+	border : 0px none;
+	background : #f9f9f9;
+}
+.Button.btn_WF_btnRed[userstatus=selected]
+{
+	border : 0px none;
+	background : #f9f9f9;
+}
+.Button.btn_WF_btnInitial[userstatus=pushed]
+{
+	background : url('./../../../_resource_/_images_/btn_WF_initialize.png') no-repeat left center #fffafb;
+	border : 1px solid #e0002a;
+}
+.Button.btn_WF_btnInitial[userstatus=selected]
+{
+	background : url('./../../../_resource_/_images_/btn_WF_initialize.png') no-repeat left center #fffafb;
+	border : 1px solid #e0002a;
+}
+.Button.btn_WF_btnSearch[userstatus=pushed]
+{
+	background : url('./../../../_resource_/_images_/btn_WF_search.png') no-repeat left center #fffafb;
+	border : 1px solid #e0002a;
+}
+.Button.btn_WF_btnSearch[userstatus=selected]
+{
+	background : url('./../../../_resource_/_images_/btn_WF_search.png') no-repeat left center #fffafb;
+	border : 1px solid #e0002a;
+}
+.Button.btn_WF_btnExp[userstatus=pushed]
+{
+	background : url('./../../../_resource_/_images_/btn_WF_doc.png') no-repeat left center #fffafb;
+	border : 1px solid #e0002a;
+}
+.Button.btn_WF_btnExp[userstatus=selected]
+{
+	background : url('./../../../_resource_/_images_/btn_WF_doc.png') no-repeat left center #fffafb;
+	border : 1px solid #e0002a;
+}
+.Grid .head .row .cell[status=disabled]
+{
+	color : #999999;
+}
+.Grid .body .row .cell[status=disabled]
+{
+	color : #999999;
+}
+.Grid .body .row .cell[status=disabled][userstatus=selected]
+{
+	background : #f0f0f0;
+}
