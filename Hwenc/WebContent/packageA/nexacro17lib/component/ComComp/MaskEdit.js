@@ -217,10 +217,12 @@ if (!nexacro.MaskEdit) {
 	};
 
 	_pMaskEdit._apply_setfocus = function (evt_name) {
+		this._processing_updateToDataset = false;
+
 		var input_elem = this._input_element;
 		if (input_elem) {
 			var value = this.value;
-			var text = this.text;
+			var text = "";
 			var emptytext = "";
 
 			var maskobj = this._getMaskObj();
@@ -858,7 +860,10 @@ if (!nexacro.MaskEdit) {
 	};
 
 	_pMaskEdit.updateToDataset = function () {
-		this._result_updateToDataset = this.applyto_bindSource("value", this.value);
+		if (this._result_updateToDataset = this.applyto_bindSource("value", this.value)) {
+			this._default_value = this.value;
+			this._default_text = this.text;
+		}
 		this._processing_updateToDataset = true;
 
 		return this._result_updateToDataset;
@@ -1164,12 +1169,11 @@ if (!nexacro.MaskEdit) {
 
 			if (pre_value != cur_value || cur_text != pre_text) {
 				if (!this._on_value_change(pre_text, pre_value, cur_text, cur_value)) {
-					this.value = cur_value = pre_value;
+					this.value = pre_value;
 				}
 			}
 
 			cur_value = this.value;
-			cur_text = this.text;
 
 			var maskobj = this._getMaskObj();
 			if (maskobj) {
@@ -1215,8 +1219,12 @@ if (!nexacro.MaskEdit) {
 	_pMaskEdit.on_click_basic_action = function (elem, button) {
 		var input_elem = this._input_element;
 		if (input_elem) {
-			if (!this._onlydisplay) {
-				input_elem.setElementFocus(button);
+			var _window = this._getWindow();
+			if (_window && this._track_capture) {
+				var capture_comp = _window._getCaptureComp(true, false, this);
+				if (!this._onlydisplay && (!capture_comp || capture_comp == this)) {
+					input_elem.setElementFocus(button);
+				}
 			}
 		}
 	};
@@ -1420,34 +1428,25 @@ if (!nexacro.MaskEdit) {
 					ret.push(input_elem._BeforeinputState.REPLACE);
 					break;
 				case "deleteByCut":
-					if (begin == end) {
+					front_text = input_value.substring(0, begin);
+					rear_text = input_value.substring(end);
+
+					update_value = front_text + rear_text;
+					if ((end - begin == input_value.length)) {
+						input_elem._beforeinput_result_data = maskobj.applyMask(update_value);
+						input_elem._beforeinput_result_pos = {
+							begin : begin, 
+							end : begin
+						};
+					}
+					else {
+						result = maskobj.arrangeMask(update_value, begin, begin);
+
 						input_elem._beforeinput_result_data = result.text;
 						input_elem._beforeinput_result_pos = {
 							begin : result.pos, 
 							end : result.pos
 						};
-					}
-					else {
-						front_text = input_value.substring(0, begin);
-						rear_text = input_value.substring(end);
-
-						update_value = front_text + rear_text;
-						if ((end - begin == input_value.length)) {
-							input_elem._beforeinput_result_data = maskobj.applyMask(update_value);
-							input_elem._beforeinput_result_pos = {
-								begin : begin, 
-								end : begin
-							};
-						}
-						else {
-							result = maskobj.arrangeMask(update_value, begin, begin);
-
-							input_elem._beforeinput_result_data = result.text;
-							input_elem._beforeinput_result_pos = {
-								begin : result.pos, 
-								end : result.pos
-							};
-						}
 					}
 					ret.push(input_elem._BeforeinputState.REPLACE);
 					break;
@@ -1481,35 +1480,27 @@ if (!nexacro.MaskEdit) {
 						else {
 							if (begin == end) {
 								update_value = input_value.substring(0, begin) + value + input_value.substring(end);
-								result = maskobj.arrangeMask(update_value, begin, end + value.length);
-								if (result == null) {
-									ret.push(input_elem._BeforeinputState.CANCEL);
-								}
-								else {
-									input_elem._beforeinput_result_data = result.text;
-									input_elem._beforeinput_result_pos = {
-										begin : result.pos, 
-										end : result.pos
-									};
-
-									ret.push(input_elem._BeforeinputState.REPLACE);
-								}
+								end = end + value.length;
 							}
 							else {
 								update_value = input_value.substring(0, begin) + value + input_value.substring(end, input_value.length);
-								result = maskobj.arrangeMask(update_value, begin, begin + value.length);
-								if (result == null) {
-									ret.push(input_elem._BeforeinputState.CANCEL);
-								}
-								else {
-									input_elem._beforeinput_result_data = result.text;
-									input_elem._beforeinput_result_pos = {
-										begin : result.pos, 
-										end : result.pos
-									};
+								end = begin + value.length;
+							}
 
-									ret.push(input_elem._BeforeinputState.REPLACE);
-								}
+							result = maskobj.arrangeMask(update_value, begin, end);
+							if (result == null) {
+								ret.push(input_elem._BeforeinputState.CANCEL);
+							}
+							else {
+								input_pos = maskobj.findNearEditablePos(result.pos, 1);
+
+								input_elem._beforeinput_result_data = result.text;
+								input_elem._beforeinput_result_pos = {
+									begin : input_pos, 
+									end : input_pos
+								};
+
+								ret.push(input_elem._BeforeinputState.REPLACE);
 							}
 						}
 					}
@@ -1542,35 +1533,27 @@ if (!nexacro.MaskEdit) {
 						else {
 							if (begin == end) {
 								update_value = input_value.substring(0, begin) + value + input_value.substring(end);
-								result = maskobj.arrangeMask(update_value, begin, end + value.length);
-								if (result == null) {
-									ret.push(input_elem._BeforeinputState.CANCEL);
-								}
-								else {
-									input_elem._beforeinput_result_data = result.text;
-									input_elem._beforeinput_result_pos = {
-										begin : result.pos, 
-										end : result.pos
-									};
-
-									ret.push(input_elem._BeforeinputState.REPLACE);
-								}
+								end = end + value.length;
 							}
 							else {
 								update_value = input_value.substring(0, begin) + value + input_value.substring(begin);
-								result = maskobj.arrangeMask(update_value, begin, begin + value.length);
-								if (result == null) {
-									ret.push(input_elem._BeforeinputState.CANCEL);
-								}
-								else {
-									input_elem._beforeinput_result_data = result.text;
-									input_elem._beforeinput_result_pos = {
-										begin : result.pos, 
-										end : result.pos
-									};
+								end = begin + value.length;
+							}
 
-									ret.push(input_elem._BeforeinputState.REPLACE);
-								}
+							result = maskobj.arrangeMask(update_value, begin, end);
+							if (result == null) {
+								ret.push(input_elem._BeforeinputState.CANCEL);
+							}
+							else {
+								input_pos = maskobj.findNearEditablePos(result.pos, 1);
+
+								input_elem._beforeinput_result_data = result.text;
+								input_elem._beforeinput_result_pos = {
+									begin : input_pos, 
+									end : input_pos
+								};
+
+								ret.push(input_elem._BeforeinputState.REPLACE);
 							}
 						}
 					}
@@ -1594,33 +1577,42 @@ if (!nexacro.MaskEdit) {
 			if (result == null) {
 				input_elem.replaceElementText("", begin, end);
 				input_elem.stopSysEvent();
-				return;
 			}
+			else {
+				var input_pos = maskobj.findNearEditablePos(result.pos, 1);
 
-			if (result.text != input_text) {
-				input_elem.updateElementText(result.text, result.pos);
-			}
-
-			if (result.text == this.text) {
-				var input_value = maskobj.removeMask(result.text);
-
-				if (this.clipmode == "includespace") {
-					var trimtype = this.trimtype;
-					if (trimtype == "both") {
-						input_value = input_value.replace(/^\s+|\s+$/g, "");
-					}
-					else if (trimtype == "left") {
-						input_value = input_value.replace(/^\s+/, "");
-					}
-					else if (trimtype == "right") {
-						input_value = input_value.replace(/\s+$/, "");
-					}
+				if (result.text != input_text || result.pos != input_pos) {
+					input_elem.updateElementText(result.text, input_pos);
 				}
 
-				this.value = input_value;
+				if (result.text == this.text) {
+					var input_value = maskobj.removeMask(result.text);
+
+					if (this.clipmode == "includespace") {
+						var trimtype = this.trimtype;
+						if (trimtype == "both") {
+							input_value = input_value.replace(/^\s+|\s+$/g, "");
+						}
+						else if (trimtype == "left") {
+							input_value = input_value.replace(/^\s+/, "");
+						}
+						else if (trimtype == "right") {
+							input_value = input_value.replace(/\s+$/, "");
+						}
+					}
+
+					this.value = input_value;
+				}
 			}
 		}
 	};
 
+	_pMaskEdit._on_input_compositionend = function (value) {
+		var input_elem = this._input_element;
+		if (input_elem) {
+			var pos = input_elem.getElementCaretPos();
+			this._undostack.push(value, (pos && pos != -1) ? pos.begin : 0, pos ? pos.end : 0);
+		}
+	};
 	_pMaskEdit = null;
 }

@@ -104,7 +104,6 @@ if (!nexacro.CellInfo) {
 				ctrl["set_" + ctrlprop](v);
 			}
 		}
-		;
 	};
 
 	_pCellInfo._setCellControlProperty = function (cellcontrol, datarow) {
@@ -119,8 +118,21 @@ if (!nexacro.CellInfo) {
 				cellcontrol["set_" + ctrlprop](v);
 			}
 		}
-		;
 	};
+
+	_pCellInfo._setCellControlPropertyForAutosize = function (cellcontrol, datarow) {
+		var _property_map = [["font", "font"], ["wordSpacing", "wordSpacing"], ["letterSpacing", "letterSpacing"], ["border", "border"], ["padding", "padding"]
+		];
+		var v, prop, ctrlprop;
+
+		for (var i = 0, n = _property_map.length; i < n; i++) {
+			ctrlprop = _property_map[i][1];
+			prop = _property_map[i][0];
+			v = this._getAttrValue(this[prop], datarow);
+			cellcontrol["set_" + ctrlprop](v);
+		}
+	};
+
 
 	_pCellInfo._use_displaytype_controls = ["buttoncontrol", "checkboxcontrol", "imagecontrol", "treeitemcontrol", "combocontrol", "calendarcontrol", "editcontrol", "maskeditcontrol", "textareacontrol", "progressbarcontrol"
 	];
@@ -148,7 +160,6 @@ if (!nexacro.CellInfo) {
 				return deft;
 			}
 		}
-		;
 		return undefined;
 	};
 
@@ -166,11 +177,10 @@ if (!nexacro.CellInfo) {
 				this[prop] = deft;
 			}
 		}
-		;
 	};
 
 	nexacro._makeCellInfoPropertySetter = function (ptype_val, _property_map) {
-		var prop, bind, deft, str, type, styl, eval_str = "";
+		var prop, bind, str, type, styl, eval_str = "";
 		function enumjoin (arr) {
 			var str = "\"" + arr[0] + "\"";
 			for (var i = 1; i < arr.length; i++) {
@@ -178,12 +188,10 @@ if (!nexacro.CellInfo) {
 			}
 			return str;
 		}
-		;
 
 		for (var i = 0; i < _property_map.length; i++) {
 			prop = _property_map[i][nexacro._CELLINFO_PMAP_PROPNAME];
 			bind = _property_map[i][nexacro._CELLINFO_PMAP_EXPRBIND];
-			deft = _property_map[i][nexacro._CELLINFO_PMAP_DEFTVALUE];
 			type = _property_map[i][nexacro._CELLINFO_PMAP_VALTYPE];
 			styl = _property_map[i][nexacro._CELLINFO_PMAP_STYLE];
 
@@ -215,6 +223,7 @@ if (!nexacro.CellInfo) {
 			else {
 				str = "$PTYPE$.set_$ATTR$ = function (v)\n";
 				str += "{\n";
+
 				if (type == 2) {
 					str += "    var val = this.$ATTR$;\n";
 					str += "    switch (v)\n";
@@ -245,7 +254,6 @@ if (!nexacro.CellInfo) {
 			str = str.replace(/\$PTYPE\$/g, ptype_val).replace(/\$ATTR\$/g, prop);
 			eval_str += str;
 		}
-		;
 		eval(eval_str);
 	};
 
@@ -364,11 +372,12 @@ if (!nexacro.CellInfo) {
 
 	_pCellInfo.destroy = function () {
 		this.parent = null;
+		var i;
+		var n = this._subcells.length;
 
-		for (var i = 0, n = this._subcells.length; i < n; i++) {
+		for (i = 0; i < n; i++) {
 			this._subcells[i].destroy();
 		}
-		;
 		this._subcells = null;
 		this._maskstringtypeobj = null;
 		this._masknumbertypeobj = null;
@@ -376,11 +385,10 @@ if (!nexacro.CellInfo) {
 		var _property_map = this._property_map;
 		var prop;
 
-		for (var i = 0; i < _property_map.length; i++) {
+		for (i = 0; i < _property_map.length; i++) {
 			prop = _property_map[i][nexacro._CELLINFO_PMAP_PROPNAME];
 			this[prop] = null;
 		}
-		;
 		this._property_map = null;
 		this._key_direction = null;
 		this._blinked_status = null;
@@ -405,6 +413,10 @@ if (!nexacro.CellInfo) {
 	};
 
 	_pCellInfo._getValue = function (rowidx) {
+		if (this.expr._value != "" && this.expr._value != null) {
+			return this._getAttrValue(this.expr, rowidx);
+		}
+
 		return this._getAttrValue(this.text, rowidx);
 	};
 
@@ -415,7 +427,9 @@ if (!nexacro.CellInfo) {
 	_pCellInfo._getDisplaytype = function (rowidx) {
 		var dt = this.displaytype;
 		var d = this._getAttrValue(dt, rowidx);
-
+		if (d === undefined) {
+			d = "normal";
+		}
 		if (d == "normal") {
 			var t = this.text;
 			if (t._bindtype == 1) {
@@ -553,11 +567,11 @@ if (!nexacro.CellInfo) {
 	};
 
 	_pCellInfo._getDefaultTextAlign = function (displayType, rowidx) {
-		var align = "center";
+		var align;
 
 		switch (displayType) {
 			case "normal":
-				var displayType = this._getDisplaytype(rowidx);
+				displayType = this._getDisplaytype(rowidx);
 				if (displayType == "number") {
 					align = "right";
 				}
@@ -655,10 +669,6 @@ if (!nexacro.CellInfo) {
 
 	_pCellInfo._getTooltipText = function (rowidx) {
 		var text = this._getAttrValue(this.tooltiptext, rowidx);
-		if (!text) {
-			text = "";
-		}
-
 		return text;
 	};
 
@@ -740,6 +750,14 @@ if (!nexacro.CellInfo) {
 
 		return locale;
 	};
+	_pCellInfo._getDisplayTypeValue = function (rowidx) {
+		var dt = this.displaytype;
+		var d = this._getAttrValue(dt, rowidx);
+		if (d === undefined) {
+			d = "normal";
+		}
+		return d;
+	};
 
 	_pCellInfo._getDisplayText = function (rowidx) {
 		var dataset = this._getBindDataset();
@@ -747,7 +765,7 @@ if (!nexacro.CellInfo) {
 			return this._getAttrValue(this.subsumtext, rowidx);
 		}
 
-		var d = this._getAttrValue(this.displaytype, rowidx);
+		var d = this._getDisplayTypeValue(rowidx);
 
 		if (d == "normal") {
 			var t = this.text;
@@ -907,7 +925,6 @@ if (!nexacro.CellInfo) {
 	_pCellInfo._getDisplayText_date = function (rowidx, colType, is_control) {
 		var v = this._getTextValueForDisp(rowidx);
 		var date = undefined;
-		var null_test = 0;
 		var nullmask = false;
 		var is_date_empty = false;
 		var mask = this._getAttrValue(this.calendardateformat, rowidx);
@@ -964,10 +981,9 @@ if (!nexacro.CellInfo) {
 		var dateStr;
 		var locale = this._getLocale(rowidx);
 		var locale_info = nexacro.Locale.getLocaleInfo(locale);
+		var format;
 
 		if (mask == "SHORTDATE" || mask == "LONGDATE") {
-			var format = "";
-
 			if (mask == "SHORTDATE") {
 				format = locale_info.shortdate_format;
 			}
@@ -993,6 +1009,7 @@ if (!nexacro.CellInfo) {
 			}
 
 			var MM = date.getMonth() + 1;
+			var MMMM = locale_info.month_names_long[date.getMonth()];
 			MM = (MM < 10 ? "0" : "") + MM;
 
 			var dddd = locale_info.weekday_names_long[date.getDay()];
@@ -1028,7 +1045,7 @@ if (!nexacro.CellInfo) {
 				millisecond = "000";
 			}
 
-			var format = mask;
+			format = mask;
 
 			if (format == null || format.length == 0 || !format.match(/[yMdHhms]/)) {
 				format = "yyyy-MM-dd ddd";
@@ -1040,10 +1057,13 @@ if (!nexacro.CellInfo) {
 				var maskchar3 = maskchar2 + maskchar1;
 				var maskchar4 = maskchar3 + maskchar1;
 
+
 				dateStr = format.replace("yyyy", maskchar4);
+				dateStr = dateStr.replace("MMMM", "lunari");
 				dateStr = dateStr.replace("MM", maskchar2);
 				dateStr = dateStr.replace("ddd", "week");
 				dateStr = dateStr.replace("dd", maskchar2);
+
 				dateStr = dateStr.replace("yy", maskchar2);
 				dateStr = dateStr.replace("M", maskchar1);
 				dateStr = dateStr.replace("d", maskchar1);
@@ -1057,19 +1077,10 @@ if (!nexacro.CellInfo) {
 				dateStr = dateStr.replace("sss", maskchar3);
 				dateStr = dateStr.replace("ss", maskchar2);
 				dateStr = dateStr.replace("s", maskchar1);
-				dateStr = dateStr.replace("weekL", maskchar4);
+				dateStr = dateStr.replace("lunari", maskchar4);
 				dateStr = dateStr.replace("week", maskchar3);
 			}
 			else {
-				dateStr = format.replace("yyyy", yyyy);
-				dateStr = dateStr.replace("MM", MM);
-				dateStr = dateStr.replace("dddd", "weekL");
-				dateStr = dateStr.replace("ddd", "week");
-				dateStr = dateStr.replace("dd", dd);
-				dateStr = dateStr.replace("yy", yy);
-				dateStr = dateStr.replace("M", M);
-				dateStr = dateStr.replace("d", d);
-
 				var hh = hour;
 				var tt = "오전";
 				if (hour > 12 && hour < 25) {
@@ -1077,7 +1088,7 @@ if (!nexacro.CellInfo) {
 					tt = "오후";
 				}
 
-				dateStr = dateStr.replace("tt", tt);
+				dateStr = format.replace("tt", tt);
 				dateStr = dateStr.replace("HH", hour);
 				dateStr = dateStr.replace("hh", hh);
 				dateStr = dateStr.replace("H", h);
@@ -1087,6 +1098,17 @@ if (!nexacro.CellInfo) {
 				dateStr = dateStr.replace("sss", millisecond);
 				dateStr = dateStr.replace("ss", second);
 				dateStr = dateStr.replace("s", s);
+
+				dateStr = dateStr.replace("dddd", "weekL");
+				dateStr = dateStr.replace("ddd", "week");
+				dateStr = dateStr.replace("yyyy", yyyy);
+				dateStr = dateStr.replace("MMMM", "lunari");
+				dateStr = dateStr.replace("MM", MM);
+				dateStr = dateStr.replace("dd", dd);
+				dateStr = dateStr.replace("yy", yy);
+				dateStr = dateStr.replace("M", M);
+				dateStr = dateStr.replace("d", d);
+				dateStr = dateStr.replace("lunari", MMMM);
 				dateStr = dateStr.replace("weekL", dddd);
 				dateStr = dateStr.replace("week", ddd);
 			}
@@ -1116,8 +1138,9 @@ if (!nexacro.CellInfo) {
 				maskobj.setDateMask(mask);
 				maskobj.setEditMask(mask);
 				v = maskobj.changeNormalizeValue(v);
-
-				delete maskobj;
+				if (maskobj.getEditFormatType() == 1) {
+					dFlag = 0;
+				}
 			}
 			else {
 				return undefined;
@@ -1125,11 +1148,12 @@ if (!nexacro.CellInfo) {
 		}
 
 		var date = new nexacro.Date();
+		var year, month, day, hour, min, sec, milsec;
 
 		if (dFlag > 0) {
-			var year = +v.substring(0, 4);
-			var month = +v.substring(4, 6);
-			var day = +v.substring(6, 8);
+			year = +v.substring(0, 4);
+			month = +v.substring(4, 6);
+			day = +v.substring(6, 8);
 
 			if (month < 1 || month > 12) {
 				return undefined;
@@ -1139,26 +1163,26 @@ if (!nexacro.CellInfo) {
 			}
 
 			if (dFlag == 1) {
-				var hour = +v.substring(8, 10);
-				var min = +v.substring(10, 12);
-				var sec = +v.substring(12, 14);
-				var milsec = v.length == 17 ? +v.substring(14, 17) : 0;
+				hour = +v.substring(8, 10);
+				min = +v.substring(10, 12);
+				sec = +v.substring(12, 14);
+				milsec = v.length == 17 ? +v.substring(14, 17) : 0;
 			}
 			else {
-				var hour = 0;
-				var min = 0;
-				var sec = 0;
-				var milsec = 0;
+				hour = 0;
+				min = 0;
+				sec = 0;
+				milsec = 0;
 			}
 		}
 		else {
-			var year = 1900;
-			var month = 1;
-			var day = 1;
-			var hour = +v.substring(0, 2);
-			var min = +v.substring(2, 4);
-			var sec = +v.substring(4, 6);
-			var milsec = v.length == 9 ? +v.substring(6, 9) : 0;
+			year = 1900;
+			month = 1;
+			day = 1;
+			hour = +v.substring(0, 2);
+			min = +v.substring(2, 4);
+			sec = +v.substring(4, 6);
+			milsec = v.length == 9 ? +v.substring(6, 9) : 0;
 		}
 		date.setHours(hour, min, sec, milsec);
 		date.setFullYear(year, month - 1, day);
@@ -1198,7 +1222,7 @@ if (!nexacro.CellInfo) {
 	};
 
 	_pCellInfo._loadXmlElement = function (cellElem, subcell_override_info, is_sub) {
-		var col = cellElem.getAttribute("col"), row = cellElem.getAttribute("row"), colspan = cellElem.getAttribute("colspan"), rowspan = cellElem.getAttribute("rowspan"), type = this._type;
+		var col = cellElem.getAttribute("col"), row = cellElem.getAttribute("row"), colspan = cellElem.getAttribute("colspan"), rowspan = cellElem.getAttribute("rowspan");
 
 		this._col = (col == null ? 0 : parseInt(col));
 		this._row = (row == null ? 0 : parseInt(row));
@@ -1207,13 +1231,15 @@ if (!nexacro.CellInfo) {
 
 		var _property_map = this._property_map;
 		var prop, attrval;
+		var i;
+		var n = _property_map.length;
 
-		for (var i = 0, n = _property_map.length; i < n; i++) {
+		for (i = 0; i < n; i++) {
 			prop = _property_map[i][nexacro._CELLINFO_PMAP_PROPNAME];
 			attrval = cellElem.getAttribute(prop);
 
 			this._loadingxml = true;
-			if (attrval) {
+			if (attrval !== null && attrval !== undefined) {
 				this["set_" + prop](attrval);
 			}
 			this._loadingxml = false;
@@ -1226,7 +1252,7 @@ if (!nexacro.CellInfo) {
 				subcell_override_info = nexacro.CellInfo;
 			}
 
-			for (var i = 0, n = subcells.length; i < n; i++) {
+			for (i = 0, n = subcells.length; i < n; i++) {
 				subcellElem = subcells[i];
 				subinfo = new subcell_override_info((this._type + this._cellidx + "_sub" + i), this.parent, this._view, this._type, i);
 				subinfo._loadXmlElement(subcellElem, true);
@@ -1255,8 +1281,10 @@ if (!nexacro.CellInfo) {
 
 		var _property_map = this._property_map;
 		var prop, bind, deft;
+		var i;
+		var n = _property_map.length;
 
-		for (var i = 0, n = _property_map.length; i < n; i++) {
+		for (i = 0; i < n; i++) {
 			prop = _property_map[i][nexacro._CELLINFO_PMAP_PROPNAME];
 			bind = _property_map[i][nexacro._CELLINFO_PMAP_EXPRBIND];
 			deft = _property_map[i][nexacro._CELLINFO_PMAP_DEFTVALUE];
@@ -1278,7 +1306,7 @@ if (!nexacro.CellInfo) {
 		if (subcells.length > 0) {
 			strContents += "\">\n";
 
-			for (var i = 0, n = subcells.length; i < n; i++) {
+			for (i = 0, n = subcells.length; i < n; i++) {
 				strContents += subcells[i]._getXmlString(true);
 			}
 
@@ -1290,6 +1318,7 @@ if (!nexacro.CellInfo) {
 
 		return strContents;
 	};
+
 	_pCellInfo._hasEditor = function (datarow) {
 		var editType = this._getEdittype(datarow);
 
@@ -1311,7 +1340,6 @@ if (!nexacro.CellInfo) {
 
 	delete _pCellInfo;
 }
-;
 
 if (!nexacro._CellControl) {
 	nexacro._CellControl = function (id, left, top, width, height, right, bottom, parent, refinfo, cellidx, view, rowidx) {
@@ -1382,6 +1410,7 @@ if (!nexacro._CellControl) {
 		info._type = "";
 		info._cellidx = cellidx;
 	};
+
 	_pCellControl._makeCellInfo = function (id, parent, view, type, idx) {
 		return new nexacro.CellInfo(id, parent, view, type, idx);
 	};
@@ -1393,6 +1422,7 @@ if (!nexacro._CellControl) {
 		var datarow = this._getDataRow();
 		return this._refinfo._getDisplaytype(datarow);
 	};
+
 	_pCellControl._getCurrentStyleAlign = function (noflush) {
 		var align = {
 			textAlign : "center", 
@@ -1548,8 +1578,9 @@ if (!nexacro._CellControl) {
 
 		var subcells = this.subcells;
 		var subcells_len = subcells.length;
+		var i;
 
-		for (var i = 0; i < subcells_len; i++) {
+		for (i = 0; i < subcells_len; i++) {
 			subcells[i].destroy();
 		}
 
@@ -1562,7 +1593,7 @@ if (!nexacro._CellControl) {
 		}
 
 		if (this._tempdestroyeditor_list) {
-			for (var i = 0; i < this._tempdestroyeditor_list.length; i++) {
+			for (i = 0; i < this._tempdestroyeditor_list.length; i++) {
 				this._tempdestroyeditor_list[i].destroy();
 			}
 			this._tempdestroyeditor_list = null;
@@ -1864,7 +1895,7 @@ if (!nexacro._CellControl) {
 		return this._view ? (this._view._getBindDataSet ? this._view._getBindDataSet() : this._view._binddataset) : null;
 	};
 
-	_pCellControl._applyEditorDataset = function (async) {
+	_pCellControl._applyEditorDataset = function (async, prevalue) {
 		if (!this._editor || !this._writable) {
 			return;
 		}
@@ -1875,7 +1906,6 @@ if (!nexacro._CellControl) {
 			var colid = this._refinfo.text._bindexpr;
 			var value = this._editor._getValueData();
 			var view = this._view;
-			var retn = true;
 
 			if (this._refinfo.text._bindtype == 1) {
 				view._is_async_recreate = async;
@@ -1888,7 +1918,6 @@ if (!nexacro._CellControl) {
 
 				if (fail.status == "cancolumnchange") {
 					this._editor.set_value(prevalue);
-					retn = false;
 				}
 				view._is_async_recreate = false;
 				view._dsEventOccured = false;
@@ -1957,15 +1986,12 @@ if (!nexacro._CellControl) {
 	};
 
 	_pCellControl.on_apply_prop_tooltip = function () {
-		var control_elem = this._control_element;
 		var datarow = this._getDataRow();
 
 		this.tooltiptext = this._refinfo._getTooltipText(datarow);
 		this.tooltiptype = this._refinfo.tooltiptype;
 
-		if (control_elem) {
-			control_elem.setElementToolTip(this.tooltiptext, this.tooltiptype);
-		}
+		nexacro.Component.prototype.on_apply_prop_tooltip.call(this);
 	};
 
 	_pCellControl.on_fire_onsize = function (width, height) {
@@ -1994,7 +2020,7 @@ if (!nexacro._CellControl) {
 		if (text_elem) {
 			var cellinfo = this._refinfo;
 			var datarow = this._getDataRow();
-			var displaytype = cellinfo._getAttrValue(cellinfo.displaytype, datarow);
+			var displaytype = cellinfo._getDisplayTypeValue(datarow);
 
 			var strtext = nexacro._toString(this._displaytext);
 
@@ -2095,7 +2121,7 @@ if (!nexacro._CellControl) {
 				var dataset = this._getBindDataset();
 				view._dsEventOccured = true;
 
-				var retn = dataset.setColumn(datarow, cellinfo.text._bindexpr, v);
+				dataset.setColumn(datarow, cellinfo.text._bindexpr, v);
 
 				if (nexacro._enableaccessibility) {
 					this._setAccessibilityStatChecked(nexacro._toBoolean(v));
@@ -2120,7 +2146,7 @@ if (!nexacro._CellControl) {
 				x += (w - controlSizeW);
 				break;
 			default:
-				x += (((w - controlSizeW) / 2));
+				x += ((w - controlSizeW) / 2);
 				break;
 		}
 		switch (valign) {
@@ -2130,18 +2156,25 @@ if (!nexacro._CellControl) {
 				y += (h - controlSizeH);
 				break;
 			default:
-				y += (((h - controlSizeH) / 2));
+				y += ((h - controlSizeH) / 2);
 				break;
 		}
 		this._subComp.move(x, y, this._subComp._adjust_width, this._subComp._adjust_height);
 	};
 
-	_pCellControl.on_apply_textDecoration = function () {
+	_pCellControl.on_apply_textDecoration = function (textDecoration) {
 		var cellinfo = this._refinfo;
 
-		this.textDecoration = cellinfo.textDecoration;
-		var textDecoration = nexacro.TextDecorationObject(this.textDecoration);
-		this._textdecoration = textDecoration;
+		if (!textDecoration && cellinfo.textDecoration) {
+			if (this.textDecoration != cellinfo.textDecoration) {
+				this.textDecoration = cellinfo.textDecoration;
+				textDecoration = nexacro.TextDecorationObject(this.textDecoration);
+				this._textdecoration = textDecoration;
+			}
+			else {
+				textDecoration = this._textdecoration;
+			}
+		}
 
 		if (this._text_elem) {
 			this._text_elem.setElementTextDecoration(textDecoration);
@@ -2327,7 +2360,7 @@ if (!nexacro._CellControl) {
 		var view = this._view;
 		var cellinfo = this._refinfo;
 		var datarow = this._getDataRow();
-		var displayType = cellinfo._getAttrValue(cellinfo.displaytype, datarow);
+		var displayType = cellinfo._getDisplayTypeValue(datarow);
 		if (displayType === undefined) {
 			displayType = "normal";
 		}
@@ -2441,6 +2474,7 @@ if (!nexacro._CellControl) {
 		this._updateAll();
 	};
 
+
 	_pCellControl._isSelectedColor = function () {
 		var useselcolor = this._view ? this._view.useselcolor : false;
 		return (this.selected && ((useselcolor == undefined) ? true : useselcolor));
@@ -2522,7 +2556,7 @@ if (!nexacro._CellControl) {
 
 			this._changeStatus("readonly", readonly);
 
-			var show = this._disp_show = this._updateDisplayer();
+			this._disp_show = this._updateDisplayer();
 
 			if (!onlycontents && status) {
 				this._changeStatus(status, true);
@@ -2534,13 +2568,11 @@ if (!nexacro._CellControl) {
 
 			var subComp = this._subComp;
 			if (subComp) {
-				subComp._changeStatus("readonly", readonly);
-				subComp._updateAll(true);
+				subComp._updateAll(true, readonly);
 			}
 
 			if (this._expandCtrl) {
-				this._expandCtrl._changeStatus("readonly", readonly);
-				this._expandCtrl._updateAll(true);
+				this._expandCtrl._updateAll(true, readonly);
 			}
 
 			this.on_apply_prop_tooltip();
@@ -2584,6 +2616,80 @@ if (!nexacro._CellControl) {
 				}
 			}
 		}
+	};
+
+	_pCellControl._updateAllEx = function () {
+		if (!this._is_alive) {
+			return false;
+		}
+
+		var cellinfo = this._refinfo;
+		var view = this._view;
+		var evenodd_change = false;
+
+		if (this.parent._rowidx >= 0) {
+			if (this._rowidx != this.parent._rowidx) {
+				var oldrowidx = this._rowidx;
+				this._rowidx = this.parent._rowidx;
+				if ((this._rowidx % 2) != (oldrowidx % 2)) {
+					evenodd_change = true;
+				}
+			}
+		}
+
+		var datarow = this._getDataRow();
+
+		var cssname = cellinfo._getAttrValue(cellinfo.cssclass, datarow);
+
+		if (this.cssclass != cssname) {
+			this.set_cssclass(cssname);
+		}
+		else {
+			if (evenodd_change) {
+				this.on_apply_cssclass();
+			}
+		}
+
+		cellinfo._setCellControlPropertyForAutosize(this, datarow);
+
+		var control_elem = this._control_element;
+		if (control_elem) {
+			var readonly = view ? !!view.readonly : false;
+
+			if (this._is_use_auto_selected_status) {
+				this._changeUserStatus("selected", this._isSelectedColor());
+			}
+
+			this._changeStatus("readonly", readonly);
+			this._disp_show = this._updateDisplayer();
+
+			this._displaytext = this._getDisplayText();
+			this.on_apply_text();
+			this.on_apply_textDecoration();
+
+			var subComp = this._subComp;
+			if (subComp) {
+				subComp._updateAll(true, readonly);
+			}
+
+			if (this._expandCtrl) {
+				this._expandCtrl._updateAll(true, readonly);
+			}
+
+
+			var remove_line = this._getRemoveLine();
+			var remove_l, remove_t, remove_r, remove_b;
+
+			remove_l = remove_line[0];
+			remove_t = remove_line[1];
+			remove_r = remove_line[2];
+			remove_b = remove_line[3];
+
+
+
+			this._control_element.setElementBorderNone(remove_l, remove_t, remove_r, remove_b);
+		}
+		return true;
 	};
 
 	_pCellControl.on_apply_accessibility = function () {
@@ -2645,7 +2751,6 @@ if (!nexacro._CellControl) {
 	_pCellControl._changeClientmode = function (mode) {
 		var control_elem = this._control_element;
 		if (control_elem) {
-			var bForcedUpdate = false;
 			var padding = this._getCurrentStylePadding();
 
 			if (this._refinfo._subcells.length) {
@@ -2673,7 +2778,6 @@ if (!nexacro._CellControl) {
 			if (mode == "text" || mode == "expandtext") {
 				if (!this._text_elem) {
 					this._text_elem = new nexacro.TextBoxElement(control_elem, "text");
-					bForcedUpdate = true;
 				}
 			}
 			else {
@@ -3001,7 +3105,6 @@ if (!nexacro._CellControl) {
 		}
 
 		var text_elem = this._text_elem;
-		var cellinfo = this._refinfo;
 		var editComp;
 		var view = this._view;
 
@@ -3009,9 +3112,9 @@ if (!nexacro._CellControl) {
 			text_elem.setElementVisible(false);
 		}
 		if (this._subComp) {
+			this._subComp._changeStatus("mouseover", false);
 			this._subComp.set_visible(false);
 		}
-
 		editComp = this._createEditor();
 		editComp._EditUpdateAll();
 		editComp.set_visible(true);
@@ -3079,6 +3182,12 @@ if (!nexacro._CellControl) {
 
 			var editComp = this._tempdestroyeditor = this._editor;
 			editComp.set_visible(false);
+			if (nexacro._Browser == "IE") {
+				var control_elem = editComp.getElement();
+				if (control_elem) {
+					control_elem.setElementDisplay("none");
+				}
+			}
 
 			if (nexacro._Browser == "Safari") {
 				nexacro._OnceCallbackTimer.callonce(editComp, function () {
@@ -3104,7 +3213,8 @@ if (!nexacro._CellControl) {
 		var controlautosizingtype = cellinfo._getAttrValue(cellinfo.controlautosizingtype, this._getDataRow());
 
 		if (fomatsize != null) {
-			var left = rect.left, top = rect.top, width = rect.width, height = rect.height, right = rect.right, bottom = rect.bottom;
+			var left = rect.left, top = rect.top;
+			var width, height, right, bottom;
 
 			var border = this._getCurrentStyleBorder();
 			var padding = this._getCurrentStylePadding();
@@ -3220,7 +3330,6 @@ if (!nexacro._CellControl) {
 		var locale = cellinfo._getLocale(datarow);
 		var mask = cellinfo._getAttrValue(cellinfo.maskeditformat, datarow);
 		var type = cellinfo._getAttrValue(cellinfo.maskedittype, datarow);
-		var displayType = cellinfo._getDisplaytype(datarow);
 
 		cMaskEdit.set_type(type);
 		if (mask) {
@@ -3375,6 +3484,7 @@ if (!nexacro._CellControl) {
 		if (this._editor) {
 			return (this._editor.visible && this._editor._adjust_width > 0);
 		}
+
 		return false;
 	};
 
@@ -3395,7 +3505,7 @@ if (!nexacro._CellControl) {
 		tmp_label = tmp_label.trim();
 
 		this._setAccessibilityLabel(tmp_label);
-		if (this._isEditable()) {
+		if (this._editor && this._editor.visible && this._editor._adjust_width > 0) {
 			this._editor._setAccessibilityStatFocus();
 		}
 		else if (this._subComp && this._curDisplayType != "treeitemcontrol") {
@@ -3444,7 +3554,6 @@ if (!nexacro._CellControl) {
 	};
 
 	_pCellControl._getTreeStatus = function () {
-		;
 	};
 
 	_pCellControl.__getAccessibilityMakeAddLabelMiddleClass = function () {
@@ -3469,7 +3578,6 @@ if (!nexacro._CellControl) {
 	};
 
 	_pCellControl._getAccessibilityRoleParentType = function () {
-		;
 	};
 
 	_pCellControl._getAccessibilityRole = function () {
@@ -3663,9 +3771,17 @@ if (!nexacro._CellControl) {
 		return true;
 	};
 
-	_pCellExpand._updateAll = function (onlycontents) {
+	_pCellExpand._updateAll = function (onlycontents, breadonly) {
 		var control_elem = this._control_element;
 		if (control_elem) {
+			if (breadonly !== undefined) {
+				if (this.on_apply_readonly) {
+					this.on_apply_readonly(breadonly);
+				}
+				else {
+					this._changeStatus("readonly", breadonly);
+				}
+			}
 			var datarow = this._cellobj._getDataRow();
 
 			if (!onlycontents) {
@@ -3824,7 +3940,15 @@ if (!nexacro._CellControl) {
 	_pCellButton._getValueData = function () {
 	};
 
-	_pCellButton._updateAll = function (onlycontents) {
+	_pCellButton._updateAll = function (onlycontents, breadonly) {
+		if (breadonly !== undefined) {
+			if (this.on_apply_readonly) {
+				this.on_apply_readonly(breadonly);
+			}
+			else {
+				this._changeStatus("readonly", breadonly);
+			}
+		}
 		if (!onlycontents) {
 			this._apply_status(this._oldstatus, this._status, this._olduserstatus, this._userstatus);
 		}
@@ -3890,6 +4014,10 @@ if (!nexacro._CellControl) {
 		}
 	};
 
+	_pCellButton._getCurrentStyleAlign = function (noflush) {
+		return this._cellobj._getCurrentStyleAlign(noflush);
+	};
+
 	nexacro._CellProgressBarControl = function (id, left, top, width, height, parent, controlmode) {
 		nexacro.ProgressBar.call(this, id, left, top, width, height, null, null, null, null, null, null, parent);
 
@@ -3947,7 +4075,15 @@ if (!nexacro._CellControl) {
 		return "";
 	};
 
-	_pCellBar._updateAll = function (onlycontents) {
+	_pCellBar._updateAll = function (onlycontents, breadonly) {
+		if (breadonly !== undefined) {
+			if (this.on_apply_readonly) {
+				this.on_apply_readonly(breadonly);
+			}
+			else {
+				this._changeStatus("readonly", breadonly);
+			}
+		}
 		if (!onlycontents) {
 			this._apply_status(this._oldstatus, this._status, this._olduserstatus, this._userstatus);
 		}
@@ -4088,6 +4224,10 @@ if (!nexacro._CellControl) {
 		}
 	};
 
+	_pCellBar._getCurrentStyleAlign = function (noflush) {
+		return this._cellobj._getCurrentStyleAlign(noflush);
+	};
+
 	nexacro._CellEditControl = function (id, left, top, width, height, parent, displaymode, controlmode) {
 		nexacro.Edit.call(this, id, left, top, width, height, null, null, null, null, null, null, parent, displaymode);
 
@@ -4184,7 +4324,15 @@ if (!nexacro._CellControl) {
 		return true;
 	};
 
-	_pCellEdit._updateAll = function (onlycontents) {
+	_pCellEdit._updateAll = function (onlycontents, breadonly) {
+		if (breadonly !== undefined) {
+			if (this.on_apply_readonly) {
+				this.on_apply_readonly(breadonly);
+			}
+			else {
+				this._changeStatus("readonly", breadonly);
+			}
+		}
 		if (!onlycontents) {
 			this._apply_status(this._oldstatus, this._status, this._olduserstatus, this._userstatus);
 		}
@@ -4240,18 +4388,10 @@ if (!nexacro._CellControl) {
 
 	_pCellEdit._setAccessibilityStatFocus = function () {
 		var cellobj = this._cellobj;
-
+		this._control_element.setElementAccessibilityLabel(cellobj.accessibilitylabel);
 		this._control_element.setElementAccessibilityAction(cellobj.accessibilityaction);
 		this._control_element.setElementAccessibilityDescription(cellobj.accessibilitydescription);
 		this._control_element.setElementAccessibilityParentLabel(cellobj._getAccessibilityMakeAddLabel().trim());
-
-		if (!this._displaymode) {
-			this._input_element._setAccessibilityLabel(this._getAccessibilityReadLabel(false));
-		}
-		else {
-			this._control_element.setElementAccessibilityLabel(cellobj.accessibilitylabel);
-		}
-
 		nexacro.Component.prototype._setAccessibilityStatFocus.call(this);
 	};
 
@@ -4293,6 +4433,19 @@ if (!nexacro._CellControl) {
 				}
 			}
 		}
+	};
+
+	_pCellEdit._getCurrentStyleAlign = function (noflush) {
+		var align = {
+			textAlign : "center", 
+			verticalAlign : "middle"
+		};
+
+		if (this._input_element) {
+			align = this._input_element._getComputedStyleAlign(noflush);
+		}
+
+		return align;
 	};
 
 	nexacro._CellTextAreaControl = function (id, left, top, width, height, parent, displaymode, controlmode) {
@@ -4421,7 +4574,15 @@ if (!nexacro._CellControl) {
 
 	_pCellTextArea._isEnable = _pCellEdit._isEnable;
 
-	_pCellTextArea._updateAll = function (onlycontents) {
+	_pCellTextArea._updateAll = function (onlycontents, breadonly) {
+		if (breadonly !== undefined) {
+			if (this.on_apply_readonly) {
+				this.on_apply_readonly(breadonly);
+			}
+			else {
+				this._changeStatus("readonly", breadonly);
+			}
+		}
 		if (!onlycontents) {
 			this._apply_status(this._oldstatus, this._status, this._olduserstatus, this._userstatus);
 		}
@@ -4657,6 +4818,19 @@ if (!nexacro._CellControl) {
 		}
 	};
 
+	_pCellTextArea._getCurrentStyleAlign = function (noflush) {
+		var align = {
+			textAlign : "center", 
+			verticalAlign : "middle"
+		};
+
+		if (this._input_element) {
+			align = this._input_element._getComputedStyleAlign(noflush);
+		}
+
+		return align;
+	};
+
 	nexacro._CellMaskEditControl = function (id, left, top, width, height, parent, displaymode, controlmode) {
 		nexacro.MaskEdit.call(this, id, left, top, width, height, null, null, null, null, null, null, parent, displaymode);
 
@@ -4726,7 +4900,15 @@ if (!nexacro._CellControl) {
 
 	_pCellMaskEdit._isEnable = _pCellEdit._isEnable;
 
-	_pCellMaskEdit._updateAll = function (onlycontents) {
+	_pCellMaskEdit._updateAll = function (onlycontents, breadonly) {
+		if (breadonly !== undefined) {
+			if (this.on_apply_readonly) {
+				this.on_apply_readonly(breadonly);
+			}
+			else {
+				this._changeStatus("readonly", breadonly);
+			}
+		}
 		if (!onlycontents) {
 			this._apply_status(this._oldstatus, this._status, this._olduserstatus, this._userstatus);
 		}
@@ -4827,6 +5009,19 @@ if (!nexacro._CellControl) {
 				}
 			}
 		}
+	};
+
+	_pCellMaskEdit._getCurrentStyleAlign = function (noflush) {
+		var align = {
+			textAlign : "center", 
+			verticalAlign : "middle"
+		};
+
+		if (this._input_element) {
+			align = this._input_element._getComputedStyleAlign(noflush);
+		}
+
+		return align;
 	};
 
 	nexacro._CellCalendarControl = function (id, left, top, width, height, parent, displaymode, controlmode) {
@@ -4991,7 +5186,7 @@ if (!nexacro._CellControl) {
 		if (!obj._displaymode) {
 			var update = this._cellobj._getAutoUpdateType();
 			if (update == "dateselect" || update == "itemselect") {
-				this._cellobj._applyEditorDataset(true);
+				this._cellobj._applyEditorDataset(true, pre_value);
 			}
 			return (nexacro.Calendar.prototype.on_fire_onchanged.call(this, obj, pre_text, pre_value, post_text, post_value));
 		}
@@ -5023,7 +5218,15 @@ if (!nexacro._CellControl) {
 		return "";
 	};
 
-	_pCellCalendar._updateAll = function (onlycontents) {
+	_pCellCalendar._updateAll = function (onlycontents, breadonly) {
+		if (breadonly !== undefined) {
+			if (this.on_apply_readonly) {
+				this.on_apply_readonly(breadonly);
+			}
+			else {
+				this._changeStatus("readonly", breadonly);
+			}
+		}
 		if (!onlycontents) {
 			this._apply_status(this._oldstatus, this._status, this._olduserstatus, this._userstatus);
 		}
@@ -5162,8 +5365,8 @@ if (!nexacro._CellControl) {
 		tmp_label = (tmp_label != cellobj._displaytext) ? tmp_label : "";
 		label = addlabel + " " + tmp_label;
 		label = label.trim();
-		this._setAccessibilityInputLabel(addlabel + " " + cellobj._getAccessibilityReadLabel(false));
-		this._setAccessibilityLabel(label);
+		this.calendaredit._control_element.setElementAccessibilityLabel(label);
+
 		nexacro.Component.prototype._setAccessibilityStatFocus.call(this);
 	};
 
@@ -5280,6 +5483,20 @@ if (!nexacro._CellControl) {
 				}
 			}
 		}
+	};
+
+	_pCellCalendar._getCurrentStyleAlign = function (noflush) {
+		var align = {
+			textAlign : "center", 
+			verticalAlign : "middle"
+		};
+		var calendaredit = this.calendaredit;
+
+		if (calendaredit && calendaredit._input_element) {
+			align = calendaredit._input_element._getComputedStyleAlign(noflush);
+		}
+
+		return align;
 	};
 
 	_pCellCalendar._setAccessibilityInputLabel = nexacro._emptyFn;
@@ -5437,7 +5654,7 @@ if (!nexacro._CellControl) {
 		if (!obj._displaymode) {
 			var update = this._cellobj._getAutoUpdateType();
 			if (update == "comboselect" || update == "itemselect") {
-				this._cellobj._applyEditorDataset(true);
+				this._cellobj._applyEditorDataset(true, prevalue);
 			}
 			return (nexacro.Combo.prototype.on_fire_onitemchanged.call(this, obj, preindex, pretext, prevalue, postindex, posttext, postvalue));
 		}
@@ -5461,7 +5678,15 @@ if (!nexacro._CellControl) {
 		return true;
 	};
 
-	_pCellCombo._updateAll = function (onlycontents) {
+	_pCellCombo._updateAll = function (onlycontents, breadonly) {
+		if (breadonly !== undefined) {
+			if (this.on_apply_readonly) {
+				this.on_apply_readonly(breadonly);
+			}
+			else {
+				this._changeStatus("readonly", breadonly);
+			}
+		}
 		if (!onlycontents) {
 			this._apply_status(this._oldstatus, this._status, this._olduserstatus, this._userstatus);
 		}
@@ -5584,8 +5809,8 @@ if (!nexacro._CellControl) {
 		tmp_label = (tmp_label != cellobj._displaytext) ? tmp_label : "";
 		label = addlabel + " " + tmp_label;
 		label = label.trim();
-		this._setAccessibilityInputLabel(addlabel + " " + cellobj._getAccessibilityReadLabel(false));
-		this._setAccessibilityLabel(label);
+		this.comboedit._control_element.setElementAccessibilityLabel(label);
+
 		nexacro.Combo.prototype._setAccessibilityStatFocus.call(this);
 	};
 
@@ -5673,6 +5898,20 @@ if (!nexacro._CellControl) {
 		}
 	};
 
+	_pCellCombo._getCurrentStyleAlign = function (noflush) {
+		var align = {
+			textAlign : "center", 
+			verticalAlign : "middle"
+		};
+		var comboedit = this.comboedit;
+
+		if (comboedit && comboedit._input_element) {
+			align = this.comboedit._input_element._getComputedStyleAlign(noflush);
+		}
+
+		return align;
+	};
+
 	_pCellCombo._setAccessibilityInputLabel = nexacro._emptyFn;
 
 	_pCellCombo.on_apply_readonly = function (readonly) {
@@ -5748,8 +5987,12 @@ if (!nexacro._CellControl) {
 
 		return true;
 	};
+	_pCellCheckboxBase._on_icon_onload = function (url, width, height) {
+		nexacro._IconText.prototype._on_icon_onload.call(this, url, width, height);
 
-	_pCellCheckboxBase._adjustAlign = function (halign, valign) {
+		this._adjustAlign(undefined, undefined, width, height);
+	};
+	_pCellCheckboxBase._adjustAlign = function (halign, valign, w, h) {
 		var prect = this._cellobj._getAvailableRect();
 		var left = prect.left;
 		var top = prect.top;
@@ -5761,7 +6004,7 @@ if (!nexacro._CellControl) {
 		var controlSize = this._cellinfo._getCheckboxsize(datarow);
 
 		if (controlSize < 0 || controlSize == undefined) {
-			var size = this._on_getFitSize();
+			var size = this._on_getFitSize(w, h);
 			controlSize = size[1];
 		}
 
@@ -5789,7 +6032,15 @@ if (!nexacro._CellControl) {
 		this.move(left, top, controlSize, controlSize);
 	};
 
-	_pCellCheckboxBase._updateAll = function (onlycontents) {
+	_pCellCheckboxBase._updateAll = function (onlycontents, breadonly) {
+		if (breadonly !== undefined) {
+			if (this.on_apply_readonly) {
+				this.on_apply_readonly(breadonly);
+			}
+			else {
+				this._changeStatus("readonly", breadonly);
+			}
+		}
 		if (!onlycontents) {
 			this._apply_status(this._oldstatus, this._status, this._olduserstatus, this._userstatus);
 		}
@@ -5857,7 +6108,11 @@ if (!nexacro._CellControl) {
 	_pCellCheckboxBase._setComputedStyle = function (ctrl_cs) {
 	};
 
-	_pCellCheckboxBase._on_getFitSize = function () {
+	_pCellCheckboxBase._getCurrentStyleAlign = function (noflush) {
+		return this._cellobj._getCurrentStyleAlign(noflush);
+	};
+
+	_pCellCheckboxBase._on_getFitSize = function (w, h) {
 		var control_elem = this.getElement();
 		if (control_elem) {
 			var total_w = 0;
@@ -5872,10 +6127,19 @@ if (!nexacro._CellControl) {
 			var icon = this._icon || this._getCSSStyleValue("icon");
 			if (icon) {
 				var icon_pos = this.iconPosition || this._getCSSStyleValue("iconPosition");
-				var icon_size = nexacro._getImageSize(icon.url, this._on_icon_onload, this, undefined, this.image) || {
-					width : 0, 
-					height : 0
-				};
+				var icon_size;
+				if (w !== undefined && h !== undefined) {
+					icon_size = {
+						width : w, 
+						height : h
+					};
+				}
+				else {
+					icon_size = nexacro._getImageSize(icon.url, this._on_icon_onload, this, undefined, this.image) || {
+						width : 0, 
+						height : 0
+					};
+				}
 
 				if (icon_pos == "top" || icon_pos == "bottom") {
 					total_h += icon_size.height;
@@ -5964,6 +6228,10 @@ if (!nexacro._CellControl) {
 		return "";
 	};
 
+	_pCellCheckbox._getCurrentStyleAlign = function (noflush) {
+		return this._cellobj._getCurrentStyleAlign(noflush);
+	};
+
 	nexacro._CellImageControl = function (id, left, top, width, height, parent) {
 		nexacro._ImageAreaControl.call(this, id, left, top, width, height, null, null, null, null, null, null, parent);
 
@@ -6031,7 +6299,15 @@ if (!nexacro._CellControl) {
 		return "";
 	};
 
-	_pCellImage._updateAll = function (onlycontents) {
+	_pCellImage._updateAll = function (onlycontents, breadonly) {
+		if (breadonly !== undefined) {
+			if (this.on_apply_readonly) {
+				this.on_apply_readonly(breadonly);
+			}
+			else {
+				this._changeStatus("readonly", breadonly);
+			}
+		}
 		if (!onlycontents) {
 			this._apply_status(this._oldstatus, this._status, this._olduserstatus, this._userstatus);
 		}
@@ -6093,6 +6369,10 @@ if (!nexacro._CellControl) {
 	};
 
 	_pCellImage._setComputedStyle = function (ctrl_cs) {
+	};
+
+	_pCellImage._getCurrentStyleAlign = function (noflush) {
+		return this._cellobj._getCurrentStyleAlign(noflush);
 	};
 
 	nexacro._CellTreeControl = function (id, left, top, width, height, right, bottom, parent) {
@@ -6387,9 +6667,10 @@ if (!nexacro._CellControl) {
 
 	_pCellTree._on_loadImage = function (url, imgW, imgH) {
 		var adjust = false;
+		var width, height;
 		if (this._btnimg_ctrl && this._btnimg_ctrl._load_url == url) {
-			var width = this._btnimg_ctrl._adjust_width;
-			var height = this._btnimg_ctrl._adjust_height;
+			width = this._btnimg_ctrl._adjust_width;
+			height = this._btnimg_ctrl._adjust_height;
 
 			if (width != imgW || height != imgH) {
 				adjust = true;
@@ -6398,8 +6679,8 @@ if (!nexacro._CellControl) {
 		}
 
 		if (this._img_ctrl && this._img_ctrl._load_url == url) {
-			var width = this._img_ctrl._adjust_width;
-			var height = this._img_ctrl._adjust_height;
+			width = this._img_ctrl._adjust_width;
+			height = this._img_ctrl._adjust_height;
 
 			if (width != imgW || height != imgH) {
 				adjust = true;
@@ -6437,7 +6718,6 @@ if (!nexacro._CellControl) {
 			this._treeusebutton = view.treeusebutton;
 		}
 
-		var datarow = this._cellobj._getDataRow();
 		var val;
 
 		if (state == 2 || state == 3 || state == -1) {
@@ -6557,9 +6837,11 @@ if (!nexacro._CellControl) {
 
 	_pCellTree._createLeftLine = function (rowidx) {
 		var view = this._view;
+		var i;
 
 		if (!view || !view.treeuseline) {
-			for (var i = 0, n = this._leftline_ctrls.length; i < n; i++) {
+			var n = this._leftline_ctrls.length;
+			for (i = 0; i < n; i++) {
 				this._leftline_ctrls[i].destroy();
 			}
 			this._leftline_ctrls = [];
@@ -6568,10 +6850,9 @@ if (!nexacro._CellControl) {
 		}
 
 		var level = this._cellinfo._getTreeLevel(rowidx);
-		var startlevel = this._cellinfo._getTreeStartLevel(rowidx);
 		var parentlevel = level - 1;
 		var bExistNextParentNode;
-		var i = 0;
+		i = 0;
 		var leftlines = this._leftline_ctrls;
 
 		while (view._rootlevel < parentlevel) {
@@ -6597,7 +6878,7 @@ if (!nexacro._CellControl) {
 			parentlevel--;
 		}
 
-		for (; leftlines.length > i; ) {
+		while (leftlines.length > i) {
 			leftlines[leftlines.length - 1].destroy();
 			leftlines.splice(leftlines.length - 1, 1);
 		}
@@ -6664,18 +6945,19 @@ if (!nexacro._CellControl) {
 	};
 
 	_pCellTree.on_apply_prop_tooltip = function () {
-		var control_elem = this._control_element;
 		var datarow = this._cellobj._getDataRow();
-		this.tooltiptext = this._cellinfo._getTooltipText(datarow);
 
-		if (control_elem) {
-			control_elem.setElementToolTip(this.tooltiptext);
-		}
+		this.tooltiptext = this._cellinfo._getTooltipText(datarow);
+		this.tooltiptype = this._cellinfo.tooltiptype;
+
+		nexacro.Component.prototype.on_apply_prop_tooltip.call(this);
 	};
 
 	_pCellTree._treeline_visible = function (v) {
+		var i;
+		var n = this._leftline_ctrls.length;
 		if (v) {
-			for (var i = 0, n = this._leftline_ctrls.length; i < n; i++) {
+			for (i = 0; i < n; i++) {
 				this._leftline_ctrls[i]._control_element.setElementVisible(this._leftline_ctrls[i].visible);
 			}
 
@@ -6690,7 +6972,7 @@ if (!nexacro._CellControl) {
 			}
 		}
 		else {
-			for (var i = 0, n = this._leftline_ctrls.length; i < n; i++) {
+			for (i = 0; i < n; i++) {
 				this._leftline_ctrls[i]._control_element.setElementVisible(false);
 			}
 
@@ -6753,8 +7035,16 @@ if (!nexacro._CellControl) {
 		}
 	};
 
-	_pCellTree._updateAll = function (onlycontents) {
+	_pCellTree._updateAll = function (onlycontents, breadonly) {
 		if (this._control_element) {
+			if (breadonly !== undefined) {
+				if (this.on_apply_readonly) {
+					this.on_apply_readonly(breadonly);
+				}
+				else {
+					this._changeStatus("readonly", breadonly);
+				}
+			}
 			var view = this._view;
 			var cellobj = this._cellobj;
 			var rowidx = cellobj._getDataRow();
@@ -6808,6 +7098,19 @@ if (!nexacro._CellControl) {
 		}
 	};
 
+	_pCellTree._getCurrentStyleAlign = function (noflush) {
+		var align = {
+			textAlign : "center", 
+			verticalAlign : "middle"
+		};
+
+		if (this._text_ctrl && this._text_ctrl._cell_elem) {
+			align = this._text_ctrl._cell_elem._getComputedStyleAlign(noflush);
+		}
+
+		return align;
+	};
+
 	_pCellTree._adjustSubCompAlign = function (level) {
 		var cellobj = this.parent;
 		var cellinfo = this._cellinfo;
@@ -6840,10 +7143,11 @@ if (!nexacro._CellControl) {
 		var left_lines = this._leftline_ctrls;
 		var left_lines_len = left_lines.length;
 		var j = 0;
+		var elem;
 
 		for (var i = 0; j < left_lines_len; i++) {
 			if (parentlevel == left_lines[j]._depth) {
-				var elem = left_lines[j++]._control_element;
+				elem = left_lines[j++]._control_element;
 				elem.setElementPosition(offset - (gap * (i + 1)) + line_adjust_left, linetop);
 			}
 
@@ -6886,9 +7190,6 @@ if (!nexacro._CellControl) {
 				line_button_gap_height = buttonHeight;
 				offset = buttonLeft + buttonWidth;
 			}
-			else {
-				offset = lineleft;
-			}
 
 			linewidth = buttonWidth;
 			this._btnimg_ctrl.move(buttonLeft, buttonTop, buttonWidth, buttonHeight);
@@ -6910,7 +7211,6 @@ if (!nexacro._CellControl) {
 		}
 
 		if (this._downline_ctrl && this._downline_ctrl.visible) {
-			var elem = this._downline_ctrl._control_element;
 			linetop = line_adjust_top + lineheight + line_button_gap_height;
 
 			var b = lineheight + linetop;
@@ -6938,16 +7238,16 @@ if (!nexacro._CellControl) {
 
 			var imageWidth = this._img_ctrl._adjust_width;
 			var imageHeight = this._img_ctrl._adjust_height;
+			var imageLeft = null;
+			var imageTop = null;
+
 			if (imageWidth > 0 && imageHeight > 0) {
-				var imageLeft = offset;
-				var imageTop = ((height - imageHeight) / 2);
-				var imageRight = imageLeft + imageWidth;
-				var imageBottom = imageTop + imageHeight;
+				imageLeft = offset;
+				imageTop = ((height - imageHeight) / 2);
 
 				offset += imageWidth;
 			}
 			else {
-				;
 			}
 
 			this._img_ctrl.move(imageLeft, imageTop, imageWidth, imageHeight);
@@ -6988,7 +7288,6 @@ if (!nexacro._CellControl) {
 	}
 
 	_pCellTree._setAccessibilityStatFocus = function (evt_name) {
-		var tmp_label = "";
 		var cellobj = this._cellobj;
 		var label = cellobj._getCellAccessibilityLabel();
 		label = label.trim();

@@ -58,9 +58,8 @@ if (!nexacro._bInitCssObjects) {
 			return obj;
 		}
 		obj = new nexacro._CSSValueObject(val);
-		if (obj) {
-			nexacro._CSSValueObject_caches[val] = obj;
-		}
+		nexacro._CSSValueObject_caches[val] = obj;
+
 		return obj;
 	};
 
@@ -184,8 +183,9 @@ if (!nexacro._bInitCssObjects) {
 		var faces = [], size = 0;
 		var webfont_style = true;
 		var types = [];
+		var i, n;
 
-		for (var i = 0, n = parts.length; i < n && webfont_style; i++) {
+		for (i = 0, n = parts.length; i < n && webfont_style; i++) {
 			part = parts[i];
 			switch (part) {
 				case "bold":
@@ -255,7 +255,7 @@ if (!nexacro._bInitCssObjects) {
 				if (parts[2]) {
 					var parts0 = parts[2].split(/\s+/);
 
-					for (var i = 0, n = parts0.length; i < n; i++) {
+					for (i = 0, n = parts0.length; i < n; i++) {
 						part = parts0[i];
 						switch (part) {
 							case "bold":
@@ -298,9 +298,8 @@ if (!nexacro._bInitCssObjects) {
 			return obj;
 		}
 		obj = new nexacro._FontObject(val);
-		if (obj) {
-			nexacro._FontObject_caches[val] = obj;
-		}
+		nexacro._FontObject_caches[val] = obj;
+
 		return obj;
 	};
 
@@ -500,8 +499,9 @@ if (!nexacro._bInitCssObjects) {
 				this.value = val;
 
 				var arr1 = val.split('/');
+				var arr2;
 				if (arr1.length == 1) {
-					var arr2 = arr1[0].split(' ');
+					arr2 = arr1[0].split(' ');
 					var arrtemp = [];
 					switch (arr2.length) {
 						case 4:
@@ -527,7 +527,7 @@ if (!nexacro._bInitCssObjects) {
 					this.rtlvalue = arrtemp.join(' ');
 				}
 				else if (arr1.length == 2) {
-					var arr2 = arr1[0].trim().split(' ');
+					arr2 = arr1[0].trim().split(' ');
 					var arrtemp1 = [];
 					switch (arr2.length) {
 						case 4:
@@ -784,10 +784,10 @@ if (!nexacro._bInitCssObjects) {
 				this._sysvalue = nexacro._getSupportedWebGradient(val);
 
 				if (this._sysvalue) {
-					if (this._sysvalue.indexOf("left") > 0) {
+					if (this._sysvalue.indexOf("left") >= 0) {
 						this._sysrtlvalue = this._sysvalue.replace("left", "right");
 					}
-					if (this._sysvalue.indexOf("right") > 0) {
+					if (this._sysvalue.indexOf("right") >= 0) {
 						this._sysrtlvalue = this._sysvalue.replace("right", "left");
 					}
 				}
@@ -936,7 +936,7 @@ if (!nexacro._bInitCssObjects) {
 			var ePercents = 0;
 			var cnt = 0;
 			var colorstopLen = this.color_stops.length;
-			var i = 0;
+			var i;
 
 			for (i = 0; i < colorstopLen; i++) {
 				var obj = this.color_stops[i];
@@ -1177,11 +1177,7 @@ if (!nexacro._bInitCssObjects) {
 		return false;
 	};
 	_pBackgroundObject._load_pos2 = function (str) {
-		if (str == "top" || str == "bottom" || str == "center") {
-			this.pos_y = str;
-			return true;
-		}
-		else if (str == "left") {
+		if (str == "left") {
 			if (!this.pos_x) {
 				this.pos_x = str;
 				this.rtlpos_x = "right";
@@ -1195,7 +1191,7 @@ if (!nexacro._bInitCssObjects) {
 			}
 			return true;
 		}
-		else if (str.search(/px|pt|cm|em|%/i) > 0) {
+		else if ((str == "top" || str == "bottom" || str == "center") || str.search(/px|pt|cm|em|%/i) > 0) {
 			this.pos_y = str;
 			return true;
 		}
@@ -1221,7 +1217,6 @@ if (!nexacro._bInitCssObjects) {
 			if (val) {
 				this.value = val;
 				var parts = val.split(/\s+/);
-				var idx = 0;
 				var cnt = parts.length;
 
 				var part = parts[0];
@@ -1237,7 +1232,6 @@ if (!nexacro._bInitCssObjects) {
 					this.url = image_url;
 					this._sysbaseurl = nexacro._project_absolutepath;
 					this._sysurl = nexacro._getSupportedImageUrl(image_url, this._sysbaseurl);
-					idx++;
 				}
 
 				if (cnt >= 2) {
@@ -1365,19 +1359,20 @@ if (!nexacro._bInitCssObjects) {
 					}
 				}
 
+				var tv, rv, bv, lv;
 				switch (cnt) {
 					case 1:
 						{
 
-							var tv = parseInt(parts[0]);
+							tv = parseInt(parts[0]);
 							this.left = this.top = this.right = this.bottom = (tv >= 0 ? tv : 0);
 						}
 						break;
 					case 2:
 						{
 
-							var tv = parseInt(parts[0]);
-							var rv = parseInt(parts[1]);
+							tv = parseInt(parts[0]);
+							rv = parseInt(parts[1]);
 							this.top = this.bottom = (tv >= 0 ? tv : 0);
 							this.left = this.right = (rv >= 0 ? rv : 0);
 						}
@@ -1385,9 +1380,9 @@ if (!nexacro._bInitCssObjects) {
 					case 3:
 						{
 
-							var tv = parseInt(parts[0]);
-							var rv = parseInt(parts[1]);
-							var bv = parseInt(parts[2]);
+							tv = parseInt(parts[0]);
+							rv = parseInt(parts[1]);
+							bv = parseInt(parts[2]);
 							this.top = (tv >= 0 ? tv : 0);
 							this.left = this.right = (rv >= 0 ? rv : 0);
 							this.bottom = (bv >= 0 ? bv : 0);
@@ -1396,10 +1391,10 @@ if (!nexacro._bInitCssObjects) {
 					case 4:
 						{
 
-							var tv = parseInt(parts[0]);
-							var rv = parseInt(parts[1]);
-							var bv = parseInt(parts[2]);
-							var lv = parseInt(parts[3]);
+							tv = parseInt(parts[0]);
+							rv = parseInt(parts[1]);
+							bv = parseInt(parts[2]);
+							lv = parseInt(parts[3]);
 							this.top = (tv >= 0 ? tv : 0);
 							this.right = (rv >= 0 ? rv : 0);
 							this.bottom = (bv >= 0 ? bv : 0);

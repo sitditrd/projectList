@@ -246,7 +246,6 @@ if (!nexacro.Phone) {
 					return true;
 				}
 
-				jsonstr = "";
 				jsonstr = "tel://" + renamephonNumber;
 				nexacro.Device.exec(jsonstr);
 			}
@@ -358,13 +357,6 @@ if (!nexacro.Sms) {
 			objSmsMessage.set_message(this.message || "");
 		}
 		else if (strNumber && strMessage) {
-			if (typeof (strNumber) == "undefined") {
-				strNumber = "";
-			}
-			if (typeof (strMessage) == "undefined") {
-				strMessage = "";
-			}
-
 			if (!objSmsMessage.set_phonenumber(strNumber)) {
 				return false;
 			}
@@ -620,7 +612,6 @@ if (!nexacro.Sms) {
 			e = new nexacro.SmsErrorEventInfo("onerror", objData.smsid, objData.phonenumber, objData.message, objData.errorcode, objData.errormsg);
 		}
 		else {
-			objSmsMessage.set_smsid(-1);
 			e = new nexacro.SmsErrorEventInfo("onerror", objData.smsid, objData.phonenumber, objData.message, objData.errorcode, objData.errormsg);
 		}
 		this._fire_onerror(this, e);
@@ -673,15 +664,14 @@ if (!nexacro.Sms) {
 	};
 
 	_pSms.paramck_message = function (strMessage) {
-		if (strMessage == null || typeof (strMessage) == "undefined" || typeof (strMessage) != "string") {
+		if (strMessage == null || typeof (strMessage) != "string") {
 			return false;
 		}
 		return true;
 	};
 
 	_pSms.paramck_sendMessage = function (strPhoneNumber, strMessage) {
-		if (strPhoneNumber == null || strMessage == null || typeof (strPhoneNumber) == "undefined" || typeof (strMessage) == "undefined"
-			 || typeof (strMessage) != "string") {
+		if (strPhoneNumber == null || strMessage == null || typeof (strPhoneNumber) == "undefined" || typeof (strMessage) == "undefined" || typeof (strMessage) != "string") {
 			return false;
 		}
 		else {
@@ -706,7 +696,7 @@ if (!nexacro.Sms) {
 	};
 
 	_pSms.paramck_deleteMessage = function (id) {
-		if (id == null || typeof (id) == "undefined") {
+		if (id == null) {
 			return false;
 		}
 
@@ -799,7 +789,6 @@ if (!nexacro.SmsMessage) {
 			this.smsid = v;
 			return true;
 		}
-		return false;
 	};
 
 	_pSmsMessage.set_type = function (v) {
@@ -811,7 +800,6 @@ if (!nexacro.SmsMessage) {
 			this.Type = v;
 			return true;
 		}
-		return false;
 	};
 
 	_pSmsMessage.set_date = function (v) {
@@ -823,7 +811,6 @@ if (!nexacro.SmsMessage) {
 			this.date = v;
 			return true;
 		}
-		return false;
 	};
 
 	_pSmsMessage.paramck_phoneNumber = function (strPhoneNumber) {
@@ -854,7 +841,7 @@ if (!nexacro.SmsMessage) {
 	};
 
 	_pSmsMessage.paramck_message = function (strMessage) {
-		if (strMessage == null || typeof (strMessage) == "undefined" || typeof (strMessage) != "string") {
+		if (strMessage == null || typeof (strMessage) != "string") {
 			return false;
 		}
 		return true;
@@ -874,12 +861,7 @@ if (!nexacro.SmsMessage) {
 			return false;
 		}
 
-		try {
-			var numberss = Number(v.toString());
-		}
-		catch (e) {
-			return false;
-		}
+
 
 		return true;
 	};
@@ -1142,7 +1124,6 @@ if (!nexacro.AudioPlayer) {
 				}
 				else if (rootPathCheck.substring(0, 7) == "http://") {
 					androidFilePath = strUrl;
-					EnvironmentPath = "";
 				}
 				else {
 					_filecache = nexacro._getFileCache(strUrl);
@@ -1526,7 +1507,7 @@ if (!nexacro.AudioPlayer) {
 	};
 
 	_pAudioPlayer.paramck_AudioLoad = function (strFilePath) {
-		if (strFilePath == null || typeof (strFilePath) == "undefined" || typeof (strFilePath) != "string") {
+		if (strFilePath == null || typeof (strFilePath) != "string") {
 			return false;
 		}
 		return true;
@@ -1790,15 +1771,15 @@ if (!nexacro.Geolocation) {
 	};
 
 	_pGeolocation.parmack_Geolocation = function (nAccuracy, nTimeout, method) {
-		if (nAccuracy == null || typeof (nAccuracy) == "undefined") {
+		if (nAccuracy == null) {
 			return false;
 		}
 
-		if (nTimeout == null || typeof (nTimeout) == "undefined") {
+		if (nTimeout == null) {
 			return false;
 		}
 
-		if (method == null || typeof (method) == "undefined") {
+		if (method == null) {
 			return false;
 		}
 
@@ -1812,56 +1793,26 @@ if (!nexacro.Geolocation) {
 
 		if (nexacro.Device.curDevice == DeviceType.ANDROID) {
 			if (method == 1) {
-				if ((nAccuracy >= 0 && nAccuracy < 3) && (nTimeout >= 200 && nTimeout <= 86400000)) {
-					return true;
-				}
-				else {
-					return false;
-				}
+				return ((nAccuracy >= 0 && nAccuracy < 3) && (nTimeout >= 200 && nTimeout <= 86400000));
 			}
 			else if (method == 2) {
-				if ((nAccuracy >= 0 && nAccuracy < 3) && (nTimeout >= 200 && nTimeout <= 86400000)) {
-					return true;
-				}
-				else {
-					return false;
-				}
+				return ((nAccuracy >= 0 && nAccuracy < 3) && (nTimeout >= 200 && nTimeout <= 86400000));
 			}
 		}
 		else if (nexacro.Device.curDevice == DeviceType.WINDOWS) {
 			if (method == 1) {
-				if ((nAccuracy == 0) && (nTimeout >= 200 && nTimeout <= 86400000)) {
-					return true;
-				}
-				else {
-					return false;
-				}
+				return ((nAccuracy == 0) && (nTimeout >= 200 && nTimeout <= 86400000));
 			}
 			else if (method == 2) {
-				if ((nAccuracy == 0) && (nTimeout >= 200 && nTimeout <= 86400000)) {
-					return true;
-				}
-				else {
-					return false;
-				}
+				return ((nAccuracy == 0) && (nTimeout >= 200 && nTimeout <= 86400000));
 			}
 		}
 		else {
 			if (method == 1) {
-				if ((nAccuracy >= 0 && nAccuracy < 5) && (nTimeout >= 200 && nTimeout <= 86400000)) {
-					return true;
-				}
-				else {
-					return false;
-				}
+				return ((nAccuracy >= 0 && nAccuracy < 5) && (nTimeout >= 200 && nTimeout <= 86400000));
 			}
 			else if (method == 2) {
-				if ((nAccuracy >= 0 && nAccuracy < 5) && (nTimeout >= 200 && nTimeout <= 86400000)) {
-					return true;
-				}
-				else {
-					return false;
-				}
+				return ((nAccuracy >= 0 && nAccuracy < 5) && (nTimeout >= 200 && nTimeout <= 86400000));
 			}
 		}
 		return true;
@@ -2088,7 +2039,7 @@ if (!nexacro.Acceleration) {
 	};
 
 	_pAcceleration.paramck_accuracy = function (v) {
-		if (v == null || typeof (v) == "undefined") {
+		if (v == null) {
 			return false;
 		}
 		if (!nexacro.Device.publicNumCheck(v)) {
@@ -2105,11 +2056,11 @@ if (!nexacro.Acceleration) {
 	};
 
 	_pAcceleration.pramck_AccelwatchStart = function (nIntervalTime, nAccuracy) {
-		if (nIntervalTime == null || typeof (nIntervalTime) == "undefined") {
+		if (nIntervalTime == null) {
 			return false;
 		}
 
-		if (nAccuracy == null || typeof (nAccuracy) == "undefined") {
+		if (nAccuracy == null) {
 			return false;
 		}
 
@@ -2240,12 +2191,7 @@ if (!nexacro.Vibrator) {
 			return nexacro.__hasVibrator();
 		}
 		else {
-			if (nexacro.Device.isphone == 1) {
-				return true;
-			}
-			else {
-				return false;
-			}
+			return (nexacro.Device.isphone == 1);
 		}
 	};
 
@@ -2254,7 +2200,7 @@ if (!nexacro.Vibrator) {
 
 		if (nexacro.Device.curDevice == DeviceType.ANDROID) {
 			if (this.startpos < this.patterns.length && this.startpos >= 0) {
-				var startPosArray = new Array();
+				var startPosArray = [];
 				var startIndex = 0;
 				if (Number(this.startpos) % 2 != 0) {
 					startPosArray[0] = 0;
@@ -2564,14 +2510,14 @@ if (!nexacro.Network) {
 	};
 
 	_pNetwork.paramck_isReachable = function (strUrl) {
-		if (strUrl.trim().length < 1 || strUrl == null || typeof (strUrl) == "undefined" || typeof (strUrl) != "string" || strUrl == "") {
+		if (strUrl.trim().length < 1 || typeof (strUrl) != "string" || strUrl == "") {
 			return false;
 		}
 		return true;
 	};
 
 	_pNetwork.paramck_watchStart = function (strTime) {
-		if (strTime == null || typeof (strTime) == "undefined") {
+		if (strTime == null) {
 			return false;
 		}
 
@@ -3227,14 +3173,14 @@ if (!nexacro.ImagePicker) {
 	};
 
 	_pImagePicker.open = function (enumGettype, enumGetimagetype) {
-		if (enumGettype != null && typeof (enumGettype) != "undefined" && (typeof (enumGettype) == "string" && ((enumGettype.toLowerCase() == "url") || (enumGettype.toLowerCase() == "imagedata"))) || ((enumGettype == 0) || (enumGettype == 1) || (enumGettype == "0") || (enumGettype == "1"))) {
+		if (enumGettype != null && (typeof (enumGettype) == "string" && ((enumGettype.toLowerCase() == "url") || (enumGettype.toLowerCase() == "imagedata"))) || ((enumGettype == 0) || (enumGettype == 1) || (enumGettype == "0") || (enumGettype == "1"))) {
 			this.gettype = enumGettype;
 		}
 		else {
 			return false;
 		}
 
-		if (enumGetimagetype != null && typeof (enumGetimagetype) != "undefined" && (typeof (enumGetimagetype) == "string" && ((enumGetimagetype.toUpperCase() == "JPEG") || (enumGetimagetype.toUpperCase() == "PNG"))) || ((enumGetimagetype == 0) || (enumGetimagetype == 1) || (enumGetimagetype == "0") || (enumGetimagetype == "1"))) {
+		if (enumGetimagetype != null && (typeof (enumGetimagetype) == "string" && ((enumGetimagetype.toUpperCase() == "JPEG") || (enumGetimagetype.toUpperCase() == "PNG"))) || ((enumGetimagetype == 0) || (enumGetimagetype == 1) || (enumGetimagetype == "0") || (enumGetimagetype == "1"))) {
 			this.encodingtype = enumGetimagetype;
 		}
 		else {
@@ -3527,7 +3473,6 @@ if (!nexacro.AudioRecorder) {
 		}
 
 		if (this.audiofile == "" || typeof (this.audiofile) == "undefined") {
-			var arobj = this;
 			nexacro._OnceCallbackTimer.callonce(this, function () {
 				var e = new nexacro.AudioErrorEventInfo("onerror", this.audiofile, this.reccurtime, "1304", "Recording Setting Error");
 				this._fire_onerror(this, e);
@@ -3568,7 +3513,6 @@ if (!nexacro.AudioRecorder) {
 			params += '", intervaltimestate:"' + IntervalTimeState;
 			params += '"}';
 
-			jsonstr = "";
 			jsonstr = '{"id":' + this._id + ', "div":"AudioRecorder", "method":"recordingStart", "params":' + params + '}';
 		}
 		else {
@@ -3594,7 +3538,6 @@ if (!nexacro.AudioRecorder) {
 			params += '", "intervaltimestate":"' + IntervalTimeState;
 			params += '"}';
 
-			jsonstr = "";
 			jsonstr = '{"id":' + this._id + ', "div":"Sound", "method":"recordingStart", "params":' + params + '}';
 		}
 
@@ -3802,8 +3745,8 @@ if (!nexacro.ContactSet) {
 			catch (e) {
 				return false;
 			}
-
-			if ((+numberss) != (+numberss)) {
+			var checknumberss = +numberss;
+			if (checknumberss != checknumberss) {
 				return false;
 			}
 
@@ -3911,7 +3854,8 @@ if (!nexacro.ContactSet) {
 		}
 
 		if (strUniqueID != null) {
-			if (((+strUniqueID) != (+strUniqueID)) || strUniqueID < 0) {
+			var checkstrUniqueID = +strUniqueID;
+			if ((checkstrUniqueID != checkstrUniqueID) || strUniqueID < 0) {
 				return false;
 			}
 		}
@@ -3953,7 +3897,7 @@ if (!nexacro.ContactSet) {
 			var address = "";
 			var organ = "";
 			var photo = "";
-			var arr = new Array();
+			var arr = [];
 
 			for (var i = 0; i < objData.length; i++) {
 				if (typeof (objData[i].contacts) != "undefined") {
@@ -4135,13 +4079,12 @@ if (!nexacro.ContactSet) {
 		var str = objData;
 
 		var str2 = nexacro._executeGlobalEvalStr("(" + str + ")");
-		var persons = new Array();
-		persons = str2.contact;
+		var persons = str2.contact;
 
-		var contactObjList = new Array();
+		var contactObjList = [];
 		for (var k = 0; k < persons.length; k++) {
 			var person = persons[k];
-			var phoneObjList = new Array();
+			var phoneObjList = [];
 			var phonenumList = person.phonenumbers;
 			var i;
 			var tempVal;
@@ -4151,49 +4094,49 @@ if (!nexacro.ContactSet) {
 				phoneObjList[i] = phonenum;
 			}
 
-			var categoriObjList = new Array();
+			var categoriObjList = [];
 			var categoriList = person.categories;
 			for (i = 0; i < categoriList.length; i++) {
 				tempVal = new nexacro.ContactField("", categoriList[i].type, categoriList[i].value.replace(new RegExp("_NEWLINE_", "gi"), "\n"), categoriList[i].label, "");
 				categoriObjList[i] = tempVal;
 			}
 
-			var photoObjList = new Array();
+			var photoObjList = [];
 			var photoList = person.photos;
 			for (i = 0; i < photoList.length; i++) {
 				tempVal = new nexacro.ContactPhoto("", photoList[i].imagedata, photoList[i].label, "");
 				photoObjList[i] = tempVal;
 			}
 
-			var organizationObjList = new Array();
+			var organizationObjList = [];
 			var organizationList = person.organizations;
 			for (i = 0; i < organizationList.length; i++) {
 				tempVal = new nexacro.ContactOrganization("", organizationList[i].type, organizationList[i].company, organizationList[i].department, organizationList[i].title, organizationList[i].label, "");
 				organizationObjList[i] = tempVal;
 			}
 
-			var addressObjList = new Array();
+			var addressObjList = [];
 			var addressList = person.addresses;
 			for (i = 0; i < addressList.length; i++) {
 				tempVal = new nexacro.ContactAddress("", addressList[i].type, addressList[i].country.replace(new RegExp("_NEWLINE_", "gi"), "\n"), addressList[i].postcode.replace(new RegExp("_NEWLINE_", "gi"), "\n"), addressList[i].city.replace(new RegExp("_NEWLINE_", "gi"), "\n"), addressList[i].region.replace(new RegExp("_NEWLINE_", "gi"), "\n"), addressList[i].street.replace(new RegExp("_NEWLINE_", "gi"), "\n"), addressList[i].label, "");
 				addressObjList[i] = tempVal;
 			}
 
-			var urlsObjList = new Array();
+			var urlsObjList = [];
 			var urlsList = person.urls;
 			for (i = 0; i < urlsList.length; i++) {
 				tempVal = new nexacro.ContactField("", urlsList[i].type, urlsList[i].value.replace(new RegExp("_NEWLINE_", "gi"), "\n"), urlsList[i].label, "");
 				urlsObjList[i] = tempVal;
 			}
 
-			var imsObjList = new Array();
+			var imsObjList = [];
 			var imsList = person.ims;
 			for (i = 0; i < imsList.length; i++) {
 				tempVal = new nexacro.ContactIM("", imsList[i].type, imsList[i].value.replace(new RegExp("_NEWLINE_", "gi"), "\n"), imsList[i].label, imsList[i].ptype, imsList[i].plabel, "");
 				imsObjList[i] = tempVal;
 			}
 
-			var emailsObjList = new Array();
+			var emailsObjList = [];
 			var emailsList = person.emails;
 			for (i = 0; i < emailsList.length; i++) {
 				tempVal = new nexacro.ContactField("", emailsList[i].type, emailsList[i].value.replace(new RegExp("_NEWLINE_", "gi"), "\n"), emailsList[i].label, "");
@@ -4426,20 +4369,21 @@ if (!nexacro.Contact) {
 				suffix : "", 
 				set_displayname : function () {
 				}, 
+
 				set_familyname : function (val) {
-					this["familyname"] = val;
+					this.familyname = val;
 				}, 
 				set_givenname : function (val) {
-					this["givenname"] = val;
+					this.givenname = val;
 				}, 
 				set_middlename : function (val) {
-					this["middlename"] = val;
+					this.middlename = val;
 				}, 
 				set_prefix : function (val) {
-					this["prefix"] = val;
+					this.prefix = val;
 				}, 
 				set_suffix : function (val) {
-					this["suffix"] = val;
+					this.suffix = val;
 				}
 			};
 			this.nickname = "";
@@ -4465,20 +4409,21 @@ if (!nexacro.Contact) {
 				suffix : (strSuffix || ""), 
 				set_displayname : function () {
 				}, 
+
 				set_familyname : function (val) {
-					this["familyname"] = val;
+					this.familyname = val;
 				}, 
 				set_givenname : function (val) {
-					this["givenname"] = val;
+					this.givenname = val;
 				}, 
 				set_middlename : function (val) {
-					this["middlename"] = val;
+					this.middlename = val;
 				}, 
 				set_prefix : function (val) {
-					this["prefix"] = val;
+					this.prefix = val;
 				}, 
 				set_suffix : function (val) {
-					this["suffix"] = val;
+					this.suffix = val;
 				}
 			};
 			this.nickname = (strNickname || "");
@@ -5829,11 +5774,11 @@ if (nexacro._OS == "iOS" && !nexacro.LiteDBConnection) {
 	};
 
 	_pLiteDBConnection.open = function (strDataSource, constOpenFlag) {
-		if (typeof (constOpenFlag) != "undefined" || constOpenFlag != null) {
+		if (constOpenFlag != null) {
 			this.openflag = constOpenFlag;
 		}
 
-		if (typeof (strDataSource) != "undefined" || strDataSource != null) {
+		if (strDataSource != null) {
 			this.datasource = strDataSource;
 		}
 
@@ -5879,7 +5824,7 @@ if (nexacro._OS == "iOS" && !nexacro.LiteDBConnection) {
 	};
 
 	_pLiteDBConnection.paramck_busytimeout = function (timout) {
-		if (timout == null || typeof (timout) == "undefined") {
+		if (timout == null) {
 			return false;
 		}
 
@@ -5895,7 +5840,7 @@ if (nexacro._OS == "iOS" && !nexacro.LiteDBConnection) {
 	};
 
 	_pLiteDBConnection.paramck_datasource = function (datasrc) {
-		if (datasrc == null || typeof (datasrc) == "undefined") {
+		if (datasrc == null) {
 			return false;
 		}
 		return true;
@@ -5904,7 +5849,7 @@ if (nexacro._OS == "iOS" && !nexacro.LiteDBConnection) {
 
 
 	_pLiteDBConnection.paramck_asyncOpen = function (strDataSource, constOpenFlag) {
-		if (strDataSource == null || typeof (strDataSource) == "undefined" || typeof (strDataSource) != "string") {
+		if (strDataSource == null || typeof (strDataSource) != "string") {
 			return false;
 		}
 
@@ -5915,14 +5860,14 @@ if (nexacro._OS == "iOS" && !nexacro.LiteDBConnection) {
 	};
 
 	_pLiteDBConnection.paramck_query = function (db_query) {
-		if (db_query == null || typeof (db_query) == "undefined" || typeof (db_query) != "string") {
+		if (db_query == null || typeof (db_query) != "string") {
 			return false;
 		}
 		return true;
 	};
 
 	_pLiteDBConnection.paramck_paramck_ldbconnection = function (objconnection) {
-		if (objconnection == null || typeof (objconnection) == "undefined" || !(objconnection instanceof nexacro.LiteDBConnection)) {
+		if (objconnection == null || !(objconnection instanceof nexacro.LiteDBConnection)) {
 			if (typeof (objconnection) != "string") {
 			}
 			else {
@@ -5933,7 +5878,7 @@ if (nexacro._OS == "iOS" && !nexacro.LiteDBConnection) {
 	};
 
 	_pLiteDBConnection.paramck_asyncExecuteQuery = function (db_query) {
-		if (db_query == null || typeof (db_query) == "undefined" || typeof (db_query) != "string") {
+		if (db_query == null || typeof (db_query) != "string") {
 			return false;
 		}
 		return true;
@@ -6025,7 +5970,7 @@ if (nexacro._OS == "iOS" && !nexacro.LiteDBParameter) {
 	};
 
 	_pLiteDBParameter.paramck_datasource = function (datasrc) {
-		if (datasrc == null || typeof (datasrc) == "undefined") {
+		if (datasrc == null) {
 			return false;
 		}
 		return true;
@@ -6050,7 +5995,6 @@ if (nexacro._OS == "iOS" && !nexacro.LiteDBStatement) {
 		this.ldbconnection = "";
 		this.parameters = {
 		};
-		this.paramdataset;
 		this.applyrowpos = -1;
 		this.enableevent = true;
 		this.async = true;
@@ -6305,7 +6249,7 @@ if (nexacro._OS == "iOS" && !nexacro.LiteDBStatement) {
 	};
 
 	_pLiteDBStatement.paramck_query = function (db_query) {
-		if (db_query == null || typeof (db_query) == "undefined" || typeof (db_query) != "string") {
+		if (db_query == null || typeof (db_query) != "string") {
 			return false;
 		}
 		return true;
@@ -6358,8 +6302,6 @@ if (!nexacro.FakeXMLHttpRequest) {
 		this.upload = {
 		};
 
-		this._filelist;
-		this._postdatalist;
 
 
 		this.readyState = 0;
@@ -6420,19 +6362,19 @@ if (!nexacro.FakeXMLHttpRequest) {
 
 		var attrs = '{"method":"' + this.method + '","async":' + this.async + '}';
 
-		var params = '{"attrs":' + attrs
-			 + ',"sendData":"' + nexacro.Device.encodeString(data)
-			 + '","strURL":"' + this.strURL
-			 + '","protocolparameters":' + JSON.stringify(nexacro.Device._protocolparameters)
-			 + ',"strDataType":"' + this.strDataType
-			 + '","bCompress":"' + this.strCompress
-			 + '","timeout":"' + this.timeout
-			 + '","requestHeaders":' + JSON.stringify(this.requestHeaders)
-			 + '}';
-		var jsonstr = '{"id":"' + this._id
-			 + '", "div":"FakeXMLHttpRequest", "method":"' + 'sendData'
-			 + '", "params":' + params
-			 + '}';
+		var params = '{"attrs":' + attrs + 
+			',"sendData":"' + nexacro.Device.encodeString(data) + 
+			'","strURL":"' + this.strURL + 
+			'","protocolparameters":' + JSON.stringify(nexacro.Device._protocolparameters) + 
+			',"strDataType":"' + this.strDataType + 
+			'","bCompress":"' + this.strCompress + 
+			'","timeout":"' + this.timeout + 
+			'","requestHeaders":' + JSON.stringify(this.requestHeaders) + 
+			'}';
+		var jsonstr = '{"id":"' + this._id + 
+			'", "div":"FakeXMLHttpRequest", "method":"' + 'sendData' + 
+			'", "params":' + params + 
+			'}';
 
 		var response = nexacro.Device.exec(jsonstr, !this.async);
 		if (!this.async) {
@@ -6440,20 +6382,20 @@ if (!nexacro.FakeXMLHttpRequest) {
 			if (jsonData) {
 				var responseHeaders;
 
-				if (jsonData["readyState"]) {
-					this.readyState = jsonData["readyState"];
+				if (jsonData.readyState) {
+					this.readyState = jsonData.readyState;
 				}
-				if (jsonData["status"]) {
-					this.status = jsonData["status"];
+				if (jsonData.status) {
+					this.status = jsonData.status;
 				}
-				if (jsonData["statusText"]) {
-					this.statusText = jsonData["statusText"];
+				if (jsonData.statusText) {
+					this.statusText = jsonData.statusText;
 				}
-				if (jsonData["responseText"]) {
-					this.responseText = nexacro.Device.decodeString(jsonData["responseText"]);
+				if (jsonData.responseText) {
+					this.responseText = nexacro.Device.decodeString(jsonData.responseText);
 				}
-				if (jsonData["responseAllHeaders"]) {
-					responseHeaders = JSON.parse(jsonData["responseAllHeaders"]);
+				if (jsonData.responseAllHeaders) {
+					responseHeaders = JSON.parse(jsonData.responseAllHeaders);
 				}
 				if (responseHeaders) {
 					this.responseAllHeaders = JSON.stringify(responseHeaders);
@@ -6471,31 +6413,31 @@ if (!nexacro.FakeXMLHttpRequest) {
 		var filelist = this._filelist;
 		var postdatalist = this._postdatalist;
 
-		var filelistkeys = Object ? Object.keys(filelist) : "";
-		for (var i = 0, len = filelistkeys.length, fileliststr = ""; i < len; i++) {
+		var filelistkeys = Object.keys(filelist);
+		var i, len, fileliststr, postdatastr;
+		for (i = 0, len = filelistkeys.length, fileliststr = ""; i < len; i++) {
 			fileliststr += filelist[filelistkeys[i]].fullpath;
 			fileliststr += (i < len - 1) ? FILE_SEPERATOR : "";
 		}
 
-		var postdatalistkeys = Object ? Object.keys(postdatalist) : "";
-		for (var i = 0, len = postdatalistkeys.length, postdatastr = ""; i < len; i++) {
+		var postdatalistkeys = Object.keys(postdatalist);
+		for (i = 0, len = postdatalistkeys.length, postdatastr = ""; i < len; i++) {
 			postdatastr += postdatalistkeys[i];
 			postdatastr += "=";
 			postdatastr += postdatalist[postdatalistkeys[i]];
 			postdatastr += (i < len - 1) ? POSTDATA_SEPERATOR : "";
 		}
 
-		var attrs = '{"method":"' + this.method + '","async":' + this.async + ',"username":"' + this.username + '","password":"' + this.password + '"}';
 
-		var params = '{"strURL":"' + this.strURL + '"'
-			 + ',"strDataType":"' + this.strDataType + '"'
-			 + ',"postdata":"' + postdatastr + '"'
-			 + ',"filelist":"' + fileliststr + '"'
-			 + '}';
-		var jsonstr = '{"id":"' + this._id
-			 + '", "div":"FakeXMLHttpRequest", "method":"' + 'fileUpload'
-			 + '", "params":' + params
-			 + '}';
+		var params = '{"strURL":"' + this.strURL + '"' + 
+			',"strDataType":"' + this.strDataType + '"' + 
+			',"postdata":"' + postdatastr + '"' + 
+			',"filelist":"' + fileliststr + '"' + 
+			'}';
+		var jsonstr = '{"id":"' + this._id + 
+			'", "div":"FakeXMLHttpRequest", "method":"' + 'fileUpload' + 
+			'", "params":' + params + 
+			'}';
 
 		nexacro.Device.exec(jsonstr, !this.async);
 	};
@@ -6579,7 +6521,6 @@ if (!nexacro.FakeXMLHttpRequest) {
 	delete _pFakeXMLHttpRequest;
 
 	nexacro._getFileCache = function (fName) {
-		var app = nexacro.getApplication();
 		if (nexacro._devicefiles && (nexacro._devicefiles[fName])) {
 			return nexacro._devicefiles[fName];
 		}
@@ -6756,10 +6697,6 @@ if (nexacro._OS == "Android" && nexacro._Browser == "Runtime") {
 						case "-110":
 						case "2":
 						case "1":
-						case "-1010":
-							errormsg = "video not supported";
-							statuscode = 4;
-							break;
 						case "-1005":
 							errormsg = "fetching process aborted by user";
 							statuscode = 1;

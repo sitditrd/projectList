@@ -216,13 +216,11 @@ if (!nexacro.TextArea) {
 		var vscroll_animationframe = this._vscroll_animationframe;
 		if (vscroll_animationframe) {
 			vscroll_animationframe.destroy();
-			vscroll_animationframe = null;
 		}
 
 		var hscroll_animationframe = this._hscroll_animationframe;
 		if (hscroll_animationframe) {
 			hscroll_animationframe.destroy();
-			hscroll_animationframe = null;
 		}
 	};
 
@@ -300,6 +298,8 @@ if (!nexacro.TextArea) {
 	};
 
 	_pTextArea._apply_setfocus = function (evt_name) {
+		this._processing_updateToDataset = false;
+
 		var input_elem = this._input_element;
 		if (input_elem) {
 			this._want_tab = true;
@@ -491,24 +491,23 @@ if (!nexacro.TextArea) {
 			if (!this._onlydisplay) {
 				if (keycode == nexacro.Event.KEY_UP) {
 					elem = this._input_element;
-					if (!elem || (elem && elem.isFirstCaretLine())) {
+					if ((elem && elem.isFirstCaretLine()) || !elem) {
 						want_arrow = false;
 					}
 				}
 				else if (keycode == nexacro.Event.KEY_DOWN) {
 					elem = this._input_element;
-					if (!this.enable || !elem || (elem && elem.isLastCaretLine())) {
+					if (!this.enable || (elem && elem.isLastCaretLine()) || !elem) {
 						want_arrow = false;
-					}
-				}
-				else if (keycode == nexacro.Event.KEY_TAB) {
-					if (this.readonly) {
-						this._want_tab = false;
 					}
 				}
 			}
 		}
-
+		if (keycode == nexacro.Event.KEY_TAB) {
+			if (this.readonly) {
+				this._want_tab = false;
+			}
+		}
 		return {
 			want_tab : this._want_tab, 
 			want_return : false, 
@@ -1256,7 +1255,10 @@ if (!nexacro.TextArea) {
 	};
 
 	_pTextArea.updateToDataset = function () {
-		this._result_updateToDataset = this.applyto_bindSource("value", this.value);
+		if (this._result_updateToDataset = this.applyto_bindSource("value", this.value)) {
+			this._default_value = this.value;
+			this._default_text = this.text;
+		}
 		this._processing_updateToDataset = true;
 
 		return this._result_updateToDataset;
@@ -1537,8 +1539,12 @@ if (!nexacro.TextArea) {
 	_pTextArea.on_click_basic_action = function (elem, button, alt_key, ctrl_key, shift_key, canvasX, canvasY, screenX, screenY) {
 		var input_elem = this._input_element;
 		if (input_elem) {
-			if (!this._onlydisplay) {
-				input_elem.setElementFocus(button);
+			var _window = this._getWindow();
+			if (_window && this._track_capture) {
+				var capture_comp = _window._getCaptureComp(true, false, this);
+				if (!this._onlydisplay && (!capture_comp || capture_comp == this)) {
+					input_elem.setElementFocus(button);
+				}
 			}
 		}
 	};
@@ -1726,7 +1732,7 @@ if (!nexacro.TextArea) {
 			update_value = this._inputtype_obj.apply(update_value);
 			if (value != update_value) {
 				if (update_value && inputType == "insertFromPaste") {
-					update_value_len = update_value ? update_value.length : 0;
+					update_value_len = update_value.length;
 					input_elem._beforeinput_result_data = update_value;
 					input_elem._beforeinput_result_pos = {
 						begin : begin + update_value_len, 
@@ -1744,7 +1750,7 @@ if (!nexacro.TextArea) {
 			update_value = this._inputfilter_obj.apply(update_value);
 			if (value != update_value) {
 				if (update_value && inputType == "insertFromPaste") {
-					update_value_len = update_value ? update_value.length : 0;
+					update_value_len = update_value.length;
 					input_elem._beforeinput_result_data = update_value;
 					input_elem._beforeinput_result_pos = {
 						begin : begin + update_value_len, 
@@ -1773,7 +1779,6 @@ if (!nexacro.TextArea) {
 
 				if (maxlength && begin + (input_value.length - end) + update_value_len > maxlength) {
 					update_value = update_value.substring(0, maxlength - (begin + input_value.length - end));
-					update_value_len = update_value.length;
 				}
 				update_value_len = update_value.length;
 				update_value = input_value.substring(0, begin) + update_value + input_value.substring(end);

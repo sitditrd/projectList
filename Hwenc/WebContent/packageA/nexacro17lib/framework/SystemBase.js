@@ -125,44 +125,34 @@ if (!nexacro._Init_systembase) {
 		else if (navigator.userAgent.match(/Edge/)) {
 			nexacro._Browser = "IE";
 			nexacro._BrowserType = "Edge";
-			var versionRegExp = /Edge\/([\.\d]+)/;
-			versionRegExp.test(navigator.userAgent);
+			/Edge\/([\.\d]+)/.test(navigator.userAgent);
 			nexacro._BrowserVersion = parseInt(RegExp.$1) | 0;
-			versionRegExp = null;
 		}
 		else if (navigator.userAgent.match(/Chrome/)) {
 			nexacro._Browser = "Chrome";
 			nexacro._BrowserType = "WebKit";
-			var versionRegExp = /Chrome\/([\.\d]+)/;
-			versionRegExp.test(navigator.userAgent);
+			/Chrome\/([\.\d]+)/.test(navigator.userAgent);
 			nexacro._BrowserVersion = parseInt(RegExp.$1) | 0;
 
 			if (navigator.userAgent.match(/Samsung/)) {
 				nexacro._BrowserExtra = "SamsungBrowser";
 			}
-
-			versionRegExp = null;
 		}
 		else if (navigator.userAgent.match(/CriOS/)) {
 			nexacro._Browser = "Chrome";
 			nexacro._BrowserType = "WebKit";
-			var versionRegExp = /CriOS\/([\.\d]+)/;
-			versionRegExp.test(navigator.userAgent);
+			/CriOS\/([\.\d]+)/.test(navigator.userAgent);
 			nexacro._BrowserVersion = parseInt(RegExp.$1) | 0;
 
 			if (navigator.userAgent.match(/Samsung/)) {
 				nexacro._BrowserExtra = "SamsungBrowser";
 			}
-
-			versionRegExp = null;
 		}
 		else if (!!window.opera || navigator.userAgent.match(/Opera/) || navigator.userAgent.match(/OPR/)) {
 			nexacro._Browser = "Opera";
 			nexacro._BrowserType = "Opera";
-			var versionRegExp = /Version\/([\.\d]+)/;
-			versionRegExp.test(navigator.userAgent);
+			/Version\/([\.\d]+)/.test(navigator.userAgent);
 			nexacro._BrowserVersion = parseInt(RegExp.$1) | 0;
-			versionRegExp = null;
 		}
 		else if (navigator.userAgent.match(/Apple.*Mobile/)) {
 			nexacro._Browser = "MobileSafari";
@@ -173,26 +163,20 @@ if (!nexacro._Init_systembase) {
 		else if (navigator.userAgent.match(/AppleWebKit\//)) {
 			nexacro._Browser = "Safari";
 			nexacro._BrowserType = "WebKit";
-			var versionRegExp = /Version\/([\.\d]+)/;
-			versionRegExp.test(navigator.userAgent);
+			/Version\/([\.\d]+)/.test(navigator.userAgent);
 			nexacro._BrowserVersion = parseInt(RegExp.$1) | 0;
-			versionRegExp = null;
 		}
 		else if (navigator.userAgent.match(/WebKit\//)) {
 			nexacro._Browser = "WebKit";
 			nexacro._BrowserType = "WebKit";
-			var versionRegExp = /WebKit\/([\.\d]+)/;
-			versionRegExp.test(navigator.userAgent);
+			/WebKit\/([\.\d]+)/.test(navigator.userAgent);
 			nexacro._BrowserVersion = parseInt(RegExp.$1) | 0;
-			versionRegExp = null;
 		}
 		else if (navigator.userAgent.match(/Gecko\//)) {
 			nexacro._Browser = "Gecko";
 			nexacro._BrowserType = "Gecko";
-			var versionRegExp = /rv\:(.+?)[\);]/;
-			versionRegExp.test(navigator.userAgent);
+			/rv\:(.+?)[\);]/.test(navigator.userAgent);
 			nexacro._BrowserVersion = parseInt(RegExp.$1) | 0;
-			versionRegExp = null;
 		}
 	}
 
@@ -624,7 +608,6 @@ if (!nexacro._Init_systembase) {
 			});
 		}
 		catch (e) {
-			;
 		}
 	}
 	Object.prototype.getNumSetter = function (name) {
@@ -640,7 +623,6 @@ if (!nexacro._Init_systembase) {
 			});
 		}
 		catch (e) {
-			;
 		}
 	}
 
@@ -1234,7 +1216,6 @@ if (!nexacro._Init_systembase) {
 			return Math.round(m) / p;
 		};
 	}
-	;
 
 	if (!nexacro.parseDate) {
 		if (nexacro._Browser == "Runtime" || nexacro._Browser == "Chrome") {
@@ -1472,7 +1453,8 @@ if (!nexacro._Init_systembase) {
 		_fn_ += ") { ";
 		_fn_ += "try { return " + inline_expr + "; } ";
 		_fn_ += "catch(e) { return undefined; } };";
-		return _fn_ = nexacro._executeEvalStr(_fn_);
+		_fn_ = nexacro._executeEvalStr(_fn_);
+		return _fn_;
 	};
 
 	nexacro._emptyFn = function () {
@@ -1525,7 +1507,6 @@ if (!nexacro._Init_systembase) {
 			return (v instanceof Array);
 		};
 	}
-	;
 
 	nexacro._isFunction = function (v) {
 		return (typeof (v) == "function");
@@ -1555,7 +1536,7 @@ if (!nexacro._Init_systembase) {
 			return v.toString();
 		}
 
-		return (v === undefined || v === null) ? "" : v + "";
+		return (v == null) ? "" : v + "";
 	};
 
 	nexacro._toInt = function (v) {
@@ -1717,7 +1698,6 @@ if (!nexacro._Init_systembase) {
 			});
 		}
 		catch (e) {
-			;
 		}
 	}
 
@@ -1741,7 +1721,6 @@ if (!nexacro._Init_systembase) {
 			});
 		}
 		catch (e) {
-			;
 		}
 	}
 
@@ -1843,8 +1822,6 @@ if (!nexacro._Init_systembase) {
 		this._idxMap = {
 		};
 		this.length = 0;
-
-		id_array = null;
 	};
 
 	_pCollection.add_item = function (id, obj) {
@@ -2259,6 +2236,40 @@ if (!nexacro._Init_systembase) {
 		return idx;
 	};
 
+	__pEventSinkObject.insertEventHandler = function (evt_id, evt_idx, func, target) {
+		evt_idx = evt_idx | 0;
+		var listener = this[evt_id];
+		var idx = -1;
+
+		if (listener) {
+			if (target) {
+				idx = listener._insertHandler(target, evt_idx, func, true);
+			}
+			else {
+				idx = listener._insertHandler(this, evt_idx, func, true);
+			}
+		}
+		else if (evt_id in this._event_list) {
+			listener = new nexacro.EventListener(evt_id);
+			this[evt_id] = listener;
+			if (this._created_event_list) {
+				this._created_event_list.push(evt_id);
+			}
+			else {
+				this._created_event_list = [];
+				this._created_event_list.push(evt_id);
+			}
+			if (target) {
+				idx = listener._addHandler(target, func, true);
+			}
+			else {
+				idx = listener._addHandler(this, func, true);
+			}
+		}
+
+		return idx;
+	};
+
 	__pEventSinkObject.removeEventHandler = function (evt_id, func, target) {
 		if (!func) {
 			return 0;
@@ -2500,6 +2511,43 @@ if (!nexacro._Init_systembase) {
 		return idx;
 	};
 
+	_pEventListener._insertHandler = function (obj, evt_idx, fn, user_handler) {
+		var handlers = this._sys_handlers;
+		if (user_handler) {
+			handlers = this._user_handlers;
+		}
+		var idx = -1;
+
+		if (fn) {
+			var target = obj;
+			var len = handlers.length;
+			var _handler = new nexacro.EventHandler(target, fn);
+			for (var i = 0; i < len; i++) {
+				if (handlers[i].handler == _handler.handler && handlers[i].target == _handler.target) {
+					return i;
+				}
+			}
+
+			if (evt_idx == -1 || evt_idx >= len) {
+				handlers.push(_handler);
+				idx = len;
+			}
+			else {
+				handlers.splice(evt_idx, 0, _handler);
+				idx = evt_idx;
+			}
+
+			this._user_handlers = handlers;
+
+			if (user_handler) {
+				this.length = handlers.length;
+			}
+
+			this._has_handlers = handlers.length;
+		}
+		return idx;
+	};
+
 	_pEventListener._removeHandler = function (obj, fn, user_handler) {
 		var handlers = this._sys_handlers;
 		if (user_handler) {
@@ -2593,7 +2641,7 @@ if (!nexacro._Init_systembase) {
 
 	_pEventListener._removeHandlerLookup = function (obj, fnstr) {
 		var handlers = this._user_handlers;
-		var len = handlers.length;
+		var len;
 		var isremove = false;
 
 		if (fnstr.length > 0) {
@@ -2656,7 +2704,6 @@ if (!nexacro._Init_systembase) {
 			handler = this._user_handlers[i];
 			handler.target = null;
 			handler.handler = null;
-			handler = null;
 			this._user_handlers[i] = null;
 			delete this._user_handlers[i];
 		}
@@ -4258,10 +4305,10 @@ if (!nexacro._Init_systembase) {
 		}
 
 		var len = touches.length;
-		var touch;
+		var touch, pos;
 		if (len === 1) {
 			touch = touches[0];
-			var pos = nexacro._getPositionFromTouch(touch);
+			pos = nexacro._getPositionFromTouch(touch);
 			return {
 				x : Math.round(pos.x), 
 				y : Math.round(pos.y)
@@ -4271,7 +4318,7 @@ if (!nexacro._Init_systembase) {
 		var x = 0, y = 0;
 		for (var i = 0; i < len; i++) {
 			touch = touches[i];
-			var pos = nexacro._getPositionFromTouch(touch);
+			pos = nexacro._getPositionFromTouch(touch);
 			x += pos.x;
 			y += pos.y;
 		}
@@ -4502,7 +4549,6 @@ if (!nexacro._Init_systembase) {
 	};
 
 	_pTouchAction._on_action = function (status) {
-		var evtType = this._cur_evt_type;
 		var session = this._cur_session;
 		if (!session) {
 			return;
@@ -4525,7 +4571,6 @@ if (!nexacro._Init_systembase) {
 	};
 
 	_pTouchAction._on_applyCurrentZoomInfo = function (zoomfactor) {
-		;
 	};
 
 	nexacro.TouchAction_Slide = function () {
@@ -4588,14 +4633,13 @@ if (!nexacro._Init_systembase) {
 	};
 
 	_pTouchActionSlide._checkFlingOption = function (evtType, session) {
-		var data = this._cur_data;
 		if (!nexacro.TouchAction.prototype._checkOption.call(this)) {
 			return false;
 		}
 
 		evtType = this._cur_evt_type;
 		session = this._cur_session;
-		data = this._cur_data;
+		var data = this._cur_data;
 		if (!data || evtType != nexacro.Touch._TOUCH_END) {
 			return false;
 		}
@@ -4669,10 +4713,10 @@ if (!nexacro._Init_systembase) {
 		data.deltaDistanceY = 0;
 
 		var ret;
-		if (session) {
-			this.status = nexacro.TouchAction._STATUS_START;
-			ret = session.onaction("fling", nexacro.TouchAction._STATUS_START, data);
-		}
+
+		this.status = nexacro.TouchAction._STATUS_START;
+		ret = session.onaction("fling", nexacro.TouchAction._STATUS_START, data);
+
 		if (ret === false) {
 			this.reset();
 			return;
@@ -4731,20 +4775,18 @@ if (!nexacro._Init_systembase) {
 		data.deltaDistanceX = (offset_cy * distanceX);
 		data.deltaDistanceY = (offset_cy * distanceY);
 
-		if (session) {
-			this.status = nexacro.TouchAction._STATUS_PENDING;
-			session.onaction("fling", this.status, data);
+		this.status = nexacro.TouchAction._STATUS_PENDING;
+		session.onaction("fling", this.status, data);
 
-			if (c >= 1) {
-				data.deltaDistanceX = 0;
-				data.deltaDistanceY = 0;
-				this.status = nexacro.TouchAction._STATUS_END;
-				session.onaction("fling", this.status, data);
-				this._is_fling = false;
-				this._fling_start_time = null;
-				this._fling_coord = null;
-				return;
-			}
+		if (c >= 1) {
+			data.deltaDistanceX = 0;
+			data.deltaDistanceY = 0;
+			this.status = nexacro.TouchAction._STATUS_END;
+			session.onaction("fling", this.status, data);
+			this._is_fling = false;
+			this._fling_start_time = null;
+			this._fling_coord = null;
+			return;
 		}
 	};
 
@@ -5199,6 +5241,7 @@ if (!nexacro._Init_systembase) {
 				var output = "";
 				var chr1, chr2, chr3, enc1, enc2, enc3, enc4;
 				var i = 0;
+				var _chr2, _chr3;
 
 				input = nexacro.utf8Encode(input);
 
@@ -5212,10 +5255,12 @@ if (!nexacro._Init_systembase) {
 					enc3 = ((chr2 & 15) << 2) | (chr3 >> 6);
 					enc4 = chr3 & 63;
 
-					if ((+chr2) != (+chr2)) {
+					_chr2 = +chr2;
+					_chr3 = +chr3;
+					if (_chr2 != _chr2) {
 						enc3 = enc4 = 64;
 					}
-					else if ((+chr3) != (+chr3)) {
+					else if (_chr3 != _chr3) {
 						enc4 = 64;
 					}
 
@@ -5282,7 +5327,7 @@ if (!nexacro._Init_systembase) {
 			};
 
 			nexacro.utf8Decode = function (utftext) {
-				var i = 0, c = 0, c1 = 0, c2 = 0, c3 = 0;
+				var i = 0, c = 0, c2 = 0, c3 = 0;
 
 				var string = [];
 				while (i < utftext.length) {
@@ -5324,7 +5369,6 @@ if (!nexacro._Init_systembase) {
 			return true;
 		}
 
-		regExp = null;
 
 		return false;
 	};
@@ -5515,8 +5559,6 @@ if (!nexacro._Init_systembase) {
 				if (isFinite(code) === false) {
 					code = -1;
 				}
-
-				val = code;
 			}
 			else if (id == "ErrorMsg") {
 				message = val;
@@ -6020,7 +6062,7 @@ if (!nexacro._Init_systembase) {
 
 		if (service && m_cache) {
 			if (service.cachelevel == "session" || service.cachelevel == "static") {
-				if (!loadItem && m_cache.version >= service.version) {
+				if (m_cache.version >= service.version) {
 					loadItem = new nexacro._CommunicationItem(path, "module", false);
 					loadItem.appendCallback(target, handler);
 
@@ -6040,11 +6082,9 @@ if (!nexacro._Init_systembase) {
 			bcache = false;
 		}
 
-		if (!loadItem) {
-			loadItem = new nexacro._CommunicationItem(path, "module", bcache, last_modified, service ? service.version : "0");
-			nexacro._CommunicationManager[path] = loadItem;
-			loadItem.appendCallback(target, handler);
-		}
+		loadItem = new nexacro._CommunicationItem(path, "module", bcache, last_modified, service ? service.version : "0");
+		nexacro._CommunicationManager[path] = loadItem;
+		loadItem.appendCallback(target, handler);
 
 		loadItem.bcache = bcache;
 		loadItem.handle = nexacro._startCommunication(loadItem, path, service ? service.cachelevel : "none", async, service);
@@ -6066,7 +6106,7 @@ if (!nexacro._Init_systembase) {
 
 		if (service && m_cache) {
 			if (service.cachelevel == "session" || service.cachelevel == "static") {
-				if (!loadItem && m_cache.version >= service.version) {
+				if (m_cache.version >= service.version) {
 					loadItem = new nexacro._CommunicationItem(path, "module", false);
 					loadItem.appendCallback(target, handler);
 
@@ -6085,11 +6125,9 @@ if (!nexacro._Init_systembase) {
 			bcache = false;
 		}
 
-		if (!loadItem) {
-			loadItem = new nexacro._CommunicationItem(path, "text", bcache, last_modified, service ? service.version : "0");
-			nexacro._CommunicationManager[path] = loadItem;
-			loadItem.appendCallback(target, handler);
-		}
+		loadItem = new nexacro._CommunicationItem(path, "text", bcache, last_modified, service ? service.version : "0");
+		nexacro._CommunicationManager[path] = loadItem;
+		loadItem.appendCallback(target, handler);
 
 		loadItem.handle = nexacro._startCommunication(loadItem, path, service ? service.cachelevel : "none", async, service);
 		return loadItem.handle;
@@ -6110,7 +6148,7 @@ if (!nexacro._Init_systembase) {
 
 		if (service && m_cache) {
 			if (service.cachelevel == "session" || service.cachelevel == "static") {
-				if (!loadItem && m_cache.version >= service.version) {
+				if (m_cache.version >= service.version) {
 					loadItem = new nexacro._CommunicationItem(path, "css", false);
 					loadItem.appendCallback(target, handler);
 
@@ -6125,15 +6163,10 @@ if (!nexacro._Init_systembase) {
 		}
 
 		bcache = false;
-		if (!service || service.cachelevel == "none") {
-			bcache = false;
-		}
 
-		if (!loadItem) {
-			loadItem = new nexacro._CommunicationItem(path, "css", bcache, last_modified, service ? service.version : "0");
-			nexacro._CommunicationManager[path] = loadItem;
-			loadItem.appendCallback(target, handler);
-		}
+		loadItem = new nexacro._CommunicationItem(path, "css", bcache, last_modified, service ? service.version : "0");
+		nexacro._CommunicationManager[path] = loadItem;
+		loadItem.appendCallback(target, handler);
 
 		loadItem.handle = nexacro._startCommunication(loadItem, path, service ? service.cachelevel : "none", async, service, path, cssreq, cssfiletype);
 		return loadItem.handle;
@@ -6443,7 +6476,7 @@ if (!nexacro._Init_systembase) {
 			case "android":
 				return false;
 			default:
-				return true;
+				break;
 		}
 
 		return true;
@@ -8291,7 +8324,7 @@ if (!nexacro._Init_systembase) {
 							first_weekday : 1, 
 							longdate_format : "\u0025\u0041\u002C\u0020\u0025\u0064\u002E\u0020\u0025\u0042\u0020\u0025\u0059", 
 							shortdate_format : "\u0025\u0064\u002E\u0025\u006D\u002E\u0025\u0059", 
-							direction : "rtl"
+							direction : "ltr"
 						};
 						return nexacro.Locale.de_de;
 						break;
@@ -8816,6 +8849,47 @@ if (!nexacro._Init_systembase) {
 							direction : "ltr"
 						};
 						return nexacro.Locale.en_in;
+						break;
+					case "en_jm":
+						nexacro.Locale.en_jm = {
+							name : "en_JM", 
+							decimal_point : "\u002E", 
+							thousands_sep : "\u002C", 
+							grouping : [3, 3], 
+							int_curr_symbol : "\u004A\u004D\u0044\u0020", 
+							currency_symbol : "\u0024", 
+							mon_decimal_point : "\u002E", 
+							mon_thousands_sep : "\u002C", 
+							mon_grouping : [3, 3], 
+							positive_sign : "", 
+							negative_sign : "\u002D", 
+							int_frac_digits : 2, 
+							frac_digits : 2, 
+							p_cs_precedes : 1, 
+							p_sep_by_space : 0, 
+							n_cs_precedes : 1, 
+							n_sep_by_space : 0, 
+							p_sign_posn : 1, 
+							n_sign_posn : 1, 
+							mon_n_sign_posn : 0, 
+							weekday_names_long : ["\u0053\u0075\u006E\u0064\u0061\u0079", "\u004D\u006F\u006E\u0064\u0061\u0079", "\u0054\u0075\u0065\u0073\u0064\u0061\u0079", "\u0057\u0065\u0064\u006E\u0065\u0073\u0064\u0061\u0079", "\u0054\u0068\u0075\u0072\u0073\u0064\u0061\u0079", "\u0046\u0072\u0069\u0064\u0061\u0079", "\u0053\u0061\u0074\u0075\u0072\u0064\u0061\u0079"], 
+							weekday_names_short : ["\u0053\u0075\u006E", "\u004D\u006F\u006E", "\u0054\u0075\u0065", "\u0057\u0065\u0064", "\u0054\u0068\u0075", "\u0046\u0072\u0069", "\u0053\u0061\u0074"], 
+							weekday_names_narrow : ["\u0053\u0075\u006E", "\u004D\u006F\u006E", "\u0054\u0075\u0065", "\u0057\u0065\u0064", "\u0054\u0068\u0075", "\u0046\u0072\u0069", "\u0053\u0061\u0074"], 
+							month_names_long : ["\u004A\u0061\u006E\u0075\u0061\u0072\u0079", "\u0046\u0065\u0062\u0072\u0075\u0061\u0072\u0079", "\u004D\u0061\u0072\u0063\u0068", "\u0041\u0070\u0072\u0069\u006C", "\u004D\u0061\u0079", "\u004A\u0075\u006E\u0065", "\u004A\u0075\u006C\u0079", "\u0041\u0075\u0067\u0075\u0073\u0074", "\u0053\u0065\u0070\u0074\u0065\u006D\u0062\u0065\u0072", "\u004F\u0063\u0074\u006F\u0062\u0065\u0072", "\u004E\u006F\u0076\u0065\u006D\u0062\u0065\u0072", "\u0044\u0065\u0063\u0065\u006D\u0062\u0065\u0072"], 
+							month_names_short : ["\u004A\u0061\u006E", "\u0046\u0065\u0062", "\u004D\u0061\u0072", "\u0041\u0070\u0072", "\u004D\u0061\u0079", "\u004A\u0075\u006E", "\u004A\u0075\u006C", "\u0041\u0075\u0067", "\u0053\u0065\u0070", "\u004F\u0063\u0074", "\u004E\u006F\u0076", "\u0044\u0065\u0063"], 
+							month_names_narrow : ["\u004A\u0061\u006E", "\u0046\u0065\u0062", "\u004D\u0061\u0072", "\u0041\u0070\u0072", "\u004D\u0061\u0079", "\u004A\u0075\u006E", "\u004A\u0075\u006C", "\u0041\u0075\u0067", "\u0053\u0065\u0070", "\u004F\u0063\u0074", "\u004E\u006F\u0076", "\u0044\u0065\u0063"], 
+							ampm : ["\u0041\u004D", "\u0050\u004D"], 
+							date_format : "\u0025\u0064\u002F\u0025\u006D\u002F\u0025\u0059", 
+							time_format : "\u0025\u0072", 
+							time_format_ampm : "\u0025\u0049\u003A\u0025\u004D\u003A\u0025\u0053\u0020\u0025\u0070", 
+							date_time_format : "\u0025\u0061\u0020\u0025\u0064\u0020\u0025\u0062\u0020\u0025\u0059\u0020\u0025\u0072\u0020\u0025\u005A", 
+							full_date_time_format : "\u0025\u0061\u0020\u0025\u0065\u0020\u0025\u0062\u0020\u0025\u0048\u003A\u0025\u004D\u003A\u0025\u0053\u0020\u0025\u005A\u0020\u0025\u0059", 
+							first_weekday : 0, 
+							longdate_format : "\u0025\u0041\u002C\u0020\u0025\u0064\u0020\u0025\u0042\u0020\u0025\u0059", 
+							shortdate_format : "\u0025\u0065\u002F\u0025\u006E\u002F\u0025\u0059", 
+							direction : "ltr"
+						};
+						return nexacro.Locale.en_jm;
 						break;
 					case "en_nz":
 						nexacro.Locale.en_nz = {
@@ -14337,16 +14411,16 @@ if (!nexacro._Init_systembase) {
 
 		nexacro.makeLocaleFormatString = function (obj, locale) {
 			var locale_string = "";
-
+			var new_obj;
 			if (obj instanceof Number) {
-				var new_obj = new nexacro.Number(obj);
+				new_obj = new nexacro.Number(obj);
 				locale_string = new_obj.toLocaleString(locale);
 			}
 			else if (obj instanceof nexacro.Number) {
 				locale_string = obj.toLocaleString(locale);
 			}
 			else if (obj instanceof Date) {
-				var new_obj = new nexacro.Date(obj);
+				new_obj = new nexacro.Date(obj);
 				locale_string = new_obj.toLocaleString(locale);
 			}
 			else if (obj instanceof nexacro.Date) {
@@ -14427,29 +14501,31 @@ if (!nexacro._Init_systembase) {
 		if (ret && ret[0] === true) {
 			var repeatData = target._on_startrepeat(refer_comp, canvasX, canvasY);
 
-			nexacro._cur_repeat_info = {
-				"targetwin" : win, 
-				"target" : target, 
-				"startX" : windowX, 
-				"startY" : windowY, 
-				"distX" : 0, 
-				"distY" : 0, 
-				"startCanvasX" : canvasX, 
-				"startCanvasY" : canvasY, 
-				"canvasX" : canvasX, 
-				"canvasY" : canvasY, 
-				"data" : repeatData, 
-				"refer_comp" : refer_comp, 
-				"step" : "first", 
-				"_repeatfunc" : null, 
-				"_timer" : null
-			};
+			if (win._cur_ldown_elem) {
+				nexacro._cur_repeat_info = {
+					"targetwin" : win, 
+					"target" : target, 
+					"startX" : windowX, 
+					"startY" : windowY, 
+					"distX" : 0, 
+					"distY" : 0, 
+					"startCanvasX" : canvasX, 
+					"startCanvasY" : canvasY, 
+					"canvasX" : canvasX, 
+					"canvasY" : canvasY, 
+					"data" : repeatData, 
+					"refer_comp" : refer_comp, 
+					"step" : "first", 
+					"_repeatfunc" : null, 
+					"_timer" : null
+				};
 
-			if (!nexacro._cur_repeat_info._repeatfunc) {
-				nexacro._cur_repeat_info._repeatfunc = nexacro._nexacroBind(win, win._on_sys_repeat);
+				if (!nexacro._cur_repeat_info._repeatfunc) {
+					nexacro._cur_repeat_info._repeatfunc = nexacro._nexacroBind(win, win._on_sys_repeat);
+				}
+
+				nexacro._cur_repeat_info._timer = nexacro._setSystemTimer(handle, nexacro._cur_repeat_info._repeatfunc, 500);
 			}
-
-			nexacro._cur_repeat_info._timer = nexacro._setSystemTimer(handle, nexacro._cur_repeat_info._repeatfunc, 500);
 		}
 
 		if (ret && ret[1] === false) {
@@ -14570,11 +14646,11 @@ if (!nexacro._Init_systembase) {
 		var env = nexacro.getEnvironment();
 		var checkversion = env.checkversion && bCheckVersion;
 
-		var bLocalCacheType;
+		var bLocalCacheType, local_url, strA, suburl;
 		if (exturl.indexOf("theme://") >= 0) {
 			bLocalCacheType = false;
 			if (nexacro._hasLocalCacheUrl(url)) {
-				var local_url = nexacro._getLocalCacheUrl(url);
+				local_url = nexacro._getLocalCacheUrl(url);
 				if (local_url) {
 					return local_url;
 				}
@@ -14582,9 +14658,8 @@ if (!nexacro._Init_systembase) {
 				bLocalCacheType = true;
 			}
 
-			var strA = exturl.split("://");
-			var name = strA[0];
-			var suburl = strA[1];
+			strA = exturl.split("://");
+			suburl = strA[1];
 
 			var realpath = [];
 			var separator = "/";
@@ -14623,7 +14698,7 @@ if (!nexacro._Init_systembase) {
 		else {
 			bLocalCacheType = false;
 			if (nexacro._hasLocalCacheUrl(url)) {
-				var local_url = nexacro._getLocalCacheUrl(url);
+				local_url = nexacro._getLocalCacheUrl(url);
 				if (local_url) {
 					return local_url;
 				}
@@ -14638,9 +14713,10 @@ if (!nexacro._Init_systembase) {
 				exturl = nexacro._transfullurl(baseurl, exturl);
 			}
 			else {
-				var strA = exturl.split("::");
+				strA = exturl.split("::");
+				suburl = strA[1];
+
 				var prefix = strA[0];
-				var suburl = strA[1];
 				var service = nexacro._getService(prefix, typedefintionurl);
 				if (service != null) {
 					var serviceurl = service.url;
@@ -14698,8 +14774,6 @@ if (!nexacro._Init_systembase) {
 			qs = "&";
 		}
 
-		var env = nexacro.getEnvironment();
-		var checkversion = env.checkversion;
 		var svc, ver;
 
 		if (type == "theme") {
@@ -15106,6 +15180,7 @@ if (!nexacro._Init_systembase) {
 		var cur_height = nexacro._getDeviceHeight(monitor_idx);
 		var is_landscape = cur_width > cur_height ? true : false;
 		var cur_type = "";
+		var temp;
 		if (nexacro._OS == "Android") {
 			var device_name = this._getDeviceName();
 			var device_info = this._getDeviceInfo(device_name);
@@ -15114,7 +15189,7 @@ if (!nexacro._Init_systembase) {
 				cur_height = +device_info.LandscapeWidth;
 				cur_type = device_info.type;
 				if (is_landscape) {
-					var temp = cur_width;
+					temp = cur_width;
 					cur_width = cur_height;
 					cur_height = temp;
 				}
@@ -15128,7 +15203,7 @@ if (!nexacro._Init_systembase) {
 			is_landscape = win_width > win_height ? true : false;
 
 			if (is_landscape) {
-				var temp = cur_width;
+				temp = cur_width;
 				cur_width = cur_height;
 				cur_height = temp;
 			}
@@ -15176,11 +15251,9 @@ if (!nexacro._Init_systembase) {
 			if (cur_os && os) {
 				var os_list = os.toLowerCase().split(",");
 				var os_cnt = os_list.length;
-				var os_found = false;
 				for (j = 0; j < os_cnt; j++) {
 					if (os_list[j] == cur_os) {
 						scr_info._priority += 10;
-						os_found = true;
 						break;
 					}
 				}
@@ -15190,11 +15263,9 @@ if (!nexacro._Init_systembase) {
 			if (cur_locale && locale) {
 				var locale_list = locale.toLowerCase().split(",");
 				var locale_cnt = locale_list.length;
-				var locale_found = false;
 				for (j = 0; j < locale_cnt; j++) {
 					if (locale_list[j] == cur_locale) {
 						scr_info._priority += 1;
-						locale_found = true;
 						break;
 					}
 				}
@@ -15237,6 +15308,7 @@ if (!nexacro._Init_systembase) {
 		var cur_height = nexacro._getDeviceHeight();
 		var cur_type;
 		var cur_zoomfactortype = curscreen.zoomfactortype ? curscreen.zoomfactortype : nexacro._curscreenzoomfactortype;
+		var zoom_fitting_width, zoom_fitting_height;
 
 		is_landscape = cur_width > cur_height ? true : false;
 
@@ -15245,14 +15317,13 @@ if (!nexacro._Init_systembase) {
 			var device_info = this._getDeviceInfo(device_name);
 			var screen_height;
 
+
 			if (device_info) {
 				cur_width = +device_info.PortraitWidth;
 				cur_height = +device_info.LandscapeWidth;
 
 				if (is_landscape) {
-					var temp = cur_width;
 					cur_width = cur_height;
-					cur_height = temp;
 				}
 			}
 
@@ -15308,7 +15379,7 @@ if (!nexacro._Init_systembase) {
 				}
 
 				if (zoom_factor == 0) {
-					var zoom_fitting_width = Math.abs(parseInt(curscreen._screen_width));
+					zoom_fitting_width = Math.abs(parseInt(curscreen._screen_width));
 					zoom_factor = zoom_fitting_width * 100 / curscreen._device_width;
 				}
 				nexacro._zoom_factor = zoom_factor;
@@ -15341,8 +15412,8 @@ if (!nexacro._Init_systembase) {
 					curscreen._screen_width = "321";
 				}
 
-				var zoom_fitting_width = Math.abs(parseInt(curscreen._screen_width));
-				var zoom_fitting_height = Math.abs(parseInt(curscreen._screen_height));
+				zoom_fitting_width = Math.abs(parseInt(curscreen._screen_width));
+				zoom_fitting_height = Math.abs(parseInt(curscreen._screen_height));
 
 				var zoom_fitting_val, device_val;
 
@@ -15406,7 +15477,6 @@ if (!nexacro._Init_systembase) {
 			var cnt = popups.length;
 			if (cnt > 0) {
 				var cur_popup = null;
-				var last_popup = null;
 				for (var i = cnt; i > 0; i--) {
 					cur_popup = popups[i - 1];
 					if (!cur_popup) {
@@ -15416,9 +15486,6 @@ if (!nexacro._Init_systembase) {
 						nexacro._current_popups = popups.slice(0, i - 1);
 						break;
 					}
-
-					last_popup = cur_popup;
-					cur_popup = null;
 				}
 			}
 		}
@@ -15508,20 +15575,18 @@ if (!nexacro._Init_systembase) {
 							}
 						}
 						else {
-							if (cur_popup) {
-								var root_comp;
-								if (cur_popup == cur_popup._attached_comp) {
-									root_comp = cur_popup;
-								}
-								else if (cur_popup._attached_comp) {
-									root_comp = cur_popup._attached_comp.parent;
-								}
+							var root_comp;
+							if (cur_popup == cur_popup._attached_comp) {
+								root_comp = cur_popup;
+							}
+							else if (cur_popup._attached_comp) {
+								root_comp = cur_popup._attached_comp.parent;
+							}
 
-								if (root_comp) {
-									is_contain = root_comp._contains(target_comp);
-									if (root_comp._is_frame) {
-										is_contain = false;
-									}
+							if (root_comp) {
+								is_contain = root_comp._contains(target_comp);
+								if (root_comp._is_frame) {
+									is_contain = false;
 								}
 							}
 						}
@@ -15909,16 +15974,17 @@ if (!nexacro._Init_systembase) {
 			var lineCnt = ssvLines.length;
 			var curIdx = 1;
 			var curStr;
+			var paramStr, varInfo, val, sep_pos, id;
 			for (; curIdx < lineCnt; curIdx++) {
 				curStr = ssvLines[curIdx];
 				if (curStr.substring(0, 7) != "Dataset") {
 					var paramArr = curStr.split(_cs_);
 					var paramCnt = paramArr.length;
 					for (var i = 0; i < paramCnt; i++) {
-						var paramStr = paramArr[i];
-						var varInfo = paramStr;
-						var val = undefined;
-						var sep_pos = paramStr.indexOf("=");
+						paramStr = paramArr[i];
+						varInfo = paramStr;
+						val = undefined;
+						sep_pos = paramStr.indexOf("=");
 						if (sep_pos >= 0) {
 							varInfo = paramStr.substring(0, sep_pos);
 							val = paramStr.substring(sep_pos + 1);
@@ -15928,8 +15994,8 @@ if (!nexacro._Init_systembase) {
 						}
 
 						if (varInfo) {
-							var id = varInfo;
-							var sep_pos = varInfo.indexOf(":");
+							id = varInfo;
+							sep_pos = varInfo.indexOf(":");
 							if (sep_pos >= 0) {
 								id = varInfo.substring(0, sep_pos);
 							}
@@ -15967,7 +16033,6 @@ if (!nexacro._Init_systembase) {
 					return true;
 				}
 			}
-			;
 
 			while (true) {
 				curIdx = nexacro.__forLoop(this, curIdx, lineCnt, __find_next_dataset_loopFn);
@@ -15976,7 +16041,7 @@ if (!nexacro._Init_systembase) {
 				}
 
 				curStr = ssvLines[curIdx];
-				var sep_pos = curStr.indexOf(":");
+				sep_pos = curStr.indexOf(":");
 				if (sep_pos >= 0) {
 					var remoteId = curStr.substring(sep_pos + 1);
 					if (remoteId && remoteId.length) {
@@ -15985,14 +16050,9 @@ if (!nexacro._Init_systembase) {
 							ds = new nexacro.Dataset(remoteId);
 						}
 
-						if (ds) {
-							ds.rowposition = -1;
-							curIdx = ds.loadFromSSVArray(ssvLines, lineCnt, curIdx, true);
-							datasetlist.push(ds);
-						}
-						else {
-							curIdx++;
-						}
+						ds.rowposition = -1;
+						curIdx = ds.loadFromSSVArray(ssvLines, lineCnt, curIdx, true);
+						datasetlist.push(ds);
 					}
 					else {
 						curIdx++;
@@ -16011,9 +16071,10 @@ if (!nexacro._Init_systembase) {
 			};
 			var paramElems = doc.getElementsByTagName("Parameter");
 			var code = 0;
+			var i;
 			if (paramElems && paramElems.length) {
 				var varCnt = paramElems.length;
-				for (var i = 0; i < varCnt; i++) {
+				for (i = 0; i < varCnt; i++) {
 					var paramElem = paramElems[i];
 					var id = paramElem.getAttribute("id");
 					if (id && id.length) {
@@ -16046,7 +16107,7 @@ if (!nexacro._Init_systembase) {
 			var datasets = doc.getElementsByTagName("Dataset");
 			if (datasets && datasets.length) {
 				var dataCnt = datasets.length;
-				for (var i = 0; i < dataCnt; i++) {
+				for (i = 0; i < dataCnt; i++) {
 					var remoteId = datasets[i].getAttribute("id");
 					if (remoteId && remoteId.length) {
 						var ds = target && target._getDataset(remoteId);
@@ -16054,11 +16115,9 @@ if (!nexacro._Init_systembase) {
 							ds = new nexacro.Dataset(remoteId);
 						}
 
-						if (ds) {
-							ds.rowposition = -1;
-							ds.loadFromDOM(datasets[i]);
-							datasetlist.push(ds);
-						}
+						ds.rowposition = -1;
+						ds.loadFromDOM(datasets[i]);
+						datasetlist.push(ds);
 					}
 				}
 			}
@@ -16070,10 +16129,17 @@ if (!nexacro._Init_systembase) {
 		if (cookieStr) {
 			var cookielist = cookieStr.split("; ");
 			var cookievarCnt = cookielist.length;
+			var sep_pos;
+			var cookieid, cookievalue;
 			for (var i = 0; i < cookievarCnt; i++) {
-				var cookie = cookielist[i].split("=");
-				var cookieid = cookie[0];
-				var cookievalue = cookie[1];
+				sep_pos = cookielist[i].indexOf("=");
+				if (sep_pos <= 0) {
+					cookieid = cookielist[i];
+				}
+				else {
+					cookieid = cookielist[i].substr(0, sep_pos);
+					cookievalue = cookielist[i].substr(sep_pos + 1);
+				}
 
 				if (nexacro._addcookietovariable) {
 					nexacro._setCookieVariable(cookieid, cookievalue, false);
@@ -16084,16 +16150,17 @@ if (!nexacro._Init_systembase) {
 
 	nexacro._addCookieFromCookieVariables = function () {
 		var envcookies = nexacro._getCookieVariables(4);
+		var prop;
 		if (envcookies) {
-			for (var pro in envcookies) {
-				nexacro._setCookie(pro, envcookies[pro].value, null, false);
+			for (prop in envcookies) {
+				nexacro._setCookie(prop, envcookies[prop].value, null, false);
 			}
 		}
 
 		var envsecurecookies = nexacro._getCookieVariables(6);
 		if (envsecurecookies) {
-			for (var pro in envsecurecookies) {
-				nexacro._setCookie(pro, envsecurecookies[pro].value, null, true);
+			for (prop in envsecurecookies) {
+				nexacro._setCookie(prop, envsecurecookies[prop].value, null, true);
 			}
 		}
 	};

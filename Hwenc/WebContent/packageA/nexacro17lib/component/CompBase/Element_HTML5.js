@@ -269,7 +269,6 @@ if (nexacro._Browser != "Runtime" && !nexacro.Element) {
 
 	_pElement._isRtl = function (bPosition) {
 		var elem = bPosition ? (this.parent_elem ? this.parent_elem : this.parent.getElement()) : this;
-		var rtl = this.rtl;
 		while (elem) {
 			if (elem.rtl !== undefined) {
 				return elem.rtl;
@@ -281,17 +280,11 @@ if (nexacro._Browser != "Runtime" && !nexacro.Element) {
 				elem = elem.parent;
 			}
 		}
-
-		if (!elem) {
-			rtl = nexacro._rtl;
-		}
-
-		return rtl;
+		return nexacro._rtl;
 	};
 
 	_pElement._isParentRtl = function () {
 		var elem = this.parent_elem ? this.parent_elem : (this.parent ? this.parent.getElement() : null);
-		var rtl = this.rtl;
 		while (elem) {
 			if (elem.rtl !== undefined) {
 				return elem.rtl;
@@ -303,18 +296,12 @@ if (nexacro._Browser != "Runtime" && !nexacro.Element) {
 				elem = elem.parent;
 			}
 		}
-
-		if (!elem) {
-			rtl = nexacro._rtl;
-		}
-
-		return rtl;
+		return nexacro._rtl;
 	};
 
 	_pElement._checkUpdateElementByRTL = function (handle, prop) {
 		var ret = false;
 		var bPositionRtl = this._isParentRtl();
-		var bRtl = this._isRtl();
 		if (handle) {
 			var handle_style = handle.style;
 			if (typeof prop == "number") {
@@ -327,12 +314,12 @@ if (nexacro._Browser != "Runtime" && !nexacro.Element) {
 		}
 		return ret;
 	};
+
 	_pElement.setElementPosition = function (left, top, bforce) {
 		var handle = this.handle;
 
-		var bUpdate = false;
 
-		if (this.left != left || this.top != top || bUpdate || bforce) {
+		if (this.left != left || this.top != top || bforce) {
 			this.left = left;
 			this.top = top;
 
@@ -696,19 +683,20 @@ if (nexacro._Browser != "Runtime" && !nexacro.Element) {
 	_pElement._getComputedStyleBackgroundColor = nexacro._emptyFn;
 	_pElement.setElementAccessibilityRole = nexacro._emptyFn;
 	_pElement.setElementAccessibilityLabel = nexacro._emptyFn;
+	_pElement.setElementAccessibilityFlagReadOnly = nexacro._emptyFn;
 	_pElement._getPositionInWindow = function () {
 		return nexacro._getElementXYInWindow(this.handle);
 	};
 
+	var __pEdgeImageElement;
 	if (nexacro._Browser == "IE" && nexacro._BrowserVersion <= 10) {
 		nexacro._EdgeImageElement = function (parent_elem) {
 			this.parent = parent_elem;
 			this.parent_elem = parent_elem;
 			this.name = this.parent_elem.name + ":edge";
 		};
-		var __pEdgeImageElement = nexacro._createPrototype(nexacro.Element, nexacro._EdgeImageElement);
+		__pEdgeImageElement = nexacro._createPrototype(nexacro.Element, nexacro._EdgeImageElement);
 		nexacro._EdgeImageElement.prototype = __pEdgeImageElement;
-
 		__pEdgeImageElement._type_name = "_EdgeImageElement";
 
 		__pEdgeImageElement.edgeImage = null;
@@ -1109,7 +1097,7 @@ if (nexacro._Browser != "Runtime" && !nexacro.Element) {
 			this.parent = parent_elem;
 			this.parent_elem = parent_elem;
 		};
-		var __pEdgeImageElement = nexacro._createPrototype(nexacro.Element, nexacro._EdgeImageElement);
+		__pEdgeImageElement = nexacro._createPrototype(nexacro.Element, nexacro._EdgeImageElement);
 		nexacro._EdgeImageElement.prototype = __pEdgeImageElement;
 
 		__pEdgeImageElement._type_name = "_EdgeImageElement";
@@ -1298,10 +1286,11 @@ if (nexacro._Browser != "Runtime" && !nexacro.Element) {
 	}
 	else {
 		_pTextBoxElement._getComputedStyle = function (prop, noflush) {
+			var style;
 			var handle = this._box_node;
 			if (prop) {
 				if (handle) {
-					var style = window.getComputedStyle(handle, null);
+					style = window.getComputedStyle(handle, null);
 					return style.getPropertyValue(prop);
 				}
 				else if (!this.text) {
@@ -1312,7 +1301,7 @@ if (nexacro._Browser != "Runtime" && !nexacro.Element) {
 					var val;
 
 					if (handle) {
-						var style = window.getComputedStyle(handle, null);
+						style = window.getComputedStyle(handle, null);
 						val = style.getPropertyValue(prop);
 					}
 					this.setElementText(text);
@@ -1660,11 +1649,7 @@ if (nexacro._Browser != "Runtime" && !nexacro.Element) {
 			this.rtl = this._isParentRtl();
 			if (this.icon && (this.icon.value != "none")) {
 				var handle_style = this._getCommonStyleStr();
-				var str = "";
-				var textAlign = this.textAlign;
-				if (textAlign || this.verticalAlign) {
-					str += nexacro.__getHTMLStyle_BKImageAlign(textAlign, this.verticalAlign);
-				}
+				var str;
 
 				handle_style += nexacro.__getHTMLStyle_BKImageUrl(this.icon._sysurl);
 
@@ -1936,7 +1921,7 @@ if (nexacro._Browser != "Runtime" && !nexacro.Element) {
 				nexacro.__setDOMStyle_BKImageUrl(box_style, this.icon._sysurl);
 			}
 			else if (_type == 3) {
-				if (this.textPadding) {
+				if (text_node && this.textPadding) {
 					nexacro.__setDOMStyle_PaddingObject(text_node.style, this.textPadding, this.rtl);
 				}
 
@@ -2930,6 +2915,14 @@ if (nexacro._Browser != "Runtime" && !nexacro.Element) {
 				nexacro.__setDOMNode_MaxLength(handle, this.maxlength);
 			}
 
+			if (nexacro._enableaccessibility) {
+				nexacro.__setDOMAccessibility_LabelBy(handle, owner_elem.name);
+
+				if (nexacro._accessibilitytype == 4 || nexacro._accessibilitytype == 5) {
+					nexacro.__setDOMAccessibility_Role(handle, owner_elem.name);
+				}
+			}
+
 			nexacro.__setDOMNode_Autocomplete(handle, "off");
 
 			if (this.handle) {
@@ -3767,6 +3760,7 @@ if (nexacro._Browser != "Runtime" && !nexacro.Element) {
 	};
 
 	_pInputElement.setElementFocus = function (trigger_type) {
+		var _doc;
 		var input_handle = this.handle;
 		if (input_handle) {
 			if (!this._is_focused) {
@@ -3801,7 +3795,7 @@ if (nexacro._Browser != "Runtime" && !nexacro.Element) {
 					if (trigger_type != "lbuttondown") {
 						nexacro.__setInputDOMNodeFocus(input_handle);
 						if (!this.autoselect && trigger_type != undefined && trigger_type != "lbutton") {
-							var _doc = this._getRootWindowHandle();
+							_doc = this._getRootWindowHandle();
 							if (_doc) {
 								nexacro.__setDOMNode_SetSelect(_doc, input_handle, 0, 0);
 							}
@@ -3811,7 +3805,7 @@ if (nexacro._Browser != "Runtime" && !nexacro.Element) {
 				else {
 					if (nexacro._Browser == "Chrome") {
 						if (trigger_type == undefined) {
-							var _doc = this._getRootWindowHandle();
+							_doc = this._getRootWindowHandle();
 							if (_doc) {
 								nexacro.__setDOMNode_SetSelect(_doc, input_handle, 0, 0);
 							}
@@ -4017,7 +4011,7 @@ if (nexacro._Browser != "Runtime" && !nexacro.Element) {
 	_pInputElement.setCompositionCancel = function () {
 		var input_handle = this.handle;
 		if (input_handle) {
-			var pos = this.getElementCaretPos();
+			var pos;
 
 			var value = this._getInputValue();
 
@@ -4355,6 +4349,7 @@ if (nexacro._Browser != "Runtime" && !nexacro.Element) {
 
 			if (pThis._beforeinput_result) {
 				pThis._beforeinput_result.forEach(function (state) {
+					var caret_after_convert;
 					switch (state) {
 						case pThis._BeforeinputState.PASS:
 							break;
@@ -4371,7 +4366,7 @@ if (nexacro._Browser != "Runtime" && !nexacro.Element) {
 								pThis._beforeinput_result_data = pThis._beforeinput_result_data.toUpperCase();
 							}
 							else if (beforeinput_type != "insertLineBreak") {
-								var caret_after_convert = endOffset + beforeinput_data.length;
+								caret_after_convert = endOffset + beforeinput_data.length;
 
 								pThis._beforeinput_result_data = input_value.substring(0, beginOffset) + beforeinput_data.toUpperCase() + input_value.substring(endOffset, input_value.length);
 								pThis._beforeinput_result_pos = {
@@ -4385,7 +4380,7 @@ if (nexacro._Browser != "Runtime" && !nexacro.Element) {
 								pThis._beforeinput_result_data = pThis._beforeinput_result_data.toLowerCase();
 							}
 							else if (beforeinput_type != "insertLineBreak") {
-								var caret_after_convert = endOffset + beforeinput_data.length;
+								caret_after_convert = endOffset + beforeinput_data.length;
 								pThis._beforeinput_result_data = input_value.substring(0, beginOffset) + beforeinput_data.toLowerCase() + input_value.substring(endOffset);
 								pThis._beforeinput_result_pos = {
 									begin : caret_after_convert, 
@@ -4427,7 +4422,7 @@ if (nexacro._Browser != "Runtime" && !nexacro.Element) {
 					}
 
 					if (!pThis._processing_oninput) {
-						var cur_status = pThis._composer.status;
+						var cur_status;
 						var delay_status = pThis._composer._delay_status;
 						if (delay_status != null) {
 							if (delay_status == nexacro._CompositionState.END) {
@@ -4524,7 +4519,7 @@ if (nexacro._Browser != "Runtime" && !nexacro.Element) {
 				var comp = pThis.parent_elem.linkedcontrol;
 
 				var value = pThis._getInputValue();
-				var pos = pThis.getElementCaretPos();
+				var pos;
 				if (pThis._beforeinput_result) {
 					var bcancle = false;
 					pThis._beforeinput_result.forEach(function (state) {
@@ -4538,7 +4533,7 @@ if (nexacro._Browser != "Runtime" && !nexacro.Element) {
 							case nexacro.InputElement.prototype._BeforeinputState.CONVERT_UPPER:
 							case nexacro.InputElement.prototype._BeforeinputState.CONVERT_LOWER:
 							case nexacro.InputElement.prototype._BeforeinputState.REPLACE:
-								if (pThis._beforeinput_result_data) {
+								if (pThis._beforeinput_result_data != null) {
 									pThis._updateInputValue(pThis._beforeinput_result_data, false, pThis._beforeinput_result_pos.begin, pThis._beforeinput_result_pos.end);
 								}
 								break;
@@ -4734,9 +4729,9 @@ if (nexacro._Browser != "Runtime" && !nexacro.Element) {
 		else if (window.clipboardData && window.clipboardData.getData) {
 			data = window.clipboardData.getData('text');
 		}
-		data = data.replace(/\r\n|\n/g, "");
 		var input_handle = (evt.target || evt.srcElement);
 		if (input_handle && !input_handle._linked_element._use_event_beforeinput && data) {
+			data = data.replace(/\r\n|\n/g, "");
 			var pThis = input_handle._linked_element;
 			var value = pThis._getInputValue();
 
@@ -4783,7 +4778,7 @@ if (nexacro._Browser != "Runtime" && !nexacro.Element) {
 		var input_handle = (evt.target || evt.srcElement);
 		if (input_handle) {
 			var pThis = input_handle._linked_element;
-
+			var comp;
 			var value = pThis._getInputValue();
 			var pos = pThis.getElementCaretPos();
 			pThis._composer.setStatus(nexacro._CompositionState.END, pos.end);
@@ -4802,13 +4797,12 @@ if (nexacro._Browser != "Runtime" && !nexacro.Element) {
 				}
 			}
 			else if (pThis._use_event_beforeinput && nexacro._OS == "Android") {
-				var comp = pThis.parent_elem.linkedcontrol;
+				comp = pThis.parent_elem.linkedcontrol;
 
 				var beforeinput_data = evt.data;
 				var beforeinput_type = evt.type;
 
 				var input_value = pThis._getInputValue();
-				var input_pos = pThis._composer.getOffset();
 
 				var composing_status = pThis.getCompositionStatus();
 				var beginOffset = pos.begin;
@@ -4819,15 +4813,21 @@ if (nexacro._Browser != "Runtime" && !nexacro.Element) {
 				}
 
 				if (endOffset == undefined) {
-					endOffset = Math.min(beginOffset + beforeinput_data.length, pThis.maxlength);
+					if (pThis.maxlength > 0) {
+						endOffset = Math.min(beginOffset + beforeinput_data.length, pThis.maxlength);
+					}
+					else {
+						endOffset = beginOffset + beforeinput_data.length;
+					}
 				}
 				beforeinput_data = beforeinput_data.substr(0, endOffset - beginOffset);
 
-				input_value = input_value.substring(0, beginOffset) + input_value.substring(endOffset, Math.min(input_value.length, pThis.maxlength));
+				input_value = input_value.substring(0, beginOffset) + input_value.substring(endOffset, Math.min(input_value.length, (pThis.maxlength > 0 ? pThis.maxlength : input_value.length)));
 
 				pThis._beforeinput_result = comp._on_beforekeyinput(pThis, beforeinput_data, composing_status, beginOffset, endOffset, beforeinput_type);
 				if (pThis._beforeinput_result) {
 					pThis._beforeinput_result.forEach(function (state) {
+						var caret_after_convert;
 						switch (state) {
 							case pThis._BeforeinputState.PASS:
 								break;
@@ -4840,7 +4840,7 @@ if (nexacro._Browser != "Runtime" && !nexacro.Element) {
 
 								break;
 							case pThis._BeforeinputState.CONVERT_UPPER:
-								var caret_after_convert = endOffset;
+								caret_after_convert = endOffset;
 
 								pThis._beforeinput_result_data = input_value.substring(0, beginOffset) + beforeinput_data.toUpperCase() + input_value.substring(endOffset, input_value.length);
 								pThis._beforeinput_result_pos = {
@@ -4849,7 +4849,7 @@ if (nexacro._Browser != "Runtime" && !nexacro.Element) {
 								};
 								break;
 							case pThis._BeforeinputState.CONVERT_LOWER:
-								var caret_after_convert = endOffset + beforeinput_data.length;
+								caret_after_convert = endOffset + beforeinput_data.length;
 
 								pThis._beforeinput_result_data = input_value.substring(0, beginOffset) + beforeinput_data.toLowerCase() + input_value.substring(endOffset);
 								pThis._beforeinput_result_pos = {
@@ -4872,7 +4872,7 @@ if (nexacro._Browser != "Runtime" && !nexacro.Element) {
 			}
 			pThis._composing_start = pThis._composing_end = undefined;
 
-			var comp = pThis.parent.linkedcontrol;
+			comp = pThis.parent.linkedcontrol;
 			if (comp) {
 				comp._on_input_compositionend(value);
 			}
@@ -5000,7 +5000,6 @@ if (nexacro._Browser != "Runtime" && !nexacro.Element) {
 			}
 			pThis._is_sys_focused = true;
 
-			var b_do_after_focus_processing = true;
 			var after_focus_processing_func = function () {
 				var _doc = pThis._getRootWindowHandle();
 				if (pThis.autoselect && pThis.inputtype != "date") {
@@ -5029,9 +5028,7 @@ if (nexacro._Browser != "Runtime" && !nexacro.Element) {
 				pThis._composer.setStatus(nexacro._CompositionState.NONE, pos.begin);
 			};
 
-			if (b_do_after_focus_processing) {
-				after_focus_processing_func();
-			}
+			after_focus_processing_func();
 		}
 	};
 
@@ -5101,11 +5098,6 @@ if (nexacro._Browser != "Runtime" && !nexacro.Element) {
 		if (touches && touches.length > 1) {
 			nexacro._stopSysEvent(evt);
 		}
-
-		var touches = evt.touches;
-		if (touches && touches.length > 1) {
-			nexacro._stopSysEvent(evt);
-		}
 	};
 
 	_pInputElement._on_sys_touchend = function (evt) {
@@ -5130,9 +5122,6 @@ if (nexacro._Browser != "Runtime" && !nexacro.Element) {
 
 			if (old_value) {
 				if (old_value.length > value.length) {
-					var range = this.getElementSelectionRange();
-					var pos = this.getElementCaretPos();
-
 					if (end < old_pos.end) {
 						var idx = old_value.substring(0, end).indexOf(value.substring(0, end));
 
@@ -5200,12 +5189,7 @@ if (nexacro._Browser != "Runtime" && !nexacro.Element) {
 	_pTextAreaElement._use_html_maxlength = false;
 
 	if (nexacro._BrowserType == "Edge") {
-		if (nexacro._BrowserVersion <= 14) {
-			_pTextAreaElement._BROWSER_SCROLLBAR_SIZE = 0;
-		}
-		else {
-			_pTextAreaElement._BROWSER_SCROLLBAR_SIZE = 0;
-		}
+		_pTextAreaElement._BROWSER_SCROLLBAR_SIZE = 0;
 	}
 	else if (nexacro._Browser == "IE" && nexacro._BrowserVersion == 11) {
 		_pTextAreaElement._BROWSER_SCROLLBAR_SIZE = 0;
@@ -5268,6 +5252,14 @@ if (nexacro._Browser != "Runtime" && !nexacro.Element) {
 
 		if (this.maxlength > 0 && this._use_html_maxlength) {
 			nexacro.__setDOMNode_MaxLength(handle, this.maxlength);
+		}
+
+		if (nexacro._enableaccessibility) {
+			nexacro.__setDOMAccessibility_LabelBy(handle, this.parent_elem.name);
+
+			if (nexacro._accessibilitytype == 4 || nexacro._accessibilitytype == 5) {
+				nexacro.__setDOMAccessibility_Role(handle, this.parent_elem.name);
+			}
 		}
 
 		if (this.handle) {
@@ -5612,7 +5604,6 @@ if (nexacro._Browser != "Runtime" && !nexacro.Element) {
 
 	_pTextAreaElement.setElementInputType = function (type, bImedisable) {
 		var input_handle = this.handle;
-		var new_handle;
 
 		if (this._imedisable != bImedisable) {
 			this._imedisable = bImedisable ? bImedisable : false;
@@ -6098,14 +6089,16 @@ if (nexacro._Browser != "Runtime" && !nexacro.Element) {
 	_pControlElement.borderBottomNone = false;
 
 	_pControlElement.create = function (win) {
+		var _doc, owner_elem, handle;
+		var handle_style;
 		if (!this._is_popup) {
-			var owner_elem = (this._is_nc_element) ? this.parent_elem : this.parent_elem.getContainerElement(this.position_step);
+			owner_elem = (this._is_nc_element) ? this.parent_elem : this.parent_elem.getContainerElement(this.position_step);
 			if (owner_elem && owner_elem.handle) {
 				if (!this.handle) {
 					this.owner_elem = owner_elem;
-					var _doc = win._doc || owner_elem._getRootWindowHandle();
+					_doc = win._doc || owner_elem._getRootWindowHandle();
 
-					var handle = _doc.createElement("div");
+					handle = _doc.createElement("div");
 					handle.id = this.name;
 					handle._linked_element = this;
 
@@ -6127,7 +6120,7 @@ if (nexacro._Browser != "Runtime" && !nexacro.Element) {
 							nexacro.__setDOMStyle_Size(innernodestyle, this.client_width, this.client_height);
 						}
 					}
-					var handle_style = handle.style;
+					handle_style = handle.style;
 					nexacro.__setDOMStyle_Pos(handle_style, this.left, this.top, bPositionRtl);
 					nexacro.__setDOMStyle_Size(handle_style, this.width, this.height);
 
@@ -6144,10 +6137,10 @@ if (nexacro._Browser != "Runtime" && !nexacro.Element) {
 			}
 		}
 		else {
-			var _doc = this._doc = win._doc;
-			var owner_elem = win;
+			_doc = this._doc = win._doc;
+			owner_elem = win;
 
-			var handle = _doc.createElement("div");
+			handle = _doc.createElement("div");
 			var linkedcontrol = this.linkedcontrol;
 
 			handle._linked_element = this;
@@ -6156,7 +6149,7 @@ if (nexacro._Browser != "Runtime" && !nexacro.Element) {
 			this.handle = this.dest_handle = handle;
 			nexacro.__setDOMNode_ClassName(handle, this._getElementClassName());
 
-			var handle_style = handle.style;
+			handle_style = handle.style;
 			nexacro.__setDOMStyle_Pos(handle_style, this.left, this.top);
 			nexacro.__setDOMStyle_Size(handle_style, this.width, this.height);
 
@@ -6706,7 +6699,7 @@ if (nexacro._Browser != "Runtime" && !nexacro.Element) {
 	};
 
 	_pControlElement.setElementCSSMapInfo = function (border, padding, edge) {
-		var change_border = false, change_padding = false, change_edge = false;
+		var change_border = false, change_padding = false;
 		if (this._border_info != border) {
 			this._border_info = border;
 			change_border = (this.border == null);
@@ -6848,9 +6841,7 @@ if (nexacro._Browser != "Runtime" && !nexacro.Element) {
 	};
 
 	_pControlElement.setElementBorder = function (border) {
-		var bUpdate = false;
-
-		if (this.border != border || bUpdate) {
+		if (this.border != border) {
 			this.border = border;
 			if (this.handle) {
 				nexacro.__setDOMStyle_BorderObject(this.handle.style, border, this.rtl);
@@ -7473,22 +7464,22 @@ if (nexacro._Browser != "Runtime" && !nexacro.Element) {
 	_pScrollableControlElement._type_name = "ScrollableControlElement";
 
 	_pScrollableControlElement.create = function (win) {
-		var owner_elem;
+		var owner_elem, _doc, handle, handle_style;
 		if (!this._is_popup) {
 			owner_elem = (this._is_nc_element) ? this.parent_elem : this.parent_elem.getContainerElement(this.position_step);
 			if (owner_elem && owner_elem.handle) {
 				if (!this.handle) {
 					this.owner_elem = owner_elem;
-					var _doc = win._doc || owner_elem._getRootWindowHandle();
+					_doc = win._doc || owner_elem._getRootWindowHandle();
 
-					var handle = _doc.createElement("div");
+					handle = _doc.createElement("div");
 					handle.id = this.name;
 					handle._linked_element = this;
 
 					this.handle = this.dest_handle = handle;
 					nexacro.__setDOMNode_ClassName(handle, this._getElementClassName());
 
-					var handle_style = handle.style;
+					handle_style = handle.style;
 					var bPositionRtl = this._isParentRtl();
 					nexacro.__setDOMStyle_Pos(handle_style, this.left, this.top, bPositionRtl);
 					nexacro.__setDOMStyle_Size(handle_style, this.width, this.height);
@@ -7500,17 +7491,17 @@ if (nexacro._Browser != "Runtime" && !nexacro.Element) {
 			}
 		}
 		else {
-			var _doc = win._doc;
+			_doc = win._doc;
 			owner_elem = win;
 
-			var handle = _doc.createElement("div");
+			handle = _doc.createElement("div");
 			handle.id = this.name;
 			handle._linked_element = this;
 
 			this.handle = this.dest_handle = handle;
 			nexacro.__setDOMNode_ClassName(handle, this._getElementClassName());
 
-			var handle_style = handle.style;
+			handle_style = handle.style;
 			nexacro.__setDOMStyle_Pos(handle_style, this.left, this.top);
 			nexacro.__setDOMStyle_Size(handle_style, this.width, this.height);
 
@@ -7890,15 +7881,17 @@ if (nexacro._Browser != "Runtime" && !nexacro.Element) {
 	};
 
 	_pScrollableControlElement._on_change_clientPos = function (left, top) {
+		var step_count = this._step_count;
+		var step_index = this._step_index;
+		var step_containers = this._step_containers;
+		var zclient_width = this._zclient_width;
+		var i;
+		var step_client_elem;
 		if (this._apply_client_padding) {
 			if (this._client_elem) {
-				var step_count = this._step_count;
-				var step_index = this._step_index;
-				var step_containers = this._step_containers;
 				if (step_count > 0 && step_containers) {
-					var zclient_width = this._zclient_width;
-					for (var i = 0; i < step_count; i++) {
-						var step_client_elem = step_containers[i];
+					for (i = 0; i < step_count; i++) {
+						step_client_elem = step_containers[i];
 						step_client_elem.setElementPosition(zclient_width * i, 0);
 						if (i == step_index) {
 							step_client_elem.setElementSize(zclient_width, this.container_maxheight);
@@ -7916,13 +7909,9 @@ if (nexacro._Browser != "Runtime" && !nexacro.Element) {
 		}
 		else if (this._client_elem) {
 			this._client_elem.setElementPosition(left, top);
-			var step_count = this._step_count;
-			var step_index = this._step_index;
-			var step_containers = this._step_containers;
 			if (step_count > 0 && step_containers) {
-				var zclient_width = this._zclient_width;
-				for (var i = 0; i < step_count; i++) {
-					var step_client_elem = step_containers[i];
+				for (i = 0; i < step_count; i++) {
+					step_client_elem = step_containers[i];
 					step_client_elem.setElementPosition(zclient_width * i, 0);
 				}
 
@@ -7972,16 +7961,16 @@ if (nexacro._Browser != "Runtime" && !nexacro.Element) {
 		var max_height = Math.max(height, this.container_maxheight);
 
 		var step_count = this._step_count;
-		var step_index = this._step_index;
 		var step_containers = this._step_containers;
-
+		var step_client_elem;
+		var i;
 		if (this._apply_client_padding) {
 			if (client_elem) {
 				client_elem.setElementSize(width, height);
 
 				if (step_count > 0 && step_containers) {
-					for (var i = 0; i < step_count; i++) {
-						var step_client_elem = step_containers[i];
+					for (i = 0; i < step_count; i++) {
+						step_client_elem = step_containers[i];
 						if (step_client_elem) {
 							step_client_elem.setElementSize(zclient_width, max_height);
 							dest_handle = step_client_elem.dest_handle;
@@ -7999,8 +7988,8 @@ if (nexacro._Browser != "Runtime" && !nexacro.Element) {
 		else {
 			if (client_elem) {
 				if (step_count > 0 && step_containers) {
-					for (var i = 0; i < step_count; i++) {
-						var step_client_elem = step_containers[i];
+					for (i = 0; i < step_count; i++) {
+						step_client_elem = step_containers[i];
 						if (step_client_elem) {
 							step_client_elem.setElementSize(zclient_width, max_height);
 						}
@@ -8054,10 +8043,7 @@ if (nexacro._Browser != "Runtime" && !nexacro.Element) {
 		var client_width = this.inner_width;
 		var client_height = this.inner_height;
 
-		var cur_inner_width = client_width;
-		var cur_inner_height = client_height;
 		var cur_client_width = this.client_width;
-		var cur_client_height = this.client_height;
 
 		if (this._apply_client_padding) {
 			var padding = this.padding ? this.padding : this._padding_info;
@@ -8083,13 +8069,6 @@ if (nexacro._Browser != "Runtime" && !nexacro.Element) {
 
 		var scroll_left = this.scroll_left;
 		var scroll_top = this.scroll_top;
-
-		if (zoomfactor != 1) {
-			zclient_width = zclient_width;
-			zclient_height = zclient_height;
-			container_maxwidth = container_maxwidth;
-			container_maxheight = container_maxheight;
-		}
 
 		var step_count = this._step_count;
 		var step_containers = this._step_containers;
@@ -8125,17 +8104,10 @@ if (nexacro._Browser != "Runtime" && !nexacro.Element) {
 				client_height -= this._hscroll_size;
 				zclient_height = client_height / zoomfactor;
 			}
-
-			hscroll_limit = 0;
 		}
 
 		if (container_maxheight > zclient_height) {
-			if (container_maxheight >= zclient_height) {
-				vscroll_limit = container_maxheight - zclient_height;
-			}
-			else if (container_maxheight > cur_client_height) {
-				vscroll_limit = container_maxheight - cur_client_height;
-			}
+			vscroll_limit = container_maxheight - zclient_height;
 
 			if ((scrolltype != "none" && scrolltype != "horizontal") && vscrollbartype != "none" && vscrollbartype != "autoindicator") {
 				client_width -= this._vscroll_size;
@@ -8166,7 +8138,6 @@ if (nexacro._Browser != "Runtime" && !nexacro.Element) {
 					hscroll_limit = container_maxwidth - cur_client_width;
 				}
 			}
-			vscroll_limit = 0;
 		}
 
 		if (step_count > 0 && step_containers) {
@@ -8310,9 +8281,10 @@ if (nexacro._Browser != "Runtime" && !nexacro.Element) {
 	_pFrameControlElement._doc = null;
 
 	_pFrameControlElement.create = function (win) {
+		var _doc, handle, handle_style, inner_node, innernodestyle;
 		if (!this.handle) {
 			if (this.parent_elem == null) {
-				var _doc = this._doc = win._doc;
+				_doc = this._doc = win._doc;
 				this.owner_elem = win;
 				this._is_window_element = true;
 				this.left = 0;
@@ -8326,7 +8298,7 @@ if (nexacro._Browser != "Runtime" && !nexacro.Element) {
 					this.height = win.clientHeight;
 				}
 
-				var handle = win.dest_handle;
+				handle = win.dest_handle;
 
 				handle.id = this.name;
 				handle._linked_element = this;
@@ -8335,18 +8307,18 @@ if (nexacro._Browser != "Runtime" && !nexacro.Element) {
 				nexacro.__setDOMNode_ClassName(handle, this._getElementClassName());
 
 				if (!this._is_simple_control) {
-					var inner_node = _doc.createElement("div");
+					inner_node = _doc.createElement("div");
 					this.dest_handle = inner_node;
 					nexacro.__setDOMNode_ClassName(inner_node, this._getElementNexaClassName("nexasimplecontainer"));
 					nexacro.__setDOMNode_Id(inner_node, "", "nexacontainer");
 					nexacro.__appendDOMNode(handle, inner_node);
 
-					var innernodestyle = inner_node.style;
+					innernodestyle = inner_node.style;
 					nexacro.__setDOMStyle_Pos(innernodestyle, this.client_left, this.client_top);
 					nexacro.__setDOMStyle_Size(innernodestyle, this.client_width, this.client_height);
 				}
 
-				var handle_style = handle.style;
+				handle_style = handle.style;
 
 
 				if (!nexacro._allow_default_pinchzoom && nexacro._isDesktop()) {
@@ -8362,8 +8334,8 @@ if (nexacro._Browser != "Runtime" && !nexacro.Element) {
 				var owner_elem = (this._is_nc_element) ? this.parent_elem : this.parent_elem.getContainerElement();
 				if (owner_elem && owner_elem.handle && !this.handle) {
 					this.owner_elem = owner_elem;
-					var _doc = owner_elem._getRootWindowHandle();
-					var handle = _doc.createElement("div");
+					_doc = owner_elem._getRootWindowHandle();
+					handle = _doc.createElement("div");
 
 					handle.id = this.name;
 					handle._linked_element = this;
@@ -8371,7 +8343,7 @@ if (nexacro._Browser != "Runtime" && !nexacro.Element) {
 					this.handle = this.dest_handle = handle;
 					nexacro.__setDOMNode_ClassName(handle, this._getElementClassName());
 
-					var handle_style = handle.style;
+					handle_style = handle.style;
 					if (owner_elem instanceof nexacro.ModalOverlayElement) {
 						if (!nexacro._allow_default_pinchzoom && nexacro._isDesktop()) {
 							nexacro.__setDOMStyle_Fixed(handle_style);
@@ -8380,13 +8352,13 @@ if (nexacro._Browser != "Runtime" && !nexacro.Element) {
 
 
 					if (!this._is_simple_control) {
-						var inner_node = _doc.createElement("div");
+						inner_node = _doc.createElement("div");
 						this.dest_handle = inner_node;
 						nexacro.__setDOMNode_ClassName(inner_node, this._getElementNexaClassName("nexasimplecontainer"));
 						nexacro.__setDOMNode_Id(inner_node, "", "nexacontainer");
 						nexacro.__appendDOMNode(handle, inner_node);
 
-						var innernodestyle = inner_node.style;
+						innernodestyle = inner_node.style;
 						nexacro.__setDOMStyle_Pos(innernodestyle, this.client_left, this.client_top);
 						if (this.client_width && this.client_height) {
 							nexacro.__setDOMStyle_Size(innernodestyle, this.client_width, this.client_height);
@@ -8418,8 +8390,8 @@ if (nexacro._Browser != "Runtime" && !nexacro.Element) {
 				if (this.handle != _win.dest_handle) {
 					var old_handle = this.handle;
 
-					var _doc = this._doc = _win._doc;
-					var handle = _win.dest_handle;
+					_doc = this._doc = _win._doc;
+					handle = _win.dest_handle;
 
 					this.owner_elem = _win;
 					this._is_window_element = true;
@@ -8433,7 +8405,7 @@ if (nexacro._Browser != "Runtime" && !nexacro.Element) {
 
 					this.handle = this.dest_handle = handle;
 
-					var handle_style = handle.style;
+					handle_style = handle.style;
 
 					if (this.border) {
 						this.border = null;
@@ -8710,9 +8682,10 @@ if (nexacro._Browser != "Runtime" && !nexacro.Element) {
 			return;
 		}
 
+		var i, border_elem;
 		var name_table = Array("lt", "t", "rt", "l", "r", "lb", "b", "rb");
-		for (var i = 0; i < 8; i++) {
-			var border_elem = new nexacro._FrameResizeBorderElement(this.parent_elem);
+		for (i = 0; i < 8; i++) {
+			border_elem = new nexacro._FrameResizeBorderElement(this.parent_elem);
 
 			border_elem.parent = this;
 
@@ -8723,8 +8696,8 @@ if (nexacro._Browser != "Runtime" && !nexacro.Element) {
 
 		var win = this.linkedcontrol._getWindow();
 
-		for (var i = 0; i < 8; i++) {
-			var border_elem = this._border_elems[i];
+		for (i = 0; i < 8; i++) {
+			border_elem = this._border_elems[i];
 			border_elem.linkedcontrol = this.linkedcontrol;
 			border_elem.create(win);
 		}
@@ -8792,12 +8765,11 @@ if (nexacro._Browser != "Runtime" && !nexacro.Element) {
 
 		var left = this.left;
 		var top = this.top;
-		var right = left + this.width;
-		var bottom = top + this.height;
 
 		var x = left;
 		var y = top;
-		for (var i = 0; i < 8; i++) {
+		var i;
+		for (i = 0; i < 8; i++) {
 			this._border_elems[i].setElementPosition(x, y);
 			switch (i) {
 				case 0:
@@ -8828,7 +8800,7 @@ if (nexacro._Browser != "Runtime" && !nexacro.Element) {
 			}
 		}
 		var w, h;
-		for (var i = 0; i < 8; i++) {
+		for (i = 0; i < 8; i++) {
 			if (i == 0 || i == 3 || i == 5) {
 				w = lw;
 			}
@@ -9126,6 +9098,8 @@ if (nexacro._Browser != "Runtime" && !nexacro.Element) {
 	__pContainerElement._use_container_move = true;
 	__pContainerElement.type = "";
 
+	var _bind_container_scroll_handler_after = nexacro._emptyFn;
+
 	var _bind_container_scroll_handler = function (elem) {
 		return function (evt) {
 			if (!evt && window.event) {
@@ -9137,12 +9111,15 @@ if (nexacro._Browser != "Runtime" && !nexacro.Element) {
 				return;
 			}
 
+			evt._node_activate_scroll = undefined;
+
 			if (elem._use_translate_scroll) {
 				target.scrollLeft = 0;
 				target.scrollTop = 0;
 			}
 			else {
 				if ((elem._scroll_top != target.scrollTop || elem._scroll_left != target.scrollLeft) && elem._use_onscroll_inner != true) {
+					evt._node_activate_scroll = true;
 					elem._callback_func_onscroll(evt);
 				}
 				else {
@@ -9152,6 +9129,8 @@ if (nexacro._Browser != "Runtime" && !nexacro.Element) {
 					elem._scroll_maxheight = target.scrollHeight;
 					elem._callback_func_onscroll(evt);
 				}
+
+				_bind_container_scroll_handler_after(elem, target.scrollLeft, target.scrollTop);
 			}
 		};
 	};
@@ -9337,17 +9316,19 @@ if (nexacro._Browser != "Runtime" && !nexacro.Element) {
 
 	__pContainerElement.createInnerContainer = function (_doc) {
 		var handle = this.handle;
+		var dest_handle;
+		var scroll_maxwidth, scroll_maxheight;
 		if (handle) {
 			if (this._use_translate_scroll) {
-				var dest_handle = this.dest_handle = _doc.createElement("div");
+				dest_handle = this.dest_handle = _doc.createElement("div");
 
 				nexacro.__setDOMNode_ClassName(dest_handle, this._getElementNexaClassName("nexainnercontainer"));
 				nexacro.__setDOMNode_Id(dest_handle, "", "nexacontainer");
 
 				nexacro.__appendDOMNode(handle, dest_handle);
 
-				var scroll_maxwidth = this._scroll_maxwidth || this.parent._scroll_maxwidth;
-				var scroll_maxheight = this._scroll_maxheight || this.parent._scroll_maxheight;
+				scroll_maxwidth = this._scroll_maxwidth || this.parent._scroll_maxwidth;
+				scroll_maxheight = this._scroll_maxheight || this.parent._scroll_maxheight;
 				if (scroll_maxwidth && scroll_maxheight) {
 					nexacro.__setDOMStyle_Size(dest_handle.style, scroll_maxwidth, scroll_maxheight);
 				}
@@ -9359,15 +9340,15 @@ if (nexacro._Browser != "Runtime" && !nexacro.Element) {
 			}
 			else {
 				if (this._use_onscroll_inner) {
-					var dest_handle = this.dest_handle = _doc.createElement("div");
+					dest_handle = this.dest_handle = _doc.createElement("div");
 
 					nexacro.__setDOMNode_ClassName(dest_handle, "nexainnercontainer");
 					nexacro.__setDOMNode_Id(dest_handle, "", "nexacontainer");
 
 					nexacro.__appendDOMNode(handle, dest_handle);
 
-					var scroll_maxwidth = this._scroll_maxwidth || this.parent._scroll_maxwidth;
-					var scroll_maxheight = this._scroll_maxheight || this.parent._scroll_maxheight;
+					scroll_maxwidth = this._scroll_maxwidth || this.parent._scroll_maxwidth;
+					scroll_maxheight = this._scroll_maxheight || this.parent._scroll_maxheight;
 					if (scroll_maxwidth && scroll_maxheight) {
 						nexacro.__setDOMStyle_Size(dest_handle.style, scroll_maxwidth, scroll_maxheight);
 					}
@@ -9439,7 +9420,7 @@ if (nexacro._Browser != "Runtime" && !nexacro.Element) {
 	};
 
 	__pContainerElement._setElementVScrollPos = function (vpos) {
-		if (this._scroll_top != vpos || this.parent._reset_scrollpos) {
+		if (this._scroll_top != vpos || this.parent._reset_scrollpos || this._use_container_move) {
 			var bRtl = this._isRtl();
 			this._scroll_top = vpos;
 			if (this._use_translate_scroll) {
@@ -9466,7 +9447,7 @@ if (nexacro._Browser != "Runtime" && !nexacro.Element) {
 	};
 
 	__pContainerElement._setElementHScrollPos = function (hpos) {
-		if (this._scroll_left != hpos || this.parent._reset_scrollpos) {
+		if (this._scroll_left != hpos || this.parent._reset_scrollpos || this._use_container_move) {
 			var bRtl = this._isRtl();
 
 			this._scroll_left = hpos;
@@ -9965,17 +9946,17 @@ if (nexacro._Browser != "Runtime" && !nexacro.Element) {
 	__pMultiInnerContainerElement.recalcInnerContainer = function () {
 		var owner_elem = this.owner_elem;
 		if (owner_elem) {
+			var i;
 			var _doc = this.owner_elem._getRootWindowHandle();
-
 			var len = this._calcInnerContainerPages();
 			if (len > 0) {
-				for (var i = 0; i < len; i++) {
+				for (i = 0; i < len; i++) {
 					this.appendInnerContainer(i, _doc);
 				}
 			}
 
 			if (len < 0) {
-				for (var i = len * -1; i > 0; i--) {
+				for (i = len * -1; i > 0; i--) {
 					this.removeInnerContainer();
 				}
 			}
@@ -10125,13 +10106,14 @@ if (nexacro._Browser != "Runtime" && !nexacro.Element) {
 		var _scroll_max = this._scroll_max_arr;
 		var idx = -1;
 
-		for (var i = 0, n = _scroll_max.length; i < n; i++) {
-			if (top < _scroll_max[i]) {
-				idx = i - 1;
-				break;
+		if (_scroll_max) {
+			for (var i = 0, n = _scroll_max.length; i < n; i++) {
+				if (top < _scroll_max[i]) {
+					idx = i - 1;
+					break;
+				}
 			}
 		}
-
 		return idx;
 	};
 
@@ -10285,10 +10267,8 @@ if (nexacro._Browser != "Runtime" && !nexacro.Element) {
 					str += '<param name="' + params.get_id(i) + '" value="' + params.get_item(i) + '" />';
 				}
 
-				var has_embed_node = false;
 				if (nexacro._BrowserVersion >= 9) {
 					if (this.pluginsrc || this.pluginpage) {
-						has_embed_node = true;
 						str += '<embed width="' + width + '" height="' + height + '" ';
 
 						var pluginsrc = this.pluginsrc;
@@ -10354,19 +10334,15 @@ if (nexacro._Browser != "Runtime" && !nexacro.Element) {
 		};
 	}
 	_pPluginElement.attachHandle = function (win) {
-		var object_node = null;
 		var handle = this.handle = win._doc.getElementById(this.name);
 		if (handle) {
 			this._object_node = handle;
-
-			if (handle) {
-				var embed_node = null;
-				var nodes = handle.getElementsByTagName("embed");
-				if (nodes && nodes.length > 0) {
-					embed_node = nodes[0];
-				}
-				this._embed_node = embed_node;
+			var embed_node = null;
+			var nodes = handle.getElementsByTagName("embed");
+			if (nodes && nodes.length > 0) {
+				embed_node = nodes[0];
 			}
+			this._embed_node = embed_node;
 		}
 	};
 
@@ -10639,9 +10615,10 @@ if (nexacro._Browser != "Runtime" && !nexacro.Element) {
 	};
 
 	_pPluginElement.setElementMIMEType = function (mimetype) {
+		var object_node;
 		if (this.mimetype != mimetype) {
 			this.mimetype = mimetype;
-			var object_node = this._object_node;
+			object_node = this._object_node;
 			if (object_node) {
 				nexacro.__setHTMLAttr_Proeprty(object_node, 'mimetype', mimetype);
 			}
@@ -10649,7 +10626,7 @@ if (nexacro._Browser != "Runtime" && !nexacro.Element) {
 		if (this.plugintype != mimetype) {
 			this.plugintype = mimetype;
 
-			var object_node = this._object_node;
+			object_node = this._object_node;
 			if (object_node) {
 				var _embed_node = this._embed_node;
 				if (_embed_node == null) {
@@ -10854,12 +10831,11 @@ if (nexacro._Browser != "Runtime" && !nexacro.Element) {
 				var script_node = _doc.createElement("script");
 				nexacro.__setHTMLAttr_Proeprty(script_node, 'for', this._object_id);
 
-				var nameFromToStringRegex = /^function\s?([^\s(]*)/;
 				var paramsFromToStringRegex = /\(.*?\)/;
 				var params = callback.toString().match(paramsFromToStringRegex)[0];
 				var eventValue = name + params;
 				var callfunc = "";
-
+				var frmidx, frmlen;
 				nexacro.__setHTMLAttr_Proeprty(script_node, 'event', eventValue);
 				nexacro.__setHTMLAttr_Proeprty(script_node, 'language', 'javascript');
 
@@ -10881,8 +10857,7 @@ if (nexacro._Browser != "Runtime" && !nexacro.Element) {
 									parentFrame2 instanceof nexacro.HFrameSet || 
 									parentFrame2 instanceof nexacro.ChildFrame) {
 									if (parentFrame2._frames && parentFrame2._frames.length) {
-										var frmidx;
-										var frmlen = parentFrame2._frames.length;
+										frmlen = parentFrame2._frames.length;
 										for (frmidx = 0; frmidx < frmlen; frmidx++) {
 											if (parentFrame2._frames[frmidx] == parentFrame) {
 												callfunc = '._frames[' + frmidx + ']' + callfunc;
@@ -10905,8 +10880,7 @@ if (nexacro._Browser != "Runtime" && !nexacro.Element) {
 							parentFrame2 = parentFrame.parent;
 							if (parentFrame2) {
 								if (parentFrame2._frames && parentFrame2._frames.length) {
-									var frmidx;
-									var frmlen = parentFrame2._frames.length;
+									frmlen = parentFrame2._frames.length;
 									for (frmidx = 0; frmidx < frmlen; frmidx++) {
 										if (parentFrame2._frames[frmidx] == parentFrame) {
 											callfunc = '._frames[' + frmidx + ']' + callfunc;
@@ -10939,8 +10913,6 @@ if (nexacro._Browser != "Runtime" && !nexacro.Element) {
 
 		_pPluginElement.removeEventHandler = function (name, callback) {
 			if (this.handle) {
-				var _doc = this._getRootWindowHandle();
-				var nameFromToStringRegex = /^function\s?([^\s(]*)/;
 				var paramsFromToStringRegex = /\(.*?\)/;
 				var params = callback.toString().match(paramsFromToStringRegex)[0];
 				var eventValue = name + params;
@@ -11007,7 +10979,6 @@ if (nexacro._Browser != "Runtime" && !nexacro.Element) {
 				var doc = this._getRootWindowHandle();
 				var script_node = doc.createElement("script");
 
-				var nameFromToStringRegex = /^function\s?([^\s(]*)/;
 				var paramsFromToStringRegex = /\(.*?\)/;
 				var params = callback.toString().match(paramsFromToStringRegex)[0];
 				var eventValue = name + params;
@@ -11016,6 +10987,7 @@ if (nexacro._Browser != "Runtime" && !nexacro.Element) {
 
 				var parentFrame, parentFrame2;
 				var callfunc = "";
+				var frmidx, frmlen;
 				parentFrame = this.component ? this.component.parent : null;
 				if (parentFrame) {
 					callfunc = "." + this.component.id + '["' + name + '"]; \n';
@@ -11033,8 +11005,7 @@ if (nexacro._Browser != "Runtime" && !nexacro.Element) {
 									parentFrame2 instanceof nexacro.HFrameSet || 
 									parentFrame2 instanceof nexacro.ChildFrame) {
 									if (parentFrame2._frames && parentFrame2._frames.length) {
-										var frmidx;
-										var frmlen = parentFrame2._frames.length;
+										frmlen = parentFrame2._frames.length;
 										for (frmidx = 0; frmidx < frmlen; frmidx++) {
 											if (parentFrame2._frames[frmidx] == parentFrame) {
 												callfunc = '._frames[' + frmidx + ']' + callfunc;
@@ -11057,8 +11028,7 @@ if (nexacro._Browser != "Runtime" && !nexacro.Element) {
 							parentFrame2 = parentFrame.parent;
 							if (parentFrame2) {
 								if (parentFrame2._frames && parentFrame2._frames.length) {
-									var frmidx;
-									var frmlen = parentFrame2._frames.length;
+									frmlen = parentFrame2._frames.length;
 									for (frmidx = 0; frmidx < frmlen; frmidx++) {
 										if (parentFrame2._frames[frmidx] == parentFrame) {
 											callfunc = '._frames[' + frmidx + ']' + callfunc;
@@ -11097,8 +11067,6 @@ if (nexacro._Browser != "Runtime" && !nexacro.Element) {
 				nexacro.__removeHTMLAttr_Proeprty(object_node, name);
 				object_node.removeAttribute(name);
 
-				var _doc = this._getRootWindowHandle();
-				var nameFromToStringRegex = /^function\s?([^\s(]*)/;
 				var paramsFromToStringRegex = /\(.*?\)/;
 				var params = callback.toString().match(paramsFromToStringRegex)[0];
 				var eventValue = name + params;
@@ -11347,15 +11315,35 @@ if (nexacro._Browser != "Runtime" && !nexacro.Element) {
 			}
 		}
 		catch (e) {
-			;
-		}
-		finally {
 		}
 	};
 
 	var _iframe_eventhandler_ontouchmove = function (evt) {
 		var target;
 		var scroll_target;
+
+		function getDirection (tInfo1, tInfo2) {
+			var gap_x = tInfo2[2] - tInfo1[2];
+			var gap_y = tInfo2[3] - tInfo1[3];
+
+			if (Math.abs(gap_y) >= Math.abs(gap_x)) {
+				if (gap_y > 0) {
+					return 1;
+				}
+				else {
+					return 2;
+				}
+			}
+			else {
+				if (gap_x < 0) {
+					return 4;
+				}
+				else {
+					return 8;
+				}
+			}
+		}
+
 		if (nexacro._Browser == "IE") {
 			target = evt.srcElement;
 		}
@@ -11393,42 +11381,10 @@ if (nexacro._Browser != "Runtime" && !nexacro.Element) {
 
 				var touchInfo = [clientX, clientY, screenX, screenY];
 
-				function getDirection (tInfo1, tInfo2) {
-					var gap_x = tInfo2[2] - tInfo1[2];
-					var gap_y = tInfo2[3] - tInfo1[3];
 
-					if (Math.abs(gap_y) >= Math.abs(gap_x)) {
-						if (gap_y > 0) {
-							return 1;
-						}
-						else {
-							return 2;
-						}
-					}
-					else {
-						if (gap_x < 0) {
-							return 4;
-						}
-						else {
-							return 8;
-						}
-					}
-				}
-
-				function getDistance (dir, tInfo1, tInfo2) {
-					var gap_x = tInfo2[2] - tInfo1[2];
-					var gap_y = tInfo2[3] - tInfo1[3];
-					if (dir < 3) {
-						return gap_y;
-					}
-					else {
-						return gap_x;
-					}
-				}
 
 				var pNode = target.parentNode;
 				var dir = getDirection(_doc._nexacro_preTouchInfo, touchInfo);
-				var distance = getDistance(dir, _doc._nexacro_preTouchInfo, touchInfo);
 				var bNexacroScroll;
 				var _win = _doc.defaultView || _doc.parentWindow;
 
@@ -11464,16 +11420,14 @@ if (nexacro._Browser != "Runtime" && !nexacro.Element) {
 
 					var scrollHeight = scroll_target.scrollHeight || _doc.documentElement.scrollHeight;
 					var scrollTop = scroll_target.scrollTop || _doc.documentElement.scrollTop;
-					if (bNexacroScroll === undefined) {
-						if (dir == 1) {
-							if (scrollTop == 0) {
-								bNexacroScroll = true;
-							}
+					if (dir == 1) {
+						if (scrollTop == 0) {
+							bNexacroScroll = true;
 						}
-						else {
-							if (scrollTop + clientHeight >= scrollHeight) {
-								bNexacroScroll = true;
-							}
+					}
+					else {
+						if (scrollTop + clientHeight >= scrollHeight) {
+							bNexacroScroll = true;
 						}
 					}
 					var preClientY = _doc._nexacro_preTouchInfo[1];
@@ -11509,16 +11463,14 @@ if (nexacro._Browser != "Runtime" && !nexacro.Element) {
 					var scrollWidth = scroll_target.scrollWidth || _doc.documentElement.scrollWidth;
 					var scrollLeft = scroll_target.scrollLeft || _doc.documentElement.scrollLeft;
 
-					if (bNexacroScroll === undefined) {
-						if (dir == 8) {
-							if (scrollLeft == 0) {
-								bNexacroScroll = true;
-							}
+					if (dir == 8) {
+						if (scrollLeft == 0) {
+							bNexacroScroll = true;
 						}
-						else {
-							if (scrollLeft + clientWidth >= scrollWidth) {
-								bNexacroScroll = true;
-							}
+					}
+					else {
+						if (scrollLeft + clientWidth >= scrollWidth) {
+							bNexacroScroll = true;
 						}
 					}
 
@@ -11625,7 +11577,6 @@ if (nexacro._Browser != "Runtime" && !nexacro.Element) {
 		}
 		if (target) {
 			var _doc = target.ownerDocument;
-			var _body = _doc.body;
 			var ct = _doc._nexacro_iframe_contaniner;
 
 			if (_doc._nexacro_bScroll) {
@@ -11678,8 +11629,9 @@ if (nexacro._Browser != "Runtime" && !nexacro.Element) {
 		}
 	};
 
+	var _iframe_eventhandler_onload;
 	if (nexacro._Browser == "IE") {
-		var _iframe_eventhandler_onload = function (evt) {
+		_iframe_eventhandler_onload = function (evt) {
 			if (window.event) {
 				evt = window.event;
 			}
@@ -11714,7 +11666,7 @@ if (nexacro._Browser != "Runtime" && !nexacro.Element) {
 		};
 	}
 	else {
-		var _iframe_eventhandler_onload = function (evt) {
+		_iframe_eventhandler_onload = function (evt) {
 			var node = evt.target;
 			if (!node) {
 				return;
@@ -11916,7 +11868,7 @@ if (nexacro._Browser != "Runtime" && !nexacro.Element) {
 			this._document = null;
 		}
 
-		var _win = comp._getWindow();
+		_win = comp._getWindow();
 		var cur_focus_paths = _win.getCurrentFocusPaths();
 		var pThis = comp;
 
@@ -12068,9 +12020,10 @@ if (nexacro._Browser != "Runtime" && !nexacro.Element) {
 				_doc = this._document = handle.contentDocument || handle.contentWindow.document;
 			}
 			var value = null;
+			var pobject;
 			if (name) {
 				if (name === "document") {
-					var pobject = new nexacro.PluginObject();
+					pobject = new nexacro.PluginObject();
 					pobject.handle = _doc;
 					return pobject;
 				}
@@ -12079,13 +12032,13 @@ if (nexacro._Browser != "Runtime" && !nexacro.Element) {
 					if (!_win) {
 						_win = this._window = handle.contentWindow;
 					}
-					var pobject = new nexacro.PluginObject();
+					pobject = new nexacro.PluginObject();
 					pobject.handle = _win;
 					return pobject;
 				}
 				value = handle[name];
 				if (value != null && typeof (value) == "object") {
-					var pobject = new nexacro.PluginObject();
+					pobject = new nexacro.PluginObject();
 					pobject.handle = value;
 					return pobject;
 				}
@@ -12211,7 +12164,6 @@ if (nexacro._Browser != "Runtime" && !nexacro.Element) {
 			return;
 		}
 
-		var name = arguments[0];
 
 		var fn_name = Array.prototype.shift.call(arguments);
 		return this._window[fn_name].apply(this._window, arguments);
@@ -12412,7 +12364,6 @@ if (nexacro._Browser != "Runtime" && !nexacro.Element) {
 			if (source) {
 				file_type = (source + "").substring(source.lastIndexOf(".") + 1).toLowerCase();
 			}
-			var type = this._getType(file_type);
 			var node_name = this._getNodeType(file_type);
 			var handle = _doc.createElement(node_name);
 
@@ -12675,10 +12626,8 @@ if (nexacro._Browser != "Runtime" && !nexacro.Element) {
 			if (source) {
 				file_type = (source + "").substring(source.lastIndexOf(".") + 1).toLowerCase();
 			}
-			var type = this._getType(file_type);
 			var node_name = this._node_type = this._getNodeType(file_type);
 			this.owner_elem = owner_elem;
-			var _doc = owner_elem._getRootWindowHandle();
 			var str = "";
 			str += "<" + node_name + " ";
 
@@ -12783,7 +12732,56 @@ if (nexacro._Browser != "Runtime" && !nexacro.Element) {
 	_pCanvasElement._matrix_stack = [];
 	_pCanvasElement.lineType = "solid";
 
-	_pCanvasElement.createPattern = function () {
+	_pCanvasElement.createPattern = function (imagesource, repeat_opt, size) {
+		var handle = this.handle;
+		if (handle) {
+			var pattern = new nexacro._CanvasFillPattern();
+			pattern.repeattype = repeat_opt;
+			pattern.basecanvas = this;
+			if (imagesource && imagesource instanceof nexacro.CanvasElement) {
+				var canvas = imagesource.handle._draw_ctx.canvas;
+				pattern.value = nexacro.__createCanvasPattern(handle, canvas, repeat_opt);
+				pattern.isloaded = true;
+
+				var url = imagesource.handle._draw_node.toDataURL();
+				if (url) {
+					var imgObj = new nexacro.Image();
+
+					if (size) {
+						imgObj.width = size.width;
+						imgObj.height = size.height;
+					}
+					imgObj.src = url;
+					imgObj.handle = nexacro._getImageObject(url, pattern.onloadcallback, pattern);
+
+					pattern.imageobject = imgObj;
+				}
+			}
+			else if (imagesource && imagesource instanceof nexacro.Image) {
+				pattern.imageobject = imagesource;
+
+				if (imagesource.handle) {
+					pattern.value = nexacro.__createCanvasPattern(handle, imagesource.handle, repeat_opt);
+					if (pattern.value) {
+						pattern.isloaded = true;
+						return pattern;
+					}
+				}
+
+				if (size) {
+					pattern.imageobject.width = size.width;
+					pattern.imageobject.height = size.height;
+				}
+				if (imagesource.src) {
+					imagesource.handle = nexacro._getImageObject(imagesource.src, pattern.onloadcallback, pattern);
+				}
+				else {
+					pattern.isloaded = false;
+				}
+			}
+			return pattern;
+		}
+
 		return null;
 	};
 
@@ -12809,6 +12807,9 @@ if (nexacro._Browser != "Runtime" && !nexacro.Element) {
 			this.fillStyle = fillstyle;
 			if (fillstyle instanceof nexacro._ColorObject) {
 				nexacro.__setCanvasFillColor(handle, fillstyle);
+			}
+			else if (fillstyle instanceof nexacro._CanvasFillPattern) {
+				nexacro.__setCanvasFillPattern(handle, fillstyle);
 			}
 			else {
 				nexacro.__setCanvasFillGradation(handle, fillstyle);
@@ -13750,7 +13751,49 @@ if (nexacro._Browser != "Runtime" && !nexacro.Element) {
 	};
 
 
+	nexacro._CanvasFillPattern = function () {
+		this.imageobject = null;
+		this.repeattype = null;
+		this.value = null;
+		this.isloaded = false;
+		this.control = null;
+		this.basecanvas = null;
+		this.controlonloadcallback = null;
+	};
+	var __pCanvasFillPattern = nexacro._CanvasFillPattern.prototype;
 
+	__pCanvasFillPattern.onloadcallback = function (imageurl, width, height, handle, errstatus, temp, fireerrorcode, returncode, path, locationuri) {
+		this.imageobject.width = width;
+		this.imageobject.height = height;
+		this.isloaded = true;
+
+		if (errstatus < 0) {
+			this.isloaded = false;
+		}
+		else {
+			if (handle) {
+				this.imageobject.handle = handle;
+			}
+			if (!this.value) {
+				this.value = nexacro.__createCanvasPattern(this.basecanvas.handle, this.imageobject.handle, this.repeattype);
+			}
+		}
+		if (this.control && this.controlonloadcallback) {
+			this.control.call(this.controlonloadcallback, this);
+		}
+	};
+
+	__pCanvasFillPattern.clear = function () {
+		if (this.imageobject) {
+			delete this.imageobject;
+		}
+		this.imageobject = null;
+		this.repeattype = null;
+		this.value = null;
+		this.isloaded = null;
+		this.control = null;
+		this.controlonloadcallback = null;
+	};
 	nexacro._CanvasGradient = function (type) {
 		this.type = type;
 		this.x0 = 0;
@@ -13842,9 +13885,10 @@ if (nexacro._Browser != "Runtime" && !nexacro.Element) {
 		if (handle) {
 			nexacro._stopSysObserving(handle, "scroll", "onscroll", this._syshandler_onscroll_forward);
 
+			var i, n;
 			if (this._target_vscroll_elements) {
 				if (nexacro._isArray(this._target_vscroll_elements)) {
-					for (var i = 0, n = this._target_vscroll_elements.length; i < n; i++) {
+					for (i = 0, n = this._target_vscroll_elements.length; i < n; i++) {
 						this._target_vscroll_elements[i] = null;
 					}
 				}
@@ -13854,7 +13898,7 @@ if (nexacro._Browser != "Runtime" && !nexacro.Element) {
 
 			if (this._target_hscroll_elements) {
 				if (nexacro._isArray(this._target_hscroll_elements)) {
-					for (var i = 0, n = this._target_hscroll_elements.length; i < n; i++) {
+					for (i = 0, n = this._target_hscroll_elements.length; i < n; i++) {
 						this._target_hscroll_elements[i] = null;
 					}
 				}
@@ -13994,27 +14038,13 @@ if (nexacro._Browser != "Runtime" && !nexacro.Element) {
 		var scroll_left = this.scroll_left;
 		var scroll_top = this.scroll_top;
 
-		if (zoomfactor != 1) {
-			zclient_width = zclient_width;
-			zclient_height = zclient_height;
-			zclient_width_body = zclient_width_body;
-			zclient_height_body = zclient_height_body;
-			container_maxwidth = container_maxwidth;
-			container_maxheight = container_maxwidth;
-		}
-
 		var step_count = this._step_count;
-		var step_index = this._step_index;
 		var step_containers = this._step_containers;
 		if (step_count > 0 && step_containers) {
 			container_maxwidth = step_count * zclient_width_body;
 		}
 
-		var reset_vlimit = false;
-		var reset_hlimit = false;
 
-		var hscroll_visible = false;
-		var vscroll_visible = false;
 
 		var hscroll_limit = 0;
 		var vscroll_limit = 0;
@@ -14041,8 +14071,6 @@ if (nexacro._Browser != "Runtime" && !nexacro.Element) {
 				zclient_height = client_height / zoomfactor;
 				zclient_height_body -= this._hscroll_size / zoomfactor;
 			}
-
-			hscroll_limit = 0;
 		}
 
 		if (zclient_height_body >= 0 && container_maxheight > zclient_height_body) {
@@ -14058,7 +14086,6 @@ if (nexacro._Browser != "Runtime" && !nexacro.Element) {
 				if (hscrollbartype != "none" && hscrollbartype != "autoindicator" && hscroll_limit == 0) {
 					client_height -= this._hscroll_size;
 					zclient_height = client_height / zoomfactor;
-					zclient_height_body -= this._hscroll_size / zoomfactor;
 					vscroll_limit += this._hscroll_size;
 				}
 				hscroll_limit = container_maxwidth - zclient_width_body;
@@ -14074,8 +14101,6 @@ if (nexacro._Browser != "Runtime" && !nexacro.Element) {
 					hscroll_limit = container_maxwidth - zclient_width_body;
 				}
 			}
-
-			vscroll_limit = 0;
 		}
 
 		if (step_count > 0 && step_containers) {
@@ -14087,7 +14112,6 @@ if (nexacro._Browser != "Runtime" && !nexacro.Element) {
 		}
 
 		if (this.hscroll_limit != hscroll_limit) {
-			reset_hlimit = true;
 			this.hscroll_limit = hscroll_limit;
 
 			if (scroll_left > hscroll_limit) {
@@ -14096,7 +14120,6 @@ if (nexacro._Browser != "Runtime" && !nexacro.Element) {
 		}
 
 		if (this.vscroll_limit != vscroll_limit) {
-			reset_vlimit = true;
 			this.vscroll_limit = vscroll_limit;
 
 			if (scroll_top > vscroll_limit) {
@@ -14262,10 +14285,6 @@ if (nexacro._Browser != "Runtime" && !nexacro.Element) {
 		var v_element = this._target_vscroll_elements;
 		if (nexacro._isArray(v_element)) {
 			v_element = v_element[0];
-		}
-		var h_element = this._target_hscroll_elements;
-		if (nexacro._isArray(h_element)) {
-			h_element = h_element[0];
 		}
 
 		this._setContainerMaxHeight(height);
@@ -14639,29 +14658,40 @@ if (nexacro._Browser != "Runtime" && !nexacro.Element) {
 		var _scroll_max = this._scroll_max_arr;
 		var _doc = this.owner_elem._getRootWindowHandle();
 
-		this._removeExtinners();
-		this._ext_inners = [];
+		this._deleteExtinners(_scroll_max.length - 1);
+
+		var newinners = this._ext_inners;
+		var newinners_cnt = newinners.length;
+		var _ext_inner;
+		var j = 0;
 
 		if (_scroll_max.length > 0) {
 			var test = ["red", "orange", "yellow", "green", "blue", "navy", "pupple"];
 			for (var i = 1; i < _scroll_max.length; i++) {
-				var _ext_inner = _doc.createElement("div");
-				nexacro.__setDOMNode_ClassName(_ext_inner, "nexainnercontainer");
-				nexacro.__setDOMNode_Id(_ext_inner, "", dest_handle.id + "_ext_" + (i - 1));
-				nexacro.__setDOMNode_Selectable(_ext_inner, false);
-
-				var inner_style = _ext_inner.style;
-				nexacro.__setDOMStyle_Absolute(inner_style);
-				nexacro.__setDOMStyle_Pos(inner_style, 0, this.height);
-				nexacro.__setDOMStyle_Size(_ext_inner.style, this.width, _scroll_max[i] - _scroll_max[i - 1]);
-
-				if (nexacro._bigdata_innertest) {
-					_ext_inner.style.border = "2px solid " + test[i - 1];
+				if (i <= newinners_cnt) {
+					_ext_inner = newinners[j++];
+					nexacro.__setDOMStyle_Size(_ext_inner.style, this.width, _scroll_max[i] - _scroll_max[i - 1]);
+					continue;
 				}
+				else {
+					_ext_inner = _doc.createElement("div");
+					nexacro.__setDOMNode_ClassName(_ext_inner, "nexainnercontainer");
+					nexacro.__setDOMNode_Id(_ext_inner, "", dest_handle.id + "_ext_" + (i - 1));
+					nexacro.__setDOMNode_Selectable(_ext_inner, false);
 
-				nexacro.__appendDOMNode(handle, _ext_inner);
+					var inner_style = _ext_inner.style;
+					nexacro.__setDOMStyle_Absolute(inner_style);
+					nexacro.__setDOMStyle_Pos(inner_style, 0, this.height);
+					nexacro.__setDOMStyle_Size(_ext_inner.style, this.width, _scroll_max[i] - _scroll_max[i - 1]);
 
-				this._ext_inners.push(_ext_inner);
+					if (nexacro._bigdata_innertest) {
+						_ext_inner.style.border = "2px solid " + test[i - 1];
+					}
+
+					nexacro.__appendDOMNode(handle, _ext_inner);
+
+					newinners.push(_ext_inner);
+				}
 			}
 		}
 	};
@@ -14695,10 +14725,12 @@ if (nexacro._Browser != "Runtime" && !nexacro.Element) {
 		var _scroll_max = this._scroll_max_arr;
 		var idx = -1;
 
-		for (var i = 0, n = _scroll_max.length; i < n; i++) {
-			if (top < _scroll_max[i]) {
-				idx = i - 1;
-				break;
+		if (_scroll_max) {
+			for (var i = 0, n = _scroll_max.length; i < n; i++) {
+				if (top < _scroll_max[i]) {
+					idx = i - 1;
+					break;
+				}
 			}
 		}
 		return idx;
@@ -14712,6 +14744,20 @@ if (nexacro._Browser != "Runtime" && !nexacro.Element) {
 			nexacro.__removeDOMNode(handle, ext_inners[i]);
 		}
 		this._ext_inners = null;
+	};
+
+	__pGridBandContainerElement._deleteExtinners = function (keepcnt) {
+		var handle = this.handle;
+		var ext_inners = this._ext_inners;
+
+		if (!keepcnt) {
+			keepcnt = 0;
+		}
+
+		for (var i = ext_inners.length - 1; i >= keepcnt; i++) {
+			nexacro.__removeDOMNode(handle, ext_inners[i]);
+			ext_inners.splice(i, 1);
+		}
 	};
 
 	if (nexacro._use_translate_scroll) {
@@ -14750,7 +14796,6 @@ if (nexacro._Browser != "Runtime" && !nexacro.Element) {
 					return;
 				}
 
-				var elem_scroll_top = container._scroll_top | 0;
 
 				if (target.scrollLeft > 0) {
 					container._noEventScroll = true;
@@ -14821,12 +14866,9 @@ if (nexacro._Browser != "Runtime" && !nexacro.Element) {
 			}
 		};
 
-		__pGridBandContainerElement._refreshDOM = function () {
-			;
-		};
+		__pGridBandContainerElement._refreshDOM = nexacro._emptyFn;
 
 		__pGridBandContainerElement.destroy = function () {
-			var handle = this.handle;
 			this._destroyElementHandle();
 
 			this._removeExtinners();
@@ -15099,9 +15141,8 @@ if (nexacro._Browser != "Runtime" && !nexacro.Element) {
 
 						var extinner_top, extinner_handle;
 						var i, n;
-
+						var extinner_height, nextinner_handle;
 						if (dir > 0) {
-							var extinner_height, nextinner_handle;
 							for (i = 0, n = scroll_max_arr.length - 1; i < n; i++) {
 								if (vpos < scroll_max_arr[0]) {
 									break;
@@ -15156,7 +15197,6 @@ if (nexacro._Browser != "Runtime" && !nexacro.Element) {
 							}
 						}
 						else if (dir < 0) {
-							var extinner_height, nextinner_handle;
 							for (i = 0, n = scroll_max_arr.length; i < n; i++) {
 								if (vpos <= scroll_max_arr[i]) {
 									if (i == 0) {
@@ -15213,10 +15253,8 @@ if (nexacro._Browser != "Runtime" && !nexacro.Element) {
 			}
 		};
 
-		__pGridBandContainerElement._refreshDOM = function () {
-		};
+		__pGridBandContainerElement._refreshDOM = nexacro._emptyFn;
 	}
-	;
 
 
 
@@ -15229,7 +15267,17 @@ if (nexacro._Browser != "Runtime" && !nexacro.Element) {
 		if (nexacro._Browser == "IE") {
 			this._client_body_element = new nexacro._ContainerElement(this, false, "body");
 			this._client_body_element._callback_func_onscroll = function (evt) {
-				this.parent.linkedcontrol._callback_func_onscroll(this._scroll_left, this._scroll_top);
+				if (evt._node_activate_scroll) {
+					var target = evt.srcElement || evt.target;
+					if (!target) {
+						return;
+					}
+
+					this.parent.linkedcontrol._callback_func_onscroll_node_acivate(target.scrollLeft);
+				}
+				else {
+					this.parent.linkedcontrol._callback_func_onscroll(this._scroll_left, this._scroll_top);
+				}
 			};
 		}
 		else {
@@ -15296,6 +15344,20 @@ if (nexacro._Browser != "Runtime" && !nexacro.Element) {
 		}
 	};
 
+	_pGridRowControlElement._removeElementHandle = function () {
+		var handle = this.handle;
+		if (handle) {
+			var dest_handle;
+			handle._linked_element = null;
+			if (this._is_nc_element) {
+				dest_handle = (this.owner_elem ? this.owner_elem.handle : null);
+			}
+			else {
+				dest_handle = (this.owner_elem ? this.owner_elem._getDestHandle(this.top) : null);
+			}
+			nexacro.__removeDOMNode(dest_handle, handle);
+		}
+	};
 
 	_pGridRowControlElement._on_destroy = function () {
 		var handle = this.handle;

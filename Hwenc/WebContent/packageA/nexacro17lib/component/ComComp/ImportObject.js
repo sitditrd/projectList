@@ -40,7 +40,6 @@ if (!nexacro.ExcelImportObject) {
 
 	delete _pExcelImportErrorEventInfo;
 
-
 	nexacro.ImportTypes = 
 		{
 		EXCEL : 0x0100, 
@@ -66,11 +65,14 @@ if (!nexacro.ExcelImportObject) {
 		this.parent = parent;
 
 		var unique_id = this._unique_id = this.parent._unique_id + "_" + this.id;
-		if (!nexacro._get_hidden_frame(unique_id, this._hidden_frame_handle)) {
-			nexacro._create_hidden_frame(unique_id, this._uploadComplete, this, "import");
-			nexacro._append_hidden_item(unique_id, "upfile", this._checkUploadFile, this, this._hidden_frame_handle);
-			nexacro._append_hidden_textitem(unique_id, "ds_command");
+
+		if (nexacro._get_hidden_frame(unique_id, this._hidden_frame_handle)) {
+			nexacro._destroy_hidden_frame(unique_id, this._hidden_frame_handle);
 		}
+
+		nexacro._create_hidden_frame(unique_id, this._uploadComplete, this, "import");
+		nexacro._append_hidden_item(unique_id, "upfile", this._checkUploadFile, this, this._hidden_frame_handle);
+		nexacro._append_hidden_textitem(unique_id, "ds_command");
 
 		this.onerror = new nexacro.EventListener("onerror");
 		this.onsuccess = new nexacro.EventListener("onsuccess");
@@ -98,6 +100,8 @@ if (!nexacro.ExcelImportObject) {
 	_pExcelImport._responseData = "";
 	_pExcelImport._responseRVal = null;
 	_pExcelImport._responseLVal = null;
+	_pExcelImport.userawdatevalue = false;
+	_pExcelImport._userawdatevalue = false;
 	_pExcelImport.userawnumbervalue = true;
 	_pExcelImport._userawnumbervalue = true;
 	_pExcelImport._user_data = null;
@@ -173,13 +177,13 @@ if (!nexacro.ExcelImportObject) {
 	_pExcelImport.set_commcompress = function (v) {
 		if (v != this.commcompress) {
 			this.commcompress = v;
-			switch (v.toString().toUpperCase()) {
-				case "COMPRESS":
-					this._commcompress = true;
-					break;
-				default:
-					this._commcompress = false;
-					break;
+
+			v = v.toString().toUpperCase();
+			if (v == "COMPRESS") {
+				this._commcompress = true;
+			}
+			else {
+				this._commcompress = false;
 			}
 		}
 		return v;
@@ -189,6 +193,14 @@ if (!nexacro.ExcelImportObject) {
 		if (this.importfilemode != v) {
 			this.importfilemode = v;
 			this._importfilemode = v == "server" ? 1 : 0;
+		}
+		return v;
+	};
+
+	_pExcelImport.set_userawdatevalue = function (v) {
+		if (this.userawdatevalue != v) {
+			this.userawdatevalue = v;
+			this._userawdatevalue = nexacro._toBoolean(v);
 		}
 		return v;
 	};
@@ -212,12 +224,12 @@ if (!nexacro.ExcelImportObject) {
 		var obj = {
 		};
 		if (range) {
-			if (range.indexOf("!") > 0) {
+			if (range.indexOf("!") >= 0) {
 				var rg = range.split("!");
 				obj.sheet = rg[0];
 				var cells = rg[1];
 				var temp;
-				if (cells.indexOf(":") > 0) {
+				if (cells.indexOf(":") >= 0) {
 					cells = cells.split(":");
 					temp = this._getExcelRowCol(cells[0]);
 					obj.startRow = temp[1] ? temp[1] : "";
@@ -292,8 +304,6 @@ if (!nexacro.ExcelImportObject) {
 					}
 					this._responseRVal.push(responArr[1]);
 					temp_response += " " + responArr[0] + "=" + responArr[1];
-
-					responArr = null;
 				}
 			}
 			this._responseData = temp_response;
@@ -484,23 +494,21 @@ if (!nexacro.ExcelImportObject) {
 		var str = "<Import>";
 		str += "<Sheets>";
 
-
-
 		var sheets = this._range.split("]");
 		var s_len = sheets.length - 1;
 		s_len = s_len == 0 ? 1 : s_len;
-		var properties = "";
+		var properties, property;
+		var output_num = 1;
 
 		for (var i = 0; i < s_len; i++) {
 			str += "<Sheet ";
 
 			properties = sheets[i].match(/[_A-Za-z0-9]+=[\(\)_!:A-Za-z0-9가-힣 \.\-]+/g);
-
 			if (properties == null) {
 				var range = sheets[i];
-				if (range.indexOf("!") > 0) {
+				if (range.indexOf("!") >= 0) {
 					var range_arr = range.split("!");
-					if (range_arr[1].indexOf(":") > 0) {
+					if (range_arr[1].indexOf(":") >= 0) {
 						var sheet = range_arr[0];
 						var rangeitem = range_arr[1].split(":");
 						var start_row = rangeitem[0].match(/[0-9]+/);
@@ -520,14 +528,11 @@ if (!nexacro.ExcelImportObject) {
 				}
 			}
 			else {
-				var tmp_num = 1;
 				var flag = false;
-				var property = "";
 				for (var j = 0, p_len = properties.length; j < p_len; j++) {
 					property = properties[j].match(/[\(\)_!:A-Za-z0-9가-힣 \.\-]+/g);
 
 					var property_name = property[0].toLowerCase();
-
 					if (property_name != "command") {
 						if (j == 0) {
 							str += 'command=\"getsheetdata\" ';
@@ -539,8 +544,8 @@ if (!nexacro.ExcelImportObject) {
 					str += property_name + "=\"" + property[1] + "\" ";
 				}
 				if (!flag) {
-					str += 'output=\"output' + tmp_num + '\" ';
-					tmp_num++;
+					str += 'output=\"output' + output_num + '\" ';
+					output_num++;
 				}
 				str += "/>";
 			}
@@ -559,8 +564,7 @@ if (!nexacro.ExcelImportObject) {
 			}
 		}
 
-		var ds_command = new nexacro.NormalDataset("COMMAND");
-		this._ds_command = ds_command;
+		var ds_command = this._ds_command = new nexacro.NormalDataset("COMMAND");
 
 		ds_command.addColumn("command", "String", 32);
 		ds_command.addColumn("type", "int", 32);
@@ -568,6 +572,7 @@ if (!nexacro.ExcelImportObject) {
 		ds_command.addColumn("format", "String", 256);
 		ds_command.addColumn("filemode", "String", 256);
 		ds_command.addColumn("password", "String", 256);
+		ds_command.addColumn("rawdatevalue", "String", 256);
 		ds_command.addColumn("rawnumbervalue", "String", 256);
 		ds_command.addColumn("importid", "String", 256);
 		ds_command.addColumn("usehtmltag", "String", 256);
@@ -580,6 +585,7 @@ if (!nexacro.ExcelImportObject) {
 		ds_command.setColumn(0, "format", this._makeImportFormat());
 		ds_command.setColumn(0, "filemode", this._importfilemode ? "server" : "local");
 		ds_command.setColumn(0, "password", this._file_password);
+		ds_command.setColumn(0, "rawdatevalue", this._userawdatevalue);
 		ds_command.setColumn(0, "rawnumbervalue", this._userawnumbervalue);
 		ds_command.setColumn(0, "importid", this._importid);
 		ds_command.setColumn(0, "usehtmltag", this._usehtmltag);
@@ -593,6 +599,7 @@ if (!nexacro.ExcelImportObject) {
 			delete this._ds_response;
 		}
 
+		var evt;
 		var datasets = this._responseLVal;
 		if (datasets) {
 			for (var i = 0, d_len = datasets.length; i < d_len; i++) {
@@ -600,29 +607,23 @@ if (!nexacro.ExcelImportObject) {
 				if (reponseDS) {
 				}
 				else {
-					var errormsg = "Dataset is null";
-					var evt = new nexacro.ExcelImportErrorEventInfo(this, "onerror", "ObjectError", errormsg, this, -2011);
+					evt = new nexacro.ExcelImportErrorEventInfo(this, "onerror", "ObjectError", "Dataset is null", this, -2011);
 					this.on_fire_onerror(this, evt);
 					return;
 				}
 			}
 		}
 		else {
-			var errormsg = "Dataset is null";
-			var evt = new nexacro.ExcelImportErrorEventInfo(this, "onerror", "ObjectError", errormsg, this, -2011);
+			evt = new nexacro.ExcelImportErrorEventInfo(this, "onerror", "ObjectError", "Dataset is null", this, -2011);
 			this.on_fire_onerror(this, evt);
 			return;
 		}
 
 		this._file_url_ds = new nexacro.NormalDataset("_file_url_ds", this);
-		var tran_item = this._tran_item = new nexacro.TransactionItem(this._importurl, this, this.id, "COMMAND=_ds_command", this._responseData + ", _file_url_ds=IMPORTFILES", this._user_data, 0, true);
+		this._tran_item = new nexacro.TransactionItem(this._importurl, this, this.id, "COMMAND=_ds_command", this._responseData + ", _file_url_ds=IMPORTFILES", this._user_data, 0, true);
 
-		var send_data = tran_item._sendData;
-		nexacro._setImportCommand(this._unique_id, "ds_command", this, this._hidden_frame_handle, send_data);
-
-		nexacro._submit(this._unique_id, this._uploadservlet, this._hidden_frame_handle, send_data, fileUrl);
-
-		tran_item = this._tran_item = null;
+		nexacro._setImportCommand(this._unique_id, "ds_command", this, this._hidden_frame_handle, this._tran_item._sendData);
+		nexacro._submit(this._unique_id, this._uploadservlet, this._hidden_frame_handle, this._tran_item._sendData, fileUrl);
 	};
 
 	if (nexacro._Browser == "Runtime") {
@@ -688,8 +689,10 @@ if (!nexacro.ExcelImportObject) {
 	}
 	else {
 		_pExcelImport._uploadComplete = function (status, data, url) {
-			var error_info, evt, fileUrl, code = -1, msg = "", result = null, unique_id = this._unique_id;
-			var importid;
+			var code = -1;
+			var msg = "";
+			var unique_id = this._unique_id;
+			var evt, result, importid;
 			try {
 				if (this._iscors) {
 					nexacro._setPostMessage(this._unique_id, this);
@@ -727,7 +730,7 @@ if (!nexacro.ExcelImportObject) {
 					var fstr = data.substring(0, 3).toUpperCase();
 					switch (fstr) {
 						case "XML":
-							var xmldoc = nexacro._getXMLDocument(this._unique_id, data, url);
+							xmldoc = nexacro._getXMLDocument(unique_id, data, url);
 							result = nexacro._Deserializer["XML"](xmldoc, this);
 							break;
 						case "SSV":
@@ -737,11 +740,9 @@ if (!nexacro.ExcelImportObject) {
 							break;
 					}
 
-					error_info = result ? result[0] : null;
-
-					if (error_info) {
-						code = error_info["ErrorCode"];
-						msg = error_info["ErrorMsg"];
+					if (result) {
+						code = result[0]["ErrorCode"];
+						msg = result[0]["ErrorMsg"];
 					}
 
 					if (code < 0) {
@@ -749,11 +750,11 @@ if (!nexacro.ExcelImportObject) {
 						this.on_fire_onerror(this, evt);
 					}
 					else {
-						fileUrl = this._fileurl = this._file_url_ds ? this._file_url_ds.getColumn(0, 3) : null;
+						this._fileurl = this._file_url_ds ? this._file_url_ds.getColumn(0, 3) : null;
 						importid = this._file_url_ds ? this._file_url_ds.getColumn(0, "importid") : null;
 
 						this._file_url_ds = null;
-						evt = new nexacro.ExcelImportEventInfo(this, "onsuccess", fileUrl, this, importid);
+						evt = new nexacro.ExcelImportEventInfo(this, "onsuccess", this._fileurl, this, importid);
 						this.on_fire_onsuccess(this, evt);
 
 						this._removeImportId(importid);
@@ -847,6 +848,7 @@ if (!nexacro.ExcelImportObject) {
 		var len = _split.length;
 		if (len > 1) {
 			extension = _split[len - 1];
+			extension = extension.toLowerCase();
 			switch (extension) {
 				case "xls":
 					checkExcel = true;

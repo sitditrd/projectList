@@ -135,7 +135,7 @@ if (!nexacro.Device || nexacro._OS == "Windows" || nexacro._OS == "Android" || n
 		};
 
 		_pLiteDBConnection.set_openflag = function (v) {
-			if (v == LiteDBConnection.openReadWrite || v == LiteDBConnection.openReadWriteCreate) {
+			if (v == this.openReadWrite || v == this.openReadWriteCreate) {
 				this.openflag = v;
 				nexacro._setLiteDBConnectionHandleOpenFlag(this, v);
 
@@ -200,12 +200,12 @@ if (!nexacro.Device || nexacro._OS == "Windows" || nexacro._OS == "Android" || n
 		};
 
 		_pLiteDBConnection.open = function (strDataSource, constOpenFlag) {
-			if (typeof (constOpenFlag) != "undefined" || constOpenFlag != null) {
+			if (constOpenFlag != null) {
 				this.openflag = constOpenFlag;
 				nexacro._setLiteDBConnectionHandleOpenFlag(this, this.openflag);
 			}
 
-			if (typeof (strDataSource) != "undefined" || strDataSource != null) {
+			if (strDataSource != null) {
 				this.datasource = strDataSource;
 				nexacro._setLiteDBConnectionHandleDataSource(this, this.datasource);
 			}
@@ -250,7 +250,7 @@ if (!nexacro.Device || nexacro._OS == "Windows" || nexacro._OS == "Android" || n
 		};
 
 		_pLiteDBConnection.paramck_busytimeout = function (timout) {
-			if (timout == null || typeof (timout) == "undefined") {
+			if (timout == null) {
 				return false;
 			}
 
@@ -266,14 +266,14 @@ if (!nexacro.Device || nexacro._OS == "Windows" || nexacro._OS == "Android" || n
 		};
 
 		_pLiteDBConnection.paramck_datasource = function (datasrc) {
-			if (datasrc == null || typeof (datasrc) == "undefined") {
+			if (datasrc == null) {
 				return false;
 			}
 			return true;
 		};
 
 		_pLiteDBConnection.paramck_open = function (strDataSource, constOpenFlag) {
-			if (strDataSource == null || typeof (strDataSource) == "undefined" || typeof (strDataSource) != "string") {
+			if (strDataSource == null || typeof (strDataSource) != "string") {
 				return false;
 			}
 
@@ -305,7 +305,8 @@ if (!nexacro.Device || nexacro._OS == "Windows" || nexacro._OS == "Android" || n
 				return false;
 			}
 
-			if ((+numberss) != (+numberss)) {
+			var checknumberss = +numberss;
+			if (checknumberss != checknumberss) {
 				return false;
 			}
 
@@ -401,7 +402,7 @@ if (!nexacro.Device || nexacro._OS == "Windows" || nexacro._OS == "Android" || n
 		}
 
 		_pLiteDBParameter.paramck_datasource = function (datasrc) {
-			if (datasrc == null || typeof (datasrc) == "undefined") {
+			if (datasrc == null) {
 				return false;
 			}
 			return true;
@@ -694,7 +695,7 @@ if (!nexacro.Device || nexacro._OS == "Windows" || nexacro._OS == "Android" || n
 		};
 
 		_pLiteDBStatement.paramck_query = function (db_query) {
-			if (db_query == null || typeof (db_query) == "undefined" || typeof (db_query) != "string") {
+			if (db_query == null || typeof (db_query) != "string") {
 				return false;
 			}
 			return true;

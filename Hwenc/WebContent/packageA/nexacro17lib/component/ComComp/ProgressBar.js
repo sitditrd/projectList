@@ -473,7 +473,6 @@ if (!nexacro.ProgressBar) {
 			}
 
 			progressbaritem.destroy();
-			progressbaritem = null;
 		}
 	};
 
@@ -656,7 +655,6 @@ if (!nexacro.ProgressBar) {
 			var item = this._progressbaritems.pop();
 			if (item) {
 				item.destroy();
-				item = null;
 			}
 		}
 	};
@@ -689,7 +687,6 @@ if (!nexacro.ProgressBar) {
 
 		var pos = this.pos;
 		var max = this.max;
-		var min = this.min;
 		var per = pos / max;
 
 		var smooth = this.smooth;

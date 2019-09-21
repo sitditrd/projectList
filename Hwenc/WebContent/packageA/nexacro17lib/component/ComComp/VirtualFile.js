@@ -148,6 +148,11 @@ if (!nexacro.VirtualFile) {
 			return false;
 		}
 
+		var bIsValid = this._IsValidConstOptions(nConstOptions);
+		if (!bIsValid) {
+			return false;
+		}
+
 		if (!strFileName) {
 			if (this.fullpath || this.path || this.filename) {
 				return nexacro._openVirtualFileHandle(this, this.fullpath, nConstOptions);
@@ -239,11 +244,19 @@ if (!nexacro.VirtualFile) {
 			return false;
 		}
 
+		if (typeof strOldname != 'string') {
+			return false;
+		}
+
+		if (typeof strNewname != 'string') {
+			return false;
+		}
+
 		return nexacro._renameVirtualFileHandle(this, strOldname, strNewname);
 	};
 
 	_pVirtualFile.getFileList = function (strPath, strSearchExpr, nConstOptions) {
-		if (!strPath || !strSearchExpr || !nConstOptions || isNaN(nConstOptions = +nConstOptions)) {
+		if (!strPath || !strSearchExpr) {
 			return false;
 		}
 
@@ -275,7 +288,16 @@ if (!nexacro.VirtualFile) {
 			bAllCreate = false;
 		}
 		else if (arguments.length == 2) {
-			bAllCreate = nexacro._toBoolean(bAllCreate);
+			if (typeof bAllCreate != 'boolean') {
+				if (typeof bAllCreate == 'number') {
+					if (bAllCreate >= 1) {
+						bAllCreate = true;
+					}
+				}
+				else {
+					bAllCreate = false;
+				}
+			}
 		}
 
 		return nexacro._createDirectoryVirtualFileHandle(this, strPath, bAllCreate);
@@ -290,7 +312,16 @@ if (!nexacro.VirtualFile) {
 			bAllChild = false;
 		}
 		else if (arguments.length == 2) {
-			bAllChild = nexacro._toBoolean(bAllChild);
+			if (typeof bAllChild != 'boolean') {
+				if (typeof bAllChild == 'number') {
+					if (bAllChild >= 1) {
+						bAllChild = true;
+					}
+				}
+				else {
+					bAllChild = false;
+				}
+			}
 		}
 
 		return nexacro._deleteDirectoryVirtualFileHandle(this, strPath, bAllChild);
@@ -415,6 +446,19 @@ if (!nexacro.VirtualFile) {
 		}
 
 		return strText;
+	};
+	_pVirtualFile._IsValidConstOptions = function (nConstOptions) {
+		if (nConstOptions == 1 || nConstOptions == 2 || nConstOptions == 16 || nConstOptions == 4096 || nConstOptions == 256 || nConstOptions == 512 || 
+			nConstOptions == 3 || nConstOptions == 17 || nConstOptions == 4097 || nConstOptions == 257 || nConstOptions == 513 || nConstOptions == 18 || 
+			nConstOptions == 4098 || nConstOptions == 258 || nConstOptions == 514 || nConstOptions == 4112 || nConstOptions == 528 || nConstOptions == 4352 || 
+			nConstOptions == 4608 || nConstOptions == 768 || nConstOptions == 19 || nConstOptions == 4099 || nConstOptions == 259 || nConstOptions == 515 || 
+			nConstOptions == 4114 || nConstOptions == 274 || nConstOptions == 530 || nConstOptions == 4368 || nConstOptions == 4624 || nConstOptions == 4864 || 
+			nConstOptions == 4115 || nConstOptions == 275 || nConstOptions == 531 || nConstOptions == 4370 || nConstOptions == 4626 || nConstOptions == 4880 || 
+			nConstOptions == 4371 || nConstOptions == 4627 || nConstOptions == 4882 || nConstOptions == 4883) {
+			return true;
+		}
+
+		return false;
 	};
 	delete _pVirtualFile;
 }

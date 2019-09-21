@@ -136,10 +136,6 @@ if (!nexacro.StatusBarControl) {
 
 		if (ownerframe && resizegrip) {
 			resizegrip._is_track = resizable;
-			var hittest_type;
-			if (resizable && ownerframe._is_window) {
-				hittest_type = "resizingborder_bottomright";
-			}
 
 
 

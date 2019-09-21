@@ -114,6 +114,8 @@ if (!nexacro.PopupDiv) {
 
 		this._callbackfunction = null;
 		this._callbackcontext = null;
+
+		return true;
 	};
 
 	_pPopupDiv.on_created_contents = function (win) {
@@ -141,7 +143,6 @@ if (!nexacro.PopupDiv) {
 			control_elem.setElementPosition(-5000, 0);
 		}
 	};
-
 
 	_pPopupDiv._applyElementVisible = function (v) {
 		nexacro.Component.prototype._applyElementVisible.call(this, v);
@@ -238,10 +239,12 @@ if (!nexacro.PopupDiv) {
 				height = frame_h;
 			}
 		}
+
 		if (this._is_fired_onsize == false && this.form) {
 			this.form.on_fire_onsize(this._adjust_width, this._adjust_height);
 			this._is_fired_onsize = true;
 		}
+
 		this._is_trackpopup = true;
 		if (this._is_loading) {
 			this._wait_pop_position = {
@@ -341,6 +344,7 @@ if (!nexacro.PopupDiv) {
 			this._callbackfunction = null;
 			this._callbackcontext = null;
 		}
+
 		if (this._is_fired_onsize == false && this.form) {
 			this.form.on_fire_onsize(this._adjust_width, this._adjust_height);
 			this._is_fired_onsize = true;
@@ -392,7 +396,6 @@ if (!nexacro.PopupDiv) {
 				this._popup(popup_info.left, popup_info.top, popup_info.width, popup_info.height);
 			}
 
-			popup_info = null;
 			delete this._wait_pop_position;
 		}
 
@@ -404,43 +407,49 @@ if (!nexacro.PopupDiv) {
 			return;
 		}
 
+		var clientXY, pThis, ret, vscrollbar, old_vpos, new_vpos, hscrollbar, old_hpos, new_hpos;
+
 		if (event_bubbles === undefined) {
 			if (!refer_comp) {
 				refer_comp = this;
 			}
 
 			if (this.visible && this._isEnable()) {
-				var clientXY = this._getClientXY(canvasX, canvasY);
+				clientXY = this._getClientXY(canvasX, canvasY);
 				event_bubbles = this.on_fire_user_onmousewheel(wheelDeltaX, wheelDeltaY, button, alt_key, ctrl_key, shift_key, screenX, screenY, canvasX, canvasY, clientXY[0], clientXY[0], this, refer_comp);
 
-				var pThis = this._getFromComponent(this);
+				pThis = this._getFromComponent(this);
 
 				if (event_bubbles !== true) {
 					if (!pThis.onmousewheel || (pThis.onmousewheel && !pThis.onmousewheel.defaultprevented)) {
-						var ret = this.on_fire_sys_onmousewheel(wheelDeltaX, wheelDeltaY, button, alt_key, ctrl_key, shift_key, screenX, screenY, canvasX, canvasY, clientXY[0], clientXY[0], this, refer_comp);
+						ret = this.on_fire_sys_onmousewheel(wheelDeltaX, wheelDeltaY, button, alt_key, ctrl_key, shift_key, screenX, screenY, canvasX, canvasY, clientXY[0], clientXY[0], this, refer_comp);
 
 						if (ret) {
 							return;
 						}
 						if (!ctrl_key) {
-							if (this.vscrollbar && this.vscrollbar.enable) {
-								var vscrollbar = this.vscrollbar;
-								var old_vpos = vscrollbar._pos;
-								this._setVScrollDefaultAction(vscrollbar, wheelDeltaY);
-								var new_vpos = vscrollbar._pos;
-								if (old_vpos != new_vpos) {
-									return;
+							if (wheelDeltaY) {
+								if (this.vscrollbar && this.vscrollbar.enable) {
+									vscrollbar = this.vscrollbar;
+									old_vpos = vscrollbar._pos;
+									this._setVScrollDefaultAction(vscrollbar, wheelDeltaY);
+									new_vpos = vscrollbar._pos;
+									if (old_vpos != new_vpos) {
+										return;
+									}
 								}
 							}
 
-							if (nexacro._OSVersion == "Mac OS") {
-								if (this.hscrollbar && this.hscrollbar.enable) {
-									var hscrollbar = this.hscrollbar;
-									var old_hpos = hscrollbar._pos;
-									this._setHScrollDefaultAction(hscrollbar, wheelDeltaX);
-									var new_hpos = hscrollbar._pos;
-									if (old_hpos != new_hpos) {
-										return;
+							if (wheelDeltaX) {
+								if (nexacro._OSVersion == "Mac OS") {
+									if (this.hscrollbar && this.hscrollbar.enable) {
+										hscrollbar = this.hscrollbar;
+										old_hpos = hscrollbar._pos;
+										this._setHScrollDefaultAction(hscrollbar, wheelDeltaX);
+										new_hpos = hscrollbar._pos;
+										if (old_hpos != new_hpos) {
+											return;
+										}
 									}
 								}
 							}
@@ -472,39 +481,43 @@ if (!nexacro.PopupDiv) {
 		}
 		else {
 			if (this.visible && this._isEnable()) {
-				var clientXY = this._getClientXY(canvasX, canvasY);
+				clientXY = this._getClientXY(canvasX, canvasY);
 
 				event_bubbles = this.on_fire_user_onmousewheel(wheelDeltaX, wheelDeltaY, button, alt_key, ctrl_key, shift_key, screenX, screenY, canvasX, canvasY, clientXY[0], clientXY[0], fire_comp, refer_comp);
 
-				var pThis = this._getFromComponent(this);
+				pThis = this._getFromComponent(this);
 
 				if (event_bubbles !== true) {
 					if (!pThis.onmousewheel || (pThis.onmousewheel && !pThis.onmousewheel.defaultprevented)) {
-						var ret = this.on_fire_sys_onmousewheel(wheelDeltaX, wheelDeltaY, button, alt_key, ctrl_key, shift_key, screenX, screenY, canvasX, canvasY, clientXY[0], clientXY[0], fire_comp, refer_comp);
+						ret = this.on_fire_sys_onmousewheel(wheelDeltaX, wheelDeltaY, button, alt_key, ctrl_key, shift_key, screenX, screenY, canvasX, canvasY, clientXY[0], clientXY[0], fire_comp, refer_comp);
 
 						if (ret) {
 							return;
 						}
 
 						if (!ctrl_key) {
-							if (this._isWheelScrollable(wheelDeltaY) && this.vscrollbar && this.vscrollbar.enable) {
-								var vscrollbar = this.vscrollbar;
-								var old_vpos = vscrollbar._pos;
-								this._setVScrollbarDefaultAction(vscrollbar, wheelDeltaY);
-								var new_vpos = vscrollbar._pos;
-								if (old_vpos != new_vpos) {
-									return;
+							if (wheelDeltaY) {
+								if (this._isWheelScrollable(wheelDeltaY) && this.vscrollbar && this.vscrollbar.enable) {
+									vscrollbar = this.vscrollbar;
+									old_vpos = vscrollbar._pos;
+									this._setVScrollbarDefaultAction(vscrollbar, wheelDeltaY);
+									new_vpos = vscrollbar._pos;
+									if (old_vpos != new_vpos) {
+										return;
+									}
 								}
 							}
 
-							if (nexacro._OSVersion == "Mac OS") {
-								if (this._isWheelScrollable(wheelDeltaX) && this.hscrollbar && this.hscrollbar.enable) {
-									var hscrollbar = this.hscrollbar;
-									var old_hpos = hscrollbar._pos;
-									this._setHScrollDefaultAction(hscrollbar, wheelDeltaX);
-									var new_hpos = hscrollbar._pos;
-									if (old_hpos != new_hpos) {
-										return;
+							if (wheelDeltaX) {
+								if (nexacro._OSVersion == "Mac OS") {
+									if (this._isWheelScrollable(wheelDeltaX) && this.hscrollbar && this.hscrollbar.enable) {
+										hscrollbar = this.hscrollbar;
+										old_hpos = hscrollbar._pos;
+										this._setHScrollDefaultAction(hscrollbar, wheelDeltaX);
+										new_hpos = hscrollbar._pos;
+										if (old_hpos != new_hpos) {
+											return;
+										}
 									}
 								}
 							}

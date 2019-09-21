@@ -434,10 +434,8 @@ if (!nexacro.DatePickerControl) {
 
 
 	_pDatePickerControl._setValue = function (v) {
-		if (this._value != v) {
-			this._value = v;
-			this.on_apply_value(v);
-		}
+		this._value = v;
+		this.on_apply_value(v);
 	};
 
 	_pDatePickerControl.on_apply_value = function (value) {
@@ -1062,12 +1060,13 @@ if (!nexacro.DatePickerControl) {
 
 	_pDatePickerHeadControl._recalcLayout = function () {
 		if (this._is_created_contents) {
-			var date = this._date;
-
 			var headformat = this._getHeadformat();
 
 			var client_w = this._getClientWidth();
 			var client_h = this._getClientHeight();
+
+			var year_size = 0, year_l = 0, year_w = 0;
+			var month_size = 0, month_l = 0, month_w = 0;
 
 			var prevbutton = this.prevbutton;
 			if (prevbutton) {
@@ -1079,14 +1078,12 @@ if (!nexacro.DatePickerControl) {
 				nextbutton.move(client_w - client_h, 0, client_h, client_h, null, null);
 			}
 
-			var year_size = 0, year_l = 0, year_w = 0, year_h = 0;
 			var yearstatic = this.yearstatic;
 			if (yearstatic) {
 				year_size = yearstatic._on_getFitSize();
 				year_w = year_size[0];
 			}
 
-			var month_size = 0, month_l = 0, month_w = 0, month_h = 0;
 			var monthstatic = this.monthstatic;
 			if (monthstatic) {
 				month_size = monthstatic._on_getFitSize();
@@ -1112,14 +1109,12 @@ if (!nexacro.DatePickerControl) {
 				monthstatic.move(month_l, 0, month_w, client_h, null, null);
 			}
 
-			year_size = year_l = year_w = year_h = 0;
 			var yearspin = this.yearspin;
 			if (yearspin) {
 				year_size = this._getSpinControlSize("year");
 				year_w = year_size + client_h;
 			}
 
-			month_size = month_l = month_w = month_h = 0;
 			var monthspin = this.monthspin;
 			if (monthspin) {
 				month_size = this._getSpinControlSize("month");
@@ -1417,7 +1412,7 @@ if (!nexacro.DatePickerControl) {
 	};
 
 	_pDatePickerBodyControl.on_apply_prop_enable = function (enable) {
-		var i = 0;
+		var i;
 		var weeks = this._weekitems;
 		var days = this._dayitems;
 		var maxWeek = this._maxWeek;
@@ -1668,9 +1663,15 @@ if (!nexacro.DatePickerControl) {
 
 		if (this._isToday(today)) {
 			today = nexacro._toString(today).padLeft(2, "0");
-			var todatObj = this._getDayItem(today);
-			if (todatObj) {
-				todatObj._changeUserStatus("today", true);
+			var todayObj = this._getDayItem(today);
+
+			if (flag) {
+				if (todayObj != dayObj) {
+					todayObj._changeUserStatus("today", true);
+				}
+			}
+			else {
+				todayObj._changeUserStatus("today", true);
 			}
 		}
 	};
@@ -1766,9 +1767,8 @@ if (!nexacro.DatePickerControl) {
 		if ((year % 4) == 0 && (year % 100) != 0 || (year % 400) == 0) {
 			return true;
 		}
-		else {
-			return false;
-		}
+
+		return false;
 	};
 
 	_pDatePickerBodyControl._getCurrentDate = function () {
@@ -1785,10 +1785,12 @@ if (!nexacro.DatePickerControl) {
 		if (datepicker) {
 			var format = datepicker._getWeekformat();
 			if (format) {
-				return format.split(/\s+/);
-			}
-			else if (format === " ") {
-				return [" ", " ", " ", " ", " ", " ", " "];
+				if (format === " ") {
+					return [" ", " ", " ", " ", " ", " ", " "];
+				}
+				else {
+					return format.split(/\s+/);
+				}
 			}
 			else {
 				var locale = this._getLocale();
@@ -2036,8 +2038,6 @@ if (!nexacro.DatePickerControl) {
 
 	_pDatePickerDayItemControl._on_apply_daysofweek = function (v) {
 		var text = v;
-		var status = this._status;
-
 		if (text && text.length > 0) {
 			if (this.trailingday) {
 				this._changeUserStatus("trailingday", true);

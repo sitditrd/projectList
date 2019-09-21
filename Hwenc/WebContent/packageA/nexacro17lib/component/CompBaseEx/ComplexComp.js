@@ -65,7 +65,6 @@ if (!nexacro._BindInfo) {
 
 	delete _pBindInfo;
 }
-;
 
 if (!nexacro._BindData) {
 	nexacro._BindData = function (valuebind, databind, xmlbind, jsonbind, fullbind, levelbind, dataexpr, fullexpr, xmlexpr, jsonexpr) {
@@ -256,7 +255,7 @@ if (!nexacro._BindData) {
 				this._binddatalist = this._convertJson2DataList(this._binddatactx, datakey);
 				this._setBindTypeJson();
 			}
-			else if (target) {
+			else {
 				this._strdatactx = datactx.replace("@", "");
 				this._binddatactx = target._findObject(this._strdatactx);
 				this._binddatakey = datakey;
@@ -387,22 +386,27 @@ if (!nexacro._BindData) {
 		function arrayconvert (b, x, a) {
 			var n = x.__v ? x.__v : x;
 			var p = x.__v ? x : null;
+			var o;
 
 			for (var k in n) {
 				var v = n[k];
 
 				if (nexacro._isArray(v)) {
 					for (var i = 0, l = v.length, w = v[i]; i < l; w = v[++i]) {
-						var o = this._newJsonItem(w, "array", k, p);
-						a.push(o), arraychild(o, p), arrayconvert(o, a);
+						o = this._newJsonItem(w, "array", k, p);
+						a.push(o);
+						arraychild(o, p);
+						arrayconvert(o, a);
 					}
 					continue;
 				}
 				if (nexacro._isObject(v)) {
 					{
 
-						var o = this._newJsonItem(v, "array", k, p);
-						a.push(o), arraychild(o, p), arrayconvert(o, a);
+						o = this._newJsonItem(v, "array", k, p);
+						a.push(o);
+						arraychild(o, p);
+						arrayconvert(o, a);
 					}
 					continue;
 				}
@@ -423,7 +427,7 @@ if (!nexacro._BindData) {
 		return nexacro._parseXMLDocument(xmlstr);
 	};
 	_pBindData._convertStr2Json = function (jsonstr) {
-		return eval('(' + jsonstr + ')');
+		return nexacro._executeEvalStr('(' + jsonstr + ')');
 	};
 	_pBindData._convertXdom2Xml = function (xdomobj) {
 		return nexacro._documentToXml(xdomobj);
@@ -565,24 +569,11 @@ if (!nexacro._BindData) {
 	_pBindData._deleteJsonCtxChild = function (ctx, type, child) {
 		if (ctx && ctx.__child) {
 			var index = child ? ctx.__child.indexOf(child) : -1;
-
 			if (index >= 0) {
 				ctx.__child.splice(index, 1);
-
-				if (type == "object") {
-					if (ctx.__value[key]) {
-						delete ctx.__value[key];
-					}
-				}
-				if (type == "array") {
-					if (ctx.__value[key]) {
-						ctx.__value[key].splice(index, 1);
-					}
-				}
 			}
 		}
 	};
-
 
 	_pBindData._appendDataListChild = function (index, child) {
 		var target = this._getBindRow(index);
@@ -594,7 +585,7 @@ if (!nexacro._BindData) {
 				this._fireDataCtxOnRowsetChangedEvent();
 			}
 			if (this._isJsonBind()) {
-				this._insertJsonCtxChild(this._getJsonCtxParent(target, this._binddatactx), "array", key, null, child);
+				this._insertJsonCtxChild(this._getJsonCtxParent(target, this._binddatactx), "array", null, null, child);
 				this._binddatacurr = Math.min(index, this._binddatalist.length - 1);
 				this._fireDataCtxOnRowsetChangedEvent();
 			}
@@ -1109,10 +1100,10 @@ if (!nexacro._BindData) {
 			bindinfo.exprix = -1;
 			bindinfo.colidx = -1;
 
-			if (this._isDataExpr()) {
-				var bindid = bindinfo.bindid;
-				var exprcx = bindinfo.exprcx;
+			var bindid = bindinfo.bindid;
+			var exprcx = bindinfo.exprcx;
 
+			if (this._isDataExpr()) {
 				if (exprcx != "") {
 					var exprfn = null;
 
@@ -1139,8 +1130,6 @@ if (!nexacro._BindData) {
 				}
 			}
 			else {
-				var bindid = bindinfo.bindid;
-
 				if (bindid != "") {
 					if (this._isFullBind()) {
 						bindinfo.colidx = this._getBindColIndex(bindid);
@@ -1270,19 +1259,18 @@ if (!nexacro._BindData) {
 	_pBindData._getBindData = function (rowindex) {
 		if (this._isDataBind()) {
 			var infos = this._bindinfo;
-
 			if (infos) {
-				if (this._binddataset) {
-					for (var i = 0, l = infos.length; i < l; i++) {
-						var info = infos[i];
+				var i;
+				var info;
+				var infos_len = infos.length;
 
+				if (this._binddataset) {
+					for (i = 0; i < infos_len; i++) {
+						info = infos[i];
 						if (info) {
 							{
+
 								info.values = this._fetchBindDataSet(info.colidx, rowindex);
-								continue;
-							}
-							{
-								info.values = this._fetchExprDataSet(info.exprix, rowindex);
 								continue;
 							}
 						}
@@ -1291,16 +1279,12 @@ if (!nexacro._BindData) {
 					return this;
 				}
 				if (this._binddatactx) {
-					for (var i = 0, l = infos.length; i < l; i++) {
-						var info = infos[i];
-
+					for (i = 0; i < infos_len; i++) {
+						info = infos[i];
 						if (info) {
 							{
+
 								info.values = this._fetchBindDataCtx(info, rowindex);
-								continue;
-							}
-							{
-								info.values = this._fetchExprDataCtx(info, rowindex);
 								continue;
 							}
 						}
@@ -1316,35 +1300,29 @@ if (!nexacro._BindData) {
 	_pBindData._getBindInfo = function (rowindex, bindindex) {
 		if (this._isDataBind()) {
 			var infos = this._bindinfo;
-
 			if (infos) {
-				if (0 <= bindindex && bindindex < infos.length) {
-					var info = infos[i];
-
-					for (; info; ) {
+				if (bindindex >= 0 && bindindex < infos.length) {
+					var info = infos[rowindex];
+					if (info) {
 						if (this._binddataset) {
 							if (info.colidx != -1) {
-								info.values = this._fetchBindDataSet(info, rowindex);
-								break;
+								info.values = this._fetchBindDataSet(info.colidx, rowindex);
 							}
-							if (info.exprix != -1) {
+							else if (info.exprix != -1) {
 								info.values = this._fetchExprDataSet(info.exprix, rowindex);
-								break;
 							}
 						}
 						if (this._binddatactx) {
 							if (info.colidx != -1) {
-								info.values = this._fetchBindDataCtx(info, rowindex);
-								break;
+								info.values = this._fetchBindDataCtx(info.colidx, rowindex);
 							}
-							if (info.exprix != -1) {
+							else if (info.exprix != -1) {
 								info.values = this._fetchExprDataCtx(info.exprix, rowindex);
-								break;
 							}
 						}
-
-						return info;
 					}
+
+					return info;
 				}
 			}
 		}
@@ -1408,7 +1386,7 @@ if (!nexacro._BindData) {
 		return bind ? bind.values : undefined;
 	};
 	_pBindData._getDataValue = function (idx) {
-		var idx = idx ? idx + 3 : 3;
+		idx = idx ? idx + 3 : 3;
 
 		if (idx >= 0 && idx < this._bindinfo.length) {
 			var bind = this._bindinfo[idx];
@@ -1422,6 +1400,7 @@ if (!nexacro._BindData) {
 
 		return this._getDataValue(idx);
 	};
+
 	_pBindData._clear = function () {
 		this._setBindType(false, false, false, false, false, false);
 
@@ -1432,9 +1411,9 @@ if (!nexacro._BindData) {
 		this._clearBindDataCtx();
 		this._clearBindDataSet();
 	};
+
 	delete _pBindData;
 }
-;
 
 if (!nexacro._Formats) {
 	nexacro._FormatsConst = 
@@ -1520,26 +1499,23 @@ if (!nexacro._Formats) {
 	_pFormatItem._addBind = function (bandsq, baseid, targetid, targetprop, bindvalue) {
 		var bindinfo = new nexacro._BindInfo();
 
-		if (bindinfo) {
-			bindinfo.baseid = baseid;
-			bindinfo.basesq = bandsq;
-			bindinfo.target = nexacro._nvl(targetid, false) ? targetid.split('.') : null;
-			bindinfo.setter = nexacro._nvl(targetprop, false) ? "set_" + targetprop : "set_text";
-			bindinfo.bindid = nexacro._nvl(bindvalue, false) ? bindvalue : "";
-		}
+		bindinfo.baseid = baseid;
+		bindinfo.basesq = bandsq;
+		bindinfo.target = nexacro._nvl(targetid, false) ? targetid.split('.') : null;
+		bindinfo.setter = nexacro._nvl(targetprop, false) ? "set_" + targetprop : "set_text";
+		bindinfo.bindid = nexacro._nvl(bindvalue, false) ? bindvalue : "";
+
 		this._binds.push(bindinfo);
 		this._bprop[targetprop] = bindinfo;
 	};
-	_pFormatItem._addExpr = function (index, baseid, targetid, targetprop, exprvalue) {
+	_pFormatItem._addExpr = function (bandsq, baseid, targetid, targetprop, exprvalue) {
 		var exprinfo = new nexacro._BindInfo();
 
-		if (exprinfo) {
-			exprinfo.baseid = baseid;
-			exprinfo.basesq = bandsq;
-			exprinfo.target = nexacro._nvl(targetid, false) ? targetid.split('.') : null;
-			exprinfo.setter = nexacro._nvl(targetprop, false) ? "set_" + targetprop : "set_text";
-			exprinfo.exprcx = nexacro._nvl(exprvalue, false) ? exprvalue : "";
-		}
+		exprinfo.baseid = baseid;
+		exprinfo.basesq = bandsq;
+		exprinfo.target = nexacro._nvl(targetid, false) ? targetid.split('.') : null;
+		exprinfo.setter = nexacro._nvl(targetprop, false) ? "set_" + targetprop : "set_text";
+		exprinfo.exprcx = nexacro._nvl(exprvalue, false) ? exprvalue : "";
 
 		this._binds.push(exprinfo);
 	};
@@ -1548,37 +1524,41 @@ if (!nexacro._Formats) {
 		item._setts[name] = item._construc.prototype["set_" + name];
 	};
 	_pFormatItem._addAttr = function (item, attrs, bandsq, bandid, basename, bindexpr) {
-		if (bindexpr) {
-			for (var i = 0, l = attrs.length; i < l; i++) {
-				var _attr = attrs[i];
-				var _name = _attr.name;
-				var _text = _attr.value;
+		var i;
+		var attr, name, text;
+		var attrs_len = attrs.length;
 
-				if (!nexacro._isNull(_text)) {
-					if (nexacro._isString(_text)) {
-						switch (_text.substr(0, 5)) {
+		if (bindexpr) {
+			for (i = 0; i < attrs_len; i++) {
+				attr = attrs[i];
+				name = attr.name;
+				text = attr.value;
+
+				if (!nexacro._isNull(text)) {
+					if (nexacro._isString(text)) {
+						switch (text.substr(0, 5)) {
 							case "bind:":
-								this._addBind(bandsq, bandid, basename, _name, _text.substr(5));
+								this._addBind(bandsq, bandid, basename, name, text.substr(5));
 								this._arrBind(item);
 								break;
 							case "expr:":
-								this._addExpr(bandsq, bandid, basename, _name, _text.substr(5));
+								this._addExpr(bandsq, bandid, basename, name, text.substr(5));
 								this._arrExpr(item);
 								break;
 						}
 					}
 
-					this._addSett(item, _name, _text);
+					this._addSett(item, name, text);
 				}
 			}
 		}
 		else {
-			for (var i = 0, l = attrs.length; i < l; i++) {
-				var _attr = attrs[i];
-				var _name = _attr.name;
+			for (i = 0; i < attrs_len; i++) {
+				attr = attrs[i];
+				name = attr.name;
 
-				if (!nexacro._isNull(_attr.value)) {
-					this._addSett(item, _name, _attr.value);
+				if (!nexacro._isNull(attr.value)) {
+					this._addSett(item, name, attr.value);
 				}
 			}
 		}
@@ -1600,25 +1580,29 @@ if (!nexacro._Formats) {
 		item[name] = value;
 	};
 	_pFormatItem._changeAttr = function (item, attrs, bandsq, bandid, basename, bindexpr) {
-		if (bindexpr) {
-			for (var i = 0, l = attrs.length; i < l; i++) {
-				var _attr = attrs[i];
-				var _name = _attr.name;
-				var _text = _attr.value;
+		var i;
+		var attr, name, text;
+		var attrs_len = attrs.length;
 
-				if (!nexacro._isNull(_text)) {
-					if (nexacro._isString(_text)) {
-						switch (_text.substr(0, 5)) {
+		if (bindexpr) {
+			for (i = 0; i < attrs_len; i++) {
+				attr = attrs[i];
+				name = attr.name;
+				text = attr.value;
+
+				if (!nexacro._isNull(text)) {
+					if (nexacro._isString(text)) {
+						var bind = this._getBind(bandsq, bandid, basename, name);
+
+						switch (text.substr(0, 5)) {
 							case "bind:":
 								{
 
-									var bind = this._getBind(bandsq, bandid, basename, _name);
-
 									if (!bind) {
-										this._addBind(bandsq, bandid, basename, _name, _text.substr(5));
+										this._addBind(bandsq, bandid, basename, name, text.substr(5));
 									}
 									else {
-										this._changeBind(_name, _text.substr(5), bind);
+										this._changeBind(name, text.substr(5), bind);
 									}
 
 									this._arrBind(item);
@@ -1627,13 +1611,11 @@ if (!nexacro._Formats) {
 							case "expr:":
 								{
 
-									var bind = this._getBind(bandsq, bandid, basename, _name);
-
 									if (!bind) {
-										this._addExpr(bandsq, bandid, basename, _name, _text.substr(5));
+										this._addExpr(bandsq, bandid, basename, name, text.substr(5));
 									}
 									else {
-										this._changeExpr(_text.substr(5), bind);
+										this._changeExpr(text.substr(5), bind);
 									}
 
 									this._arrExpr(item);
@@ -1642,17 +1624,17 @@ if (!nexacro._Formats) {
 						}
 					}
 
-					this._changeSett(item, _name, _text);
+					this._changeSett(item, name, text);
 				}
 			}
 		}
 		else {
-			for (var i = 0, l = attrs.length; i < l; i++) {
-				var _attr = attrs[i];
-				var _name = _attr.name;
+			for (i = 0; i < attrs_len; i++) {
+				attr = attrs[i];
+				name = attr.name;
 
-				if (!nexacro._isNull(_attr.value)) {
-					this._changeSett(item, _name, _attr.value);
+				if (!nexacro._isNull(attr.value)) {
+					this._changeSett(item, name, attr.value);
 				}
 			}
 		}
@@ -1676,28 +1658,30 @@ if (!nexacro._Formats) {
 
 	_pFormatItem._addBand = function (bandsq, bandid, bandElem, format) {
 		if (bandElem && bandElem.attributes) {
-			var _band = this._getBand(bandid);
+			var band = this._getBand(bandid);
 			var tname = bandElem.nodeName;
 			var attrs = bandElem.attributes;
 
 			if (format) {
-				this._setType(_band, format, tname, "nexacro.ComplexComponent");
+				this._setType(band, format, tname, "nexacro.ComplexComponent");
 			}
 
 			if (attrs) {
-				this._addAttr(_band, attrs, bandsq, bandid, "", format._format_bind);
+				this._addAttr(band, attrs, bandsq, bandid, "", format._format_bind);
 			}
 
-			this._arrBand(_band, bandsq);
+			this._arrBand(band, bandsq);
 
-			return _band;
+			return band;
 		}
 
 		return null;
 	};
 	_pFormatItem._addBandChild = function (bandsq, bandid, childidx, childElem, format) {
 		if (childElem) {
-			var _band = this._getBand(bandid);
+			var i;
+
+			var band = this._getBand(bandid);
 
 			var attrs = childElem.attributes;
 			var tname = childElem.nodeName;
@@ -1705,34 +1689,32 @@ if (!nexacro._Formats) {
 
 			var bname = cname ? cname : "" + childidx;
 
-			var _item = _band._items[childidx] = {
+			var item = band._items[childidx] = {
 			};
 
-			if (_item) {
-				if (format) {
-					this._setType(_item, format, tname, "nexacro.ComplexComponent");
-				}
-
-				if (attrs) {
-					this._addAttr(_item, attrs, bandsq, bandid, bname, format._format_bind);
-				}
-
-				var subchilds = childElem.childNodes;
-
-				if (subchilds && subchilds.length) {
-					_item._items = [];
-
-					for (var i = 0, l = subchilds.length; i < l; i++) {
-						var subchild = subchilds[i];
-
-						this._addBandSubChild(bandsq, bandid, bname, _item, i, subchild, format);
-					}
-				}
-
-				this._arrBandChild(_item, childidx);
-
-				return _item;
+			if (format) {
+				this._setType(item, format, tname, "nexacro.ComplexComponent");
 			}
+
+			if (attrs) {
+				this._addAttr(item, attrs, bandsq, bandid, bname, format._format_bind);
+			}
+
+			var subchilds = childElem.childNodes;
+			var subchilds_len = subchilds ? subchilds.length : 0;
+			if (subchilds_len) {
+				item._items = [];
+
+				for (i = 0; i < subchilds_len; i++) {
+					var subchild = subchilds[i];
+
+					this._addBandSubChild(bandsq, bandid, bname, item, i, subchild, format);
+				}
+			}
+
+			this._arrBandChild(item, childidx);
+
+			return item;
 		}
 
 		return null;
@@ -1744,23 +1726,22 @@ if (!nexacro._Formats) {
 			var cname = childElem.getAttribute("id");
 			var bname = baseid + "." + cname ? cname : childidx;
 
-			var _item = item._items[childidx] = {
+			var citem = item._items[childidx] = {
 			};
-			if (_item) {
-				if (format) {
-					this._setType(_item, format, tname, "nexacro.ComplexComponent");
-				}
 
-				if (attrs) {
-					this._addAttr(_item, attrs, bandsq, bandid, bname, format._format_bind);
-				}
-
-
-
-				this._arrBandSubChild(_item, childidx);
+			if (format) {
+				this._setType(citem, format, tname, "nexacro.ComplexComponent");
 			}
 
-			return _item;
+			if (attrs) {
+				this._addAttr(citem, attrs, bandsq, bandid, bname, format._format_bind);
+			}
+
+
+
+			this._arrBandSubChild(citem, childidx);
+
+			return citem;
 		}
 		else {
 			return null;
@@ -1862,13 +1843,12 @@ if (!nexacro._Formats) {
 
 			var item = band._items[childidx] = {
 			};
-			if (item) {
-				this._setType(item, format, tname, conts);
 
-				this._addAttr(item, attrs, bandsq, bandid, conts, format._format_bind);
+			this._setType(item, format, tname, conts);
 
-				item._id = item.id;
-			}
+			this._addAttr(item, attrs, bandsq, bandid, conts, format._format_bind);
+
+			item._id = item.id;
 		}
 	};
 
@@ -1887,9 +1867,6 @@ if (!nexacro._Formats) {
 		}
 	};
 	_pFormatItem._makeAutoMarkBand = function (makebandid, basebandid, keyinfos, format) {
-		var bandseq = format._getBandSeq(makebandid);
-		var bindfmt = format._format_bind;
-
 		var markband = this._bands[makebandid];
 		var bodyband = this._bands[basebandid];
 
@@ -1964,9 +1941,10 @@ if (!nexacro._Formats) {
 		return targetband;
 	};
 	_pFormatItem._copyBandChild = function (targetbandid, sourcechildid, sourceindex, format) {
+		var makechild;
+
 		var targetband = this._getBand(targetbandid);
 		var sourcecell = this._getBandChildFromIndex(sourcechildid, sourceindex);
-		var makechild;
 		if (targetband && sourcecell) {
 			var basename = format._getBaseName(sourcecell, sourceindex);
 			var attrlist = format._getAttrList(sourcecell, []);
@@ -2057,7 +2035,6 @@ if (!nexacro._Formats) {
 		if (band) {
 			var attrobj = this._makeAttr(propid, propval);
 			var bandseq = format._getBandSeq(bandid);
-			var basename = format._getBaseName(band, bandid);
 			var bindtype = format._format_bind;
 
 			if (band.hasOwnProperty(propid)) {
@@ -2155,13 +2132,17 @@ if (!nexacro._Formats) {
 		};
 	};
 	_pFormatItem._clearBind = function () {
-		for (var i = 0, l = this._binds.length; i < l; i++) {
+		var i, prop;
+
+		var binds_len = this._binds.length;
+
+		for (i = 0; i < binds_len; i++) {
 			if (this._binds[i]) {
 				delete this._binds[i];
 				this._binds[i] = null;
 			}
 		}
-		for (var prop in this._bprop) {
+		for (prop in this._bprop) {
 			if (prop) {
 				delete this._bprop[prop];
 				this._bprop[prop] = null;
@@ -2208,7 +2189,6 @@ if (!nexacro._Formats) {
 	_pFormatItemRowCol._getColSizes = function (index, band) {
 		if (index && band) {
 			var _band = this._col_bands[band];
-
 			if (_band) {
 				index += _band._bound;
 			}
@@ -2221,7 +2201,6 @@ if (!nexacro._Formats) {
 	_pFormatItemRowCol._getRowSizes = function (index, band) {
 		if (index && band) {
 			var _band = this._row_bands[band];
-
 			if (_band) {
 				index += _band._bound;
 			}
@@ -2235,7 +2214,6 @@ if (!nexacro._Formats) {
 	_pFormatItemRowCol._addColSize = function (index, band, size) {
 		var _size = parseInt(size);
 		var _band = this._col_bands[band];
-
 		if (_band) {
 			_band._size += _size;
 			_band._bound = Math.min(_band._bound, index);
@@ -2420,16 +2398,19 @@ if (!nexacro._Formats) {
 			item._pos = [_left, _top, _width, _height, _right, _bottom];
 			item.__ap = [_left, _top, _width, _height, _right, _bottom, false];
 
-			for (var c = 0, pos = item.__ap, n = pos.length; c < n; c++) {
-				var p = pos[c];
+			var i;
 
-				if (p && typeof p === "string") {
-					if (p.indexOf("%") >= 0) {
-						pos[c] = parseFloat(p) / 10000;
-						pos[6] = true;
+			var pos_len = item.__ap.length;
+
+			for (i = 0; i < pos_len; i++) {
+				var pos_item = item.__ap[i];
+				if (pos_item && (typeof pos_item === "string")) {
+					if (pos_item.indexOf("%") >= 0) {
+						item.__ap[i] = parseFloat(pos_item) / 10000;
+						item.__ap[6] = true;
 					}
 					else {
-						pos[c] = parseInt(p);
+						item.__ap[i] = parseInt(pos_item);
 					}
 				}
 			}
@@ -2547,8 +2528,7 @@ if (!nexacro._Formats) {
 	};
 
 	_pFormats._parseFormatsFromJson = function (formats, databind) {
-		var items = eval('(' + formats + ')');
-
+		var items = nexacro._executeEvalStr('(' + formats + ')');
 		if (items) {
 			if (nexacro._isArray(items)) {
 				this._format_items = items;
@@ -2570,16 +2550,18 @@ if (!nexacro._Formats) {
 
 	_pFormats._parseFormatsFromXml = function (formats, databind) {
 		var contentsElem = nexacro._parseXMLDocument(formats);
-
 		if (!contentsElem) {
 			return;
 		}
 
 		var formatElems = contentsElem.getElementsByTagName("Format");
-
 		if (formatElems) {
-			if (formatElems.length) {
-				for (var i = 0, l = formatElems.length; i < l; i++) {
+			var i;
+
+			var formatElems_len = formatElems.length;
+
+			if (formatElems_len) {
+				for (i = 0; i < formatElems_len; i++) {
 					var formatElem = formatElems[i];
 
 					var formatID = formatElem.getAttribute("id");
@@ -2600,8 +2582,6 @@ if (!nexacro._Formats) {
 		else {
 			this._format_parsed = false;
 		}
-
-		delete contentsElem;
 	};
 
 	_pFormats._getFormatsStringFromXml = function (formatString, formatID) {
@@ -2609,21 +2589,22 @@ if (!nexacro._Formats) {
 			return;
 		}
 
-		if (!formatID) {
-			formatID = this._getCurrentID();
-		}
-
 		var contentsElem = nexacro._parseXMLDocument(formatString);
-
 		if (!contentsElem) {
 			return;
 		}
 
-		var formatElems = contentsElem.getElementsByTagName("Format");
-		var formatString = "";
+		if (!formatID) {
+			formatID = this._getCurrentID();
+		}
 
+		var formatElems = contentsElem.getElementsByTagName("Format");
 		if (formatElems) {
-			for (var i = 0, l = formatElems.length; i < l; i++) {
+			var i;
+
+			var formatElems_len = formatElems.length;
+
+			for (i = 0; i < formatElems_len; i++) {
 				var formatElem = formatElems[i];
 
 				if (formatID == formatElem.getAttribute("id")) {
@@ -2633,7 +2614,6 @@ if (!nexacro._Formats) {
 			}
 		}
 
-		delete contentsElem;
 		return formatString;
 	};
 
@@ -2648,16 +2628,16 @@ if (!nexacro._Formats) {
 		if (item) {
 			var bands = item._getBands();
 			if (bands) {
-				if (this._head_bands.length) {
-				}
+				var i, j, prop;
+
 				if (this._body_bands.length) {
-					for (var i in this._body_bands) {
+					for (i in this._body_bands) {
 						var band = bands[this._body_bands[i]];
 						if (band) {
 							if (band._items && band._items.length) {
 								formatString += "<Band";
 
-								for (var prop in band) {
+								for (prop in band) {
 									if (band.hasOwnProperty(prop)) {
 										if (prop.charAt(0) != "_") {
 											formatString += " " + prop + "=\"" + band[prop] + "\"";
@@ -2667,10 +2647,10 @@ if (!nexacro._Formats) {
 
 								formatString += ">";
 
-								for (var j in band._items) {
+								for (j in band._items) {
 									formatString += "<Cell";
 
-									for (var prop in band._items[j]) {
+									for (prop in band._items[j]) {
 										if (band._items[j].hasOwnProperty(prop)) {
 											if (prop.charAt(0) != "_") {
 												formatString += " " + prop + "=\"" + band._items[j][prop] + "\"";
@@ -2687,7 +2667,7 @@ if (!nexacro._Formats) {
 							else {
 								formatString += "<Band";
 
-								for (var prop in band) {
+								for (prop in band) {
 									if (band.hasOwnProperty(prop)) {
 										if (prop.charAt(0) != "_") {
 											formatString += " " + prop + "=\"" + band[prop] + "\"";
@@ -2711,9 +2691,21 @@ if (!nexacro._Formats) {
 
 	_pFormats._loadFormatFromDOM = function (formatID, formatElem) {
 		if (formatID) {
+			var i, j;
+
+			var n, m;
+
+			var item;
+
 			if (formatElem) {
+				var bands, childs;
+				var bandid, bandsq;
+				var colElem, rowElem, bandElem, childElem;
+
 				if (this._format_type == nexacro._FormatsConst.FORMATTYPE_ROWCOL) {
-					var item = new nexacro._FormatItemRowCol();
+					var bandstr, sizestr;
+
+					item = new nexacro._FormatItemRowCol();
 
 					var cols = formatElem.getElementsByTagName("Column");
 					if (!cols || !cols.length) {
@@ -2721,8 +2713,8 @@ if (!nexacro._Formats) {
 					}
 
 					if (cols) {
-						for (var i = 0, l = cols.length; i < l; i++) {
-							var colElem = cols[i];
+						for (i = 0, n = cols.length; i < n; i++) {
+							colElem = cols[i];
 
 							bandstr = nexacro._nvl(colElem.getAttribute("band"), this._default_band);
 							sizestr = nexacro._nvl(colElem.getAttribute("size"), this._default_size);
@@ -2733,67 +2725,61 @@ if (!nexacro._Formats) {
 
 					var rows = formatElem.getElementsByTagName("Row");
 
-					if (rows) {
-						for (var i = 0, l = rows.length; i < l; i++) {
-							var rowElem = rows[i];
+					for (i = 0, n = rows.length; i < n; i++) {
+						rowElem = rows[i];
 
-							bandstr = nexacro._nvl(colElem.getAttribute("band"), this._default_band);
-							sizestr = nexacro._nvl(colElem.getAttribute("size"), this._default_size);
+						bandstr = nexacro._nvl(rowElem.getAttribute("band"), this._default_band);
+						sizestr = nexacro._nvl(rowElem.getAttribute("size"), this._default_size);
 
-							item._addRowSize(i, bandstr, sizestr);
-						}
+						item._addRowSize(i, bandstr, sizestr);
 					}
 
 
 
 					this._format_items[formatID] = item;
 
-					var bands = formatElem.getElementsByTagName("Band");
-
+					bands = formatElem.getElementsByTagName("Band");
 					if (bands) {
-						for (var i = 0, l = bands.length; i < l; i++) {
-							var bandElem = bands[i];
+						for (i = 0, n = bands.length; i < n; i++) {
+							bandElem = bands[i];
 
 							bandid = nexacro._nvl(bandElem.getAttribute("id"), this._default_band);
 							bandsq = this._getBandSeq(bandid);
 
 							item._addBand(bandsq, bandid, bandElem, this);
 
-							var childs = bandElem.childNodes;
-
+							childs = bandElem.childNodes;
 							if (childs) {
-								for (var c = 0, n = childs.length; c < n; c++) {
-									var childElem = childs[c];
+								for (j = 0, m = childs.length; j < m; j++) {
+									childElem = childs[j];
 
-									item._addBandChild(bandsq, bandid, c, childElem, this);
+									item._addBandChild(bandsq, bandid, j, childElem, this);
 								}
 							}
 						}
 					}
 				}
 				else {
-					var item = new nexacro._FormatItemPos();
+					item = new nexacro._FormatItemPos();
 
 					this._format_items[formatID] = item;
 
-					var bands = formatElem.getElementsByTagName("Band");
-
+					bands = formatElem.getElementsByTagName("Band");
 					if (bands) {
-						for (var i = 0, l = bands.length; i < l; i++) {
-							var bandElem = bands[i];
+						for (i = 0, n = bands.length; i < n; i++) {
+							bandElem = bands[i];
 
 							bandid = nexacro._nvl(bandElem.getAttribute("id"), this._default_band);
 							bandsq = this._getBandSeq(bandid);
 
 							item._addBand(bandsq, bandid, bandElem, this);
 
-							var childs = bandElem.childNodes;
-
+							childs = bandElem.childNodes;
 							if (childs) {
-								for (var c = 0, n = childs.length; c < n; c++) {
-									var childElem = childs[c];
+								for (j = 0, m = childs.length; j < m; j++) {
+									childElem = childs[j];
 
-									item._addBandChild(bandsq, bandid, c, childElem, this);
+									item._addBandChild(bandsq, bandid, j, childElem, this);
 								}
 							}
 						}
@@ -2801,7 +2787,7 @@ if (!nexacro._Formats) {
 				}
 			}
 			else {
-				var item = new nexacro._FormatItemPos();
+				item = new nexacro._FormatItemPos();
 
 				this._format_items[formatID] = item;
 			}
@@ -2831,25 +2817,25 @@ if (!nexacro._Formats) {
 	};
 
 	_pFormats._makeFormatStringByColInfos = function (colinfos, keyinfos, levelbind) {
-		function _makeFormatStringByCol (colinfo, type, name, l, r, t, b, w, h) {
+		var _makeFormatStringByCol = function (colinfo, type, name, l, r, t, b, w, h) {
 			var fmt = "<" + type + " id=\"" + name + "\"";
 
-			if (l != undefined || l != null) {
+			if (l != null) {
 				fmt += " left=\"" + l + "\"";
 			}
-			if (r != undefined || r != null) {
+			if (r != null) {
 				fmt += " right=\"" + r + "\"";
 			}
-			if (t != undefined || t != null) {
+			if (t != null) {
 				fmt += " top=\"" + t + "\"";
 			}
-			if (b != undefined || b != null) {
+			if (b != null) {
 				fmt += " bottom=\"" + b + "\"";
 			}
-			if (w != undefined || w != null) {
+			if (w != null) {
 				fmt += " width=\"" + w + "\"";
 			}
-			if (h != undefined || h != null) {
+			if (h != null) {
 				fmt += " height=\"" + h + "\"";
 			}
 
@@ -2857,24 +2843,30 @@ if (!nexacro._Formats) {
 			fmt += "/>";
 
 			return fmt;
-		}
-		;
+		};
 
 		var fmt = "<Format id=\"" + this._default_id + "\">";
 
 		if (colinfos && colinfos.length) {
+			var colinfo;
 			var bandtype = this._type_names.length > 0 ? this._type_names[0] : "Band";
 			var celltype = this._type_names.length > 1 ? this._type_names[1] : "Cell";
 			var cellname = celltype;
+			var nameidx;
 			var defhsize = "24px";
-			var i, n, c, l, w, t, b;
+			var i, n, c, l, w;
 
 			if (levelbind && this._body_bands.length >= 2) {
 				fmt += "<" + bandtype + " id=\"" + this._body_bands[0] + "\" width=\"100%\" height=\"" + defhsize + "\">";
 
-				for (i = 0, n = c = Math.min(colinfos.length / 2, 5), l = 0, w = Math.round(100 / c); i < n; i++, l += w) {
-					var colinfo = colinfos[i];
-					var nameidx = cellname + (i < 10 ? "0" + i : i);
+				l = 0;
+				n = Math.min(colinfos.length / 2, 5);
+				c = Math.min(colinfos.length / 2, 5);
+				w = Math.round(100 / c);
+
+				for (i = 0; i < n; i++, l += w) {
+					colinfo = colinfos[i];
+					nameidx = cellname + (i < 10 ? "0" + i : i);
 
 					if (i == 0) {
 						fmt += _makeFormatStringByCol(colinfo, celltype, nameidx, "0px", null, "0px", "0px", w + "%", null);
@@ -2890,9 +2882,14 @@ if (!nexacro._Formats) {
 				fmt += "</" + bandtype + ">";
 				fmt += "<" + bandtype + " id=\"" + this._body_bands[1] + "\" width=\"100%\" height=\"" + defhsize + "\">";
 
-				for (n = Math.min(colinfos.length, 10), c = n - c, i = l = 0, w = Math.round(100 / c); i < c; i++, l += w) {
-					var colinfo = colinfos[i];
-					var nameidx = cellname + (i < 10 ? "0" + i : i);
+				l = 0;
+				n = Math.min(colinfos.length, 10);
+				c = n - c;
+				w = Math.round(100 / c);
+
+				for (i = 0; i < c; i++, l += w) {
+					colinfo = colinfos[i];
+					nameidx = cellname + (i < 10 ? "0" + i : i);
 
 					if (i == 0) {
 						fmt += _makeFormatStringByCol(colinfo, celltype, nameidx, "0px", null, "0px", "0px", w + "%", null);
@@ -2910,9 +2907,14 @@ if (!nexacro._Formats) {
 			else {
 				fmt += "<" + bandtype + " id=\"" + this._body_bands[0] + "\" width=\"100%\" height=\"" + defhsize + "\">";
 
-				for (i = 0, n = c = Math.min(colinfos.length, 10), l = 0, w = Math.round(100 / c); i < n; i++, l += w) {
-					var colinfo = colinfos[i];
-					var nameidx = cellname + (i < 10 ? "0" + i : i);
+				l = 0;
+				n = Math.min(colinfos.length, 10);
+				c = Math.min(colinfos.length, 10);
+				w = Math.round(100 / c);
+
+				for (i = 0; i < n; i++, l += w) {
+					colinfo = colinfos[i];
+					nameidx = cellname + (i < 10 ? "0" + i : i);
 
 					if (i == 0) {
 						fmt += _makeFormatStringByCol(colinfo, celltype, nameidx, "0px", null, "0px", "0px", w + "%", null);
@@ -2951,19 +2953,21 @@ if (!nexacro._Formats) {
 				var bodybandid = this._body_bands[0];
 
 				for (var formatid in this._format_items) {
-					var formatit = this._format_items[formatid];
+					if (this._format_items.hasOwnProperty(formatid)) {
+						var formatit = this._format_items[formatid];
 
-					if (isautohead) {
-						formatit._makeAutoHeadBand(autobandid, bodybandid, keyinfos, this);
-					}
-					if (isautotail) {
-						formatit._makeAutoTailBand(autobandid, bodybandid, keyinfos, this);
-					}
-					if (isautomark) {
-						formatit._makeAutoMarkBand(autobandid, bodybandid, keyinfos, this);
-					}
-					if (isautonull) {
-						formatit._makeAutoNullBand(autobandid, keyinfos, this);
+						if (isautohead) {
+							formatit._makeAutoHeadBand(autobandid, bodybandid, keyinfos, this);
+						}
+						if (isautotail) {
+							formatit._makeAutoTailBand(autobandid, bodybandid, keyinfos, this);
+						}
+						if (isautomark) {
+							formatit._makeAutoMarkBand(autobandid, bodybandid, keyinfos, this);
+						}
+						if (isautonull) {
+							formatit._makeAutoNullBand(autobandid, keyinfos, this);
+						}
 					}
 				}
 			}
@@ -2995,7 +2999,6 @@ if (!nexacro._Formats) {
 	};
 	_pFormats._getBindInfos = function (id) {
 		var item = this._getItem(id);
-
 		if (item) {
 			return item._getBinds();
 		}
@@ -3006,9 +3009,8 @@ if (!nexacro._Formats) {
 
 	_pFormats._getBandSeq = function (bandid) {
 		var body = this._body_bands;
-
 		if (body) {
-			for (var i = 0, l = body.length; i < l; i++) {
+			for (var i = 0, n = body.length; i < n; i++) {
 				if (body[i] == bandid) {
 					return i;
 				}
@@ -3088,7 +3090,6 @@ if (!nexacro._Formats) {
 
 	delete _pFormats;
 }
-;
 
 if (!nexacro._PanelPopupControl) {
 	nexacro._PanelPopupConst = 
@@ -3180,15 +3181,13 @@ if (!nexacro._PanelPopupControl) {
 		comp.move(0, 0, width, height);
 		comp.set_visible(true);
 
-		if (owner) {
-			owner.on_notify_popup_onpopup(this._popup_index, this._start_index, this._start_level);
+		owner.on_notify_popup_onpopup(this._popup_index, this._start_index, this._start_level);
 
-			this._popupBy(origin, left, top, width, height);
+		this._popupBy(origin, left, top, width, height);
 
-			var _window = owner._getWindow();
-			if (_window && owner._track_capture) {
-				_window._setCaptureLock(owner, true, false);
-			}
+		var _window = owner._getWindow();
+		if (_window && owner._track_capture) {
+			_window._setCaptureLock(owner, true, false);
 		}
 	};
 	_pPanelPopupControl._closePopup = function () {
@@ -3229,7 +3228,6 @@ if (!nexacro._PanelPopupControl) {
 
 	delete _pPanelPopupControl;
 }
-;
 
 
 if (!nexacro._PanelSelectControl) {
@@ -3441,7 +3439,6 @@ if (!nexacro._PanelSelectControl) {
 		}
 	};
 
-
 	_pPanelSelectControl._clearSelector = function () {
 		return this._clearControls(this._select_ctrls);
 	};
@@ -3466,7 +3463,6 @@ if (!nexacro._PanelSelectControl) {
 			}
 		}
 	};
-
 
 	_pPanelSelectControl._attachSelect = function (begin, final) {
 		if (this._select_begin != begin || this._select_final != final) {
@@ -3550,21 +3546,28 @@ if (!nexacro._PanelSelectControl) {
 				break;
 		}
 
-		var il = bound[0], bl = il;
-		var it = bound[1], bt = it;
-		var ir = bound[4], br = ir - bs;
-		var ib = bound[5], bb = ib - bs;
-		var iw = bound[2], ch = iw / 2;
-		var ih = bound[3], cv = ih / 2;
+		var il = bound[0];
+		var it = bound[1];
+		var ir = bound[4];
+		var ib = bound[5];
+		var iw = bound[2];
+		var ih = bound[3];
+
+		var bl = il;
+		var bt = it;
+		var br = ir - bs;
+		var bb = ib - bs;
 
 		switch (this._select_type & nexacro._PanelSelectConst.ALIGN_MASK) {
 			case nexacro._PanelSelectConst.ALIGN_INNER:
 				break;
 			case nexacro._PanelSelectConst.ALIGN_OUTER:
-				br = ir, bb = ib;
+				br = ir;
+				bb = ib;
 				break;
 			case nexacro._PanelSelectConst.ALIGN_MIDDL:
-				br += bh, bb += bh;
+				br += bh;
+				bb += bh;
 				break;
 		}
 
@@ -3608,23 +3611,32 @@ if (!nexacro._PanelSelectControl) {
 				break;
 		}
 
-		var il = bound[0], bl = il - bs;
-		var it = bound[1], bt = it - bs;
-		var ir = bound[4], br = ir - bs;
-		var ib = bound[5], bb = ib - bs;
-		var iw = bound[2], ch = iw / 2;
-		var ih = bound[3], cv = ih / 2;
+		var il = bound[0];
+		var it = bound[1];
+		var ir = bound[4];
+		var ib = bound[5];
+		var iw = bound[2];
+		var ih = bound[3];
+
+		var bl = il - bs;
+		var bt = it - bs;
+		var br = ir - bs;
+		var bb = ib - bs;
 
 		switch (this._select_type & nexacro._PanelSelectConst.ALIGN_MASK) {
 			case nexacro._PanelSelectConst.ALIGN_INNER:
-				bl = il, bt = it;
+				bl = il;
+				bt = it;
 				break;
 			case nexacro._PanelSelectConst.ALIGN_OUTER:
-				br = ir, bb = ib;
+				br = ir;
+				bb = ib;
 				break;
 			case nexacro._PanelSelectConst.ALIGN_MIDDL:
-				bl += bh, bt += bh;
-				br += bh, bb += bh;
+				bl += bh;
+				bt += bh;
+				br += bh;
+				bb += bh;
 				break;
 		}
 
@@ -3740,7 +3752,7 @@ if (!nexacro._PanelSelectControl) {
 			this._notifyChange(offsetX, offsetY);
 		}
 	};
-	_pPanelSelectControl._resizeSelectArea = function (ctrlIdx, offsetX, offsetY, changeattach) {
+	_pPanelSelectControl._resizeSelectArea = function (ctrlIdx, offsetX, offsetY, notify) {
 		var bound = this._getBoundArea();
 		var ctrls = this._select_ctrls;
 
@@ -3751,15 +3763,21 @@ if (!nexacro._PanelSelectControl) {
 			return;
 		}
 
+		var ctrlRT, ctrlRB;
+		var ctrlLT, ctrlLB;
+		var ctrlCL, ctrlCT, ctrlCR, ctrlCB;
+
+		var newX, newY;
+
 		switch (ctrlIdx) {
 			case 0:
 				{
 
-					var ctrlRT = ctrls[2];
-					var ctrlCT = ctrls[1];
-					var ctrlLT = ctrls[0];
-					var ctrlCL = ctrls[7];
-					var ctrlLB = ctrls[4];
+					ctrlRT = ctrls[2];
+					ctrlCT = ctrls[1];
+					ctrlLT = ctrls[0];
+					ctrlCL = ctrls[7];
+					ctrlLB = ctrls[4];
 
 					ctrlLT.move(ctrlLT.getOffsetLeft() + offsetX, ctrlLT.getOffsetTop() + offsetY);
 					ctrlRT.move(ctrlRT.getOffsetLeft(), ctrlRT.getOffsetTop() + offsetY);
@@ -3772,11 +3790,11 @@ if (!nexacro._PanelSelectControl) {
 			case 1:
 				{
 
-					var ctrlLT = ctrls[0];
-					var ctrlCT = ctrls[1];
-					var ctrlRT = ctrls[2];
+					ctrlLT = ctrls[0];
+					ctrlCT = ctrls[1];
+					ctrlRT = ctrls[2];
 
-					var newY = ctrlLT.getOffsetTop() + offsetY;
+					newY = ctrlLT.getOffsetTop() + offsetY;
 
 					ctrlLT.move(ctrlLT.getOffsetLeft(), newY);
 					ctrlCT.move(ctrlCT.getOffsetLeft(), newY);
@@ -3787,11 +3805,11 @@ if (!nexacro._PanelSelectControl) {
 			case 2:
 				{
 
-					var ctrlLT = ctrls[0];
-					var ctrlCT = ctrls[1];
-					var ctrlRT = ctrls[2];
-					var ctrlCR = ctrls[3];
-					var ctrlRB = ctrls[6];
+					ctrlLT = ctrls[0];
+					ctrlCT = ctrls[1];
+					ctrlRT = ctrls[2];
+					ctrlCR = ctrls[3];
+					ctrlRB = ctrls[6];
 
 					ctrlRT.move(ctrlRT.getOffsetLeft() + offsetX, ctrlRT.getOffsetTop() + offsetY);
 					ctrlLT.move(ctrlLT.getOffsetLeft(), ctrlLT.getOffsetTop() + offsetY);
@@ -3804,11 +3822,11 @@ if (!nexacro._PanelSelectControl) {
 			case 3:
 				{
 
-					var ctrlRT = ctrls[2];
-					var ctrlCR = ctrls[3];
-					var ctrlRB = ctrls[6];
+					ctrlRT = ctrls[2];
+					ctrlCR = ctrls[3];
+					ctrlRB = ctrls[6];
 
-					var newX = ctrlCR.getOffsetLeft() + offsetX;
+					newX = ctrlCR.getOffsetLeft() + offsetX;
 
 					ctrlRT.move(newX, ctrlRT.getOffsetTop());
 					ctrlCR.move(newX, ctrlCR.getOffsetTop());
@@ -3819,28 +3837,26 @@ if (!nexacro._PanelSelectControl) {
 			case 4:
 				{
 
-					var ctrlLT = ctrls[0];
-					var ctrlCL = ctrls[7];
-					var ctrlLB = ctrls[4];
-					var ctrlCB = ctrls[5];
-					var ctrlRB = ctrls[6];
+					ctrlLT = ctrls[0];
+					ctrlLB = ctrls[4];
+					ctrlCB = ctrls[5];
+					ctrlRB = ctrls[6];
 
 					ctrlLB.move(ctrlLB.getOffsetLeft() + offsetX, ctrlLB.getOffsetTop() + offsetY);
 					ctrlRB.move(ctrlRB.getOffsetLeft(), ctrlRB.getOffsetTop() + offsetY);
 					ctrlLT.move(ctrlLT.getOffsetLeft() + offsetX, ctrlLT.getOffsetTop());
 					ctrlCB.move(ctrlCB.getOffsetLeft() + offsetX, ctrlCB.getOffsetTop() + offsetY, ctrlCB.getOffsetWidth() - offsetX, ctrlCB.getOffsetHeight());
-					ctrlCL.move(ctrlCL.getOffsetLeft() + offsetX, ctrlCL.getOffsetTop(), ctrlCR.getOffsetWidth(), ctrlCR.getOffsetHeight() - offsetY);
 
 					break;
 				}
 			case 5:
 				{
 
-					var ctrlLB = ctrls[4];
-					var ctrlCB = ctrls[5];
-					var ctrlRB = ctrls[6];
+					ctrlLB = ctrls[4];
+					ctrlCB = ctrls[5];
+					ctrlRB = ctrls[6];
 
-					var newY = ctrlCB.getOffsetTop() + offsetY;
+					newY = ctrlCB.getOffsetTop() + offsetY;
 
 					ctrlLB.move(ctrlLB.getOffsetLeft(), newY);
 					ctrlCB.move(ctrlCB.getOffsetLeft(), newY);
@@ -3851,11 +3867,11 @@ if (!nexacro._PanelSelectControl) {
 			case 6:
 				{
 
-					var ctrlRT = ctrls[2];
-					var ctrlCB = ctrls[5];
-					var ctrlRB = ctrls[6];
-					var ctrlCR = ctrls[3];
-					var ctrlLB = ctrls[4];
+					ctrlRT = ctrls[2];
+					ctrlCB = ctrls[5];
+					ctrlRB = ctrls[6];
+					ctrlCR = ctrls[3];
+					ctrlLB = ctrls[4];
 
 					ctrlRB.move(ctrlRB.getOffsetLeft() + offsetX, ctrlRB.getOffsetTop() + offsetY);
 					ctrlLB.move(ctrlLB.getOffsetLeft(), ctrlLB.getOffsetTop() + offsetY);
@@ -3868,11 +3884,11 @@ if (!nexacro._PanelSelectControl) {
 			case 7:
 				{
 
-					var ctrlLT = ctrls[0];
-					var ctrlCL = ctrls[7];
-					var ctrlLB = ctrls[4];
+					ctrlLT = ctrls[0];
+					ctrlCL = ctrls[7];
+					ctrlLB = ctrls[4];
 
-					var newX = ctrlCL.getOffsetLeft() + offsetX;
+					newX = ctrlCL.getOffsetLeft() + offsetX;
 
 					ctrlLT.move(newX, ctrlLT.getOffsetTop());
 					ctrlCL.move(newX, ctrlCL.getOffsetTop());
@@ -3916,7 +3932,6 @@ if (!nexacro._PanelSelectControl) {
 	_pPanelSelectControl._hideAssistor = function () {
 		return this._showAssistor(false);
 	};
-
 
 	_pPanelSelectControl._convPosOffset = function (pos, base, offsetfn) {
 		for (; base && base.parent && base.parent != this._select_owner; base = base.parent) {
@@ -4035,17 +4050,13 @@ if (!nexacro._PanelSelectControl) {
 			case "selectclick":
 				{
 
-					if (true) {
-						this._clickSelect(e);
-					}
+					this._clickSelect(e);
 					break;
 				}
 			case "selectdrag":
 				{
 
-					if (true) {
-						this._dragSelect(e);
-					}
+					this._dragSelect(e);
 					break;
 				}
 			case "selectmove":
@@ -4114,7 +4125,6 @@ if (!nexacro._PanelSelectControl) {
 
 	delete _pPanelSelectControl;
 }
-;
 
 
 if (!nexacro._PanelSlot) {
@@ -4179,7 +4189,7 @@ if (!nexacro._PanelSlot) {
 		}
 	};
 	_pPanelSlot._clearSlotTarget = function (nullset) {
-		this._slot_target = nullset ? null : null;
+		this._slot_target = null;
 	};
 
 	_pPanelSlot._getSlotStatic = function () {
@@ -4205,41 +4215,44 @@ if (!nexacro._PanelSlot) {
 
 		if (this._slot_target) {
 			if (this._slot_target.length) {
+				var i;
+
+				var n;
+
+				var target;
+
 				switch (this._slot_multi) {
 					case -1:
 					case 2:
 						{
 
-							var _target = this._slot_target[0];
-
+							target = this._slot_target[0];
 							if (target) {
 								target.set_visible(show);
 							}
 
 							if (show) {
-								for (var i = 1, l = _target.length; i < l; i++) {
-									_target = this._slot_target[i];
-
+								for (i = 1, n = target.length; i < n; i++) {
+									target = this._slot_target[i];
 									if (target) {
 										target.set_visible(false);
 									}
 								}
 							}
+							break;
 						}
 					case 1:
 					case 0:
 					default:
 						{
 
-							var _target;
-
-							for (var i = 0, l = _target.length; i < l; i++) {
-								_target = this._slot_target[i];
-
+							for (i = 0, n = 0; i < n; i++) {
+								target = this._slot_target[i];
 								if (target) {
 									target.set_visible(show);
 								}
 							}
+							break;
 						}
 				}
 			}
@@ -4275,6 +4288,7 @@ if (!nexacro._PanelSlot) {
 	_pPanelSlot._isEmptyStatic = function (_static) {
 		return !this._isNonEmptyStatic(_static);
 	};
+
 	_pPanelSlot._setSlotStatus = function (slotstat) {
 		this._slot_status = slotstat;
 	};
@@ -4306,7 +4320,6 @@ if (!nexacro._PanelSlot) {
 	_pPanelSlot._getSlotStatusSet = function () {
 		return [this._slot_status, this._slot_multi];
 	};
-
 
 	_pPanelSlot._setSlotIndex = function (index) {
 		this._slot_index = index;
@@ -4462,24 +4475,16 @@ if (!nexacro._PanelSlot) {
 	};
 	_pPanelSlot._getTargetSize = function (idx, max) {
 		var target = this._slot_target;
-
 		if (target) {
 			if (target.length) {
 				if (idx >= 0 && idx < target.length) {
 					return this._getControlSize(target[idx]);
 				}
-				if (max) {
-					var stsize = this._getControlSize(target[0]);
-					var maxpos = this._getSlotMaxPosition();
 
-					return [stsize[0], stsize[1], maxpos[2], maxpos[3], stsize[0] + maxpos[2], stsize[1] + maxpos[3]];
-				}
-				else {
-					var stsize = this._getControlSize(target[0]);
-					var minpos = this._getSlotMinPosition();
+				var stsize = this._getControlSize(target[0]);
+				var pos = max ? this._getSlotMaxPosition() : this._getSlotMinPosition();
 
-					return [stsize[0], stsize[1], minpos[2], minpos[3], stsize[0] + minpos[2], stsize[1] + minpos[3]];
-				}
+				return [stsize[0], stsize[1], pos[2], pos[3], stsize[0] + pos[2], stsize[1] + pos[3]];
 			}
 
 			return this._getControlSize(target);
@@ -4588,7 +4593,7 @@ if (!nexacro._PanelSlot) {
 		return this._slot_left || this._slot_top || this._slot_right || this._slot_bottom;
 	};
 	_pPanelSlot._isSetSlotCalc = function () {
-		return this._isSetSlotCalcSize() || _isSetSlotCalcRect();
+		return this._isSetSlotCalcSize() || this._isSetSlotCalcRect();
 	};
 
 	_pPanelSlot._setSlotCalcSize = function (width, height) {
@@ -4722,17 +4727,15 @@ if (!nexacro._PanelSlot) {
 
 	_pPanelSlot._calcSlotPosition = function (left, top, right, bottom, clientwidth, clientheight) {
 		var _posits = this._arrSlotPosition(clientwidth, clientheight);
-
 		if (_posits && _posits.length) {
-			var _static = this._slot_static;
-			var _target = this._slot_target;
-			var _left = left ? left : 0;
-			var _top = top ? top : 0;
-			var _right = right ? right : 0;
-			var _bottom = bottom ? bottom : 0;
 			var _width = clientwidth;
 			var _height = clientheight;
 			var _poslen = _posits.length;
+			var _arrpos, _pos;
+			var _index, _limit;
+
+			var _minpos = [0, 0, 0, 0, 0, 0];
+			var _maxpos = [0, 0, 0, 0, 0, 0];
 
 			switch (this._slot_multi) {
 				case -1:
@@ -4740,29 +4743,26 @@ if (!nexacro._PanelSlot) {
 				case 1:
 					{
 
-						var _minpos = [0, 0, 0, 0, 0, 0];
-						var _maxpos = [0, 0, 0, 0, 0, 0];
-
 						if (_poslen > 1) {
-							var _index = 0;
-							var _limit = 1;
+							_index = 0;
+							_limit = 1;
 
 							for (; _index < _limit; _index++) {
-								var _arrpos = _posits[_index].slice();
+								_arrpos = _posits[_index].slice();
 
 								this._adjustPrePosition(_arrpos, _maxpos, _width, _height);
 								this._adjustMinPosition(_minpos, _arrpos, _width, _height);
 								this._adjustMaxPosition(_maxpos, _arrpos, _width, _height);
 							}
 							for (; _index < _poslen; _index++) {
-								var _arrpos = _posits[_index].slice();
+								_arrpos = _posits[_index].slice();
 
 								this._adjustPrePosition(_arrpos, _maxpos, _width, _height);
 								this._adjustMaxPosition(_maxpos, _arrpos, _width, _height);
 							}
 						}
 						else {
-							var _arrpos = _posits[0];
+							_arrpos = _posits[0];
 
 							this._adjustMinPosition(_minpos, _arrpos, _width, _height);
 							this._adjustMaxPosition(_maxpos, _arrpos, _width, _height);
@@ -4771,7 +4771,7 @@ if (!nexacro._PanelSlot) {
 						this._setSlotMinPosition(_minpos);
 						this._setSlotMaxPosition(_maxpos);
 
-						var _pos = this._slot_multi != 1 ? this._getSlotMinPosition() : this._getSlotMaxPosition();
+						_pos = this._slot_multi != 1 ? this._getSlotMinPosition() : this._getSlotMaxPosition();
 
 						this._setSlotCalcRect(_pos[0] + (left ? left : 0), _pos[1] + (top ? top : 0), _pos[4] + (right ? right : 0), _pos[5] + (bottom ? bottom : 0));
 						this._setSlotCalcSize(_pos[2], _pos[3]);
@@ -4781,14 +4781,11 @@ if (!nexacro._PanelSlot) {
 				default:
 					{
 
-						var _minpos = [0, 0, 0, 0, 0, 0];
-						var _maxpos = [0, 0, 0, 0, 0, 0];
-
 						if (_poslen) {
-							var _index = 0;
+							_index = 0;
 
 							for (; _index < _poslen; _index++) {
-								var _arrpos = _posits[_index].slice();
+								_arrpos = _posits[_index].slice();
 
 								this._adjustPrePosition(_arrpos, _maxpos, _width, _height);
 								this._adjustMinPosition(_minpos, _arrpos, _width, _height);
@@ -4796,7 +4793,7 @@ if (!nexacro._PanelSlot) {
 							}
 						}
 						else {
-							var _arrpos = _posits[0];
+							_arrpos = _posits[0];
 
 							this._adjustMinPosition(_minpos, _arrpos, _width, _height);
 							this._adjustMaxPosition(_maxpos, _arrpos, _width, _height);
@@ -4805,7 +4802,7 @@ if (!nexacro._PanelSlot) {
 						this._setSlotMinPosition(_minpos);
 						this._setSlotMaxPosition(_maxpos);
 
-						var _pos = this._getSlotMaxPosition();
+						_pos = this._getSlotMaxPosition();
 
 						this._setSlotCalcRect(_pos[0] + (left ? left : 0), _pos[1] + (top ? top : 0), _pos[4] + (right ? right : 0), _pos[5] + (bottom ? bottom : 0));
 						this._setSlotCalcSize(_pos[2], _pos[3]);
@@ -4829,6 +4826,14 @@ if (!nexacro._PanelSlot) {
 			var _width = clientwidth;
 			var _height = clientheight;
 
+			var l, n;
+			var count, index;
+			var _pos, _tar;
+
+			var _nilpos = [0, 0, 0, 0, 0, 0];
+			var _accpos = [0, 0, 0, 0, 0, 0];
+			var _clcpos = [_left, _top, 0, 0, _right, _bottom];
+
 			switch (this._slot_multi) {
 				case -1:
 				case 2:
@@ -4836,14 +4841,12 @@ if (!nexacro._PanelSlot) {
 
 						if (this._isNonEmptyTarget(_target)) {
 							if (_target.length) {
-								var count = 1;
-								var index = 0;
-								var pocnt = _posits.length;
+								count = 1;
+								index = 0;
 
-								for (var l = Math.min(count, _target.length); index < l; index++) {
-									var _pos = _posits[index % pocnt];
-									var _tar = _target[index];
-
+								for (l = Math.min(count, _target.length); index < l; index++) {
+									_pos = _posits[index % _posits.length];
+									_tar = _target[index];
 									if (_tar && _tar.move) {
 										_tar.move(_pos[0] + _left, _pos[1] + _top, _pos[2], _pos[3], _pos[4] + _right, _pos[5] + _bottom);
 										_tar.set_visible(true);
@@ -4854,14 +4857,10 @@ if (!nexacro._PanelSlot) {
 									}
 								}
 
-								var _nilpos = [0, 0, 0, 0, 0, 0];
-
 								for (l = _target.length; index < l; index++) {
-									var _tar = _target[index];
-
+									_tar = _target[index];
 									if (_tar && _tar.move) {
-										var _pos = _posits[index % pocnt];
-										var _tar = _target[index];
+										_tar = _target[index];
 
 										_tar.move.apply(_tar, _nilpos);
 										_tar.set_visible(false);
@@ -4870,7 +4869,7 @@ if (!nexacro._PanelSlot) {
 							}
 							else {
 								if (_target && _target.move) {
-									var _pos = _posits[0];
+									_pos = _posits[0];
 
 									_target.move(_pos[0] + _left, _pos[1] + _top, _pos[2], _pos[3], _pos[4] + _right, _pos[5] + _bottom);
 									_target.set_visible(true);
@@ -4884,7 +4883,7 @@ if (!nexacro._PanelSlot) {
 						}
 
 						if (_static && _static.move) {
-							var _pos = this._getSlotMaxPosition();
+							_pos = this._getSlotMaxPosition();
 
 							_static.move(_pos[0] + _left, _pos[1] + _top, _pos[2], _pos[3], _pos[4] + _right, _pos[5] + _bottom);
 							_static.set_visible(true);
@@ -4900,10 +4899,7 @@ if (!nexacro._PanelSlot) {
 
 						if (this._isNonEmptyTarget(_target)) {
 							if (_target.length) {
-								var _clcpos = [_left, _top, 0, 0, _right, _bottom];
-								var _accpos = [0, 0, 0, 0, 0, 0];
-
-								for (var index = 0, l = _target.length, n = _posits.length; index < l; index++) {
+								for (index = 0, l = _target.length, n = _posits.length; index < l; index++) {
 									var _curtar = _target[index];
 									var _curpos = _posits[index % n];
 									var _arrpos = _curpos.slice();
@@ -4926,9 +4922,8 @@ if (!nexacro._PanelSlot) {
 								}
 							}
 							else {
-								var _pos = _posits[0];
-
 								if (_target && _target.move) {
+									_pos = _posits[0];
 									_target.move(_pos[0] + _left, _pos[1] + _top, _pos[2], _pos[3], _pos[4] + _right, _pos[5] + _bottom);
 									_target.set_visible(true);
 
@@ -4941,8 +4936,7 @@ if (!nexacro._PanelSlot) {
 						}
 
 						if (_static && _static.move) {
-							var _pos = this._getSlotMaxPosition();
-
+							_pos = this._getSlotMaxPosition();
 							_static.move(_pos[0] + _left, _pos[1] + _top, _pos[2], _pos[3], _pos[4] + _right, _pos[5] + _bottom);
 
 							this._setSlotCachedPos([_pos[0] + _left, _pos[1] + _top, _pos[2], _pos[3], _pos[4] + _right, _pos[5] + _bottom], true);
@@ -5096,7 +5090,6 @@ if (!nexacro._PanelSlot) {
 
 	delete _pPanelSlot;
 }
-;
 
 if (!nexacro._Panel) {
 	nexacro._PanelConst = 
@@ -5520,7 +5513,7 @@ if (!nexacro._Panel) {
 			size[curr++] = slots;
 			size[curr++] = count;
 			size[curr++] = width;
-			size[curr++] = height;
+			size[curr] = height;
 		}
 	};
 	_pPanel._getPanelEachSize = function (index) {
@@ -5572,8 +5565,8 @@ if (!nexacro._Panel) {
 	};
 
 	_pPanel._relocPanelSlotSize = function (hr, vr, hi, vi, hs, vs, cw, ch) {
+		var slot;
 		var slots = this._panel_slots;
-		var sizes = this._panel_eachsize;
 		var sn = slots.length;
 		var en = this._getPanelEachCount();
 
@@ -5581,8 +5574,14 @@ if (!nexacro._Panel) {
 			return;
 		}
 
+		var i, n, s;
 		var sl = 0, dl = 0, fl = 0, ml = 0;
 		var st = 0, dt = 0, ft = 0, mt = 0;
+
+		var cn;
+		var nn;
+		var ew, eh;
+		var sw, sh;
 
 		if (this._isColFirst()) {
 			if (vs > 0) {
@@ -5633,11 +5632,11 @@ if (!nexacro._Panel) {
 				}
 			}
 
-			for (var i = 0, s = 0, ft = st; i < en; i++, ft += dt) {
-				var cn = this._getPanelEachSizeSlots(i) || 0;
-				var nn = this._getPanelEachSizeCount(i) || 0;
-				var ew = this._getPanelEachSizeWidth(i) || 0;
-				var sw = cw - ew;
+			for (i = 0, s = 0, ft = st; i < en; i++, ft += dt) {
+				cn = this._getPanelEachSizeSlots(i) || 0;
+				nn = this._getPanelEachSizeCount(i) || 0;
+				ew = this._getPanelEachSizeWidth(i) || 0;
+				sw = cw - ew;
 
 				if (sw > 0 && nn > 0) {
 					switch (hr) {
@@ -5699,15 +5698,14 @@ if (!nexacro._Panel) {
 				}
 
 				if (vr == 0x2000 && i == en - 1) {
-					var slot = slots[s];
-
+					slot = slots[s];
 					if (slot && slot._isVisible()) {
 						ft = vi ? -slot._getSlotCalcTop() : ch - slot._getSlotCalcTop() - slot._getSlotCalcHeight();
 					}
 				}
 
-				for (var n = 0, fl = sl; n < nn && s < sn; s++, n++) {
-					var slot = slots[s];
+				for (n = 0, fl = sl; n < nn && s < sn; s++, n++) {
+					slot = slots[s];
 					if (slot && slot._isVisible()) {
 						slot._shiftSlotSize(fl, ft, null, null, cw, ch);
 
@@ -5765,11 +5763,11 @@ if (!nexacro._Panel) {
 				}
 			}
 
-			for (var i = 0, s = 0, fl = sl; i < en; i++, fl += dl) {
-				var cn = this._getPanelEachSizeSlots(i);
-				var nn = this._getPanelEachSizeCount(i);
-				var eh = this._getPanelEachSizeHeight(i);
-				var sh = ch - eh;
+			for (i = 0, s = 0, fl = sl; i < en; i++, fl += dl) {
+				cn = this._getPanelEachSizeSlots(i);
+				nn = this._getPanelEachSizeCount(i);
+				eh = this._getPanelEachSizeHeight(i);
+				sh = ch - eh;
 
 				if (sh > 0 && nn > 0) {
 					switch (vr) {
@@ -5830,16 +5828,14 @@ if (!nexacro._Panel) {
 				}
 
 				if (hr == 0x0020 && i == en - 1) {
-					var slot = slots[s];
-
+					slot = slots[s];
 					if (slot && slot._isVisible()) {
 						fl = hi ? -slot._getSlotCalcLeft() : cw - slot._getSlotCalcLeft() - slot._getSlotCalcWidth();
 					}
 				}
 
-				for (var n = 0, ft = st; n < nn && s < sn; s++, n++) {
-					var slot = slots[s];
-
+				for (n = 0, ft = st; n < nn && s < sn; s++, n++) {
+					slot = slots[s];
 					if (slot && slot._isVisible()) {
 						slot._shiftSlotSize(fl, ft, null, null, cw, ch);
 
@@ -5848,8 +5844,7 @@ if (!nexacro._Panel) {
 				}
 
 				if (vr == 0x2000 && s < sn) {
-					var slot = slots[s++];
-
+					slot = slots[s++];
 					if (slot && slot._isVisible()) {
 						var lt = (nn) ? (vi ? -slot._getSlotCalcTop() : ch - slot._getSlotCalcTop() - slot._getSlotCalcHeight()) : st;
 
@@ -5863,6 +5858,7 @@ if (!nexacro._Panel) {
 			this._shiftPanelMaxSize(ml, mt);
 		}
 	};
+
 	_pPanel._recalcPanelSlotPosition = function (clientwidth, clientheight, item, partitemover) {
 		if (clientwidth <= 0 || clientheight <= 0) {
 			return;
@@ -5872,11 +5868,15 @@ if (!nexacro._Panel) {
 		var st = (this._panel_slotbase & nexacro._PanelConst.SLOT_ARRANGETYPE_VERTTAIL) ? clientheight : 0;
 		var hr = (this._panel_slotbase & nexacro._PanelConst.SLOT_ARRANGETYPE_HORZ_RLOC);
 		var vr = (this._panel_slotbase & nexacro._PanelConst.SLOT_ARRANGETYPE_VERT_RLOC);
-		var hf = (this._panel_autosize & nexacro._PanelConst.SLOT_AUTOSIZETYPE_HORZFIT);
-		var vf = (this._panel_autosize & nexacro._PanelConst.SLOT_AUTOSIZETYPE_VERTFIT);
 
 
 
+
+		var i;
+
+		var n;
+
+		var slot;
 
 		if (item) {
 			this._initPanelMinPos(clientwidth, clientheight);
@@ -5907,14 +5907,15 @@ if (!nexacro._Panel) {
 			var rn = 0;
 
 			var ix = 0;
-			var tm = 0;
+
+			var hs;
+			var vs;
 
 			if (this._isColFirst()) {
 				this._setPanelMaxSize(pow, poh);
 
-				for (var i = 0, s = this._panel_slots.length; i < s; i++) {
-					var slot = this._panel_slots[i];
-
+				for (i = 0, n = this._panel_slots.length; i < n; i++) {
+					slot = this._panel_slots[i];
 					if (slot && slot._isVisible()) {
 						slot._calcSlotPosition(l, t, null, null, clientwidth, clientheight);
 
@@ -5953,16 +5954,18 @@ if (!nexacro._Panel) {
 							}
 
 							if (k && i) {
-								tm = this._accPanelEachSizeHeight(ix, d);
+								this._accPanelEachSizeHeight(ix, d);
 								ix = this._addPanelEachSize((cn - 1), (cn - 1), (sl ? clientwidth - (l + w) : l), h);
-								cn = 1, rn++;
+								cn = 1;
+								rn++;
 							}
 
 							th += h;
 
 							l = sl ? (sl - w) : sl;
 							o = false;
-							H = h, d = 0;
+							H = h;
+							d = 0;
 						}
 						else {
 							h = slot._getSlotCalcHeight() || 0;
@@ -5995,8 +5998,8 @@ if (!nexacro._Panel) {
 						this._addPanelEachSize(w ? Math.floor(clientwidth / w) : 1, cn, sl ? (clientwidth - l) : (l + w), h);
 					}
 
-					var vs = vr ? (st ? (t < 0 ? 0 : t) : (t > (clientheight - h) ? 0 : clientheight - (t + h))) : 0;
-					var hs = hr ? (sl ? (this._getPanelMinLeft()) : (clientwidth - this._getPanelMaxWidth())) : 0;
+					vs = vr ? (st ? (t < 0 ? 0 : t) : (t > (clientheight - h) ? 0 : clientheight - (t + h))) : 0;
+					hs = hr ? (sl ? (this._getPanelMinLeft()) : (clientwidth - this._getPanelMaxWidth())) : 0;
 
 					this._relocPanelSlotSize(hr, vr, !!sl, !!st, hs, vs, clientwidth, clientheight);
 				}
@@ -6004,9 +6007,8 @@ if (!nexacro._Panel) {
 			else {
 				this._setPanelMaxSize(pow, poh);
 
-				for (var i = 0, s = this._panel_slots.length; i < s; i++) {
-					var slot = this._panel_slots[i];
-
+				for (i = 0, n = this._panel_slots.length; i < n; i++) {
+					slot = this._panel_slots[i];
 					if (slot && slot._isVisible()) {
 						slot._calcSlotPosition(l, t, null, null, clientwidth, clientheight);
 
@@ -6045,14 +6047,16 @@ if (!nexacro._Panel) {
 							}
 
 							if (k && i) {
-								tm = this._accPanelEachSizeWidth(ix, d);
+								this._accPanelEachSizeWidth(ix, d);
 								ix = this._addPanelEachSize((rn - 1), (rn - 1), w, st ? (clientheight - (t + h)) : t);
-								rn = 1, cn++;
+								rn = 1;
+								cn++;
 							}
 
 							t = st ? (st - h) : st;
 							o = false;
-							W = w, d = 0;
+							W = w;
+							d = 0;
 						}
 						else {
 							w = slot._getSlotCalcWidth() || 0;
@@ -6079,17 +6083,16 @@ if (!nexacro._Panel) {
 						this._addPanelEachSize(h ? Math.floor(clientheight / h) : 1, rn, w, st ? (clientheight - t) : (t + h));
 					}
 
-					var hs = hr ? (sl ? (l < 0 ? 0 : l) : (l > (clientwidth - w) ? 0 : clientwidth - (l + w))) : 0;
-					var vs = vr ? (st ? (this._getPanelMinTop()) : (clientheight - this._getPanelMaxHeight())) : 0;
+					hs = hr ? (sl ? (l < 0 ? 0 : l) : (l > (clientwidth - w) ? 0 : clientwidth - (l + w))) : 0;
+					vs = vr ? (st ? (this._getPanelMinTop()) : (clientheight - this._getPanelMaxHeight())) : 0;
 
 					this._relocPanelSlotSize(hr, vr, !!sl, !!st, hs, vs, clientwidth, clientheight);
 				}
 			}
 		}
 		else {
-			for (var i = 0, s = this._panel_slots.length; i < s; i++) {
-				var slot = this._panel_slots[i];
-
+			for (i = 0, n = this._panel_slots.length; i < n; i++) {
+				slot = this._panel_slots[i];
 				if (slot && slot._isVisible()) {
 					slot._adjustSlotPosition(0, 0, clientwidth, clientheight, null, null);
 
@@ -6112,11 +6115,13 @@ if (!nexacro._Panel) {
 		var colcnt = cpanel._getPanelColSizeCount();
 
 		if (rowcnt <= 0) {
-			rpanel._resetPanelRowSize(rowcnt = 1);
+			rowcnt = 1;
+			rpanel._resetPanelRowSize(rowcnt);
 			rpanel._setPanelDefaultRowSize(clientheight);
 		}
 		if (colcnt <= 0) {
-			cpanel._resetPanelColSize(colcnt = 1);
+			colcnt = 1;
+			cpanel._resetPanelColSize(colcnt);
 			cpanel._setPanelDefaultColSize(clientwidth);
 		}
 
@@ -6140,6 +6145,9 @@ if (!nexacro._Panel) {
 		this._initPanelMaxSize();
 		this._initPanelEachSize();
 
+		var i, s;
+		var slot;
+
 		var pow = repeat ? this._getPanelPrevOverWidth() : 0;
 		var now = repeat ? this._getPanelNextOverWidth() : 0;
 		var poh = repeat ? this._getPanelPrevOverHeight() : 0;
@@ -6159,12 +6167,14 @@ if (!nexacro._Panel) {
 		var a = !k;
 		var cn = 0, rn = 0;
 
+		var vs;
+		var hs;
+
 		if (this._isColFirst()) {
 			this._setPanelMaxSize(pow, poh);
 
-			for (var i = 0, s = this._panel_slots.length; i < s; i++) {
-				var slot = this._panel_slots[i];
-
+			for (i = 0, s = this._panel_slots.length; i < s; i++) {
+				slot = this._panel_slots[i];
 				if (slot && slot._isVisible()) {
 					{
 
@@ -6193,7 +6203,12 @@ if (!nexacro._Panel) {
 					}
 
 					if (o) {
-						r = slot._isIndexedRow() ? slot._getSlotRowIndex() : ++r;
+						if (slot._isIndexedRow()) {
+							r = slot._getSlotRowIndex();
+						}
+						else {
+							++r;
+						}
 
 						if (st) {
 							h = rpanel._getPanelRowSize(r, slot._getSlotRowSpan());
@@ -6206,7 +6221,8 @@ if (!nexacro._Panel) {
 
 						if (k && i) {
 							this._addPanelEachSize((cn - 1), (cn - 1), (sl ? clientwidth - (l + w) : l), h);
-							cn = 1, rn++;
+							cn = 1;
+							rn++;
 						}
 
 						l = sl ? (sl - w) : sl;
@@ -6234,8 +6250,8 @@ if (!nexacro._Panel) {
 					this._addPanelEachSize(w ? Math.floor(clientwidth / w) : 1, cn, sl ? (clientwidth - l) : (l + w), h);
 				}
 
-				var vs = vr ? (st ? (t < 0 ? 0 : t) : (t > (clientheight - h) ? 0 : clientheight - (t + h))) : 0;
-				var hs = hr ? (sl ? (this._getPanelMinLeft()) : (clientwidth - this._getPanelMaxWidth())) : 0;
+				vs = vr ? (st ? (t < 0 ? 0 : t) : (t > (clientheight - h) ? 0 : clientheight - (t + h))) : 0;
+				hs = hr ? (sl ? (this._getPanelMinLeft()) : (clientwidth - this._getPanelMaxWidth())) : 0;
 
 				this._relocPanelSlotSize(hr, vr, !!sl, !!st, hs, vs, clientwidth, clientheight);
 			}
@@ -6243,9 +6259,8 @@ if (!nexacro._Panel) {
 		else {
 			this._setPanelMaxSize(pow, poh);
 
-			for (var i = 0, s = this._panel_slots.length; i < s; i++) {
-				var slot = this._panel_slots[i];
-
+			for (i = 0, s = this._panel_slots.length; i < s; i++) {
+				slot = this._panel_slots[i];
 				if (slot && slot._isVisible()) {
 					{
 
@@ -6274,7 +6289,12 @@ if (!nexacro._Panel) {
 					}
 
 					if (o) {
-						c = slot._isIndexedCol() ? slot._getSlotColIndex() : ++c;
+						if (slot._isIndexedCol()) {
+							c = slot._getSlotColIndex();
+						}
+						else {
+							++c;
+						}
 
 						if (sl) {
 							w = cpanel._getPanelColSize(c, slot._getSlotColSpan());
@@ -6287,7 +6307,8 @@ if (!nexacro._Panel) {
 
 						if (k && i) {
 							this._addPanelEachSize((rn - 1), (rn - 1), w, st ? (clientheight - (t + h)) : t);
-							rn = 1, cn++;
+							rn = 1;
+							cn++;
 						}
 
 						t = st ? (st - h) : st;
@@ -6315,8 +6336,8 @@ if (!nexacro._Panel) {
 					this._addPanelEachSize(h ? Math.floor(clientheight / h) : 1, rn, w, st ? (clientheight - t) : (t + h));
 				}
 
-				var hs = hr ? (sl ? (l < 0 ? 0 : l) : (l > (clientwidth - w) ? 0 : clientwidth - (l + w))) : 0;
-				var vs = vr ? (st ? (this._getPanelMinTop()) : (clientheight - this._getPanelMaxHeight())) : 0;
+				hs = hr ? (sl ? (l < 0 ? 0 : l) : (l > (clientwidth - w) ? 0 : clientwidth - (l + w))) : 0;
+				vs = vr ? (st ? (this._getPanelMinTop()) : (clientheight - this._getPanelMaxHeight())) : 0;
 
 				this._relocPanelSlotSize(hr, vr, !!sl, !!st, hs, vs, clientwidth, clientheight);
 			}
@@ -6460,7 +6481,8 @@ if (!nexacro._Panel) {
 
 	_pPanel._getPanelRowSize = function (_index, count, group) {
 		var bound = this._panel_rowsizes.length;
-		var rsize = 0;
+		var ret = 0;
+		var size;
 		var start = 0;
 		var index = _index;
 
@@ -6483,30 +6505,32 @@ if (!nexacro._Panel) {
 		}
 
 
-		if (bound = 0) {
+		if (bound == 0) {
 			return 0;
 		}
+
 		if (bound < 0) {
 			bound = this._panel_rowsizes.length - this._panel_fixrtail;
 		}
 
 		if (bound == 1) {
-			var size = this._panel_rowsizes[start];
+			size = this._panel_rowsizes[start];
 
 			return nexacro._isNull(size) ? this._panel_defrsize * count : size * count;
 		}
 
 		for (var i = index, l = index + count; i < l; i++) {
-			var size = this._panel_rowsizes[(i % bound) + start];
+			size = this._panel_rowsizes[(i % bound) + start];
 
-			rsize += nexacro._isNull(size) ? this._panel_defrsize : size;
+			ret += nexacro._isNull(size) ? this._panel_defrsize : size;
 		}
 
-		return rsize;
+		return ret;
 	};
 	_pPanel._getPanelColSize = function (_index, count, group) {
 		var bound = this._panel_colsizes.length;
-		var csize = 0;
+		var ret = 0;
+		var size;
 		var start = 0;
 		var index = _index;
 
@@ -6534,23 +6558,24 @@ if (!nexacro._Panel) {
 		}
 
 		if (bound == 1) {
-			var size = this._panel_colsizes[start];
+			size = this._panel_colsizes[start];
 
 			return nexacro._isNull(size) ? this._panel_defcsize * count : size * count;
 		}
 
 		for (var i = index, l = index + count; i < l; i++) {
-			var size = this._panel_colsizes[(i % bound) + start];
+			size = this._panel_colsizes[(i % bound) + start];
 
-			csize += nexacro._isNull(size) ? this._panel_defcsize : size;
+			ret += nexacro._isNull(size) ? this._panel_defcsize : size;
 		}
 
-		return csize;
+		return ret;
 	};
 	_pPanel._getPanelAllRowSize = function (defsize) {
 		var bound = this._panel_rowsizes.length;
 		var count = this._panel_rowcount;
-		var csize = 0;
+		var ret = 0;
+		var size;
 
 		count = count < 0 ? count * (-1) : count;
 
@@ -6559,22 +6584,24 @@ if (!nexacro._Panel) {
 		}
 
 		if (bound == 1) {
-			var size = this._panel_rowsizes[0];
+			size = this._panel_rowsizes[0];
 
 			return nexacro._isNull(size) ? defsize * count : size * count;
 		}
 
 		for (var i = 0, l = count; i < l; i++) {
-			var size = this._panel_rowsizes[i % bound];
-			csize += nexacro._isNull(size) ? defsize : size;
+			size = this._panel_rowsizes[i % bound];
+
+			ret += nexacro._isNull(size) ? defsize : size;
 		}
 
-		return csize;
+		return ret;
 	};
 	_pPanel._getPanelAllColSize = function (defsize) {
 		var bound = this._panel_colsizes.length;
 		var count = this._panel_colcount;
-		var csize = 0;
+		var ret = 0;
+		var size;
 
 		count = count < 0 ? count * (-1) : count;
 
@@ -6583,17 +6610,18 @@ if (!nexacro._Panel) {
 		}
 
 		if (bound == 1) {
-			var size = this._panel_colsizes[0];
+			size = this._panel_colsizes[0];
 
 			return nexacro._isNull(size) ? defsize * count : size * count;
 		}
 
 		for (var i = 0, l = count; i < l; i++) {
-			var size = this._panel_colsizes[i % bound];
-			csize += nexacro._isNull(size) ? defsize : size;
+			size = this._panel_colsizes[i % bound];
+
+			ret += nexacro._isNull(size) ? defsize : size;
 		}
 
-		return csize;
+		return ret;
 	};
 
 	_pPanel._setPanelDefaultRowSize = function (size) {
@@ -6649,10 +6677,10 @@ if (!nexacro._Panel) {
 		return this._panel_mintop;
 	};
 	_pPanel._setPanelMinLeft = function (left) {
-		this._panel_minleft = Math.max(width, this._panel_minleft);
+		this._panel_minleft = Math.max(left, this._panel_minleft);
 	};
 	_pPanel._setPanelMinTop = function (top) {
-		this._panel_mintop = Math.max(height, this._panel_mintop);
+		this._panel_mintop = Math.max(top, this._panel_mintop);
 	};
 	_pPanel._setPanelMinPos = function (left, top) {
 		this._panel_minleft = Math.min(left, this._panel_minleft);
@@ -6738,7 +6766,7 @@ if (!nexacro._Panel) {
 	_pPanel._addPanelLimitOverWidth = function (width) {
 		var last_elem = this._panel_limitoverwidth.slice(-1);
 		if (last_elem.length) {
-			height += last_elem[0];
+			width += last_elem[0];
 		}
 
 		this._panel_limitoverwidth.push(width);
@@ -7050,8 +7078,6 @@ if (!nexacro._Panel) {
 
 			if (this._isGroupPopup()) {
 				if (show) {
-					var panelpopup = this._getPanelPopup(slot);
-
 					this._showPanelPopup(slot);
 				}
 				else {
@@ -7159,7 +7185,7 @@ if (!nexacro._Panel) {
 
 					this._closePanelBandPopup(popupslot);
 
-					var panelpopup = this._getPanelBandPopup(slot);
+					this._getPanelBandPopup(slot);
 
 					this._showPanelBandPopup(slot);
 				}
@@ -7259,10 +7285,6 @@ if (!nexacro._Panel) {
 
 	delete _pPanel;
 }
-;
-
-
-
 
 if (!nexacro._ScrollManager) {
 	nexacro._ScrollConst = 
@@ -7591,36 +7613,40 @@ if (!nexacro._ScrollManager) {
 	};
 	_pScrollManager._convertScrollCtrlSet = function (ctrlset) {
 		var arr = nexacro._toString(ctrlset).toLowerCase().split(" ");
-
 		if (!arr) {
 			return 0;
 		}
+
+		var v, h;
+
 		if (arr.length == 1) {
-			var h = nexacro._ScrollConst.SCROLLCTRLSET_CONVERT[arr[0]];
+			h = nexacro._ScrollConst.SCROLLCTRLSET_CONVERT[arr[0]];
 
 			return h | (h << 1);
 		}
 		else {
-			var h = nexacro._ScrollConst.SCROLLCTRLSET_CONVERT[arr[0]];
-			var v = nexacro._ScrollConst.SCROLLCTRLSET_CONVERT[arr[1]];
+			h = nexacro._ScrollConst.SCROLLCTRLSET_CONVERT[arr[0]];
+			v = nexacro._ScrollConst.SCROLLCTRLSET_CONVERT[arr[1]];
 
 			return h | v;
 		}
 	};
 	_pScrollManager._convertScrollVisible = function (ctrlvisible) {
 		var arr = nexacro._toString(ctrlvisible).toLowerCase().split(" ");
-
 		if (!arr) {
 			return 0;
 		}
+
+		var v, h;
+
 		if (arr.length == 1) {
-			var h = nexacro._ScrollConst.SCROLLVISIBLE_CONVERT[arr[0]];
+			h = nexacro._ScrollConst.SCROLLVISIBLE_CONVERT[arr[0]];
 
 			return h | (h << 1);
 		}
 		else {
-			var h = nexacro._ScrollConst.SCROLLVISIBLE_CONVERT[arr[0]];
-			var v = nexacro._ScrollConst.SCROLLVISIBLE_CONVERT[arr[1]];
+			h = nexacro._ScrollConst.SCROLLVISIBLE_CONVERT[arr[0]];
+			v = nexacro._ScrollConst.SCROLLVISIBLE_CONVERT[arr[1]];
 
 			return h | v;
 		}
@@ -7666,10 +7692,13 @@ if (!nexacro._ScrollManager) {
 			var vrecurr = this.vscrollinfo && vinfo && this.vscrollinfo.pos != vinfo.pos;
 
 			if (hrecurr) {
-				this.recurrtype |= nexacro._ScrollConst.SCROLLDIRTYPE_HORZ, this.hscrollinfo = hinfo;
+				this.recurrtype |= nexacro._ScrollConst.SCROLLDIRTYPE_HORZ;
+				this.hscrollinfo = hinfo;
 			}
+
 			if (vrecurr) {
-				this.recurrtype |= nexacro._ScrollConst.SCROLLDIRTYPE_VERT, this.vscrollinfo = vinfo;
+				this.recurrtype |= nexacro._ScrollConst.SCROLLDIRTYPE_VERT;
+				this.vscrollinfo = vinfo;
 			}
 
 			return true;
@@ -7882,6 +7911,7 @@ if (!nexacro._ScrollManager) {
 	};
 	_pScrollManager._setScrollTrackCover = function (covertype) {
 		this.covertype = this._convertScrollCoverType(covertype);
+
 		this.parttrack = (this.covertype != 0);
 	};
 	_pScrollManager._setScrollTrackBands = function (trackband, tracktype, trackloct) {
@@ -8427,7 +8457,6 @@ if (!nexacro._ScrollManager) {
 								this._setcoverbimg = true;
 							}
 							if (!this._setcoversize) {
-								var zindex = owner._getItemsCount();
 								this._trackcovereb.setElementZIndex(1);
 								this._trackcoverem.setElementZIndex(2);
 								this._trackcovereb.setElementSize(width, height);
@@ -8496,54 +8525,23 @@ if (!nexacro._ScrollManager) {
 	_pScrollManager._actionTrackCover = function (trigger) {
 		switch (trigger) {
 			case "trackinit":
-				{
-
-					if (true) {
-						this._hideTrackCover();
-					}
-					break;
-				}
-			case "trackstart":
-			case "trackbegun":
-				{
-
-					if (true) {
-						this._showTrackCover();
-					}
-					break;
-				}
-			case "trackmove":
-			case "trackmoved":
-				{
-
-					if (true) {
-						this._showTrackCover();
-					}
-					break;
-				}
-			case "trackwheel":
-				{
-
-					if (true) {
-						this._showTrackCover();
-					}
-					break;
-				}
 			case "trackend":
 			case "trackended":
 				{
 
-					if (true) {
-						this._hideTrackCover();
-					}
+					this._hideTrackCover();
 					break;
 				}
+			case "trackstart":
+			case "trackbegun":
+			case "trackmove":
+			case "trackmoved":
+			case "trackwheel":
 			case "trackpause":
 				{
 
-					if (true) {
-						this._showTrackCover();
-					}
+					this._showTrackCover();
+					break;
 				}
 		}
 	};
@@ -8692,16 +8690,8 @@ if (!nexacro._ScrollManager) {
 				}
 			case "trackmove":
 			case "trackmoved":
-				{
-
-					if (this._trackbandtrk.length) {
-						this._takeTrackBands(this._trackbandtrk);
-						this._moveTrackBands(this._trackbandtrk);
-						this._showTrackBands(this._trackbandtrk);
-					}
-					break;
-				}
 			case "trackwheel":
+			case "trackpause":
 				{
 
 					if (this._trackbandtrk.length) {
@@ -8722,16 +8712,6 @@ if (!nexacro._ScrollManager) {
 						this._takeTrackBands(this._trackbandend);
 						this._moveTrackBands(this._trackbandend);
 						this._showTrackBands(this._trackbandend);
-					}
-					break;
-				}
-			case "trackpause":
-				{
-
-					if (this._trackbandtrk.length) {
-						this._takeTrackBands(this._trackbandtrk);
-						this._moveTrackBands(this._trackbandtrk);
-						this._showTrackBands(this._trackbandtrk);
 					}
 					break;
 				}
@@ -8993,9 +8973,6 @@ if (!nexacro._ScrollManager) {
 		var flxl = this.fixlcount;
 
 		if (lead && flxl) {
-			var l = this.rowfirst ? hpos : 0;
-			var t = this.rowfirst ? 0 : vpos;
-
 			for (var i = 0, n = Math.min(lead.length, flxl); i < n; i++) {
 				var index = lead[i];
 				var items = this._getOwnerItem(index);
@@ -9019,11 +8996,8 @@ if (!nexacro._ScrollManager) {
 		var flxt = this.fixtcount;
 
 		if (tail && flxt) {
-			var l = this.rowfirst ? hpos : 0;
-			var t = this.rowfirst ? 0 : vpos;
-
 			for (var i = 0, n = Math.min(tail.length, flxt); i < n; i++) {
-				var index = lead[i];
+				var index = tail[i];
 				var items = this._getOwnerItem(index);
 				if (items) {
 					for (var c = 0, m = items.length; c < m; c++) {
@@ -9111,10 +9085,9 @@ if (!nexacro._ScrollManager) {
 		}
 		return null;
 	};
+
 	delete _pScrollManager;
 }
-;
-
 
 if (!nexacro._ExpandManager) {
 	nexacro._ExpandConst = 
@@ -9224,6 +9197,7 @@ if (!nexacro._ExpandManager) {
 	_pExpandManager.isExpanding = function () {
 		return this.expandstat == 2;
 	};
+
 	_pExpandManager._convertExpandDirType = function (dirtype) {
 		return dirtype ? nexacro._ExpandConst.EXPANDDIRTYPE_CONVERT[dirtype] : nexacro._ExpandConst.EXPANDDIRTYPE_NONE;
 	};
@@ -9280,8 +9254,6 @@ if (!nexacro._ExpandManager) {
 	_pExpandManager.onChangeStatus = function (oldstat, newstat, type, info) {
 		switch (oldstat) {
 			case 4:
-				{
-				}
 			case 0:
 				{
 
@@ -9468,12 +9440,10 @@ if (!nexacro._ExpandManager) {
 
 	delete _pExpandManager;
 }
-;
 
 
 if (!nexacro._SelectManager) {
 }
-;
 
 
 if (!nexacro.ComplexComponent) {
@@ -9845,6 +9815,7 @@ if (!nexacro.ComplexComponent) {
 			return null;
 		}
 	};
+
 	_pComplexComponent._createdNCChild = function (window) {
 		if (this._is_nc_scroll) {
 			this._createdScroll(window);
@@ -9920,6 +9891,7 @@ if (!nexacro.ComplexComponent) {
 	_pComplexComponent._onGetNCTailControlWidth = function (before) {
 		return this._nclead.getPixelWidth();
 	};
+
 	_pComplexComponent._getNCChildren = function () {
 		var children = [];
 
@@ -10660,7 +10632,7 @@ if (!nexacro.ComplexComponent) {
 	};
 	_pComplexComponent._setChildSubLayoutInfo = function (child) {
 		if (child && child._is_panel_layout) {
-			this._onInitSubPanelChildLayout(item, this.panel);
+			this._onInitSubPanelChildLayout(child, this.panel);
 		}
 	};
 	_pComplexComponent._setItemSubLayoutInfo = function (item, binddata, index) {
@@ -10750,24 +10722,20 @@ if (!nexacro.ComplexComponent) {
 		var panel = this._panel;
 
 		if (panel) {
+			var slot;
+			var headslot, tailslot;
+
 			var leveled = this._is_levelbind && this._databind != null;
 			var formats = this._is_format_layout && this._formats != null;
 			var childpan = this._is_child && ctrls == this._children;
 			var partitem = this._is_items && ctrls == this._items && this._use_partitem;
-			var partslot = panel._panel_partslot;
-			var rowfirst = panel._isRowFirst();
 			var indexed = panel._panel_layout == 0;
-			var posited = panel._panel_layout == 1;
-			var autosize = panel._panel_autosize;
-			var autofill = panel._panel_autofill;
 			var startidx = panel._panel_idxstart ? panel._panel_idxstart : 0;
 			var startlvl = panel._panel_lvlstart ? panel._panel_lvlstart : 0;
 			var slotstat = nexacro._PanelSlotConst.STATUS_NONE;
 			var bandstat = nexacro._PanelSlotConst.STATUS_NONE;
 			var collapse = false;
-			var bandhide = false;
 			var slotpopup = false;
-			var bandpopup = false;
 
 
 			switch (panel._panel_subgroup & nexacro._PanelConst.GROUPING_SUBSTYLE_GROUP_MASK) {
@@ -10775,9 +10743,6 @@ if (!nexacro.ComplexComponent) {
 					slotstat = nexacro._PanelSlotConst.STATUS_EXPAND;
 					break;
 				case nexacro._PanelConst.GROUPING_SUBSTYLE_GROUP_COLLAPSE:
-					slotstat = nexacro._PanelSlotConst.STATUS_COLLPASE;
-					collapse = true;
-					break;
 				case nexacro._PanelConst.GROUPING_SUBSTYLE_GROUP_ACCORDION:
 					slotstat = nexacro._PanelSlotConst.STATUS_COLLPASE;
 					collapse = true;
@@ -10794,16 +10759,12 @@ if (!nexacro.ComplexComponent) {
 					break;
 				case nexacro._PanelConst.GROUPING_SUBSTYLE_BAND_COLLAPSE:
 					bandstat = nexacro._PanelSlotConst.STATUS_COLLPASE;
-					bandhide = true;
 					break;
 				case nexacro._PanelConst.GROUPING_SUBSTYLE_BAND_ACCORDION:
 					bandstat = nexacro._PanelSlotConst.STATUS_COLLPASE;
-					bandhide = true;
 					break;
 				case nexacro._PanelConst.GROUPING_SUBSTYLE_BAND_POPUP:
 					bandstat = nexacro._PanelSlotConst.STATUS_COLLPASE;
-					bandhide = true;
-					bandpopup = true;
 					break;
 			}
 
@@ -10816,6 +10777,8 @@ if (!nexacro.ComplexComponent) {
 			var bindcount = this._getBindCount();
 			var nullcount = bindcount ? 0 : this._null_count;
 			var slotcount = 0;
+			var headcount;
+			var tailcount;
 
 			if (childpan) {
 				slotindex = 0;
@@ -10824,8 +10787,8 @@ if (!nexacro.ComplexComponent) {
 			else {
 				bindcount = bindcount ? bindcount : nullcount;
 
-				var headslot = start < 0 || count < 0;
-				var tailslot = start < 0 || count < 0;
+				headslot = start < 0 || count < 0;
+				tailslot = start < 0 || count < 0;
 
 				if (over) {
 					if (over < 0) {
@@ -10834,6 +10797,7 @@ if (!nexacro.ComplexComponent) {
 							if (slotindex < 0) {
 								slotindex = 0;
 							}
+
 							slotcount = slotindex + count + prevc + nextc;
 							if (slotcount >= bindcount) {
 								slotcount = bindcount;
@@ -10844,6 +10808,7 @@ if (!nexacro.ComplexComponent) {
 							if (slotindex < 0) {
 								slotindex = 0;
 							}
+
 							slotcount = slotindex + count;
 							if (slotcount >= bindcount) {
 								slotcount = bindcount;
@@ -10856,6 +10821,7 @@ if (!nexacro.ComplexComponent) {
 							if (slotindex < 0) {
 								slotindex = 0;
 							}
+
 							slotcount = slotindex + count + prevc + nextc;
 							if (slotcount >= bindcount) {
 								slotcount = bindcount;
@@ -10866,6 +10832,7 @@ if (!nexacro.ComplexComponent) {
 							if (slotindex >= bindcount) {
 								slotindex = bindcount;
 							}
+
 							slotcount = slotindex + count;
 							if (slotcount >= bindcount) {
 								slotcount = bindcount;
@@ -10882,8 +10849,8 @@ if (!nexacro.ComplexComponent) {
 					}
 				}
 				else {
-					var headcount = this._use_headitem && this._head_count ? this._head_count : 0;
-					var tailcount = this._use_tailitem && this._tail_count ? this._tail_count : 0;
+					headcount = this._use_headitem && this._head_count ? this._head_count : 0;
+					tailcount = this._use_tailitem && this._tail_count ? this._tail_count : 0;
 
 					slotindex = (!start || start < 0 || headslot || tailslot) ? (baseindex - headcount) : Math.max(baseindex + start - prevc, 0);
 					slotcount = (!count || count < 0 || headslot || tailslot) ? (bindcount + tailcount) : Math.min(slotindex + count + prevc + nextc, bindcount);
@@ -10899,29 +10866,28 @@ if (!nexacro.ComplexComponent) {
 			}
 
 			if (!panel._panel_showslot) {
+				var c;
+				var curlvl, rowcols, position;
+
 				if (formats) {
 					if (slotpopup && leveled && collapse) {
 						for (; ctrlindex < ctrlcount && slotindex < slotcount; slotindex++, bindindex++) {
-							var curlvl = this._fetchLevelBindValue(bindindex);
-
+							curlvl = this._fetchLevelBindValue(bindindex);
 							if (curlvl == startlvl || bindindex < startidx) {
-								var slot = panel._getPanelSlot(slotindex, true);
-
+								slot = panel._getPanelSlot(slotindex, true);
 								if (slot) {
 									slot._setSlotIndex(bindindex < startidx ? -1 : bindindex);
 									slot._setSlotLevel(curlvl);
 									slot._setSlotStatusSet(slotstat, bandstat);
 
-									var c = 0;
-
 									if (indexed) {
-										var rowcols = this._fetchFormatsRowCols(bindindex);
+										rowcols = this._fetchFormatsRowCols(bindindex);
 										c = rowcols.length;
 
 										slot._setSlotRowCols(rowcols);
 									}
 									else {
-										var position = this._fetchFormatsPosition(bindindex);
+										position = this._fetchFormatsPosition(bindindex);
 										c = position.length;
 
 										slot._setSlotPosition(position);
@@ -10950,29 +10916,26 @@ if (!nexacro.ComplexComponent) {
 					}
 					else {
 						for (; ctrlindex < ctrlcount && slotindex < slotcount; slotindex++, bindindex++) {
-							var slot = panel._getPanelSlot(slotindex, true);
-
+							slot = panel._getPanelSlot(slotindex, true);
 							if (slot) {
 								slot._setSlotIndex(bindindex);
 								slot._setSlotStatusSet(slotstat, bandstat);
 
 								if (leveled) {
-									var curlvl = this._fetchLevelBindValue(bindindex);
+									curlvl = this._fetchLevelBindValue(bindindex);
 
 									slot._setSlotLevel(curlvl);
 									slot._setSlotVisible(!collapse || curlvl <= startlvl);
 								}
 
-								var c = 0;
-
 								if (indexed) {
-									var rowcols = this._fetchFormatsRowCols(bindindex);
+									rowcols = this._fetchFormatsRowCols(bindindex);
 									c = rowcols.length;
 
 									slot._setSlotRowCols(rowcols);
 								}
 								else {
-									var position = this._fetchFormatsPosition(bindindex);
+									position = this._fetchFormatsPosition(bindindex);
 									c = position.length;
 
 									slot._setSlotPosition(position);
@@ -10994,8 +10957,7 @@ if (!nexacro.ComplexComponent) {
 					}
 
 					for (; slotindex < slotcount; slotindex++) {
-						var slot = panel._getPanelSlot(slotindex, true);
-
+						slot = panel._getPanelSlot(slotindex, true);
 						if (slot) {
 							if (indexed) {
 								slot._setSlotRowCols();
@@ -11009,11 +10971,9 @@ if (!nexacro.ComplexComponent) {
 				else {
 					if (slotpopup && leveled && collapse) {
 						for (; ctrlindex < ctrlcount && slotindex < slotcount; slotindex++, bindindex++) {
-							var curlvl = this._fetchLevelBindValue(bindindex);
-
+							curlvl = this._fetchLevelBindValue(bindindex);
 							if (curlvl == startlvl || bindindex < startidx) {
-								var slot = panel._getPanelSlot(slotindex, true);
-
+								slot = panel._getPanelSlot(slotindex, true);
 								if (slot) {
 									slot._setSlotIndex(bindindex < startidx ? -1 : bindindex);
 									slot._setSlotLevel(curlvl);
@@ -11026,7 +10986,7 @@ if (!nexacro.ComplexComponent) {
 										slot._setSlotPosition();
 									}
 
-									var c = this._getPanelSlotTargetCount(bindindex);
+									c = this._getPanelSlotTargetCount(bindindex);
 
 									if (c > 1) {
 										slot._setSlotTarget(partitem ? this._getItem(bindindex) : this._getSubArray(ctrls, ctrlindex, c));
@@ -11051,14 +11011,13 @@ if (!nexacro.ComplexComponent) {
 					}
 					else {
 						for (; ctrlindex < ctrlcount && slotindex < slotcount; slotindex++, bindindex++) {
-							var slot = panel._getPanelSlot(slotindex, true);
-
+							slot = panel._getPanelSlot(slotindex, true);
 							if (slot) {
 								slot._setSlotIndex(bindindex);
 								slot._setSlotStatusSet(slotstat, bandstat);
 
 								if (leveled) {
-									var curlvl = this._fetchLevelBindValue(bindindex);
+									curlvl = this._fetchLevelBindValue(bindindex);
 
 									slot._setSlotLevel(curlvl);
 									slot._setSlotVisible(!collapse || curlvl <= startlvl);
@@ -11071,7 +11030,7 @@ if (!nexacro.ComplexComponent) {
 									slot._setSlotPosition();
 								}
 
-								var c = this._getPanelSlotTargetCount(bindindex);
+								c = this._getPanelSlotTargetCount(bindindex);
 
 								if (c > 1) {
 									slot._setSlotTarget(partitem ? this._getItem(bindindex) : this._getSubArray(ctrls, ctrlindex, c));
@@ -11086,8 +11045,7 @@ if (!nexacro.ComplexComponent) {
 					}
 
 					for (; slotindex < slotcount; slotindex++) {
-						var slot = panel._getPanelSlot(slotindex, true);
-
+						slot = panel._getPanelSlot(slotindex, true);
 						if (slot) {
 							if (indexed) {
 								slot._setSlotRowCols();
@@ -11100,9 +11058,7 @@ if (!nexacro.ComplexComponent) {
 				}
 			}
 			else {
-				var view = new nexacro._IconText("view");
-				var slot = new nexacro._PanelSlot(ctrl, view);
-
+				slot = new nexacro._PanelSlot(null, new nexacro._IconText("view"));
 				if (slot) {
 					panel._addPanelSlot(slot);
 				}
@@ -11112,53 +11068,24 @@ if (!nexacro.ComplexComponent) {
 
 	_pComplexComponent._showPanelItemSlot = function (ctrls, start, count, prevc, nextc, over, show, band) {
 		var panel = this._panel;
-
 		if (panel && this._use_partitem && ctrls) {
 			var leveled = this._is_levelbind && this._databind != null;
 			var formats = this._is_format_layout && this._formats != null;
 			var startidx = panel._panel_idxstart ? panel._panel_idxstart : 0;
 			var startlvl = panel._panel_lvlstart ? panel._panel_lvlstart : 0;
-			var slotstat = nexacro._PanelSlotConst.STATUS_NONE;
-			var bandstat = nexacro._PanelSlotConst.STATUS_NONE;
 			var collapse = false;
-			var bandhide = false;
 			var slotpopup = false;
-			var bandpopup = false;
 
 			switch (panel._panel_subgroup & nexacro._PanelConst.GROUPING_SUBSTYLE_GROUP_MASK) {
 				case nexacro._PanelConst.GROUPING_SUBSTYLE_GROUP_EXPAND:
-					slotstat = nexacro._PanelSlotConst.STATUS_EXPAND;
 					break;
 				case nexacro._PanelConst.GROUPING_SUBSTYLE_GROUP_COLLAPSE:
-					slotstat = nexacro._PanelSlotConst.STATUS_COLLPASE;
-					collapse = true;
-					break;
 				case nexacro._PanelConst.GROUPING_SUBSTYLE_GROUP_ACCORDION:
-					slotstat = nexacro._PanelSlotConst.STATUS_COLLPASE;
 					collapse = true;
 					break;
 				case nexacro._PanelConst.GROUPING_SUBSTYLE_GROUP_POPUP:
-					slotstat = nexacro._PanelSlotConst.STATUS_COLLPASE;
 					collapse = true;
 					slotpopup = true;
-					break;
-			}
-			switch (panel._panel_subgroup & nexacro._PanelConst.GROUPING_SUBSTYLE_BAND_MASK) {
-				case nexacro._PanelConst.GROUPING_SUBSTYLE_BAND_EXPAND:
-					bandstat = nexacro._PanelSlotConst.STATUS_EXPAND;
-					break;
-				case nexacro._PanelConst.GROUPING_SUBSTYLE_BAND_COLLAPSE:
-					bandstat = nexacro._PanelSlotConst.STATUS_COLLPASE;
-					bandhide = true;
-					break;
-				case nexacro._PanelConst.GROUPING_SUBSTYLE_BAND_ACCORDION:
-					bandstat = nexacro._PanelSlotConst.STATUS_COLLPASE;
-					bandhide = true;
-					break;
-				case nexacro._PanelConst.GROUPING_SUBSTYLE_BAND_POPUP:
-					bandstat = nexacro._PanelSlotConst.STATUS_COLLPASE;
-					bandhide = true;
-					bandpopup = true;
 					break;
 			}
 
@@ -11167,13 +11094,11 @@ if (!nexacro.ComplexComponent) {
 			var ctrlindex = 0;
 			var baseindex = 0;
 
-			var ctrlcount = ctrls ? ctrls.length : 0;
+			var ctrlcount = ctrls.length;
 			var bindcount = this._getBindCount();
 			var slotcount = 0;
 
 			var headcount = this._use_headitem && this._head_count ? this._head_count : 0;
-			var tailcount = this._use_tailitem && this._tail_count ? this._tail_count : 0;
-			var fullcount = bindcount + headcount + tailcount;
 
 			slotindex = (!start || start < 0) ? baseindex : Math.max(baseindex + start - prevc, 0);
 			slotcount = (!count || count < 0) ? bindcount : Math.min(slotindex + count + prevc + nextc, bindcount);
@@ -11184,14 +11109,15 @@ if (!nexacro.ComplexComponent) {
 
 
 			if (!panel._panel_showslot) {
+				var curlvl;
+				var slot;
+
 				if (formats) {
 					if (slotpopup && leveled && collapse) {
 						for (; ctrlindex < ctrlcount && slotindex < slotcount; slotindex++, bindindex++) {
-							var curlvl = this._fetchLevelBindValue(bindindex);
-
+							curlvl = this._fetchLevelBindValue(bindindex);
 							if (curlvl == startlvl || bindindex < startidx) {
-								var slot = panel._getPanelSlot(slotindex, true);
-
+								slot = panel._getPanelSlot(slotindex, true);
 								if (slot) {
 									if (show === false) {
 										slot._clearSlotTarget(this._delItem(bindindex, true));
@@ -11216,8 +11142,7 @@ if (!nexacro.ComplexComponent) {
 					}
 					else {
 						for (; ctrlindex < ctrlcount && slotindex < slotcount; slotindex++, bindindex++) {
-							var slot = panel._getPanelSlot(slotindex, true);
-
+							slot = panel._getPanelSlot(slotindex, true);
 							if (slot) {
 								if (show === false) {
 									slot._clearSlotTarget(this._delItem(bindindex, true));
@@ -11237,11 +11162,9 @@ if (!nexacro.ComplexComponent) {
 				else {
 					if (slotpopup && leveled && collapse) {
 						for (; ctrlindex < ctrlcount && slotindex < slotcount; slotindex++, bindindex++) {
-							var curlvl = this._fetchLevelBindValue(bindindex);
-
+							curlvl = this._fetchLevelBindValue(bindindex);
 							if (curlvl == startlvl || bindindex < startidx) {
-								var slot = panel._getPanelSlot(slotindex, true);
-
+								slot = panel._getPanelSlot(slotindex, true);
 								if (slot) {
 									if (show === false) {
 										slot._clearSlotTarget(this._delItem(bindindex, true));
@@ -11266,8 +11189,7 @@ if (!nexacro.ComplexComponent) {
 					}
 					else {
 						for (; ctrlindex < ctrlcount && slotindex < slotcount; slotindex++, bindindex++) {
-							var slot = panel._getPanelSlot(slotindex, true);
-
+							slot = panel._getPanelSlot(slotindex, true);
 							if (slot) {
 								if (show === false) {
 									slot._clearSlotTarget(this._delItem(bindindex, true));
@@ -11319,7 +11241,8 @@ if (!nexacro.ComplexComponent) {
 					var _prevc = mkcnt - prevc;
 
 					if (_prevs < headcnt) {
-						_prevc += _prevs, _prevs = 0;
+						_prevc += _prevs;
+						_prevs = 0;
 					}
 
 					if (_prevc > headcnt) {
@@ -11352,7 +11275,6 @@ if (!nexacro.ComplexComponent) {
 			if (band == -1) {
 				var heads = 0;
 				var headc = headcnt;
-
 				if (headc > 0) {
 					this._showPanelItemSlot(ctrls, heads, headc, 0, 0, 0, true, -1);
 				}
@@ -11362,7 +11284,6 @@ if (!nexacro.ComplexComponent) {
 			if (band == -2) {
 				var tails = headcnt + bindcnt;
 				var tailc = tailcnt;
-
 				if (tailc > 0) {
 					this._showPanelItemSlot(ctrls, tails, tailc, 0, 0, 0, true, -2);
 				}
@@ -11373,7 +11294,7 @@ if (!nexacro.ComplexComponent) {
 	};
 	_pComplexComponent._makePanelItemTrackCover = function (ctrls, start, count, prevc, nextc, band, rowfirst) {
 		if (this._scrollmanager._setcoverbimg || !this._is_created) {
-			return null;
+			return;
 		}
 
 		if (this._use_partitem && ctrls && ctrls.length) {
@@ -11385,66 +11306,18 @@ if (!nexacro.ComplexComponent) {
 				case "auto":
 					{
 
-						if (true) {
-							var canvas = new nexacro.CanvasElement(this.getElement());
-							canvas.setElementPosition(0, 0);
-							canvas.setElementVisible(nexacro._Browser == "Runtime");
-							canvas.create(this._getWindow());
 
-							var idxs = this._getItemScrollViewStart() + this._getItemScrollFixLeadCount();
-							var idxc = rowfirst ? this._getItemViewCountRow(rowfirst) : this._getItemViewCountCol(rowfirst);
 
-							for (var i = idxs, l = idxs + idxc; i < l; i++) {
-								var item = this._getItem(i);
-								if (nexacro._isArray(item)) {
-									item = item.length ? item[0] : null;
-								}
-								if (item) {
-									canvas.setElementSize(this._adjust_width, item._adjust_height);
-									nexacro._drawComponent2Canvas(canvas, item, item.getPixelLeft(), 0);
-								}
-							}
 
-							var imgc = canvas.toDataURL("image/png");
-							var rept = "white " + (imgc ? ("url('" + imgc.src + "') ") : ("")) + " repeat";
 
-							canvas.destroy();
-							canvas = null;
 
-							return nexacro.BackgroundObject(rept, this);
-						}
-						else {
-							var item = this._getItem(0);
-							if (nexacro._isArray(item)) {
-								item = item.length ? item[0] : null;
-							}
-							if (item) {
-								var sizg = item.getPixelHeight() + "px";
-								var sizt = "1px", sizb = "1px";
-								var clrt = "gray", clrb = "gray";
-								var clrg = "white";
 
-								if (window.getComputedStyle) {
-									var style = window.getComputedStyle(item._control_element.handle, null);
 
-									sizt = style.getPropertyValue("border-top-width");
-									sizb = style.getPropertyValue("border-bottom-width");
-									clrt = style.getPropertyValue("border-top-color");
-									clrb = style.getPropertyValue("border-bottom-color");
-									clrg = style.getPropertyValue("background-color");
-								}
 
-								var rept = "repeating-linear-gradient(" + clrt + "," + clrg + " " + sizt + "," + clrg + " " + sizg + "," + clrb + " " + sizb + ") left top repeat";
-
-								return nexacro.BackgroundObject(rept, this);
-							}
-						}
 					}
 					break;
 			}
 		}
-
-		return null;
 	};
 	_pComplexComponent._makePanelItemTrackBands = function (ctrls, start, count, prevc, nextc, band, rowfirst) {
 		if (this._scrollmanager._setbandslist || !this._is_created) {
@@ -11485,8 +11358,6 @@ if (!nexacro.ComplexComponent) {
 
 		var items = [];
 		var headc = this._head_count && this._use_headitem ? this._head_count : 0;
-		var tailc = this._tail_count && this._use_tailitem ? this._tail_count : 0;
-		var bodyc = this._body_count ? this._body_count : 1;
 
 		if (ctrls && ctrls.length) {
 			for (var i = start, l = Math.min(start + count, ctrls.length); i < l; i++) {
@@ -11680,7 +11551,6 @@ if (!nexacro.ComplexComponent) {
 	};
 	_pComplexComponent._recalcPanelItemSlot = function (itemover) {
 		var panel = this._panel;
-
 		if (panel) {
 			switch (panel._panel_layout) {
 				case 0:
@@ -11698,7 +11568,7 @@ if (!nexacro.ComplexComponent) {
 				default:
 					{
 
-						this._onRecalcPanelItemsSlot(over);
+						this._onRecalcPanelItemsSlot(itemover);
 						break;
 					}
 			}
@@ -11718,6 +11588,7 @@ if (!nexacro.ComplexComponent) {
 	_pComplexComponent._setPanelCtxtInfo = function (ctxtinfo, formattype) {
 		if (ctxtinfo) {
 			var panel = this._panel;
+			var ch, cb, ct, cn;
 
 			switch (panel._panel_layout) {
 				case 0:
@@ -11742,9 +11613,9 @@ if (!nexacro.ComplexComponent) {
 
 
 
-									var ch = this._fetchFormatsRowCols(-1).length;
-									var cb = this._fetchFormatsRowCols(0).length;
-									var ct = this._fetchFormatsRowCols(-2).length;
+									ch = this._fetchFormatsRowCols(-1).length;
+									cb = this._fetchFormatsRowCols(0).length;
+									ct = this._fetchFormatsRowCols(-2).length;
 
 									panel._setSlotTargetCount(ch, cb, ct);
 
@@ -11755,10 +11626,10 @@ if (!nexacro.ComplexComponent) {
 							case 1:
 								{
 
-									var ch = this._fetchFormatsPosition(-1).length;
-									var cb = this._fetchFormatsPosition(0).length;
-									var ct = this._fetchFormatsPosition(-2).length;
-									var cn = this._fetchFormatsPosition(-4).length;
+									ch = this._fetchFormatsPosition(-1).length;
+									cb = this._fetchFormatsPosition(0).length;
+									ct = this._fetchFormatsPosition(-2).length;
+									cn = this._fetchFormatsPosition(-4).length;
 
 									panel._setSlotTargetCount(ch, cb ? cb : cb + cn, ct);
 
@@ -12061,8 +11932,8 @@ if (!nexacro.ComplexComponent) {
 				}
 			}
 
-			items.length = 0;
-			items = null;
+			this._popuplist.length = 0;
+			this._popuplist = null;
 		}
 	};
 
@@ -12120,8 +11991,8 @@ if (!nexacro.ComplexComponent) {
 				}
 			}
 
-			items.length = 0;
-			items = null;
+			this._grouplist.length = 0;
+			this._grouplist = null;
 		}
 	};
 	_pComplexComponent._createPopupChildControl = function (child) {
@@ -12210,6 +12081,7 @@ if (!nexacro.ComplexComponent) {
 	_pComplexComponent._getCurrentPopupLevel = function () {
 		return this.__current_startlevel;
 	};
+
 	_pComplexComponent._getPopupChildSize = function (popup) {
 		return this._onGetPopupChildSize(popup);
 	};
@@ -12242,16 +12114,12 @@ if (!nexacro.ComplexComponent) {
 		var assistor = this._createSelectorAssist(beginidx, finalidx);
 
 		if (selector) {
-			var rawitem = parts ? parts : true;
 			var begincomp = null;
 			var finalcomp = null;
 
-			if (rawitem) {
+			{
+
 				begincomp = finalcomp = this._getRawItem([beginidx, finalidx]);
-			}
-			else {
-				begincomp = this._getPanelSlot(beginidx);
-				finalcomp = this._getPanelSlot(finalidx);
 			}
 
 			selector._attachSelect(begincomp, finalcomp);
@@ -12323,8 +12191,8 @@ if (!nexacro.ComplexComponent) {
 				}
 			}
 
-			ctrls.length = 0;
-			ctrls = null;
+			this._selectlist.length = 0;
+			this._selectlist = null;
 		}
 	};
 	_pComplexComponent._clearSelectorAssist = function () {
@@ -12339,8 +12207,8 @@ if (!nexacro.ComplexComponent) {
 				}
 			}
 
-			ctrls.length = 0;
-			ctrls = null;
+			this._assistlist.length = 0;
+			this._assistlist = null;
 		}
 	};
 
@@ -12451,13 +12319,13 @@ if (!nexacro.ComplexComponent) {
 		return this.__current_selectcontrol;
 	};
 
-	_pComplexComponent._onCreateSelector = function () {
-		var selector = null;
-		var selecttype = this._panel ? this._panel._getSlotSelectorType() : nexacro._PanelSelectConst.TYPE_AREA;
 
-		if (select = this._createSelectControl(new nexacro._PanelSelectControl("panelselector", selecttype, this))) {
+	_pComplexComponent._onCreateSelector = function () {
+		var selecttype = this._panel ? this._panel._getSlotSelectorType() : nexacro._PanelSelectConst.TYPE_AREA;
+		var selector = this._createSelectControl(new nexacro._PanelSelectControl("panelselector", selecttype, this));
+		if (selector) {
 		}
-		return select;
+		return selector;
 	};
 	_pComplexComponent._onCreateSelectorAssist = function () {
 		var assist = null;
@@ -12520,6 +12388,7 @@ if (!nexacro.ComplexComponent) {
 	_pComplexComponent._setLayoutAutoFit = function (f) {
 		f ? this._layoutflag |= 8 : this._layoutflag &= ~8;
 	};
+
 	_pComplexComponent._isContentLayout = function () {
 		return this._layoutflag & 1;
 	};
@@ -12532,6 +12401,7 @@ if (!nexacro.ComplexComponent) {
 	_pComplexComponent._isAutoFitLayout = function () {
 		return this._layoutflag & 8;
 	};
+
 	_pComplexComponent._beginRecalcLayout = function () {
 		return !(this.__recalcLayout ? false : this.__recalcLayout = true);
 	};
@@ -12737,105 +12607,114 @@ if (!nexacro.ComplexComponent) {
 	};
 
 	_pComplexComponent._onRecalcChildLayout = function (reset) {
+		var i;
+
+		var ctrl;
+		var ctrl_left, ctrl_top;
+		var ctrl_full, ctrl_calc, ctrl_size;
+
 		var children = this._getChildren();
+		var children_len = children.length;
+
 		var leadchild = this._getLeadChild();
-		var count = children.length;
 
 		var client_left = this._getClientLeft();
 		var client_top = this._getClientTop();
 		var client_width = this._getClientWidth();
 		var client_height = this._getClientHeight();
 
-		if (count <= 0) {
+		if (children_len <= 0) {
 			return;
 		}
-		if (count == 1) {
-			var ctrl = children[0];
+		else if (children_len == 1) {
+			ctrl = children[0];
 
 			ctrl.move(client_left, client_top, client_width, client_height, null, null);
 
 			return;
 		}
-		if (leadchild) {
-			var lead = leadchild;
-
-			if (client_width > client_height) {
-				var lead_size = client_width / 2;
-				var ctrl_calc = count - 1;
-				var ctrl_size = client_height;
-				var ctrl_full = client_height * ctrl_calc;
-				var ctrl_left = client_left;
-
-				if (lead_size < ctrl_full) {
-					ctrl_size = lead_size / ctrl_calc;
-				}
-				else {
-					lead_size = client_width - ctrl_full;
-				}
-
-				for (var i = 0; i < count; i++) {
-					var ctrl = children[i];
-					if (ctrl) {
-						if (ctrl == lead) {
-							ctrl.move(ctrl_left, client_top, lead_size, client_height, null, null);
-							ctrl_left += lead_size;
-						}
-						else {
-							ctrl.move(ctrl_left, client_top, ctrl_size, client_height, null, null);
-							ctrl_left += ctrl_size;
-						}
-					}
-				}
-			}
-			else {
-				var lead_size = client_height / 2;
-				var ctrl_calc = count - 1;
-				var ctrl_size = client_width;
-				var ctrl_full = client_width * ctrl_calc;
-				var ctrl_top = client_top;
-
-				if (lead_size < ctrl_full) {
-					ctrl_size = lead_size / ctrl_calc;
-				}
-				else {
-					lead_size = client_height - ctrl_full;
-				}
-
-				for (var i = 0; i < count; i++) {
-					var ctrl = children[i];
-					if (ctrl) {
-						if (ctrl == lead) {
-							ctrl.move(client_left, ctrl_top, client_width, lead_size, null, null);
-							ctrl_top += lead_size;
-						}
-						else {
-							ctrl.move(client_left, ctrl_top, client_width, ctrl_size, null, null);
-							ctrl_top += ctrl_size;
-						}
-					}
-				}
-			}
-		}
 		else {
-			if (client_width > client_height) {
-				var ctrl_size = client_width / count;
-				var ctrl_left = client_left;
+			if (leadchild) {
+				var lead_size;
 
-				for (var i = 0; i < count; i++, ctrl_left += ctrl_size) {
-					var ctrl = children[i];
-					if (ctrl) {
-						ctrl.move(ctrl_left, client_top, ctrl_size, client_height, null, null);
+				if (client_width > client_height) {
+					lead_size = client_width / 2;
+					ctrl_calc = children_len - 1;
+					ctrl_size = client_height;
+					ctrl_full = client_height * ctrl_calc;
+					ctrl_left = client_left;
+
+					if (lead_size < ctrl_full) {
+						ctrl_size = lead_size / ctrl_calc;
+					}
+					else {
+						lead_size = client_width - ctrl_full;
+					}
+
+					for (i = 0; i < children_len; i++) {
+						ctrl = children[i];
+						if (ctrl) {
+							if (ctrl == leadchild) {
+								ctrl.move(ctrl_left, client_top, lead_size, client_height, null, null);
+								ctrl_left += lead_size;
+							}
+							else {
+								ctrl.move(ctrl_left, client_top, ctrl_size, client_height, null, null);
+								ctrl_left += ctrl_size;
+							}
+						}
+					}
+				}
+				else {
+					lead_size = client_height / 2;
+					ctrl_calc = children_len - 1;
+					ctrl_size = client_width;
+					ctrl_full = client_width * ctrl_calc;
+					ctrl_top = client_top;
+
+					if (lead_size < ctrl_full) {
+						ctrl_size = lead_size / ctrl_calc;
+					}
+					else {
+						lead_size = client_height - ctrl_full;
+					}
+
+					for (i = 0; i < children_len; i++) {
+						ctrl = children[i];
+						if (ctrl) {
+							if (ctrl == leadchild) {
+								ctrl.move(client_left, ctrl_top, client_width, lead_size, null, null);
+								ctrl_top += lead_size;
+							}
+							else {
+								ctrl.move(client_left, ctrl_top, client_width, ctrl_size, null, null);
+								ctrl_top += ctrl_size;
+							}
+						}
 					}
 				}
 			}
 			else {
-				var ctrl_size = client_height / count;
-				var ctrl_top = client_top;
+				if (client_width > client_height) {
+					ctrl_size = client_width / children_len;
+					ctrl_left = client_left;
 
-				for (var i = 0; i < count; i++, ctrl_top += ctrl_size) {
-					var ctrl = children[i];
-					if (ctrl) {
-						ctrl.move(client_left, ctrl_top, client_width, ctrl_size, null, null);
+					for (i = 0; i < children_len; i++, ctrl_left += ctrl_size) {
+						ctrl = children[i];
+						if (ctrl) {
+							ctrl.move(ctrl_left, client_top, ctrl_size, client_height, null, null);
+						}
+					}
+				}
+				else {
+					ctrl_size = client_height / children_len;
+					ctrl_top = client_top;
+
+					for (i = 0; i < children_len; i++, ctrl_top += ctrl_size) {
+						ctrl = children[i];
+						if (ctrl) {
+							ctrl.move(client_left, ctrl_top, client_width, ctrl_size, null, null);
+						}
 					}
 				}
 			}
@@ -12845,6 +12724,8 @@ if (!nexacro.ComplexComponent) {
 	};
 
 	_pComplexComponent._onRecalcItemsLayout = function (reset) {
+		var i;
+		var item;
 		var items = this._getItems();
 		var count = items ? items.length : 0;
 
@@ -12853,6 +12734,9 @@ if (!nexacro.ComplexComponent) {
 		var client_width = this._getClientWidth();
 		var client_height = this._getClientHeight();
 
+		var ctrl_left, ctrl_top;
+		var ctrl_size;
+
 		if (count <= 0) {
 			return;
 		}
@@ -12860,11 +12744,11 @@ if (!nexacro.ComplexComponent) {
 			if (client_width > client_height) {
 				this._isColFirst = false;
 
-				var ctrl_size = client_width / count;
-				var ctrl_left = client_left;
+				ctrl_size = client_width / count;
+				ctrl_left = client_left;
 
-				for (var i = 0; i < count; i++, ctrl_left += ctrl_size) {
-					var item = items[i] ? items[i] : this._getPartItem(i);
+				for (i = 0; i < count; i++, ctrl_left += ctrl_size) {
+					item = items[i] ? items[i] : this._getPartItem(i);
 					if (item) {
 						item.move(ctrl_left, client_top, ctrl_size, client_height, null, null);
 					}
@@ -12873,11 +12757,11 @@ if (!nexacro.ComplexComponent) {
 			else {
 				this._isColFirst = true;
 
-				var ctrl_size = client_height / count;
-				var ctrl_top = client_top;
+				ctrl_size = client_height / count;
+				ctrl_top = client_top;
 
-				for (var i = 0; i < count; i++, ctrl_top += ctrl_size) {
-					var item = items[i] ? items[i] : this._getPartItem(i);
+				for (i = 0; i < count; i++, ctrl_top += ctrl_size) {
+					item = items[i] ? items[i] : this._getPartItem(i);
 					if (item) {
 						item.move(client_left, ctrl_top, client_width, ctrl_size, null, null);
 					}
@@ -12978,7 +12862,7 @@ if (!nexacro.ComplexComponent) {
 	_pComplexComponent._setLeadChild = function (child) {
 		this._leadchild = child;
 	};
-	_pComplexComponent._setCurrChild = function () {
+	_pComplexComponent._setCurrChild = function (child) {
 		this._currchild = child;
 	};
 
@@ -13060,8 +12944,8 @@ if (!nexacro.ComplexComponent) {
 				}
 			}
 
-			child.length = 0;
-			child = [];
+			this._children.length = 0;
+			this._children = [];
 		}
 	};
 
@@ -13108,13 +12992,14 @@ if (!nexacro.ComplexComponent) {
 	_pComplexComponent.createChildCtxtControl = function (ctxt) {
 		if (ctxt) {
 			var ctxtchild = ctxt._items;
-
 			if (ctxtchild) {
-				if (nexacro._isArray(ctxtchild)) {
-					var childs = [];
+				var i, n;
+				var child;
+				var childs = [];
 
-					for (var i = 0, l = ctxtchild.length; i < l; i++) {
-						var child = this.createCtxtControl(ctxtchild[i], i, true);
+				if (nexacro._isArray(ctxtchild)) {
+					for (i = 0, n = ctxtchild.length; i < n; i++) {
+						child = this.createCtxtControl(ctxtchild[i], i, true);
 
 						childs.push(this.createChildControl(child));
 					}
@@ -13122,7 +13007,7 @@ if (!nexacro.ComplexComponent) {
 					return childs;
 				}
 				else {
-					var child = this.createCtxtControl(ctxtchild);
+					child = this.createCtxtControl(ctxtchild);
 
 					return this.createChildControl(child);
 				}
@@ -13199,14 +13084,20 @@ if (!nexacro.ComplexComponent) {
 		var count = items.length;
 
 		if (items && count) {
+			var ret;
+
+			var i;
+
+			var n;
+
 			var headcount = this._head_count && this._use_headitem ? this._head_count : 0;
 			var tailcount = this._tail_count && this._use_tailitem ? this._tail_count : 0;
 			var bodycount = this._body_count ? this._body_count : 1;
 
+			var c = index * bodycount + headcount;
+
 			if (index >= 0 && index < count) {
 				if (this._use_partitem) {
-					var c = index * bodycount + headcount;
-
 					if (c >= count || !items[c]) {
 						if (partcreate) {
 							this._createPartItem(index);
@@ -13214,9 +13105,8 @@ if (!nexacro.ComplexComponent) {
 					}
 
 					if (this._body_count > 1) {
-						var ret = new Array(bodycount);
-
-						for (var i = 0, l = bodycount; i < l; i++, c++) {
+						ret = new Array(bodycount);
+						for (i = 0, n = bodycount; i < n; i++, c++) {
 							ret[i] = items[c];
 						}
 
@@ -13227,12 +13117,9 @@ if (!nexacro.ComplexComponent) {
 					}
 				}
 				else {
-					var c = index * bodycount + headcount;
-
 					if (this._body_count > 1) {
-						var ret = new Array(bodycount);
-
-						for (var i = 0, l = bodycount; i < l; i++, c++) {
+						ret = new Array(bodycount);
+						for (i = 0, n = bodycount; i < n; i++, c++) {
 							ret[i] = items[c];
 						}
 
@@ -13245,9 +13132,8 @@ if (!nexacro.ComplexComponent) {
 			}
 			if (index == -1 && this._use_headitem && headcount) {
 				if (headcount > 1) {
-					var ret = new Array(headcount);
-
-					for (var i = 0, l = headcount; i < l; i++) {
+					ret = new Array(headcount);
+					for (i = 0, n = headcount; i < n; i++) {
 						ret[i] = items[i];
 					}
 
@@ -13258,12 +13144,11 @@ if (!nexacro.ComplexComponent) {
 				}
 			}
 			if (index == -2 && this._use_tailitem && tailcount) {
-				var c = count - tailcount;
+				c = count - tailcount;
 
 				if (tailcount > 1) {
-					var ret = new Array(tailcount);
-
-					for (var i = 0; c < count; i++, c++) {
+					ret = new Array(tailcount);
+					for (i = 0; c < count; i++, c++) {
 						ret[i] = items[c];
 					}
 
@@ -13345,7 +13230,6 @@ if (!nexacro.ComplexComponent) {
 	};
 	_pComplexComponent._getRawItemInItems = function (items, index) {
 		var count = items ? items.length : 0;
-
 		if (count) {
 			if (index && index < count) {
 				return items[index];
@@ -13362,15 +13246,19 @@ if (!nexacro.ComplexComponent) {
 		var count = items.length;
 
 		if (items && count) {
+			var i;
+
+			var n;
+
 			var headcount = this._head_count && this._use_headitem ? this._head_count : 0;
 			var tailcount = this._tail_count && this._use_tailitem ? this._tail_count : 0;
 			var bodycount = this._body_count ? this._body_count : 1;
 
-			if (index >= 0 && index < count) {
-				var c = index * bodycount + headcount;
+			var c = index * bodycount + headcount;
 
+			if (index >= 0 && index < count) {
 				if (bodycount > 1) {
-					for (var i = 0, l = bodycount; i < l; i++, c++) {
+					for (i = 0, n = bodycount; i < n; i++, c++) {
 						if (items[c]) {
 							if (items[c].destroy) {
 								items[c].destroy();
@@ -13391,10 +13279,10 @@ if (!nexacro.ComplexComponent) {
 				return bodycount;
 			}
 			if (index == -1 && this._use_headitem && headcount) {
-				var c = 0;
+				c = 0;
 
 				if (headcount > 1) {
-					for (var i = 0, l = headcount; i < l; i++, c++) {
+					for (i = 0, n = headcount; i < n; i++, c++) {
 						if (items[c]) {
 							if (items[c].destroy) {
 								items[c].destroy();
@@ -13415,10 +13303,10 @@ if (!nexacro.ComplexComponent) {
 				return headcount;
 			}
 			if (index == -2 && this._use_tailitem && tailcount) {
-				var c = count - tailcount;
+				c = count - tailcount;
 
 				if (tailcount > 1) {
-					for (var i = 0; c < count; i++, c++) {
+					for (i = 0; c < count; i++, c++) {
 						if (items[c]) {
 							if (items[c].destroy) {
 								items[c].destroy();
@@ -13528,10 +13416,11 @@ if (!nexacro.ComplexComponent) {
 	_pComplexComponent._updateItems = function (index, count, info) {
 		if (this._is_items && this._items) {
 			if (index >= 0) {
-				var items = this._getItems();
-				var count = !count || count < 0 ? this._getItemsCount() : index + count;
+				var i, j;
 
-				for (var i = index; i < count; i++) {
+				var n, m;
+
+				for (i = index, n = !count || count < 0 ? this._getItemsCount() : index + count; i < n; i++) {
 					var item = this._getItem(i);
 					var bind = this._getBindData(i);
 
@@ -13539,7 +13428,7 @@ if (!nexacro.ComplexComponent) {
 						this._setBindItemInfo(item, bind, i);
 
 						if (nexacro._isArray(item)) {
-							for (var j = 0; j < item.length; j++) {
+							for (j = 0, m = item.length; j < m; j++) {
 								var band = item[j];
 								if (band.onUpdateItem) {
 									band.onUpdateItem(i, info);
@@ -13595,18 +13484,23 @@ if (!nexacro.ComplexComponent) {
 			}
 
 			items.length = 0;
-			items = [];
 		}
 	};
 
 	_pComplexComponent._createBindItems = function () {
 		{
 
+			var i, s;
+			var n;
+
+			var bind, ctxt;
+			var item;
+			var clvl, sidx, slvl;
+
 			if (this._use_headitem) {
-				var ctxt = this._getCtxtData(-1);
+				ctxt = this._getCtxtData(-1);
 
-				var item = this.onCreateItemBegin(ctxt);
-
+				item = this.onCreateItemBegin(ctxt);
 				if (item) {
 					this._setItemIndex(item, -1);
 					this._setCtxtItemInfo(item, ctxt, -1);
@@ -13620,20 +13514,21 @@ if (!nexacro.ComplexComponent) {
 					this._createPartItemList(bindcount);
 				}
 				else if (this._isPanelSubGroupPopup()) {
-					var sidx = this._getPanelStartIndex();
-					var slvl = this._getPanelStartLevel();
+					sidx = this._getPanelStartIndex();
+					slvl = this._getPanelStartLevel();
 
-					for (var i = sidx, l = bindcount, s = 0; i < l; i++) {
-						var bind = this._getBindData(i);
+					for (i = sidx, n = bindcount, s = 0; i < n; i++) {
+						bind = this._getBindData(i);
 						if (!bind) {
 							continue;
 						}
-						var clvl = data._getLevelValue();
+
+						clvl = bind._getLevelValue();
 
 						if (clvl == slvl || clvl == undefined) {
-							var ctxt = this._getCtxtData(i);
+							ctxt = this._getCtxtData(i);
 
-							var item = this.onCreateItem(ctxt, bind, i);
+							item = this.onCreateItem(ctxt, bind, i);
 
 
 							if (item) {
@@ -13653,11 +13548,11 @@ if (!nexacro.ComplexComponent) {
 					}
 				}
 				else {
-					for (var i = 0, l = bindcount; i < l; i++) {
-						var bind = this._getBindData(i);
-						var ctxt = this._getCtxtData(i);
+					for (i = 0, n = bindcount; i < n; i++) {
+						bind = this._getBindData(i);
+						ctxt = this._getCtxtData(i);
 
-						var item = this.onCreateItem(ctxt, bind, i);
+						item = this.onCreateItem(ctxt, bind, i);
 
 
 						if (item) {
@@ -13671,9 +13566,9 @@ if (!nexacro.ComplexComponent) {
 				}
 			}
 			else if (this._use_nullitem) {
-				var ctxt = this._getCtxtData(-4);
+				ctxt = this._getCtxtData(-4);
 
-				var item = this.onCreateItemNull(ctxt);
+				item = this.onCreateItemNull(ctxt);
 				if (item) {
 					this._setItemIndex(item, -4);
 					this._setCtxtItemInfo(item, ctxt, -4);
@@ -13683,10 +13578,9 @@ if (!nexacro.ComplexComponent) {
 
 			{
 
-				var ctxt = this._getCtxtData(-2);
+				ctxt = this._getCtxtData(-2);
 
-				var item = this.onCreateItemFinal(ctxt);
-
+				item = this.onCreateItemFinal(ctxt);
 				if (item) {
 					this._setItemIndex(item, -2);
 					this._setCtxtItemInfo(item, ctxt, -2);
@@ -13699,27 +13593,32 @@ if (!nexacro.ComplexComponent) {
 	_pComplexComponent._createRepeatItems = function () {
 		{
 
+			var i;
+
+			var n;
+
+			var ctxt;
+			var item;
+
 			{
 
-				var ctxt = this._getCtxtData(-1);
+				ctxt = this._getCtxtData(-1);
 
 				this.onCreateItemBegin(ctxt);
 			}
 
-			for (var i = 0, l = this._getItemsCount(); i < l; i++) {
-				var ctxt = this._getCtxtData(i);
-				var bind = null;
+			for (i = 0, n = this._getItemsCount(); i < n; i++) {
+				ctxt = this._getCtxtData(i);
 
-				var item = this.onCreateItem(ctxt, bind, i);
-
+				item = this.onCreateItem(ctxt, null, i);
 				if (item) {
-					this._setItemSubLayoutInfo(item, bind, i);
+					this._setItemSubLayoutInfo(item, null, i);
 				}
 			}
 
 			{
 
-				var ctxt = this._getCtxtData(-2);
+				ctxt = this._getCtxtData(-2);
 
 				this.onCreateItemFinal(ctxt);
 			}
@@ -13729,12 +13628,10 @@ if (!nexacro.ComplexComponent) {
 		if (item) {
 			item._is_nc_control = true;
 
-			if (item) {
-				item._setControl(item._type_name);
+			item._setControl(item._type_name);
 
-				if (item.createComponent(true)) {
-					return item;
-				}
+			if (item.createComponent(true)) {
+				return item;
 			}
 		}
 
@@ -13786,11 +13683,17 @@ if (!nexacro.ComplexComponent) {
 	};
 	_pComplexComponent.createItemCtxtControl = function (ctxt, index, nc) {
 		if (ctxt) {
-			if (nexacro._isArray(ctxt)) {
-				var items = [];
+			var i;
 
-				for (var i = 0, l = ctxt.length; i < l; i++) {
-					var item = this.createCtxtControl(ctxt[i], index);
+			var n;
+
+			var items, item;
+
+			if (nexacro._isArray(ctxt)) {
+				items = [];
+
+				for (i = 0, n = ctxt.length; i < n; i++) {
+					item = this.createCtxtControl(ctxt[i], index);
 
 					items.push(nc ? this.createItemNCControl(item, index, i) : this.createItemControl(item, index, i));
 				}
@@ -13798,7 +13701,7 @@ if (!nexacro.ComplexComponent) {
 				return items;
 			}
 			else {
-				var item = this.createCtxtControl(ctxt, index);
+				item = this.createCtxtControl(ctxt, index);
 
 				return nc ? this.createItemNCControl(item, index) : this.createItemControl(item, index);
 			}
@@ -13919,6 +13822,8 @@ if (!nexacro.ComplexComponent) {
 	};
 
 	_pComplexComponent._getItemViewCountRow = function (rowfirst) {
+		var rc;
+
 		var ih = this._getItemHeight(0);
 		if (ih <= 0) {
 			return 0;
@@ -13929,17 +13834,19 @@ if (!nexacro.ComplexComponent) {
 		}
 
 		if (rowfirst) {
-			var rc = Math.floor(ch / ih);
+			rc = Math.floor(ch / ih);
 
 			return rc > 0 ? rc : 1;
 		}
 		else {
-			var rc = Math.ceil(ch / (ih * this._getItemViewCountCol(false)));
+			rc = Math.ceil(ch / (ih * this._getItemViewCountCol(false)));
 
 			return rc > 0 ? rc : 0;
 		}
 	};
 	_pComplexComponent._getItemViewCountCol = function (rowfirst) {
+		var cc;
+
 		var iw = this._getItemWidth(0);
 		if (iw <= 0) {
 			return 0;
@@ -13950,21 +13857,22 @@ if (!nexacro.ComplexComponent) {
 		}
 
 		if (rowfirst) {
-			var cc = Math.round(cw / (iw * this._getItemViewCountRow(true)));
+			cc = Math.round(cw / (iw * this._getItemViewCountRow(true)));
 
 			return cc > 0 ? cc : 0;
 		}
 		else {
-			var cc = Math.floor(cw / iw);
+			cc = Math.floor(cw / iw);
 
 			return cc > 0 ? cc : 1;
 		}
 	};
 	_pComplexComponent._getItemViewIndexRow = function (pos, rowfirst) {
-		var ih = this._getItemHeight(0, rowfirst);
+		var rc;
 
+		var ih = this._getItemHeight(0, rowfirst);
 		if (ih > 0) {
-			var rc = Math.floor(pos / ih) * this._getItemViewCountCol(false);
+			rc = Math.floor(pos / ih) * this._getItemViewCountCol(false);
 
 			return rc > 0 ? rc : 0;
 		}
@@ -13973,10 +13881,11 @@ if (!nexacro.ComplexComponent) {
 		}
 	};
 	_pComplexComponent._getItemViewIndexCol = function (pos, rowfirst) {
-		var iw = this._getItemWidth(0);
+		var cc;
 
+		var iw = this._getItemWidth(0);
 		if (iw > 0) {
-			var cc = Math.floor(pos / iw) * this._getItemViewCountRow(true);
+			cc = Math.floor(pos / iw) * this._getItemViewCountRow(true);
 
 			return cc > 0 ? cc : 0;
 		}
@@ -14104,12 +14013,17 @@ if (!nexacro.ComplexComponent) {
 	};
 
 	_pComplexComponent.onCreateItem = function (ctxtdata, binddata, index, nc) {
-		if (this._is_format_layout && ctxtdata) {
-			var item = this.createItemCtxtControl(ctxtdata, index, nc);
+		var i;
 
+		var n;
+
+		var item;
+
+		if (this._is_format_layout && ctxtdata) {
+			item = this.createItemCtxtControl(ctxtdata, index, nc);
 			if (item) {
 				if (nexacro._isArray(item)) {
-					for (var i = 0, l = item.length; i < l; i++) {
+					for (i = 0, n = item.length; i < n; i++) {
 						var each = item[i];
 						if (!each) {
 							continue;
@@ -14126,8 +14040,7 @@ if (!nexacro.ComplexComponent) {
 			return item;
 		}
 		else {
-			var item = this.createItemControl(new nexacro.Button("item", 0, 0, 0, 0, null, null, null, null, null, null, this), index);
-
+			item = this.createItemControl(new nexacro.Button("item", 0, 0, 0, 0, null, null, null, null, null, null, this), index);
 			if (item) {
 				item.set_text("text");
 				item._setEventHandler("onclick", this.on_notify_item_onclick, this);
@@ -14218,112 +14131,112 @@ if (!nexacro.ComplexComponent) {
 	};
 
 	_pComplexComponent._onGetItemLeft = function (index, stat) {
-		{
+		var pos = 0;
 
-			var item = this._getItem(index);
-			var pos = 0;
+		var items = this._getItem(index);
+		if (items) {
+			if (nexacro._isArray(items)) {
+				var i, n;
+				var item;
 
-			if (item) {
-				if (nexacro._isArray(item)) {
-					switch (stat) {
-						case -9:
-							{
+				switch (stat) {
+					case -9:
+						{
 
-								for (var i = 0, l = item.length; i < l; i++) {
-									var itm = item[i];
-									if (itm) {
-										pos = itm.visible ? Math.max(pos, itm.getOffsetLeft()) : pos;
-									}
+							for (i = 0, n = items.length; i < n; i++) {
+								item = items[i];
+								if (item) {
+									pos = item.visible ? Math.max(pos, item.getOffsetLeft()) : pos;
 								}
-								break;
 							}
-						case -1:
-						case 2:
-							{
+							break;
+						}
+					case -1:
+					case 2:
+						{
 
-								for (var i = 0, l = 1; i < l; i++) {
-									var itm = item[i];
-									if (itm) {
-										pos = Math.max(pos, itm.getOffsetLeft());
-									}
+							for (i = 0, n = 1; i < n; i++) {
+								item = items[i];
+								if (item) {
+									pos = Math.max(pos, item.getOffsetLeft());
 								}
-								break;
 							}
-						case 1:
-						default:
-							{
+							break;
+						}
+					case 1:
+					default:
+						{
 
-								for (var i = 0, l = item.length; i < l; i++) {
-									var itm = item[i];
-									if (itm) {
-										pos = Math.max(pos, itm.getOffsetLeft());
-									}
+							for (i = 0, n = items.length; i < n; i++) {
+								item = items[i];
+								if (item) {
+									pos = Math.max(pos, item.getOffsetLeft());
 								}
-								break;
 							}
-					}
-				}
-				else {
-					pos = item.getOffsetLeft();
+							break;
+						}
 				}
 			}
-
-			return pos;
+			else {
+				pos = items.getOffsetLeft();
+			}
 		}
+
+		return pos;
 	};
 	_pComplexComponent._onGetItemTop = function (index, stat) {
-		{
+		var pos;
 
-			var item = this._getItem(index);
-			var pos;
+		var items = this._getItem(index);
+		if (items) {
+			if (nexacro._isArray(items)) {
+				var i, n;
+				var item;
 
-			if (item) {
-				if (nexacro._isArray(item)) {
-					switch (stat) {
-						case -9:
-							{
+				switch (stat) {
+					case -9:
+						{
 
-								for (var i = 0, l = item.length; i < l; i++) {
-									var itm = item[i];
-									if (itm) {
-										pos = pos !== undefined ? itm.visible ? Math.min(pos, itm.getOffsetTop()) : pos : itm.getOffsetTop();
-									}
+							for (i = 0, n = items.length; i < n; i++) {
+								item = items[i];
+								if (item) {
+									pos = pos !== undefined ? item.visible ? Math.min(pos, item.getOffsetTop()) : pos : item.getOffsetTop();
 								}
-								break;
 							}
-						case -1:
-						case 2:
-							{
+							break;
+						}
+					case -1:
+					case 2:
+						{
 
-								for (var i = 0, l = 1; i < l; i++) {
-									var itm = item[i];
-									if (itm) {
-										pos = pos !== undefined ? Math.min(pos, itm.getOffsetTop()) : itm.getOffsetTop();
-									}
+							for (i = 0, n = 1; i < n; i++) {
+								item = items[i];
+								if (item) {
+									pos = pos !== undefined ? Math.min(pos, item.getOffsetTop()) : item.getOffsetTop();
 								}
-								break;
 							}
-						case 1:
-						default:
-							{
+							break;
+						}
+					case 1:
+					default:
+						{
 
-								for (var i = 0, l = item.length; i < l; i++) {
-									var itm = item[i];
-									if (itm) {
-										pos = pos !== undefined ? Math.min(pos, itm.getOffsetTop()) : itm.getOffsetTop();
-									}
+							for (i = 0, n = items.length; i < n; i++) {
+								item = items[i];
+								if (item) {
+									pos = pos !== undefined ? Math.min(pos, item.getOffsetTop()) : item.getOffsetTop();
 								}
-								break;
 							}
-					}
-				}
-				else {
-					pos = item.getOffsetTop();
+							break;
+						}
 				}
 			}
-
-			return pos;
+			else {
+				pos = items.getOffsetTop();
+			}
 		}
+
+		return pos;
 	};
 
 	_pComplexComponent._onGetItemWidth = function (index, stat) {
@@ -14351,7 +14264,6 @@ if (!nexacro.ComplexComponent) {
 									return this._panel._getPanelColSize(index, -1);
 								}
 						}
-						break;
 					}
 				case 1:
 					{
@@ -14376,49 +14288,50 @@ if (!nexacro.ComplexComponent) {
 			}
 		}
 
-		{
+		var size = 0;
 
-			var item = this._getItem(index);
-			var size = 0;
+		var item = this._getItem(index);
+		if (item) {
+			var i, n;
+			if (nexacro._isArray(item)) {
+				switch (stat) {
+					case -9:
+						{
 
-			if (item) {
-				if (nexacro._isArray(item)) {
-					switch (stat) {
-						case -9:
-							{
-
-								for (var i = 0, l = item.length; i < l; i++) {
-									size = item[i].visible ? Math.max(size, item[i].getOffsetRight() - item[i].getOffsetLeft()) : size;
-								}
-								break;
+							for (i = 0, n = item.length; i < n; i++) {
+								size = item[i].visible ? Math.max(size, item[i].getOffsetRight() - item[i].getOffsetLeft()) : size;
 							}
-						case -1:
-						case 2:
-							{
 
-								for (var i = 0, l = 1; i < l; i++) {
-									size = Math.max(size, item[i].getOffsetRight() - item[i].getOffsetLeft());
-								}
-								break;
-							}
-						case 1:
-						default:
-							{
+							break;
+						}
+					case -1:
+					case 2:
+						{
 
-								for (var i = 0, l = item.length; i < l; i++) {
-									size = Math.max(size, item[i].getOffsetRight() - item[i].getOffsetLeft());
-								}
-								break;
+							for (i = 0, n = 1; i < n; i++) {
+								size = Math.max(size, item[i].getOffsetRight() - item[i].getOffsetLeft());
 							}
-					}
-				}
-				else {
-					size = item.getOffsetRight() - item.getOffsetLeft();
+
+							break;
+						}
+					case 1:
+					default:
+						{
+
+							for (i = 0, n = item.length; i < n; i++) {
+								size = Math.max(size, item[i].getOffsetRight() - item[i].getOffsetLeft());
+							}
+
+							break;
+						}
 				}
 			}
-
-			return size;
+			else {
+				size = item.getOffsetRight() - item.getOffsetLeft();
+			}
 		}
+
+		return size;
 	};
 	_pComplexComponent._onGetItemHeight = function (index, stat) {
 		var panel = this._getPanel();
@@ -14445,7 +14358,6 @@ if (!nexacro.ComplexComponent) {
 									return this._panel._getPanelRowSize(index, -1);
 								}
 						}
-						break;
 					}
 				case 1:
 					{
@@ -14470,51 +14382,52 @@ if (!nexacro.ComplexComponent) {
 			}
 		}
 
-		{
+		var size = 0;
 
-			var item = this._getItem(index);
-			var size = 0;
+		var item = this._getItem(index);
+		if (item) {
+			var i, n;
+			if (nexacro._isArray(item)) {
+				var base = item[0].getOffsetTop();
 
-			if (item) {
-				if (nexacro._isArray(item)) {
-					var base = item[0].getOffsetTop();
+				switch (stat) {
+					case -9:
+						{
 
-					switch (stat) {
-						case -9:
-							{
-
-								for (var i = 0, l = item.length; i < l; i++) {
-									size = item[i].visible ? Math.max(size, size + item[i].getOffsetBottom() - base) : size;
-								}
-								break;
+							for (i = 0, n = item.length; i < n; i++) {
+								size = item[i].visible ? Math.max(size, size + item[i].getOffsetBottom() - base) : size;
 							}
-						case -1:
-						case 2:
-							{
 
-								for (var i = 0, l = 1; i < l; i++) {
-									size = Math.max(size, item[i].getOffsetBottom() - base);
-								}
-								break;
-							}
-						case 1:
-						default:
-							{
+							break;
+						}
+					case -1:
+					case 2:
+						{
 
-								for (var i = 0, l = item.length; i < l; i++) {
-									size = Math.max(size, size + item[i].getOffsetBottom() - base);
-								}
-								break;
+							for (i = 0, n = 1; i < n; i++) {
+								size = Math.max(size, item[i].getOffsetBottom() - base);
 							}
-					}
-				}
-				else {
-					size = item.getOffsetBottom() - item.getOffsetTop();
+
+							break;
+						}
+					case 1:
+					default:
+						{
+
+							for (i = 0, n = item.length; i < n; i++) {
+								size = Math.max(size, size + item[i].getOffsetBottom() - base);
+							}
+
+							break;
+						}
 				}
 			}
-
-			return size;
+			else {
+				size = item.getOffsetBottom() - item.getOffsetTop();
+			}
 		}
+
+		return size;
 	};
 	_pComplexComponent._onGetItemArrWidth = function (index, stat, width) {
 		var panel = this._getPanel();
@@ -14541,7 +14454,6 @@ if (!nexacro.ComplexComponent) {
 									return this._panel._getPanelColSize(index, -1);
 								}
 						}
-						break;
 					}
 				case 1:
 					{
@@ -14598,7 +14510,6 @@ if (!nexacro.ComplexComponent) {
 									return this._panel._getPanelRowSize(index, -1);
 								}
 						}
-						break;
 					}
 				case 1:
 					{
@@ -14632,87 +14543,87 @@ if (!nexacro.ComplexComponent) {
 	};
 
 	_pComplexComponent._onGetItemRect = function (index, bandseq, stat) {
-		{
+		var rect = {
+			left : 0, 
+			top : 0, 
+			right : 0, 
+			bottom : 0, 
+			width : 0, 
+			height : 0
+		};
 
-			var item = this._getItem(index);
-			var rect = {
-				left : 0, 
-				top : 0, 
-				right : 0, 
-				bottom : 0, 
-				width : 0, 
-				height : 0
-			};
+		var items = this._getItem(index);
+		if (items) {
+			var i, n;
+			var item;
 
-			if (item) {
-				if (nexacro._isArray(item)) {
-					var sole = (bandseq != undefined) ? true : false;
+			if (nexacro._isArray(items)) {
+				var sole = (bandseq != undefined) ? true : false;
 
-					switch (stat) {
-						case -9:
-							{
+				switch (stat) {
+					case -9:
+						{
 
-								rect.left = Infinity;
-								rect.top = Infinity;
+							rect.left = Infinity;
+							rect.top = Infinity;
 
-								for (var i = bandseq ? bandseq : 0, l = sole ? i + 1 : item.length; i < l; i++) {
-									var itm = item[i];
-									if (itm && itm.visible) {
-										rect.left = Math.min(rect.left, itm.getOffsetLeft());
-										rect.top = Math.min(rect.top, itm.getOffsetTop());
-										rect.right = Math.max(rect.right, itm.getOffsetRight());
-										rect.bottom = Math.max(rect.bottom, rect.bottom + itm.getOffsetBottom());
-									}
+							for (i = bandseq ? bandseq : 0, n = sole ? i + 1 : items.length; i < n; i++) {
+								item = items[i];
+								if (item && item.visible) {
+									rect.left = Math.min(rect.left, item.getOffsetLeft());
+									rect.top = Math.min(rect.top, item.getOffsetTop());
+									rect.right = Math.max(rect.right, item.getOffsetRight());
+									rect.bottom = Math.max(rect.bottom, rect.bottom + item.getOffsetBottom());
 								}
-								break;
 							}
-						case -1:
-						case 2:
-							{
+							break;
+						}
+					case -1:
+					case 2:
+						{
 
-								sole = true;
-							}
-						case 1:
-						default:
-							{
+							sole = true;
+						}
+					case 1:
+					default:
+						{
 
-								rect.left = Infinity;
-								rect.top = Infinity;
+							rect.left = Infinity;
+							rect.top = Infinity;
 
-								for (var i = bandseq ? bandseq : 0, l = sole ? i + 1 : item.length; i < l; i++) {
-									var itm = item[i];
-									if (itm) {
-										rect.left = Math.min(rect.left, itm.getOffsetLeft());
-										rect.top = Math.min(rect.top, itm.getOffsetTop());
-										rect.right = Math.max(rect.right, itm.getOffsetRight());
-										rect.bottom = Math.max(rect.bottom, rect.bottom + itm.getOffsetBottom());
-									}
+							for (i = bandseq ? bandseq : 0, n = sole ? i + 1 : items.length; i < n; i++) {
+								item = items[i];
+								if (item) {
+									rect.left = Math.min(rect.left, item.getOffsetLeft());
+									rect.top = Math.min(rect.top, item.getOffsetTop());
+									rect.right = Math.max(rect.right, item.getOffsetRight());
+									rect.bottom = Math.max(rect.bottom, rect.bottom + item.getOffsetBottom());
 								}
-								break;
 							}
-					}
-
-					if (rect.left == Infinity) {
-						rect.left = 0;
-					}
-
-					if (rect.top == Infinity) {
-						rect.top = 0;
-					}
-				}
-				else {
-					rect.left = item.getOffsetLeft();
-					rect.top = item.getOffsetTop();
-					rect.right = item.getOffsetRight();
-					rect.bottom = item.getOffsetBottom();
+							break;
+						}
 				}
 
-				rect.width = rect.right - rect.left;
-				rect.height = rect.bottom - rect.top;
+				if (rect.left == Infinity) {
+					rect.left = 0;
+				}
+
+				if (rect.top == Infinity) {
+					rect.top = 0;
+				}
+			}
+			else {
+				rect.left = items.getOffsetLeft();
+				rect.top = items.getOffsetTop();
+				rect.right = items.getOffsetRight();
+				rect.bottom = items.getOffsetBottom();
 			}
 
-			return rect;
+			rect.width = rect.right - rect.left;
+			rect.height = rect.bottom - rect.top;
 		}
+
+		return rect;
 	};
 
 	_pComplexComponent._onGetItemChildRect = function (rowindex, bandseq, cellindex) {
@@ -14973,15 +14884,13 @@ if (!nexacro.ComplexComponent) {
 			var arrs = Array(ctxt.length);
 
 			for (var i = 0, l = ctxt.length; i < l; i++) {
-				var ctx = ctxt[i];
-
-				arrs[i] = ctx ? base._getArrPos(ctx) : arrd;
+				arrs[i] = ctxt[i] ? base._getArrPos(ctxt[i]) : arrd;
 			}
 
 			return arrs;
 		}
 		else {
-			return [ctxt ? base._getArrPos(ctx) : arrd];
+			return [ctxt ? base._getArrPos(ctxt) : arrd];
 		}
 	};
 	_pComplexComponent._fetchFormatsPosition = function (index) {
@@ -14999,15 +14908,13 @@ if (!nexacro.ComplexComponent) {
 			var arrs = Array(ctxt.length);
 
 			for (var i = 0, l = ctxt.length; i < l; i++) {
-				var ctx = ctxt[i];
-
-				arrs[i] = ctx ? base._getArrPos(ctx) : arrd;
+				arrs[i] = ctxt[i] ? base._getArrPos(ctxt[i]) : arrd;
 			}
 
 			return arrs;
 		}
 		else {
-			return [ctxt ? base._getArrPos(ctx) : arrd];
+			return [ctxt ? base._getArrPos(ctxt) : arrd];
 		}
 	};
 
@@ -15112,14 +15019,16 @@ if (!nexacro.ComplexComponent) {
 
 	_pComplexComponent._setCtxtItemInfo = function (item, ctxtdata, index, subindex) {
 		if (item && ctxtdata) {
+			var i, n, m;
+
 			if (nexacro._isArray(item)) {
 				if (nexacro._isArray(ctxtdata)) {
-					for (var i = 0, l = item.length, m = ctxtdata.length; i < l; i++) {
+					for (i = 0, n = item.length, m = ctxtdata.length; i < n; i++) {
 						this._setCtxtItemInfo(item[i], ctxtdata[i % m], index, i);
 					}
 				}
 				else {
-					for (var i = 0, l = item.length; i < l; i++) {
+					for (i = 0, n = item.length; i < n; i++) {
 						this._setCtxtItemInfo(item[i], ctxtdata, index, i);
 					}
 				}
@@ -15140,10 +15049,11 @@ if (!nexacro.ComplexComponent) {
 				if (cset) {
 					for (var prop in cset) {
 						var func = cset[prop];
+						var data = ctxt[prop];
+
 						if (!func) {
 							continue;
 						}
-						var data = ctxt[prop];
 
 						if (Array.isArray(data)) {
 							func.apply(item, data);
@@ -15155,7 +15065,7 @@ if (!nexacro.ComplexComponent) {
 				}
 
 				if (csub && isub) {
-					for (var i = 0, l = isub.length, m = csub.length; i < l; i++) {
+					for (i = 0, n = isub.length, m = csub.length; i < n; i++) {
 						this._setCtxtItemInfo(isub[i], csub[i % m], index, i);
 					}
 				}
@@ -15166,7 +15076,6 @@ if (!nexacro.ComplexComponent) {
 	_pComplexComponent.createCtxtControl = function (ctxt, seq, is_child) {
 		if (ctxt) {
 			var _name;
-
 			if (is_child) {
 				_name = ctxt._id;
 			}
@@ -15222,7 +15131,9 @@ if (!nexacro.ComplexComponent) {
 				item._setAddedCreateInfo(this, ctxt, seq);
 			}
 
-			item._setEventHandler("onclick", this.on_notify_item_onclick, this);
+			if (item._setEventHandler) {
+				item._setEventHandler("onclick", this.on_notify_item_onclick, this);
+			}
 		}
 
 		return item;
@@ -15250,7 +15161,7 @@ if (!nexacro.ComplexComponent) {
 			}
 
 			if (!data.length) {
-				var bands = this._ctxtdata._getBands();
+				bands = this._ctxtdata._getBands();
 				if (bands && bands.length) {
 					data.push(bands[0]);
 				}
@@ -15500,60 +15411,50 @@ if (!nexacro.ComplexComponent) {
 	_pComplexComponent.createCodeBindInfo = function (targetid, targetprop, bindprop) {
 		var bindinfo = new nexacro._BindInfo();
 
-		if (bindinfo) {
-			bindinfo.baseid = "";
-			bindinfo.target = nexacro._nvl(targetid, false) ? targetid.split('.') : null;
-			bindinfo.setter = nexacro._nvl(targetprop, false) ? "set_" + targetprop : "set_" + this._onGetBindableProperties();
-			bindinfo.bindid = nexacro._nvl(bindprop, false) ? bindprop : this._onGetCodeProp();
-		}
+		bindinfo.baseid = "";
+		bindinfo.target = nexacro._nvl(targetid, false) ? targetid.split('.') : null;
+		bindinfo.setter = nexacro._nvl(targetprop, false) ? "set_" + targetprop : "set_" + this._onGetBindableProperties();
+		bindinfo.bindid = nexacro._nvl(bindprop, false) ? bindprop : this._onGetCodeProp();
 
 		return bindinfo;
 	};
 	_pComplexComponent.createLevelBindInfo = function (targetid, targetprop, bindprop) {
 		var bindinfo = new nexacro._BindInfo();
 
-		if (bindinfo) {
-			bindinfo.baseid = "";
-			bindinfo.target = nexacro._nvl(targetid, false) ? targetid.split('.') : null;
-			bindinfo.setter = nexacro._nvl(targetprop, false) ? "set_" + targetprop : "";
-			bindinfo.bindid = nexacro._nvl(bindprop, false) ? bindprop : this._onGetLevelProp();
-		}
+		bindinfo.baseid = "";
+		bindinfo.target = nexacro._nvl(targetid, false) ? targetid.split('.') : null;
+		bindinfo.setter = nexacro._nvl(targetprop, false) ? "set_" + targetprop : "";
+		bindinfo.bindid = nexacro._nvl(bindprop, false) ? bindprop : this._onGetLevelProp();
 
 		return bindinfo;
 	};
 	_pComplexComponent.createGroupBindInfo = function (targetid, targetprop, bindprop) {
 		var bindinfo = new nexacro._BindInfo();
 
-		if (bindinfo) {
-			bindinfo.baseid = "";
-			bindinfo.target = nexacro._nvl(targetid, false) ? targetid.split('.') : null;
-			bindinfo.setter = nexacro._nvl(targetprop, false) ? "set_" + targetprop : "";
-			bindinfo.bindid = nexacro._nvl(bindprop, false) ? bindprop : this._onGetGroupProp();
-		}
+		bindinfo.baseid = "";
+		bindinfo.target = nexacro._nvl(targetid, false) ? targetid.split('.') : null;
+		bindinfo.setter = nexacro._nvl(targetprop, false) ? "set_" + targetprop : "";
+		bindinfo.bindid = nexacro._nvl(bindprop, false) ? bindprop : this._onGetGroupProp();
 
 		return bindinfo;
 	};
 	_pComplexComponent.createDataBindInfo = function (baseid, targetid, targetprop, bindprop) {
 		var bindinfo = new nexacro._BindInfo();
 
-		if (bindinfo) {
-			bindinfo.baseid = baseid;
-			bindinfo.target = nexacro._nvl(targetid, false) ? targetid.split('.') : null;
-			bindinfo.setter = nexacro._nvl(targetprop, false) ? "set_" + targetprop : "set_text";
-			bindinfo.bindid = nexacro._nvl(bindprop, false) ? bindprop : this._onGetDataProps()[0];
-		}
+		bindinfo.baseid = baseid;
+		bindinfo.target = nexacro._nvl(targetid, false) ? targetid.split('.') : null;
+		bindinfo.setter = nexacro._nvl(targetprop, false) ? "set_" + targetprop : "set_text";
+		bindinfo.bindid = nexacro._nvl(bindprop, false) ? bindprop : this._onGetDataProps()[0];
 
 		return bindinfo;
 	};
 	_pComplexComponent.createDataExprInfo = function (baseid, targetid, targetprop, exprprop) {
 		var exprinfo = new nexacro._BindInfo();
 
-		if (exprinfo) {
-			exprinfo.baseid = baseid;
-			exprinfo.target = nexacro._nvl(targetid, false) ? targetid.split('.') : null;
-			exprinfo.setter = nexacro._nvl(targetprop, false) ? "set_" + targetprop : "set_text";
-			exprinfo.exprid = nexacro._nvl(exprprop, false) ? exprprop : this._onGetExprProp();
-		}
+		exprinfo.baseid = baseid;
+		exprinfo.target = nexacro._nvl(targetid, false) ? targetid.split('.') : null;
+		exprinfo.setter = nexacro._nvl(targetprop, false) ? "set_" + targetprop : "set_text";
+		exprinfo.exprid = nexacro._nvl(exprprop, false) ? exprprop : this._onGetExprProp();
 
 		return exprinfo;
 	};
@@ -15570,6 +15471,7 @@ if (!nexacro.ComplexComponent) {
 	_pComplexComponent.createItemSubControlExprInfo = function (targetid, targetprop, exprprop) {
 		return this.createDataExprInfo(null, targetid, targetprop, exprprop);
 	};
+
 	_pComplexComponent._setBindInfos = function (codebindinfo, levelbindinfo, groupbindinfo, databindinfos) {
 		if (this._databind) {
 			return this._databind._setBindInfos(codebindinfo, levelbindinfo, groupbindinfo, databindinfos);
@@ -15721,28 +15623,36 @@ if (!nexacro.ComplexComponent) {
 
 	_pComplexComponent._setBindItemInfo = function (item, binddata, index, bandseq) {
 		if (item && binddata) {
+			var i, n;
+
 			var infos = binddata._getBindInfos();
 			var start = binddata._chkBindInfos();
 
+			var info, base, comp, func, data;
+
 			if (nexacro._isArray(item)) {
-				for (var i = start, l = infos.length; i < l; i++) {
-					var info = infos[i];
+				for (i = start, n = infos.length; i < n; i++) {
+					info = infos[i];
 					if (!info) {
 						continue;
 					}
-					var base = nexacro._nvl(info.baseid, false) ? this._getBindBase(item, info.basesq) : null;
+
+					base = nexacro._nvl(info.baseid, false) ? this._getBindBase(item, info.basesq) : null;
 					if (!base) {
 						continue;
 					}
-					var comp = nexacro._nvl(info.target, false) ? this._getBindComp(base, info.target) : base;
+
+					comp = nexacro._nvl(info.target, false) ? this._getBindComp(base, info.target) : base;
 					if (!comp) {
 						continue;
 					}
-					var func = nexacro._nvl(info.setter, false) ? this._getBindFunc(comp, info.setter) : null;
+
+					func = nexacro._nvl(info.setter, false) ? this._getBindFunc(comp, info.setter) : null;
 					if (!func) {
 						continue;
 					}
-					var data = info.values;
+
+					data = info.values;
 
 					if (nexacro._isArray(data)) {
 						func.apply(comp, data);
@@ -15753,20 +15663,23 @@ if (!nexacro.ComplexComponent) {
 				}
 			}
 			else if (bandseq) {
-				for (var i = start, l = infos.length; i < l; i++) {
-					var info = infos[i];
+				for (i = start, n = infos.length; i < n; i++) {
+					info = infos[i];
 					if (!info || info.basesq != bandseq) {
 						continue;
 					}
-					var comp = nexacro._nvl(info.target, false) ? this._getBindComp(item, info.target) : item;
+
+					comp = nexacro._nvl(info.target, false) ? this._getBindComp(item, info.target) : item;
 					if (!comp) {
 						continue;
 					}
-					var func = nexacro._nvl(info.setter, false) ? this._getBindFunc(comp, info.setter) : null;
+
+					func = nexacro._nvl(info.setter, false) ? this._getBindFunc(comp, info.setter) : null;
 					if (!func) {
 						continue;
 					}
-					var data = info.values;
+
+					data = info.values;
 
 					if (nexacro._isArray(data)) {
 						func.apply(comp, data);
@@ -15777,20 +15690,23 @@ if (!nexacro.ComplexComponent) {
 				}
 			}
 			else {
-				for (var i = start, l = infos.length; i < l; i++) {
-					var info = infos[i];
+				for (i = start, n = infos.length; i < n; i++) {
+					info = infos[i];
 					if (!info) {
 						continue;
 					}
-					var comp = nexacro._nvl(info.target, false) ? this._getBindComp(item, info.target) : item;
+
+					comp = nexacro._nvl(info.target, false) ? this._getBindComp(item, info.target) : item;
 					if (!comp) {
 						continue;
 					}
-					var func = nexacro._nvl(info.setter, false) ? this._getBindFunc(comp, info.setter) : null;
+
+					func = nexacro._nvl(info.setter, false) ? this._getBindFunc(comp, info.setter) : null;
 					if (!func) {
 						continue;
 					}
-					var data = info.values;
+
+					data = info.values;
 
 					if (nexacro._isArray(data)) {
 						func.apply(comp, data);
@@ -15814,7 +15730,6 @@ if (!nexacro.ComplexComponent) {
 		if (this._is_databind) {
 			return this.innerdataset ? this.innerdataset : this.binddatasource;
 		}
-		;
 		return null;
 	};
 	_pComplexComponent._onGetBindDataKey = function () {
@@ -16072,14 +15987,18 @@ if (!nexacro.ComplexComponent) {
 			}
 		}
 	};
+
 	_pComplexComponent._setItemSelect = function (index, select, show) {
 		if (index == null) {
 			return;
 		}
+
+		var i, n;
+
 		if (index.length) {
 			if (this.rangeselect) {
 				if (this._use_multiselector) {
-					for (var i = 0, l = index.length; i < l; i++) {
+					for (i = 0, n = index.length; i < n; i++) {
 						this._setItemRangeSelect(index[i], select);
 						this._showSelector(index[i], select);
 					}
@@ -16092,7 +16011,7 @@ if (!nexacro.ComplexComponent) {
 					return;
 				}
 				else {
-					for (var i = 0, l = index.length; i < l; i++) {
+					for (i = 0, n = index.length; i < n; i++) {
 						this._setItemRangeSelect(index[i], select);
 					}
 					if (this._use_selector) {
@@ -16106,7 +16025,7 @@ if (!nexacro.ComplexComponent) {
 			}
 			else {
 				if (this._use_multiselector) {
-					for (var i = 0, l = index.length; i < l; i++) {
+					for (i = 0, n = index.length; i < n; i++) {
 						this._setItemArraySelect(this._getItem(index[i]), select);
 						this._showSelector(index[i], select);
 					}
@@ -16127,7 +16046,7 @@ if (!nexacro.ComplexComponent) {
 					return;
 				}
 				else {
-					for (var i = 0, l = index.length; i < l; i++) {
+					for (i = 0, n = index.length; i < n; i++) {
 						this._setItemArraySelect(this._getItem(index[i]), select);
 					}
 					if (this._use_selector) {
@@ -16159,13 +16078,13 @@ if (!nexacro.ComplexComponent) {
 			}
 			else {
 				if (this._use_multiselector) {
-					for (var i = 0; i < count; i++) {
+					for (i = 0; i < count; i++) {
 						this._setItemArraySelect(this._getItem(i), select);
 						this._showSelector(i, select);
 					}
 				}
 				else {
-					for (var i = 0; i < count; i++) {
+					for (i = 0; i < count; i++) {
 						this._setItemArraySelect(this._getItem(i), select);
 					}
 					if (this._use_selector) {
@@ -16217,6 +16136,7 @@ if (!nexacro.ComplexComponent) {
 		if (select === undefined || select === null) {
 			select = -1;
 		}
+
 		var oldpos = select.length ? select[0] : select;
 		if (oldpos === undefined || oldpos === null || oldpos < 0) {
 			oldpos = -1;
@@ -16268,18 +16188,13 @@ if (!nexacro.ComplexComponent) {
 		var oldchild = this._getCurrChild();
 		var newchild = oldchild;
 
-		switch (keycode) {
-			case nexacro.Event.KEY_TAB:
-				{
-
-					if (shift_key) {
-						newchild = this._getPrevChild(this._getCurrChild(), true);
-					}
-					else {
-						newchild = this._getNextChild(this._getCurrChild(), true);
-					}
-					break;
-				}
+		if (keycode == nexacro.Event.KEY_TAB) {
+			if (shift_key) {
+				newchild = this._getPrevChild(this._getCurrChild(), true);
+			}
+			else {
+				newchild = this._getNextChild(this._getCurrChild(), true);
+			}
 		}
 
 		return newchild != oldchild ? newchild : null;
@@ -16307,14 +16222,6 @@ if (!nexacro.ComplexComponent) {
 				break;
 			case nexacro.Event.KEY_DOWN:
 			case nexacro.Event.KEY_UP:
-				if (!alt_key && ctrl_key && !shift_key) {
-					ret = scroll;
-				}
-				else {
-					ret = select;
-				}
-
-				break;
 			case nexacro.Event.KEY_LEFT:
 			case nexacro.Event.KEY_RIGHT:
 			case nexacro.Event.KEY_PAGE_UP:
@@ -16346,9 +16253,7 @@ if (!nexacro.ComplexComponent) {
 			case nexacro.Event.KEY_PAGE_UP:
 			case nexacro.Event.KEY_PAGE_DOWN:
 				var select = this._findNextSelectIndex(keycode, alt_key, ctrl_key, shift_key);
-				var ckitem = this._getItem(select);
-
-				if (select == undefined || select == null || select < 0) {
+				if (select == null || select < 0) {
 					return false;
 				}
 
@@ -16356,39 +16261,28 @@ if (!nexacro.ComplexComponent) {
 					this.addSelect(select);
 				}
 
-				if (true) {
-					this.setSelect(select);
-				}
+				this.setSelect(select);
 
-				if (true) {
-					this._focusItem(select);
-				}
+				this._focusItem(select);
 
 				break;
 			case nexacro.Event.KEY_TAB:
 				if (this._is_child) {
 					var child = this._findNextSelectChild(keycode, alt_key, ctrl_key, shift_key);
-
 					if (child == null) {
 						return false;
 					}
 
-					if (child) {
-						child.setFocus();
-					}
+					child.setFocus();
 				}
 				else {
 					var index = this._findNextSelectIndex(keycode, alt_key, ctrl_key, shift_key);
-
-					if (index == undefined || index == null || index < 0) {
+					if (index == null || index < 0) {
 						return false;
 					}
 
-					if (true) {
-						this.setSelect(index);
-					}
+					this.setSelect(index);
 				}
-
 				break;
 			case nexacro.Event.KEY_ENTER:
 				break;
@@ -16460,6 +16354,7 @@ if (!nexacro.ComplexComponent) {
 
 		this._updateItemScrollInfo("itemshow", true);
 	};
+
 	_pComplexComponent._expandItemKeyInfo = function (keycode, alt_key, ctrl_key, shift_key) {
 		var stat = nexacro._ExpandConst.EXPANDSTAT_EXPAND;
 		var type = nexacro._ExpandConst.EXPANDMODE_INDEX;
@@ -16474,19 +16369,8 @@ if (!nexacro.ComplexComponent) {
 	};
 
 	_pComplexComponent._customItemKeyInfo = function (keycode, alt_key, ctrl_key, shift_key) {
-		switch (keycode) {
-			case nexacro.Event.KEY_TAB:
-				{
-
-					break;
-				}
-			case nexacro.Event.KEY_ENTER:
-				{
-
-					break;
-				}
-		}
 	};
+
 
 	_pComplexComponent._on_basic_onselect = function (oldvalue, newvalue) {
 		if (this._selectinfo) {
@@ -16788,12 +16672,7 @@ if (!nexacro.ComplexComponent) {
 		var control_elem = this._control_element;
 
 		if (control_elem && this._is_scrollable) {
-			if (before) {
-				control_elem.setElementScrollbarSize(hscrollbarsize, vscrollbarsize, hscrollbartype, vscrollbartype, this._getScrollType());
-			}
-			else {
-				control_elem.setElementScrollbarSize(hscrollbarsize, vscrollbarsize, hscrollbartype, vscrollbartype, this._getScrollType());
-			}
+			control_elem.setElementScrollbarSize(hscrollbarsize, vscrollbarsize, hscrollbartype, vscrollbartype, this._getScrollType());
 		}
 	};
 	_pComplexComponent._setContentsScrollInfo = function (info, before) {
@@ -16895,17 +16774,20 @@ if (!nexacro.ComplexComponent) {
 		this._setItemScrollFullStart(start - prevc);
 		this._setItemScrollFullCount(start + viewc + nextc);
 
-		var fulls = this._getItemScrollFullStart();
 		var fullc = this._getItemScrollFullCount();
 		var rowvc = this._getItemViewCountRow(rowfirst);
 		var colvc = this._getItemViewCountCol(rowfirst);
 
+		var sz, pc, nc;
+		var pw, ph;
+		var nw, nh;
+
 		if (rowfirst) {
-			var sz = this._getItemWidth(0);
-			var pc = (start - prevc) / rowvc;
-			var nc = (fullc - (start + viewc + nextc)) / rowvc;
-			var pw = sz * pc;
-			var nw = sz * nc;
+			sz = this._getItemWidth(0);
+			pc = (start - prevc) / rowvc;
+			nc = (fullc - (start + viewc + nextc)) / rowvc;
+			pw = sz * pc;
+			nw = sz * nc;
 
 			this._setPanelPrevOverWidth(pw > 0 ? pw : 0);
 			this._setPanelNextOverWidth(nw > 0 ? nw : 0);
@@ -16913,11 +16795,11 @@ if (!nexacro.ComplexComponent) {
 			this._setPanelNextOverHeight(0);
 		}
 		else {
-			var sz = this._getItemHeight(0);
-			var pc = (start - prevc) / colvc;
-			var nc = (fullc - (start + viewc + nextc)) / colvc;
-			var ph = sz * pc;
-			var nh = sz * nc;
+			sz = this._getItemHeight(0);
+			pc = (start - prevc) / colvc;
+			nc = (fullc - (start + viewc + nextc)) / colvc;
+			ph = sz * pc;
+			nh = sz * nc;
 
 			this._setPanelPrevOverHeight(ph > 0 ? ph : 0);
 			this._setPanelNextOverHeight(nh > 0 ? nh : 0);
@@ -16987,13 +16869,14 @@ if (!nexacro.ComplexComponent) {
 
 			var fullc = this._getBindCount();
 			var start = this._getItemScrollViewStart();
-			if (start < 0) {
-				start = 0;
-			}
 			var viewc = this._getItemScrollViewCount();
 			var prevc = this._getItemScrollPrevCount();
 			var nextc = this._getItemScrollNextCount();
 			var overc = 0;
+
+			if (start < 0) {
+				start = 0;
+			}
 
 			if (pos >= 0 && viewc >= 0) {
 				var newps = this._calcItemScrollViewStart(pos, cn, co, rowfirst);
@@ -17074,13 +16957,13 @@ if (!nexacro.ComplexComponent) {
 					if (prevc < 0) {
 						prevc = 0;
 					}
+
 					index = 0;
 				}
 
 				overc = (index + count) - fullc;
 
 				if (overc > 0) {
-					count -= overc;
 					nextc -= overc;
 					if (nextc < 0) {
 						nextc = 0;
@@ -17110,15 +16993,18 @@ if (!nexacro.ComplexComponent) {
 		var cn = this._getItemViewCountRow(rowfirst);
 		var co = this._getItemViewCountCol(rowfirst);
 
+		var pos;
+		var st;
+
 		if (rowfirst) {
-			var pos = this._scrollmanager && this._scrollmanager.hscrollinfo ? this._scrollmanager.hscrollinfo.pos : this._hscroll_pos;
-			var st = this._calcItemScrollViewStart(pos, cn, co, rowfirst);
+			pos = this._scrollmanager && this._scrollmanager.hscrollinfo ? this._scrollmanager.hscrollinfo.pos : this._hscroll_pos;
+			st = this._calcItemScrollViewStart(pos, cn, co, rowfirst);
 
 			return st;
 		}
 		else {
-			var pos = this._scrollmanager && this._scrollmanager.vscrollinfo ? this._scrollmanager.vscrollinfo.pos : this._vscroll_pos;
-			var st = this._calcItemScrollViewStart(pos, cn, co, rowfirst);
+			pos = this._scrollmanager && this._scrollmanager.vscrollinfo ? this._scrollmanager.vscrollinfo.pos : this._vscroll_pos;
+			st = this._calcItemScrollViewStart(pos, cn, co, rowfirst);
 
 			switch (tracktype) {
 				case nexacro._ScrollConst.SCROLLTRACKPOS_TOP:
@@ -17509,7 +17395,7 @@ if (!nexacro.ComplexComponent) {
 				return this._getBindCount();
 			}
 			if (this._items) {
-				return _items.length;
+				return this._items.length;
 			}
 
 			return 0;
@@ -17649,21 +17535,16 @@ if (!nexacro.ComplexComponent) {
 	};
 
 	_pComplexComponent._createExpandBar = function (expandbartype, expandbarsize) {
-		var expandbar;
-
 		var ctrlsettype;
 		var ctrlvisible;
-		var ctrlarrange;
 
 		if (this._use_expandmanager && this._expandmanager) {
 			ctrlsettype = this._expandmanager.ctrlsettype;
 			ctrlvisible = this._expandmanager.ctrlvisible;
-			ctrlarrange = this._expandmanager.ctrlarrange;
 		}
 		else {
 			ctrlsettype = nexacro._ExpandConst.EXPANDCTRLSET_CONVERT[expandbartype];
 			ctrlvisible = nexacro._ExpandConst.EXPANDVISIBLE_CONVERT[expandbartype];
-			ctrlarrange = nexacro._ExpandConst.EXPANDARRANGE_CONVERT[expandbartype];
 		}
 
 		if (nexacro._isNull(ctrlsettype)) {
@@ -17671,9 +17552,6 @@ if (!nexacro.ComplexComponent) {
 		}
 		if (nexacro._isNull(ctrlvisible)) {
 			ctrlvisible = nexacro._ExpandConst.EXPANDVISIBLE_CONVERT[this._default_expandbartype];
-		}
-		if (nexacro._isNull(ctrlarrange)) {
-			ctrlarrange = nexacro._ExpandConst.EXPANDARRANGE_CONVERT[this._default_expandbartype];
 		}
 
 		var clientwidth = this._getClientWidth();
@@ -17687,9 +17565,9 @@ if (!nexacro.ComplexComponent) {
 						this._destroyExpandBar();
 					}
 					if (this.expandbar == null) {
-						expandbar = this.expandbar = this.createNCChildControl(new nexacro.CheckBox("expandbar", clientwidth, 0, expandbarsize[0], expandbarsize[1], null, null, null, null, null, null, this));
+						this.expandbar = this.createNCChildControl(new nexacro.CheckBox("expandbar", clientwidth, 0, expandbarsize[0], expandbarsize[1], null, null, null, null, null, null, this));
 
-						expandbar._setEventHandler("onclick", this.on_notify_expand_onclick, this);
+						this.expandbar._setEventHandler("onclick", this.on_notify_expand_onclick, this);
 					}
 					break;
 				}
@@ -17701,9 +17579,9 @@ if (!nexacro.ComplexComponent) {
 						this._destroyExpandBar();
 					}
 					if (this.expandbar == null) {
-						expandbar = this.expandbar = this.createNCChildControl(new nexacro.Button("expandbar", clientwidth, 0, expandbarsize[0], expandbarsize[1], null, null, null, null, null, null, this));
+						this.expandbar = this.createNCChildControl(new nexacro.Button("expandbar", clientwidth, 0, expandbarsize[0], expandbarsize[1], null, null, null, null, null, null, this));
 
-						expandbar._setEventHandler("onclick", this.on_notify_expand_onclick, this);
+						this.expandbar._setEventHandler("onclick", this.on_notify_expand_onclick, this);
 					}
 					break;
 				}
@@ -17717,12 +17595,15 @@ if (!nexacro.ComplexComponent) {
 			case nexacro._ExpandConst.EXPANDVISIBLE_AUTO:
 				{
 
-					expandbar.set_visible(overflow);
+					this.expandbar.set_visible(overflow);
+					this.expandbar.set_enable(overflow);
+					break;
 				}
 			case nexacro._ExpandConst.EXPANDVISIBLE_FIXED:
 				{
 
-					expandbar.set_enable(overflow);
+					this.expandbar.set_enable(overflow);
+					break;
 				}
 			case nexacro._ExpandConst.EXPANDVISIBLE_CONST:
 			default:
@@ -17906,12 +17787,7 @@ if (!nexacro.ComplexComponent) {
 		var control_elem = this._control_element;
 
 		if (control_elem && this._is_expandable) {
-			if (before) {
-				control_elem.setElementExpandbarSize(expandbarsize, expandbartype, this._getExpandDirType(), this._getExpandVisible(), this._getExpandArrange());
-			}
-			else {
-				control_elem.setElementExpandbarSize(expandbarsize, expandbartype, this._getExpandDirType(), this._getExpandVisible(), this._getExpandArrange());
-			}
+			control_elem.setElementExpandbarSize(expandbarsize, expandbartype, this._getExpandDirType(), this._getExpandVisible(), this._getExpandArrange());
 		}
 	};
 
@@ -17935,6 +17811,7 @@ if (!nexacro.ComplexComponent) {
 	_pComplexComponent._getItemExpandSizes = function (width, height, before) {
 		return this._is_child ? this._onGetItemExpandSizes(width, height, before) : [-1, -1];
 	};
+
 	_pComplexComponent._onExpandReady = function (obj, type, info) {
 		return this._on_ready_onexpand(obj, info);
 	};
@@ -17983,6 +17860,7 @@ if (!nexacro.ComplexComponent) {
 	_pComplexComponent._onGetExpandArrange = function () {
 		return this._getExpandArrange();
 	};
+
 	_pComplexComponent._onRecalcExpandSize = function (before) {
 		var maxwidth = this._getContentsMaxWidth(before);
 		var maxheight = this._getContentsMaxHeight(before);
@@ -18028,7 +17906,7 @@ if (!nexacro.ComplexComponent) {
 			return this._getBindCount();
 		}
 		if (this._items) {
-			return _items.length;
+			return this._items.length;
 		}
 		return -1;
 	};
@@ -18036,10 +17914,10 @@ if (!nexacro.ComplexComponent) {
 		if (this._children) {
 			return [-1, -1];
 		}
-		else {
-			return [-1, -1];
-		}
+
+		return [-1, -1];
 	};
+
 	_pComplexComponent._on_fire_onexpand = function (obj, e) {
 		if (this.onexpand && this.onexpand._has_handlers) {
 			e.fromobject = this;
@@ -18261,15 +18139,7 @@ if (!nexacro.ComplexComponent) {
 
 	_pComplexComponent.on_fire_sys_onlbuttondown = function (button, alt_key, ctrl_key, shift_key, screenX, screenY, canvasX, canvasY, clientX, clientY, from_comp, from_refer_comp) {
 		if (this.onlbuttondown && this.onlbuttondown._has_handlers) {
-			var evt = null;
-
-			if (this._is_items) {
-				evt = new nexacro.MouseEventInfo(this, "onlbuttondown", button, alt_key, ctrl_key, shift_key, screenX, screenY, canvasX, canvasY, clientX, clientY, from_comp, from_refer_comp);
-			}
-			else {
-				evt = new nexacro.MouseEventInfo(this, "onlbuttondown", button, alt_key, ctrl_key, shift_key, screenX, screenY, canvasX, canvasY, clientX, clientY, from_comp, from_refer_comp);
-			}
-
+			var evt = new nexacro.MouseEventInfo(this, "onlbuttondown", button, alt_key, ctrl_key, shift_key, screenX, screenY, canvasX, canvasY, clientX, clientY, from_comp, from_refer_comp);
 			return this.onlbuttondown._fireSysEvent(this, evt);
 		}
 		return false;
@@ -18432,7 +18302,5 @@ if (!nexacro.ComplexComponent) {
 
 
 
-
 	delete _pComplexComponent;
 }
-;

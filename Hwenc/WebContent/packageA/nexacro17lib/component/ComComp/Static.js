@@ -39,6 +39,8 @@ if (!nexacro._IconText) {
 	_pIconText._is_simple_control = true;
 	_pIconText._is_eventinfo_control = false;
 	_pIconText._is_fiticonsize = false;
+	_pIconText._icon_width = 0;
+	_pIconText._icon_height = 0;
 
 	_pIconText.accessibilityrole = "Icon";
 
@@ -237,10 +239,20 @@ if (!nexacro._IconText) {
 			if (icon) {
 				var textpadding = this._textpadding || this._getCSSStyleValue("textPadding");
 				var icon_pos = this.iconPosition || this._getCSSStyleValue("iconPosition");
-				var icon_size = nexacro._getImageSize(icon.url, this._on_icon_onload, this, undefined, this.image) || {
-					width : 0, 
-					height : 0
-				};
+
+				var icon_size;
+				if (this._icon_width != 0 && this._icon_height != 0) {
+					icon_size = {
+						width : this._icon_width, 
+						height : this._icon_height
+					};
+				}
+				else {
+					icon_size = nexacro._getImageSize(icon.url, this._on_icon_onload, this, undefined, this.image) || {
+						width : this._icon_width, 
+						height : this._icon_height
+					};
+				}
 
 				if (icon_pos == "top" || icon_pos == "bottom") {
 					total_h += icon_size.height;
@@ -282,6 +294,9 @@ if (!nexacro._IconText) {
 				this.on_apply_icon(null);
 			}
 		}
+
+		this._icon_width = 0;
+		this._icon_height = 0;
 	};
 
 	_pIconText.on_apply_icon = function (icon) {
@@ -401,7 +416,10 @@ if (!nexacro._IconText) {
 	};
 
 	_pIconText._on_icon_onload = function (url, width, height) {
-		if (this.fittocontents !== "none") {
+		if (this.fittocontents !== "none" && (this._icon_width != width || this._icon_height != height)) {
+			this._icon_width = width;
+			this._icon_height = height;
+
 			this._update_position();
 		}
 	};

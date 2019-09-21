@@ -40,6 +40,7 @@ if (!nexacro._ListViewCellControl) {
 	};
 
 	delete _pListViewCellInfo;
+
 	nexacro._ListViewCellControl = function (id, left, top, width, height, right, bottom, minwidth, maxwidth, minheight, maxheight, parent, cellinfo) {
 		nexacro._CellControl.call(this, id, left, top, width, height, right, bottom, parent, cellinfo, undefined, undefined, undefined);
 	};
@@ -118,13 +119,13 @@ if (!nexacro._ListViewCellControl) {
 	};
 
 	_pListViewCellControl.on_focus_basic_action = function (self_flag, evt_name, lose_focus, refer_lose_focus, new_focus, refer_new_focus) {
-		var ret = nexacro._CellControl.prototype.on_focus_basic_action.call(this, self_flag, evt_name, lose_focus, refer_lose_focus, new_focus, refer_new_focus);
+		nexacro._CellControl.prototype.on_focus_basic_action.call(this, self_flag, evt_name, lose_focus, refer_lose_focus, new_focus, refer_new_focus);
 
 		this._actionEditCell(this._getActionCell(refer_new_focus), "setfocus");
 	};
 
 	_pListViewCellControl.on_killfocus_basic_action = function (new_focus, new_refer_focus) {
-		var ret = nexacro._CellControl.prototype.on_killfocus_basic_action.call(this, new_focus, new_refer_focus);
+		nexacro._CellControl.prototype.on_killfocus_basic_action.call(this, new_focus, new_refer_focus);
 
 		this._actionEditCell(this._getActionCell(this), "killfocus");
 	};
@@ -147,6 +148,7 @@ if (!nexacro._ListViewCellControl) {
 		}
 
 		var autoenter = this._getAutoEnter();
+		var acceptsenter;
 
 		switch (trigger) {
 			case "setfocus":
@@ -161,15 +163,13 @@ if (!nexacro._ListViewCellControl) {
 				}
 				break;
 			case "lbuttondown":
-				if (cell) {
-					var show = cell.selected;
+				var show = cell.selected;
 
-					cell.setFocus(false, true);
+				cell.setFocus(false, true);
 
-					if (autoenter != "select") {
-						if (show && cell._hasEditor() && cell._isEditable()) {
-							cell._showEditor();
-						}
+				if (autoenter != "select") {
+					if (show && cell._hasEditor() && cell._isEditable()) {
+						cell._showEditor();
 					}
 				}
 				break;
@@ -185,8 +185,7 @@ if (!nexacro._ListViewCellControl) {
 					cell._applyEditor(true);
 
 					if (cell._editor) {
-						var acceptsenter = cell._editor._cellinfo._getAttrValue(cell._editor._cellinfo.textareaacceptsenter);
-						acceptsenter = nexacro._toBoolean(acceptsenter);
+						acceptsenter = nexacro._toBoolean(cell._editor._cellinfo._getAttrValue(cell._editor._cellinfo.textareaacceptsenter));
 
 						cell.on_fire_onenterdown(cell._editor);
 
@@ -211,8 +210,7 @@ if (!nexacro._ListViewCellControl) {
 					cell._applyEditor(true);
 
 					if (cell._editor) {
-						var acceptsenter = cell._editor._cellinfo._getAttrValue(cell._editor._cellinfo.textareaacceptsenter);
-						acceptsenter = nexacro._toBoolean(acceptsenter);
+						acceptsenter = nexacro._toBoolean(cell._editor._cellinfo._getAttrValue(cell._editor._cellinfo.textareaacceptsenter));
 
 						cell.on_fire_onenterdown(cell._editor);
 
@@ -305,7 +303,6 @@ if (!nexacro._ListViewCellControl) {
 
 	delete _pListViewCellControl;
 }
-;
 
 if (!nexacro._ListViewBandControl) {
 	nexacro._ListViewBandControl = function (id, left, top, width, height, right, bottom, minwidth, maxwidth, minheight, maxheight, parent) {
@@ -487,7 +484,7 @@ if (!nexacro._ListViewBandControl) {
 		}
 
 		var count = child.length;
-		if (child && count) {
+		if (count) {
 			for (var i = 0; i < count; i++) {
 				child[i]._setEnable(v);
 			}
@@ -538,7 +535,6 @@ if (!nexacro._ListViewBandControl) {
 
 	delete _pListViewBandControl;
 }
-;
 
 if (!nexacro.ListView) {
 	nexacro.ListViewBandStatusEventInfo = function (obj, id, from_comp, from_refer_comp, row, bandstatus) {
@@ -745,20 +741,18 @@ if (!nexacro.ListView) {
 	};
 
 	_pListView._resetScrollInfo = function (rowposition) {
+		var currrow;
 		if (rowposition && rowposition > -1) {
-			var panel_slot = this._getPanelSlot(rowposition);
-			if (panel_slot) {
-				var slot_top = panel_slot._getSlotCalcTop();
-				this._updateItemVScrollInfo(slot_top, "trackinit", true);
-			}
+			currrow = rowposition;
 		}
 		else {
-			var currsel = this.getSelect();
-			var panel_slot = this._getPanelSlot(currsel.row);
-			if (panel_slot) {
-				var slot_top = panel_slot._getSlotCalcTop();
-				this._updateItemVScrollInfo(slot_top, "trackinit", true);
-			}
+			currrow = this.getSelect().row;
+		}
+
+		var panel_slot = this._getPanelSlot(currrow);
+		if (panel_slot) {
+			var slot_top = panel_slot._getSlotCalcTop();
+			this._updateItemVScrollInfo(slot_top, "trackinit", true);
 		}
 	};
 
@@ -801,7 +795,7 @@ if (!nexacro.ListView) {
 	_pListView.onCreateChild = function () {
 	};
 
-	_pComplexComponent._initOverflow = function () {
+	_pListView._initOverflow = function () {
 		if (this._is_scrollable) {
 			this._use_native_scroll = false;
 			this._use_translate_scroll = true;
@@ -980,6 +974,7 @@ if (!nexacro.ListView) {
 					var rowidx, bandidx = curband;
 
 					rowidx = this._findNextSelectIndex(nexacro.Event.KEY_RIGHT);
+
 					if (currow == rowidx) {
 						return;
 					}
@@ -1020,6 +1015,7 @@ if (!nexacro.ListView) {
 					var rowidx, bandidx = curband;
 
 					rowidx = this._findNextSelectIndex(nexacro.Event.KEY_LEFT);
+
 					if (currow == rowidx) {
 						return;
 					}
@@ -1065,6 +1061,7 @@ if (!nexacro.ListView) {
 					}
 					else {
 						rowidx = this._findNextSelectIndex(nexacro.Event.KEY_UP);
+
 						if (currow == rowidx) {
 							return;
 						}
@@ -1112,6 +1109,7 @@ if (!nexacro.ListView) {
 					}
 					else {
 						rowidx = this._findNextSelectIndex(nexacro.Event.KEY_DOWN);
+
 						if (currow == rowidx) {
 							return;
 						}
@@ -1141,9 +1139,6 @@ if (!nexacro.ListView) {
 		if (cell) {
 			cell._setFocus(false);
 		}
-		else {
-			;
-		}
 	};
 
 	_pListView._moveToCellPageup = function () {
@@ -1152,9 +1147,6 @@ if (!nexacro.ListView) {
 
 		if (cell) {
 			cell._setFocus(false);
-		}
-		else {
-			;
 		}
 	};
 
@@ -1219,8 +1211,6 @@ if (!nexacro.ListView) {
 	};
 
 	_pListView._selectItemKeyInfo = function (keycode, alt_key, ctrl_key, shift_key) {
-		var type = "";
-
 		switch (keycode) {
 			case nexacro.Event.KEY_DOWN:
 			case nexacro.Event.KEY_UP:
@@ -1229,9 +1219,8 @@ if (!nexacro.ListView) {
 			case nexacro.Event.KEY_PAGE_UP:
 			case nexacro.Event.KEY_PAGE_DOWN:
 				var select = this._findNextSelectIndex(keycode, alt_key, ctrl_key, shift_key);
-				var ckitem = this._getItem(select);
 
-				if (select == undefined || select == null || select < 0) {
+				if (select == null || select < 0) {
 					return false;
 				}
 
@@ -1239,13 +1228,8 @@ if (!nexacro.ListView) {
 					this.addSelect(select);
 				}
 
-				if (true) {
-					this.setSelect(select);
-				}
-
-				if (true) {
-					this._focusItem(select);
-				}
+				this.setSelect(select);
+				this._focusItem(select);
 
 				break;
 			case nexacro.Event.KEY_TAB:
@@ -1334,7 +1318,6 @@ if (!nexacro.ListView) {
 				return false;
 				break;
 		}
-		;
 
 		if ((keyCode >= 16 && keyCode <= 21) || (keyCode >= 33 && keyCode <= 40) || (keyCode >= 91 && keyCode <= 93) || (keyCode >= 112 && keyCode <= 123)) {
 			return false;
@@ -1355,6 +1338,10 @@ if (!nexacro.ListView) {
 		}
 
 		if (elem.isInputElement()) {
+			var pos = elem.getElementCaretPos();
+			var line = elem.getElementCaretLine();
+			var max_line;
+
 			if (elem.readonly == true) {
 				return false;
 			}
@@ -1363,8 +1350,6 @@ if (!nexacro.ListView) {
 				if (ctrlKey || shiftKey || altKey) {
 					return true;
 				}
-
-				var pos = elem.getElementCaretPos();
 
 				if ((pos && pos != -1) && pos.begin != 0) {
 					return true;
@@ -1375,7 +1360,6 @@ if (!nexacro.ListView) {
 					return true;
 				}
 
-				var pos = elem.getElementCaretPos();
 				var elem_val = elem.getElementValue();
 				var v = elem_val ? elem_val.length : 0;
 
@@ -1389,8 +1373,6 @@ if (!nexacro.ListView) {
 				}
 
 				if (elem.usemultiline) {
-					var line = elem.getElementCaretLine();
-
 					if (line != 1) {
 						return true;
 					}
@@ -1402,10 +1384,7 @@ if (!nexacro.ListView) {
 				}
 
 				if (elem.usemultiline) {
-					var line = elem.getElementCaretLine();
-					var comp = elem.parent.linkedcontrol;
-					var max_line = parseInt(comp._getLineCount());
-
+					max_line = parseInt(elem.parent.linkedcontrol._getLineCount());
 					if (line != max_line) {
 						return true;
 					}
@@ -1475,7 +1454,7 @@ if (!nexacro.ListView) {
 
 			if (origin_pos.y + origin_height + popup_height > win_h) {
 				if (origin_pos.y - popup_height >= 0) {
-					var post = -popup_height;
+					post = -popup_height;
 				}
 			}
 
@@ -1510,7 +1489,7 @@ if (!nexacro.ListView) {
 	_pListView.on_notify_popup_onclose = function (popupindex, startindex, startlevel) {
 		var panel = this._getPanel();
 		if (panel) {
-			var slot = panel ? panel._getPanelSlot(startindex) : null;
+			var slot = panel._getPanelSlot(startindex);
 			if (slot) {
 				var bandstatus = slot._getSlotStatusBand();
 
@@ -1681,9 +1660,11 @@ if (!nexacro.ListView) {
 
 	_pListView._onGetContextDataNull = function (index) {
 		if (this._formats) {
+			var bandchild;
+
 			var ctxt = this._onGetContextDataBand(this._formats._null_bands, index);
 			if (ctxt && ctxt[0]) {
-				var bandchild = ctxt[0]._items;
+				bandchild = ctxt[0]._items;
 			}
 			else {
 				var tmp = new nexacro._Formats();
@@ -1697,10 +1678,9 @@ if (!nexacro.ListView) {
 				tmp._makeAutoBands();
 
 				var item = tmp._getItem("default");
-				var ctxt = [item._getBand("null", false)];
-				var bandchild = item._getBandChilds("null");
 
-				delete tmp;
+				ctxt = [item._getBand("null", false)];
+				bandchild = item._getBandChilds("null");
 			}
 
 			if (bandchild && bandchild[0]) {
@@ -1734,7 +1714,9 @@ if (!nexacro.ListView) {
 		}
 
 		var cell1_x, cell1_y, cell2, cell2_x, cell2_y;
-		var idx = cell._cellidx;
+
+		var i, n;
+		var dir;
 		var diridx = (direction == "l" || direction == "r") ? 0 : 1;
 		var min = Infinity;
 		var same = null;
@@ -1743,8 +1725,8 @@ if (!nexacro.ListView) {
 		cell1_x = cell._adjust_left + (cell._adjust_width / 2);
 		cell1_y = cell._adjust_top + (cell._adjust_height / 2);
 
-		for (var j = 0, n = cells.length; j < n; j++) {
-			cell2 = cells[j];
+		for (i = 0, n = cells.length; i < n; i++) {
+			cell2 = cells[i];
 			cell2_x = cell2._adjust_left + (cell2._adjust_width / 2);
 			cell2_y = cell2._adjust_top + (cell2._adjust_height / 2);
 
@@ -1765,7 +1747,7 @@ if (!nexacro.ListView) {
 
 			var result = this._calcCellAngleDistance(cell1_x, cell1_y, cell2_x, cell2_y);
 
-			result.idx = j;
+			result.idx = i;
 			result.x = cell2_x;
 			result.y = cell2_y;
 
@@ -1778,33 +1760,33 @@ if (!nexacro.ListView) {
 					min = result.distance;
 				}
 				else if (min == result.distance) {
-					same.push(result);
+					if (same) {
+						same.push(result);
+					}
 				}
 			}
 		}
 
-		var neer;
-
 		if (same) {
-			neer = Infinity;
+			var neer = Infinity;
 
 			if (diridx == 0) {
-				for (var j = 0, nn = same.length; j < nn; j++) {
-					var h = Math.abs(same[j].y - cell1_y);
+				for (i = 0, n = same.length; i < n; i++) {
+					var h = Math.abs(same[i].y - cell1_y);
 
 					if (neer > h) {
 						neer = h;
-						key_direction = same[j].idx;
+						key_direction = same[i].idx;
 					}
 				}
 			}
 			else {
-				for (var j = 0, nn = same.length; j < nn; j++) {
-					var w = Math.abs(same[j].x - cell1_x);
+				for (i = 0, n = same.length; i < n; i++) {
+					var w = Math.abs(same[i].x - cell1_x);
 
 					if (neer > w) {
 						neer = w;
-						key_direction = same[j].idx;
+						key_direction = same[i].idx;
 					}
 				}
 			}
@@ -1823,8 +1805,10 @@ if (!nexacro.ListView) {
 			return;
 		}
 
+		var i, j, k, n, nn;
+		var w, h;
 		var cell1, cell1_x, cell1_y, cell2, cell2_x, cell2_y;
-		for (var i = 0, n = cells.length; i < n; i++) {
+		for (i = 0, n = cells.length; i < n; i++) {
 			var key_direction = {
 				left : -1, 
 				up : -1, 
@@ -1848,7 +1832,7 @@ if (!nexacro.ListView) {
 			cell1_x = cell1._adjust_left + (cell1._adjust_width / 2);
 			cell1_y = cell1._adjust_top + (cell1._adjust_height / 2);
 
-			for (var j = 0; j < n; j++) {
+			for (j = 0; j < n; j++) {
 				if (i == j) {
 					continue;
 				}
@@ -1863,7 +1847,7 @@ if (!nexacro.ListView) {
 				result.x = cell2_x;
 				result.y = cell2_y;
 
-				for (var k = 0; k < 2; k++) {
+				for (k = 0; k < 2; k++) {
 					var dir = result.direction[k];
 					if (dir != undefined) {
 						if (min[dir] > result.distance) {
@@ -1882,8 +1866,8 @@ if (!nexacro.ListView) {
 
 			if (same["l"]) {
 				neer = Infinity;
-				for (var j = 0, nn = same["l"].length; j < nn; j++) {
-					var h = Math.abs(same["l"][j].y - cell1_y);
+				for (j = 0, nn = same["l"].length; j < nn; j++) {
+					h = Math.abs(same["l"][j].y - cell1_y);
 
 					if (neer > h) {
 						neer = h;
@@ -1894,8 +1878,8 @@ if (!nexacro.ListView) {
 
 			if (same["t"]) {
 				neer = Infinity;
-				for (var j = 0, nn = same["t"].length; j < nn; j++) {
-					var w = Math.abs(same["t"][j].x - cell1_x);
+				for (j = 0, nn = same["t"].length; j < nn; j++) {
+					w = Math.abs(same["t"][j].x - cell1_x);
 
 					if (neer > w) {
 						neer = w;
@@ -1906,8 +1890,8 @@ if (!nexacro.ListView) {
 
 			if (same["r"]) {
 				neer = Infinity;
-				for (var j = 0, nn = same["r"].length; j < nn; j++) {
-					var h = Math.abs(same["r"][j].y - cell1_y);
+				for (j = 0, nn = same["r"].length; j < nn; j++) {
+					h = Math.abs(same["r"][j].y - cell1_y);
 
 					if (neer > h) {
 						neer = h;
@@ -1918,8 +1902,8 @@ if (!nexacro.ListView) {
 
 			if (same["b"]) {
 				neer = Infinity;
-				for (var j = 0, nn = same["b"].length; j < nn; j++) {
-					var w = Math.abs(same["b"][j].x - cell1_x);
+				for (j = 0, nn = same["b"].length; j < nn; j++) {
+					w = Math.abs(same["b"][j].x - cell1_x);
 
 					if (neer > w) {
 						neer = w;
@@ -2148,13 +2132,12 @@ if (!nexacro.ListView) {
 			var prevc = this._getItemScrollPrevCount();
 			var nextc = this._getItemScrollNextCount();
 
-			var overc = 0;
+			var overc;
 
 			if (pos >= 0 && viewc >= 0) {
 				var newps = this._calcItemScrollViewStart(pos, cn, co, rowfirst);
 
 				var diffc = newps - start;
-
 				if (diffc == 0) {
 					return 0;
 				}
@@ -2180,6 +2163,7 @@ if (!nexacro.ListView) {
 							prevc = 0;
 						}
 					}
+
 					if (nextc < viewc) {
 						prevc = viewc;
 						nextc = viewc;
@@ -2232,7 +2216,6 @@ if (!nexacro.ListView) {
 				overc = (index + count) - fullc;
 
 				if (overc > 0) {
-					count -= overc;
 					nextc -= overc;
 					if (nextc < 0) {
 						nextc = 0;
@@ -2284,7 +2267,7 @@ if (!nexacro.ListView) {
 			slotindex = (!start || start < 0) ? baseindex : Math.max(baseindex + start - prevc, 0);
 			slotcount = (!count || count < 0) ? bindcount : Math.min(slotindex + count + prevc + nextc, bindcount);
 
-			for (var i = 0, j = 0; i < bindcount; i++) {
+			for (var i = 0; i < bindcount; i++) {
 				slot = panel._getPanelSlot(i);
 				slot_empty = !slot._isNonEmptyTarget(slot._getSlotTarget());
 				if (!slot_empty) {
@@ -2370,20 +2353,16 @@ if (!nexacro.ListView) {
 			return;
 		}
 
-		switch (action) {
-			case "trackwheel":
-				if (true) {
-					manager._callbackReady(this, this._callbackReady, true);
-				}
-				break;
-			default:
-				if (usecover) {
-					manager._actionReady(action, this, this._callbackReady);
-				}
-				else {
-					manager._callbackReady(this, this._callbackReady, true);
-				}
-				break;
+		if (action == "trackwheel") {
+			manager._callbackReady(this, this._callbackReady, true);
+		}
+		else {
+			if (usecover) {
+				manager._actionReady(action, this, this._callbackReady);
+			}
+			else {
+				manager._callbackReady(this, this._callbackReady, true);
+			}
 		}
 	};
 
@@ -2406,7 +2385,7 @@ if (!nexacro.ListView) {
 	_pListView._callbackApper = function (over) {
 		if (this._use_partitem) {
 			if (over === undefined) {
-				var over = this._isRowFirst() ? 
+				over = this._isRowFirst() ? 
 					this._calcItemScrollInfo(this._scrollmanager && this._scrollmanager.hscrollinfo ? this._scrollmanager.hscrollinfo.pos : this._hscroll_pos, true) : 
 					this._calcItemScrollInfo(this._scrollmanager && this._scrollmanager.vscrollinfo ? this._scrollmanager.vscrollinfo.pos : this._vscroll_pos, false);
 			}
@@ -2446,9 +2425,7 @@ if (!nexacro.ListView) {
 				this._makePanelItemSlot(items, viewstart, viewcount, prevcount, nextcount, -2, rowfirst);
 			}
 
-			if (true) {
-				this._makePanelItemSlot(items, viewstart, viewcount, prevcount, nextcount, 0, rowfirst);
-			}
+			this._makePanelItemSlot(items, viewstart, viewcount, prevcount, nextcount, 0, rowfirst);
 
 			this._resetLayoutTrack();
 			this._resetScrollStatus();
@@ -2554,8 +2531,6 @@ if (!nexacro.ListView) {
 	};
 
 	_pListView._on_finish_onvscroll = function (obj, info) {
-		var usecover = this.showcover;
-
 		switch (info.type) {
 			case "track":
 			case "trackstart":
@@ -2802,6 +2777,7 @@ if (!nexacro.ListView) {
 			var tmpband, tmpcell;
 			var oldrow, oldbandid, oldcellid;
 			var row, bandid, cellid;
+			var selectstartrow, selectendrow;
 
 			if (oldvalue) {
 				tmpband = this._getCurrentBand(oldvalue.row, oldvalue.band);
@@ -2952,11 +2928,6 @@ if (!nexacro.ListView) {
 		this._enable = v;
 
 		var items = this._getItems();
-
-		if (!items) {
-			return;
-		}
-
 		var count = items.length;
 		if (items && count) {
 			for (var i = 0; i < count; i++) {
@@ -3029,9 +3000,7 @@ if (!nexacro.ListView) {
 
 
 	_pListView._onResetSysStatus = function () {
-		if (true) {
-			this._onResetSysEnable();
-		}
+		this._onResetSysEnable();
 
 		if (this._use_readonly_status) {
 			this._onResetSysReadOnly();
@@ -3045,19 +3014,25 @@ if (!nexacro.ListView) {
 	};
 
 	_pListView._onResetUserSelected = function () {
+		var i, j;
+		var item;
+		var items = this._getItems();
+		var items_len = items.length;
+
 		var currselect = this.getSelect();
 		if (currselect.row == this._DEFAULT_ROWINDEX) {
 			var rowidx = this._getBindCurrentPos();
 			if (rowidx > -1) {
+				var band, cell;
 				var bandidx = -1;
 				var cellidx = -1;
 
-				var item = this._getItem(rowidx);
+				item = this._getItem(rowidx);
 				if (nexacro._isArray(item)) {
-					for (var i = 0; i < item.length; i++) {
-						var band = this._getCurrentBand(rowidx, i);
+					for (i = 0; i < item.length; i++) {
+						band = this._getCurrentBand(rowidx, i);
 						if (band) {
-							var cell = this._findEditableCell(band, 0, 1);
+							cell = this._findEditableCell(band, 0, 1);
 							if (cell) {
 								bandidx = band._itemsubidx;
 								cellidx = cell._cellidx;
@@ -3067,11 +3042,11 @@ if (!nexacro.ListView) {
 					}
 				}
 				else {
-					var band = this._getCurrentBand(rowidx, 0);
+					band = this._getCurrentBand(rowidx, 0);
 					if (band) {
 						bandidx = band._itemsubidx;
 
-						var cell = this._findEditableCell(band, 0, 1);
+						cell = this._findEditableCell(band, 0, 1);
 						if (cell) {
 							cellidx = cell._cellidx;
 						}
@@ -3088,26 +3063,26 @@ if (!nexacro.ListView) {
 			return;
 		}
 
-		var items = this._getItems();
-		if (items.length) {
-			for (var i = 0, l = items.length, item; i < l; i++) {
-				if (item = items[i]) {
-					if (item._rowidx == currselect.row) {
-						item._changeUserStatus("selected", this._onCheckSelectable() ? true : false);
-					}
-					else {
-						item._changeUserStatus("selected", false);
-					}
+		for (i = 0; i < items_len; i++) {
+			item = items[i];
+			if (item) {
+				if (item._rowidx == currselect.row) {
+					item._changeUserStatus("selected", this._onCheckSelectable() ? true : false);
+				}
+				else {
+					item._changeUserStatus("selected", false);
+				}
 
-					var children = item._getChildren();
-					for (var n = 0, m = children.length, child; n < m; n++) {
-						if (child = children[n]) {
-							if (item._rowidx == currselect.row && item._itemsubidx == currselect.band && child._cellidx == currselect.cell) {
-								child.selected = true;
-							}
-							else {
-								child.selected = false;
-							}
+				var children = item._getChildren();
+				var children_len = children.length;
+				for (j = 0; j < children_len; j++) {
+					var child = children[j];
+					if (child) {
+						if (item._rowidx == currselect.row && item._itemsubidx == currselect.band && child._cellidx == currselect.cell) {
+							child.selected = true;
+						}
+						else {
+							child.selected = false;
 						}
 					}
 				}
@@ -3119,16 +3094,18 @@ if (!nexacro.ListView) {
 		nexacro.Component.prototype.on_update_position.call(this, resize_flag, move_flag, update);
 
 		if (this._is_created) {
-			var vscrollpos = this._getViewStartScrollPos();
+			if (resize_flag || move_flag || update) {
+				var vscrollpos = this._getViewStartScrollPos();
 
-			this._recreateItems();
+				this._recreateItems();
 
-			this.scrollTo(0, vscrollpos);
-			this._updateItemVScrollInfo(vscrollpos, "trackinit", true);
+				this.scrollTo(0, vscrollpos);
+				this._updateItemVScrollInfo(vscrollpos, "trackinit", true);
 
-			var cell = this._getCurrentCell();
-			if (cell && cell._editor && cell._editor._isPopupVisible()) {
-				cell._editor.on_update_position(resize_flag, move_flag, update);
+				var cell = this._getCurrentCell();
+				if (cell && cell._editor && cell._editor._isPopupVisible()) {
+					cell._editor.on_update_position(resize_flag, move_flag, update);
+				}
 			}
 		}
 	};
@@ -3323,9 +3300,11 @@ if (!nexacro.ListView) {
 			var nullctrl = this._getItemChildById(0, "nullband", "nullctrl");
 			var nullctxt = this._getCtxtData(-4);
 			if (nullctrl && nullctxt) {
+				var child;
+
 				if (nexacro._isArray(nullctxt)) {
 					for (var i in nullctxt) {
-						var child = nullctxt[i]._items[0];
+						child = nullctxt[i]._items[0];
 						if (child) {
 							child["text"] = this.nodatatext;
 
@@ -3336,7 +3315,7 @@ if (!nexacro.ListView) {
 					}
 				}
 				else {
-					var child = nullctxt._items[0];
+					child = nullctxt._items[0];
 					if (child) {
 						child["text"] = this.nodatatext;
 
@@ -3369,11 +3348,14 @@ if (!nexacro.ListView) {
 			var nullctrl = this._getItemChildById(0, "nullband", "nullctrl");
 			var nullctxt = this._getCtxtData(-4);
 			if (nullctrl && nullctxt) {
+				var child;
+
 				if (nexacro._isArray(nullctxt)) {
 					for (var i in nullctxt) {
-						var child = nullctxt[i]._items[0];
+						child = nullctxt[i]._items[0];
 						if (child) {
 							child["background"] = "transparent " + this.nodataimage + " center center no-repeat";
+
 							if (child._setts["background"]) {
 								child._setts["background"].call(nullctrl, child["background"]);
 							}
@@ -3381,9 +3363,10 @@ if (!nexacro.ListView) {
 					}
 				}
 				else {
-					var child = nullctxt._items[0];
+					child = nullctxt._items[0];
 					if (child) {
 						child["background"] = "transparent " + this.nodataimage + " center center no-repeat";
+
 						if (child._setts["background"]) {
 							child._setts["background"].call(nullctrl, child["background"]);
 						}
@@ -3420,12 +3403,13 @@ if (!nexacro.ListView) {
 	};
 
 	_pListView.set_selecttype = function (v) {
+		var type_enum = ["datarow"];
+		if (type_enum.indexOf(v) == -1) {
+			return;
+		}
+
 		if (this.selecttype != v) {
-			switch (v) {
-				case "datarow":
-					this.selecttype = v;
-					break;
-			}
+			this.selecttype = v;
 		}
 	};
 
@@ -3766,25 +3750,25 @@ if (!nexacro.ListView) {
 	};
 
 	_pListView.makeFormatString = function () {
-		function _makeFormatStringByCol (type, name, colinfo, bindable, l, t, w, h, r, b) {
+		var _makeFormatStringByCol = function (type, name, colinfo, bindable, l, t, w, h, r, b) {
 			var fmt = "<" + type + " id=\"" + name + "\"";
 
-			if (l != undefined || l != null) {
+			if (l != null) {
 				fmt += " left=\"" + l + "\"";
 			}
-			if (r != undefined || r != null) {
+			if (r != null) {
 				fmt += " right=\"" + r + "\"";
 			}
-			if (t != undefined || t != null) {
+			if (t != null) {
 				fmt += " top=\"" + t + "\"";
 			}
-			if (b != undefined || b != null) {
+			if (b != null) {
 				fmt += " bottom=\"" + b + "\"";
 			}
-			if (w != undefined || w != null) {
+			if (w != null) {
 				fmt += " width=\"" + w + "\"";
 			}
-			if (h != undefined || h != null) {
+			if (h != null) {
 				fmt += " height=\"" + h + "\"";
 			}
 
@@ -3797,14 +3781,16 @@ if (!nexacro.ListView) {
 			fmt += "/>";
 
 			return fmt;
-		}
-		;
+		};
 
 		var ret = "";
 
 		var formats = this._formats;
 		var data = this._databind;
 		if (formats && data) {
+			ret += "<Formats>";
+			ret += "<Format id=\"" + formats._default_id + "\">";
+
 			var bandformat = "";
 			var cellformat = "";
 
@@ -3815,8 +3801,6 @@ if (!nexacro.ListView) {
 
 				var l = 0;
 				var t = 5;
-				var w = 0;
-				var h = 0;
 
 				var contents_h = 24;
 
@@ -3829,8 +3813,6 @@ if (!nexacro.ListView) {
 				var contents_w = label_gap + label_w + editor_gap + editor_w;
 
 				var target_w = this._adjust_width;
-				var target_h = this._adjust_height;
-
 
 				var colinfo, cellname, labelname;
 				var cellcnt = 0;
@@ -3864,13 +3846,12 @@ if (!nexacro.ListView) {
 				}
 
 				bandformat = "<" + bandtype + " id=\"body\" width=\"100%\" height=\"" + (t + contents_h + line_gap) + "\">";
+
+				ret += bandformat;
+				ret += cellformat;
+				ret += "</" + bandtype + ">";
 			}
 
-			ret += "<Formats>";
-			ret += "<Format id=\"" + formats._default_id + "\">";
-			ret += bandformat;
-			ret += cellformat;
-			ret += "</" + bandtype + ">";
 			ret += "</Format>";
 			ret += "</Formats>";
 		}
@@ -3929,18 +3910,19 @@ if (!nexacro.ListView) {
 	_pListView.getCellRect = function (rowindex, bandid, cellid) {
 		rowindex = parseInt(rowindex);
 
+		var rect = {
+			left : 0, 
+			top : 0, 
+			right : 0, 
+			bottom : 0, 
+			width : 0, 
+			height : 0
+		};
+
 		var child = this._getItemChildById(rowindex, bandid, cellid);
 		if (child) {
 			var subindex = child._bandidx;
 			var base = this._onGetItemRect(rowindex, subindex, null, true);
-			var rect = {
-				left : 0, 
-				top : 0, 
-				right : 0, 
-				bottom : 0, 
-				width : 0, 
-				height : 0
-			};
 
 			rect.left = child.getOffsetLeft() + base.left;
 			rect.top = child.getOffsetTop() + base.top;
@@ -3995,30 +3977,38 @@ if (!nexacro.ListView) {
 		var currselect = this.getSelect();
 		var cell = this._getItemChildByIndex(currselect.row, currselect.band, currselect.cell);
 
-		if (cell && cell._hasEditor()) {
-			if (show === undefined) {
-				show = true;
+		if (cell) {
+			if (cell._hasEditor()) {
+				if (show === undefined) {
+					show = true;
+				}
+				else {
+					show = nexacro._toBoolean(show);
+				}
+
+				if (cell._isShowEditor() == show) {
+					return false;
+				}
+
+				if (show) {
+					if (cell._showEditor) {
+						cell._showEditor();
+					}
+				}
+				else {
+					if (cell._hideEditor) {
+						cell._hideEditor();
+					}
+				}
+
+				return true;
 			}
 			else {
-				show = nexacro._toBoolean(show);
-			}
-
-			if (cell._isShowEditor() == show) {
-				return false;
-			}
-
-			if (show) {
-				if (cell._showEditor) {
-					cell._showEditor();
+				var edittype = cell._refinfo._getEdittype(currselect.row);
+				if (edittype == "checkbox") {
+					return true;
 				}
 			}
-			else {
-				if (cell._hideEditor) {
-					cell._hideEditor();
-				}
-			}
-
-			return true;
 		}
 
 		return false;
@@ -4034,9 +4024,8 @@ if (!nexacro.ListView) {
 		if (beforeselect.row != afterselect.row || beforeselect.band != afterselect.band || beforeselect.cell != afterselect.cell) {
 			return true;
 		}
-		else {
-			return false;
-		}
+
+		return false;
 	};
 
 	_pListView.moveToPrevCell = function () {
@@ -4049,9 +4038,8 @@ if (!nexacro.ListView) {
 		if (beforeselect.row != afterselect.row || beforeselect.band != afterselect.band || beforeselect.cell != afterselect.cell) {
 			return true;
 		}
-		else {
-			return false;
-		}
+
+		return false;
 	};
 
 	_pListView.setCellPos = function (bandid, cellid) {
@@ -4060,9 +4048,8 @@ if (!nexacro.ListView) {
 		if (cell && cell._isEnable() && cell.setFocus()) {
 			return true;
 		}
-		else {
-			return false;
-		}
+
+		return false;
 	};
 
 	_pListView.hideDetailBand = function (rowindex) {
@@ -4275,38 +4262,35 @@ if (!nexacro.ListView) {
 		var selrow = selects.row;
 		var retn = [];
 
-		retn.push(selrow);
+		if (selrow > -1) {
+			retn.push(selrow);
+		}
 
 		return retn;
 	};
 
 	_pListView.getBindCellId = function (enumBand, strColID) {
 		var format = this._formats;
-
-		if (!format) {
-			return "";
-		}
-
-		var formatitems = format._getItem();
-
+		var formatitems = format ? format._getItem() : null;
 		if (!formatitems || !strColID) {
 			return "";
 		}
 
 		enumBand = enumBand.toLowerCase();
 		var bindCells = formatitems._getBinds();
-		if (enumBand == "body" && bindCells) {
-			var _bindcellsLen = bindCells.length;
-			var cellinfo;
+		if (bindCells) {
+			var i, cellinfo;
+			var bindCells_len = bindCells.length;
 
-			for (var i = 0; i < _bindcellsLen; i++) {
+			for (i = 0; i < bindCells_len; i++) {
 				cellinfo = bindCells[i];
 
-				if (cellinfo.baseid == "body" && cellinfo.bindid == strColID) {
+				if (cellinfo.baseid == enumBand && cellinfo.bindid == strColID) {
 					return cellinfo.target[0];
 				}
 			}
 		}
+
 		return "";
 	};
 
@@ -4387,7 +4371,7 @@ if (!nexacro.ListView) {
 
 		var showEditclick = false;
 		if (!(itemcell instanceof nexacro._ListViewCellControl)) {
-			var obj = itemcell;
+			obj = itemcell;
 			while (obj && !(obj instanceof nexacro._ListViewBandControl)) {
 				if (obj.parent instanceof nexacro._ListViewCellControl) {
 					if (obj._displaymode == false && !obj._clickevt_able) {
@@ -4414,15 +4398,13 @@ if (!nexacro.ListView) {
 	_pListView.on_notify_band_ondblclick = function (obj, e) {
 		var item = this._getActionItem(e);
 		var itemindex = this._getItemIndex(item);
-		var itemsubindex = this._getItemSubIndex(item);
 		var itembandid = this._getItemId(item);
 		var itemcell = this._getActionItemCell(e);
 		var itemcellid = item ? item._getChildId(itemcell) : "";
-		var itemcellindex = item ? item._findChildIndex(itemcell) : this._DEFAULT_CELLINDEX;
 
 		var showEditclick = false;
 		if (!(itemcell instanceof nexacro._ListViewCellControl)) {
-			var obj = itemcell;
+			obj = itemcell;
 			while (obj && !(obj instanceof nexacro._ListViewBandControl)) {
 				if (obj.parent instanceof nexacro._ListViewCellControl) {
 					if (obj._displaymode == false && !obj._clickevt_able) {
@@ -4431,7 +4413,6 @@ if (!nexacro.ListView) {
 
 					itemcell = obj.parent;
 					itemcellid = item ? item._getChildId(itemcell) : "";
-					itemcellindex = item ? item._findChildIndex(itemcell) : this._DEFAULT_CELLINDEX;
 					break;
 				}
 
@@ -4449,7 +4430,6 @@ if (!nexacro.ListView) {
 		var itemindex = this._getItemIndex(item);
 		var itemsubindex = this._getItemSubIndex(item);
 		var itemcell = this._getActionItemCell(e);
-		var itemcellid = item ? item._getChildId(itemcell) : "";
 		var itemcellindex = item ? item._findChildIndex(itemcell) : this._DEFAULT_CELLINDEX;
 
 		this._actionSelectItem(itemindex, itemsubindex, itemcellindex, itemcellindex >= 0 ? "cellfocus" : "bandfocus");
@@ -4515,16 +4495,16 @@ if (!nexacro.ListView) {
 		if (self_flag) {
 			switch (evt_name) {
 				case "tabkey":
-					var info = this._getFirstEditableCell();
-					if (info.row >= 0) {
-						this._actionSelectItem(info.row, info.band, info.cell, "tabfocus");
+					var firstcell = this._getFirstEditableCell();
+					if (firstcell.row >= 0) {
+						this._actionSelectItem(firstcell.row, firstcell.band, firstcell.cell, "tabfocus");
 					}
 					this._acceptstab = this._remainEditableCell(1);
 					break;
 				case "shifttabkey":
-					var info = this._getLastEditableCell();
-					if (info.row >= 0) {
-						this._actionSelectItem(info.row, info.band, info.cell, "tabfocus");
+					var lastcell = this._getLastEditableCell();
+					if (lastcell.row >= 0) {
+						this._actionSelectItem(lastcell.row, lastcell.band, lastcell.cell, "tabfocus");
 					}
 					this._acceptstab = this._remainEditableCell(-1);
 					break;
@@ -4533,7 +4513,7 @@ if (!nexacro.ListView) {
 	};
 
 	_pListView.on_lbuttondown_basic_action = function (elem, button, alt_key, ctrl_key, shift_key, canvasX, canvasY, screenX, screenY, refer_comp) {
-		var ret = nexacro.ComplexComponent.prototype.on_lbuttondown_basic_action.call(this, elem, button, alt_key, ctrl_key, shift_key, canvasX, canvasY, screenX, screenY, refer_comp);
+		nexacro.ComplexComponent.prototype.on_lbuttondown_basic_action.call(this, elem, button, alt_key, ctrl_key, shift_key, canvasX, canvasY, screenX, screenY, refer_comp);
 
 		var cell = nexacro._ListViewCellControl.prototype._getActionCell(refer_comp);
 
@@ -4543,7 +4523,7 @@ if (!nexacro.ListView) {
 	};
 
 	_pListView.on_lbuttonup_basic_action = function (elem, button, alt_key, ctrl_key, shift_key, canvasX, canvasY, screenX, screenY, refer_comp) {
-		var ret = nexacro.ComplexComponent.prototype.on_lbuttonup_basic_action.call(this, elem, button, alt_key, ctrl_key, shift_key, canvasX, canvasY, screenX, screenY, refer_comp);
+		nexacro.ComplexComponent.prototype.on_lbuttonup_basic_action.call(this, elem, button, alt_key, ctrl_key, shift_key, canvasX, canvasY, screenX, screenY, refer_comp);
 
 		var cell = nexacro._ListViewCellControl.prototype._getActionCell(refer_comp);
 		if (cell) {
@@ -4572,6 +4552,8 @@ if (!nexacro.ListView) {
 	};
 
 	_pListView.on_fire_onclick = function (button, alt_key, ctrl_key, shift_key, screenX, screenY, canvasX, canvasY, clientX, clientY, from_comp, from_refer_comp, itemindex, itembandid, itemcellid, itemcell, clickitem) {
+		var evt;
+
 		var canvas = this._getRecalcCanvasXY(from_refer_comp._control_element, canvasX, canvasY);
 		canvasX = canvas[0];
 		canvasY = canvas[1];
@@ -4582,7 +4564,7 @@ if (!nexacro.ListView) {
 
 		if (clickitem == "expandbutton") {
 			if (this.oncellexpandclick && this.oncellexpandclick._has_handlers) {
-				var evt = new nexacro.ListViewClickEventInfo(this, "oncellexpandclick", button, alt_key, ctrl_key, shift_key, screenX, screenY, canvasX, canvasY, clientX, clientY, from_comp, from_refer_comp, itembandid || "none", itemcellid || "", itemindex, clickitem);
+				evt = new nexacro.ListViewClickEventInfo(this, "oncellexpandclick", button, alt_key, ctrl_key, shift_key, screenX, screenY, canvasX, canvasY, clientX, clientY, from_comp, from_refer_comp, itembandid || "none", itemcellid || "", itemindex, clickitem);
 				return this.oncellexpandclick._fireEvent(this, evt);
 			}
 		}
@@ -4600,7 +4582,7 @@ if (!nexacro.ListView) {
 			}
 
 			if (this.oncellclick && this.oncellclick._has_handlers) {
-				var evt = new nexacro.ListViewClickEventInfo(this, "oncellclick", button, alt_key, ctrl_key, shift_key, screenX, screenY, canvasX, canvasY, clientX, clientY, from_comp, from_refer_comp, itembandid || "none", itemcellid || "", itemindex, clickitem);
+				evt = new nexacro.ListViewClickEventInfo(this, "oncellclick", button, alt_key, ctrl_key, shift_key, screenX, screenY, canvasX, canvasY, clientX, clientY, from_comp, from_refer_comp, itembandid || "none", itemcellid || "", itemindex, clickitem);
 				return this.oncellclick._fireEvent(this, evt);
 			}
 			return true;
@@ -4608,7 +4590,7 @@ if (!nexacro.ListView) {
 
 		if (itemcell instanceof nexacro.Button && itemcellid == "expandbar") {
 			if (this.onbandexpandclick && this.onbandexpandclick._has_handlers) {
-				var evt = new nexacro.ListViewClickEventInfo(this, "onbandexpandclick", button, alt_key, ctrl_key, shift_key, screenX, screenY, canvasX, canvasY, clientX, clientY, from_comp, from_refer_comp, itembandid || "none", itemcellid, itemindex, clickitem);
+				evt = new nexacro.ListViewClickEventInfo(this, "onbandexpandclick", button, alt_key, ctrl_key, shift_key, screenX, screenY, canvasX, canvasY, clientX, clientY, from_comp, from_refer_comp, itembandid || "none", itemcellid, itemindex, clickitem);
 				return this.onbandexpandclick._fireEvent(this, evt);
 			}
 			return true;
@@ -4616,29 +4598,29 @@ if (!nexacro.ListView) {
 
 		if (itemindex >= 0) {
 			if (this.onbandclick && this.onbandclick._has_handlers) {
-				var evt = new nexacro.ListViewClickEventInfo(this, "onbandclick", button, alt_key, ctrl_key, shift_key, screenX, screenY, canvasX, canvasY, clientX, clientY, from_comp, from_refer_comp, itembandid || "none", "", itemindex, clickitem);
+				evt = new nexacro.ListViewClickEventInfo(this, "onbandclick", button, alt_key, ctrl_key, shift_key, screenX, screenY, canvasX, canvasY, clientX, clientY, from_comp, from_refer_comp, itembandid || "none", "", itemindex, clickitem);
 				return this.onbandclick._fireEvent(this, evt);
 			}
 		}
 		else if (itemindex == -1) {
 			if (this.onheadclick && this.onheadclick._has_handlers) {
-				var evt = new nexacro.ListViewClickEventInfo(this, "onheadclick", button, alt_key, ctrl_key, shift_key, screenX, screenY, canvasX, canvasY, clientX, clientY, from_comp, from_refer_comp, itembandid || "none", "", -1, clickitem);
+				evt = new nexacro.ListViewClickEventInfo(this, "onheadclick", button, alt_key, ctrl_key, shift_key, screenX, screenY, canvasX, canvasY, clientX, clientY, from_comp, from_refer_comp, itembandid || "none", "", -1, clickitem);
 				return this.onheadclick._fireEvent(this, evt);
 			}
 		}
-		else if (itemindex == undefined || itemindex == null || itemindex == -4) {
+		else if (itemindex == null || itemindex == -4) {
 			var cw = this._getClientWidth();
 			var ch = this._getClientHeight();
 
 			if (clientX < 0 || clientY < 0 || clientX > cw || clientY > ch) {
 				if (this.onclick && this.onclick._has_handlers) {
-					var evt = new nexacro.ListViewClickEventInfo(this, "onclick", button, alt_key, ctrl_key, shift_key, screenX, screenY, canvasX, canvasY, clientX, clientY, from_comp, from_refer_comp, "none", "", this._DEFAULT_ROWINDEX, clickitem);
+					evt = new nexacro.ListViewClickEventInfo(this, "onclick", button, alt_key, ctrl_key, shift_key, screenX, screenY, canvasX, canvasY, clientX, clientY, from_comp, from_refer_comp, "none", "", this._DEFAULT_ROWINDEX, clickitem);
 					return this.onclick._fireEvent(this, evt);
 				}
 			}
 			else {
 				if (this.onnodataareaclick && this.onnodataareaclick._has_handlers) {
-					var evt = new nexacro.ListViewClickEventInfo(this, "onnodataareaclick", button, alt_key, ctrl_key, shift_key, screenX, screenY, canvasX, canvasY, clientX, clientY, from_comp, from_refer_comp, "none", "", this._DEFAULT_ROWINDEX, clickitem);
+					evt = new nexacro.ListViewClickEventInfo(this, "onnodataareaclick", button, alt_key, ctrl_key, shift_key, screenX, screenY, canvasX, canvasY, clientX, clientY, from_comp, from_refer_comp, "none", "", this._DEFAULT_ROWINDEX, clickitem);
 					return this.onnodataareaclick._fireEvent(this, evt);
 				}
 			}
@@ -4648,6 +4630,8 @@ if (!nexacro.ListView) {
 	};
 
 	_pListView.on_fire_ondblclick = function (button, alt_key, ctrl_key, shift_key, screenX, screenY, canvasX, canvasY, clientX, clientY, from_comp, from_refer_comp, itemindex, itembandid, itemcellid, itemcell, clickitem) {
+		var evt;
+
 		var canvas = this._getRecalcCanvasXY(from_refer_comp._control_element, canvasX, canvasY);
 		canvasX = canvas[0];
 		canvasY = canvas[1];
@@ -4658,25 +4642,25 @@ if (!nexacro.ListView) {
 
 		if (itemcell instanceof nexacro._ListViewCellControl) {
 			if (this.oncelldblclick && this.oncelldblclick._has_handlers) {
-				var evt = new nexacro.ListViewClickEventInfo(this, "oncelldblclick", button, alt_key, ctrl_key, shift_key, screenX, screenY, canvasX, canvasY, clientX, clientY, from_comp, from_refer_comp, itembandid || "none", itemcellid || "", itemindex, clickitem);
+				evt = new nexacro.ListViewClickEventInfo(this, "oncelldblclick", button, alt_key, ctrl_key, shift_key, screenX, screenY, canvasX, canvasY, clientX, clientY, from_comp, from_refer_comp, itembandid || "none", itemcellid || "", itemindex, clickitem);
 				return this.oncelldblclick._fireEvent(this, evt);
 			}
 		}
 		if (itemindex >= 0) {
 			if (this.onbanddblclick && this.onbanddblclick._has_handlers) {
-				var evt = new nexacro.ListViewClickEventInfo(this, "onbanddblclick", button, alt_key, ctrl_key, shift_key, screenX, screenY, canvasX, canvasY, clientX, clientY, from_comp, from_refer_comp, itembandid || "none", itemcellid || "", itemindex, clickitem);
+				evt = new nexacro.ListViewClickEventInfo(this, "onbanddblclick", button, alt_key, ctrl_key, shift_key, screenX, screenY, canvasX, canvasY, clientX, clientY, from_comp, from_refer_comp, itembandid || "none", "", itemindex, clickitem);
 				return this.onbanddblclick._fireEvent(this, evt);
 			}
 		}
 		if (itemindex == -1) {
 			if (this.onheaddblclick && this.onheaddblclick._has_handlers) {
-				var evt = new nexacro.ListViewClickEventInfo(this, "onheaddblclick", button, alt_key, ctrl_key, shift_key, screenX, screenY, canvasX, canvasY, clientX, clientY, from_comp, from_refer_comp, "none", "", this._DEFAULT_ROWINDEX, clickitem);
+				evt = new nexacro.ListViewClickEventInfo(this, "onheaddblclick", button, alt_key, ctrl_key, shift_key, screenX, screenY, canvasX, canvasY, clientX, clientY, from_comp, from_refer_comp, "none", "", this._DEFAULT_ROWINDEX, clickitem);
 				return this.onheaddblclick._fireEvent(this, evt);
 			}
 		}
-		if (itemindex == undefined || itemindex == null) {
+		if (itemindex == null) {
 			if (this.onnodataareadblclick && this.onnodataareadblclick._has_handlers) {
-				var evt = new nexacro.ListViewClickEventInfo(this, "onnodataareadblclick", button, alt_key, ctrl_key, shift_key, screenX, screenY, canvasX, canvasY, clientX, clientY, from_comp, from_refer_comp, itembandid || "none", itemcellid || "", itemindex || -1, clickitem);
+				evt = new nexacro.ListViewClickEventInfo(this, "onnodataareadblclick", button, alt_key, ctrl_key, shift_key, screenX, screenY, canvasX, canvasY, clientX, clientY, from_comp, from_refer_comp, itembandid || "none", itemcellid || "", -1, clickitem);
 				return this.onnodataareadblclick._fireEvent(this, evt);
 			}
 		}
@@ -4687,15 +4671,13 @@ if (!nexacro.ListView) {
 	_pListView.on_fire_user_onkeydown = function (key_code, alt_key, ctrl_key, shift_key, from_comp, from_refer_comp) {
 		var ret = nexacro.SimpleComponent.prototype.on_fire_user_onkeydown.call(this, key_code, alt_key, ctrl_key, shift_key, from_comp, from_refer_comp);
 
-		switch (key_code) {
-			case nexacro.Event.KEY_TAB:
-				if (!shift_key) {
-					this._acceptstab = this._remainEditableCell(1);
-				}
-				else {
-					this._acceptstab = this._remainEditableCell(-1);
-				}
-				break;
+		if (key_code == nexacro.Event.KEY_TAB) {
+			if (!shift_key) {
+				this._acceptstab = this._remainEditableCell(1);
+			}
+			else {
+				this._acceptstab = this._remainEditableCell(-1);
+			}
 		}
 
 		return ret;
@@ -4733,7 +4715,6 @@ if (!nexacro.ListView) {
 				else {
 					cell._actionEditCell(cell, "lbuttondown");
 				}
-				;
 			}
 			var obj = this._makeEventInfo(from_refer_comp);
 			var evt = new nexacro.ListViewMouseEventInfo(this, "onlbuttondown", button, alt_key, ctrl_key, shift_key, screenX, screenY, canvasX, canvasY, clientX, clientY, from_comp, from_refer_comp, obj.bandid, obj.cellid, obj.rowidx);
@@ -4785,6 +4766,7 @@ if (!nexacro.ListView) {
 
 		return false;
 	};
+
 	_pListView.on_fire_user_onrbuttondown = function (button, alt_key, ctrl_key, shift_key, screenX, screenY, canvasX, canvasY, clientX, clientY, from_comp, from_refer_comp) {
 		if (this.onrbuttondown && this.onrbuttondown._has_handlers) {
 			var obj = this._makeEventInfo(from_refer_comp);
@@ -4794,6 +4776,7 @@ if (!nexacro.ListView) {
 		}
 		return false;
 	};
+
 	_pListView.on_fire_sys_onrbuttonup = function (button, alt_key, ctrl_key, shift_key, screenX, screenY, canvasX, canvasY, clientX, clientY, from_comp, from_refer_comp) {
 		if (this.onrbuttonup && this.onrbuttonup._has_handlers) {
 			var obj = this._makeEventInfo(from_refer_comp);
@@ -4803,6 +4786,7 @@ if (!nexacro.ListView) {
 		}
 		return false;
 	};
+
 	_pListView.on_fire_user_onrbuttonup = function (button, alt_key, ctrl_key, shift_key, screenX, screenY, canvasX, canvasY, clientX, clientY, from_comp, from_refer_comp) {
 		if (this.onrbuttonup && this.onrbuttonup._has_handlers) {
 			var obj = this._makeEventInfo(from_refer_comp);
@@ -4812,6 +4796,7 @@ if (!nexacro.ListView) {
 		}
 		return false;
 	};
+
 	_pListView.on_fire_sys_onmouseenter = function (button, alt_key, ctrl_key, shift_key, screenX, screenY, canvasX, canvasY, clientX, clientY, from_comp, from_refer_comp) {
 		if (this.onmouseenter && this.onmouseenter._has_handlers) {
 			var obj = this._makeEventInfo(from_refer_comp);
@@ -4820,6 +4805,7 @@ if (!nexacro.ListView) {
 		}
 		return false;
 	};
+
 	_pListView.on_fire_user_onmouseenter = function (button, alt_key, ctrl_key, shift_key, screenX, screenY, canvasX, canvasY, clientX, clientY, from_comp, from_refer_comp) {
 		if (this.onmouseenter && this.onmouseenter._has_handlers) {
 			var obj = this._makeEventInfo(from_refer_comp);
@@ -4828,6 +4814,7 @@ if (!nexacro.ListView) {
 		}
 		return false;
 	};
+
 	_pListView.on_fire_sys_onmouseleave = function (button, alt_key, ctrl_key, shift_key, screenX, screenY, canvasX, canvasY, clientX, clientY, from_comp, from_refer_comp) {
 		if (this.onmouseleave && this.onmouseleave._has_handlers) {
 			var obj = this._makeEventInfo(from_refer_comp);
@@ -4836,6 +4823,7 @@ if (!nexacro.ListView) {
 		}
 		return false;
 	};
+
 	_pListView.on_fire_user_onmouseleave = function (button, alt_key, ctrl_key, shift_key, screenX, screenY, canvasX, canvasY, clientX, clientY, from_comp, from_refer_comp) {
 		if (this.onmouseleave && this.onmouseleave._has_handlers) {
 			var obj = this._makeEventInfo(from_refer_comp);
@@ -4844,6 +4832,7 @@ if (!nexacro.ListView) {
 		}
 		return false;
 	};
+
 	_pListView.on_fire_sys_onmousedown = function (button, alt_key, ctrl_key, shift_key, screenX, screenY, canvasX, canvasY, clientX, clientY, from_comp, from_refer_comp) {
 		if (this.onmousedown && this.onmousedown._has_handlers) {
 			var obj = this._makeEventInfo(from_refer_comp);
@@ -5040,11 +5029,12 @@ if (!nexacro.ListView) {
 		if (this.ondropdown && this.ondropdown._has_handlers) {
 			var obj = this._makeEventInfo(from_refer_comp);
 
+			var value;
 			if (from_refer_comp._getCellValue) {
-				var value = from_refer_comp._getCellValue();
+				value = from_refer_comp._getCellValue();
 			}
 			else {
-				var value = from_refer_comp.value;
+				value = from_refer_comp.value;
 			}
 
 			var evt = new nexacro.ListViewEditEventInfo(this, "ondropdown", obj.rowidx, obj.bandid, obj.cellid, value, from_refer_comp);
@@ -5058,11 +5048,12 @@ if (!nexacro.ListView) {
 		if (this.oncloseup && this.oncloseup._has_handlers) {
 			var obj = this._makeEventInfo(from_refer_comp, postvalue);
 
+			var value;
 			if (from_refer_comp._getCellValue) {
-				var value = from_refer_comp._getCellValue();
+				value = from_refer_comp._getCellValue();
 			}
 			else {
-				var value = from_refer_comp.value;
+				value = from_refer_comp.value;
 			}
 
 			var evt = new nexacro.ListViewEditEventInfo(this, "oncloseup", obj.rowidx, obj.bandid, obj.cellid, value, from_refer_comp);
@@ -5073,14 +5064,19 @@ if (!nexacro.ListView) {
 	};
 
 	_pListView.on_fire_onenterdown = function (from_refer_comp) {
+		if (this.readonly) {
+			return true;
+		}
+
 		if (this.onenterdown && this.onenterdown._has_handlers) {
 			var obj = this._makeEventInfo(from_refer_comp);
 
+			var value;
 			if (from_refer_comp._getCellValue) {
-				var value = from_refer_comp._getCellValue();
+				value = from_refer_comp._getCellValue();
 			}
 			else {
-				var value = from_refer_comp.value;
+				value = from_refer_comp.value;
 			}
 
 			var evt = new nexacro.ListViewEditEventInfo(this, "onenterdown", obj.rowidx, obj.bandid, obj.cellid, value, from_refer_comp);
@@ -5111,6 +5107,7 @@ if (!nexacro.ListView) {
 				break;
 		}
 	};
+
 	_pListView._makeEventInfo = function (from_refer_comp) {
 		var obj = {
 			cellid : "", 
@@ -5170,10 +5167,11 @@ if (!nexacro.ListView) {
 	};
 
 	_pListView._findEditableCell = function (item, from_cellidx, dir) {
+		var i, n;
 		var cell = null;
 
 		if (nexacro._isArray(item)) {
-			for (var i = 0, n = item.length; i < n; i++) {
+			for (i = 0, n = item.length; i < n; i++) {
 				if (i > 0) {
 					from_cellidx = (dir == 1) ? 0 : item._getLastChild() ? item._getLastChild()._cellidx : 0;
 				}
@@ -5188,8 +5186,8 @@ if (!nexacro.ListView) {
 			if (cells) {
 				switch (dir) {
 					case -1:
-						for (var i = from_cellidx; i >= 0; i--) {
-							if (cells[i]._hasEditor()) {
+						for (i = from_cellidx; i >= 0; i--) {
+							if (cells[i]._hasEditor() || cells[i]._refinfo._getEdittype(cells[i]._getDataRow()) == "checkbox") {
 								cell = cells[i];
 								break;
 							}
@@ -5197,7 +5195,7 @@ if (!nexacro.ListView) {
 						break;
 					case 1:
 						for (i = from_cellidx, n = cells.length; i < n; i++) {
-							if (cells[i]._hasEditor()) {
+							if (cells[i]._hasEditor() || cells[i]._refinfo._getEdittype(cells[i]._getDataRow()) == "checkbox") {
 								cell = cells[i];
 								break;
 							}
@@ -5213,6 +5211,8 @@ if (!nexacro.ListView) {
 	_pListView._remainEditableCell = function (dir) {
 		var sel = this.getSelect();
 		var rowcnt = this._getBindCount();
+
+		var item;
 		var items = this._getItem(sel.row);
 		if (items) {
 			var cell;
@@ -5330,12 +5330,6 @@ if (!nexacro.ListView) {
 				band = this._items[currow * slotcnt + curband];
 			}
 		}
-		else if (type == "head") {
-			;
-		}
-		else if (type == "tail") {
-			;
-		}
 		return band;
 	};
 
@@ -5397,6 +5391,7 @@ if (!nexacro.ListView) {
 
 		var rowcnt = this._getBindCount();
 		if (rowcnt > 0) {
+			var item;
 			var items = this._getItem(rowcnt - 1);
 			if (items) {
 				var cell, lastcell;
@@ -5465,4 +5460,3 @@ if (!nexacro.ListView) {
 
 	delete _pListView;
 }
-;

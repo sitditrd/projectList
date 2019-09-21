@@ -311,7 +311,7 @@ if (!nexacro.Frame) {
 		}
 
 		if (!nexacro._is_loaded_application) {
-			this._on_focus(true, this);
+			this._on_focus(true);
 		}
 	};
 
@@ -1093,11 +1093,7 @@ if (!nexacro.Frame) {
 
 		var obj = this[id];
 		if (obj) {
-			var is_focused = false;
 			var _window = this._getWindow();
-			if (_window) {
-				is_focused = (_window._indexOfCurrentFocusPaths(obj) > -1);
-			}
 
 			var nextframe = null;
 			if (this._is_frameset) {
@@ -1193,7 +1189,6 @@ if (!nexacro.Frame) {
 		var old_width = this._adjust_width;
 		var old_height = this._adjust_height;
 		var bsize = false, bmove = false;
-		var update = false;
 		if (this._is_window && this._window) {
 			this._adjustPosition(left, top, right, bottom, width, height, null, null);
 		}
@@ -1207,9 +1202,6 @@ if (!nexacro.Frame) {
 		}
 		if (this._adjust_width != old_width || this._adjust_height != old_height) {
 			bsize = true;
-			if (old_width == 0 || old_height == 0) {
-				update = true;
-			}
 		}
 		if (this._left != old_left || this._top != old_top) {
 			bmove = true;
@@ -1346,9 +1338,9 @@ if (!nexacro.Frame) {
 		}
 
 		var _window = this._getWindow();
-		var wheelZoom = 1.0;
+
 		if (_window && (_window._wheelZoom != undefined)) {
-			wheelZoom = _window._wheelZoom / 100;
+			var wheelZoom = _window._wheelZoom / 100;
 			x = x / wheelZoom;
 			y = y / wheelZoom;
 		}
@@ -1432,9 +1424,7 @@ if (!nexacro.Frame) {
 				owner_frame.on_change_containerRect(owner_frame._getClientWidth(), owner_frame._getClientHeight());
 			}
 		}
-		else if (this._window
-			 && this._window._parentwindowforopen
-			 && this._window_type == 2) {
+		else if (this._window && this._window._parentwindowforopen && this._window_type == 2) {
 			if (nexacro._Browser == "Runtime" && (nexacro._SystemType.toLowerCase() == "win32" || nexacro._SystemType.toLowerCase() == "win64")) {
 				nexacro._unregisterPopupFrame(this.id, this._window._parentwindowforopen, undefined, true);
 			}
@@ -1459,7 +1449,7 @@ if (!nexacro.Frame) {
 			root_closing_comp = this;
 		}
 		var msg = "";
-
+		var child_msg;
 		if (this.form) {
 			var form_msg = this.form._on_beforeclose(root_closing_comp);
 			msg = this.form._appendBeforeCloseMsg(msg, form_msg);
@@ -1469,13 +1459,13 @@ if (!nexacro.Frame) {
 			var frames = this.frames;
 			var len = frames.length;
 			for (var i = 0; i < len; i++) {
-				var child_msg = frames[i]._on_beforeclose(root_closing_comp);
+				child_msg = frames[i]._on_beforeclose(root_closing_comp);
 				msg = this._appendBeforeCloseMsg(msg, child_msg);
 			}
 		}
 
 		if (this.frame) {
-			var child_msg = this.frame._on_beforeclose(root_closing_comp);
+			child_msg = this.frame._on_beforeclose(root_closing_comp);
 			msg = this._appendBeforeCloseMsg(msg, child_msg);
 		}
 
@@ -2677,26 +2667,28 @@ if (!nexacro.Frame) {
 
 
 	_pChildFrame.on_created_contents = function (win) {
+		var left, top, calculated_size, width, height, after_align_pos, recalculated_pos;
 		if (this._is_window && this._window) {
 			var window = this._window;
 			win = window;
 			var delayedwindowpos = this._delayed_window_pos;
+
 			if (delayedwindowpos && window.handle) {
 				if (nexacro._OS == "Windows") {
 					if (this._window_type == 5 && this.form && this.form._is_loaded == true && window._prepared_flag == false) {
-						var left = delayedwindowpos.left;
-						var top = delayedwindowpos.top;
-						var calculated_size = this._getAutosizedFrameSize(true);
-						var width = calculated_size.width;
-						var height = calculated_size.height;
+						left = delayedwindowpos.left;
+						top = delayedwindowpos.top;
+						calculated_size = this._getAutosizedFrameSize(true);
+						width = calculated_size.width;
+						height = calculated_size.height;
 
-						var after_align_pos = this._getOpenAlignPos(this._getWindow(), left, top, width, height);
+						after_align_pos = this._getOpenAlignPos(this._getWindow(), left, top, width, height);
 						if (after_align_pos) {
 							left = after_align_pos.left;
 							top = after_align_pos.top;
 						}
 
-						var recalculated_pos = this._recalcModalPosition(left, top, width, height);
+						recalculated_pos = this._recalcModalPosition(left, top, width, height);
 						window.moveTo(delayedwindowpos.left, delayedwindowpos.top);
 
 						this._move(delayedwindowpos.left, delayedwindowpos.top, recalculated_pos.width, recalculated_pos.height);
@@ -2722,19 +2714,19 @@ if (!nexacro.Frame) {
 			}
 		}
 		else if ((this._window_type == 1 || this._window_type == 4) && this.form && this.autosize) {
-			var left = this._adjust_left;
-			var top = this._adjust_top;
-			var calculated_size = this._getAutosizedFrameSize(true);
-			var width = calculated_size.width;
-			var height = calculated_size.height;
+			left = this._adjust_left;
+			top = this._adjust_top;
+			calculated_size = this._getAutosizedFrameSize(true);
+			width = calculated_size.width;
+			height = calculated_size.height;
 
-			var after_align_pos = this._getOpenAlignPos(this._getWindow(), left, top, width, height);
+			after_align_pos = this._getOpenAlignPos(this._getWindow(), left, top, width, height);
 			if (after_align_pos) {
 				left = after_align_pos.left;
 				top = after_align_pos.top;
 			}
 
-			var recalculated_pos = this._recalcModalPosition(left, top, width, height);
+			recalculated_pos = this._recalcModalPosition(left, top, width, height);
 			this._move(recalculated_pos.left, recalculated_pos.top, recalculated_pos.width, recalculated_pos.height);
 		}
 
@@ -3036,7 +3028,9 @@ if (!nexacro.Frame) {
 			}
 		}
 
-		if (nexacro._registerPopupFrame(id, this) < 0) {
+		var parent_window = parent_frame ? parent_frame._getWindow() : null;
+
+		if (nexacro._registerPopupFrame(id, this, parent_window) < 0) {
 			if (_win) {
 				_win._updateWrapper(undefined, "show");
 			}
@@ -3099,7 +3093,7 @@ if (!nexacro.Frame) {
 			this.top = after_align_pos.top;
 		}
 
-		if (opener == null || opener == undefined) {
+		if (opener == null) {
 			var _focus_obj = null;
 			if (parent_frame && parent_frame._focusManager) {
 				_focus_obj = parent_frame._focusManager[0];
@@ -3110,7 +3104,7 @@ if (!nexacro.Frame) {
 					this.opener = _focus_obj.parent;
 				}
 				else {
-					this.opener = parent_frame ? parent_frame.form : null;
+					this.opener = parent_frame.form;
 				}
 			}
 			else {
@@ -3199,7 +3193,9 @@ if (!nexacro.Frame) {
 			}
 		}
 
-		if (nexacro._registerPopupFrame(id, this) < 0) {
+		var parent_window = parent_frame ? parent_frame._getWindow() : null;
+
+		if (nexacro._registerPopupFrame(id, this, parent_window) < 0) {
 			throw nexacro.MakeNativeError(this, "native_exist_id", id);
 		}
 
@@ -3224,7 +3220,7 @@ if (!nexacro.Frame) {
 			this.top = after_align_pos.top;
 		}
 
-		if (opener == null || opener == undefined) {
+		if (opener == null) {
 			var _focus_obj = null;
 			if (parent_frame && parent_frame._focusManager) {
 				_focus_obj = parent_frame._focusManager[0];
@@ -3235,7 +3231,7 @@ if (!nexacro.Frame) {
 					this.opener = _focus_obj.parent;
 				}
 				else {
-					this.opener = parent_frame ? parent_frame.form : null;
+					this.opener = parent_frame.form;
 				}
 			}
 			else {
@@ -3297,7 +3293,6 @@ if (!nexacro.Frame) {
 		if (arguments[3 + shift_argument]) {
 			this.opener = arguments[3 + shift_argument];
 		}
-		lockmode = arguments[4 + shift_argument];
 
 		lockmode = 1;
 
@@ -3396,7 +3391,6 @@ if (!nexacro.Frame) {
 			var parent_frame;
 			var left, top, width, height;
 			var arr_args;
-			var opener;
 			var name = this.name;
 
 			var popupframeoption = nexacro._popupframeoption[name];
@@ -3411,7 +3405,7 @@ if (!nexacro.Frame) {
 				width = popupframeoption._width;
 				height = popupframeoption._height;
 				arr_args = popupframeoption._args;
-				this.opener = opener = popupframeoption._opener;
+				this.opener = popupframeoption._opener;
 			}
 			if (parent_frame) {
 				parent_frame.addChild(name, this);
@@ -3465,6 +3459,7 @@ if (!nexacro.Frame) {
 
 	_pChildFrame._on_load = function () {
 		this.createComponent();
+		this._on_focus(true);
 		this.on_created();
 		this._changeStateActivate(true);
 	};
@@ -3923,9 +3918,7 @@ if (!nexacro.Frame) {
 			if (ownerframe) {
 				ownerframe.removeChild(this.id);
 			}
-			else if (this._window
-				 && this._window._parentwindowforopen
-				 && this._window_type == 2) {
+			else if (this._window && this._window._parentwindowforopen && this._window_type == 2) {
 				if (nexacro._Browser == "Runtime" && (nexacro._SystemType.toLowerCase() == "win32" || nexacro._SystemType.toLowerCase() == "win64")) {
 					nexacro._unregisterPopupFrame(this.id, this._window._parentwindowforopen, undefined, true);
 				}
@@ -3981,12 +3974,13 @@ if (!nexacro.Frame) {
 			var after_align_pos, parent_window = this._delayed_create_parent;
 			var left = this._left;
 			var top = this._top;
-			var width = this.form._init_width;
-			var height = this.form._init_height;
+			var width;
+			var height;
+			var calculated_size, _adjust_width, _adjust_height;
 
 			if (this._is_window && this._window_type == 2) {
 				if (this._delayed_create_window) {
-					var calculated_size = this._getAutosizedFrameSize(nexacro._Browser == "Runtime");
+					calculated_size = this._getAutosizedFrameSize(nexacro._Browser == "Runtime");
 					width = calculated_size.width;
 					height = calculated_size.height;
 
@@ -4007,7 +4001,7 @@ if (!nexacro.Frame) {
 				}
 				else {
 					if (this._window) {
-						var calculated_size = this._getAutosizedFrameSize(nexacro._Browser == "Runtime");
+						calculated_size = this._getAutosizedFrameSize(nexacro._Browser == "Runtime");
 						width = calculated_size.width;
 						height = calculated_size.height;
 
@@ -4016,6 +4010,8 @@ if (!nexacro.Frame) {
 							left = after_align_pos.left;
 							top = after_align_pos.top;
 						}
+
+						this._move(left, top, width, height);
 
 						if (this._init_openstatus) {
 							this.set_openstatus(this._init_openstatus);
@@ -4026,10 +4022,8 @@ if (!nexacro.Frame) {
 							this._init_openstatus = null;
 						}
 
-						this._move(left, top, width, height);
-
-						var _adjust_width = width + this._window._gap_client_width;
-						var _adjust_height = height + this._window._gap_client_height;
+						_adjust_width = width + this._window._gap_client_width;
+						_adjust_height = height + this._window._gap_client_height;
 
 						if (nexacro._Browser == "IE" && nexacro._BrowserVersion <= 8) {
 							function getWindowSize (win) {
@@ -4052,7 +4046,6 @@ if (!nexacro.Frame) {
 									height : wH
 								};
 							}
-							;
 
 							var win_rect = getWindowSize(this._window);
 
@@ -4070,7 +4063,7 @@ if (!nexacro.Frame) {
 				if (this._delayed_create_window) {
 					{
 
-						var calculated_size = this._getAutosizedFrameSize(nexacro._Browser == "Runtime");
+						calculated_size = this._getAutosizedFrameSize(nexacro._Browser == "Runtime");
 						width = calculated_size.width;
 						height = calculated_size.height;
 					}
@@ -4111,7 +4104,7 @@ if (!nexacro.Frame) {
 				}
 				else {
 					if (this._window) {
-						var calculated_size = this._getAutosizedFrameSize(nexacro._Browser == "Runtime");
+						calculated_size = this._getAutosizedFrameSize(nexacro._Browser == "Runtime");
 						width = calculated_size.width;
 						height = calculated_size.height;
 
@@ -4122,14 +4115,14 @@ if (!nexacro.Frame) {
 						}
 						this._move(left, top, width, height);
 
-						var _adjust_width = width + this._window._gap_client_width;
-						var _adjust_height = height + this._window._gap_client_height;
+						_adjust_width = width + this._window._gap_client_width;
+						_adjust_height = height + this._window._gap_client_height;
 						this._window.setSize(_adjust_width, _adjust_height);
 					}
 				}
 			}
 			else if (this._window_type == 1 || this._window_type == 4) {
-				var calculated_size = this._getAutosizedFrameSize(true);
+				calculated_size = this._getAutosizedFrameSize(true);
 				width = calculated_size.width;
 				height = calculated_size.height;
 
@@ -4149,6 +4142,7 @@ if (!nexacro.Frame) {
 		this._checkValidWindowSize();
 		if (!this._is_created) {
 			this.createComponent();
+			this._on_focus(true);
 			this.on_created();
 		}
 
@@ -4163,9 +4157,10 @@ if (!nexacro.Frame) {
 	};
 
 	_pChildFrame._createdForm = function () {
+		var _window;
 		if (this._window_type == 1) {
 			if (this._isNotProcessedWheelZoom == true) {
-				var _window = this._getWindow();
+				_window = this._getWindow();
 				var wheelZoomScale = 1.0;
 				if (_window && (_window._wheelZoom != undefined) && (_window._wheelZoom != 100)) {
 					wheelZoomScale = _window._wheelZoom / 100.0;
@@ -4194,7 +4189,7 @@ if (!nexacro.Frame) {
 		if (this._state_openstatus != 2) {
 			var owner_frame = this.getOwnerFrame();
 			var _win = this._getWindow();
-
+			var is_active_layer;
 			if (owner_frame) {
 				var proc_focus = false;
 
@@ -4221,7 +4216,7 @@ if (!nexacro.Frame) {
 						this.form._playAccessibilityWholeReadLabel("wholeread");
 					}
 					else {
-						var is_active_layer = _win._isActiveLayerComponent(this.form);
+						is_active_layer = _win._isActiveLayerComponent(this.form);
 						if (is_active_layer) {
 							this.form._on_focus(true);
 						}
@@ -4237,7 +4232,7 @@ if (!nexacro.Frame) {
 					this.form._playAccessibilityWholeReadLabel("wholeread");
 				}
 				else {
-					var is_active_layer = _win._isActiveLayerComponent(this.form);
+					is_active_layer = _win._isActiveLayerComponent(this.form);
 					if (is_active_layer) {
 						this.form._on_focus(true);
 					}
@@ -4251,7 +4246,7 @@ if (!nexacro.Frame) {
 
 		if (this.form && this.form._delayedfocuscomp) {
 			if (this._window_type == 5) {
-				var _window = this._getWindow();
+				_window = this._getWindow();
 				if (_window && _window._prepared_flag == true) {
 					this.form._delayedfocuscomp = null;
 					delete this.form._delayedfocuscomp;
@@ -4399,7 +4394,6 @@ if (!nexacro.Frame) {
 	else {
 		_pChildFrame._checkValidWindowSize = nexacro._emptyFn;
 	}
-	;
 
 	_pChildFrame._setModalLock = function (modalWindowOverlayColor) {
 		var win;
@@ -4458,40 +4452,35 @@ if (!nexacro.Frame) {
 			}
 		}
 
-		var ref_dest_handle;
-		if (win.frame && win.frame._waitcomp) {
-			var waitcomp = win.frame._waitcomp;
-			if (waitcomp._control_element && waitcomp._control_element.handle) {
-				ref_dest_handle = waitcomp._control_element.handle;
-			}
-		}
 
 		var modal_overlay_elem;
-		if (this._window_type == 5) {
-			modal_overlay_elem = this._modal_overlay_elem = new nexacro.ModalOverlayElement(parent._control_element);
-			modal_overlay_elem.setLinkedControl(parent);
-			modal_overlay_elem.setElementZIndex(zindex);
-			modal_overlay_elem.name = "modal_overlay";
-			if (overlaycolor) {
-				modal_overlay_elem.setElementBackground(overlaycolor);
-			}
-			modal_overlay_elem.create(win);
+		if (parent) {
+			if (this._window_type == 5) {
+				modal_overlay_elem = this._modal_overlay_elem = new nexacro.ModalOverlayElement(parent._control_element);
+				modal_overlay_elem.setLinkedControl(parent);
+				modal_overlay_elem.setElementZIndex(zindex);
+				modal_overlay_elem.name = "modal_overlay";
+				if (overlaycolor) {
+					modal_overlay_elem.setElementBackground(overlaycolor);
+				}
+				modal_overlay_elem.create(win);
 
-			parent._accessibilityModalLock(modal_stack);
-			win._modal_frame_stack.push([this, zindex, cur_focus_path]);
-		}
-		else {
-			modal_overlay_elem = this._modal_overlay_elem = new nexacro.ModalOverlayElement(parent._control_element);
-			modal_overlay_elem.setLinkedControl(this);
-			modal_overlay_elem.setElementZIndex(zindex);
-			modal_overlay_elem.name = "modal_overlay";
-			if (overlaycolor) {
-				modal_overlay_elem.setElementBackground(overlaycolor);
+				parent._accessibilityModalLock(modal_stack);
+				win._modal_frame_stack.push([this, zindex, cur_focus_path]);
 			}
-			modal_overlay_elem.create(win);
+			else {
+				modal_overlay_elem = this._modal_overlay_elem = new nexacro.ModalOverlayElement(parent._control_element);
+				modal_overlay_elem.setLinkedControl(this);
+				modal_overlay_elem.setElementZIndex(zindex);
+				modal_overlay_elem.name = "modal_overlay";
+				if (overlaycolor) {
+					modal_overlay_elem.setElementBackground(overlaycolor);
+				}
+				modal_overlay_elem.create(win);
 
-			this._accessibilityModalLock(modal_stack);
-			win._modal_frame_stack.push([this, zindex, cur_focus_path]);
+				this._accessibilityModalLock(modal_stack);
+				win._modal_frame_stack.push([this, zindex, cur_focus_path]);
+			}
 		}
 	};
 
@@ -4700,7 +4689,6 @@ if (!nexacro.Frame) {
 	_pFrameSetBase.on_change_containerRect = function (width, height) {
 		var control_elem = this._control_element;
 		if (control_elem) {
-			;
 		}
 	};
 
@@ -4742,7 +4730,6 @@ if (!nexacro.Frame) {
 			var frame_item = this.frames[i];
 			if (frame_item) {
 				frame_item.destroyComponent();
-				frame_item = null;
 			}
 		}
 		this.frames = null;
@@ -4750,11 +4737,9 @@ if (!nexacro.Frame) {
 
 
 	_pFrameSetBase.set_ctrltaborder = function () {
-		;
 	};
 
 	_pFrameSetBase.set_ctrltabtype = function () {
-		;
 	};
 
 	_pFrameSetBase.set_separatesize = function (v) {
@@ -5036,14 +5021,14 @@ if (!nexacro.Frame) {
 	_pFrameSetBase._recalcSeparateFrameSize = function (totalsize, inframecnt, inseparatecnt) {
 		var separateframesize = [];
 
-		var separatesizecnt = ((inseparatecnt) ? inseparatecnt : this._separatesize.length);
 		var framecnt = ((inframecnt) ? inframecnt : this._visibleFrameCount());
 
 		var dividecnt = 0, fixedcnt = 0;
 		var totalfixedsize = 0, dividesize = 0;
 
 		var separatesize = this._separatesize;
-		for (var i = 0; i < framecnt; i++) {
+		var i;
+		for (i = 0; i < framecnt; i++) {
 			var str = separatesize[i];
 			var pos = -1;
 			var size = -1;
@@ -5084,7 +5069,7 @@ if (!nexacro.Frame) {
 
 		dividesize = dividecnt > 0 ? (totalsize - totalfixedsize) / dividecnt : 0;
 
-		for (var i = 0; i < framecnt; i++) {
+		for (i = 0; i < framecnt; i++) {
 			if (separateframesize[i] < 0) {
 				separateframesize[i] = Math.abs(separateframesize[i]) * dividesize;
 			}
@@ -5226,7 +5211,7 @@ if (!nexacro.Frame) {
 				this._max_frame._move(frameleft, frametop, framewidth, frameheight);
 			}
 
-			var i = 0;
+			var i;
 			var frames = this.frames;
 			var len = frames.length;
 			for (i = 0; i < len; i++) {
@@ -5284,8 +5269,9 @@ if (!nexacro.Frame) {
 		var arrangecnt = 0;
 		var frames = this.frames;
 		var len = frames.length;
-		for (var i = 0; i < len; i++) {
-			var child = this._zordermap[i];
+		var i, j, child, fixed, colcnt, rowcnt, left, col, rc, width, height, row;
+		for (i = 0; i < len; i++) {
+			child = this._zordermap[i];
 			if (child.visible == false || child._state_openstatus == 2) {
 				continue;
 			}
@@ -5309,8 +5295,8 @@ if (!nexacro.Frame) {
 			var cascadegapy = cascadegapx;
 			framewidth = this._getClientWidth() - (cascadegapx * cascadecnt);
 			frameheight = this._getClientHeight() - (cascadegapy * cascadecnt);
-			for (var i = 0, j = 0; i < this.frames.length; i++) {
-				var child = this._zordermap[i];
+			for (i = 0, j = 0; i < this.frames.length; i++) {
+				child = this._zordermap[i];
 				if (child.visible == false || child._state_openstatus == 2) {
 					continue;
 				}
@@ -5324,24 +5310,24 @@ if (!nexacro.Frame) {
 			}
 		}
 		if (v == "tilevertical") {
-			var fixed = true;
-			var rowcnt = parseInt(Math.sqrt(arrangecnt)) | 0;
-			var colcnt = parseInt(arrangecnt / rowcnt) | 0;
+			fixed = true;
+			rowcnt = parseInt(Math.sqrt(arrangecnt)) | 0;
+			colcnt = parseInt(arrangecnt / rowcnt) | 0;
 
 			if ((arrangecnt % rowcnt) != 0) {
 				rowcnt += 1;
 				fixed = false;
 			}
 
-			var left = arrangecnt;
-			for (var col = 0, i = 0; col < colcnt; col++) {
-				for (var row = 0; row < rowcnt; ) {
-					var child = this._zordermap[i];
+			left = arrangecnt;
+			for (col = 0, i = 0; col < colcnt; col++) {
+				for (row = 0; row < rowcnt; ) {
+					child = this._zordermap[i];
 					if (child.visible == false || child._state_openstatus == 2) {
 						continue;
 					}
 
-					var rc = {
+					rc = {
 						left : frameleft, 
 						top : frametop, 
 						right : frameleft + framewidth, 
@@ -5350,8 +5336,8 @@ if (!nexacro.Frame) {
 					rc.right = rc.left + ((rc.right - rc.left) / colcnt);
 					rc.bottom = rc.top + ((rc.bottom - rc.top) / rowcnt);
 
-					var width = rc.right - rc.left;
-					var height = rc.bottom - rc.top;
+					width = rc.right - rc.left;
+					height = rc.bottom - rc.top;
 					rc.left += (colcnt - col - 1) * width;
 					rc.top += (rowcnt - row - 1) * height;
 					rc.right += (colcnt - col - 1) * width;
@@ -5370,24 +5356,24 @@ if (!nexacro.Frame) {
 			}
 		}
 		if (v == "tilehorizontal") {
-			var fixed = true;
-			var colcnt = parseInt(Math.sqrt(arrangecnt)) | 0;
-			var rowcnt = parseInt(arrangecnt / colcnt) | 0;
+			fixed = true;
+			colcnt = parseInt(Math.sqrt(arrangecnt)) | 0;
+			rowcnt = parseInt(arrangecnt / colcnt) | 0;
 
 			if ((arrangecnt % colcnt) != 0) {
 				rowcnt += 1;
 				fixed = false;
 			}
 
-			var left = arrangecnt;
-			for (var col = 0, i = 0; col < colcnt; col++) {
-				for (var row = 0; row < rowcnt; ) {
-					var child = this._zordermap[i];
+			left = arrangecnt;
+			for (col = 0, i = 0; col < colcnt; col++) {
+				for (row = 0; row < rowcnt; ) {
+					child = this._zordermap[i];
 					if (child.visible == false || child._state_openstatus == 2) {
 						continue;
 					}
 
-					var rc = {
+					rc = {
 						left : frameleft, 
 						top : frametop, 
 						right : frameleft + framewidth, 
@@ -5396,15 +5382,17 @@ if (!nexacro.Frame) {
 					rc.right = rc.left + ((rc.right - rc.left) / colcnt);
 					rc.bottom = rc.top + ((rc.bottom - rc.top) / rowcnt);
 
-					var width = rc.right - rc.left;
-					var height = rc.bottom - rc.top;
+					width = rc.right - rc.left;
+					height = rc.bottom - rc.top;
 					rc.left += (colcnt - col - 1) * width;
 					rc.top += (rowcnt - row - 1) * height;
 					rc.right += (colcnt - col - 1) * width;
 					rc.bottom += (rowcnt - row - 1) * height;
 
 					child._move(rc.left, rc.top, rc.right - rc.left, rc.bottom - rc.top);
-					row++, i++, left--;
+					row++;
+					i++;
+					left--;
 				}
 
 				if (!fixed && rowcnt > 2 && (left % (rowcnt - 1)) == 0) {
@@ -5414,8 +5402,8 @@ if (!nexacro.Frame) {
 			}
 		}
 		if (v == "vertical") {
-			for (var i = 0, j = 0; i < this.frames.length; i++) {
-				var child = this._zordermap[i];
+			for (i = 0, j = 0; i < this.frames.length; i++) {
+				child = this._zordermap[i];
 				if (child.visible == false || child._state_openstatus == 2) {
 					continue;
 				}
@@ -5426,13 +5414,13 @@ if (!nexacro.Frame) {
 		}
 		if (v == "horizontal") {
 			var top = frametop;
-			for (var i = 0; i < this.frames.length; i++) {
-				var child = this._zordermap[i];
+			for (i = 0; i < this.frames.length; i++) {
+				child = this._zordermap[i];
 				if (child.visible == false || child._state_openstatus == 2) {
 					continue;
 				}
 
-				var rc = {
+				rc = {
 					left : frameleft, 
 					top : frametop, 
 					right : frameleft + framewidth, 
@@ -5441,7 +5429,7 @@ if (!nexacro.Frame) {
 				rc.top = top;
 				rc.bottom = rc.top + (frameheight / arrangecnt);
 
-				var minx = 0, miny = 0;
+				var miny = 0;
 
 				if (rc.bottom - rc.top < miny) {
 					rc.bottom = rc.top + miny;
@@ -5476,16 +5464,16 @@ if (!nexacro.Frame) {
 			var frameright = frameleft + width;
 
 			var maxframeheight = this._getClientHeight();
+			var child, i, minheight, titleheight;
 			if (this._max_frame) {
 				var maxidx = -1;
-				var minheight = 0;
-				for (var i = 0; i < cnt; i++) {
-					var child = this.frames[i];
+				for (i = 0; i < cnt; i++) {
+					child = this.frames[i];
 					if (child == this._max_frame) {
 						maxidx = i;
 						continue;
 					}
-					var titleheight = child._titlebarheight;
+					titleheight = child._titlebarheight;
 					minheight = parseInt(titleheight) | 0;
 
 
@@ -5498,8 +5486,8 @@ if (!nexacro.Frame) {
 
 			var preframe_minimized = false;
 			var gap = 0;
-			for (var i = 0; i < cnt; i++) {
-				var child = this.frames[i];
+			for (i = 0; i < cnt; i++) {
+				child = this.frames[i];
 
 				if (preframe_minimized) {
 					frametop = framebottom;
@@ -5509,8 +5497,7 @@ if (!nexacro.Frame) {
 				if (child._state_openstatus == 2) {
 					child._setVerticalMin(false);
 
-					var minheight = 0;
-					var titleheight = child._titlebarheight;
+					titleheight = child._titlebarheight;
 					minheight = parseInt(titleheight) | 0;
 
 
@@ -5560,16 +5547,16 @@ if (!nexacro.Frame) {
 			var framebottom = frametop + height;
 
 			var maxframewidth = this._getClientWidth();
+			var child, i, minwidth, titleheight;
 			if (this._max_frame) {
 				var maxidx = -1;
-				var minwidth = 0;
-				for (var i = 0; i < cnt; i++) {
-					var child = this.frames[i];
+				for (i = 0; i < cnt; i++) {
+					child = this.frames[i];
 					if (child == this._max_frame) {
 						maxidx = i;
 						continue;
 					}
-					var titleheight = child._titlebarheight;
+					titleheight = child._titlebarheight;
 					minwidth = parseInt(titleheight) | 0;
 
 
@@ -5582,8 +5569,8 @@ if (!nexacro.Frame) {
 
 			var preframe_minimized = false;
 			var gap = 0;
-			for (var i = 0; i < cnt; i++) {
-				var child = this.frames[i];
+			for (i = 0; i < cnt; i++) {
+				child = this.frames[i];
 
 				if (preframe_minimized) {
 					frameleft = frameright;
@@ -5593,8 +5580,7 @@ if (!nexacro.Frame) {
 				if (child._state_openstatus == 2) {
 					child._setVerticalMin(true);
 
-					var minwidth = 0;
-					var titleheight = child._titlebarheight;
+					titleheight = child._titlebarheight;
 					minwidth = parseInt(titleheight) | 0;
 
 
@@ -5655,9 +5641,10 @@ if (!nexacro.Frame) {
 			var fullframewidth = this._getClientWidth();
 			var fullframeheight = this._getClientHeight();
 
+			var i;
 			if (this.fullframemaximize == false) {
 				if (this._max_frame) {
-					for (var i = 0; i < this.frames.length; i++) {
+					for (i = 0; i < this.frames.length; i++) {
 						if (this._max_frame != this.frames[i] && this.frames[i]._state_openstatus != 2) {
 							this.frames[i].openstatus = "minimize";
 							this.frames[i]._changeOpenStatus(2);
@@ -5665,7 +5652,7 @@ if (!nexacro.Frame) {
 					}
 				}
 				else {
-					for (var i = 0; i < this.frames.length; i++) {
+					for (i = 0; i < this.frames.length; i++) {
 						if (this.frames[i]._state_openstatus == 2) {
 							this.frames[i].openstatus = "normal";
 							this.frames[i]._changeOpenStatus(0);
@@ -5708,7 +5695,6 @@ if (!nexacro.Frame) {
 				displayframeheight = (height - (horzminarea ? minareaheight : 0)) / framerowcnt;
 			}
 
-			var newcnt = framecnt - separatecnt > 0 ? separatecnt : framecnt;
 			var realcolcnt = normalframecnt - separatecnt > 0 ? separatecnt : normalframecnt;
 
 			var realtotalsize = 0;
@@ -5767,17 +5753,18 @@ if (!nexacro.Frame) {
 				}
 			}
 			else if (this.fullframemaximize == false) {
-				for (var i = 0; i < this.frames.length; i++) {
+				for (i = 0; i < this.frames.length; i++) {
 					if (this.frames[i]._state_openstatus == 2) {
 						this.frames[i]._changeOpenStatus(1);
 					}
 				}
 			}
 
-			var i = 0, j = 0, k = 0;
+			var j = 0, k = 0;
+			var child;
 			for (i = 0; i < framerowcnt; i++) {
 				for (j = 0; j < realcolcnt && k < framecnt; k++) {
-					var child = this.frames[k];
+					child = this.frames[k];
 					if (child == this._max_frame) {
 						continue;
 					}
@@ -5857,7 +5844,7 @@ if (!nexacro.Frame) {
 			minwidth = minwidth < 100 ? 100 : minwidth;
 
 			for (i = 0; i < framecnt; i++) {
-				var child = this.frames[i];
+				child = this.frames[i];
 				if (child._state_openstatus == 2) {
 					child._setVerticalMin(false);
 
@@ -5874,20 +5861,12 @@ if (!nexacro.Frame) {
 
 					switch (this._minimizedchildposition) {
 						case 0:
-							minframebottom = minframetop + minheight;
-							child._move(minframeleft, minframetop, minframeright - minframeleft, minheight);
-							minframetop = minframebottom;
-							break;
-						case 1:
-							minframeright = minframeleft + minwidth;
-							child._move(minframeleft, minframetop, minwidth, minframebottom - minframetop);
-							minframeleft = minframeright;
-							break;
 						case 2:
 							minframebottom = minframetop + minheight;
 							child._move(minframeleft, minframetop, minframeright - minframeleft, minheight);
 							minframetop = minframebottom;
 							break;
+						case 1:
 						case 3:
 							minframeright = minframeleft + minwidth;
 							child._move(minframeleft, minframetop, minwidth, minframebottom - minframetop);

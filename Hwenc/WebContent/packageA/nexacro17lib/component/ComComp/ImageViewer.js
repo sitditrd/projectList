@@ -302,8 +302,6 @@ if (!nexacro.ImageViewer) {
 		if (this.onload && this.onload._has_handlers) {
 			var evt = new nexacro.LoadEventInfo(obj, "onload", url);
 			var ret = this.onload._fireEvent(this, evt);
-			evt.destroy();
-			evt = null;
 			return ret;
 		}
 		return true;

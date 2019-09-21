@@ -55,7 +55,7 @@ if (!nexacro.Sketch) {
 
 		this._history = [];
 
-		this._image_format = ["bmp", "gif", "jpeg", "jpg", "png", "tiff", "icon"];
+		this._image_format = ["bmp", "bmp,mono", "gif", "jpeg", "jpg", "png", "tif", "tiff", "icon"];
 		this._save_image_formattype = ["BMP", "PNG", "JPG", "GIF", "TIF", "BMP,Mono"];
 
 		this._default_stroke_style = nexacro.ColorObject("black");
@@ -152,6 +152,8 @@ if (!nexacro.Sketch) {
 
 	_pSketch._event_list = {
 		"oninit" : 1, 
+		"onclick" : 1, 
+		"ondblclick" : 1, 
 		"onkillfocus" : 1, 
 		"onsetfocus" : 1, 
 		"ontouch" : 1, 
@@ -272,7 +274,6 @@ if (!nexacro.Sketch) {
 
 			if (text_elem) {
 				text_elem.create(this._getWindow());
-				text_elem = null;
 				control_elem.bringToFrontElement(this._canvas_elem);
 			}
 
@@ -346,7 +347,6 @@ if (!nexacro.Sketch) {
 
 			if (text_elem) {
 				text_elem.create(this._getWindow());
-				text_elem = null;
 				control_elem.bringToFrontElement(this._canvas_elem);
 			}
 			var sketchtextarea = this.sketchtextarea;
@@ -392,9 +392,13 @@ if (!nexacro.Sketch) {
 		if (this._canvas_elem_bg) {
 			this._canvas_elem_bg.setElementSize(width, height);
 		}
+		var text_elem = this._text_elem;
+		if (text_elem) {
+			text_elem.setElementSize(width, height);
+		}
 
-		if (this._currentPath.length > 0) {
-			this._regenStroke(this._currentPath, this._canvas_elem_tmp);
+		if (this._adjust_height > 0 && this._adjust_width > 0) {
+			this._restoreSketch();
 		}
 	};
 	_pSketch.on_change_containerPos = function (left, top) {
@@ -551,6 +555,36 @@ if (!nexacro.Sketch) {
 			}
 		}
 		return false;
+	};
+
+	_pSketch._restoreSketch = function () {
+		var path = this._currentStrokes();
+		var cnt = this._drawpathcount;
+		this._drawpathcount = 0;
+
+		var img_obj = this._imgurl;
+		if (img_obj) {
+			var url = "";
+			var img_type = this._img_type;
+			if (img_type == "url") {
+				url = nexacro._getURIValue(img_obj);
+				url = nexacro._getImageLocation(url, this._getRefFormBaseUrl());
+			}
+			else {
+				if (img_obj._base64str) {
+					url = img_obj._base64str;
+				}
+			}
+			if (!this._image) {
+				this._image = new nexacro.ImageSketchBackground(this);
+			}
+			this._image.set_src(url);
+		}
+		for (var n = 0, length = path.length; n < length; n++) {
+			this._regenStroke(path[n], this._canvas_elem);
+			this._regenStroke(path[n], this._canvas_elem_tmp);
+		}
+		this._drawpathcount = cnt;
 	};
 
 	_pSketch.saveSketchToFile = function (fileName, fileType, option) {
@@ -837,7 +871,7 @@ if (!nexacro.Sketch) {
 
 		this._initPath(this._path_style, this._const_text, x, y, null, width, height, text);
 
-		if (text && text !== undefined && text != "") {
+		if (text !== undefined && text != "") {
 			multiline = true;
 		}
 		return this._showTextEditor(x, y, width, height, text, multiline);
@@ -885,10 +919,6 @@ if (!nexacro.Sketch) {
 	_pSketch.on_fire_sys_ontouchmove = _pSketch.on_fire_ontouchmove;
 
 	_pSketch.on_fire_onmousemove = function (button, alt_key, ctrl_key, shift_key, screenX, screenY, canvasX, canvasY, clientX, clientY, from_comp, from_refer_comp) {
-		var ret = true;
-		if ("touch") {
-			ret = false;
-		}
 		this._moveAction(button, clientX, clientY);
 		return false;
 	};
@@ -1115,7 +1145,7 @@ if (!nexacro.Sketch) {
 				var _image = this._canvas_elem.toDataURL();
 				if (_image && _image.src) {
 					_image.setBase64String(_image.src);
-					this.value = this._image = _image;
+					this.value = _image;
 				}
 			}
 		}
@@ -1161,7 +1191,6 @@ if (!nexacro.Sketch) {
 		var errormsg = "";
 		this._clearCanvas(this._isEnableRedraw());
 		if (this._image) {
-			this._image = null;
 		}
 
 		this._setImageType(url);
@@ -1175,8 +1204,12 @@ if (!nexacro.Sketch) {
 				if (nexacro._OS == "iOS" && nexacro._isHybrid()) {
 					var jsonstr = '{"div":"sketch", "method":"toBase64String", "params":"' + url + '"}';
 					url = nexacro.Device.exec(jsonstr, true);
-
-					img_type = this._img_type = "base64";
+					if (url == "") {
+						url = undefined;
+					}
+					else {
+						img_type = this._img_type = "base64";
+					}
 				}
 			}
 			else {
@@ -1191,7 +1224,7 @@ if (!nexacro.Sketch) {
 			this.on_fire_onerror(this, this._const_code_parameter, errormsg, this._const_errortype_obj, this._const_code_parameter, url, this._getRefFormBaseUrl());
 			return false;
 		}
-		if (img_type == "url" && url && url !== undefined) {
+		if (img_type == "url" && url) {
 			var imgformat = url.substring(url.lastIndexOf(".") + 1).toLowerCase();
 			if ((this._image_format).indexOf(imgformat) == -1) {
 				errormsg = nexacro._GetSystemErrorMsg(this, this._const_code_incorrectfile_msg);
@@ -1201,7 +1234,10 @@ if (!nexacro.Sketch) {
 		}
 
 		nexacro._getImageSize(url, this._imageload, this, this.parent._getRefFormBaseUrl());
-		this._image = new nexacro.ImageSketchBackground(this);
+		if (!this._image || !(this._image instanceof nexacro.ImageSketchBackground)) {
+			this._image = null;
+			this._image = new nexacro.ImageSketchBackground(this);
+		}
 		var retn = this._image.set_src(url);
 		if (retn) {
 			if (this._apply_client_padding) {
@@ -1268,7 +1304,7 @@ if (!nexacro.Sketch) {
 			var multiliney = Number(y);
 
 			if (multiline) {
-				if (text && text !== undefined && text != "") {
+				if (text != "") {
 					text = text.replace(/&quot;/g, "\"");
 					if (text.indexOf("\r\n") != -1 || text.indexOf("\n\r") != -1) {
 						text = text.replace(/\r\n/g, "\n").replace(/\n\r/g, "\n");
@@ -1318,15 +1354,14 @@ if (!nexacro.Sketch) {
 		if (this._currentPath[0] && this._currentPath[0].tool != mode) {
 			start = true;
 		}
-		switch (start) {
-			case true:
-				this._initPath(this._path_style, mode, clientX, clientY);
-				this._drawPath(clientX, clientY);
-				break;
-			default:
-				this._drawPath(clientX, clientY);
-				this._endPath();
-				break;
+
+		if (start == true) {
+			this._initPath(this._path_style, mode, clientX, clientY);
+			this._drawPath(clientX, clientY);
+		}
+		else {
+			this._drawPath(clientX, clientY);
+			this._endPath();
 		}
 	};
 
@@ -1380,7 +1415,7 @@ if (!nexacro.Sketch) {
 			sketchtextarea.setFocus(true);
 			sketchtextarea.setCaretPos(caretpos);
 
-			if (text && text !== undefined && text != "") {
+			if (text !== undefined && text != "") {
 				if (text.length > 0) {
 					sketchtextarea.setSelect(0, text.length);
 				}
@@ -1398,7 +1433,7 @@ if (!nexacro.Sketch) {
 		var rettext = sketchtextarea.value;
 
 		if (clear) {
-			sketchtextarea.set_value(null);
+			sketchtextarea.set_value(undefined);
 		}
 
 		if (this._isEnableRedraw()) {
@@ -1493,7 +1528,7 @@ if (!nexacro.Sketch) {
 			case this._const_stroke_user:
 			default:
 				canavs_elem.setElementStrokeStyle(p1.strokeStyle);
-				if (canavs_elem.lineWidth != p1.lineWidth) {
+				if (p1.lineWidth) {
 					canavs_elem.setElementLineWidth(p1.lineWidth);
 				}
 		}
@@ -1615,13 +1650,9 @@ if (!nexacro.Sketch) {
 
 	_pSketch._clearCanvas = function (bEnableRedaw) {
 		var canvas_elem = this._canvas_elem;
-		var canvas_elem_bg = this._canvas_elem_bg;
 		var canvas_elem_tmp = this._canvas_elem_tmp;
 		if (canvas_elem) {
 			this._clearCanvasElem(canvas_elem);
-		}
-		if (canvas_elem_bg) {
-			this._clearCanvasElem(canvas_elem_bg);
 		}
 		if (canvas_elem_tmp) {
 			this._clearCanvasElem(canvas_elem_tmp);
@@ -1682,8 +1713,6 @@ if (!nexacro.Sketch) {
 			case this._const_erase:
 			case this._const_erase_user:
 				{
-
-					dest = canvas_elem;
 				}
 				break;
 		}
@@ -1694,10 +1723,8 @@ if (!nexacro.Sketch) {
 	};
 
 	_pSketch._initPath = function (_style, _editmode, clientX, clientY, opt, clientwidth, clientheight, clienttext) {
-		switch (this._currentPath[0] && this._currentPath[0].tool) {
-			case this._const_stroke_user:
-				this._endPath();
-				break;
+		if ((this._currentPath[0] && this._currentPath[0].tool) == this._const_stroke_user) {
+			this._endPath();
 		}
 
 		var style = this._clone(_style);
@@ -1940,13 +1967,14 @@ if (!nexacro.Sketch) {
 			}
 
 			var canvas_elem = sketch._canvas_elem;
-			if (canvas_elem && sketch._image) {
+			var sketch_image = sketch._image;
+			if (canvas_elem && sketch_image) {
 				if (sketch._isEnableRedraw()) {
-					canvas_elem.drawImage(sketch._image, 0, 0, width, height);
+					canvas_elem.drawImage(sketch_image, 0, 0, width, height);
 					if (sketch._canvas_elem_tmp) {
-						sketch._canvas_elem_tmp.drawImage(sketch._image, 0, 0, width, height);
+						sketch._canvas_elem_tmp.drawImage(sketch_image, 0, 0, width, height);
 					}
-					sketch._setImageValue(sketch._image);
+					sketch._setImageValue(sketch_image);
 				}
 				if (sketch._clr_history) {
 					sketch.on_fire_onload(this, imageurl);
@@ -1961,6 +1989,22 @@ if (!nexacro.Sketch) {
 			this.handle = nexacro._getImageObject(v, this.on_load, this, this.parent._getRefFormBaseUrl());
 			if (this.handle) {
 				return true;
+			}
+		}
+		else {
+			var width = this.width;
+			var height = this.height;
+			var sketch = this.parent;
+			var canvas_elem = sketch._canvas_elem;
+			var sketch_image = sketch._image;
+			if (canvas_elem && sketch_image) {
+				if (sketch._isEnableRedraw()) {
+					canvas_elem.drawImage(sketch_image, 0, 0, width, height);
+					if (sketch._canvas_elem_tmp) {
+						sketch._canvas_elem_tmp.drawImage(sketch_image, 0, 0, width, height);
+					}
+					return true;
+				}
 			}
 		}
 		return false;

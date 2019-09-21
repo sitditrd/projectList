@@ -73,6 +73,7 @@ if (!nexacro.TitleBarControl) {
 		this.maxbutton._removeEventHandler("onclick", this._notify_clickmaxbutton, this._notify_target);
 		this.normalbutton._removeEventHandler("onclick", this._notify_clicknormalbutton, this._notify_target);
 		this.closebutton._removeEventHandler("onclick", this._notify_clickclosebutton, this._notify_target);
+		this.titleicon._removeEventHandler("ondblclick", this._notify_dblclick, this._notify_target);
 
 		this._removeEventHandler("ondblclick", this._notify_dblclick, this._notify_target);
 	};
@@ -83,6 +84,7 @@ if (!nexacro.TitleBarControl) {
 		this.maxbutton._setEventHandler("onclick", this._notify_clickmaxbutton, this._notify_target);
 		this.normalbutton._setEventHandler("onclick", this._notify_clicknormalbutton, this._notify_target);
 		this.closebutton._setEventHandler("onclick", this._notify_clickclosebutton, this._notify_target);
+		this.titleicon._setEventHandler("ondblclick", this._notify_dblclick, this._notify_target);
 
 		this._setEventHandler("ondblclick", this._notify_dblclick, this._notify_target);
 	};

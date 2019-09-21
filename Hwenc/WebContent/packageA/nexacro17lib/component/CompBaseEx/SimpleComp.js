@@ -687,7 +687,6 @@ if (!nexacro.SimpleComponent) {
 	};
 
 	_pSimpleComponent._initControlElementStatus = function () {
-		var visible = this.visible;
 		if (!this.visible) {
 			this._control_element.setElementVisible(false);
 		}
@@ -1061,12 +1060,10 @@ if (!nexacro.SimpleComponent) {
 	_pSimpleComponent.createExprInfo = function (baseid, targetid, targetprop, exprprop) {
 		var exprinfo = new nexacro._ExprInfo();
 
-		if (exprinfo) {
-			exprinfo.baseid = baseid;
-			exprinfo.target = nexacro._nvl(targetid, false) ? targetid.split('.') : null;
-			exprinfo.setter = nexacro._nvl(targetprop, false) ? "set_" + targetprop : "set_text";
-			exprinfo.exprid = nexacro._nvl(exprprop, false) ? exprprop : this._onGetExprProp();
-		}
+		exprinfo.baseid = baseid;
+		exprinfo.target = nexacro._nvl(targetid, false) ? targetid.split('.') : null;
+		exprinfo.setter = nexacro._nvl(targetprop, false) ? "set_" + targetprop : "set_text";
+		exprinfo.exprid = nexacro._nvl(exprprop, false) ? exprprop : this._onGetExprProp();
 
 		return exprinfo;
 	};
@@ -1144,7 +1141,7 @@ if (!nexacro.SimpleComponent) {
 	_pSimpleComponent.on_apply_value = function () {
 		if (this._client_elem) {
 			var value = this._getValue();
-			if (value != undefined && value != null) {
+			if (value != null) {
 				this._client_elem.setElementText(value);
 			}
 		}
@@ -1254,22 +1251,14 @@ if (!nexacro.SimpleComponent) {
 							this._changeUserStatus("selected", newvalue ? (this._onCheckSelectable() ? true : false) : false);
 						}
 
-						return;
+						break;
 					}
 				case 0x02:
-					{
-
-						return;
-					}
 				case 0x01:
-					{
-
-						return;
-					}
 				case 0xFF:
 					{
 
-						return;
+						break;
 					}
 			}
 		}
@@ -1870,7 +1859,7 @@ if (!nexacro._CompUtil) {
 				var _doc = elem._getRootWindowHandle();
 				var _win = _doc.defaultView || _doc.parentWindow;
 				var _cps = _win.getComputedStyle || 0;
-				var _obj = _cps ? _win.getComputedStyle(elem.handle) : node.currentStyle;
+				var _obj = _cps ? _win.getComputedStyle(elem.handle) : elem.handle.currentStyle;
 
 				return _cps ? {
 					curr : _obj, 
@@ -1885,59 +1874,46 @@ if (!nexacro._CompUtil) {
 			}
 		};
 		nexacro._getCurrentStyleValue = function (style, prop) {
-			switch (prop) {
-				case "font":
-					{
-
-						if (style.type == "runtime") {
-							return style.elem._getComputedStyle("font");
-						}
-						else {
-							var font = [];
-							font.push(nexacro._getCurrentStyleValue(style, "font-style"));
-							font.push(nexacro._getCurrentStyleValue(style, "font-variant"));
-							font.push(nexacro._getCurrentStyleValue(style, "font-weight"));
-							font.push(nexacro._getCurrentStyleValue(style, "font-size"));
-							font.push(nexacro._getCurrentStyleValue(style, "font-family"));
-							return font.join(' ');
+			if (prop == "font") {
+				if (style.type == "runtime") {
+					return style.elem._getComputedStyle("font");
+				}
+				else {
+					var font = [];
+					font.push(nexacro._getCurrentStyleValue(style, "font-style"));
+					font.push(nexacro._getCurrentStyleValue(style, "font-variant"));
+					font.push(nexacro._getCurrentStyleValue(style, "font-weight"));
+					font.push(nexacro._getCurrentStyleValue(style, "font-size"));
+					font.push(nexacro._getCurrentStyleValue(style, "font-family"));
+					return font.join(' ');
+				}
+			}
+			else {
+				var r;
+				if (style.type == "runtime") {
+					r = prop.split('-');
+					if (r.length > 1 && r[0] == "background") {
+						return style.elem._getComputedStyleSubValue(r[0], prop);
+					}
+					else {
+						return style.elem._getComputedStyleValue(prop);
+					}
+				}
+				else if (style.type == "current") {
+					r = prop.split('-');
+					for (var i = 1, l = r.length; i < l; i++) {
+						var s = r[i];
+						if (s.length) {
+							s[0] = s[0].toUpperCase();
 						}
 					}
-				default:
-					{
+					var p = r.join('');
 
-						switch (style.type) {
-							case "runtime":
-								{
-
-									var r = prop.split('-');
-									if (r.length > 1 && r[0] == "background") {
-										return style.elem._getComputedStyleSubValue(r[0], prop);
-									}
-									else {
-										return style.elem._getComputedStyleValue(prop);
-									}
-								}
-							case "current":
-								{
-
-									var r = prop.split('-');
-									for (var i = 1, l = r.length; i < l; i++) {
-										var s = r[i];
-										if (s.length) {
-											s[0] = s[0].toUpperCase();
-										}
-									}
-									var p = r.join('');
-
-									return style.curr[p];
-								}
-							case "compute":
-								{
-
-									return style.curr.getPropertyValue(prop);
-								}
-						}
-					}
+					return style.curr[p];
+				}
+				else if (style.type == "compute") {
+					return style.curr.getPropertyValue(prop);
+				}
 			}
 		};
 
@@ -1992,6 +1968,18 @@ if (!nexacro._CompUtil) {
 
 				var style = nexacro._getCurrentStyleObject(elem);
 
+				var bkcolor = nexacro._getCurrentStyleValue(style, "background-color");
+				var bkimage = nexacro._getCurrentStyleValue(style, "background-image");
+				var bkposit = nexacro._getCurrentStyleValue(style, "background-position");
+				var bkrepeat = nexacro._getCurrentStyleValue(style, "background-repeat");
+
+				var halign = nexacro._getCurrentStyleValue(style, "text-align");
+				var font = nexacro._getCurrentStyleValue(style, "font");
+				var color = nexacro._getCurrentStyleValue(style, ("color"));
+
+				var drawImg, drawBox, drawIco, drawTxt;
+				var image;
+
 				nexacro._clipAdd2Canvas(canvas, l, t, w, h);
 
 				switch (elem._type_name) {
@@ -2007,72 +1995,69 @@ if (!nexacro._CompUtil) {
 							var radius = elem.borderRadius ? elem.borderRadius : null;
 
 							if (border) {
+								var offset;
+
 								var rx = radius ? radius.x : 0;
 								var ry = radius ? radius.y : 0;
 
+								var tw = border.top._width;
+								var rw = border.right._width;
+								var bw = border.bottom._width;
+								var lw = border.left._width;
+
 								if (rx && ry) {
-									var s = border.top._width;
-									if (s) {
+									if (tw) {
 										canvas._setLineStyle(border.top);
 										canvas.drawStrokeInsetRoundRect(l, t, w, h, rx, ry);
 
-										l += s;
-										t += s;
-										w -= s;
-										h -= s;
+										l += tw;
+										t += tw;
+										w -= tw;
+										h -= tw;
 									}
 								}
 								else if (border._single) {
-									var s = border.top._width;
-									if (s) {
+									if (tw) {
 										canvas._setLineStyle(border.top);
 										canvas.drawStrokeInsetRect(l, t, w, h);
 
-										l += s;
-										t += s;
-										w -= s;
-										h -= s;
+										l += tw;
+										t += tw;
+										w -= tw;
+										h -= tw;
 									}
 								}
 								else {
 									if (border.top._isValid()) {
-										var s = border.top._width;
-										var o = t + s / 2;
+										offset = t + tw / 2;
 										canvas._setLineStyle(border.top);
-										canvas.drawStrokeLine(l, o, l + w, o);
-										t += s;
+										canvas.drawStrokeLine(l, offset, l + w, offset);
+										t += tw;
 									}
 									if (border.right._isValid()) {
-										var s = border.right._width;
-										var o = l + w - s / 2;
+										offset = l + w - rw / 2;
 										canvas._setLineStyle(border.right);
-										canvas.drawStrokeLine(o, t, o, t + h);
-										w -= s;
+										canvas.drawStrokeLine(offset, t, offset, t + h);
+										w -= rw;
 									}
 									if (border.bottom._isValid()) {
-										var s = border.bottom._width;
-										var o = t + h - s / 2;
+										offset = t + h - bw / 2;
 										canvas._setLineStyle(border.bottom);
-										canvas.drawStrokeLine(l, o, x + w, o);
-										h -= s;
+										canvas.drawStrokeLine(l, offset, l + w, offset);
+										h -= bw;
 									}
 									if (border.left._isValid()) {
-										var s = border.left._width;
-										var o = l + s / 2;
+										offset = l + lw / 2;
 										canvas._setLineStyle(border.left);
-										canvas.drawStrokeLine(o, t, o, t + h);
-										l += s;
+										canvas.drawStrokeLine(offset, t, offset, t + h);
+										l += lw;
 									}
 								}
 							}
-							var bkcolor = nexacro._getCurrentStyleValue(style, "background-color");
-							var bkimage = nexacro._getCurrentStyleValue(style, "background-image");
-							var bkposit = nexacro._getCurrentStyleValue(style, "background-position");
-							var bkrepeat = nexacro._getCurrentStyleValue(style, "background-repeat");
 
 							if (bkrepeat) {
 								if (bkimage && bkimage != "none") {
-									canvas.drawImage(elem, 0, 0, image.width, image.height);
+									canvas.drawImage(elem, 0, 0, bkimage.width, bkimage.height);
 								}
 								else {
 									canvas.setElementFillStyle(nexacro.ColorObject(bkcolor));
@@ -2081,8 +2066,7 @@ if (!nexacro._CompUtil) {
 							}
 							else {
 								if (bkimage && bkimage != "none") {
-									var image;
-									canvas.drawImage(image, 0, 0, image.width, image.height);
+									canvas.drawImage(bkimage, 0, 0, bkimage.width, bkimage.height);
 								}
 								else {
 									canvas.setElementFillStyle(nexacro.ColorObject(bkcolor));
@@ -2096,20 +2080,12 @@ if (!nexacro._CompUtil) {
 					case "ImageElement":
 						{
 
-							var drawImg = !opimg || opimg == "drawImg";
-							var drawBox = opimg && opimg == "drawBox";
-							var align = false;
+							drawImg = !opimg || opimg == "drawImg";
+							drawBox = opimg && opimg == "drawBox";
 
-							if (align && elem.parent_elem) {
-								var pw = elem.parent_elem.width;
-								var ph = elem.parent_elem.height;
-
-								l += Math.max((pw - w) / 2, 0);
-								t += Math.max((ph - h) / 2, 0);
-							}
 							if (drawImg) {
 								if (style.type == "runtime") {
-									var image = new nexacro.Image();
+									image = new nexacro.Image();
 									if (elem.icon) {
 										image.set_src(elem.icon.value);
 									}
@@ -2118,9 +2094,6 @@ if (!nexacro._CompUtil) {
 									}
 
 									canvas.drawImage(image, l, t, w, h);
-
-									delete image;
-									image = null;
 								}
 								else {
 									canvas.drawImage(elem, l, t, w, h);
@@ -2136,21 +2109,16 @@ if (!nexacro._CompUtil) {
 					case "IconTextElement":
 						{
 
-							var drawBox = elem._box_node || 0;
-							var drawIco = elem._icon_node || elem.icon;
-							var drawTxt = elem._text_node || elem.text;
+							drawBox = elem._box_node || 0;
+							drawIco = elem._icon_node || elem.icon;
 
 							if (drawBox) {
-								var bkcolor = nexacro._getCurrentStyleValue(style, "background-color");
-								var bkimage = nexacro._getCurrentStyleValue(style, "background-image");
-								var bkposit = nexacro._getCurrentStyleValue(style, "background-position");
-
 								if (bkcolor) {
 									canvas.setElementFillStyle(nexacro.ColorObject(bkcolor));
 									canvas.drawFillRect(l, t, w, h);
 								}
 								if (bkimage && bkimage != "none") {
-									var image = new nexacro.Image();
+									image = new nexacro.Image();
 									image.set_src(bkimage);
 
 									var ix = l, iy = t;
@@ -2165,26 +2133,21 @@ if (!nexacro._CompUtil) {
 									}
 
 									canvas.drawImage(image, ix, iy, iw, ih);
-
-									delete image;
-									image = null;
 								}
 							}
 							if (drawIco) {
 								if (style.type == "runtime" && elem.icon) {
-									var image = new nexacro.Image();
+									image = new nexacro.Image();
 									image.set_src(elem.icon.value);
 
 									canvas.drawImage(image, l, t, image.width, image.height);
-
-									delete image;
-									image = null;
 								}
 								else if (elem._icon_node) {
 									canvas.drawImage(elem._icon_node, l, t, elem._icon_node.width, elem._icon_node.height);
 								}
 							}
-							if (!drawTxt) {
+							{
+
 								break;
 							}
 						}
@@ -2193,30 +2156,27 @@ if (!nexacro._CompUtil) {
 					case "TextAreaElement":
 						{
 
-							var drawBox = (optxt && optxt == "drawBox") && elem.text;
-							var drawTxt = (!optxt || optxt == "drawTxt") && elem.text;
+							drawBox = (optxt && optxt == "drawBox") && elem.text;
+							drawTxt = (!optxt || optxt == "drawTxt") && elem.text;
 
 							var padding = elem.textPadding;
 							if (padding) {
 								l += padding.left;
 								t += padding.top;
 							}
-							var halign = nexacro._getCurrentStyleValue(style, "text-align");
 							if (halign) {
 								canvas.setElementTextAlign(halign);
 							}
-							var font = nexacro._getCurrentStyleValue(style, "font");
 							if (font) {
 								canvas.setElementFont(nexacro.FontObject(font));
 							}
-							var color = nexacro._getCurrentStyleValue(style, ("color"));
 							if (color) {
 								canvas.setElementFillStyle(nexacro.ColorObject(color));
 							}
 
+							var x;
 							if (drawTxt) {
 								var text = elem.text;
-								var x = l;
 								switch (halign) {
 									case "right":
 										x = l + w;
@@ -2232,12 +2192,12 @@ if (!nexacro._CompUtil) {
 								canvas.fillText(text, x, t);
 							}
 							if (drawBox) {
-								var n = elem.text.length, c = 6, r = 8, s = 1;
-								var x = Math.max(w - (c + s) * n - s, 0);
+								var n = elem.text.length;
+								var c = 6, r = 8, s = 1;
+								x = Math.max(w - (c + s) * n - s, 0);
 
 								switch (halign) {
 									case "right":
-										x = x;
 										break;
 									case "center":
 										x /= 2;
@@ -2246,7 +2206,11 @@ if (!nexacro._CompUtil) {
 										x = 0;
 										break;
 								}
-								for (var i = 0, l = l + x, t = (h - r) / 2, e = l + w; i < n && l + c < e; i++, l += c + s) {
+
+								l = l + x;
+								t = (h - r) / 2;
+
+								for (var i = 0; i < n && l + c < l + w; i++, l += c + s) {
 									canvas.drawFillRect(l, t, c, r);
 								}
 							}
@@ -2254,18 +2218,10 @@ if (!nexacro._CompUtil) {
 							break;
 						}
 					case "CanvasElement":
-						{
-
-							break;
-						}
 					case "PluginElement":
 					case "WebBrowserPluginElement":
 					case "VideoPlayerPluginElement":
 					case "GoogleMapElement":
-						{
-
-							break;
-						}
 					case "ContainerElement":
 					case "ModalOverlayElement":
 						{
@@ -2288,17 +2244,20 @@ if (!nexacro._CompUtil) {
 
 				var control_elem = comp.getElement();
 				if (control_elem && control_elem.handle) {
-					var em = control_elem;
-					if (em) {
-						var b = comp._getCurrentStyleBorder();
-						var bl = b ? b.left._width : 0;
-						var bt = b ? b.top._width : 0;
+					var i, n;
+					var items, item, children, child;
 
-						nexacro._drawElement2Canvas(canvas, em, l, t, optxt, opimg);
+					var cl, ct;
+					var el, et;
 
-						l += bl;
-						t += bt;
-					}
+					var b = comp._getCurrentStyleBorder();
+					var bl = b ? b.left._width : 0;
+					var bt = b ? b.top._width : 0;
+
+					nexacro._drawElement2Canvas(canvas, control_elem, l, t, optxt, opimg);
+
+					l += bl;
+					t += bt;
 
 					var child_elem = control_elem.getContainerElement();
 					child_elem = comp._getClientElement ? comp._getClientElement() : child_elem;
@@ -2308,8 +2267,8 @@ if (!nexacro._CompUtil) {
 					child_elem = comp._input_element ? comp._input_element : child_elem;
 
 					if (child_elem && child_elem != control_elem && child_elem.handle) {
-						var el = child_elem.left;
-						var et = child_elem.top;
+						el = child_elem.left;
+						et = child_elem.top;
 
 						canvas.setElementFont(comp._getCurrentStyleInheritValue("font"));
 						canvas.setElementColor(comp._getCurrentStyleInheritValue("color"));
@@ -2317,26 +2276,26 @@ if (!nexacro._CompUtil) {
 						nexacro._drawElement2Canvas(canvas, child_elem, l + el, t + et, optxt, opimg);
 					}
 
-					var children = comp._getChildren ? comp._getChildren() : null;
+					children = comp._getChildren ? comp._getChildren() : null;
 					if (children) {
-						for (var i = 0, n = children.length; i < n; i++) {
-							var child = children[i];
+						for (i = 0, n = children.length; i < n; i++) {
+							child = children[i];
 							if (child) {
-								var cl = child.getOffsetLeft();
-								var ct = child.getOffsetTop();
+								cl = child.getOffsetLeft();
+								ct = child.getOffsetTop();
 
 								nexacro._drawComponent2Canvas(canvas, child, l + cl, t + ct, optxt, opimg);
 							}
 						}
 					}
 
-					var items = comp._getItems ? comp._getItems() : null;
+					items = comp._getItems ? comp._getItems() : null;
 					if (items) {
-						for (var i = 0, n = items.length; i < n; i++) {
-							var item = items[i];
+						for (i = 0, n = items.length; i < n; i++) {
+							item = items[i];
 							if (item) {
-								var cl = item.getOffsetLeft();
-								var ct = item.getOffsetTop();
+								cl = item.getOffsetLeft();
+								ct = item.getOffsetTop();
 
 								nexacro._drawComponent2Canvas(canvas, item, l + cl, t + ct, optxt, opimg);
 							}
@@ -2345,11 +2304,11 @@ if (!nexacro._CompUtil) {
 
 					var ncchild = comp._getNCChildren ? comp._getNCChildren() : null;
 					if (ncchild) {
-						for (var i = 0, n = ncchild.length; i < n; i++) {
-							var child = ncchild[i];
+						for (i = 0, n = ncchild.length; i < n; i++) {
+							child = ncchild[i];
 							if (child) {
-								var cl = child.getOffsetLeft();
-								var ct = child.getOffsetTop();
+								cl = child.getOffsetLeft();
+								ct = child.getOffsetTop();
 
 								nexacro._drawComponent2Canvas(canvas, child, l + cl, t + ct, optxt, opimg);
 							}
@@ -2367,48 +2326,26 @@ if (!nexacro._CompUtil) {
 		this._notifytype = type;
 		this._notifycomp = comp;
 	};
-	nexacro._notify = function (msg) {
-		if (this._notifycomp && this._notifycomp.value) {
-			switch (this._notifytype) {
-				case "addtext":
-					return this._notifycomp.value += msg;
-				case "addline":
-					return this._notifycomp.value += msg + "\n";
-				case "settext":
-					return this._notifycomp.value = msg;
-			}
-		}
-		{
-
-			switch (this._notifytype) {
-				case "alert":
-					return alert(msg);
-				case "trace":
-					return trace(msg);
-			}
-			switch (nexacro._Browser) {
-				case "Runtime":
-					return alert(msg);
-				default:
-					return trace(msg);
-			}
-		}
-	};
 	nexacro._errorV8CallStack = function () {
-		if (nexacro.__onNexacroStudioError) {
-			Error.stackTraceLimit = 30;
+		Error.stackTraceLimit = 30;
+
+		var traceFn = nexacro.__onNexacroStudioError ? nexacro.__onNexacroStudioError : Error ? trace : null;
+		if (traceFn) {
+			var e = new Error();
+			var stack = e.stack;
+			var str = "";
+
+			var i, j;
+			var frame, func, argstr, tempstr;
+			var _this, _obname, _fnname;
 
 			try {
-				var e = new Error();
-				var stack = e.stack;
-				var str = "";
-
-				for (var i = 1; i < stack.length; i++) {
-					var frame = stack[i];
-					var func = frame.getFunction();
-					var argstr = "";
-					for (var j = 0; j < func.arguments.length; j++) {
-						var tempstr = func.arguments[j] + ", ";
+				for (i = 1; i < stack.length; i++) {
+					frame = stack[i];
+					func = frame.getFunction();
+					argstr = "";
+					for (j = 0; j < func.arguments.length; j++) {
+						tempstr = func.arguments[j] + ", ";
 						if (tempstr.length > 30) {
 							argstr += "[LONG STR], ";
 						}
@@ -2417,9 +2354,9 @@ if (!nexacro._CompUtil) {
 						}
 					}
 
-					var _this = frame.getThis();
-					var _obname = _this.id ? _this.id : _this.name;
-					var _fnname = frame.getFunctionName();
+					_this = frame.getThis();
+					_obname = _this.id ? _this.id : _this.name;
+					_fnname = frame.getFunctionName();
 					str += "\n   " + _this + _obname + "." + _fnname + "(arg: " + argstr + ")";
 				}
 
@@ -2427,67 +2364,17 @@ if (!nexacro._CompUtil) {
 
 				switch (mode) {
 					case 0:
-						nexacro.__onNexacroStudioError("\n===[callstack(" + (stack.length - 1) + ")]==============================\n" + str + "\n============================================");
+						traceFn("\n===[callstack(" + (stack.length - 1) + ")]==============================\n" + str + "\n============================================");
 						break;
 					case 1:
 						{
 
-							nexacro.__onNexacroStudioError("\n===[callstack(" + (stack.length - 1) + ")]==============================");
+							traceFn("\n===[callstack(" + (stack.length - 1) + ")]==============================");
 							var strlist = str.split("\n");
-							for (var i = 0; i < strlist.length; i++) {
-								nexacro.__onNexacroStudioError(strlist[i]);
+							for (i = 0; i < strlist.length; i++) {
+								traceFn(strlist[i]);
 							}
-							nexacro.__onNexacroStudioError("============================================");
-						}
-						break;
-				}
-			}
-			catch (e) {
-			}
-		}
-		else if (Error) {
-			Error.stackTraceLimit = 30;
-
-			try {
-				var e = new Error();
-				var stack = e.stack;
-				var str = "";
-
-				for (var i = 1; i < stack.length; i++) {
-					var frame = stack[i];
-					var func = frame.getFunction();
-					var argstr = "";
-					for (var j = 0; j < func.arguments.length; j++) {
-						var tempstr = func.arguments[j] + ", ";
-						if (tempstr.length > 30) {
-							argstr += "[LONG STR], ";
-						}
-						else {
-							argstr += tempstr;
-						}
-					}
-
-					var _this = frame.getThis();
-					var _obname = _this.id ? _this.id : _this.name;
-					var _fnname = frame.getFunctionName();
-					str += "\n   " + _this + _obname + "." + _fnname + "(arg: " + argstr + ")";
-				}
-
-				var mode = 0;
-
-				switch (mode) {
-					case 0:
-						trace("\n===[callstack(" + (stack.length - 1) + ")]==============================\n" + str + "\n============================================");
-						break;
-					case 1:
-						{
-
-							trace("\n===[callstack(" + (stack.length - 1) + ")]==============================");
-							var strlist = str.split("\n");
-							for (var i = 0; i < strlist.length; i++) {
-								trace(strlist[i]);
-							}
-							trace("============================================");
+							traceFn("============================================");
 						}
 						break;
 				}

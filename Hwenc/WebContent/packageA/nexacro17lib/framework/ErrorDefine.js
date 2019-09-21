@@ -65,7 +65,7 @@ if (this.nexacro) {
 			"msg_permit_domain" : ["이 도메인은 항상 허용"], 
 			"msg_permit_cert" : ["이 인증서는 항상 허용"], 
 
-			"msg_update_processing" : ["실행중인 Process[", "%0", "] 가 있어서 Update가 실패하였습니다. 실행중인 Process를 자동 종료하려면 Yes(예), 실행중인 Process를 직접 종료하고 난 후에 계속 진행하려면 No(아니오), Restart 후에 Update를 적용하려면 Cancel(무시)를 선택합니다. "], 
+			"msg_update_processing" : ["실행중인 Process[", "%0", "] 가 있어서 Update가 실패하였습니다. 실행중인 Process를 자동 종료하려면 Yes(예), 실행중인 Process를 직접 종료하고 난 후에 계속 진행하려면 No(아니오), Restart 후에 Update를 적용하려면 Cancel(취소)를 선택합니다. "], 
 			"msg_reset_sandboxdialog" : ["프로그램 개선에 따라 폴더/도메인 접근 경고창에서 기존에 설정 하였던 허용 여부를 재설정 하여야만 합니다. 고객님의 많은 양해 부탁드립니다."], 
 
 			"msg_start" : ["nexacro platform 을 시작합니다."], 
@@ -244,7 +244,7 @@ if (this.nexacro) {
 			"msg_permit_folder" : ["このフォルダ配下のファイルは、常にアクセス許可"], 
 			"msg_permit_domain" : ["このドメインは常にアクセス許容"], 
 			"msg_permit_cert" : ["この証明書は常にアクセス許容"], 
-			"msg_update_processing" : ["実行中のプロセス[", "%0", "]があるため、Updateに失敗しました。実行中のプロセスを自動終了する場合はYes(はい)、実行中のプロセスを直接終了させてから続ける場合はNo(いいえ), 再起動後にアップデートを適用する場合はキャンセルを選択します。"], 
+			"msg_update_processing" : ["実行中のプロセス[", "%0", "]があるため、Updateに失敗しました。実行中のプロセスを自動終了する場合はYes(はい)、実行中のプロセスを直接終了させてから続ける場合はNo(いいえ), 再起動後にアップデートを適用する場合はCancel(キャンセル)を選択します。"], 
 			"msg_reset_sandboxdialog" : ["プログラム改善によりフォルダやドメインへのアクセス警告ウィンドウで設定したアクセス可否の設定値を再設定する必要があります。\nご了承ください。"], 
 
 			"msg_start" : ["nexacro platformをスタートします。"], 

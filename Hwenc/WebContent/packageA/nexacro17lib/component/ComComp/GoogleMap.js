@@ -304,10 +304,6 @@ if (nexacro.Device && nexacro._OS == "Android") {
 		};
 
 		_pGoogleMap.set_viewmode = function (v) {
-			if (v == null) {
-				return false;
-			}
-
 			if (v != null) {
 				this.viewmode = v;
 
@@ -326,10 +322,6 @@ if (nexacro.Device && nexacro._OS == "Android") {
 		};
 
 		_pGoogleMap.set_showzoom = function (v) {
-			if (v == null) {
-				return false;
-			}
-
 			if (v != null) {
 				if (v == true || (typeof (v) == "string" && v == "true")) {
 					this.showzoom = true;
@@ -352,10 +344,6 @@ if (nexacro.Device && nexacro._OS == "Android") {
 		};
 
 		_pGoogleMap.set_shownavigator = function (v) {
-			if (v == null) {
-				return false;
-			}
-
 			if (v != null) {
 				if (v == true || (typeof (v) == "string" && v == "true")) {
 					this.shownavigator = true;
@@ -382,10 +370,6 @@ if (nexacro.Device && nexacro._OS == "Android") {
 		};
 
 		_pGoogleMap.set_showcompass = function (v) {
-			if (v == null) {
-				return false;
-			}
-
 			if (v != null) {
 				if (v == true || (typeof (v) == "string" && v == "true")) {
 					this.showcompass = true;
@@ -503,7 +487,7 @@ if (nexacro.Device && nexacro._OS == "Android") {
 					return false;
 				}
 
-				if ((+nlat) != (+nlat)) {
+				if (nlat != nlat) {
 					return false;
 				}
 				try {
@@ -513,7 +497,7 @@ if (nexacro.Device && nexacro._OS == "Android") {
 					return false;
 				}
 
-				if ((+nlon) != (+nlon)) {
+				if (nlon != nlon) {
 					return false;
 				}
 				this.centerlocation.latitude = nlat;
@@ -579,19 +563,11 @@ if (nexacro.Device && nexacro._OS == "Android") {
 		};
 
 		_pGoogleMap.getAddress = function (nLatitude, nLongitude, nMaxResultCount, enumLocale) {
-			if (nLatitude == undefined || nLatitude == null) {
+			if (nLatitude == null || nLongitude == null || nMaxResultCount < 0) {
 				return false;
 			}
 
-			if (nLongitude == undefined || nLongitude == null) {
-				return false;
-			}
-
-			if (nMaxResultCount < 0) {
-				return false;
-			}
-
-			if (nMaxResultCount == undefined || nMaxResultCount == null) {
+			if (nMaxResultCount == null) {
 				nMaxResultCount = 1;
 			}
 
@@ -607,7 +583,7 @@ if (nexacro.Device && nexacro._OS == "Android") {
 		};
 
 		_pGoogleMap.getCoordinates = function (strAddress) {
-			if (strAddress == undefined || strAddress == null || strAddress == "") {
+			if (strAddress == null || strAddress == "") {
 				return false;
 			}
 
@@ -630,7 +606,7 @@ if (nexacro.Device && nexacro._OS == "Android") {
 				return false;
 			}
 
-			if (strItemID == "" || typeof (strItemID) == "undefined" || objComponent == "" || objComponent == "undefined" || strItemID.trim() == "") {
+			if (strItemID == "" || objComponent == "" || objComponent == "undefined" || strItemID.trim() == "") {
 				return false;
 			}
 
@@ -668,20 +644,11 @@ if (nexacro.Device && nexacro._OS == "Android") {
 		_pGoogleMap.addMarker = function (elem, markName, markObj) {
 			if (markObj.imageurl.length > 0) {
 				var _v = markObj.imageurl.toString().split(" ").join("");
-				var img_path = "";
 
-				if (_v.substring(0, 9).toLowerCase() == "%userapp%") {
-					img_path = "../" + _v.substring(9, _v.length);
-				}
-				else if (_v.substring(0, 9).toLowerCase() == "%sd_card%") {
-					img_path = "file://mnt/sdcard/NEXACRO/" + _v.substring(9, _v.length);
-				}
-				else {
+				if (_v.substring(0, 9).toLowerCase() != "%userapp%"
+					 && _v.substring(0, 9).toLowerCase() != "%sd_card%") {
 					var _filecache = nexacro._getFileCache(_v);
-					if (null != _filecache) {
-						img_path = "../" + _filecache;
-					}
-					else {
+					if (null == _filecache) {
 						return false;
 					}
 				}
@@ -719,35 +686,6 @@ if (nexacro.Device && nexacro._OS == "Android") {
 				}
 			}
 
-			var _color_stroke;
-			if (typeof (nexacro._xreNamedColorList[polygonObj.linecolor]) != "undefined") {
-				_color_stroke = nexacro._xreNamedColorList[polygonObj.linecolor] + "FF";
-			}
-			else {
-				_color_stroke = polygonObj.linecolor;
-			}
-
-			var _color_fill;
-			if (typeof (nexacro._xreNamedColorList[polygonObj.linecolor]) != "undefined") {
-				_color_fill = nexacro._xreNamedColorList[polygonObj.linecolor] + "FF";
-			}
-			else {
-				_color_fill = polygonObj.linecolor;
-			}
-
-			var _alpha_stroke_1;
-			var _alpha_stroke = 1.0;
-			if (_color_stroke.length > 7) {
-				_alpha_stroke_1 = parseInt(_color_stroke.substring(7), 16);
-				_alpha_stroke = _alpha_stroke_1 / 255.0;
-			}
-			var _alpha_fill_1;
-			var _alpha_fill = 1.0;
-			if (_color_fill.length > 7) {
-				_alpha_fill_1 = parseInt(_color_fill.substring(7), 16);
-				_alpha_fill = _alpha_fill_1 / 255.0;
-			}
-
 			_itemsname.push(polygonName);
 			_items[polygonName] = "polygon";
 
@@ -780,19 +718,6 @@ if (nexacro.Device && nexacro._OS == "Android") {
 					arr_lat.push(_lat);
 					arr_lng.push(_lng);
 				}
-			}
-
-			var _color;
-			if (typeof (nexacro._xreNamedColorList[polylineObj.linecolor]) != "undefined") {
-				_color = nexacro._xreNamedColorList[polylineObj.linecolor] + "FF";
-			}
-			else {
-				_color = polylineObj.style.strokepen.linecolor;
-			}
-
-			var _alpha_1;
-			if (_color.length > 7) {
-				_alpha_1 = parseInt(_color.substring(7), 16);
 			}
 
 			_itemsname.push(polylineName);
@@ -836,7 +761,7 @@ if (nexacro.Device && nexacro._OS == "Android") {
 				return false;
 			}
 
-			if (strItemID == "" || typeof (strItemID) == "undefined") {
+			if (strItemID == "") {
 				return false;
 			}
 
@@ -1107,7 +1032,7 @@ if (nexacro.Device && nexacro._OS == "Android") {
 				return false;
 			}
 
-			if ((+nWidth) != (+nWidth)) {
+			if (nWidth != nWidth) {
 				return false;
 			}
 			this.linewidth = nWidth;
@@ -1176,7 +1101,7 @@ if (nexacro.Device && nexacro._OS == "Android") {
 				return false;
 			}
 
-			if ((+nWidth) != (+nWidth)) {
+			if (nWidth != nWidth) {
 				return false;
 			}
 			this.linewidth = nWidth;
@@ -1235,7 +1160,7 @@ if (nexacro.Device && nexacro._OS == "Android") {
 				return false;
 			}
 
-			if ((+this.longitude) != (+this.longitude)) {
+			if (this.longitude != this.longitude) {
 				return false;
 			}
 			return true;
@@ -1249,7 +1174,7 @@ if (nexacro.Device && nexacro._OS == "Android") {
 				return false;
 			}
 
-			if ((+this.latitude) != (+this.latitude)) {
+			if (this.latitude != this.latitude) {
 				return false;
 			}
 
@@ -1270,7 +1195,7 @@ if (nexacro.Device && nexacro._OS == "Android") {
 		};
 
 		_pGoogleMapCircle.set_radius = function (v) {
-			if (v == null || typeof (v) == "undefined") {
+			if (v == null) {
 				this.radius = 100;
 			}
 			else {
@@ -1496,9 +1421,7 @@ else if ((nexacro.Device && nexacro._OS != "Windows") || nexacro._Browser != "Ru
 				return false;
 			}
 
-			var __zoomalign = google.maps.ControlPosition.LEFT_TOP;
-			__zoomalign = this._getalign(this.zoomalign_halign, this.zoomalign_valign);
-			this.zoomalign = __zoomalign;
+			this.zoomalign = this._getalign(this.zoomalign_halign, this.zoomalign_valign);
 
 			this._google_map_option_test = {
 				zoomControlOptions : {
@@ -1543,10 +1466,10 @@ else if ((nexacro.Device && nexacro._OS != "Windows") || nexacro._Browser != "Ru
 			}
 		};
 
-		var _itemsname = [];
-		var _items = [];
-		var _infowindowname = [];
-		var _infowindow = [];
+		_itemsname = [];
+		_items = [];
+		_infowindowname = [];
+		_infowindow = [];
 
 		_pGoogleMap.set_enableevent = function (v) {
 			this.enableevent = nexacro._toBoolean(v);
@@ -1554,10 +1477,6 @@ else if ((nexacro.Device && nexacro._OS != "Windows") || nexacro._Browser != "Ru
 		};
 
 		_pGoogleMap.set_viewmode = function (v) {
-			if (v == null) {
-				return false;
-			}
-
 			if (v != null) {
 				this.viewmode = v;
 				if (this.bLoaded) {
@@ -1580,10 +1499,6 @@ else if ((nexacro.Device && nexacro._OS != "Windows") || nexacro._Browser != "Ru
 		};
 
 		_pGoogleMap.set_showmode = function (v) {
-			if (v == null) {
-				return false;
-			}
-
 			if (v != null) {
 				if (v == true || (typeof (v) == "string" && v == "true")) {
 					this.showmode = true;
@@ -1612,10 +1527,6 @@ else if ((nexacro.Device && nexacro._OS != "Windows") || nexacro._Browser != "Ru
 		};
 
 		_pGoogleMap.set_showmapscale = function (v) {
-			if (v == null) {
-				return false;
-			}
-
 			if (v != null) {
 				if (v == true || (typeof (v) == "string" && v == "true")) {
 					this.showmapscale = true;
@@ -1640,10 +1551,6 @@ else if ((nexacro.Device && nexacro._OS != "Windows") || nexacro._Browser != "Ru
 		};
 
 		_pGoogleMap.set_showmapscale = function (v) {
-			if (v == null) {
-				return false;
-			}
-
 			if (v != null) {
 				if (v == true || (typeof (v) == "string" && v == "true")) {
 					this.showmapscale = true;
@@ -1666,10 +1573,6 @@ else if ((nexacro.Device && nexacro._OS != "Windows") || nexacro._Browser != "Ru
 		};
 
 		_pGoogleMap.set_shownavigator = function (v) {
-			if (v == null) {
-				return false;
-			}
-
 			if (v != null) {
 				if (v == true || (typeof (v) == "string" && v == "true")) {
 					this.shownavigator = true;
@@ -1698,6 +1601,7 @@ else if ((nexacro.Device && nexacro._OS != "Windows") || nexacro._Browser != "Ru
 
 			this.apikey = v;
 		};
+
 		_pGoogleMap._set_option = function () {
 			var _mapType = this._getMapType();
 
@@ -1730,7 +1634,8 @@ else if ((nexacro.Device && nexacro._OS != "Windows") || nexacro._Browser != "Ru
 		};
 
 		_pGoogleMap._getMapType = function (v) {
-			var __maptype = google.maps.MapTypeId.ROADMAP;
+			var __maptype;
+
 			switch (v) {
 				default:
 				case 0:
@@ -1944,6 +1849,7 @@ else if ((nexacro.Device && nexacro._OS != "Windows") || nexacro._Browser != "Ru
 		};
 
 		_pGoogleMap.load = function (bUseSensor, nLatitude, nLongitude, constViewMode, nZoomLevel, retry) {
+			var google_map = this._google_map;
 			if (nexacro.googlemaps_loaded == false) {
 				if (!retry) {
 					nexacro.load_googlemaps(this.apikey);
@@ -2046,7 +1952,7 @@ else if ((nexacro.Device && nexacro._OS != "Windows") || nexacro._Browser != "Ru
 					return false;
 				}
 
-				if ((+nlat) != (+nlat)) {
+				if (nlat != nlat) {
 					return false;
 				}
 				try {
@@ -2056,7 +1962,7 @@ else if ((nexacro.Device && nexacro._OS != "Windows") || nexacro._Browser != "Ru
 					return false;
 				}
 
-				if ((+nlon) != (+nlon)) {
+				if (nlon != nlon) {
 					return false;
 				}
 				this.centerlocation.latitude = nlat;
@@ -2107,7 +2013,7 @@ else if ((nexacro.Device && nexacro._OS != "Windows") || nexacro._Browser != "Ru
 					geo.getCurrentPosition(function (position) {
 						var initialLocation = new google.maps.LatLng(position.latitude, position.longitude);
 
-						var myLatlng = new google.maps.LatLng(position.latitude, position.longitude);
+						myLatlng = new google.maps.LatLng(position.latitude, position.longitude);
 						google_map.setCenter(initialLocation);
 					}, function () {
 						parentMap._apply_onerror({
@@ -2226,19 +2132,12 @@ else if ((nexacro.Device && nexacro._OS != "Windows") || nexacro._Browser != "Ru
 		};
 
 		_pGoogleMap.getAddress = function (nLatitude, nLongitude, nMaxResultCount, strLocale) {
-			if (nLatitude == undefined || nLatitude == null) {
+			if (nLatitude == null || nLongitude == null || nMaxResultCount < 0) {
 				return false;
 			}
 
-			if (nLongitude == undefined || nLongitude == null) {
-				return false;
-			}
 
-			if (nMaxResultCount < 0) {
-				return false;
-			}
-
-			if (nMaxResultCount == undefined || nMaxResultCount == null) {
+			if (nMaxResultCount == null) {
 				nMaxResultCount = 1;
 			}
 
@@ -2253,7 +2152,7 @@ else if ((nexacro.Device && nexacro._OS != "Windows") || nexacro._Browser != "Ru
 		};
 
 		_pGoogleMap.getCoordinates = function (strAddress) {
-			if (strAddress == undefined || strAddress == null || strAddress == "") {
+			if (strAddress == null || strAddress == "") {
 				return false;
 			}
 
@@ -2273,9 +2172,7 @@ else if ((nexacro.Device && nexacro._OS != "Windows") || nexacro._Browser != "Ru
 				return false;
 			}
 
-			if (strItemID == "" || typeof (strItemID) == "undefined"
-				 || objItem == "" || objItem == "undefined"
-				 || strItemID.trim() == "") {
+			if (strItemID == "" || objItem == "" || objItem == "undefined" || strItemID.trim() == "") {
 				return false;
 			}
 
@@ -2527,7 +2424,7 @@ else if ((nexacro.Device && nexacro._OS != "Windows") || nexacro._Browser != "Ru
 			};
 
 			google.maps.event.addListener(_items[polygonName], 'click', function (e) {
-				__parent.gmap_onoverlayclick(_items[polygonName], e.latLng.lat(), e.latLng.lng(), 0, 0);
+				_pGoogleMap.gmap_onoverlayclick(_items[polygonName], e.latLng.lat(), e.latLng.lng(), 0, 0);
 			});
 			_items[polygonName].setOptions(polygonOpt);
 		};
@@ -2633,7 +2530,7 @@ else if ((nexacro.Device && nexacro._OS != "Windows") || nexacro._Browser != "Ru
 			};
 
 			google.maps.event.addListener(_items[polylineName], 'click', function (e) {
-				__parent.gmap_onoverlayclick(_items[polylineName], e.latLng.lat(), e.latLng.lng(), 0, 0);
+				_pGoogleMap.gmap_onoverlayclick(_items[polylineName], e.latLng.lat(), e.latLng.lng(), 0, 0);
 			});
 
 			_items[polylineName].setOptions(polyLineOpt);
@@ -2688,14 +2585,6 @@ else if ((nexacro.Device && nexacro._OS != "Windows") || nexacro._Browser != "Ru
 		};
 
 		_pGoogleMap.setCircleOptions = function (circleName, ciecleObj) {
-			var circleOpt = {
-				fillOpacity : 0, 
-				strokeWeight : 1.5, 
-				center : new google.maps.LatLng(ciecleObj.latitude, ciecleObj.longitude), 
-				radius : ciecleObj.radius, 
-				visible : ciecleObj.visible
-			};
-
 			_items[circleName].setOptions(ciecleObj);
 		};
 
@@ -2721,7 +2610,7 @@ else if ((nexacro.Device && nexacro._OS != "Windows") || nexacro._Browser != "Ru
 			if (strItemID == null) {
 				return false;
 			}
-			if (strItemID == "" || typeof (strItemID) == "undefined") {
+			if (strItemID == "") {
 				return false;
 			}
 
@@ -2817,17 +2706,17 @@ else if ((nexacro.Device && nexacro._OS != "Windows") || nexacro._Browser != "Ru
 		};
 
 		_pGoogleMap._on_sys_click = function (node, e, bubble) {
-			var e = e.changedTouches ? e.changedTouches[0] : e;
-			nexacro.ajaxlog("_on_sys_click" + e.screenx + "," + e.screeny
-				 + ":" + node + ":" + e + ":" + bubble + "]");
+			var event = e.changedTouches ? e.changedTouches[0] : e;
+			nexacro.ajaxlog("_on_sys_click" + event.screenx + "," + event.screeny
+				 + ":" + node + ":" + event + ":" + bubble + "]");
 
 			if (this.$IsReadyFireEvent() && this.$isEnable() && this.enableevent) {
 				if (this.kindClick == "normalclick") {
-					this._fire_onclick(node._comp, e);
+					this._fire_onclick(node._comp, event);
 				}
 				else {
 					if (this.kindClick == "overlayclick" && typeof (this.overlayfromobj) != "undefined") {
-						this._fire_onoverlayclick(node._comp, e);
+						this._fire_onoverlayclick(node._comp, event);
 					}
 				}
 			}
@@ -3036,7 +2925,7 @@ else if ((nexacro.Device && nexacro._OS != "Windows") || nexacro._Browser != "Ru
 				return false;
 			}
 
-			if ((+this.longitude) != (+this.longitude)) {
+			if (this.longitude != this.longitude) {
 				return false;
 			}
 
@@ -3057,7 +2946,7 @@ else if ((nexacro.Device && nexacro._OS != "Windows") || nexacro._Browser != "Ru
 				return false;
 			}
 
-			if ((+this.latitude) != (+this.latitude)) {
+			if (this.latitude != this.latitude) {
 				return false;
 			}
 
@@ -3124,7 +3013,7 @@ else if ((nexacro.Device && nexacro._OS != "Windows") || nexacro._Browser != "Ru
 
 		_pGoogleMapMarker.set_style = function (v) {
 			var v_arr = v.split(";");
-			var i = 0;
+			var i;
 			var _v_arr;
 			var ret = true;
 			for (i = 0; i < v_arr.length; i++) {
@@ -3132,14 +3021,13 @@ else if ((nexacro.Device && nexacro._OS != "Windows") || nexacro._Browser != "Ru
 				if (_v_arr.length != 2) {
 					return false;
 				}
-				switch (_v_arr[0].split(" ").join("").toLowerCase()) {
-					case "align":
-						ret = this.style.set_align(_v_arr[1]);
-						break;
-					default:
-						ret = false;
-						break;
+				else if (_v_arr[0].split(" ").join("").toLowerCase() == "align") {
+					ret = this.style.set_align(_v_arr[1]);
 				}
+				else {
+					ret = false;
+				}
+
 				if (!ret) {
 					return ret;
 				}
@@ -3220,7 +3108,7 @@ else if ((nexacro.Device && nexacro._OS != "Windows") || nexacro._Browser != "Ru
 				return false;
 			}
 
-			if ((+nWidth) != (+nWidth)) {
+			if (nWidth != nWidth) {
 				return false;
 			}
 			this.linewidth = nWidth;
@@ -3305,7 +3193,7 @@ else if ((nexacro.Device && nexacro._OS != "Windows") || nexacro._Browser != "Ru
 				return false;
 			}
 
-			if ((+nWidth) != (+nWidth)) {
+			if (nWidth != nWidth) {
 				return false;
 			}
 			this.linewidth = nWidth;
@@ -3357,7 +3245,7 @@ else if ((nexacro.Device && nexacro._OS != "Windows") || nexacro._Browser != "Ru
 				return false;
 			}
 
-			if ((+this.longitude) != (+this.longitude)) {
+			if (this.longitude != this.longitude) {
 				return false;
 			}
 
@@ -3375,7 +3263,7 @@ else if ((nexacro.Device && nexacro._OS != "Windows") || nexacro._Browser != "Ru
 				return false;
 			}
 
-			if ((+this.latitude) != (+this.latitude)) {
+			if (this.latitude != this.latitude) {
 				return false;
 			}
 
@@ -3403,7 +3291,7 @@ else if ((nexacro.Device && nexacro._OS != "Windows") || nexacro._Browser != "Ru
 		};
 
 		_pGoogleMapCircle.set_radius = function (v) {
-			if (v == null || typeof (v) == "undefined") {
+			if (v == null) {
 				this.radius = 100;
 			}
 			else {
@@ -3457,6 +3345,8 @@ else {
 		_pGoogleMap.set_mapscalealign = function (v) {
 		};
 		_pGoogleMap.set_draggable = function (v) {
+		};
+		_pGoogleMap.set_apikey = function (v) {
 		};
 
 		_pGoogleMap.load = function (bUseSensor, nLatitude, nLongitude, constViewMode, nZoomLevel) {

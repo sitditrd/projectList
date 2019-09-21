@@ -205,23 +205,24 @@ if (!nexacro.ScrollBarControl) {
 			wheelZoom = _window._wheelZoom / 100;
 		}
 		var fromObject = fromComp;
+		var btn, left, top, width, height;
 		if (fromObject == this.decbutton) {
-			var btn = this.decbutton;
-			var left = btn._adjust_left;
-			var top = btn._adjust_top;
-			var width = btn._adjust_width * scale * wheelZoom;
-			var height = btn._adjust_height * scale * wheelZoom;
+			btn = this.decbutton;
+			left = btn._adjust_left;
+			top = btn._adjust_top;
+			width = btn._adjust_width * scale * wheelZoom;
+			height = btn._adjust_height * scale * wheelZoom;
 
 			if (left <= x && (left + width) >= x && top <= y && (top + height) >= y) {
 				this.on_decbutton_lbuttondown(this);
 			}
 		}
 		else if (fromObject == this.incbutton) {
-			var btn = this.incbutton;
-			var left = btn._adjust_left;
-			var top = btn._adjust_top;
-			var width = btn._adjust_width * scale * wheelZoom;
-			var height = btn._adjust_height * scale * wheelZoom;
+			btn = this.incbutton;
+			left = btn._adjust_left;
+			top = btn._adjust_top;
+			width = btn._adjust_width * scale * wheelZoom;
+			height = btn._adjust_height * scale * wheelZoom;
 
 			if (left <= x && (left + width) >= x && top <= y && (top + height) >= y) {
 				this.on_incbutton_lbuttondown(this);
@@ -245,12 +246,13 @@ if (!nexacro.ScrollBarControl) {
 			wheelZoom = _window._wheelZoom / 100;
 		}
 		var btn, fromObject = fromComp;
+		var left, top, width, height;
 		if (fromObject == this.decbutton) {
 			btn = this.decbutton;
-			var left = btn._adjust_left;
-			var top = btn._adjust_top;
-			var width = btn._adjust_width * scale * wheelZoom;
-			var height = btn._adjust_height * scale * wheelZoom;
+			left = btn._adjust_left;
+			top = btn._adjust_top;
+			width = btn._adjust_width * scale * wheelZoom;
+			height = btn._adjust_height * scale * wheelZoom;
 
 			if (left <= x && (left + width) >= x && top <= y && (top + height) >= y) {
 				this.on_decbutton_lbuttondown(this, null);
@@ -258,10 +260,10 @@ if (!nexacro.ScrollBarControl) {
 		}
 		else if (fromObject == this.incbutton) {
 			btn = this.incbutton;
-			var left = btn._adjust_left;
-			var top = btn._adjust_top;
-			var width = btn._adjust_width * scale * wheelZoom;
-			var height = btn._adjust_height * scale * wheelZoom;
+			left = btn._adjust_left;
+			top = btn._adjust_top;
+			width = btn._adjust_width * scale * wheelZoom;
+			height = btn._adjust_height * scale * wheelZoom;
 
 			if (left <= x && (left + width) >= x && top <= y && (top + height) >= y) {
 				this.on_incbutton_lbuttondown(this, null);
@@ -269,10 +271,10 @@ if (!nexacro.ScrollBarControl) {
 		}
 		else if (fromObject == this) {
 			btn = this.trackbar;
-			var left = btn._adjust_left;
-			var top = btn._adjust_top;
-			var width = btn._adjust_width * scale;
-			var height = btn._adjust_height * scale;
+			left = btn._adjust_left;
+			top = btn._adjust_top;
+			width = btn._adjust_width * scale;
+			height = btn._adjust_height * scale;
 
 			var eType = "";
 			if (this.direction == "vertical") {
@@ -282,9 +284,6 @@ if (!nexacro.ScrollBarControl) {
 				else if (y / wheelZoom > (top + height)) {
 					eType = "pagedown";
 				}
-				else {
-					eType = "";
-				}
 			}
 			else {
 				if (x / wheelZoom < left) {
@@ -292,9 +291,6 @@ if (!nexacro.ScrollBarControl) {
 				}
 				else if (x / wheelZoom > (left + width)) {
 					eType = "pageright";
-				}
-				else {
-					eType = "";
 				}
 			}
 			this._start_page_navi = eType;
@@ -806,6 +802,7 @@ if (!nexacro.ScrollBarControl) {
 			var decsize = this.decbuttonsize != undefined ? this.decbuttonsize : -1;
 			var incsize = this.incbuttonsize != undefined ? this.incbuttonsize : -1;
 			var tracksize = 0, diff;
+			var shaftsize, view, barminsize, baroutsize, size;
 			if (this.direction == "vertical") {
 				if (decsize < 0) {
 					decsize = client_width;
@@ -842,12 +839,12 @@ if (!nexacro.ScrollBarControl) {
 					this.incbutton.move(l, b, client_width, client_height - b);
 				}
 
-				var shaftsize = b - t;
+				shaftsize = b - t;
 				if (shaftsize > 0) {
-					var view = this.view;
-					var barminsize = this.barminsize != undefined ? this.barminsize : -1;
-					var baroutsize = this.baroutsize != undefined ? this.baroutsize : -1;
-					var size = this._max - this._min;
+					view = this.view;
+					barminsize = this.barminsize != undefined ? this.barminsize : -1;
+					baroutsize = this.baroutsize != undefined ? this.baroutsize : -1;
+					size = this._max - this._min;
 
 					if (baroutsize < 0) {
 						baroutsize = r - l;
@@ -919,12 +916,12 @@ if (!nexacro.ScrollBarControl) {
 					this.incbutton.move(r, t, client_width - r, client_height);
 				}
 
-				var shaftsize = r - l;
+				shaftsize = r - l;
 				if (shaftsize > 0) {
-					var view = this.view;
-					var barminsize = this.barminsize != undefined ? this.barminsize : -1;
-					var baroutsize = this.baroutsize != undefined ? this.baroutsize : -1;
-					var size = this._max - this._min;
+					view = this.view;
+					barminsize = this.barminsize != undefined ? this.barminsize : -1;
+					baroutsize = this.baroutsize != undefined ? this.baroutsize : -1;
+					size = this._max - this._min;
 
 					if (baroutsize < 0) {
 						baroutsize = b - t;
@@ -1329,6 +1326,7 @@ if (!nexacro.ScrollIndicatorControl) {
 			var l = 0, r = 0, t = 0, b = 0;
 
 			var shaftsize, tracksize = 0;
+			var view, barminsize, baroutsize, size;
 			if (this.direction == "vertical") {
 				l = client_left;
 				r = l + client_width;
@@ -1337,10 +1335,10 @@ if (!nexacro.ScrollIndicatorControl) {
 
 				shaftsize = client_height;
 				if (shaftsize > 0) {
-					var view = this.view;
-					var barminsize = this.barminsize != undefined ? this.barminsize : -1;
-					var baroutsize = this.baroutsize != undefined ? this.baroutsize : -1;
-					var size = this._max - this._min;
+					view = this.view;
+					barminsize = this.barminsize != undefined ? this.barminsize : -1;
+					baroutsize = this.baroutsize != undefined ? this.baroutsize : -1;
+					size = this._max - this._min;
 
 					if (baroutsize < 0) {
 						baroutsize = client_width;
@@ -1384,10 +1382,10 @@ if (!nexacro.ScrollIndicatorControl) {
 
 				shaftsize = client_width;
 				if (shaftsize > 0) {
-					var view = this.view;
-					var barminsize = this.barminsize != undefined ? this.barminsize : -1;
-					var baroutsize = this.baroutsize != undefined ? this.baroutsize : -1;
-					var size = this._max - this._min;
+					view = this.view;
+					barminsize = this.barminsize != undefined ? this.barminsize : -1;
+					baroutsize = this.baroutsize != undefined ? this.baroutsize : -1;
+					size = this._max - this._min;
 
 					if (baroutsize < 0) {
 						baroutsize = client_height;

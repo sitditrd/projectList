@@ -48,9 +48,6 @@ if (!nexacro.BluetoothLE) {
 	_pBluetoothLE._type_name = "BluetoothLE";
 
 	_pBluetoothLE.destroy = function () {
-		var params = '""';
-		var jsonstr;
-
 		nexacro._destroyBluetoothLEConnectionObject(this.handle);
 
 		delete nexacro.Device._userCreatedObj[this._id];
@@ -64,32 +61,32 @@ if (!nexacro.BluetoothLE) {
 		var params = '{ "duration":"' + duration;
 		params += '", "service_uuid":"' + service_uuid;
 		params += '"}';
-		jsonstr = this.makeJSONString('"scanStart"', params);
+		var jsonstr = this.makeJSONString('"scanStart"', params);
 		nexacro.Device.exec(jsonstr);
 	};
 
 	_pBluetoothLE.scanStop = function () {
 		var params = '""';
-		jsonstr = this.makeJSONString('"scanStop"', params);
+		var jsonstr = this.makeJSONString('"scanStop"', params);
 		nexacro.Device.exec(jsonstr);
 	};
 
 	_pBluetoothLE.connect = function (device_address) {
 		var params = '{ "device_address":"' + device_address;
 		params += '"}';
-		jsonstr = this.makeJSONString('"connect"', params);
+		var jsonstr = this.makeJSONString('"connect"', params);
 		nexacro.Device.exec(jsonstr);
 	};
 
 	_pBluetoothLE.disconnect = function () {
 		var params = '""';
-		jsonstr = this.makeJSONString('"disconnect"', params);
+		var jsonstr = this.makeJSONString('"disconnect"', params);
 		nexacro.Device.exec(jsonstr);
 	};
 
 	_pBluetoothLE.discoverService = function (device_address) {
 		var params = '""';
-		jsonstr = this.makeJSONString('"discoverServices"', params);
+		var jsonstr = this.makeJSONString('"discoverServices"', params);
 		nexacro.Device.exec(jsonstr);
 	};
 
@@ -97,7 +94,7 @@ if (!nexacro.BluetoothLE) {
 		var params = '{ "service_uuid":"' + service_uuid;
 		params += '", "characteristic_uuid":"' + characteristic_uuid;
 		params += '"}';
-		jsonstr = this.makeJSONString('"subscribe"', params);
+		var jsonstr = this.makeJSONString('"subscribe"', params);
 		nexacro.Device.exec(jsonstr);
 	};
 
@@ -106,7 +103,7 @@ if (!nexacro.BluetoothLE) {
 		var params = '{ "service_uuid":"' + service_uuid;
 		params += '", "characteristic_uuid":"' + characteristic_uuid;
 		params += '"}';
-		jsonstr = this.makeJSONString('"unsubscribe"', params);
+		var jsonstr = this.makeJSONString('"unsubscribe"', params);
 		nexacro.Device.exec(jsonstr);
 	};
 
@@ -115,7 +112,7 @@ if (!nexacro.BluetoothLE) {
 		params += '", "characteristic_uuid":"' + characteristic_uuid;
 		params += '", "value":"' + value;
 		params += '"}';
-		jsonstr = this.makeJSONString('"writeCharacteristic"', params);
+		var jsonstr = this.makeJSONString('"writeCharacteristic"', params);
 		nexacro.Device.exec(jsonstr);
 	};
 
@@ -123,7 +120,7 @@ if (!nexacro.BluetoothLE) {
 		var params = '{  "service_uuid":"' + service_uuid;
 		params += '", "characteristic_uuid":"' + characteristic_uuid;
 		params += '"}';
-		jsonstr = this.makeJSONString('"readCharacteristic"', params);
+		var jsonstr = this.makeJSONString('"readCharacteristic"', params);
 		nexacro.Device.exec(jsonstr);
 	};
 
@@ -163,12 +160,7 @@ if (!nexacro.BluetoothLE) {
 			return nexacro.__hasBluetoothLE();
 		}
 		else {
-			if (nexacro.Device.isphone == 1) {
-				return true;
-			}
-			else {
-				return false;
-			}
+			return (nexacro.Device.isphone == 1);
 		}
 	};
 
@@ -310,13 +302,7 @@ if (nexacro._Browser == "Runtime") {
 		};
 	}
 
-	else if (nexacro._OS == "Android") {
-		nexacro._createBluetoothLEConnectionObject = function (target) {
-		};
-		nexacro._destroyBluetoothLEConnectionObject = function (target) {
-		};
-	}
-	else if (nexacro._OS == "OSX") {
+	else if (nexacro._OS == "Android" || nexacro._OS == "OSX") {
 		nexacro._createBluetoothLEConnectionObject = function (target) {
 		};
 		nexacro._destroyBluetoothLEConnectionObject = function (target) {

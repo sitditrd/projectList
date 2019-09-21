@@ -120,7 +120,7 @@ if (!nexacro.FileDialog) {
 		nexacro._setFileDialogHandleFilterIndex(this, this.filterindex);
 	};
 
-	_pFileDialog.open = function (strTitle, constOpenMode, strInitialPath, strFileName) {
+	_pFileDialog.open = function (strTitle, constOpenMode, strInitialPath, strFileName, nDlgWidth, nDlgHeight) {
 		if (isNaN(constOpenMode = +constOpenMode) || (constOpenMode < 1 || constOpenMode > 4)) {
 			return;
 		}
@@ -128,6 +128,8 @@ if (!nexacro.FileDialog) {
 		strTitle = strTitle ? strTitle : this.id;
 		strInitialPath = strInitialPath ? strInitialPath : "%USERAPP%";
 		strFileName = strFileName ? strFileName : "";
+		nDlgWidth = nDlgWidth ? nDlgWidth : -1;
+		nDlgHeight = nDlgHeight ? nDlgHeight : -1;
 
 		var filter = this.filter ? this.filter : "All(*.*)|*.*|";
 		var filterarr = filter.split("|");
@@ -140,7 +142,7 @@ if (!nexacro.FileDialog) {
 			return false;
 		}
 
-		nexacro._openFileDialogHandle(this, strTitle, constOpenMode, strInitialPath, strFileName, this.dialogtype);
+		nexacro._openFileDialogHandle(this, strTitle, constOpenMode, strInitialPath, strFileName, this.dialogtype, nDlgWidth, nDlgHeight);
 
 		return true;
 	};

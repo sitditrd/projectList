@@ -538,64 +538,28 @@ if (!nexacro.Dataset) {
 	}
 
 	nexacro.Date = function (year, month, day, hours, minutes, seconds, milliseconds) {
+		var bsetfullyear = true;
+
 		if (year == null) {
 			this._timecheck = true;
 			this.date = new Date();
+			bsetfullyear = false;
 		}
 		else if (month == null && typeof year == "string") {
 			this._timecheck = true;
 			this.date = new Date(year);
+			bsetfullyear = false;
 		}
 		else if (day == null) {
 			year = (parseInt(year, 10) | 0);
 			month = (parseInt(month, 10) | 0);
 			this.date = new Date(year, month);
-			if (year <= 99 && year >= 0) {
-				if (year == 0) {
-					var base_date = new Date(0, 1, 1);
-					year = this.date.getFullYear() - base_date.getFullYear();
-					if (year < 0) {
-						year = 0;
-					}
-				}
-
-				this.date.setFullYear(year);
-			}
-			else {
-				var cur_year = this.date.getFullYear();
-				if (cur_year > 9999) {
-					this.date.setFullYear(9999);
-				}
-				else if (cur_year < 0) {
-					this.date.setFullYear(0);
-				}
-			}
 		}
 		else if (hours == null) {
 			year = (parseInt(year, 10) | 0);
 			month = (parseInt(month, 10) | 0);
 			day = (parseInt(day, 10) | 0);
 			this.date = new Date(year, month, day);
-			if (year <= 99 && year >= 0) {
-				if (year == 0) {
-					var base_date = new Date(0, 1, 1);
-					year = this.date.getFullYear() - base_date.getFullYear();
-					if (year < 0) {
-						year = 0;
-					}
-				}
-
-				this.date.setFullYear(year);
-			}
-			else {
-				var cur_year = this.date.getFullYear();
-				if (cur_year > 9999) {
-					this.date.setFullYear(9999);
-				}
-				else if (cur_year < 0) {
-					this.date.setFullYear(0);
-				}
-			}
 		}
 		else if (minutes == null) {
 			this._timecheck = true;
@@ -604,26 +568,6 @@ if (!nexacro.Dataset) {
 			day = (parseInt(day, 10) | 0);
 			hours = (parseInt(hours, 10) | 0);
 			this.date = new Date(year, month, day, hours);
-			if (year <= 99 && year >= 0) {
-				if (year == 0) {
-					var base_date = new Date(0, 1, 1);
-					year = this.date.getFullYear() - base_date.getFullYear();
-					if (year < 0) {
-						year = 0;
-					}
-				}
-
-				this.date.setFullYear(year);
-			}
-			else {
-				var cur_year = this.date.getFullYear();
-				if (cur_year > 9999) {
-					this.date.setFullYear(9999);
-				}
-				else if (cur_year < 0) {
-					this.date.setFullYear(0);
-				}
-			}
 		}
 		else if (seconds == null) {
 			this._timecheck = true;
@@ -633,26 +577,6 @@ if (!nexacro.Dataset) {
 			hours = (parseInt(hours, 10) | 0);
 			minutes = (parseInt(minutes, 10) | 0);
 			this.date = new Date(year, month, day, hours, minutes);
-			if (year <= 99 && year >= 0) {
-				if (year == 0) {
-					var base_date = new Date(0, 1, 1);
-					year = this.date.getFullYear() - base_date.getFullYear();
-					if (year < 0) {
-						year = 0;
-					}
-				}
-
-				this.date.setFullYear(year);
-			}
-			else {
-				var cur_year = this.date.getFullYear();
-				if (cur_year > 9999) {
-					this.date.setFullYear(9999);
-				}
-				else if (cur_year < 0) {
-					this.date.setFullYear(0);
-				}
-			}
 		}
 		else if (milliseconds == null) {
 			this._timecheck = true;
@@ -663,26 +587,6 @@ if (!nexacro.Dataset) {
 			minutes = (parseInt(minutes, 10) | 0);
 			seconds = (parseInt(seconds, 10) | 0);
 			this.date = new Date(year, month, day, hours, minutes, seconds);
-			if (year <= 99 && year >= 0) {
-				if (year == 0) {
-					var base_date = new Date(0, 1, 1);
-					year = this.date.getFullYear() - base_date.getFullYear();
-					if (year < 0) {
-						year = 0;
-					}
-				}
-
-				this.date.setFullYear(year);
-			}
-			else {
-				var cur_year = this.date.getFullYear();
-				if (cur_year > 9999) {
-					this.date.setFullYear(9999);
-				}
-				else if (cur_year < 0) {
-					this.date.setFullYear(0);
-				}
-			}
 		}
 		else {
 			this._timecheck = true;
@@ -694,26 +598,36 @@ if (!nexacro.Dataset) {
 			seconds = (parseInt(seconds, 10) | 0);
 			milliseconds = (parseInt(milliseconds, 10) | 0);
 			this.date = new Date(year, month, day, hours, minutes, seconds, milliseconds);
+		}
+
+		if (bsetfullyear) {
 			if (year <= 99 && year >= 0) {
-				if (year == 0) {
-					var base_date = new Date(0, 1, 1);
-					year = this.date.getFullYear() - base_date.getFullYear();
-					if (year < 0) {
-						year = 0;
-					}
+				var base_date = new Date(0, 0, 1);
+				var calc_year = this.date.getFullYear() - base_date.getFullYear();
+
+				if (calc_year < 0) {
+					this.date.setFullYear(0);
+					this.date.setMonth(0);
+					this.date.setDate(1);
 				}
-				this.date.setFullYear(year);
+				else {
+					this.date.setFullYear(calc_year);
+				}
 			}
 			else {
 				var cur_year = this.date.getFullYear();
+
 				if (cur_year > 9999) {
 					this.date.setFullYear(9999);
+					this.date.setMonth(11);
+					this.date.setDate(31);
 				}
 				else if (cur_year < 0) {
 					this.date.setFullYear(0);
 				}
 			}
 		}
+
 		return;
 	};
 
@@ -994,7 +908,7 @@ if (!nexacro.Dataset) {
 		var millisec = this.getMilliseconds();
 
 		y = y !== null ? this.toZeroDigitString(y, 4) : "0000";
-		m = m !== null ? this.toZeroDigitString(m, 2) : m;
+		m = m ? this.toZeroDigitString(m, 2) : m;
 		d = d !== null ? this.toZeroDigitString(d, 2) : d;
 		h = h !== null ? this.toZeroDigitString(h, 2) : h;
 		min = min !== null ? this.toZeroDigitString(min, 2) : min;
@@ -1157,6 +1071,34 @@ if (!nexacro.Dataset) {
 		}
 
 		return ampm_string;
+	};
+
+	_pDate.addYear = function (v) {
+		return this.date.setFullYear(this.date.getFullYear() + v);
+	};
+
+	_pDate.addMonth = function (v) {
+		return this.date.setMonth(this.date.getMonth() + v);
+	};
+
+	_pDate.addDate = function (v) {
+		return this.date.setDate(this.date.getDate() + v);
+	};
+
+	_pDate.addHours = function (v) {
+		return this.date.setHours(this.date.getHours() + v);
+	};
+
+	_pDate.addMinutes = function (v) {
+		return this.date.setMinutes(this.date.getMinutes() + v);
+	};
+
+	_pDate.addSeconds = function (v) {
+		return this.date.setSeconds(this.date.getSeconds() + v);
+	};
+
+	_pDate.addMilliseconds = function (v) {
+		return this.date.setMilliseconds(this.date.getMilliseconds() + v);
 	};
 
 	delete _pDate;
@@ -1582,7 +1524,6 @@ if (!nexacro.Dataset) {
 				default:
 					return this.toVariant(value);
 			}
-			return "";
 		}, 
 
 		_datetimeToDate : function (datetime) {
@@ -1660,12 +1601,14 @@ if (!nexacro.Dataset) {
 
 		_toDate : function (year, month, date) {
 			var val = new nexacro.Date(year, month - 1, date);
-			return ((+val) != (+val)) ? undefined : val;
+			var _val = +val.date;
+			return (_val != _val) ? undefined : val;
 		}, 
 
 		_toTime : function (hour, minute, second, millisecond) {
 			var val = new nexacro.Date(0, 0, 1, hour, minute, second, millisecond);
-			if ((+val) != (+val)) {
+			var _val = +val.date;
+			if (_val != _val) {
 				return undefined;
 			}
 			val._timeonly = true;
@@ -1675,7 +1618,8 @@ if (!nexacro.Dataset) {
 
 		_toDateTime : function (year, month, date, hour, minute, second, millisecond) {
 			var val = new nexacro.Date(year, month - 1, date, hour, minute, second, millisecond);
-			return ((+val) != (+val)) ? undefined : val;
+			var _val = +val.date;
+			return (_val != _val) ? undefined : val;
 		}, 
 
 		_isValidTime : function (time) {
@@ -1713,6 +1657,7 @@ if (!nexacro.Dataset) {
 	nexacro.ExprParser.prototype = _pExprParser;
 
 	_pExprParser.whitespace = nexacro._gen_arrmap("\n\r\t ".split(''));
+	_pExprParser._replace_whitespace = nexacro._gen_arrmap("\\n,\\r,\\t,\\s".split(','));
 	_pExprParser.wordchars = nexacro._gen_arrmap("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_$".split(''));
 	_pExprParser.punct = nexacro._gen_arrmap("+ - * / % & ++ -- = += -= *= /= %= == === != <> !== > < >= <= >> << >>> >>>= >>= <<= && &= | || ! !! , : ? ^ ^= |= ::".split(' '));
 	_pExprParser.line_starters = nexacro._gen_arrmap("continue,try,throw,return,var,if,switch,case,default,for,while,break,function".split(','));
@@ -1888,7 +1833,7 @@ if (!nexacro.Dataset) {
 				continue;
 			}
 
-			var esc = false;
+			var esc;
 			if (tok == "'" || tok == '"') {
 				while (cur_pos < src_len) {
 					var sep = tok;
@@ -2062,21 +2007,8 @@ if (!nexacro.Dataset) {
 							var colidx = ds.getColIndex(id);
 							if (colidx >= 0) {
 								if (i < (to - 1) && output[i + 1].type == 7) {
-									var bcnt = 0, bcbt = 0;
 									var j;
-									for (j = i + 2; j < to; j++) {
-										if (output[j].type == 7) {
-											bcbt++;
-										}
-										if (output[j].type == 8) {
-											if (bcnt == 0) {
-												break;
-											}
-											else {
-												bcnt--;
-											}
-										}
-									}
+
 									if (j < to && j > (i + 2)) {
 										var substr = this.makeSubExpr(ds, i + 2, j);
 										if (substr != null) {
@@ -2153,9 +2085,7 @@ if (!nexacro.Dataset) {
 				if (item.type == 0 && item.pos == 0) {
 					id = item.tok;
 
-					if (id == "var") {
-					}
-					else {
+					if (id != "var") {
 						str += id;
 					}
 				}
@@ -2177,6 +2107,28 @@ if (!nexacro.Dataset) {
 		this.tokenizeExpr(expr_str);
 		var str = this.makeSubEval(ds, 0, this.output.length);
 		return str;
+	};
+
+	_pExprParser._transferWhitespace = function (edit_val) {
+		var whitespace = Object.keys(this.whitespace);
+		var replace_whitespace = Object.keys(this._replace_whitespace);
+		var block;
+		var full = "";
+
+		for (var i = 0; i < edit_val.length; i++) {
+			block = edit_val.charAt(i);
+
+			for (var j = 0; j < whitespace.length; j++) {
+				if (block == whitespace[j]) {
+					full += replace_whitespace[j];
+					break;
+				}
+			}
+
+			full += block;
+		}
+
+		return full;
 	};
 	delete _pExprParser;
 
@@ -2376,13 +2328,14 @@ if (!nexacro.Dataset) {
 	delete _pDSColChangeEventInfo;
 
 
-	nexacro.DSLoadEventInfo = function (obj, id, errorcode, errormsg, reason) {
+	nexacro.DSLoadEventInfo = function (obj, id, errorcode, errormsg, reason, progressload) {
 		this.id = this.eventid = id || "onload";
 		this.fromobject = this.fromreferenceobject = obj;
 
 		this.errorcode = errorcode;
 		this.errormsg = errormsg;
 		this.reason = reason;
+		this.progressload = (progressload === true) ? true : false;
 	};
 	var _pDSLoadEventInfo = nexacro._createPrototype(nexacro.Event, nexacro.DSLoadEventInfo);
 	nexacro.DSLoadEventInfo.prototype = _pDSLoadEventInfo;
@@ -2635,18 +2588,18 @@ if (!nexacro.Dataset) {
 		this.useclientlayout = v;
 	};
 
-	_pDataset.on_fire_onload = function (errcode, errmsg, reason) {
+	_pDataset.on_fire_onload = function (errcode, errmsg, reason, progressload) {
 		var event = this.onload;
 		if (event && event._has_handlers) {
-			var evt = new nexacro.DSLoadEventInfo(this, "onload", errcode, errmsg, reason);
+			var evt = new nexacro.DSLoadEventInfo(this, "onload", errcode, errmsg, reason, progressload);
 			event._fireEvent(this, evt);
 		}
 	};
 
-	_pDataset.on_fire_sys_onload = function (errcode, errmsg, reason) {
+	_pDataset.on_fire_sys_onload = function (errcode, errmsg, reason, progressload) {
 		var event = this.onload;
 		if (event && event._has_handlers) {
-			var evt = new nexacro.DSLoadEventInfo(this, "onload", errcode, errmsg, reason);
+			var evt = new nexacro.DSLoadEventInfo(this, "onload", errcode, errmsg, reason, progressload);
 			event._fireSysEvent(this, evt);
 		}
 	};
@@ -3183,30 +3136,31 @@ if (!nexacro.Dataset) {
 	_pDataset.updateColID = function (idx, newID) {
 		var colList = this.colinfos;
 		var constList = this._constVars;
-
+		var updated;
+		var evt;
 		idx = this.getColIndex(idx);
 		if (idx < 0) {
 			return -1;
 		}
 		else if (idx < colList.length) {
-			var updated = colList._updateID(idx, newID);
+			updated = colList._updateID(idx, newID);
 			if (updated) {
 				this._clearAllExprs();
 				if (this._eventstat) {
 					this.on_fire_onrowsetchanged(-1, -1, 34);
-					var evt = new nexacro.DSColChangeEventInfo(this, "onvaluechanged", this.rowposition, -1, -1, "", undefined, undefined);
+					evt = new nexacro.DSColChangeEventInfo(this, "onvaluechanged", this.rowposition, -1, -1, "", undefined, undefined);
 					this.on_fire_onvaluechanged(evt);
 				}
 				return idx;
 			}
 		}
 		else {
-			var updated = constList._updateID(idx - colList.length, newID);
+			updated = constList._updateID(idx - colList.length, newID);
 			if (updated) {
 				this._clearAllExprs();
 				if (this._eventstat) {
 					this.on_fire_onrowsetchanged(-1, -1, 34);
-					var evt = new nexacro.DSColChangeEventInfo(this, "onvaluechanged", this.rowposition, -1, -1, "", undefined, undefined);
+					evt = new nexacro.DSColChangeEventInfo(this, "onvaluechanged", this.rowposition, -1, -1, "", undefined, undefined);
 					this.on_fire_onvaluechanged(evt);
 				}
 				return idx;
@@ -3280,13 +3234,15 @@ if (!nexacro.Dataset) {
 		var colList = this.colinfos;
 		var srcList = srcds.colinfos;
 		var idx_map = [];
+		var dst_idx;
+		var src_idx;
 		if (strcolinfo != null && strcolinfo.length > 0) {
 			var colArr = strcolinfo.split(',');
 			function __makeIndexMap_fromStr_loopFn (i) {
 				var colids = colArr[i].split('=');
 				if (colids.length > 1) {
-					var dst_idx = colList.indexOf(colids[0].trim());
-					var src_idx = srcList.indexOf(colids[1].trim());
+					dst_idx = colList.indexOf(colids[0].trim());
+					src_idx = srcList.indexOf(colids[1].trim());
 					if (dst_idx >= 0 && src_idx >= 0) {
 						idx_map[idx_map.length] = {
 							dest : dst_idx, 
@@ -3296,8 +3252,8 @@ if (!nexacro.Dataset) {
 				}
 				else {
 					var colid = colids[0].trim();
-					var dst_idx = colList.indexOf(colid);
-					var src_idx = srcList.indexOf(colid);
+					dst_idx = colList.indexOf(colid);
+					src_idx = srcList.indexOf(colid);
 					if (dst_idx >= 0 && src_idx >= 0) {
 						idx_map[idx_map.length] = {
 							dest : dst_idx, 
@@ -3346,7 +3302,8 @@ if (!nexacro.Dataset) {
 				rowtype = destRow._rtype;
 				if (destRow._rtype == 1) {
 					var orgRow = [];
-					this._copyMappingRowData(orgRow, destRow, idx_map);
+					this._copyRowData(orgRow, destRow);
+
 					destRow._orgrow = orgRow;
 					rowtype = 4;
 				}
@@ -3527,22 +3484,6 @@ if (!nexacro.Dataset) {
 				}
 				else {
 					return (value.date == cmpval);
-				}
-			}
-			else if (coltype < 0) {
-				var val1, val2;
-				if ((val1 instanceof nexacro.Decimal)) {
-					if (val2 instanceof nexacro.Decimal) {
-						return (val1.hi == val2.hi && val1.lo == -val2.lo);
-					}
-					else {
-						var v2 = (+val2);
-						return (val1.hi == v2 && val1.lo == 0);
-					}
-				}
-				else if (val2 instanceof nexacro.Decimal) {
-					var v1 = (+val1);
-					return (val2.hi == v1 && val2.lo == 0);
 				}
 			}
 		}
@@ -3895,7 +3836,7 @@ if (!nexacro.Dataset) {
 					delRecords[delRecords.length] = rowRow;
 					this._removeRawRow(rowRow);
 				}
-				else if (rowRow._rtype == 2) {
+				else if (rowRow._rtype == 2 || rowRow._rtype == 16) {
 					rowRow._rtype = 0;
 					rowRow.length = 0;
 					this._removeRawRow(rowRow);
@@ -3914,11 +3855,7 @@ if (!nexacro.Dataset) {
 					delRecords[delRecords.length] = rowRow;
 					this._removeRawRow(rowRow);
 				}
-				else if (rowRow._rtype == 16) {
-					rowRow._rtype = 0;
-					rowRow.length = 0;
-					this._removeRawRow(rowRow);
-				}
+
 				else {
 					return -1;
 				}
@@ -3964,11 +3901,13 @@ if (!nexacro.Dataset) {
 		}
 
 		var idx = this._deleteRow(row);
+		var oldpos;
+		var setpos;
 		if (idx >= 0) {
 			if (this._eventstat) {
-				var oldpos = this.rowposition;
+				oldpos = this.rowposition;
 				this.on_fire_onrowsetchanged(idx, 1, 20);
-				var setpos = this.rowposition;
+				setpos = this.rowposition;
 
 				if (oldpos == setpos) {
 					if (setpos == idx) {
@@ -3990,8 +3929,7 @@ if (!nexacro.Dataset) {
 				}
 			}
 			else {
-				var setpos = this.rowposition;
-
+				setpos = this.rowposition;
 				if (setpos == idx) {
 					if (this.rowcount == 0) {
 						this.rowposition = -1;
@@ -4019,7 +3957,7 @@ if (!nexacro.Dataset) {
 		var delcnt = 0;
 
 		if (this.updatecontrol) {
-			var delRecords = this._deletedRecords;
+			delRecords = this._deletedRecords;
 			function __deleteAll_updatectrl_loopFn (i) {
 				var rowRow = viewRecords[i];
 				if (rowRow) {
@@ -4159,7 +4097,7 @@ if (!nexacro.Dataset) {
 						delRecords[delRecords.length] = rowRow;
 						this._removeRawRow(rowRow);
 					}
-					else if (rowRow._rtype == 2) {
+					else if (rowRow._rtype == 2 || rowRow._rtype == 16) {
 						rowRow._rtype = 0;
 						rowRow.length = 0;
 					}
@@ -4177,10 +4115,7 @@ if (!nexacro.Dataset) {
 						delRecords[delRecords.length] = rowRow;
 						this._removeRawRow(rowRow);
 					}
-					else if (rowRow._rtype == 16) {
-						rowRow._rtype = 0;
-						rowRow.length = 0;
-					}
+
 					else {
 						return -1;
 					}
@@ -4274,7 +4209,6 @@ if (!nexacro.Dataset) {
 				}
 			}
 			else {
-				var newIdx = -1;
 				if (oldRow != null) {
 					newIdx = this._viewRecords.indexOf(oldRow);
 				}
@@ -4345,7 +4279,7 @@ if (!nexacro.Dataset) {
 			viewRecords = this._viewRecords = rawRecords.slice(0, rawRecords.length);
 		}
 
-		var oldrawRow, oldviewRow, oldidx, newidx;
+		var oldviewRow, oldidx, newidx;
 
 		oldviewRow = viewRecords[oldrow];
 		if (oldviewRow) {
@@ -4578,9 +4512,10 @@ if (!nexacro.Dataset) {
 		}
 
 		var oldpos = this.rowposition;
+		var evt;
 		if (newpos != oldpos && newpos < this.rowcount) {
 			if (this.onrowposchanged && this.onrowposchanged._has_handlers) {
-				var evt = new nexacro.DSRowPosChangeEventInfo(this, "onrowposchanged", oldpos, newpos, reason);
+				evt = new nexacro.DSRowPosChangeEventInfo(this, "onrowposchanged", oldpos, newpos, reason);
 				this.rowposition = newpos;
 				this.on_fire_onrowposchanged(evt);
 			}
@@ -4589,7 +4524,7 @@ if (!nexacro.Dataset) {
 			}
 		}
 		if (this.onvaluechanged && this.onvaluechanged._has_handlers) {
-			var evt = new nexacro.DSColChangeEventInfo(this, "onvaluechanged", newpos, -1, -1, "", undefined, undefined);
+			evt = new nexacro.DSColChangeEventInfo(this, "onvaluechanged", newpos, -1, -1, "", undefined, undefined);
 			this.on_fire_onvaluechanged(evt);
 		}
 	};
@@ -4600,9 +4535,10 @@ if (!nexacro.Dataset) {
 		}
 
 		var oldpos = this.rowposition;
-		if (newpos != oldpos || (reason == 53 && newpos == oldpos)) {
+		var evt;
+		if (newpos != oldpos || reason == 53) {
 			if ((this.canrowposchange && this.canrowposchange._has_handlers) || (this.onrowposchanged && this.onrowposchanged._has_handlers)) {
-				var evt = new nexacro.DSRowPosChangeEventInfo(this, "canrowposchange", oldpos, newpos, reason);
+				evt = new nexacro.DSRowPosChangeEventInfo(this, "canrowposchange", oldpos, newpos, reason);
 
 				if (this.canrowposchange && this.canrowposchange._has_handlers && this._eventstat && v === undefined
 					 && (oldpos >= -1 && oldpos < this.rowcount)) {
@@ -4620,7 +4556,7 @@ if (!nexacro.Dataset) {
 							this.on_fire_onrowposchanged(evt);
 						}
 						if (this.onvaluechanged && this.onvaluechanged._has_handlers) {
-							var evt = new nexacro.DSColChangeEventInfo(this, "onvaluechanged", this.rowposition, -1, -1, "", undefined, undefined);
+							evt = new nexacro.DSColChangeEventInfo(this, "onvaluechanged", this.rowposition, -1, -1, "", undefined, undefined);
 							this.on_fire_onvaluechanged(evt);
 						}
 					}
@@ -4633,7 +4569,7 @@ if (!nexacro.Dataset) {
 								this.on_fire_onrowposchanged(evt);
 							}
 							if (this.onvaluechanged && this.onvaluechanged._has_handlers) {
-								var evt = new nexacro.DSColChangeEventInfo(this, "onvaluechanged", this.rowposition, -1, -1, "", undefined, undefined);
+								evt = new nexacro.DSColChangeEventInfo(this, "onvaluechanged", this.rowposition, -1, -1, "", undefined, undefined);
 								this.on_fire_onvaluechanged(evt);
 							}
 						}
@@ -4643,14 +4579,14 @@ if (!nexacro.Dataset) {
 			else {
 				this.rowposition = newpos;
 				if (this._eventstat && this.onvaluechanged && this.onvaluechanged._has_handlers) {
-					var evt = new nexacro.DSColChangeEventInfo(this, "onvaluechanged", this.rowposition, -1, -1, "", undefined, undefined);
+					evt = new nexacro.DSColChangeEventInfo(this, "onvaluechanged", this.rowposition, -1, -1, "", undefined, undefined);
 					this.on_fire_onvaluechanged(evt);
 				}
 			}
 		}
 		else if (value_update) {
 			if (this.onvaluechanged && this.onvaluechanged._has_handlers) {
-				var evt = new nexacro.DSColChangeEventInfo(this, "onvaluechanged", this.rowposition, -1, -1, "", undefined, undefined);
+				evt = new nexacro.DSColChangeEventInfo(this, "onvaluechanged", this.rowposition, -1, -1, "", undefined, undefined);
 				this.on_fire_onvaluechanged(evt);
 			}
 		}
@@ -4741,12 +4677,10 @@ if (!nexacro.Dataset) {
 					else if (key2.charAt(0) == '+') {
 						colid = key2.substr(1);
 						colidx = this.colinfos.indexOf(colid);
-						descending = false;
 					}
 					else {
 						colid = key2;
 						colidx = this.colinfos.indexOf(colid);
-						descending = false;
 					}
 
 					if (colidx >= 0) {
@@ -4818,7 +4752,6 @@ if (!nexacro.Dataset) {
 			}
 			var cmpfn = this.__createSortFunc();
 			viewRecords.sort(cmpfn);
-			cmpfn = null;
 		}
 	};
 	_pDataset._sortRawData = function () {
@@ -4826,14 +4759,14 @@ if (!nexacro.Dataset) {
 		if (this._keycols.length > 0 && rawRecords.length > 0) {
 			var cmpfn = this.__createSortFunc();
 			rawRecords.sort(cmpfn);
-			cmpfn = null;
 			this._adjustRawIdx(0, rawRecords.length);
 		}
 	};
 
 	_pDataset._reFilter = function () {
+		var viewRecords;
 		if (this.filterstr.length > 0) {
-			var viewRecords = [];
+			viewRecords = [];
 
 			if (this._filterFn == null) {
 				var filterFn = this._createExprFunc(this.filterstr);
@@ -4858,7 +4791,7 @@ if (!nexacro.Dataset) {
 			}
 		}
 		else {
-			var viewRecords = this._viewRecords;
+			viewRecords = this._viewRecords;
 			if (viewRecords != this._rawRecords) {
 				viewRecords.length = 0;
 			}
@@ -5080,7 +5013,6 @@ if (!nexacro.Dataset) {
 			}
 			return true;
 		}
-		;
 		nexacro.__whileLoop(this, __createGroupData_loopFn);
 
 		if (this.reversesubsum) {
@@ -5112,11 +5044,6 @@ if (!nexacro.Dataset) {
 	};
 
 	_pDataset._resetSortGroup = function () {
-		var oldpos = this.rowposition;
-		if (this.rowposition == -1) {
-			var oldpos = 0;
-		}
-
 		var viewRecords = this._viewRecords;
 		var rawRecords = this._rawRecords;
 
@@ -5151,8 +5078,9 @@ if (!nexacro.Dataset) {
 
 		var delcnt = 1;
 		var cnt = viewRecords.length;
+		var idx;
 		if (this.reversesubsum) {
-			var idx = row - 1;
+			idx = row - 1;
 			function __removeEmptyGroup_reverse_loopFn () {
 				if (idx >= 0) {
 					var grpRow = viewRecords[idx];
@@ -5209,7 +5137,7 @@ if (!nexacro.Dataset) {
 			nexacro.__whileLoop(this, __adjustGroupRowData_reverse2_loopFn);
 		}
 		else {
-			var idx = row;
+			idx = row;
 			function __removeEmptyGroup_forward_loopFn () {
 				if (idx < cnt) {
 					var grpRow = viewRecords[idx];
@@ -5300,9 +5228,9 @@ if (!nexacro.Dataset) {
 				isReset = true;
 			}
 
-			var viewRecords, oldpos, oldrowdata, oldRow;
+			var viewRecords, oldpos, oldRow;
 			if (this.keystring && !isReset) {
-				var viewRecords = this._viewRecords;
+				viewRecords = this._viewRecords;
 				oldpos = this.rowposition;
 				oldRow = viewRecords[oldpos];
 
@@ -5350,8 +5278,9 @@ if (!nexacro.Dataset) {
 	_pDataset.getColumn = function (row, col) {
 		row = row | 0;
 		var colinfo = this.colinfos[col];
+		var rowRow, constvar;
 		if (colinfo) {
-			var rowRow = this.__getParsedRow(this._viewRecords[row]);
+			rowRow = this.__getParsedRow(this._viewRecords[row]);
 			if (rowRow) {
 				return rowRow[colinfo._index];
 			}
@@ -5359,7 +5288,7 @@ if (!nexacro.Dataset) {
 		}
 		var colidx = (+col);
 		if (colidx != col) {
-			var constvar = this._constVars[col];
+			constvar = this._constVars[col];
 			if (constvar) {
 				return constvar.value;
 			}
@@ -5369,7 +5298,7 @@ if (!nexacro.Dataset) {
 				}
 				colinfo = this.colinfos[0];
 				if (colinfo) {
-					var rowRow = this.__getParsedRow(this._viewRecords[row]);
+					rowRow = this.__getParsedRow(this._viewRecords[row]);
 					if (rowRow) {
 						return rowRow[colinfo._index];
 					}
@@ -5379,7 +5308,7 @@ if (!nexacro.Dataset) {
 			return undefined;
 		}
 		else {
-			var constvar = this._constVars[colidx - this.colinfos.length];
+			constvar = this._constVars[colidx - this.colinfos.length];
 			if (constvar) {
 				return constvar.value;
 			}
@@ -5392,8 +5321,10 @@ if (!nexacro.Dataset) {
 	_pDataset.getColumnNF = function (row, col) {
 		row = row | 0;
 		var colinfo = this.colinfos[col];
+		var rowRow;
+		var constvar;
 		if (colinfo) {
-			var rowRow = this.__getParsedRow(this._rawRecords[row]);
+			rowRow = this.__getParsedRow(this._rawRecords[row]);
 			if (rowRow) {
 				return rowRow[colinfo._index];
 			}
@@ -5401,7 +5332,7 @@ if (!nexacro.Dataset) {
 		}
 		var colidx = (+col);
 		if (colidx != col) {
-			var constvar = this._constVars[col];
+			constvar = this._constVars[col];
 			if (constvar) {
 				return constvar.value;
 			}
@@ -5411,7 +5342,7 @@ if (!nexacro.Dataset) {
 				}
 				colinfo = this.colinfos[0];
 				if (colinfo) {
-					var rowRow = this.__getParsedRow(this._rawRecords[row]);
+					rowRow = this.__getParsedRow(this._rawRecords[row]);
 					if (rowRow) {
 						return rowRow[colinfo._index];
 					}
@@ -5421,7 +5352,7 @@ if (!nexacro.Dataset) {
 			return undefined;
 		}
 		else {
-			var constvar = this._constVars[colidx - this.colinfos.length];
+			constvar = this._constVars[colidx - this.colinfos.length];
 			if (constvar) {
 				return constvar.value;
 			}
@@ -5435,8 +5366,10 @@ if (!nexacro.Dataset) {
 	_pDataset.getOrgColumn = function (row, col) {
 		row = row | 0;
 		var colinfo = this.colinfos[col];
+		var rowRow;
+		var constvar;
 		if (colinfo) {
-			var rowRow = this.__getParsedRow(this._viewRecords[row]);
+			rowRow = this.__getParsedRow(this._viewRecords[row]);
 			if (rowRow) {
 				return rowRow._orgrow ? rowRow._orgrow[colinfo._index] : rowRow[colinfo._index];
 			}
@@ -5444,7 +5377,7 @@ if (!nexacro.Dataset) {
 		}
 		var colidx = (+col);
 		if (colidx != col) {
-			var constvar = this._constVars[col];
+			constvar = this._constVars[col];
 			if (constvar) {
 				return constvar.value;
 			}
@@ -5454,7 +5387,7 @@ if (!nexacro.Dataset) {
 				}
 				colinfo = this.colinfos[0];
 				if (colinfo) {
-					var rowRow = this.__getParsedRow(this._viewRecords[row]);
+					rowRow = this.__getParsedRow(this._viewRecords[row]);
 					if (rowRow) {
 						return rowRow._orgrow ? rowRow._orgrow[colinfo._index] : rowRow[colinfo._index];
 					}
@@ -5464,7 +5397,7 @@ if (!nexacro.Dataset) {
 			return undefined;
 		}
 		else {
-			var constvar = this._constVars[colidx - this.colinfos.length];
+			constvar = this._constVars[colidx - this.colinfos.length];
 			if (constvar) {
 				return constvar.value;
 			}
@@ -5478,8 +5411,10 @@ if (!nexacro.Dataset) {
 	_pDataset.getOrgColumnNF = function (row, col) {
 		row = row | 0;
 		var colinfo = this.colinfos[col];
+		var rowRow;
+		var constvar;
 		if (colinfo) {
-			var rowRow = this.__getParsedRow(this._rawRecords[row]);
+			rowRow = this.__getParsedRow(this._rawRecords[row]);
 			if (rowRow) {
 				return rowRow._orgrow ? rowRow._orgrow[colinfo._index] : rowRow[colinfo._index];
 			}
@@ -5487,7 +5422,7 @@ if (!nexacro.Dataset) {
 		}
 		var colidx = (+col);
 		if (colidx != col) {
-			var constvar = this._constVars[col];
+			constvar = this._constVars[col];
 			if (constvar) {
 				return constvar.value;
 			}
@@ -5497,7 +5432,7 @@ if (!nexacro.Dataset) {
 				}
 				colinfo = this.colinfos[0];
 				if (colinfo) {
-					var rowRow = this.__getParsedRow(this._rawRecords[row]);
+					rowRow = this.__getParsedRow(this._rawRecords[row]);
 					if (rowRow) {
 						return rowRow._orgrow ? rowRow._orgrow[colinfo._index] : rowRow[colinfo._index];
 					}
@@ -5507,7 +5442,7 @@ if (!nexacro.Dataset) {
 			return undefined;
 		}
 		else {
-			var constvar = this._constVars[colidx - this.colinfos.length];
+			constvar = this._constVars[colidx - this.colinfos.length];
 			if (constvar) {
 				return constvar.value;
 			}
@@ -5521,8 +5456,9 @@ if (!nexacro.Dataset) {
 	_pDataset.getDeletedColumn = function (row, col) {
 		row = row | 0;
 		var colinfo = this.colinfos[col];
+		var rowRow, constvar;
 		if (colinfo) {
-			var rowRow = this.__getParsedRow(this._deletedRecords[row]);
+			rowRow = this.__getParsedRow(this._deletedRecords[row]);
 			if (rowRow) {
 				return rowRow[colinfo._index];
 			}
@@ -5530,7 +5466,7 @@ if (!nexacro.Dataset) {
 		}
 		var colidx = (+col);
 		if (colidx != col) {
-			var constvar = this._constVars[col];
+			constvar = this._constVars[col];
 			if (constvar) {
 				return constvar.value;
 			}
@@ -5540,7 +5476,7 @@ if (!nexacro.Dataset) {
 				}
 				colinfo = this.colinfos[0];
 				if (colinfo) {
-					var rowRow = this.__getParsedRow(this._deletedRecords[row]);
+					rowRow = this.__getParsedRow(this._deletedRecords[row]);
 					if (rowRow) {
 						return rowRow[colinfo._index];
 					}
@@ -5550,7 +5486,7 @@ if (!nexacro.Dataset) {
 			return undefined;
 		}
 		else {
-			var constvar = this._constVars[colidx - this.colinfos.length];
+			constvar = this._constVars[colidx - this.colinfos.length];
 			if (constvar) {
 				return constvar.value;
 			}
@@ -5671,6 +5607,7 @@ if (!nexacro.Dataset) {
 
 	_pDataset.setColumn = function (row, col, value) {
 		row = row | 0;
+		var rowRow, constvar;
 		if (row < 0 || row >= this.rowcount) {
 			return false;
 		}
@@ -5678,7 +5615,7 @@ if (!nexacro.Dataset) {
 		var fail = arguments[3];
 		var colinfo = this.colinfos[col];
 		if (colinfo) {
-			var rowRow = this.__getParsedRow(this._viewRecords[row]);
+			rowRow = this.__getParsedRow(this._viewRecords[row]);
 			if (rowRow) {
 				return this._setColumn(row, rowRow, colinfo, value, fail);
 			}
@@ -5686,7 +5623,7 @@ if (!nexacro.Dataset) {
 
 		var colidx = (+col);
 		if (colidx != col) {
-			var constvar = this._constVars[col];
+			constvar = this._constVars[col];
 			if (constvar) {
 				return this.setConstColumn(col, value);
 			}
@@ -5697,7 +5634,7 @@ if (!nexacro.Dataset) {
 
 				colinfo = this.colinfos[0];
 				if (colinfo) {
-					var rowRow = this.__getParsedRow(this._viewRecords[row]);
+					rowRow = this.__getParsedRow(this._viewRecords[row]);
 					if (rowRow) {
 						return this._setColumn(row, rowRow, colinfo, value, fail);
 					}
@@ -5706,7 +5643,7 @@ if (!nexacro.Dataset) {
 			return false;
 		}
 		else {
-			var constvar = this._constVars[colidx - this.colinfos.length];
+			constvar = this._constVars[colidx - this.colinfos.length];
 			if (constvar) {
 				return this.setConstColumn(colidx - this.colinfos.length, value);
 			}
@@ -5718,16 +5655,17 @@ if (!nexacro.Dataset) {
 
 	_pDataset.setColumnNF = function (row, col, value) {
 		row = row | 0;
+		var rowRow, constvar, newrow;
 		if (row < 0 || row >= this._rawRecords.length) {
 			return false;
 		}
 
 		var colinfo = this.colinfos[col];
 		if (colinfo) {
-			var rowRow = this.__getParsedRow(this._rawRecords[row]);
+			rowRow = this.__getParsedRow(this._rawRecords[row]);
 			if (rowRow) {
 				if (this._viewRecords != this._rawRecords) {
-					var newrow = this._viewRecords.indexOf(rowRow);
+					newrow = this._viewRecords.indexOf(rowRow);
 					if (newrow >= 0) {
 						return this._setColumn(newrow, rowRow, colinfo, value, null);
 					}
@@ -5743,7 +5681,7 @@ if (!nexacro.Dataset) {
 
 		var colidx = (+col);
 		if (colidx != col) {
-			var constvar = this._constVars[col];
+			constvar = this._constVars[col];
 			if (constvar) {
 				return this.setConstColumn(col, value);
 			}
@@ -5753,10 +5691,10 @@ if (!nexacro.Dataset) {
 				}
 				colinfo = this.colinfos[0];
 				if (colinfo) {
-					var rowRow = this.__getParsedRow(this._rawRecords[row]);
+					rowRow = this.__getParsedRow(this._rawRecords[row]);
 					if (rowRow) {
 						if (this._viewRecords != this._rawRecords) {
-							var newrow = this._viewRecords.indexOf(rowRow);
+							newrow = this._viewRecords.indexOf(rowRow);
 							if (newrow >= 0) {
 								return this._setColumn(newrow, rowRow, colinfo, value, null);
 							}
@@ -5773,7 +5711,7 @@ if (!nexacro.Dataset) {
 			return false;
 		}
 		else {
-			var constvar = this._constVars[colidx - this.colinfos.length];
+			constvar = this._constVars[colidx - this.colinfos.length];
 			if (constvar) {
 				return this.setConstColumn(colidx - this.colinfos.length, value);
 			}
@@ -5846,8 +5784,6 @@ if (!nexacro.Dataset) {
 		function __copyRowList_loopFn (i) {
 			var srcRow = srcRecords[i];
 
-			var level = srcRow._level;
-			var rtype = srcRow._rtype;
 
 			if ((srcRow._level == 0) && (srcRow._rtype & 7)) {
 				var rowRow = [];
@@ -5886,7 +5822,6 @@ if (!nexacro.Dataset) {
 		}
 
 		var cnt = 0;
-		var len = srcRecords.length;
 		function __appendRowList_loopFn (i) {
 			var srcRow = srcds.__getParsedRow(srcRecords[i]);
 			if ((srcRow._level == 0) && (srcRow._rtype & 7)) {
@@ -6207,16 +6142,13 @@ if (!nexacro.Dataset) {
 		this.loadstatus = true;
 		this._eventstat = this.enableevent;
 
-		var oldpos = this.rowposition;
 
 		var rawRecords = this._rawRecords;
-		var len = rawRecords.length;
-		var i = len - 1;
 		var b_sort = false;
 
 		function __reset_loopFn (i) {
 			var rowRow = rawRecords[i];
-			if (rowRow._rtype == 0 || rowRow._rtype == 2) {
+			if (rowRow._rtype == 0 || rowRow._rtype == 2 || rowRow._rtype == 16) {
 				rawRecords.splice(i, 1);
 				b_sort = true;
 			}
@@ -6234,10 +6166,6 @@ if (!nexacro.Dataset) {
 			}
 			else if (rowRow._rtype == 8) {
 				rowRow._rtype = 1;
-			}
-			else if (rowRow._rtype == 16) {
-				rawRecords.splice(i, 1);
-				b_sort = true;
 			}
 		}
 		nexacro.__reverseForLoop(this, rawRecords.length - 1, 0, __reset_loopFn);
@@ -6292,13 +6220,12 @@ if (!nexacro.Dataset) {
 		var rawRecords = this._rawRecords;
 		var delRecords = this._deletedRecords;
 
-		var i = 0;
-		var len = srcRecords.length;
 		function __assignRowList_loopFn (i) {
 			var srcRow = srcds.__getParsedRow(srcRecords[i]);
+			var rowRow;
 			if (srcRow._level == 0) {
 				if (srcRow._rtype & 7) {
-					var rowRow = [];
+					rowRow = [];
 					rowRow._level = 0;
 					rowRow._rawidx = rawRecords.length;
 					rowRow._rtype = srcRow._rtype;
@@ -6317,7 +6244,7 @@ if (!nexacro.Dataset) {
 					cnt++;
 				}
 				else if (srcRow._rtype == 8) {
-					var rowRow = [];
+					rowRow = [];
 					rowRow._level = 0;
 					rowRow._rawidx = -1;
 					rowRow._rtype = 8;
@@ -6474,8 +6401,9 @@ if (!nexacro.Dataset) {
 		}
 
 		var colidx = (+expr);
+		var constVar;
 		if (colidx != expr) {
-			var constVar = this._constVars[expr];
+			constVar = this._constVars[expr];
 			if (constVar) {
 				return (constVar.value == cmpval) ? start : -1;
 			}
@@ -6492,7 +6420,7 @@ if (!nexacro.Dataset) {
 			return -1;
 		}
 		else {
-			var constVar = this._constVars[colidx - this.colinfos.length];
+			constVar = this._constVars[colidx - this.colinfos.length];
 			if (constVar) {
 				return (constVar.value == cmpval) ? start : -1;
 			}
@@ -6501,8 +6429,6 @@ if (!nexacro.Dataset) {
 				return (constVar && constVar.value == cmpval) ? start : -1;
 			}
 		}
-
-		return -1;
 	};
 
 	_pDataset.findRowNF = function (expr, cmpval, start, end, args) {
@@ -6636,8 +6562,9 @@ if (!nexacro.Dataset) {
 		}
 
 		var colidx = (+expr);
+		var constVar;
 		if (colidx != expr) {
-			var constVar = this._constVars[expr];
+			constVar = this._constVars[expr];
 			if (constVar) {
 				if (this._isLikeValue(constVar.value, cmpval)) {
 					return start;
@@ -6659,7 +6586,7 @@ if (!nexacro.Dataset) {
 			return -1;
 		}
 		else {
-			var constVar = this._constVars[colidx - this.colinfos.length];
+			constVar = this._constVars[colidx - this.colinfos.length];
 			if (constVar) {
 				if (this._isLikeValue(constVar.value, cmpval)) {
 					return start;
@@ -6906,14 +6833,15 @@ if (!nexacro.Dataset) {
 		}
 
 		var colidx = (+expr);
+		var constVar;
 		if (colidx != expr) {
-			var constVar = this._constVars[expr];
+			constVar = this._constVars[expr];
 			if (constVar) {
 				return (constVar.value != null) ? (end - start) : 0;
 			}
 		}
 		else {
-			var constVar = this._constVars[colidx - this.colinfos.length];
+			constVar = this._constVars[colidx - this.colinfos.length];
 			if (constVar) {
 				return (constVar.value != null) ? (end - start) : 0;
 			}
@@ -6940,7 +6868,7 @@ if (!nexacro.Dataset) {
 
 		var val = +expr;
 		if (val == val) {
-			return (val != null) ? (rows.length) : 0;
+			return rows.length;
 		}
 
 		var colinfo = this.colinfos[expr];
@@ -7047,9 +6975,9 @@ if (!nexacro.Dataset) {
 		if (coltype != 2 && coltype != 3 && coltype != 4) {
 			return 0;
 		}
-
+		var sum;
 		if (coltype == 4) {
-			var sum = new nexacro.Decimal();
+			sum = new nexacro.Decimal();
 			function __Decimal_loopFn (i) {
 				var rowRow = this.__getParsedRow(records[i]);
 				if (rowRow._rtype & 7) {
@@ -7068,7 +6996,7 @@ if (!nexacro.Dataset) {
 			return sum.isNaN() ? 0 : sum;
 		}
 		else {
-			var sum = 0;
+			sum = 0;
 			function __Value_loopFn (i) {
 				var rowRow = this.__getParsedRow(records[i]);
 				if (rowRow._rtype & 7) {
@@ -7125,8 +7053,9 @@ if (!nexacro.Dataset) {
 			return 0;
 		}
 
+		var sum;
 		if (coltype == 4) {
-			var sum = new nexacro.Decimal();
+			sum = new nexacro.Decimal();
 			function __Decimal_loopFn (i) {
 				var idx = rows[i];
 				var rowRow = this.__getParsedRow(records[idx]);
@@ -7146,7 +7075,7 @@ if (!nexacro.Dataset) {
 			return sum.isNaN() ? 0 : sum;
 		}
 		else {
-			var sum = 0;
+			sum = 0;
 			function __Value_loopFn (i) {
 				var idx = rows[i];
 				var rowRow = this.__getParsedRow(records[idx]);
@@ -7419,7 +7348,8 @@ if (!nexacro.Dataset) {
 		if (min instanceof nexacro.Decimal) {
 			return min.isNaN() ? undefined : min;
 		}
-		return (+min) != (+min) ? undefined : min;
+		var _min = +min;
+		return _min != _min ? undefined : min;
 	};
 	_pDataset.getMin = function (expr, start, end, args) {
 		return this.__getMin(this._viewRecords, expr, start, end, args);
@@ -7459,7 +7389,8 @@ if (!nexacro.Dataset) {
 		if (min instanceof nexacro.Decimal) {
 			return min.isNaN() ? undefined : min;
 		}
-		return (+min) != (+min) ? undefined : min;
+		var _min = +min;
+		return _min != _min ? undefined : min;
 	};
 	_pDataset.getRowsMin = function (rows, expr, args) {
 		return this.__getRowsMin(this._viewRecords, rows, expr, args);
@@ -7608,7 +7539,8 @@ if (!nexacro.Dataset) {
 		if (max instanceof nexacro.Decimal) {
 			return max.isNaN() ? undefined : max;
 		}
-		return (+max) != (+max) ? undefined : max;
+		var _max = +max;
+		return _max != _max ? undefined : max;
 	};
 	_pDataset.getMax = function (expr, start, end, args) {
 		return this.__getMax(this._viewRecords, expr, start, end, args);
@@ -7648,7 +7580,8 @@ if (!nexacro.Dataset) {
 		if (max instanceof nexacro.Decimal) {
 			return max.isNaN() ? undefined : max;
 		}
-		return (+max) != (+max) ? undefined : max;
+		var _max = +max;
+		return _max != _max ? undefined : max;
 	};
 	_pDataset.getRowsMax = function (rows, expr, args) {
 		return this.__getRowsMax(this._viewRecords, rows, expr, args);
@@ -7661,15 +7594,15 @@ if (!nexacro.Dataset) {
 		if (coltype != 2 && coltype != 3 && coltype != 4) {
 			return 0;
 		}
-
+		var cnt, sum;
 		if (coltype == 4) {
-			var cnt = 0;
-			var sum = new nexacro.Decimal();
+			cnt = 0;
+			sum = new nexacro.Decimal();
 			function __Decimal_loopFn (i) {
 				var rowRow = this.__getParsedRow(records[i]);
 				if (rowRow._rtype & 7) {
 					var colval = rowRow[colidx];
-					if (!excludeNaN || (colval != null && (colval !== "" || colval === 0))) {
+					if (!excludeNaN || (colval != null && (colval !== ""))) {
 						cnt++;
 					}
 					if (colval) {
@@ -7690,13 +7623,13 @@ if (!nexacro.Dataset) {
 			return sum;
 		}
 		else {
-			var cnt = 0;
-			var sum = 0;
+			cnt = 0;
+			sum = 0;
 			function __Value_loopFn (i) {
 				var rowRow = this.__getParsedRow(records[i]);
 				if (rowRow._rtype & 7) {
 					var colval = rowRow[colidx];
-					if (!excludeNaN || (colval != null && (colval !== "" || colval === 0))) {
+					if (!excludeNaN || (colval != null && (colval !== ""))) {
 						cnt++;
 					}
 
@@ -7720,7 +7653,7 @@ if (!nexacro.Dataset) {
 			var rowRow = this.__getParsedRow(records[i]);
 			if (rowRow._rtype & 15) {
 				var colval = exprFn.call(this, i, rowRow._rawidx, null, this, records, rowRow, args);
-				if (!excludeNaN || (colval != null && !isNaN(colval) && (colval !== "" || colval === 0))) {
+				if (!excludeNaN || (colval != null && !isNaN(colval) && (colval !== ""))) {
 					cnt++;
 				}
 				if (colval) {
@@ -7760,16 +7693,16 @@ if (!nexacro.Dataset) {
 		if (coltype != 2 && coltype != 3 && coltype != 4) {
 			return 0;
 		}
-
+		var cnt, sum;
 		if (coltype == 4) {
-			var cnt = 0;
-			var sum = new nexacro.Decimal();
+			cnt = 0;
+			sum = new nexacro.Decimal();
 			function __Decimal_loopFn (i) {
 				var idx = rows[i];
 				var rowRow = this.__getParsedRow(records[idx]);
 				if (rowRow && (rowRow._rtype & 7)) {
 					var colval = rowRow[colidx];
-					if (!excludeNaN || (colval != null && (colval !== "" || colval === 0))) {
+					if (!excludeNaN || (colval != null && (colval !== ""))) {
 						cnt++;
 					}
 					if (colval) {
@@ -7790,14 +7723,14 @@ if (!nexacro.Dataset) {
 			return sum;
 		}
 		else {
-			var cnt = 0;
-			var sum = 0;
+			cnt = 0;
+			sum = 0;
 			function __Value_loopFn (i) {
 				var idx = rows[i];
 				var rowRow = this.__getParsedRow(records[idx]);
 				if (rowRow && (rowRow._rtype & 7)) {
 					var colval = rowRow[colidx];
-					if (!excludeNaN || (colval != null && (colval !== "" || colval === 0))) {
+					if (!excludeNaN || (colval != null && (colval !== ""))) {
 						cnt++;
 					}
 
@@ -7822,7 +7755,7 @@ if (!nexacro.Dataset) {
 			var rowRow = this.__getParsedRow(records[idx]);
 			if (rowRow && (rowRow._rtype & 15)) {
 				var colval = exprFn.call(this, idx, idx, null, this, records, rowRow, args);
-				if (!excludeNaN || (colval != null && !isNaN(colval) && (colval !== "" || colval === 0))) {
+				if (!excludeNaN || (colval != null && !isNaN(colval) && (colval !== ""))) {
 					cnt++;
 				}
 				if (colval) {
@@ -8000,9 +7933,9 @@ if (!nexacro.Dataset) {
 		if (coltype != 2 && coltype != 3 && coltype != 4) {
 			return 0;
 		}
-
+		var sum;
 		if (coltype == 4) {
-			var sum = new nexacro.Decimal();
+			sum = new nexacro.Decimal();
 			function __Decimal_loopFn (i) {
 				var rowRow = this.__getParsedRow(records[i]);
 				if (rowRow._rtype & 15) {
@@ -8024,7 +7957,7 @@ if (!nexacro.Dataset) {
 			return sum.isNaN() ? 0 : sum;
 		}
 		else {
-			var sum = 0;
+			sum = 0;
 			function __Value_loopFn (i) {
 				var rowRow = this.__getParsedRow(records[i]);
 				if (rowRow._rtype & 15) {
@@ -8119,7 +8052,7 @@ if (!nexacro.Dataset) {
 			return 0;
 		}
 
-		var val = +valExpr;
+		val = +valExpr;
 		if (val == val) {
 			if (val) {
 				var cnt = this._getCaseCount(records, cmpFn, start, end, ((args instanceof Array) ? args : []));
@@ -8128,7 +8061,7 @@ if (!nexacro.Dataset) {
 			return 0;
 		}
 
-		var constVar = this._constVars[valExpr];
+		constVar = this._constVars[valExpr];
 		if (constVar) {
 			if (constVar.value) {
 				return constVar.value * this._getCaseCount(records, cmpFn, start, end, ((args instanceof Array) ? args : []));
@@ -8136,7 +8069,7 @@ if (!nexacro.Dataset) {
 			return 0;
 		}
 
-		var colinfo = this.colinfos[valExpr];
+		colinfo = this.colinfos[valExpr];
 		if (colinfo) {
 			return this._getCaseSumValue(records, cmpFn, colinfo._index, start, end, colinfo.ntype, ((args instanceof Array) ? args : []));
 		}
@@ -8255,10 +8188,11 @@ if (!nexacro.Dataset) {
 			return undefined;
 		}
 
-		var val = +valExpr;
+		val = +valExpr;
+		var frow;
 		if (val == val) {
 			if (val) {
-				var frow = this._findRowExpr(records, cmpFn, start, end, ((args instanceof Array) ? args : []));
+				frow = this._findRowExpr(records, cmpFn, start, end, ((args instanceof Array) ? args : []));
 				if (frow >= 0) {
 					return val;
 				}
@@ -8266,10 +8200,10 @@ if (!nexacro.Dataset) {
 			return undefined;
 		}
 
-		var constVar = this._constVars[valExpr];
+		constVar = this._constVars[valExpr];
 		if (constVar) {
 			if (constVar.value) {
-				var frow = this._findRowExpr(records, cmpFn, start, end, ((args instanceof Array) ? args : []));
+				frow = this._findRowExpr(records, cmpFn, start, end, ((args instanceof Array) ? args : []));
 				if (frow >= 0) {
 					return constVar.value;
 				}
@@ -8277,7 +8211,7 @@ if (!nexacro.Dataset) {
 			return undefined;
 		}
 
-		var colinfo = this.colinfos[valExpr];
+		colinfo = this.colinfos[valExpr];
 		if (colinfo) {
 			return this._getCaseMinValue(records, cmpFn, colinfo._index, start, end, colinfo.ntype, ((args instanceof Array) ? args : []));
 		}
@@ -8396,10 +8330,11 @@ if (!nexacro.Dataset) {
 			return undefined;
 		}
 
-		var val = +valExpr;
+		var frow;
+		val = +valExpr;
 		if (val == val) {
 			if (val) {
-				var frow = this._findRowExpr(records, cmpFn, start, end, ((args instanceof Array) ? args : []));
+				frow = this._findRowExpr(records, cmpFn, start, end, ((args instanceof Array) ? args : []));
 				if (frow >= 0) {
 					return val;
 				}
@@ -8407,10 +8342,10 @@ if (!nexacro.Dataset) {
 			return undefined;
 		}
 
-		var constVar = this._constVars[valExpr];
+		constVar = this._constVars[valExpr];
 		if (constVar) {
 			if (constVar.value) {
-				var frow = this._findRowExpr(records, cmpFn, start, end, ((args instanceof Array) ? args : []));
+				frow = this._findRowExpr(records, cmpFn, start, end, ((args instanceof Array) ? args : []));
 				if (frow >= 0) {
 					return constVar.value;
 				}
@@ -8418,7 +8353,7 @@ if (!nexacro.Dataset) {
 			return undefined;
 		}
 
-		var colinfo = this.colinfos[valExpr];
+		colinfo = this.colinfos[valExpr];
 		if (colinfo) {
 			return this._getCaseMaxValue(records, cmpFn, colinfo._index, start, end, colinfo.ntype, ((args instanceof Array) ? args : []));
 		}
@@ -8445,16 +8380,17 @@ if (!nexacro.Dataset) {
 			return 0;
 		}
 
+		var cnt, sum;
 		if (coltype == 4) {
-			var cnt = 0;
-			var sum = new nexacro.Decimal();
+			cnt = 0;
+			sum = new nexacro.Decimal();
 			function __Decimal_loopFn (i) {
 				var rowRow = this.__getParsedRow(records[i]);
 				if (rowRow._rtype & 15) {
 					var cmp = cmpFn.call(this, i, i, null, this, records, rowRow, args);
 					if (cmp) {
 						var colval = rowRow[colidx];
-						if (!excludeNaN || (colval != null && (colval !== "" || colval === 0))) {
+						if (!excludeNaN || (colval != null && (colval !== ""))) {
 							cnt++;
 						}
 						if (colval) {
@@ -8477,15 +8413,15 @@ if (!nexacro.Dataset) {
 			return sum;
 		}
 		else {
-			var cnt = 0;
-			var sum = 0;
+			cnt = 0;
+			sum = 0;
 			function __Value_loopFn (i) {
 				var rowRow = this.__getParsedRow(records[i]);
 				if (rowRow._rtype & 15) {
 					var cmp = cmpFn.call(this, i, i, null, this, records, rowRow, args);
 					if (cmp) {
 						var colval = rowRow[colidx];
-						if (!excludeNaN || (colval != null && (colval !== "" || colval === 0))) {
+						if (!excludeNaN || (colval != null && (colval !== ""))) {
 							cnt++;
 						}
 						if (colval) {
@@ -8512,7 +8448,7 @@ if (!nexacro.Dataset) {
 				var cmp = cmpFn.call(this, i, i, null, this, records, rowRow, args);
 				if (cmp) {
 					var colval = valFn.call(this, i, i, null, this, records, rowRow, valargs);
-					if (!excludeNaN || (colval != null && !isNaN(colval) && (colval !== "" || colval === 0))) {
+					if (!excludeNaN || (colval != null && !isNaN(colval) && (colval !== ""))) {
 						cnt++;
 					}
 					if (colval) {
@@ -8592,10 +8528,11 @@ if (!nexacro.Dataset) {
 			return NaN;
 		}
 
-		var val = +valExpr;
+		var frow;
+		val = +valExpr;
 		if (val == val) {
 			if (val) {
-				var frow = this._findRowExpr(records, cmpFn, start, end, ((args instanceof Array) ? args : []));
+				frow = this._findRowExpr(records, cmpFn, start, end, ((args instanceof Array) ? args : []));
 				if (frow >= 0) {
 					return val;
 				}
@@ -8603,10 +8540,10 @@ if (!nexacro.Dataset) {
 			return NaN;
 		}
 
-		var constVar = this._constVars[valExpr];
+		constVar = this._constVars[valExpr];
 		if (constVar) {
 			if (constVar.value) {
-				var frow = this._findRowExpr(records, cmpFn, start, end, ((args instanceof Array) ? args : []));
+				frow = this._findRowExpr(records, cmpFn, start, end, ((args instanceof Array) ? args : []));
 				if (frow >= 0) {
 					return constVar.value;
 				}
@@ -8614,7 +8551,7 @@ if (!nexacro.Dataset) {
 			return 0;
 		}
 
-		var colinfo = this.colinfos[valExpr];
+		colinfo = this.colinfos[valExpr];
 		if (colinfo) {
 			return this._getCaseAvgValue(records, cmpFn, colinfo._index, start, end, colinfo.ntype, excludeNaN, ((args instanceof Array) ? args : []));
 		}
@@ -8715,29 +8652,30 @@ if (!nexacro.Dataset) {
 			end = records.length;
 		}
 
-		var rawRecords = this._rawRecords;
 		var colList = this.colinfos;
 		var constList = this._constVars;
 
 		var sel_arr = [];
+		var selid, selval;
+		var constVar, colinfo;
 		function __parse_selct_loopFn (i) {
 			var selectitem = select_list[i];
 			var seppos = selectitem.indexOf(":");
 			if (seppos > 0) {
-				var selid = selectitem.substring(0, seppos).trim();
-				var selval = selectitem.substring(seppos + 1).trim();
+				selid = selectitem.substring(0, seppos).trim();
+				selval = selectitem.substring(seppos + 1).trim();
 
-				var colinfo = this.getColIndex(selval);
+				colinfo = this.getColIndex(selval);
 				if (colinfo) {
 					sel_arr[sel_arr.length] = {
 						id : selid, 
 						type : "column", 
 						colid : selval, 
-						colidx : colinfo._index
+						colidx : colinfo
 					};
 					return false;
 				}
-				var constVar = constList[selval];
+				constVar = constList[selval];
 				if (constVar) {
 					sel_arr[sel_arr.length] = {
 						id : selid, 
@@ -8769,9 +8707,9 @@ if (!nexacro.Dataset) {
 				};
 			}
 			else {
-				var selid = selectitem.trim();
+				selid = selectitem.trim();
 
-				var colinfo = colList[selid];
+				colinfo = colList[selid];
 				if (colinfo) {
 					sel_arr[sel_arr.length] = {
 						id : selid, 
@@ -8781,7 +8719,7 @@ if (!nexacro.Dataset) {
 					};
 					return false;
 				}
-				var constVar = constList[selid];
+				constVar = constList[selid];
 				if (constVar) {
 					sel_arr[sel_arr.length] = {
 						id : selid, 
@@ -8914,10 +8852,12 @@ if (!nexacro.Dataset) {
 			var selectitem = select_list[i];
 			var seppos = selectitem.indexOf(":");
 			var colinfo;
-
+			var selid;
+			var selval;
+			var constVar;
 			if (seppos > 0) {
-				var selid = selectitem.substring(0, seppos).trim();
-				var selval = selectitem.substring(seppos + 1).trim();
+				selid = selectitem.substring(0, seppos).trim();
+				selval = selectitem.substring(seppos + 1).trim();
 				var aggtype = "sum";
 				seppos = selval.indexOf(":");
 				if (seppos > 0) {
@@ -8939,7 +8879,7 @@ if (!nexacro.Dataset) {
 					};
 					return false;
 				}
-				var constVar = constList[selval];
+				constVar = constList[selval];
 				if (constVar) {
 					sel_arr[sel_arr.length] = {
 						id : selid, 
@@ -8973,7 +8913,7 @@ if (!nexacro.Dataset) {
 				};
 			}
 			else {
-				var selid = selectitem.trim();
+				selid = selectitem.trim();
 
 				colinfo = colList[selid];
 				if (colinfo) {
@@ -8987,7 +8927,7 @@ if (!nexacro.Dataset) {
 					};
 					return false;
 				}
-				var constVar = constList[selid];
+				constVar = constList[selid];
 				if (constVar) {
 					sel_arr[sel_arr.length] = {
 						id : selid, 
@@ -9048,12 +8988,13 @@ if (!nexacro.Dataset) {
 
 		function __create_colinfo_loopFn (j) {
 			var selcol = sel_arr[j];
+			var constVar;
 			if (selcol.key >= 0) {
 				if (selcol.type == "column") {
 					outDS._addColumnInfo(selcol.id, colList[selcol.colid]);
 				}
 				else if (selcol.type == "const") {
-					var constVar = constList[selcol.colid];
+					constVar = constList[selcol.colid];
 					outDS._addConstColumn(selcol.id, selcol.colval, constVar.type, constVar.size);
 				}
 				else {
@@ -9062,7 +9003,7 @@ if (!nexacro.Dataset) {
 			}
 			else {
 				if (selcol.type == "const") {
-					var constVar = constList[selcol.colid];
+					constVar = constList[selcol.colid];
 					outDS._addConstColumn(selcol.id, selcol.colval, constVar.type, constVar.size);
 				}
 				else {
@@ -9117,11 +9058,10 @@ if (!nexacro.Dataset) {
 		}
 		nexacro.__forLoop(this, start, end, __create_keydata_loopFn);
 
-		var cmpfn = this.__createKeyRowsSortFunc(group_arr, group_arr.length);
-		keyRecords.sort(cmpfn);
-		cmpfn = null;
-
-
+		if (group_arr) {
+			var cmpfn = this.__createKeyRowsSortFunc(group_arr, group_arr.length);
+			keyRecords.sort(cmpfn);
+		}
 
 		var outRecords = outDS._rawRecords;
 
@@ -9314,7 +9254,9 @@ if (!nexacro.Dataset) {
 		keyRecords = null;
 
 		sel_arr.length = 0;
-		group_arr.length = 0;
+		if (group_arr) {
+			group_arr.length = 0;
+		}
 
 		outDS._viewRecords = outDS._rawRecords;
 
@@ -9346,14 +9288,13 @@ if (!nexacro.Dataset) {
 					newpos = -1;
 				}
 				var oldpos = this.rowposition;
+				var evt;
 				if (newpos != oldpos) {
 					if (this.onrowposchanged && this.onrowposchanged._has_handlers) {
-						var evt = new nexacro.DSRowPosChangeEventInfo(this, "onrowposchanged", oldpos, newpos, 51);
+						evt = new nexacro.DSRowPosChangeEventInfo(this, "onrowposchanged", oldpos, newpos, 51);
 						if (newpos >= 0 || newpos < this.rowcount) {
 							this.rowposition = newpos;
-							if (newpos != oldpos) {
-								this.on_fire_onrowposchanged(evt);
-							}
+							this.on_fire_onrowposchanged(evt);
 						}
 					}
 					else {
@@ -9361,7 +9302,7 @@ if (!nexacro.Dataset) {
 					}
 				}
 				if (this.onvaluechanged && this.onvaluechanged._has_handlers) {
-					var evt = new nexacro.DSColChangeEventInfo(this, "onvaluechanged", this.rowposition, -1, -1, "", undefined, undefined);
+					evt = new nexacro.DSColChangeEventInfo(this, "onvaluechanged", this.rowposition, -1, -1, "", undefined, undefined);
 					this.on_fire_onvaluechanged(evt);
 				}
 			}
@@ -9390,7 +9331,6 @@ if (!nexacro.Dataset) {
 					}
 					this.rowposition = -1;
 				}
-				doc = null;
 			}
 
 			this.updateSortGroup();
@@ -9453,8 +9393,6 @@ if (!nexacro.Dataset) {
 		curIdx = this._loadRecordFromDOM(dsDOM, curIdx, loadCnt);
 
 		var viewRecords = this._viewRecords;
-		var delRecords = this._deletedRecords;
-		var rawRecords = this._rawRecords;
 
 		this.constcount = this._constVars.length;
 		this.colcount = this.colinfos.length + this.constcount;
@@ -9463,18 +9401,12 @@ if (!nexacro.Dataset) {
 		this.loadstatus = false;
 		this._eventstat = this.enableevent;
 
-		viewRecords = null;
-		delRecords = null;
-		rawRecords = null;
 
 		return curIdx;
 	};
 
 	_pDataset._setColInfoFromDOM = function (dsDOM, bOrgLayout) {
-		if (bOrgLayout) {
-			;
-		}
-		else {
+		if (!bOrgLayout) {
 			var _colElems = dsDOM.getElementsByTagName("ConstColumn");
 			function __loadFromDOM_const_loopFn (i) {
 				var _colElem = _colElems[i];
@@ -9486,7 +9418,7 @@ if (!nexacro.Dataset) {
 			var len = (_colElems ? _colElems.length : 0);
 			nexacro.__forLoop(this, 0, len, __loadFromDOM_const_loopFn);
 
-			var _colElems = dsDOM.getElementsByTagName("Column");
+			_colElems = dsDOM.getElementsByTagName("Column");
 			function __loadFromDOM_col_loopFn (i) {
 				var _colElem = _colElems[i];
 				var id = _colElem.getAttribute("id");
@@ -9494,14 +9426,13 @@ if (!nexacro.Dataset) {
 					this._addColumn(id, _colElem.getAttribute("type"), _colElem.getAttribute("size"), _colElem.getAttribute("prop"), _colElem.getAttribute("sumtext"));
 				}
 			}
-			var len = (_colElems ? _colElems.length : 0);
+			len = (_colElems ? _colElems.length : 0);
 			nexacro.__forLoop(this, 0, len, __loadFromDOM_col_loopFn);
 		}
 	};
 
 	_pDataset._loadRecordFromDOM = function (dsDOM, curIdx, loadCnt) {
 		var colList = this.colinfos;
-		var curCol;
 
 		var _rowElems = dsDOM.getElementsByTagName("Row");
 		var cnt = (_rowElems ? _rowElems.length : 0);
@@ -9569,8 +9500,8 @@ if (!nexacro.Dataset) {
 				var orgcnt = (_orgrowElems ? _orgrowElems.length : 0);
 				if (orgcnt) {
 					var orgRow = templateRow.slice(0, colCnt);
-					var _colElems = _orgrowElems[0].getElementsByTagName("Col");
-					var len = (_colElems ? _colElems.length : 0);
+					_colElems = _orgrowElems[0].getElementsByTagName("Col");
+					len = (_colElems ? _colElems.length : 0);
 					if (len > 0) {
 						function __loadRecordFromDOM_orgcoldata_loopFn (j) {
 							var _colElem = _colElems[j];
@@ -9646,11 +9577,11 @@ if (!nexacro.Dataset) {
 					this._forcesetRowPosition(0, 51);
 					this.rowposition = 0;
 
-					curIdx = this._loadFromDOM(dsDOM, curIdx, -1, bOrgLayout, false);
+					this._loadFromDOM(dsDOM, curIdx, -1, bOrgLayout, false);
 				}
 			}
 			else {
-				curIdx = this._loadFromDOM(dsDOM, curIdx, -1, bOrgLayout, bClear);
+				this._loadFromDOM(dsDOM, curIdx, -1, bOrgLayout, bClear);
 			}
 
 			if (this.colinfos) {
@@ -9942,11 +9873,11 @@ if (!nexacro.Dataset) {
 					this._forcesetRowPosition(0, 51);
 					this.rowposition = 0;
 
-					xml_parse_pos = this._loadFromXMLStr(xmlStr, xml_parse_pos, -1, bOrgLayout, false);
+					this._loadFromXMLStr(xmlStr, xml_parse_pos, -1, bOrgLayout, false);
 				}
 			}
 			else {
-				xml_parse_pos = this._loadFromXMLStr(xmlStr, 0, -1, bOrgLayout, bClear);
+				this._loadFromXMLStr(xmlStr, 0, -1, bOrgLayout, bClear);
 			}
 
 			if (this.colinfos) {
@@ -10070,8 +10001,6 @@ if (!nexacro.Dataset) {
 				break;
 		}
 
-		var i;
-		var n;
 		var list = [];
 
 		this.__writeXMLData(list, "<Dataset id=\"" + saveId + "\">", depth++);
@@ -10257,9 +10186,10 @@ if (!nexacro.Dataset) {
 	};
 
 	_pDataset.__makeDataMappingFunc = function (colArr, colCnt, type) {
+		var i;
 		var idMap = {
 		};
-		for (var i = 0; i < colCnt; i++) {
+		for (i = 0; i < colCnt; i++) {
 			var colItem = colArr[i].split(":");
 			var id = colItem[0];
 			idMap[id] = i;
@@ -10275,7 +10205,7 @@ if (!nexacro.Dataset) {
 			checkud = true;
 		}
 
-		for (var i = 0; i < colLen; i++) {
+		for (i = 0; i < colLen; i++) {
 			var colinfo = colinfos[i];
 			var idx = idMap[colinfo.id];
 			var colidx = colinfo._index;
@@ -10388,8 +10318,6 @@ if (!nexacro.Dataset) {
 	};
 
 	_pDataset._loadFromSSVArray = function (ssvColLines, ssvLines, curIdx, loadCnt, bOrgLayout, bClear) {
-		var _cs_ = String.fromCharCode(31);
-
 		this.loadstatus = true;
 		this._eventstat = !this.loadstatus && this.enableevent;
 
@@ -10511,7 +10439,6 @@ if (!nexacro.Dataset) {
 
 	_pDataset._loadRecordFromSSVLines = function (ssvLines, curIdx, loadCnt, _convertFn) {
 		var _cs_ = String.fromCharCode(31);
-		var _ud_ = String.fromCharCode(3);
 
 		var rawRecords = this._rawRecords;
 		var delRecords = this._deletedRecords;
@@ -10538,9 +10465,10 @@ if (!nexacro.Dataset) {
 				}
 
 				curLine = prefix + curLine;
+				var curData;
 				var typeChar = curLine.charAt(typePos);
 				if (typeChar == 'I' || typeChar == 'i') {
-					var curData = [];
+					curData = [];
 					curData._rtype = 2;
 					curData._orgidx = rowidx;
 					curData._rawidx = rawRecords.length;
@@ -10549,7 +10477,7 @@ if (!nexacro.Dataset) {
 					rawRecords[rawRecords.length] = curData;
 				}
 				else if (typeChar == 'U' || typeChar == 'u') {
-					var curData = [];
+					curData = [];
 					curData._rtype = 4;
 					curData._orgidx = rowidx;
 					curData._rawidx = rawRecords.length;
@@ -10562,7 +10490,7 @@ if (!nexacro.Dataset) {
 						return true;
 					}
 
-					var curData = [];
+					curData = [];
 					curData._rtype = 8;
 					curData._orgidx = rowidx;
 					curData._rawidx = rawRecords.length;
@@ -10574,7 +10502,7 @@ if (!nexacro.Dataset) {
 					rawRecords[rawRecords.length - 1]._orgdata = curLine;
 				}
 				else {
-					var curData = [];
+					curData = [];
 					curData._rtype = 1;
 					curData._orgidx = rowidx;
 					curData._rawidx = rawRecords.length;
@@ -10960,9 +10888,6 @@ if (!nexacro.Dataset) {
 				idMap[id] = i;
 				return true;
 			}
-			else if (curType == 'C') {
-				return false;
-			}
 			return true;
 		}
 		nexacro.__forLoop(this, 0, colLines.length, __makePPXDataMappingFunc_loopFn);
@@ -11017,13 +10942,14 @@ if (!nexacro.Dataset) {
 		function __setColInfoFromPPXLines_loopFn (i) {
 			var curStr = colLines[i];
 			var curType = curStr.charAt(0);
+			var valArr;
 			if (curType == 'V') {
-				var valArr = curStr.split(_cs_);
+				valArr = curStr.split(_cs_);
 				this._addConstColumn(valArr[1], valArr[3], valArr[2]);
 				return false;
 			}
 			else if (curType == 'C') {
-				var valArr = curStr.split(_cs_);
+				valArr = curStr.split(_cs_);
 				this._addColumn(valArr[1], valArr[2], valArr[3], valArr[4], valArr[5]);
 				return false;
 			}
@@ -11246,7 +11172,7 @@ if (!nexacro.Dataset) {
 			_convertFn = this.__makeDataMappingFunc(colArr, csvColCnt, "C");
 		}
 		else {
-			csvColCnt = this.__csvSetColInfo(csvColLine);
+			this.__csvSetColInfo(csvColLine);
 			_convertFn = this.__makeDataConvertFunc("C");
 		}
 
@@ -11693,20 +11619,14 @@ if (!nexacro.Dataset) {
 				d_cache.last_modified = last_modified ? last_modified : "";
 				d_cache.version = this.version;
 			}
-			d_cache = null;
 		}
 
-		parameters = null;
-		datasets = null;
-		data = null;
-		ret = null;
 
 		var errorcode = 0;
 		var errormsg = "SUCCESS";
 		if (errorinfo) {
 			errorcode = errorinfo[0];
 			errormsg = errorinfo[1];
-			errorinfo = null;
 		}
 
 		if (this._usewaitcursor) {
@@ -11729,8 +11649,6 @@ if (!nexacro.Dataset) {
 				dataitem._is_cancel = undefined;
 			}
 
-			dataitem = null;
-			loadmanager = null;
 
 			for (var i = 0; i < n; i++) {
 				var item = callbackList[i];
@@ -11738,8 +11656,6 @@ if (!nexacro.Dataset) {
 				if (target._is_alive != false) {
 					item.callback.call(target, this.svcid, errorcode, errormsg);
 				}
-				target = null;
-				item = null;
 			}
 			callbackList.splice(0, n);
 		}
@@ -11874,7 +11790,6 @@ if (!nexacro.Dataset) {
 
 		var loadmanager = this.context._load_manager;
 		var dataitem = loadmanager ? loadmanager.getDataItem(this.svcid) : null;
-		var dataitem_handle = dataitem ? dataitem.handle : null;
 
 
 		if (dataitem && !dataitem._is_cancel) {
@@ -11882,8 +11797,6 @@ if (!nexacro.Dataset) {
 		}
 
 		callbackList.splice(0, n);
-
-
 
 		nexacro._removeCommContext(this.context);
 
@@ -11972,14 +11885,12 @@ if (!nexacro.Dataset) {
 		var splitedParams = paramStr.match(expr);
 
 		if (!splitedParams || splitedParams.length == 0) {
-			" ".match(/\s/);
 			return undefined;
 		}
 		var splitedParamCnt = splitedParams.length;
 
-		var listLength = 0;
-
-		for (var i = 0; i < splitedParamCnt; i++) {
+		var i;
+		for (i = 0; i < splitedParamCnt; i++) {
 			var param = splitedParams[i].split("=");
 			var key = param[0].trim();
 			var value = param[1].trim();
@@ -11995,7 +11906,6 @@ if (!nexacro.Dataset) {
 			if (bduplicate) {
 				i++;
 
-				" ".match(/\s/);
 				return false;
 			}
 
@@ -12015,7 +11925,6 @@ if (!nexacro.Dataset) {
 			list.push(paramObj);
 		}
 
-		" ".match(/\s/);
 
 		return list;
 	};
@@ -12048,7 +11957,7 @@ if (!nexacro.Dataset) {
 
 				var type = "N";
 
-				var len = value.length;
+				len = value.length;
 				if (len > 0) {
 					value = nexacro.stripQuote(value);
 				}
@@ -12063,7 +11972,6 @@ if (!nexacro.Dataset) {
 			}
 		}
 
-		" ".match(/\s/);
 
 		return list;
 	};
@@ -12086,7 +11994,8 @@ if (!nexacro.Dataset) {
 
 		var argParamsCnt = 0;
 		var cookievarCnt = 0;
-
+		var i;
+		var id, val;
 		var enginecookievars = nexacro._getCookieVariables(4);
 		if (enginecookievars) {
 			for (pro in enginecookievars) {
@@ -12095,8 +12004,6 @@ if (!nexacro.Dataset) {
 					value : enginecookievars[pro].value
 				});
 			}
-
-			enginecookievars = null;
 		}
 
 		enginecookievars = nexacro._getCookieVariables(6);
@@ -12107,8 +12014,6 @@ if (!nexacro.Dataset) {
 					value : enginecookievars[pro].value
 				});
 			}
-
-			enginecookievars = null;
 		}
 
 		this._writeData(list, "<?xml version=\"1.0\" encoding=\"UTF-8\"?>", depth);
@@ -12120,21 +12025,19 @@ if (!nexacro.Dataset) {
 		if (argParams) {
 			argParamsCnt = argParams.length;
 		}
-		if (cookievar) {
-			cookievarCnt = cookievar.length;
-		}
+		cookievarCnt = cookievar.length;
 
 		if (argParamsCnt > 0 || cookievarCnt > 0) {
 			this._writeData(list, "<Parameters>", depth++);
 
 			if (cookievarCnt) {
-				for (var i = 0; i < cookievarCnt; i++) {
+				for (i = 0; i < cookievarCnt; i++) {
 					var cookie = cookievar[i];
 					if (!cookie) {
 						continue;
 					}
-					var id = cookie.id;
-					var val = cookie.value;
+					id = cookie.id;
+					val = cookie.value;
 
 					if (val && val.length) {
 						val = nexacro._encodeXml(val);
@@ -12146,9 +12049,9 @@ if (!nexacro.Dataset) {
 				}
 			}
 			if (argParamsCnt > 0) {
-				for (var i = 0; i < argParamsCnt; i++) {
-					var id = argParams[i].lval;
-					var val = argParams[i].rval;
+				for (i = 0; i < argParamsCnt; i++) {
+					id = argParams[i].lval;
+					val = argParams[i].rval;
 
 					if (val && val.length) {
 						val = nexacro._encodeXml(val);
@@ -12169,7 +12072,7 @@ if (!nexacro.Dataset) {
 		if (datasetParams && datasetParams.length) {
 			var datasetCnt = datasetParams.length;
 			for (i = 0; i < datasetCnt; i++) {
-				var id = datasetParams[i].rval;
+				id = datasetParams[i].rval;
 				var ds = this.context._getDatasetObject(id);
 				if (ds) {
 					list.push(ds._saveXML(datasetParams[i].lval, datasetParams[i].saveType, depth));
@@ -12192,9 +12095,7 @@ if (!nexacro.Dataset) {
 
 	_pTransactionItem.__serializeSSV = function () {
 		var _rs_ = String.fromCharCode(30);
-		var _cs_ = String.fromCharCode(31);
 
-		var depth = 0;
 		var list = [], cookievar = [], pro;
 
 		var enginecookievars = nexacro._getCookieVariables(4);
@@ -12205,8 +12106,6 @@ if (!nexacro.Dataset) {
 					value : enginecookievars[pro].value
 				});
 			}
-
-			enginecookievars = null;
 		}
 
 		enginecookievars = nexacro._getCookieVariables(6);
@@ -12217,13 +12116,10 @@ if (!nexacro.Dataset) {
 					value : enginecookievars[pro].value
 				});
 			}
-
-			enginecookievars = null;
 		}
 
 		var id, val, ds, i;
 
-		var listLength = 0;
 		list.push("SSV:utf-8" + _rs_);
 
 		var argParamsCnt = 0;
@@ -12233,9 +12129,7 @@ if (!nexacro.Dataset) {
 		if (argParams) {
 			argParamsCnt = argParams.length;
 		}
-		if (cookievar) {
-			cookievarCnt = cookievar.length;
-		}
+		cookievarCnt = cookievar.length;
 
 		if (cookievarCnt > 0) {
 			for (i = 0; i < cookievarCnt; i++) {
@@ -12243,12 +12137,11 @@ if (!nexacro.Dataset) {
 				if (!cookie) {
 					continue;
 				}
-				var id = cookie.id;
-				var val = cookie.value;
+				id = cookie.id;
+				val = cookie.value;
 
 
 				if (val && val.length) {
-					val = val;
 					list.push(id + "=" + val + _rs_);
 				}
 				else {
@@ -12262,7 +12155,6 @@ if (!nexacro.Dataset) {
 				val = argParams[i].rval;
 
 				if (val) {
-					val = val;
 					list.push(id + "=" + val + _rs_);
 				}
 				else {
@@ -12275,8 +12167,8 @@ if (!nexacro.Dataset) {
 		if (datasetParams && datasetParams.length) {
 			var datasetCnt = datasetParams.length;
 			for (i = 0; i < datasetCnt; i++) {
-				var id = datasetParams[i].rval;
-				var ds = this.context._getDatasetObject(id);
+				id = datasetParams[i].rval;
+				ds = this.context._getDatasetObject(id);
 				if (ds) {
 					list.push(ds.saveSSV(datasetParams[i].lval, datasetParams[i].saveType));
 				}
@@ -12472,6 +12364,7 @@ if (!nexacro.Dataset) {
 		var message = "SUCCESS";
 		var env = nexacro.getEnvironment();
 		var datasetloadtype = env.datasetloadtype;
+		var i, param, attrStr, ds;
 
 		if (!strRecvData) {
 			return [[-1, "Stream Data is null!"], null, null];
@@ -12492,13 +12385,12 @@ if (!nexacro.Dataset) {
 		var paramsInfo = nexacro._getXMLTagData(headerData, head_parse_pos, "<Parameters>", "</Parameters>");
 		if (paramsInfo) {
 			var paramsData = paramsInfo[0];
-			head_parse_pos = paramsInfo[3];
 
 			var param_parse_pos = 0;
 			var varInfo = nexacro._getXMLTagData2(paramsData, param_parse_pos, "<Parameter ", "</Parameter>");
 			while (varInfo) {
 				param_parse_pos = varInfo[3];
-				var attrStr = varInfo[1];
+				attrStr = varInfo[1];
 				var id = nexacro._getXMLAttributeID(attrStr);
 				if (id && id.length) {
 					var val = varInfo[0];
@@ -12549,9 +12441,9 @@ if (!nexacro.Dataset) {
 		var inDatasets = this.inputDatasets;
 		if (inDatasets && inDatasets.length) {
 			var inDataCnt = inDatasets.length;
-			for (var i = 0; i < inDataCnt; i++) {
-				var param = inDatasets[i];
-				var ds = form._getDatasetObject(param.rval);
+			for (i = 0; i < inDataCnt; i++) {
+				param = inDatasets[i];
+				ds = form._getDatasetObject(param.rval);
 				if (ds) {
 					ds.applyChange();
 				}
@@ -12565,8 +12457,8 @@ if (!nexacro.Dataset) {
 		var outDatasets = this.outputDatasets;
 		if (outDatasets && outDatasets.length) {
 			var outDataCnt = outDatasets.length;
-			for (var i = 0; i < outDataCnt; i++) {
-				var param = outDatasets[i];
+			for (i = 0; i < outDataCnt; i++) {
+				param = outDatasets[i];
 				if (dsIds[param.rval] == undefined) {
 					dsIds[param.rval] = param.lval;
 					dsTypes[param.rval] = param.saveType;
@@ -12578,12 +12470,12 @@ if (!nexacro.Dataset) {
 			var datasetInfo = nexacro._getXMLTagData2(strRecvData, xml_parse_pos, "<Dataset ", "</Dataset>");
 			while (datasetInfo) {
 				xml_parse_pos = datasetInfo[3];
-				var attrStr = datasetInfo[1];
+				attrStr = datasetInfo[1];
 				var remoteId = nexacro._getXMLAttributeID(attrStr);
 				if (remoteId && remoteId.length) {
 					var localId = dsIds[remoteId];
 					var type = dsTypes[remoteId];
-					var ds = form._getDatasetObject(localId);
+					ds = form._getDatasetObject(localId);
 					if (ds) {
 						ds.rowposition = -1;
 						ds.loadFromXMLStr(datasetInfo[0], null, (type == "P"));
@@ -12596,8 +12488,6 @@ if (!nexacro.Dataset) {
 			}
 		}
 
-		dsIds = null;
-		dsTypes = null;
 		return [[code, message], parameters, datasets];
 	};
 
@@ -12607,10 +12497,11 @@ if (!nexacro.Dataset) {
 		var code = 0;
 		var env = nexacro.getEnvironment();
 		var datasetloadtype = env.datasetloadtype;
+		var i;
 
 		if (paramElems && paramElems.length) {
 			var varCnt = paramElems.length;
-			for (var i = 0; i < varCnt; i++) {
+			for (i = 0; i < varCnt; i++) {
 				var paramElem = paramElems[i];
 				var id = paramElem.getAttribute("id");
 				if (id && id.length) {
@@ -12650,7 +12541,7 @@ if (!nexacro.Dataset) {
 		var outDatasets = target.outputDatasets;
 		if (outDatasets && outDatasets.length) {
 			var outDataCnt = outDatasets.length;
-			for (var i = 0; i < outDataCnt; i++) {
+			for (i = 0; i < outDataCnt; i++) {
 				var param = outDatasets[i];
 				if (dsIds[param.rval] == undefined) {
 					dsIds[param.rval] = param.lval;
@@ -12664,7 +12555,7 @@ if (!nexacro.Dataset) {
 		var datasets = doc.getElementsByTagName("Dataset");
 		if (datasets && datasets.length) {
 			var dataCnt = datasets.length;
-			for (var i = 0; i < dataCnt; i++) {
+			for (i = 0; i < dataCnt; i++) {
 				var remoteId = datasets[i].getAttribute("id");
 				if (remoteId && remoteId.length) {
 					var localId = dsIds[remoteId];
@@ -12674,17 +12565,13 @@ if (!nexacro.Dataset) {
 					if (!ds) {
 						ds = new nexacro.Dataset(remoteId);
 					}
-					if (ds) {
-						ds.rowposition = -1;
-						ds.loadFromDOM(datasets[i], null, (type == "P"));
-						datasetlist.push(ds);
-					}
+					ds.rowposition = -1;
+					ds.loadFromDOM(datasets[i], null, (type == "P"));
+					datasetlist.push(ds);
 				}
 			}
 		}
 
-		dsIds = null;
-		dsTypes = null;
 		return [variablelist, datasetlist];
 	};
 
@@ -12710,9 +12597,11 @@ if (!nexacro.Dataset) {
 		var ppxLines = strRecvData.split(_rs_);
 		var lineCnt = ppxLines.length;
 		var curIdx = 1;
+		var param, curStr, ds;
+		var i;
 
 		for (; curIdx < lineCnt; curIdx++) {
-			var curStr = ppxLines[curIdx];
+			curStr = ppxLines[curIdx];
 			var curType = curStr.charAt(0);
 
 			if (curType == "P") {
@@ -12768,15 +12657,14 @@ if (!nexacro.Dataset) {
 		var inDatasets = this.inputDatasets;
 		if (inDatasets && inDatasets.length) {
 			var inDataCnt = inDatasets.length;
-			for (var i = 0; i < inDataCnt; i++) {
-				var param = inDatasets[i];
-				var ds = form._getDatasetObject(param.rval);
+			for (i = 0; i < inDataCnt; i++) {
+				param = inDatasets[i];
+				ds = form._getDatasetObject(param.rval);
 				if (ds) {
 					ds.applyChange();
 				}
 			}
 		}
-		inDatasets = null;
 
 		var dsIds = {
 		};
@@ -12785,15 +12673,14 @@ if (!nexacro.Dataset) {
 		var outDatasets = this.outputDatasets;
 		if (outDatasets && outDatasets.length) {
 			var outDataCnt = outDatasets.length;
-			for (var i = 0; i < outDataCnt; i++) {
-				var param = outDatasets[i];
+			for (i = 0; i < outDataCnt; i++) {
+				param = outDatasets[i];
 				if (dsIds[param.rval] == undefined) {
 					dsIds[param.rval] = param.lval;
 					dsTypes[param.rval] = param.saveType;
 				}
 			}
 		}
-		outDatasets = null;
 
 		function __find_next_dataset_loopFn (i) {
 			var curStr = ppxLines[i];
@@ -12801,7 +12688,6 @@ if (!nexacro.Dataset) {
 				return true;
 			}
 		}
-		;
 
 		while (true) {
 			curIdx = nexacro.__forLoop(this, curIdx, lineCnt, __find_next_dataset_loopFn);
@@ -12809,12 +12695,12 @@ if (!nexacro.Dataset) {
 				break;
 			}
 
-			var curStr = ppxLines[curIdx];
+			curStr = ppxLines[curIdx];
 			var valArr = curStr.split(_cs_);
 			var remoteId = valArr[1];
 			if (remoteId && remoteId.length) {
 				var localId = dsIds[remoteId];
-				var ds = form._getDatasetObject(localId);
+				ds = form._getDatasetObject(localId);
 				var type = dsTypes[remoteId];
 
 				if (ds) {
@@ -12827,7 +12713,6 @@ if (!nexacro.Dataset) {
 				else {
 					curIdx++;
 				}
-				ds = null;
 			}
 			else {
 				curIdx++;
@@ -12835,15 +12720,12 @@ if (!nexacro.Dataset) {
 		}
 
 		ppxLines.length = 0;
-		dsIds = null;
-		dsTypes = null;
 		return [[code, message], parameters, datasets];
 	};
 
 	_pTransactionItem.__deserializeSSV = function (strRecvData) {
 		var parameters = [];
 		var datasets = new nexacro.Collection();
-
 
 		var _rs_ = String.fromCharCode(30);
 		var _cs_ = String.fromCharCode(31);
@@ -12863,17 +12745,18 @@ if (!nexacro.Dataset) {
 		var ssvLines = strRecvData.split(_rs_);
 		var lineCnt = ssvLines.length;
 		var curIdx = 1;
+		var i, param, curStr, sep_pos, ds;
 
 		for (; curIdx < lineCnt; curIdx++) {
-			var curStr = ssvLines[curIdx];
+			curStr = ssvLines[curIdx];
 			if (curStr.substring(0, 7) != "Dataset") {
 				var paramArr = curStr.split(_cs_);
 				var paramCnt = paramArr.length;
-				for (var i = 0; i < paramCnt; i++) {
+				for (i = 0; i < paramCnt; i++) {
 					var paramStr = paramArr[i];
 					var varInfo = paramStr;
 					var val = undefined;
-					var sep_pos = paramStr.indexOf("=");
+					sep_pos = paramStr.indexOf("=");
 					if (sep_pos >= 0) {
 						varInfo = paramStr.substring(0, sep_pos);
 						val = paramStr.substring(sep_pos + 1);
@@ -12884,7 +12767,7 @@ if (!nexacro.Dataset) {
 
 					if (varInfo) {
 						var id = varInfo;
-						var sep_pos = varInfo.indexOf(":");
+						sep_pos = varInfo.indexOf(":");
 						if (sep_pos >= 0) {
 							id = varInfo.substring(0, sep_pos);
 						}
@@ -12937,9 +12820,9 @@ if (!nexacro.Dataset) {
 		var inDatasets = this.inputDatasets;
 		if (inDatasets && inDatasets.length) {
 			var inDataCnt = inDatasets.length;
-			for (var i = 0; i < inDataCnt; i++) {
-				var param = inDatasets[i];
-				var ds = form._getDatasetObject(param.rval);
+			for (i = 0; i < inDataCnt; i++) {
+				param = inDatasets[i];
+				ds = form._getDatasetObject(param.rval);
 				if (ds) {
 					ds.applyChange();
 				}
@@ -12953,8 +12836,8 @@ if (!nexacro.Dataset) {
 		var outDatasets = this.outputDatasets;
 		if (outDatasets && outDatasets.length) {
 			var outDataCnt = outDatasets.length;
-			for (var i = 0; i < outDataCnt; i++) {
-				var param = outDatasets[i];
+			for (i = 0; i < outDataCnt; i++) {
+				param = outDatasets[i];
 				if (dsIds[param.rval] == undefined) {
 					dsIds[param.rval] = param.lval;
 					dsTypes[param.rval] = param.saveType;
@@ -12968,7 +12851,6 @@ if (!nexacro.Dataset) {
 				return true;
 			}
 		}
-		;
 
 		while (true) {
 			curIdx = nexacro.__forLoop(this, curIdx, lineCnt, __find_next_dataset_loopFn);
@@ -12976,13 +12858,13 @@ if (!nexacro.Dataset) {
 				break;
 			}
 
-			var curStr = ssvLines[curIdx];
-			var sep_pos = curStr.indexOf(":");
+			curStr = ssvLines[curIdx];
+			sep_pos = curStr.indexOf(":");
 			if (sep_pos >= 0) {
 				var remoteId = curStr.substring(sep_pos + 1);
 				if (remoteId && remoteId.length) {
 					var localId = dsIds[remoteId];
-					var ds = form._getDatasetObject(localId);
+					ds = form._getDatasetObject(localId);
 					var type = dsTypes[remoteId];
 
 					if (ds) {
@@ -13006,8 +12888,6 @@ if (!nexacro.Dataset) {
 		}
 
 		ssvLines.length = 0;
-		dsIds = null;
-		dsTypes = null;
 		return [[code, message], parameters, datasets];
 	};
 
@@ -13030,30 +12910,31 @@ if (!nexacro.Dataset) {
 		var csvLines = strRecvData.split(/\r\n|\n/);
 		var lineCnt = csvLines.length;
 		var curIdx = 1;
+		var i, param, curStr, sep_pos, ds;
 
 		for (; curIdx < lineCnt; curIdx++) {
-			var curStr = csvLines[curIdx];
+			curStr = csvLines[curIdx];
 			if (curStr.substring(0, 7) == "Dataset") {
 				break;
 			}
 
 			var paramArr = curStr.split(",");
 			var paramCnt = paramArr.length;
-			for (var i = 0; i < paramCnt; i++) {
+			for (i = 0; i < paramCnt; i++) {
 				var paramStr = paramArr[i];
 				if (paramStr.charAt(0) == "\"" || paramStr.charAt(0) == "\'") {
 					paramStr = paramStr.substring(1, paramStr.length - 1);
 				}
 				var varInfo = paramStr;
 				var val = undefined;
-				var sep_pos = paramStr.indexOf("=");
+				sep_pos = paramStr.indexOf("=");
 				if (sep_pos >= 0) {
 					varInfo = paramStr.substring(0, sep_pos);
 					val = paramStr.substring(sep_pos + 1);
 				}
 				if (varInfo) {
 					var id = varInfo;
-					var sep_pos = varInfo.indexOf(":");
+					sep_pos = varInfo.indexOf(":");
 					if (sep_pos >= 0) {
 						id = varInfo.substring(0, sep_pos);
 					}
@@ -13101,9 +12982,9 @@ if (!nexacro.Dataset) {
 		var inDatasets = this.inputDatasets;
 		if (inDatasets && inDatasets.length) {
 			var inDataCnt = inDatasets.length;
-			for (var i = 0; i < inDataCnt; i++) {
-				var param = inDatasets[i];
-				var ds = form._getDatasetObject(param.rval);
+			for (i = 0; i < inDataCnt; i++) {
+				param = inDatasets[i];
+				ds = form._getDatasetObject(param.rval);
 				if (ds) {
 					ds.applyChange();
 				}
@@ -13117,8 +12998,8 @@ if (!nexacro.Dataset) {
 		var outDatasets = this.outputDatasets;
 		if (outDatasets && outDatasets.length) {
 			var outDataCnt = outDatasets.length;
-			for (var i = 0; i < outDataCnt; i++) {
-				var param = outDatasets[i];
+			for (i = 0; i < outDataCnt; i++) {
+				param = outDatasets[i];
 				if (dsIds[param.rval] == undefined) {
 					dsIds[param.rval] = param.lval;
 					dsTypes[param.rval] = param.saveType;
@@ -13132,7 +13013,6 @@ if (!nexacro.Dataset) {
 				return true;
 			}
 		}
-		;
 
 		while (true) {
 			curIdx = nexacro.__forLoop(this, curIdx, lineCnt, __find_next_dataset_loopFn);
@@ -13140,13 +13020,13 @@ if (!nexacro.Dataset) {
 				break;
 			}
 
-			var curStr = csvLines[curIdx];
-			var sep_pos = curStr.indexOf(":");
+			curStr = csvLines[curIdx];
+			sep_pos = curStr.indexOf(":");
 			if (sep_pos >= 0) {
 				var remoteId = curStr.substring(sep_pos + 1);
 				if (remoteId && remoteId.length) {
 					var localId = dsIds[remoteId];
-					var ds = form._getDatasetObject(localId);
+					ds = form._getDatasetObject(localId);
 					var type = dsTypes[remoteId];
 					if (ds) {
 						ds.rowposition = -1;
@@ -13169,8 +13049,6 @@ if (!nexacro.Dataset) {
 		}
 
 		csvLines.length = 0;
-		dsIds = null;
-		dsTypes = null;
 		return [[code, message], parameters, datasets];
 	};
 

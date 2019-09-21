@@ -37,6 +37,7 @@ if (!nexacro.Animation) {
 			autoplay : false, 
 			offset : 0
 		};
+
 		var defaultTweenSettings = {
 			duration : 1000, 
 			delay : 0, 
@@ -44,6 +45,7 @@ if (!nexacro.Animation) {
 			elasticity : 500, 
 			round : 0
 		};
+
 		var validTransforms = ['translateX', 'translateY', 'translateZ', 'rotate', 'rotateX', 'rotateY', 'rotateZ', 'scale', 'scaleX', 'scaleY', 'scaleZ', 'skewX', 'skewY'];
 		var transformString;
 
@@ -56,14 +58,15 @@ if (!nexacro.Animation) {
 
 		var crossBrowserSplit;
 
-		crossBrowserSplit = crossBrowserSplit || function (undef) {
+		crossBrowserSplit = function (undef) {
 			var nativeSplit = String.prototype.split, compliantExecNpcg = /()??/.exec("")[1] === undef, self;
 
 			self = function (str, separator, limit) {
 				if (Object.prototype.toString.call(separator) !== "[object RegExp]") {
 					return nativeSplit.call(str, separator, limit);
 				}
-				var output = [], flags = (separator.ignoreCase ? "i" : "") + (separator.multiline ? "m" : "") + (separator.extended ? "x" : "") + (separator.sticky ? "y" : ""), lastLastIndex = 0, separator = new RegExp(separator.source, flags + "g"), separator2, match, lastIndex, lastLength;
+				var output = [], flags = (separator.ignoreCase ? "i" : "") + (separator.multiline ? "m" : "") + (separator.extended ? "x" : "") + (separator.sticky ? "y" : ""), lastLastIndex = 0, separator2, match, lastIndex, lastLength;
+				separator = new RegExp(separator.source, flags + "g");
 				str += "";
 				if (!compliantExecNpcg) {
 					separator2 = new RegExp("^" + separator.source + "$(?!\\s)", flags);
@@ -145,6 +148,7 @@ if (!nexacro.Animation) {
 				return (is.hex(a) || is.rgb(a) || is.hsl(a) || isNamedColor(a));
 			}
 		};
+
 		var bezier = function () {
 			var kSplineTableSize = 11;
 			var kSampleStepSize = 1.0 / (kSplineTableSize - 1.0);
@@ -152,24 +156,19 @@ if (!nexacro.Animation) {
 			function A (aA1, aA2) {
 				return 1.0 - 3.0 * aA2 + 3.0 * aA1;
 			}
-			;
 			function B (aA1, aA2) {
 				return 3.0 * aA2 - 6.0 * aA1;
 			}
-			;
 			function C (aA1) {
 				return 3.0 * aA1;
 			}
-			;
 
 			function calcBezier (aT, aA1, aA2) {
 				return ((A(aA1, aA2) * aT + B(aA1, aA2)) * aT + C(aA1)) * aT;
 			}
-			;
 			function getSlope (aT, aA1, aA2) {
 				return 3.0 * A(aA1, aA2) * aT * aT + 2.0 * B(aA1, aA2) * aT + C(aA1);
 			}
-			;
 
 			function binarySubdivide (aX, aA, aB, mX1, mX2) {
 				var currentX, currentT, i = 0;
@@ -182,7 +181,6 @@ if (!nexacro.Animation) {
 					else {
 						aA = currentT;
 					}
-					;
 				} while (Math.abs(currentX) > 0.0000001 && ++i < 10);
 				return currentT;
 			}
@@ -291,9 +289,11 @@ if (!nexacro.Animation) {
 					return t < .5 ? (1 - bounce(1 - (t * 2))) * 0.5 : bounce(t * 2 - 1) * 0.5 + 0.5;
 				}]
 			};
+
 			var functions = {
 				linear : bezier(0.250, 0.250, 0.750, 0.750)
 			};
+
 			var that = this;
 
 			for (var type in equations) {
@@ -628,12 +628,6 @@ if (!nexacro.Animation) {
 			};
 		}
 
-		function recomposeValue (numbers, strings) {
-			return strings.reduce(function (a, b, i) {
-				return (a + numbers[i - 1] + b);
-			});
-		}
-
 		function parseTargets (targets) {
 			var targetsArray = targets ? (flattenArray(is.arr(targets) ? targets.map(toArray) : toArray(targets))) : [];
 			return targetsArray.filter(function (item, pos, self) {
@@ -766,6 +760,7 @@ if (!nexacro.Animation) {
 				transforms[id].push("" + p + "" + v);
 			}
 		};
+
 		function createAnimation (animatable, prop) {
 			var animType = getAnimationType(animatable.target, prop.name);
 			if (animType) {
@@ -858,6 +853,7 @@ if (!nexacro.Animation) {
 					child.reset();
 				}
 			};
+
 			function toggleInstanceDirection () {
 				instance.reversed = !instance.reversed;
 			}
@@ -867,21 +863,22 @@ if (!nexacro.Animation) {
 			}
 
 			function syncInstanceChildren (time) {
+				var i;
 				var children = instance.children;
 				if (time >= instance.currentTime) {
-					for (var i = 0; i < arrayLength(children); i++) {
+					for (i = 0; i < arrayLength(children); i++) {
 						children[i].seek(time);
 					}
 				}
 				else {
-					for (var i = arrayLength(children); i--; ) {
+					for (i = arrayLength(children); i--; ) {
 						children[i].seek(time);
 					}
 				}
 			}
 
 			function setAnimationsProgress (insTime) {
-				var i = 0;
+				var i = 0, n;
 				var transforms = {
 				};
 				var animations = instance.animations;
@@ -904,7 +901,7 @@ if (!nexacro.Animation) {
 					var numbers = [];
 					var progress;
 					var toNumbersLength = tween.to.numbers.length;
-					for (var n = 0; n < toNumbersLength; n++) {
+					for (n = 0; n < toNumbersLength; n++) {
 						var value;
 						var toNumber = tween.to.numbers[n];
 						var fromNumber = tween.from.numbers[n];
@@ -928,15 +925,14 @@ if (!nexacro.Animation) {
 					else {
 						progress = strings[0];
 						for (var s = 0; s < stringsLength; s++) {
-							var a = strings[s];
 							var b = strings[s + 1];
-							var n = numbers[s];
-							if (!isNaN(n)) {
+							var l = numbers[s];
+							if (!isNaN(l)) {
 								if (!b) {
-									progress += n + ' ';
+									progress += l + ' ';
 								}
 								else {
-									progress += n + b;
+									progress += l + b;
 								}
 							}
 						}
@@ -1034,9 +1030,11 @@ if (!nexacro.Animation) {
 				var engineTime = (lastTime + now - startTime) * anime.speed;
 				setInstanceProgress(engineTime);
 			};
+
 			instance.seek = function (time) {
 				setInstanceProgress(adjustTime(time));
 			};
+
 			instance.pause = function () {
 				var i = activeInstances.indexOf(instance);
 				if (i > -1) {
@@ -1044,6 +1042,7 @@ if (!nexacro.Animation) {
 				}
 				instance.paused = true;
 			};
+
 			instance.play = function () {
 				if (!instance.paused) {
 					return;
@@ -1057,11 +1056,13 @@ if (!nexacro.Animation) {
 					raf.start();
 				}
 			};
+
 			instance.reverse = function () {
 				toggleInstanceDirection();
 				startTime = 0;
 				lastTime = adjustTime(instance.currentTime);
 			};
+
 			instance.restart = function () {
 				instance.pause();
 				instance.reset();
@@ -1097,12 +1098,13 @@ if (!nexacro.Animation) {
 			tl.pause();
 			tl.duration = 0;
 			tl.add = function (instancesParams) {
-				for (var i = 0; i < tl.children.length; i++) {
+				var i;
+				for (i = 0; i < tl.children.length; i++) {
 					tl.children[i].began = true;
 					tl.children[i].completed = true;
 				}
 				var arrInstance = toArray(instancesParams);
-				for (var i = 0; i < arrInstance.length; i++) {
+				for (i = 0; i < arrInstance.length; i++) {
 					var tlDuration = tl.duration;
 					var insOffset = arrInstance[i].offset;
 					arrInstance[i].autoplay = false;
@@ -1227,6 +1229,7 @@ if (!nexacro.Animation) {
 	_pAnimation.setTargets = function (obj) {
 		this.targets = obj;
 	};
+
 	_pAnimation.set_targets = function (v) {
 		if (nexacro._isObject(v)) {
 			this.setTargets(v);
@@ -1235,6 +1238,7 @@ if (!nexacro.Animation) {
 			this.targets = nexacro._toString(v);
 		}
 	};
+
 	_pAnimation.set_loop = function (v) {
 		var loop = nexacro._toBoolean(v) ? v : false;
 
@@ -1242,6 +1246,7 @@ if (!nexacro.Animation) {
 			this.loop = loop;
 		}
 	};
+
 	_pAnimation.set_loopcount = function (v) {
 		var loopcount = nexacro._isInt(v) ? (v > 0 ? v : undefined) : undefined;
 
@@ -1249,6 +1254,7 @@ if (!nexacro.Animation) {
 			this.loopcount = loopcount;
 		}
 	};
+
 	_pAnimation.set_direction = function (v) {
 		var direction = nexacro._toString(v);
 
@@ -1256,6 +1262,7 @@ if (!nexacro.Animation) {
 			this.direction = direction;
 		}
 	};
+
 	_pAnimation.set_offset = function (v) {
 		var offset = nexacro._toInt(v);
 
@@ -1263,6 +1270,7 @@ if (!nexacro.Animation) {
 			this.offset = offset;
 		}
 	};
+
 	_pAnimation.set_duration = function (v) {
 		var duration = nexacro._toInt(v);
 
@@ -1270,6 +1278,7 @@ if (!nexacro.Animation) {
 			this.duration = duration;
 		}
 	};
+
 	_pAnimation.set_delay = function (v) {
 		var delay = nexacro._toInt(v);
 
@@ -1277,6 +1286,7 @@ if (!nexacro.Animation) {
 			this.delay = delay;
 		}
 	};
+
 	_pAnimation.set_easing = function (v) {
 		var easing = nexacro._toString(v);
 
@@ -1284,6 +1294,7 @@ if (!nexacro.Animation) {
 			this.easing = easing;
 		}
 	};
+
 	_pAnimation.set_beziercurve = function (v) {
 		var beziercurve = nexacro._toString(v);
 		if (this.beziercurve != beziercurve) {
@@ -1298,6 +1309,7 @@ if (!nexacro.Animation) {
 			this.elasticity = elasticity;
 		}
 	};
+
 	_pAnimation.set_round = function (v) {
 		var round = nexacro._toInt(v);
 
@@ -1305,9 +1317,11 @@ if (!nexacro.Animation) {
 			this.round = round;
 		}
 	};
+
 	_pAnimation.set_targetprops = function (v) {
 		this.targetprops = nexacro._toString(v);
 	};
+
 	_pAnimation.play = function () {
 		if (!this._anime) {
 			this.reset();
@@ -1319,21 +1333,25 @@ if (!nexacro.Animation) {
 
 		this._anime.play();
 	};
+
 	_pAnimation.stop = function () {
 		this.pause();
 		this.seek(0);
 		this.reset();
 	};
+
 	_pAnimation.pause = function () {
 		if (this._anime) {
 			this._anime.pause();
 		}
 	};
+
 	_pAnimation.restart = function () {
 		if (this._anime) {
 			this._anime.restart();
 		}
 	};
+
 	_pAnimation.seek = function (time) {
 		this.play();
 		this.pause();
@@ -1341,47 +1359,55 @@ if (!nexacro.Animation) {
 			this._anime.seek(time);
 		}
 	};
+
 	_pAnimation.reverse = function () {
 		if (this._anime) {
 			this._anime.reverse();
 		}
 	};
+
 	_pAnimation.reset = function () {
 		if (this._anime) {
 			this._anime.reset();
 		}
 		this._createAnimeJSObject();
 	};
+
 	_pAnimation.getReversedStatus = function () {
 		if (this._anime) {
 			return this._anime.reversed;
 		}
 		return false;
 	};
+
 	_pAnimation.getCurrentTime = function () {
 		if (this._anime) {
 			return this._anime.currentTime;
 		}
 		return 0;
 	};
+
 	_pAnimation.getPausedStatus = function () {
 		if (this._anime) {
 			return this._anime.paused;
 		}
 		return false;
 	};
+
 	_pAnimation.getBeginStatus = function () {
 		if (this._anime) {
 			return this._anime.began;
 		}
 		return false;
 	};
+
 	_pAnimation.getCompletedStatus = function () {
 		if (this._anime) {
 			return this._anime.completed;
 		}
 		return false;
 	};
+
 	_pAnimation.removeTarget = function (id) {
 		var ret = -1;
 		var item = this.items[id];
@@ -1411,8 +1437,6 @@ if (!nexacro.Animation) {
 	};
 
 	_pAnimation.addChild = function (id, obj) {
-		var ret = -1;
-
 		if (id && id.length <= 0) {
 			return -1;
 		}
@@ -1451,45 +1475,53 @@ if (!nexacro.Animation) {
 			this._refobject.on_fire_update();
 		}
 	};
+
 	_pAnimation.on_fire_update = function () {
 		if (this.onupdate && this.onupdate._has_handlers) {
 			var evt = new nexacro.AnimationEventInfo(this, "onupdate");
 			this.onupdate._fireEvent(this, evt);
 		}
 	};
+
 	_pAnimation._on_begin = function () {
 		if (this._refobject && this._refobject.enableevent) {
 			this._refobject.on_fire_begin();
 		}
 	};
+
 	_pAnimation.on_fire_begin = function () {
 		if (this.onbegin && this.onbegin._has_handlers) {
 			var evt = new nexacro.AnimationEventInfo(this, "onbegin");
 			this.onbegin._fireEvent(this, evt);
 		}
 	};
+
 	_pAnimation._on_run = function () {
 		if (this._refobject && this._refobject.enableevent) {
 			this._refobject.on_fire_run();
 		}
 	};
+
 	_pAnimation.on_fire_run = function () {
 		if (this.onrun && this.onrun._has_handlers) {
 			var evt = new nexacro.AnimationEventInfo(this, "onrun");
 			this.onrun._fireEvent(this, evt);
 		}
 	};
+
 	_pAnimation._on_complete = function () {
 		if (this._refobject && this._refobject.enableevent) {
 			this._refobject.on_fire_complete();
 		}
 	};
+
 	_pAnimation.on_fire_complete = function () {
 		if (this.oncomplete && this.oncomplete._has_handlers) {
 			var evt = new nexacro.AnimationEventInfo(this, "oncomplete");
 			this.oncomplete._fireEvent(this, evt);
 		}
 	};
+
 	_pAnimation._makeParamsObject = function (offset) {
 		var objParams = {
 		};
@@ -1560,6 +1592,7 @@ if (!nexacro.Animation) {
 
 		return objParams;
 	};
+
 	_pAnimation._createAnimeJSObject = function () {
 		var _anime = anime(this._makeParamsObject());
 		this._anime = _anime;
@@ -1570,6 +1603,7 @@ if (!nexacro.Animation) {
 		_anime.run = this._on_run;
 		_anime.complete = this._on_complete;
 	};
+
 	nexacro.AnimationTimelineItem = function (id, animationid, offset) {
 		nexacro.Object.call(this, id);
 		this.animationid = animationid || "";
@@ -1636,6 +1670,7 @@ if (!nexacro.Animation) {
 
 		return objParams;
 	};
+
 	_pAnimationTimeline._createAnimeJSObject = function () {
 		this._anime = anime.timeline(this._makeParamsObject());
 		this._anime._refobject = this;
@@ -1656,7 +1691,7 @@ if (!nexacro.Animation) {
 
 		if (!item) {
 			item = new nexacro.AnimationTimelineItem(id, obj.id, offset);
-			ret = this.addChild(obj.id, obj);
+			this.addChild(obj.id, obj);
 			ret = this.items.add_item(id, item);
 		}
 		return ret;
@@ -1673,17 +1708,16 @@ if (!nexacro.Animation) {
 			this.items.removeTarget(id);
 		}
 
-		ret = this.addChild(obj.id, obj);
+		this.addChild(obj.id, obj);
 		ret = this.items.insert_item(index, id, item);
 		return ret;
 	};
 }
 
 if (_process) {
-	delete _process;
-	delete _pAnimationItem;
-	delete _pAnimationEventInfo;
-	delete _pAnimation;
-	delete _pAnimationTimelineItem;
-	delete _pAnimationTimeline;
+	_pAnimationItem = null;
+	_pAnimationEventInfo = null;
+	_pAnimation = null;
+	_pAnimationTimelineItem = null;
+	_pAnimationTimeline = null;
 }

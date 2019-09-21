@@ -16,18 +16,23 @@ if (!nexacro.TCPClientSocket) {
 		nexacro._createTCPClientSocket = function (obj, func_succ, func_error) {
 			return nexacro.__createTCPClientSocket(obj, func_succ, func_error);
 		};
+
 		nexacro._destroyTCPClientSocket = function (obj) {
 			return nexacro.__destroyTCPClientSocket(obj);
 		};
+
 		nexacro._openTCPClientSocket = function (obj, addr, port) {
 			return nexacro.__openTCPClientSocket(obj, addr, port);
 		};
+
 		nexacro._closeTCPClientSocket = function (obj) {
 			return nexacro.__closeTCPClientSocket(obj);
 		};
+
 		nexacro._readTCPClientSocket = function (obj, isreadline, maxsize, timeout, charset) {
 			return nexacro.__readTCPClientSocket(obj, isreadline, maxsize, timeout, charset);
 		};
+
 		nexacro._writeTCPClientSocket = function (obj, data, charset) {
 			return nexacro.__writeTCPClientSocket(obj, data, charset);
 		};
@@ -39,10 +44,12 @@ if (!nexacro.TCPClientSocket) {
 			nexacro.Device.exec('{"id":' + handle + ', "div":"TCPClientSocket", "method":"constructor", "params":""}');
 			return handle;
 		};
+
 		nexacro._destroyTCPClientSocket = function (handle) {
 			delete nexacro.Device._userCreatedObj[handle];
 			nexacro.Device.exec('{"id":' + handle + ', "div":"TCPClientSocket", "method":"destroy", "params":""}');
 		};
+
 		nexacro._openTCPClientSocket = function (handle, addr, port) {
 			if (port && typeof port == 'string') {
 				port = nexacro._toInt(port);
@@ -55,11 +62,13 @@ if (!nexacro.TCPClientSocket) {
 			var result = nexacro._executeEvalStr('(' + resultString + ')');
 			return result.result;
 		};
+
 		nexacro._closeTCPClientSocket = function (handle) {
 			var resultString = nexacro.Device.exec('{"id":' + handle + ', "div":"TCPClientSocket", "method":"close", "params":""}', true);
 			var result = nexacro._executeEvalStr('(' + resultString + ')');
 			return result.result;
 		};
+
 		nexacro._readTCPClientSocket = function (handle, isreadline, maxsize, timeout, charset) {
 			if (maxsize && typeof maxsize == 'string') {
 				maxsize = nexacro._toInt(maxsize);
@@ -84,6 +93,7 @@ if (!nexacro.TCPClientSocket) {
 			}
 			return [result.result, result.data];
 		};
+
 		nexacro._writeTCPClientSocket = function (handle, data, charset) {
 			var params = '{"data":' + '"' + nexacro.Device.encodeString(data) + '"';
 			if (charset) {
@@ -257,7 +267,7 @@ if (!nexacro.TCPClientSocket) {
 
 	_pTCPClientSocket.on_success = function (evt_id, arg0, arg1, arg2, arg3) {
 		var reasonmsg = evt_id;
-		var reason;
+		var reason, evt;
 
 		if (reasonmsg == "on_connect") {
 			reason = 1;
@@ -265,7 +275,7 @@ if (!nexacro.TCPClientSocket) {
 			this.isopen = true;
 
 			if (this.onsuccess && this.onsuccess._has_handlers) {
-				var evt = new nexacro.SocketEventInfo(this, "onsuccess", reasonmsg, reason, undefined, undefined);
+				evt = new nexacro.SocketEventInfo(this, "onsuccess", reasonmsg, reason, undefined, undefined);
 				return this.onsuccess._fireEvent(this, evt);
 			}
 		}
@@ -275,7 +285,7 @@ if (!nexacro.TCPClientSocket) {
 			this.isopen = false;
 
 			if (this.onsuccess && this.onsuccess._has_handlers) {
-				var evt = new nexacro.SocketEventInfo(this, "onsuccess", reasonmsg, reason, undefined, undefined);
+				evt = new nexacro.SocketEventInfo(this, "onsuccess", reasonmsg, reason, undefined, undefined);
 				return this.onsuccess._fireEvent(this, evt);
 			}
 		}
@@ -283,7 +293,7 @@ if (!nexacro.TCPClientSocket) {
 			reason = 3;
 
 			if (this.onsuccess && this.onsuccess._has_handlers) {
-				var evt = new nexacro.SocketEventInfo(this, "onsuccess", reasonmsg, reason, arg2, arg3);
+				evt = new nexacro.SocketEventInfo(this, "onsuccess", reasonmsg, reason, arg2, arg3);
 				return this.onsuccess._fireEvent(this, evt);
 			}
 		}

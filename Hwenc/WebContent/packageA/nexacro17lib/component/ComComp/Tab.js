@@ -504,47 +504,31 @@ if (!nexacro.Tab) {
 	};
 
 	_pTab.set_tabbuttonwidth = function (v) {
-		v = parseInt(v) | 0;
-
-		if (this.tabbuttonwidth == v) {
-			return;
+		if (this.tabbuttonwidth != v) {
+			this.tabbuttonwidth = (v === undefined) ? v : (parseInt(v) | 0);
+			this._rearrangeContents();
 		}
-
-		this.tabbuttonwidth = v;
-		this._rearrangeContents();
 	};
 
 	_pTab.set_tabbuttonheight = function (v) {
-		v = parseInt(v) | 0;
-
-		if (this.tabbuttonheight == v) {
-			return;
+		if (this.tabbuttonheight != v) {
+			this.tabbuttonheight = (v === undefined) ? v : (parseInt(v) | 0);
+			this._rearrangeContents();
 		}
-
-		this.tabbuttonheight = v;
-		this._rearrangeContents();
 	};
 
 	_pTab.set_selectedtabbuttonwidth = function (v) {
-		v = parseInt(v) | 0;
-
-		if (this.selectedtabbuttonwidth == v) {
-			return;
+		if (this.selectedtabbuttonwidth != v) {
+			this.selectedtabbuttonwidth = (v === undefined) ? v : (parseInt(v) | 0);
+			this._rearrangeContents();
 		}
-
-		this.selectedtabbuttonwidth = v;
-		this._rearrangeContents();
 	};
 
 	_pTab.set_selectedtabbuttonheight = function (v) {
-		v = parseInt(v) | 0;
-
-		if (this.selectedtabbuttonheight == v) {
-			return;
+		if (this.selectedtabbuttonheight != v) {
+			this.selectedtabbuttonheight = (v === undefined) ? v : (parseInt(v) | 0);
+			this._rearrangeContents();
 		}
-
-		this.selectedtabbuttonheight = v;
-		this._rearrangeContents();
 	};
 
 	_pTab.set_extrabuttonsize = function (v) {
@@ -586,10 +570,6 @@ if (!nexacro.Tab) {
 		}
 
 		tabpage = new nexacro.Tabpage(strId, this);
-		if (!tabpage) {
-			return -1;
-		}
-
 		tabpage._refobj = this;
 
 		if (strText) {
@@ -619,8 +599,6 @@ if (!nexacro.Tab) {
 		if (this[strId]) {
 			if (this[strId].name == tabpage.name) {
 				tabpage.destroy();
-				tabpage = null;
-
 				return -1;
 			}
 		}
@@ -628,7 +606,7 @@ if (!nexacro.Tab) {
 		var oldtabpage = oldtabindex > -1 ? tabpages[oldtabindex] : undefined;
 		var oldtabtn = oldtabindex > -1 ? this._tabbuttonitems[oldtabindex] : undefined;
 
-		if (oldtabpage) {
+		if (oldtabpage && oldtabtn) {
 			if (oldtabpage.enable) {
 				oldtabtn._changeStatus("enabled", true);
 			}
@@ -708,7 +686,6 @@ if (!nexacro.Tab) {
 			tabpages.delete_item(tabpage.id);
 
 			tabpage.destroy();
-			tabpage = null;
 
 			tabbuttonitems = this._tabbuttonitems;
 			var tabbuttonitem = tabbuttonitems[idx];
@@ -721,7 +698,6 @@ if (!nexacro.Tab) {
 				}
 
 				tabbuttonitem.destroy();
-				tabbuttonitem = null;
 			}
 
 			tabbuttonitems.splice(idx, 1);
@@ -746,7 +722,9 @@ if (!nexacro.Tab) {
 				newtabpage._on_apply_url();
 			}
 
-			tabbuttonitems[this.tabindex]._changeUserStatus("selected", true);
+			if (tabbuttonitems) {
+				tabbuttonitems[this.tabindex]._changeUserStatus("selected", true);
+			}
 		}
 
 		if (tabbuttonitems_len > 0) {
@@ -1162,7 +1140,6 @@ if (!nexacro.Tab) {
 		var tabpages = this.tabpages;
 		var tabpages_length = tabpages.length;
 		var tabpage;
-		var tabindex = this.tabindex;
 
 		for (i = 0; i < tabpages_length; i++) {
 			tabpage = tabpages[i];
@@ -1285,12 +1262,7 @@ if (!nexacro.Tab) {
 	};
 
 	_pTab._isSpinButtonVisible = function () {
-		if (this.nextbutton.visible || this.prevbutton.visible) {
-			return true;
-		}
-		else {
-			return false;
-		}
+		return this.nextbutton.visible || this.prevbutton.visible;
 	};
 
 	_pTab._getPrevButtonSize = function () {
@@ -1483,7 +1455,8 @@ if (!nexacro.Tab) {
 	};
 
 	_pTab._changeTabIndex = function (index, is_apply_focus) {
-		if (!this._is_created || this.tabindex == index || ((+index) != (+index)) || index < 0 || (this.tabpages && index >= this.tabpages.length)) {
+		var nindex = +index;
+		if (!this._is_created || this.tabindex == index || (nindex != nindex) || index < 0 || (this.tabpages && index >= this.tabpages.length)) {
 			return;
 		}
 
@@ -1503,7 +1476,7 @@ if (!nexacro.Tab) {
 		var oldtabtn = oldindex > -1 ? this._tabbuttonitems[oldindex] : undefined;
 		var newtabbtn = this._tabbuttonitems[index];
 
-		if (oldtabpage) {
+		if (oldtabpage && oldtabtn) {
 			if (oldtabpage.enable) {
 				oldtabtn._changeStatus("enabled", true);
 			}
@@ -1549,7 +1522,7 @@ if (!nexacro.Tab) {
 			}
 		}
 		else {
-			if (oldtabpage) {
+			if (oldtabpage && oldtabtn) {
 				if (oldtabtn.enable) {
 					oldtabtn._changeStatus("focused", true);
 				}
@@ -1600,8 +1573,8 @@ if (!nexacro.Tab) {
 		var tabindex = this.tabindex;
 
 		var bshowspin = false;
-		var prevbutton = this.prevbutton;
-		var nextbutton = this.nextbutton;
+		var prevbutton;
+		var nextbutton;
 		var prevbutton_size;
 		var nextbutton_size;
 		var nextbutton_enable = false;
@@ -1626,22 +1599,6 @@ if (!nexacro.Tab) {
 
 		var tab_width = this._getClientWidth();
 		var tab_height = this._getClientHeight();
-		var tab_border = this._border || this._getCSSStyleValue("border");
-		var tab_border_l = 0, tab_border_t = 0, tab_border_r = 0, tab_border_b = 0;
-		if (tab_border) {
-			if (tab_border.left) {
-				tab_border_l = tab_border.left._width;
-			}
-			if (tab_border.top) {
-				tab_border_t = tab_border.top._width;
-			}
-			if (tab_border.right) {
-				tab_border_r = tab_border.right._width;
-			}
-			if (tab_border.bottom) {
-				tab_border_b = tab_border.bottom._width;
-			}
-		}
 
 		var tabpages = this.tabpages;
 		var tabpages_len = tabpages.length;
@@ -1675,11 +1632,11 @@ if (!nexacro.Tab) {
 		tabpage_position.width = tab_width;
 		tabpage_position.height = tab_height;
 
-		var tab_buttonwidth = this.tabbuttonwidth | 0;
-		var tab_buttonheight = this.tabbuttonheight | 0;
+		var tab_buttonwidth = this.tabbuttonwidth;
+		var tab_buttonheight = this.tabbuttonheight;
 
-		var tab_selectedbuttonwidth = this.selectedtabbuttonwidth | 0;
-		var tab_selectedbuttonheight = this.selectedtabbuttonheight | 0;
+		var tab_selectedbuttonwidth = this.selectedtabbuttonwidth;
+		var tab_selectedbuttonheight = this.selectedtabbuttonheight;
 
 
 
@@ -1713,62 +1670,62 @@ if (!nexacro.Tab) {
 			var prop_tabbuttonitemwidth = tabpage.tabbuttonwidth;
 			var prop_tabbuttonitemheight = tabpage.tabbuttonheight;
 
-			var each_tabbuttonitemwidth = 0;
-			var each_tabbuttonitemheight = 0;
+			var each_tabbuttonitemwidth = undefined;
+			var each_tabbuttonitemheight = undefined;
 
 			if (!bmultiline) {
 				if (btabjustify) {
 					if (tabposition == "top" || tabposition == "bottom") {
-						if (tab_buttonheight) {
+						if (tab_buttonheight !== undefined) {
 							each_tabbuttonitemheight = tab_buttonheight;
 						}
 
-						if (prop_tabbuttonitemheight) {
+						if (prop_tabbuttonitemheight !== undefined) {
 							each_tabbuttonitemheight = prop_tabbuttonitemheight;
 						}
 
 						if (tabbuttonitem._tabindex == tabindex) {
-							if (tab_selectedbuttonheight) {
+							if (tab_selectedbuttonheight !== undefined) {
 								each_tabbuttonitemheight = tab_selectedbuttonheight;
 							}
 						}
 					}
 					else {
-						if (tab_buttonwidth) {
+						if (tab_buttonwidth !== undefined) {
 							each_tabbuttonitemwidth = tab_buttonwidth;
 						}
 
-						if (prop_tabbuttonitemwidth) {
+						if (prop_tabbuttonitemwidth !== undefined) {
 							each_tabbuttonitemwidth = prop_tabbuttonitemwidth;
 						}
 
 						if (tabbuttonitem._tabindex == tabindex) {
-							if (tab_selectedbuttonwidth) {
+							if (tab_selectedbuttonwidth !== undefined) {
 								each_tabbuttonitemwidth = tab_selectedbuttonwidth;
 							}
 						}
 					}
 				}
 				else {
-					if (tab_buttonwidth) {
+					if (tab_buttonwidth !== undefined) {
 						each_tabbuttonitemwidth = tab_buttonwidth;
 					}
-					if (tab_buttonheight) {
+					if (tab_buttonheight !== undefined) {
 						each_tabbuttonitemheight = tab_buttonheight;
 					}
 
-					if (prop_tabbuttonitemwidth) {
+					if (prop_tabbuttonitemwidth !== undefined) {
 						each_tabbuttonitemwidth = prop_tabbuttonitemwidth;
 					}
-					if (prop_tabbuttonitemheight) {
+					if (prop_tabbuttonitemheight !== undefined) {
 						each_tabbuttonitemheight = prop_tabbuttonitemheight;
 					}
 
 					if (tabbuttonitem._tabindex == tabindex) {
-						if (tab_selectedbuttonwidth) {
+						if (tab_selectedbuttonwidth !== undefined) {
 							each_tabbuttonitemwidth = tab_selectedbuttonwidth;
 						}
-						if (tab_selectedbuttonheight) {
+						if (tab_selectedbuttonheight !== undefined) {
 							each_tabbuttonitemheight = tab_selectedbuttonheight;
 						}
 					}
@@ -1786,16 +1743,26 @@ if (!nexacro.Tab) {
 				}
 			}
 
-			if (each_tabbuttonitemwidth) {
-				tabbuttonitem_width = each_tabbuttonitemwidth;
+			if (each_tabbuttonitemwidth !== undefined) {
+				if (each_tabbuttonitemwidth < 0) {
+					tabbuttonitem_width = 0;
+				}
+				else {
+					tabbuttonitem_width = each_tabbuttonitemwidth;
+				}
 			}
-			if (each_tabbuttonitemheight) {
-				tabbuttonitem_height = each_tabbuttonitemheight;
+			if (each_tabbuttonitemheight !== undefined) {
+				if (each_tabbuttonitemheight < 0) {
+					tabbuttonitem_height = 0;
+				}
+				else {
+					tabbuttonitem_height = each_tabbuttonitemheight;
+				}
 			}
 
 			if (tabposition == "top" || tabposition == "bottom") {
 				tabbuttonitem_pos.width = tabbuttonitem_width;
-				if (!each_tabbuttonitemheight) {
+				if (each_tabbuttonitemheight === undefined) {
 					tabbuttonitem_pos.height = tabbuttonitem_max_height;
 				}
 				else {
@@ -1803,7 +1770,7 @@ if (!nexacro.Tab) {
 				}
 			}
 			else {
-				if (!each_tabbuttonitemwidth) {
+				if (each_tabbuttonitemwidth === undefined) {
 					tabbuttonitem_pos.width = tabbuttonitem_max_width;
 				}
 				else {
@@ -1949,7 +1916,6 @@ if (!nexacro.Tab) {
 		}
 
 		line_count = cur_line_index + 1;
-		cur_line_index = 0;
 
 
 
@@ -2647,7 +2613,7 @@ if (!nexacro.Tab) {
 									newcomp[0]._setFocus(true, 1, true);
 								}
 							}
-							else if (page_last_comp) {
+							else {
 								comp = this._focusobj.form._searchPrevTabFocus(page_last_comp, undefined, undefined, 0);
 								if (comp && comp[0]) {
 									comp[0]._setFocus(true, 0, true);
@@ -2686,7 +2652,6 @@ if (!nexacro.Tab) {
 						else if (focusobj instanceof nexacro.Tabpage) {
 							tabpage_form = focusobj.form;
 							page_last_comp = tabpage_form._getLastFocused();
-							page_first_comp = tabpage_form._getTabOrderFirst(7 + 8);
 
 							if (page_last_comp) {
 								comp = tabpage_form._searchPrevTabFocus(page_last_comp, undefined, undefined, 7 + 8);
@@ -2893,7 +2858,8 @@ if (!nexacro.Tab) {
 
 		var ar = [];
 
-		if (comps) {
+		{
+
 			var comp_len = comps.length;
 			for (var i = 0; i < comp_len; i++) {
 				var comp = comps[i];
@@ -2941,7 +2907,6 @@ if (!nexacro.Tab) {
 	_pTab._getTabOrderNext = function (current, direction, filter_type) {
 		var tabbuttonitem = this._tabbuttonitems[this.tabindex];
 		var tabpage = this.tabpages[this.tabindex];
-		var next = null;
 
 		if (nexacro._isNull(filter_type)) {
 			filter_type = 4;
@@ -3031,7 +2996,7 @@ if (!nexacro.Tab) {
 				return false;
 			}
 
-			if (fnConstructor && fnConstructor.prototype && fnConstructor.prototype._is_component) {
+			if (fnConstructor.prototype && fnConstructor.prototype._is_component) {
 				var attr = {
 				};
 				var attr_props = {
@@ -3077,7 +3042,6 @@ if (!nexacro.Tab) {
 				this.addChild(obj.id, obj);
 				obj.set_visible(false);
 				obj.show();
-				obj = null;
 			}
 
 			node = node.nextSibling;
@@ -3089,8 +3053,6 @@ if (!nexacro.Tab) {
 			this.on_apply_tabindex(cur_tabindex);
 			this._rearrangeContents();
 		}
-
-		doc = null;
 
 		return ret;
 	};
@@ -3451,6 +3413,10 @@ if (!nexacro._TabButtonItemControl) {
 		if (extrabutton) {
 			extrabutton._setEnable(v);
 		}
+		var tabbuttonitemtext = this._tabbuttonitemtext;
+		if (tabbuttonitemtext) {
+			tabbuttonitemtext._setEnable(v);
+		}
 	};
 
 
@@ -3571,12 +3537,14 @@ if (!nexacro._TabButtonItemControl) {
 		}
 
 		var border_w = 0;
+		var border_h = 0;
 		if (border) {
-			border_w = border._getBorderLeftWidth() || 0;
+			border_w = border._getBorderWidth() || 0;
+			border_h = border._getBorderHeight() || 0;
 		}
 
-		width = padding_l + padding_r + border_w * 2;
-		height = padding_t + padding_b + border_w * 2;
+		width = padding_l + padding_r + border_w;
+		height = padding_t + padding_b + border_h;
 
 		var textsize = this._getItemTextSize();
 		if (textsize) {
@@ -3605,17 +3573,18 @@ if (!nexacro._TabButtonItemControl) {
 		}
 
 		var border_w = 0;
+		var border_h = 0;
 		if (border) {
-			border_w = border._getBorderLeftWidth() || 0;
+			border_w = border._getBorderWidth() || 0;
+			border_h = border._getBorderHeight() || 0;
 		}
 
-		ret[0] += padding_l + padding_r + (border_w * 2);
-		ret[1] += padding_t + padding_b + (border_w * 2);
+		ret[0] += padding_l + padding_r + border_w;
+		ret[1] += padding_t + padding_b + border_h;
 
 		var strText = this._displaytext;
 
 		var font = tabbuttonitemtext._getCurrentStyleInheritValue("font");
-		var wordwrap = tabbuttonitemtext._getCurrentStyleInheritValue("wordWrap");
 		var wordspace = tabbuttonitemtext._getCurrentStyleInheritValue("wordSpacing");
 		var letterspace = tabbuttonitemtext._getCurrentStyleInheritValue("letterSpacing");
 
@@ -3657,12 +3626,14 @@ if (!nexacro._TabButtonItemControl) {
 		}
 
 		var border_w = 0;
+		var border_h = 0;
 		if (border) {
-			border_w = border._getBorderLeftWidth() || 0;
+			border_w = border._getBorderWidth() || 0;
+			border_h = border._getBorderHeight() || 0;
 		}
 
-		ret.width += padding_l + padding_r + (border_w * 2);
-		ret.height += padding_t + padding_b + (border_w * 2);
+		ret.width += padding_l + padding_r + border_w;
+		ret.height += padding_t + padding_b + border_h;
 
 		var extrabutton_iconsize = this._getExtraButtonIconSize();
 		if (extrabutton_iconsize) {
@@ -3680,11 +3651,6 @@ if (!nexacro._TabButtonItemControl) {
 
 
 	_pTabButtonItemControl._getExtraButtonIconSize = function () {
-		var ret = {
-			width : 0, 
-			height : 0
-		};
-
 		var icon = this._extrabutton._getCSSStyleValue("icon");
 		if (icon instanceof Object) {
 			icon = icon.value;

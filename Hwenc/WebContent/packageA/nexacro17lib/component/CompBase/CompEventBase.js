@@ -204,7 +204,7 @@ if (nexacro.Component) {
 			}
 			var root_comp = p_comp._getFromComponent(p_comp);
 			var listener = root_comp["on" + event_name];
-			if (!listener || (listener && !listener.defaultprevented)) {
+			if (!listener || !listener.defaultprevented) {
 				p_comp = p_comp.parent;
 				if (root_comp instanceof nexacro.MainFrame) {
 					return false;
@@ -255,6 +255,9 @@ if (nexacro.Component) {
 
 		var _win = this._getRootWindow();
 		var i, j, n;
+		var focus_path_before, focus_path_after;
+		var is_focus_changed = false;
+		var focus_paths;
 
 		if (self_flag) {
 			var pThis = this;
@@ -328,8 +331,7 @@ if (nexacro.Component) {
 					}
 				}
 
-				var focus_path_before, focus_path_after;
-				var is_focus_changed = false;
+
 				var kill_focus_arrs = cur_focus_paths.slice(focus_info[1] + 1).reverse();
 				if (kill_focus_arrs && kill_focus_arrs.length > 0) {
 					for (i = 0, n = kill_focus_arrs.length; i < n; i++) {
@@ -388,20 +390,19 @@ if (nexacro.Component) {
 			var c = this._getLastFocused();
 
 			if (is_accessibility_mode) {
-				if (!c || (c && (!c.visible || (!c.enable && !c.accessibilityenable)))) {
+				if (!c || (!c.visible || (!c.enable && !c.accessibilityenable))) {
 					c = this._getTabOrderFirst(nexacro._enableaccessibility ? 15 : 4);
 				}
 			}
 			else {
-				if (!c || (c && (!c.visible || !c.enable))) {
+				if (!c || (!c.visible || !c.enable)) {
 					c = this._getTabOrderFirst();
 				}
 			}
 
 
 			if (c && c.visible && !this._block_inner_focus) {
-				var focus_paths = _win.getCurrentFocusPaths();
-				var focus_path_before, focus_path_after;
+				focus_paths = _win.getCurrentFocusPaths();
 
 				if (focus_paths) {
 					focus_path_before = focus_paths.slice(0);
@@ -415,8 +416,8 @@ if (nexacro.Component) {
 				this.on_fire_onsetfocus(lose_focus, refer_lose_focus);
 
 				if (focus_paths) {
-					var focus_path_after = _win.getCurrentFocusPaths();
-					var is_focus_changed = (focus_path_before.length != focus_path_after.length);
+					focus_path_after = _win.getCurrentFocusPaths();
+					is_focus_changed = (focus_path_before.length != focus_path_after.length);
 					if (!is_focus_changed) {
 						for (j = 0; j < focus_path_before.length; j++) {
 							if (focus_path_before[j] != focus_path_after[j]) {
@@ -459,8 +460,7 @@ if (nexacro.Component) {
 					}
 				}
 
-				var focus_paths = _win.getCurrentFocusPaths();
-				var focus_path_before, focus_path_after;
+				focus_paths = _win.getCurrentFocusPaths();
 
 				if (focus_paths) {
 					focus_path_before = focus_paths.slice(0);
@@ -470,7 +470,7 @@ if (nexacro.Component) {
 
 				if (focus_paths) {
 					focus_path_after = _win.getCurrentFocusPaths();
-					var is_focus_changed = (focus_path_before.length != focus_path_after.length);
+					is_focus_changed = (focus_path_before.length != focus_path_after.length);
 					if (!is_focus_changed) {
 						for (j = 0; j < focus_path_before.length; j++) {
 							if (focus_path_before[j] != focus_path_after[j]) {
@@ -627,7 +627,7 @@ if (nexacro.Component) {
 		}
 
 		var listener = root_comp.oncontextmenu;
-		if (!listener || (listener && !listener.defaultprevented)) {
+		if (!listener || !listener.defaultprevented) {
 			var ret = this._on_contextmenu_default_action();
 			return ret;
 		}
@@ -695,13 +695,11 @@ if (nexacro.Component) {
 			return;
 		}
 
+		var canvas;
 		var win = this._getWindow();
 
 		if (event_bubbles === undefined) {
-			var first_comp;
-
 			if (!refer_comp) {
-				first_comp = this;
 				refer_comp = this._focus_refer_comp = this;
 				if (!this._is_focus_accept) {
 					this._focus_refer_comp = this._getFocusAcceptableComponent(this);
@@ -709,10 +707,6 @@ if (nexacro.Component) {
 			}
 
 			if (this.visible && this._isEnable()) {
-				if (event_bubbles === false) {
-					event_bubbles = undefined;
-				}
-
 				var bubble = this.on_touch_lbuttondown_basic_action(elem, button, alt_key, ctrl_key, shift_key, canvasX, canvasY, screenX, screenY, fire_comp, refer_comp);
 				if (bubble) {
 					return;
@@ -722,8 +716,8 @@ if (nexacro.Component) {
 				}
 			}
 
-			if ((!this.onlbuttondown || (this.onlbuttondown && !this.onlbuttondown.stoppropagation)) && (event_bubbles !== true) && this.parent && !this.parent._is_application) {
-				var canvas = this._getRecalcCanvasXY(elem, canvasX, canvasY);
+			if ((!this.onlbuttondown || (this.onlbuttondown && !this.onlbuttondown.stoppropagation)) && this.parent && !this.parent._is_application) {
+				canvas = this._getRecalcCanvasXY(elem, canvasX, canvasY);
 
 				canvasX = canvas[0];
 				canvasY = canvas[1];
@@ -753,7 +747,7 @@ if (nexacro.Component) {
 		}
 		else {
 			if ((!this.onlbuttondown || (this.onlbuttondown && !this.onlbuttondown.stoppropagation)) && (event_bubbles !== true) && this.parent && !this.parent._is_application) {
-				var canvas = this._getRecalcCanvasXY(elem, canvasX, canvasY);
+				canvas = this._getRecalcCanvasXY(elem, canvasX, canvasY);
 
 				canvasX = canvas[0];
 				canvasY = canvas[1];
@@ -768,13 +762,11 @@ if (nexacro.Component) {
 			return;
 		}
 
+		var clientXY, canvas;
 		var win = this._getWindow();
 
 		if (event_bubbles === undefined) {
-			var first_comp;
-
 			if (!refer_comp) {
-				first_comp = this;
 				refer_comp = this._focus_refer_comp = this;
 
 				if (!this._is_focus_accept) {
@@ -783,7 +775,7 @@ if (nexacro.Component) {
 			}
 
 			if (this.visible && this._isEnable()) {
-				var clientXY = this._getClientXY(canvasX, canvasY);
+				clientXY = this._getClientXY(canvasX, canvasY);
 				if (bubble_scope) {
 					event_bubbles = this.on_fire_user_onlbuttondown(button, alt_key, ctrl_key, shift_key, screenX, screenY, canvasX, canvasY, clientXY[0], clientXY[1], this, refer_comp);
 				}
@@ -807,7 +799,7 @@ if (nexacro.Component) {
 			}
 
 			if ((!this.onlbuttondown || (this.onlbuttondown && !this.onlbuttondown.stoppropagation)) && (event_bubbles !== true) && this.parent && !this.parent._is_application) {
-				var canvas = this._getRecalcCanvasXY(elem, canvasX, canvasY);
+				canvas = this._getRecalcCanvasXY(elem, canvasX, canvasY);
 
 				canvasX = canvas[0];
 				canvasY = canvas[1];
@@ -823,7 +815,7 @@ if (nexacro.Component) {
 		}
 		else {
 			if (this.visible && this._isEnable()) {
-				var clientXY = this._getClientXY(canvasX, canvasY);
+				clientXY = this._getClientXY(canvasX, canvasY);
 
 				if (bubble_scope) {
 					event_bubbles = this.on_fire_user_onlbuttondown(button, alt_key, ctrl_key, shift_key, screenX, screenY, canvasX, canvasY, clientXY[0], clientXY[1], fire_comp, refer_comp);
@@ -833,7 +825,7 @@ if (nexacro.Component) {
 				}
 			}
 			if ((!this.onlbuttondown || (this.onlbuttondown && !this.onlbuttondown.stoppropagation)) && (event_bubbles !== true) && this.parent && !this.parent._is_application) {
-				var canvas = this._getRecalcCanvasXY(elem, canvasX, canvasY);
+				canvas = this._getRecalcCanvasXY(elem, canvasX, canvasY);
 
 				canvasX = canvas[0];
 				canvasY = canvas[1];
@@ -923,6 +915,7 @@ if (nexacro.Component) {
 	};
 
 	_pComponent._on_bubble_rbuttondown = function (elem, button, alt_key, ctrl_key, shift_key, canvasX, canvasY, screenX, screenY, event_bubbles, fire_comp, refer_comp, bubble_scope) {
+		var clientXY, canvas;
 		if (!this._is_alive) {
 			return;
 		}
@@ -933,7 +926,7 @@ if (nexacro.Component) {
 			}
 
 			if (this.visible && this._isEnable()) {
-				var clientXY = this._getClientXY(canvasX, canvasY);
+				clientXY = this._getClientXY(canvasX, canvasY);
 
 				if (bubble_scope) {
 					event_bubbles = this.on_fire_user_onrbuttondown(button, alt_key, ctrl_key, shift_key, screenX, screenY, canvasX, canvasY, clientXY[0], clientXY[1], this, refer_comp);
@@ -946,7 +939,7 @@ if (nexacro.Component) {
 				}
 			}
 			if ((!this.onrbuttondown || (this.onrbuttondown && !this.onrbuttondown.stoppropagation)) && (event_bubbles !== true) && this.parent && !this.parent._is_application) {
-				var canvas = this._getRecalcCanvasXY(elem, canvasX, canvasY);
+				canvas = this._getRecalcCanvasXY(elem, canvasX, canvasY);
 
 				canvasX = canvas[0];
 				canvasY = canvas[1];
@@ -961,7 +954,7 @@ if (nexacro.Component) {
 		}
 		else {
 			if (this.visible && this._isEnable()) {
-				var clientXY = this._getClientXY(canvasX, canvasY);
+				clientXY = this._getClientXY(canvasX, canvasY);
 
 				if (bubble_scope) {
 					event_bubbles = this.on_fire_user_onrbuttondown(button, alt_key, ctrl_key, shift_key, screenX, screenY, canvasX, canvasY, clientXY[0], clientXY[1], fire_comp, refer_comp);
@@ -971,7 +964,7 @@ if (nexacro.Component) {
 				}
 			}
 			if ((!this.onrbuttondown || (this.onrbuttondown && !this.onrbuttondown.stoppropagation)) && (event_bubbles !== true) && this.parent && !this.parent._is_application) {
-				var canvas = this._getRecalcCanvasXY(elem, canvasX, canvasY);
+				canvas = this._getRecalcCanvasXY(elem, canvasX, canvasY);
 
 				canvasX = canvas[0];
 				canvasY = canvas[1];
@@ -1010,6 +1003,7 @@ if (nexacro.Component) {
 		if (!this._is_alive) {
 			return;
 		}
+		var clientXY, canvas;
 
 		if (event_bubbles === undefined) {
 			if (!refer_comp) {
@@ -1021,7 +1015,7 @@ if (nexacro.Component) {
 			}
 
 			if (this.visible && this._isEnable()) {
-				var clientXY = this._getClientXY(canvasX, canvasY);
+				clientXY = this._getClientXY(canvasX, canvasY);
 
 				if (bubble_scope) {
 					event_bubbles = this.on_fire_user_onlbuttonup(button, alt_key, ctrl_key, shift_key, screenX, screenY, canvasX, canvasY, clientXY[0], clientXY[1], this, refer_comp, from_elem);
@@ -1034,7 +1028,7 @@ if (nexacro.Component) {
 				}
 			}
 			if ((!this.onlbuttonup || (this.onlbuttonup && !this.onlbuttonup.stoppropagation)) && (event_bubbles !== true) && this.parent && !this.parent._is_application) {
-				var canvas = this._getRecalcCanvasXY(elem, canvasX, canvasY);
+				canvas = this._getRecalcCanvasXY(elem, canvasX, canvasY);
 
 				canvasX = canvas[0];
 				canvasY = canvas[1];
@@ -1049,7 +1043,7 @@ if (nexacro.Component) {
 		}
 		else {
 			if (this.visible && this._isEnable()) {
-				var clientXY = this._getClientXY(canvasX, canvasY);
+				clientXY = this._getClientXY(canvasX, canvasY);
 
 				if (bubble_scope) {
 					event_bubbles = this.on_fire_user_onlbuttonup(button, alt_key, ctrl_key, shift_key, screenX, screenY, canvasX, canvasY, clientXY[0], clientXY[1], fire_comp, refer_comp, from_elem);
@@ -1059,7 +1053,7 @@ if (nexacro.Component) {
 				}
 			}
 			if ((!this.onlbuttonup || (this.onlbuttonup && !this.onlbuttonup.stoppropagation)) && (event_bubbles !== true) && this.parent && !this.parent._is_application) {
-				var canvas = this._getRecalcCanvasXY(elem, canvasX, canvasY);
+				canvas = this._getRecalcCanvasXY(elem, canvasX, canvasY);
 
 				canvasX = canvas[0];
 				canvasY = canvas[1];
@@ -1100,7 +1094,7 @@ if (nexacro.Component) {
 		if (!this._is_alive) {
 			return;
 		}
-
+		var clientXY, canvas;
 		if (event_bubbles === undefined) {
 			if (!refer_comp) {
 				refer_comp = this;
@@ -1109,7 +1103,7 @@ if (nexacro.Component) {
 			this.on_rbuttonup_basic_action(elem, button, alt_key, ctrl_key, shift_key, canvasX, canvasY, screenX, screenY, refer_comp);
 
 			if (this.visible && this._isEnable()) {
-				var clientXY = this._getClientXY(canvasX, canvasY);
+				clientXY = this._getClientXY(canvasX, canvasY);
 
 				if (bubble_scope) {
 					event_bubbles = this.on_fire_user_onrbuttonup(button, alt_key, ctrl_key, shift_key, screenX, screenY, canvasX, canvasY, clientXY[0], clientXY[1], this, refer_comp, from_elem);
@@ -1123,7 +1117,7 @@ if (nexacro.Component) {
 			}
 
 			if ((!this.onrbuttonup || (this.onrbuttonup && !this.onrbuttonup.stoppropagation)) && (event_bubbles !== true) && this.parent && !this.parent._is_application) {
-				var canvas = this._getRecalcCanvasXY(elem, canvasX, canvasY);
+				canvas = this._getRecalcCanvasXY(elem, canvasX, canvasY);
 
 				canvasX = canvas[0];
 				canvasY = canvas[1];
@@ -1138,7 +1132,7 @@ if (nexacro.Component) {
 		}
 		else {
 			if (this.visible && this._isEnable()) {
-				var clientXY = this._getClientXY(canvasX, canvasY);
+				clientXY = this._getClientXY(canvasX, canvasY);
 
 				if (bubble_scope) {
 					event_bubbles = this.on_fire_user_onrbuttonup(button, alt_key, ctrl_key, shift_key, screenX, screenY, canvasX, canvasY, clientXY[0], clientXY[1], fire_comp, refer_comp, from_elem);
@@ -1148,7 +1142,7 @@ if (nexacro.Component) {
 				}
 			}
 			if ((!this.onrbuttonup || (this.onrbuttonup && !this.onrbuttonup.stoppropagation)) && (event_bubbles !== true) && this.parent && !this.parent._is_application) {
-				var canvas = this._getRecalcCanvasXY(elem, canvasX, canvasY);
+				canvas = this._getRecalcCanvasXY(elem, canvasX, canvasY);
 
 				canvasX = canvas[0];
 				canvasY = canvas[1];
@@ -1192,14 +1186,14 @@ if (nexacro.Component) {
 		if (!this._is_alive) {
 			return;
 		}
-
+		var clientXY, canvas;
 		if (event_bubbles === undefined) {
 			if (!refer_comp) {
 				refer_comp = this;
 			}
 
 			if (this.visible && this._isEnable()) {
-				var clientXY = this._getClientXY(canvasX, canvasY);
+				clientXY = this._getClientXY(canvasX, canvasY);
 
 				if (bubble_scope) {
 					event_bubbles = this.on_fire_user_onmouseup(button, alt_key, ctrl_key, shift_key, screenX, screenY, canvasX, canvasY, clientXY[0], clientXY[1], this, refer_comp, from_elem);
@@ -1212,7 +1206,7 @@ if (nexacro.Component) {
 				}
 			}
 			if ((!this.onmouseup || (this.onmouseup && !this.onmouseup.stoppropagation)) && (event_bubbles !== true) && this.parent && !this.parent._is_application) {
-				var canvas = this._getRecalcCanvasXY(elem, canvasX, canvasY);
+				canvas = this._getRecalcCanvasXY(elem, canvasX, canvasY);
 
 				canvasX = canvas[0];
 				canvasY = canvas[1];
@@ -1227,7 +1221,7 @@ if (nexacro.Component) {
 		}
 		else {
 			if (this.visible && this._isEnable()) {
-				var clientXY = this._getClientXY(canvasX, canvasY);
+				clientXY = this._getClientXY(canvasX, canvasY);
 
 				if (bubble_scope) {
 					event_bubbles = this.on_fire_user_onmouseup(button, alt_key, ctrl_key, shift_key, screenX, screenY, canvasX, canvasY, clientXY[0], clientXY[1], fire_comp, refer_comp, from_elem);
@@ -1237,7 +1231,7 @@ if (nexacro.Component) {
 				}
 			}
 			if ((!this.onmouseup || (this.onmouseup && !this.onmouseup.stoppropagation)) && (event_bubbles !== true) && this.parent && !this.parent._is_application) {
-				var canvas = this._getRecalcCanvasXY(elem, canvasX, canvasY);
+				canvas = this._getRecalcCanvasXY(elem, canvasX, canvasY);
 
 				canvasX = canvas[0];
 				canvasY = canvas[1];
@@ -1269,14 +1263,14 @@ if (nexacro.Component) {
 		if (!this._is_alive) {
 			return;
 		}
-
+		var clientXY, canvas;
 		if (event_bubbles === undefined) {
 			if (!refer_comp) {
 				refer_comp = this;
 			}
 
 			if (this.visible && this._isEnable()) {
-				var clientXY = this._getClientXY(canvasX, canvasY);
+				clientXY = this._getClientXY(canvasX, canvasY);
 
 				if (bubble_scope) {
 					event_bubbles = this.on_fire_user_onmousedown(button, alt_key, ctrl_key, shift_key, screenX, screenY, canvasX, canvasY, clientXY[0], clientXY[1], this, refer_comp);
@@ -1289,7 +1283,7 @@ if (nexacro.Component) {
 				}
 			}
 			if ((!this.onmousedown || (this.onmousedown && !this.onmousedown.stoppropagation)) && (event_bubbles !== true) && this.parent && !this.parent._is_application) {
-				var canvas = this._getRecalcCanvasXY(elem, canvasX, canvasY);
+				canvas = this._getRecalcCanvasXY(elem, canvasX, canvasY);
 
 				canvasX = canvas[0];
 				canvasY = canvas[1];
@@ -1304,7 +1298,7 @@ if (nexacro.Component) {
 		}
 		else {
 			if (this.visible && this._isEnable()) {
-				var clientXY = this._getClientXY(canvasX, canvasY);
+				clientXY = this._getClientXY(canvasX, canvasY);
 
 				if (bubble_scope) {
 					event_bubbles = this.on_fire_user_onmousedown(button, alt_key, ctrl_key, shift_key, screenX, screenY, canvasX, canvasY, clientXY[0], clientXY[1], fire_comp, refer_comp);
@@ -1314,7 +1308,7 @@ if (nexacro.Component) {
 				}
 			}
 			if ((!this.onmousedown || (this.onmousedown && !this.onmousedown.stoppropagation)) && (event_bubbles !== true) && this.parent && !this.parent._is_application) {
-				var canvas = this._getRecalcCanvasXY(elem, canvasX, canvasY);
+				canvas = this._getRecalcCanvasXY(elem, canvasX, canvasY);
 
 				canvasX = canvas[0];
 				canvasY = canvas[1];
@@ -1369,6 +1363,7 @@ if (nexacro.Component) {
 		if (!this._is_alive) {
 			return;
 		}
+		var clientXY, canvas;
 
 		if (event_bubbles === undefined) {
 			if (!refer_comp) {
@@ -1380,7 +1375,7 @@ if (nexacro.Component) {
 					this.on_mousemove_basic_action(elem, button, alt_key, ctrl_key, shift_key, canvasX, canvasY, screenX, screenY, refer_comp);
 				}
 
-				var clientXY = this._getClientXY(canvasX, canvasY);
+				clientXY = this._getClientXY(canvasX, canvasY);
 				if (bubble_scope) {
 					event_bubbles = this.on_fire_user_onmousemove(button, alt_key, ctrl_key, shift_key, screenX, screenY, canvasX, canvasY, clientXY[0], clientXY[1], this, refer_comp);
 				}
@@ -1393,7 +1388,7 @@ if (nexacro.Component) {
 			}
 
 			if ((!this.onmousemove || (this.onmousemove && !this.onmousemove.stoppropagation)) && (event_bubbles !== true) && this.parent && !this.parent._is_application) {
-				var canvas = this._getRecalcCanvasXY(elem, canvasX, canvasY);
+				canvas = this._getRecalcCanvasXY(elem, canvasX, canvasY);
 
 				canvasX = canvas[0];
 				canvasY = canvas[1];
@@ -1412,7 +1407,7 @@ if (nexacro.Component) {
 					this.on_mousemove_basic_action(elem, button, alt_key, ctrl_key, shift_key, canvasX, canvasY, screenX, screenY, refer_comp);
 				}
 
-				var clientXY = this._getClientXY(canvasX, canvasY);
+				clientXY = this._getClientXY(canvasX, canvasY);
 				if (bubble_scope) {
 					event_bubbles = this.on_fire_user_onmousemove(button, alt_key, ctrl_key, shift_key, screenX, screenY, canvasX, canvasY, clientXY[0], clientXY[1], fire_comp, refer_comp);
 				}
@@ -1422,7 +1417,7 @@ if (nexacro.Component) {
 			}
 
 			if ((!this.onmousemove || (this.onmousemove && !this.onmousemove.stoppropagation)) && (event_bubbles !== true) && this.parent && !this.parent._is_application) {
-				var canvas = this._getRecalcCanvasXY(elem, canvasX, canvasY);
+				canvas = this._getRecalcCanvasXY(elem, canvasX, canvasY);
 
 				canvasX = canvas[0];
 				canvasY = canvas[1];
@@ -1494,6 +1489,7 @@ if (nexacro.Component) {
 		if (!this._is_alive) {
 			return;
 		}
+		var clientXY, canvas;
 
 		if (event_bubbles === undefined) {
 			var first_comp;
@@ -1511,7 +1507,7 @@ if (nexacro.Component) {
 					}
 
 					if (first_comp == this) {
-						var clientXY = this._getClientXY(canvasX, canvasY);
+						clientXY = this._getClientXY(canvasX, canvasY);
 						if (bubble_scope) {
 							event_bubbles = this.on_fire_user_onmouseenter(button, alt_key, ctrl_key, shift_key, screenX, screenY, canvasX, canvasY, clientXY[0], clientXY[1], this, refer_comp);
 						}
@@ -1529,7 +1525,7 @@ if (nexacro.Component) {
 						return true;
 					}
 
-					var clientXY = this._getClientXY(canvasX, canvasY);
+					clientXY = this._getClientXY(canvasX, canvasY);
 
 					if (bubble_scope) {
 						event_bubbles = this.on_fire_user_onmouseenter(button, alt_key, ctrl_key, shift_key, screenX, screenY, canvasX, canvasY, clientXY[0], clientXY[1], this, refer_comp);
@@ -1540,7 +1536,7 @@ if (nexacro.Component) {
 				}
 			}
 			if ((!this.onmouseenter || (this.onmouseenter && !this.onmouseenter.stoppropagation)) && (event_bubbles !== true) && this.parent && !this.parent._is_application) {
-				var canvas = this._getRecalcCanvasXY(elem, canvasX, canvasY);
+				canvas = this._getRecalcCanvasXY(elem, canvasX, canvasY);
 
 				canvasX = canvas[0];
 				canvasY = canvas[1];
@@ -1555,7 +1551,7 @@ if (nexacro.Component) {
 		}
 		else {
 			if (this.visible && this._isEnable()) {
-				var clientXY = this._getClientXY(canvasX, canvasY);
+				clientXY = this._getClientXY(canvasX, canvasY);
 
 				if (bubble_scope) {
 					event_bubbles = this.on_fire_user_onmouseenter(button, alt_key, ctrl_key, shift_key, screenX, screenY, canvasX, canvasY, clientXY[0], clientXY[1], fire_comp, refer_comp);
@@ -1566,7 +1562,7 @@ if (nexacro.Component) {
 			}
 
 			if ((!this.onmouseenter || (this.onmouseenter && !this.onmouseenter.stoppropagation)) && (event_bubbles !== true) && this.parent && !this.parent._is_application) {
-				var canvas = this._getRecalcCanvasXY(elem, canvasX, canvasY);
+				canvas = this._getRecalcCanvasXY(elem, canvasX, canvasY);
 
 				canvasX = canvas[0];
 				canvasY = canvas[1];
@@ -1613,6 +1609,7 @@ if (nexacro.Component) {
 		if (!this._is_alive) {
 			return;
 		}
+		var clientXY, canvas;
 
 		if (event_bubbles === undefined) {
 			var first_comp;
@@ -1632,7 +1629,7 @@ if (nexacro.Component) {
 						this.on_mouseleave_basic_action(elem, to_comp, button, alt_key, ctrl_key, shift_key, canvasX, canvasY, screenX, screenY, refer_comp);
 
 						if (this._isEnable()) {
-							var clientXY = this._getClientXY(canvasX, canvasY);
+							clientXY = this._getClientXY(canvasX, canvasY);
 							if (bubble_scope) {
 								event_bubbles = this.on_fire_user_onmouseleave(button, alt_key, ctrl_key, shift_key, screenX, screenY, canvasX, canvasY, clientXY[0], clientXY[1], this, refer_comp);
 							}
@@ -1655,7 +1652,7 @@ if (nexacro.Component) {
 						this.on_mouseleave_basic_action(elem, to_comp, button, alt_key, ctrl_key, shift_key, canvasX, canvasY, screenX, screenY, refer_comp);
 					}
 					if (this._isEnable()) {
-						var clientXY = this._getClientXY(canvasX, canvasY);
+						clientXY = this._getClientXY(canvasX, canvasY);
 						if (bubble_scope) {
 							event_bubbles = this.on_fire_user_onmouseleave(button, alt_key, ctrl_key, shift_key, screenX, screenY, canvasX, canvasY, clientXY[0], clientXY[1], this, refer_comp);
 						}
@@ -1666,7 +1663,7 @@ if (nexacro.Component) {
 				}
 			}
 			if ((!this.onmouseleave || (this.onmouseleave && !this.onmouseleave.stoppropagation)) && (event_bubbles !== true) && this.parent && !this.parent._is_application) {
-				var canvas = this._getRecalcCanvasXY(elem, canvasX, canvasY);
+				canvas = this._getRecalcCanvasXY(elem, canvasX, canvasY);
 
 				canvasX = canvas[0];
 				canvasY = canvas[1];
@@ -1681,7 +1678,7 @@ if (nexacro.Component) {
 		}
 		else {
 			if (this.visible && this._isEnable()) {
-				var clientXY = this._getClientXY(canvasX, canvasY);
+				clientXY = this._getClientXY(canvasX, canvasY);
 				if (bubble_scope) {
 					event_bubbles = this.on_fire_user_onmouseleave(button, alt_key, ctrl_key, shift_key, screenX, screenY, canvasX, canvasY, clientXY[0], clientXY[1], fire_comp, refer_comp);
 				}
@@ -1690,7 +1687,7 @@ if (nexacro.Component) {
 				}
 			}
 			if ((!this.onmouseleave || (this.onmouseleave && !this.onmouseleave.stoppropagation)) && (event_bubbles !== true) && this.parent && !this.parent._is_application) {
-				var canvas = this._getRecalcCanvasXY(elem, canvasX, canvasY);
+				canvas = this._getRecalcCanvasXY(elem, canvasX, canvasY);
 
 				canvasX = canvas[0];
 				canvasY = canvas[1];
@@ -1764,6 +1761,12 @@ if (nexacro.Component) {
 		if (!this._is_alive) {
 			return;
 		}
+		var clientXY, canvas;
+		var pThis, ret;
+		var vscrollbar, hscrollbar;
+		var old_vpos, old_hpos;
+		var new_vpos, new_hpos;
+		var vScrollbarType, hScrollbarType;
 
 		if (event_bubbles === undefined) {
 			if (!refer_comp) {
@@ -1771,49 +1774,54 @@ if (nexacro.Component) {
 			}
 
 			if (this.visible && this._isEnable()) {
-				var clientXY = this._getClientXY(canvasX, canvasY);
+				clientXY = this._getClientXY(canvasX, canvasY);
 				event_bubbles = this.on_fire_user_onmousewheel(wheelDeltaX, wheelDeltaY, button, alt_key, ctrl_key, shift_key, screenX, screenY, canvasX, canvasY, clientXY[0], clientXY[1], this, refer_comp);
 
-				var pThis = this._getFromComponent(this);
+				pThis = this._getFromComponent(this);
 
 				if (event_bubbles !== true) {
 					if (pThis && (!pThis.onmousewheel || (pThis.onmousewheel && !pThis.onmousewheel.defaultprevented))) {
-						var ret = this.on_fire_sys_onmousewheel(wheelDeltaX, wheelDeltaY, button, alt_key, ctrl_key, shift_key, screenX, screenY, canvasX, canvasY, clientXY[0], clientXY[1], this, refer_comp);
+						ret = this.on_fire_sys_onmousewheel(wheelDeltaX, wheelDeltaY, button, alt_key, ctrl_key, shift_key, screenX, screenY, canvasX, canvasY, clientXY[0], clientXY[1], this, refer_comp);
 
 						if (ret) {
 							return false;
 						}
 
 						if (!ctrl_key) {
-							var vScrollbarType = this._getVScrollBarType();
-							if (this.vscrollbar && this.vscrollbar.enable && (this.vscrollbar.visible || vScrollbarType == "autoindicator")) {
-								var vscrollbar = this.vscrollbar;
-								var old_vpos = vscrollbar._pos;
-								this._setVScrollDefaultAction(wheelDeltaY);
-								var new_vpos = vscrollbar._pos;
-								if (old_vpos != new_vpos) {
-									return false;
+							if (wheelDeltaY) {
+								vScrollbarType = this._getVScrollBarType();
+								if (this.vscrollbar && this.vscrollbar.enable && (this.vscrollbar.visible || vScrollbarType == "autoindicator")) {
+									vscrollbar = this.vscrollbar;
+									old_vpos = vscrollbar._pos;
+									this._setVScrollDefaultAction(wheelDeltaY);
+									new_vpos = vscrollbar._pos;
+									if (old_vpos != new_vpos) {
+										return false;
+									}
 								}
-							}
-							else if (vScrollbarType == "none") {
-								if (this._setVScrollDefaultAction(wheelDeltaY)) {
-									return false;
+								else if (vScrollbarType == "none") {
+									if (this._setVScrollDefaultAction(wheelDeltaY)) {
+										return false;
+									}
 								}
 							}
 
-							var hScrollbarType = this._getHScrollBarType();
-							if (this.hscrollbar && this.hscrollbar.enable && (this.hscrollbar.visible || hScrollbarType == "autoindicator")) {
-								var hscrollbar = this.hscrollbar;
-								var old_hpos = hscrollbar._pos;
-								this._setHScrollDefaultAction(wheelDeltaX);
-								var new_hpos = hscrollbar._pos;
-								if (old_hpos != new_hpos) {
-									return false;
+
+							if (wheelDeltaX) {
+								hScrollbarType = this._getHScrollBarType();
+								if (this.hscrollbar && this.hscrollbar.enable && (this.hscrollbar.visible || hScrollbarType == "autoindicator")) {
+									hscrollbar = this.hscrollbar;
+									old_hpos = hscrollbar._pos;
+									this._setHScrollDefaultAction(wheelDeltaX);
+									new_hpos = hscrollbar._pos;
+									if (old_hpos != new_hpos) {
+										return false;
+									}
 								}
-							}
-							else if (hScrollbarType == "none") {
-								if (this._setHScrollDefaultAction(wheelDeltaX)) {
-									return false;
+								else if (hScrollbarType == "none") {
+									if (this._setHScrollDefaultAction(wheelDeltaX)) {
+										return false;
+									}
 								}
 							}
 						}
@@ -1829,7 +1837,7 @@ if (nexacro.Component) {
 
 					if (!pThis.onmousewheel || (pThis.onmousewheel && !pThis.onmousewheel.stoppropagation)) {
 						if (this.parent && !this.parent._is_application) {
-							var canvas = this._getRecalcCanvasXY(elem, canvasX, canvasY);
+							canvas = this._getRecalcCanvasXY(elem, canvasX, canvasY);
 
 							canvasX = canvas[0];
 							canvasY = canvas[1];
@@ -1847,44 +1855,45 @@ if (nexacro.Component) {
 		}
 		else {
 			if (this.visible && this._isEnable()) {
-				var clientXY = this._getClientXY(canvasX, canvasY);
+				clientXY = this._getClientXY(canvasX, canvasY);
 
 				event_bubbles = this.on_fire_user_onmousewheel(wheelDeltaX, wheelDeltaY, button, alt_key, ctrl_key, shift_key, screenX, screenY, canvasX, canvasY, clientXY[0], clientXY[0], fire_comp, refer_comp);
 
-				var pThis = this._getFromComponent(this);
+				pThis = this._getFromComponent(this);
 
 				if (event_bubbles !== true) {
 					if (pThis && (!pThis.onmousewheel || (pThis.onmousewheel && !pThis.onmousewheel.defaultprevented))) {
-						var ret = this.on_fire_sys_onmousewheel(wheelDeltaX, wheelDeltaY, button, alt_key, ctrl_key, shift_key, screenX, screenY, canvasX, canvasY, clientXY[0], clientXY[0], fire_comp, refer_comp);
+						ret = this.on_fire_sys_onmousewheel(wheelDeltaX, wheelDeltaY, button, alt_key, ctrl_key, shift_key, screenX, screenY, canvasX, canvasY, clientXY[0], clientXY[0], fire_comp, refer_comp);
 
 						if (ret) {
 							return false;
 						}
 
 						if (!ctrl_key) {
-							var vscrollbar;
-							var old_vpos;
-							var new_vpos;
-							var vScrollbarType = this._getVScrollBarType();
-							if (this.vscrollbar && this.vscrollbar.enable && (this.vscrollbar.visible || vScrollbarType == "autoindicator")) {
-								vscrollbar = this.vscrollbar;
-								old_vpos = vscrollbar._pos;
-								this._setVScrollDefaultAction(wheelDeltaY);
-								new_vpos = vscrollbar._pos;
-								if (old_vpos != new_vpos) {
-									return false;
+							if (wheelDeltaY) {
+								vScrollbarType = this._getVScrollBarType();
+								if (this.vscrollbar && this.vscrollbar.enable && (this.vscrollbar.visible || vScrollbarType == "autoindicator")) {
+									vscrollbar = this.vscrollbar;
+									old_vpos = vscrollbar._pos;
+									this._setVScrollDefaultAction(wheelDeltaY);
+									new_vpos = vscrollbar._pos;
+									if (old_vpos != new_vpos) {
+										return false;
+									}
 								}
 							}
 
-							if (nexacro.OS == "Mac OS") {
-								var hScrollbarType = this._getHScrollBarType();
-								if (this.hscrollbar && this.hscrollbar.enable && (this.hscrollbar.visible || hScrollbarType == "autoindicator")) {
-									hscrollbar = this.hscrollbar;
-									old_hpos = hscrollbar._pos;
-									this._setHScrollDefaultAction(wheelDeltaX);
-									new_hpos = hscrollbar._pos;
-									if (old_hpos != new_hpos) {
-										return false;
+							if (wheelDeltaX) {
+								if (nexacro.OS == "Mac OS") {
+									hScrollbarType = this._getHScrollBarType();
+									if (this.hscrollbar && this.hscrollbar.enable && (this.hscrollbar.visible || hScrollbarType == "autoindicator")) {
+										hscrollbar = this.hscrollbar;
+										old_hpos = hscrollbar._pos;
+										this._setHScrollDefaultAction(wheelDeltaX);
+										new_hpos = hscrollbar._pos;
+										if (old_hpos != new_hpos) {
+											return false;
+										}
 									}
 								}
 							}
@@ -1893,7 +1902,7 @@ if (nexacro.Component) {
 
 					if (!pThis.onmousewheel || (pThis.onmousewheel && !pThis.onmousewheel.stoppropagation)) {
 						if (this.parent && !this.parent._is_application) {
-							var canvas = this._getRecalcCanvasXY(elem, canvasX, canvasY);
+							canvas = this._getRecalcCanvasXY(elem, canvasX, canvasY);
 
 							canvasX = canvas[0];
 							canvasY = canvas[1];
@@ -1928,7 +1937,8 @@ if (nexacro.Component) {
 		if (!this._is_alive) {
 			return;
 		}
-
+		var clientXY, canvas;
+		var pThis;
 		if (event_bubbles === undefined) {
 			var is_subcontrol_bubble;
 
@@ -1936,14 +1946,14 @@ if (nexacro.Component) {
 				refer_comp = this;
 			}
 
-			var pThis = this._getFromComponent(this);
+			pThis = this._getFromComponent(this);
 
 			if (this._is_subcontrol) {
 				is_subcontrol_bubble = true;
 			}
 			else {
 				is_subcontrol_bubble = false;
-				var clientXY = this._getClientXY(canvasX, canvasY);
+				clientXY = this._getClientXY(canvasX, canvasY);
 
 				event_bubbles = this.on_fire_user_ondrag(button, alt_key, ctrl_key, shift_key, screenX, screenY, canvasX, canvasY, clientXY[0], clientXY[1], this, refer_comp, refer_comp);
 				if (!event_bubbles || event_bubbles[0] !== true) {
@@ -1955,7 +1965,7 @@ if (nexacro.Component) {
 
 			if ((!event_bubbles || event_bubbles[0] !== true)) {
 				if (pThis && (!pThis.ondrag || (pThis.ondrag && !pThis.ondrag.stoppropagation)) && !this._window && this.parent && !this.parent._is_application) {
-					var canvas = this._getRecalcCanvasXY(elem, canvasX, canvasY);
+					canvas = this._getRecalcCanvasXY(elem, canvasX, canvasY);
 
 					canvasX = canvas[0];
 					canvasY = canvas[1];
@@ -1972,16 +1982,16 @@ if (nexacro.Component) {
 		}
 		else {
 			if ((!event_bubbles || event_bubbles[0] !== true) && this.parent && !this.parent._is_application) {
-				var clientXY = this._getClientXY(canvasX, canvasY);
+				clientXY = this._getClientXY(canvasX, canvasY);
 				event_bubbles = this.on_fire_user_ondrag(button, alt_key, ctrl_key, shift_key, screenX, screenY, canvasX, canvasY, clientXY[0], clientXY[1], this, refer_comp, this);
 				if (!event_bubbles || event_bubbles[0] !== true) {
-					var pThis = this._getFromComponent(this);
+					pThis = this._getFromComponent(this);
 					if (pThis && (!pThis.ondrag || (pThis.ondrag && !pThis.ondrag.defaultprevented))) {
 						this.on_fire_sys_ondrag(button, alt_key, ctrl_key, shift_key, screenX, screenY, canvasX, canvasY, clientXY[0], clientXY[1], this, refer_comp, this);
 					}
 
 					if (pThis && (!pThis.ondrag || (pThis.ondrag && !pThis.ondrag.stoppropagation)) && !this._window && this.parent && !this.parent._is_application) {
-						var canvas = this._getRecalcCanvasXY(elem, canvasX, canvasY);
+						canvas = this._getRecalcCanvasXY(elem, canvasX, canvasY);
 
 						canvasX = canvas[0];
 						canvasY = canvas[1];
@@ -2012,13 +2022,14 @@ if (nexacro.Component) {
 			return;
 		}
 
+		var clientXY, canvas;
 		if (event_bubbles === undefined) {
 			if (!refer_comp) {
 				refer_comp = this;
 			}
 
 			if (this.visible && this._isEnable()) {
-				var clientXY = this._getClientXY(canvasX, canvasY);
+				clientXY = this._getClientXY(canvasX, canvasY);
 				if (bubble_scope) {
 					event_bubbles = this.on_fire_user_ondrop(src_comp, src_refer_comp, dragdata, userdata, datatype, filelist, button, alt_key, ctrl_key, shift_key, screenX, screenY, canvasX, canvasY, clientXY[0], clientXY[1], this, refer_comp);
 				}
@@ -2031,7 +2042,7 @@ if (nexacro.Component) {
 			}
 
 			if ((!this.ondrop || (this.ondrop && !this.ondrop.stoppropagation)) && event_bubbles !== true && this.parent && !this.parent._is_application) {
-				var canvas = this._getRecalcCanvasXY(elem, canvasX, canvasY);
+				canvas = this._getRecalcCanvasXY(elem, canvasX, canvasY);
 
 				canvasX = canvas[0];
 				canvasY = canvas[1];
@@ -2046,7 +2057,7 @@ if (nexacro.Component) {
 		}
 		else {
 			if (this.visible && this._isEnable()) {
-				var clientXY = this._getClientXY(canvasX, canvasY);
+				clientXY = this._getClientXY(canvasX, canvasY);
 				if (bubble_scope) {
 					event_bubbles = this.on_fire_user_ondrop(src_comp, src_refer_comp, dragdata, userdata, datatype, filelist, button, alt_key, ctrl_key, shift_key, screenX, screenY, canvasX, canvasY, clientXY[0], clientXY[1], fire_comp, refer_comp);
 				}
@@ -2055,7 +2066,7 @@ if (nexacro.Component) {
 				}
 			}
 			if ((!this.ondrop || (this.ondrop && !this.ondrop.stoppropagation)) && event_bubbles !== true && this.parent && !this.parent._is_application) {
-				var canvas = this._getRecalcCanvasXY(elem, canvasX, canvasY);
+				canvas = this._getRecalcCanvasXY(elem, canvasX, canvasY);
 
 				canvasX = canvas[0];
 				canvasY = canvas[1];
@@ -2086,6 +2097,7 @@ if (nexacro.Component) {
 			return;
 		}
 
+		var clientXY, canvas;
 		if (event_bubbles === undefined) {
 			var is_subcontrol_bubble;
 
@@ -2099,7 +2111,7 @@ if (nexacro.Component) {
 			else {
 				is_subcontrol_bubble = false;
 				if (this.visible && this._isEnable()) {
-					var clientXY = this._getClientXY(canvasX, canvasY);
+					clientXY = this._getClientXY(canvasX, canvasY);
 					if (bubble_scope) {
 						event_bubbles = this.on_fire_user_ondragmove(src_comp, src_refer_comp, dragdata, userdata, datatype, filelist, button, alt_key, ctrl_key, shift_key, screenX, screenY, canvasX, canvasY, clientXY[0], clientXY[1], this, refer_comp);
 					}
@@ -2110,7 +2122,7 @@ if (nexacro.Component) {
 			}
 
 			if ((!this.ondragmove || (this.ondragmove && !this.ondragmove.stoppropagation)) && event_bubbles !== true && this.parent && !this.parent._is_application) {
-				var canvas = this._getRecalcCanvasXY(elem, canvasX, canvasY);
+				canvas = this._getRecalcCanvasXY(elem, canvasX, canvasY);
 
 				canvasX = canvas[0];
 				canvasY = canvas[1];
@@ -2125,7 +2137,7 @@ if (nexacro.Component) {
 		}
 		else {
 			if (this.visible && this._isEnable()) {
-				var clientXY = this._getClientXY(canvasX, canvasY);
+				clientXY = this._getClientXY(canvasX, canvasY);
 				if (bubble_scope) {
 					event_bubbles = this.on_fire_user_ondragmove(src_comp, src_refer_comp, dragdata, userdata, datatype, filelist, button, alt_key, ctrl_key, shift_key, screenX, screenY, canvasX, canvasY, clientXY[0], clientXY[1], fire_comp, refer_comp);
 				}
@@ -2134,7 +2146,7 @@ if (nexacro.Component) {
 				}
 			}
 			if ((!this.ondragmove || (this.ondragmove && !this.ondragmove.stoppropagation)) && event_bubbles !== true && this.parent && !this.parent._is_application) {
-				var canvas = this._getRecalcCanvasXY(elem, canvasX, canvasY);
+				canvas = this._getRecalcCanvasXY(elem, canvasX, canvasY);
 
 				canvasX = canvas[0];
 				canvasY = canvas[1];
@@ -2165,6 +2177,7 @@ if (nexacro.Component) {
 			return;
 		}
 
+		var clientXY, canvas;
 		if (event_bubbles === undefined) {
 			var is_subcontrol_bubble;
 			var first_comp;
@@ -2194,7 +2207,7 @@ if (nexacro.Component) {
 				if (this.visible && this._isEnable()) {
 					this.on_dragenter_basic_action(elem, from_comp, src_comp, src_refer_comp, dragdata, userdata, dayatype, filelist, button, alt_key, ctrl_key, shift_key, canvasX, canvasY, screenX, screenY, refer_comp);
 
-					var clientXY = this._getClientXY(canvasX, canvasY);
+					clientXY = this._getClientXY(canvasX, canvasY);
 					if (bubble_scope) {
 						event_bubbles = this.on_fire_user_ondragenter(src_comp, src_refer_comp, dragdata, userdata, dayatype, filelist, button, alt_key, ctrl_key, shift_key, screenX, screenY, canvasX, canvasY, clientXY[0], clientXY[1], this, refer_comp);
 					}
@@ -2204,7 +2217,7 @@ if (nexacro.Component) {
 				}
 			}
 			if ((!this.ondragenter || (this.ondragenter && !this.ondragenter.stoppropagation)) && event_bubbles !== true && this.parent && !this.parent._is_application) {
-				var canvas = this._getRecalcCanvasXY(elem, canvasX, canvasY);
+				canvas = this._getRecalcCanvasXY(elem, canvasX, canvasY);
 
 				canvasX = canvas[0];
 				canvasY = canvas[1];
@@ -2219,7 +2232,7 @@ if (nexacro.Component) {
 		}
 		else {
 			if (this.visible && this._isEnable()) {
-				var clientXY = this._getClientXY(canvasX, canvasY);
+				clientXY = this._getClientXY(canvasX, canvasY);
 
 				if (bubble_scope) {
 					event_bubbles = this.on_fire_user_ondragenter(src_comp, src_refer_comp, dragdata, userdata, dayatype, filelist, button, alt_key, ctrl_key, shift_key, screenX, screenY, canvasX, canvasY, clientXY[0], clientXY[1], fire_comp, refer_comp);
@@ -2231,7 +2244,7 @@ if (nexacro.Component) {
 				this._changeStatus("mouseover", true);
 			}
 			if ((!this.ondragenter || (this.ondragenter && !this.ondragenter.stoppropagation)) && event_bubbles !== true && this.parent && !this.parent._is_application) {
-				var canvas = this._getRecalcCanvasXY(elem, canvasX, canvasY);
+				canvas = this._getRecalcCanvasXY(elem, canvasX, canvasY);
 
 				canvasX = canvas[0];
 				canvasY = canvas[1];
@@ -2268,6 +2281,7 @@ if (nexacro.Component) {
 			return;
 		}
 
+		var clientXY, canvas;
 		if (event_bubbles === undefined) {
 			var is_subcontrol_bubble;
 			var first_comp;
@@ -2296,7 +2310,7 @@ if (nexacro.Component) {
 				if (this.visible && this._isEnable()) {
 					this.on_dragleave_basic_action(elem, to_comp, src_comp, src_refer_comp, dragdata, userdata, dayatype, filelist, button, alt_key, ctrl_key, shift_key, canvasX, canvasY, screenX, screenY, refer_comp);
 
-					var clientXY = this._getClientXY(canvasX, canvasY);
+					clientXY = this._getClientXY(canvasX, canvasY);
 					if (bubble_scope) {
 						event_bubbles = this.on_fire_user_ondragleave(src_comp, src_refer_comp, dragdata, userdata, dayatype, filelist, button, alt_key, ctrl_key, shift_key, screenX, screenY, canvasX, canvasY, clientXY[0], clientXY[1], this, refer_comp);
 					}
@@ -2307,7 +2321,7 @@ if (nexacro.Component) {
 			}
 
 			if ((!this.ondragleave || (this.ondragleave && !this.ondragleave.stoppropagation)) && event_bubbles !== true && this.parent && !this.parent._is_application) {
-				var canvas = this._getRecalcCanvasXY(elem, canvasX, canvasY);
+				canvas = this._getRecalcCanvasXY(elem, canvasX, canvasY);
 
 				canvasX = canvas[0];
 				canvasY = canvas[1];
@@ -2322,7 +2336,7 @@ if (nexacro.Component) {
 		}
 		else {
 			if (this.visible && this._isEnable()) {
-				var clientXY = this._getClientXY(canvasX, canvasY);
+				clientXY = this._getClientXY(canvasX, canvasY);
 				if (bubble_scope) {
 					event_bubbles = this.on_fire_user_ondragleave(src_comp, src_refer_comp, dragdata, userdata, dayatype, filelist, button, alt_key, ctrl_key, shift_key, screenX, screenY, canvasX, canvasY, clientXY[0], clientXY[1], fire_comp, refer_comp);
 				}
@@ -2334,7 +2348,7 @@ if (nexacro.Component) {
 				}
 			}
 			if ((!this.ondragleave || (this.ondragleave && !this.ondragleave.stoppropagation)) && event_bubbles !== true && this.parent && !this.parent._is_application) {
-				var canvas = this._getRecalcCanvasXY(elem, canvasX, canvasY);
+				canvas = this._getRecalcCanvasXY(elem, canvasX, canvasY);
 
 				canvasX = canvas[0];
 				canvasY = canvas[1];
@@ -2506,7 +2520,7 @@ if (nexacro.Component) {
 
 		var root_comp = this._getFromComponent(this);
 		var listener = root_comp.ontouchstart;
-		if (!listener || (listener && !listener.defaultprevented)) {
+		if (!listener || !listener.defaultprevented) {
 			this._on_bubble_touchstart(touch_manager, touchinfos, changedtouchinfos, event_bubbles, fire_comp, refer_comp, false);
 		}
 	};
@@ -2516,30 +2530,32 @@ if (nexacro.Component) {
 			return;
 		}
 
-		var listener;
+		var listener, fire_event_func;
 		if (event_bubbles === undefined) {
 			if (!refer_comp) {
 				refer_comp = this;
 			}
+			if (this.visible && this._isEnable()) {
+				if (is_userbubble) {
+					this.on_touchstart_basic_action(touch_manager, touchinfos, changedtouchinfos, refer_comp);
+				}
+				else {
+					this.on_touchstart_default_action(touch_manager, touchinfos, changedtouchinfos, refer_comp);
+				}
 
-			if (is_userbubble) {
-				this.on_touchstart_basic_action(touch_manager, touchinfos, changedtouchinfos, refer_comp);
-			}
-			else {
-				this.on_touchstart_default_action(touch_manager, touchinfos, changedtouchinfos, refer_comp);
-			}
+				if ((is_userbubble && this.enableevent) || !is_userbubble) {
+					fire_event_func = is_userbubble ? this.on_fire_user_ontouchstart : this.on_fire_sys_ontouchstart;
+					event_bubbles = fire_event_func.call(this, touchinfos, changedtouchinfos, this, refer_comp);
 
-			if (this.visible && this._isEnable() && ((is_userbubble && this.enableevent) || !is_userbubble)) {
-				var fire_event_func = is_userbubble ? this.on_fire_user_ontouchstart : this.on_fire_sys_ontouchstart;
-				event_bubbles = fire_event_func.call(this, touchinfos, changedtouchinfos, this, refer_comp);
-
-				if (event_bubbles === false) {
-					event_bubbles = undefined;
+					if (event_bubbles === false) {
+						event_bubbles = undefined;
+					}
 				}
 			}
 
+
 			listener = this.ontouchstart;
-			if ((!listener || (listener && !listener.stoppropagation)) && (event_bubbles !== true) && this.parent && !this.parent._is_application) {
+			if ((!listener || !listener.stoppropagation) && (event_bubbles !== true) && this.parent && !this.parent._is_application) {
 				touch_manager.updateTouchInputInfosCanvasXY(touchinfos, (this._adjust_left - this._scroll_left || 0), (this._adjust_top - this._scroll_top || 0));
 
 				if (this._is_subcontrol) {
@@ -2571,12 +2587,12 @@ if (nexacro.Component) {
 			if (this.visible && this._isEnable() && ((is_userbubble && this.enableevent) || !is_userbubble)) {
 				touch_manager.updateTouchInputInfosClientXY(touchinfos, this);
 
-				var fire_event_func = is_userbubble ? this.on_fire_user_ontouchstart : this.on_fire_sys_ontouchstart;
+				fire_event_func = is_userbubble ? this.on_fire_user_ontouchstart : this.on_fire_sys_ontouchstart;
 				event_bubbles = fire_event_func.call(this, touchinfos, changedtouchinfos, fire_comp, refer_comp);
 			}
 
 			listener = this.ontouchstart;
-			if ((!listener || (listener && !listener.stoppropagation)) && (event_bubbles !== true) && this.parent && !this.parent._is_application) {
+			if ((!listener || !listener.stoppropagation) && (event_bubbles !== true) && this.parent && !this.parent._is_application) {
 				touch_manager.updateTouchInputInfosCanvasXY(touchinfos, (this._adjust_left - this._scroll_left || 0), (this._adjust_top - this._scroll_top || 0));
 				return this.parent._on_bubble_touchstart(touch_manager, touchinfos, changedtouchinfos, false, fire_comp, refer_comp, is_userbubble);
 			}
@@ -2615,7 +2631,7 @@ if (nexacro.Component) {
 
 		var root_comp = this._getFromComponent(this);
 		var listener = root_comp.ontouchmove;
-		if (!listener || (listener && !listener.defaultprevented)) {
+		if (!listener || !listener.defaultprevented) {
 			this._on_bubble_touchmove(touch_manager, touchinfos, changedtouchinfos, event_bubbles, fire_comp, refer_comp, false);
 		}
 	};
@@ -2625,30 +2641,31 @@ if (nexacro.Component) {
 			return;
 		}
 
-		var listener;
+		var listener, fire_event_func;
 		if (event_bubbles === undefined) {
 			if (!refer_comp) {
 				refer_comp = this;
 			}
+			if (this.visible && this._isEnable()) {
+				if (is_userbubble) {
+					this.on_touchmove_basic_action(touch_manager, touchinfos, changedtouchinfos, refer_comp);
+				}
+				else {
+					this.on_touchmove_default_action(touch_manager, touchinfos, changedtouchinfos, refer_comp);
+				}
 
-			if (is_userbubble) {
-				this.on_touchmove_basic_action(touch_manager, touchinfos, changedtouchinfos, refer_comp);
-			}
-			else {
-				this.on_touchmove_default_action(touch_manager, touchinfos, changedtouchinfos, refer_comp);
-			}
+				if (((is_userbubble && this.enableevent) || !is_userbubble)) {
+					fire_event_func = is_userbubble ? this.on_fire_user_ontouchmove : this.on_fire_sys_ontouchmove;
+					event_bubbles = fire_event_func.call(this, touchinfos, changedtouchinfos, this, refer_comp);
 
-			if (this.visible && this._isEnable() && ((is_userbubble && this.enableevent) || !is_userbubble)) {
-				var fire_event_func = is_userbubble ? this.on_fire_user_ontouchmove : this.on_fire_sys_ontouchmove;
-				event_bubbles = fire_event_func.call(this, touchinfos, changedtouchinfos, this, refer_comp);
-
-				if (event_bubbles === false) {
-					event_bubbles = undefined;
+					if (event_bubbles === false) {
+						event_bubbles = undefined;
+					}
 				}
 			}
 
 			listener = this.ontouchmove;
-			if ((!listener || (listener && !listener.stoppropagation)) && (event_bubbles !== true) && this.parent && !this.parent._is_application) {
+			if ((!listener || !listener.stoppropagation) && (event_bubbles !== true) && this.parent && !this.parent._is_application) {
 				touch_manager.updateTouchInputInfosCanvasXY(touchinfos, (this._adjust_left - this._scroll_left || 0), (this._adjust_top - this._scroll_top || 0));
 				if (this._is_subcontrol) {
 					return this.parent._on_bubble_touchmove(touch_manager, touchinfos, changedtouchinfos, event_bubbles, null, refer_comp, is_userbubble);
@@ -2662,12 +2679,12 @@ if (nexacro.Component) {
 			if (this.visible && this._isEnable() && ((is_userbubble && this.enableevent) || !is_userbubble)) {
 				touch_manager.updateTouchInputInfosClientXY(touchinfos, this);
 
-				var fire_event_func = is_userbubble ? this.on_fire_user_ontouchmove : this.on_fire_sys_ontouchmove;
+				fire_event_func = is_userbubble ? this.on_fire_user_ontouchmove : this.on_fire_sys_ontouchmove;
 				event_bubbles = fire_event_func.call(this, touchinfos, changedtouchinfos, this, refer_comp);
 			}
 
 			listener = this.ontouchmove;
-			if ((!listener || (listener && !listener.stoppropagation)) && (event_bubbles !== true) && this.parent && !this.parent._is_application) {
+			if ((!listener || !listener.stoppropagation) && (event_bubbles !== true) && this.parent && !this.parent._is_application) {
 				touch_manager.updateTouchInputInfosCanvasXY(touchinfos, (this._adjust_left - this._scroll_left || 0), (this._adjust_top - this._scroll_top || 0));
 				return this.parent._on_bubble_touchmove(touch_manager, touchinfos, changedtouchinfos, false, fire_comp, refer_comp, is_userbubble);
 			}
@@ -2699,7 +2716,7 @@ if (nexacro.Component) {
 		var root_comp = this._getFromComponent(this);
 		if (root_comp) {
 			var listener = root_comp.ontouchend;
-			if (!listener || (listener && !listener.defaultprevented)) {
+			if (!listener || !listener.defaultprevented) {
 				this._on_bubble_touchend(touch_manager, touchinfos, changedtouchinfos, event_bubbles, fire_comp, refer_comp, false);
 			}
 			if (listener && listener.defaultprevented) {
@@ -2713,30 +2730,32 @@ if (nexacro.Component) {
 			return;
 		}
 
-		var listener;
+		var listener, fire_event_func;
 		if (event_bubbles === undefined) {
 			if (!refer_comp) {
 				refer_comp = this;
 			}
 
-			if (is_userbubble) {
-				this.on_touchend_basic_action(touch_manager, touchinfos, changedtouchinfos, refer_comp);
-			}
-			else {
-				this.on_touchend_default_action(touch_manager, touchinfos, changedtouchinfos, refer_comp);
-			}
+			if (this.visible && this._isEnable()) {
+				if (is_userbubble) {
+					this.on_touchend_basic_action(touch_manager, touchinfos, changedtouchinfos, refer_comp);
+				}
+				else {
+					this.on_touchend_default_action(touch_manager, touchinfos, changedtouchinfos, refer_comp);
+				}
 
-			if (this.visible && this._isEnable() && ((is_userbubble && this.enableevent) || !is_userbubble)) {
-				var fire_event_func = is_userbubble ? this.on_fire_user_ontouchend : this.on_fire_sys_ontouchend;
-				event_bubbles = fire_event_func.call(this, touchinfos, changedtouchinfos, this, refer_comp);
+				if (((is_userbubble && this.enableevent) || !is_userbubble)) {
+					fire_event_func = is_userbubble ? this.on_fire_user_ontouchend : this.on_fire_sys_ontouchend;
+					event_bubbles = fire_event_func.call(this, touchinfos, changedtouchinfos, this, refer_comp);
 
-				if (event_bubbles === false) {
-					event_bubbles = undefined;
+					if (event_bubbles === false) {
+						event_bubbles = undefined;
+					}
 				}
 			}
 
 			listener = this.ontouchend;
-			if ((!listener || (listener && !listener.stoppropagation)) && (event_bubbles !== true) && this.parent && !this.parent._is_application) {
+			if ((!listener || !listener.stoppropagation) && (event_bubbles !== true) && this.parent && !this.parent._is_application) {
 				touch_manager.updateTouchInputInfosCanvasXY(touchinfos, (this._adjust_left - this._scroll_left || 0), (this._adjust_top - this._scroll_top || 0));
 				if (this._is_subcontrol) {
 					return this.parent._on_bubble_touchend(touch_manager, touchinfos, changedtouchinfos, event_bubbles, null, refer_comp, is_userbubble);
@@ -2750,12 +2769,12 @@ if (nexacro.Component) {
 			if (this.visible && this._isEnable() && ((is_userbubble && this.enableevent) || !is_userbubble)) {
 				touch_manager.updateTouchInputInfosClientXY(touchinfos, this);
 
-				var fire_event_func = is_userbubble ? this.on_fire_user_ontouchend : this.on_fire_sys_ontouchend;
+				fire_event_func = is_userbubble ? this.on_fire_user_ontouchend : this.on_fire_sys_ontouchend;
 				event_bubbles = fire_event_func.call(this, touchinfos, changedtouchinfos, this, refer_comp);
 			}
 
 			listener = this.ontouchend;
-			if ((!listener || (listener && !listener.stoppropagation)) && (event_bubbles !== true) && this.parent && !this.parent._is_application) {
+			if ((!listener || !listener.stoppropagation) && (event_bubbles !== true) && this.parent && !this.parent._is_application) {
 				touch_manager.updateTouchInputInfosCanvasXY(touchinfos, (this._adjust_left - this._scroll_left || 0), (this._adjust_top - this._scroll_top || 0));
 				return this.parent._on_bubble_touchend(touch_manager, touchinfos, changedtouchinfos, false, fire_comp, refer_comp, is_userbubble);
 			}
@@ -2798,7 +2817,8 @@ if (nexacro.Component) {
 			return;
 		}
 
-		var listener;
+		var clientXY, canvas;
+		var listener, fire_event_func;
 		if (event_bubbles === undefined) {
 			var is_first = false;
 			if (!refer_comp) {
@@ -2809,21 +2829,21 @@ if (nexacro.Component) {
 				is_first = true;
 			}
 
-			if (is_userbubble) {
-				this.on_tap_basic_action_before(elem, canvasX, canvasY, screenX, screenY, refer_comp);
-				if (is_first) {
-					this.on_tap_basic_action(elem, canvasX, canvasY, screenX, screenY, refer_comp);
-				}
-			}
-			else {
-				this.on_tap_default_action(elem, canvasX, canvasY, screenX, screenY, refer_comp);
-			}
-
 			if (this.visible && this._isEnable()) {
-				var clientXY = this._getClientXY(canvasX, canvasY);
+				clientXY = this._getClientXY(canvasX, canvasY);
 
-				if (!is_userbubble || (is_userbubble && nexacro._enabletouchevent && this.enableevent)) {
-					var fire_event_func = is_userbubble ? this.on_fire_user_ontap : this.on_fire_sys_ontap;
+				if (is_userbubble) {
+					this.on_tap_basic_action_before(elem, canvasX, canvasY, screenX, screenY, refer_comp);
+					if (is_first) {
+						this.on_tap_basic_action(elem, canvasX, canvasY, screenX, screenY, refer_comp);
+					}
+				}
+				else {
+					this.on_tap_default_action(elem, canvasX, canvasY, screenX, screenY, refer_comp);
+				}
+
+				if (!is_userbubble || (nexacro._enabletouchevent && this.enableevent)) {
+					fire_event_func = is_userbubble ? this.on_fire_user_ontap : this.on_fire_sys_ontap;
 					event_bubbles = fire_event_func.call(this, elem, screenX, screenY, canvasX, canvasY, clientXY[0], clientXY[1], this, refer_comp);
 
 					if (event_bubbles === false) {
@@ -2833,8 +2853,8 @@ if (nexacro.Component) {
 			}
 
 			listener = this.ontap;
-			if ((!listener || (listener && !listener.stoppropagation)) && (event_bubbles !== true) && this.parent && !this.parent._is_application) {
-				var canvas = this._getRecalcCanvasXY(elem, canvasX, canvasY);
+			if ((!listener || !listener.stoppropagation) && (event_bubbles !== true) && this.parent && !this.parent._is_application) {
+				canvas = this._getRecalcCanvasXY(elem, canvasX, canvasY);
 
 				canvasX = canvas[0];
 				canvasY = canvas[1];
@@ -2849,15 +2869,15 @@ if (nexacro.Component) {
 		}
 		else {
 			if (this.visible && this._isEnable() && nexacro._enabletouchevent && this.enableevent) {
-				var clientXY = this._getClientXY(canvasX, canvasY);
+				clientXY = this._getClientXY(canvasX, canvasY);
 
-				var fire_event_func = is_userbubble ? this.on_fire_user_ontap : this.on_fire_sys_ontap;
+				fire_event_func = is_userbubble ? this.on_fire_user_ontap : this.on_fire_sys_ontap;
 				event_bubbles = fire_event_func.call(this, elem, screenX, screenY, canvasX, canvasY, clientXY[0], clientXY[1], fire_comp, refer_comp);
 			}
 
 			listener = this.ontap;
-			if ((!listener || (listener && !listener.stoppropagation)) && (event_bubbles !== true) && this.parent && !this.parent._is_application) {
-				var canvas = this._getRecalcCanvasXY(elem, canvasX, canvasY);
+			if ((!listener || !listener.stoppropagation) && (event_bubbles !== true) && this.parent && !this.parent._is_application) {
+				canvas = this._getRecalcCanvasXY(elem, canvasX, canvasY);
 
 				canvasX = canvas[0];
 				canvasY = canvas[1];
@@ -2905,7 +2925,7 @@ if (nexacro.Component) {
 
 		var root_comp = this._getFromComponent(this);
 		var listener = root_comp.ondbltap;
-		if (!listener || (listener && !listener.defaultprevented)) {
+		if (!listener || !listener.defaultprevented) {
 			this._on_bubble_dbltap(elem, canvasX, canvasY, screenX, screenY, event_bubbles, fire_comp, refer_comp, false);
 		}
 	};
@@ -2915,24 +2935,24 @@ if (nexacro.Component) {
 			return;
 		}
 
-		var listener;
+		var clientXY, canvas;
+		var listener, fire_event_func;
 		if (event_bubbles === undefined) {
 			if (!refer_comp) {
 				refer_comp = this;
 			}
 
-			if (is_userbubble) {
-				this.on_dbltap_basic_action(elem, canvasX, canvasY, screenX, screenY, refer_comp);
-			}
-			else {
-				this.on_dbltap_default_action(elem, canvasX, canvasY, screenX, screenY, refer_comp);
-			}
-
 			if (this.visible && this._isEnable()) {
-				var clientXY = this._getClientXY(canvasX, canvasY);
+				clientXY = this._getClientXY(canvasX, canvasY);
+				if (is_userbubble) {
+					this.on_dbltap_basic_action(elem, canvasX, canvasY, screenX, screenY, refer_comp);
+				}
+				else {
+					this.on_dbltap_default_action(elem, canvasX, canvasY, screenX, screenY, refer_comp);
+				}
 
-				if (!is_userbubble || (is_userbubble && nexacro._enabletouchevent && this.enableevent)) {
-					var fire_event_func = is_userbubble ? this.on_fire_user_ondbltap : this.on_fire_sys_ondbltap;
+				if (!is_userbubble || (nexacro._enabletouchevent && this.enableevent)) {
+					fire_event_func = is_userbubble ? this.on_fire_user_ondbltap : this.on_fire_sys_ondbltap;
 					event_bubbles = fire_event_func.call(this, elem, screenX, screenY, canvasX, canvasY, clientXY[0], clientXY[1], this, refer_comp);
 
 					if (event_bubbles === false) {
@@ -2942,8 +2962,8 @@ if (nexacro.Component) {
 			}
 
 			listener = this.ondbltap;
-			if ((!listener || (listener && !listener.stoppropagation)) && (event_bubbles !== true) && this.parent && !this.parent._is_application) {
-				var canvas = this._getRecalcCanvasXY(elem, canvasX, canvasY);
+			if ((!listener || !listener.stoppropagation) && (event_bubbles !== true) && this.parent && !this.parent._is_application) {
+				canvas = this._getRecalcCanvasXY(elem, canvasX, canvasY);
 
 				canvasX = canvas[0];
 				canvasY = canvas[1];
@@ -2958,14 +2978,14 @@ if (nexacro.Component) {
 		}
 		else {
 			if (this.visible && this._isEnable() && nexacro._enabletouchevent && this.enableevent) {
-				var clientXY = this._getClientXY(canvasX, canvasY);
-				var fire_event_func = is_userbubble ? this.on_fire_user_ondbltap : this.on_fire_sys_ondbltap;
+				clientXY = this._getClientXY(canvasX, canvasY);
+				fire_event_func = is_userbubble ? this.on_fire_user_ondbltap : this.on_fire_sys_ondbltap;
 				event_bubbles = fire_event_func.call(this, elem, screenX, screenY, canvasX, canvasY, clientXY[0], clientXY[1], fire_comp, refer_comp);
 			}
 
 			listener = this.ondbltap;
-			if ((!listener || (listener && !listener.stoppropagation)) && (event_bubbles !== true) && this.parent && !this.parent._is_application) {
-				var canvas = this._getRecalcCanvasXY(elem, canvasX, canvasY);
+			if ((!listener || !listener.stoppropagation) && (event_bubbles !== true) && this.parent && !this.parent._is_application) {
+				canvas = this._getRecalcCanvasXY(elem, canvasX, canvasY);
 
 				canvasX = canvas[0];
 				canvasY = canvas[1];
@@ -2986,7 +3006,7 @@ if (nexacro.Component) {
 
 		var root_comp = this._getFromComponent(this);
 		var listener = root_comp.onpinchstart;
-		if (!listener || (listener && !listener.defaultprevented)) {
+		if (!listener || !listener.defaultprevented) {
 			if (this._isParentdefaultprevented(root_comp, "pinchstart")) {
 				return true;
 			}
@@ -3002,7 +3022,7 @@ if (nexacro.Component) {
 			return;
 		}
 
-		var listener;
+		var listener, fire_event_func;
 		if (event_bubbles === undefined) {
 			if (!refer_comp) {
 				refer_comp = this;
@@ -3016,8 +3036,8 @@ if (nexacro.Component) {
 			}
 
 			if (this.visible && this._isEnable()) {
-				if (nexacro._enabletouchevent && (!is_userbubble || (is_userbubble && this.enableevent))) {
-					var fire_event_func = is_userbubble ? this.on_fire_user_onpinchstart : this.on_fire_sys_onpinchstart;
+				if (nexacro._enabletouchevent && (!is_userbubble || this.enableevent)) {
+					fire_event_func = is_userbubble ? this.on_fire_user_onpinchstart : this.on_fire_sys_onpinchstart;
 					event_bubbles = fire_event_func.call(this, elem, touchinfos, accvalue, deltavalue, this, refer_comp);
 
 					if (event_bubbles === false) {
@@ -3027,7 +3047,7 @@ if (nexacro.Component) {
 			}
 
 			listener = this.onpinchstart;
-			if ((!listener || (listener && !listener.stoppropagation)) && (event_bubbles !== true) && this.parent && !this.parent._is_application) {
+			if ((!listener || !listener.stoppropagation) && (event_bubbles !== true) && this.parent && !this.parent._is_application) {
 				if (this._is_subcontrol) {
 					return this.parent._on_bubble_pinchstart(elem, touchinfos, accvalue, deltavalue, firstrange, currange, event_bubbles, null, refer_comp, bZoom, is_userbubble);
 				}
@@ -3038,14 +3058,14 @@ if (nexacro.Component) {
 		}
 		else {
 			if (this.visible && this._isEnable()) {
-				if (nexacro._enabletouchevent && (!is_userbubble || (is_userbubble && this.enableevent))) {
-					var fire_event_func = is_userbubble ? this.on_fire_user_onpinchstart : this.on_fire_sys_onpinchstart;
+				if (nexacro._enabletouchevent && (!is_userbubble || this.enableevent)) {
+					fire_event_func = is_userbubble ? this.on_fire_user_onpinchstart : this.on_fire_sys_onpinchstart;
 					event_bubbles = fire_event_func.call(this, elem, touchinfos, accvalue, deltavalue, fire_comp, refer_comp);
 				}
 			}
 
 			listener = this.onpinchstart;
-			if ((!listener || (listener && !listener.stoppropagation)) && (event_bubbles !== true) && this.parent && !this.parent._is_application) {
+			if ((!listener || !listener.stoppropagation) && (event_bubbles !== true) && this.parent && !this.parent._is_application) {
 				return this.parent._on_bubble_pinchstart(elem, touchinfos, accvalue, deltavalue, firstrange, currange, false, fire_comp, refer_comp, bZoom, is_userbubble);
 			}
 		}
@@ -3062,7 +3082,7 @@ if (nexacro.Component) {
 
 		var root_comp = this._getFromComponent(this);
 		var listener = root_comp.onpinch;
-		if (!listener || (listener && !listener.defaultprevented)) {
+		if (!listener || !listener.defaultprevented) {
 			if (this._isParentdefaultprevented(root_comp, "pinch")) {
 				return true;
 			}
@@ -3078,7 +3098,7 @@ if (nexacro.Component) {
 			return;
 		}
 
-		var listener;
+		var listener, fire_event_func;
 		if (event_bubbles === undefined) {
 			if (!refer_comp) {
 				refer_comp = this;
@@ -3092,8 +3112,8 @@ if (nexacro.Component) {
 			}
 
 			if (this.visible && this._isEnable()) {
-				if (nexacro._enabletouchevent && (!is_userbubble || (is_userbubble && this.enableevent))) {
-					var fire_event_func = is_userbubble ? this.on_fire_user_onpinch : this.on_fire_sys_onpinch;
+				if (nexacro._enabletouchevent && (!is_userbubble || this.enableevent)) {
+					fire_event_func = is_userbubble ? this.on_fire_user_onpinch : this.on_fire_sys_onpinch;
 					event_bubbles = fire_event_func.call(this, elem, touchinfos, accvalue, deltavalue, firstrange, currange, this, refer_comp);
 
 					if (event_bubbles === false) {
@@ -3103,7 +3123,7 @@ if (nexacro.Component) {
 			}
 
 			listener = this.onpinch;
-			if ((!listener || (listener && !listener.stoppropagation)) && (event_bubbles !== true) && this.parent && !this.parent._is_application) {
+			if ((!listener || !listener.stoppropagation) && (event_bubbles !== true) && this.parent && !this.parent._is_application) {
 				if (this._is_subcontrol) {
 					return this.parent._on_bubble_pinch(elem, touchinfos, accvalue, deltavalue, firstrange, currange, event_bubbles, null, refer_comp, bZoom, is_userbubble);
 				}
@@ -3114,14 +3134,14 @@ if (nexacro.Component) {
 		}
 		else {
 			if (this.visible && this._isEnable()) {
-				if (nexacro._enabletouchevent && (!is_userbubble || (is_userbubble && this.enableevent))) {
-					var fire_event_func = is_userbubble ? this.on_fire_user_onpinch : this.on_fire_sys_onpinch;
+				if (nexacro._enabletouchevent && (!is_userbubble || this.enableevent)) {
+					fire_event_func = is_userbubble ? this.on_fire_user_onpinch : this.on_fire_sys_onpinch;
 					event_bubbles = fire_event_func.call(this, elem, touchinfos, accvalue, deltavalue, firstrange, currange, fire_comp, refer_comp);
 				}
 			}
 
 			listener = this.onpinch;
-			if ((!listener || (listener && !listener.stoppropagation)) && (event_bubbles !== true) && this.parent && !this.parent._is_application) {
+			if ((!listener || !listener.stoppropagation) && (event_bubbles !== true) && this.parent && !this.parent._is_application) {
 				return this.parent._on_bubble_pinch(elem, touchinfos, accvalue, deltavalue, firstrange, currange, false, fire_comp, refer_comp, bZoom, is_userbubble);
 			}
 		}
@@ -3138,7 +3158,7 @@ if (nexacro.Component) {
 
 		var root_comp = this._getFromComponent(this);
 		var listener = root_comp.onpinchend;
-		if (!listener || (listener && !listener.defaultprevented)) {
+		if (!listener || !listener.defaultprevented) {
 			this._on_bubble_pinchend(elem, touchinfos, accvalue, deltavalue, firstrange, currange, event_bubbles, fire_comp, refer_comp, bZoom, false);
 		}
 	};
@@ -3148,7 +3168,7 @@ if (nexacro.Component) {
 			return;
 		}
 
-		var listener;
+		var listener, fire_event_func;
 		if (event_bubbles === undefined) {
 			if (!refer_comp) {
 				refer_comp = this;
@@ -3162,8 +3182,8 @@ if (nexacro.Component) {
 			}
 
 			if (this.visible && this._isEnable()) {
-				if (nexacro._enabletouchevent && (!is_userbubble || (is_userbubble && this.enableevent))) {
-					var fire_event_func = is_userbubble ? this.on_fire_user_onpinchend : this.on_fire_sys_onpinchend;
+				if (nexacro._enabletouchevent && (!is_userbubble || this.enableevent)) {
+					fire_event_func = is_userbubble ? this.on_fire_user_onpinchend : this.on_fire_sys_onpinchend;
 					event_bubbles = fire_event_func.call(this, elem, touchinfos, accvalue, deltavalue, this, refer_comp);
 
 					if (event_bubbles === false) {
@@ -3173,7 +3193,7 @@ if (nexacro.Component) {
 			}
 
 			listener = this.onpinchend;
-			if ((!listener || (listener && !listener.stoppropagation)) && (event_bubbles !== true) && this.parent && !this.parent._is_application) {
+			if ((!listener || !listener.stoppropagation) && (event_bubbles !== true) && this.parent && !this.parent._is_application) {
 				if (this._is_subcontrol) {
 					return this.parent._on_bubble_pinchend(elem, touchinfos, accvalue, deltavalue, firstrange, currange, event_bubbles, null, refer_comp, bZoom, is_userbubble);
 				}
@@ -3184,14 +3204,14 @@ if (nexacro.Component) {
 		}
 		else {
 			if (this.visible && this._isEnable()) {
-				if (nexacro._enabletouchevent && (!is_userbubble || (is_userbubble && this.enableevent))) {
-					var fire_event_func = is_userbubble ? this.on_fire_user_onpinchend : this.on_fire_sys_onpinchend;
+				if (nexacro._enabletouchevent && (!is_userbubble || this.enableevent)) {
+					fire_event_func = is_userbubble ? this.on_fire_user_onpinchend : this.on_fire_sys_onpinchend;
 					event_bubbles = fire_event_func.call(this, elem, touchinfos, accvalue, deltavalue, fire_comp, refer_comp);
 				}
 			}
 
 			listener = this.onpinchend;
-			if ((!listener || (listener && !listener.stoppropagation)) && (event_bubbles !== true) && this.parent && !this.parent._is_application) {
+			if ((!listener || !listener.stoppropagation) && (event_bubbles !== true) && this.parent && !this.parent._is_application) {
 				return this.parent._on_bubble_pinchend(elem, touchinfos, accvalue, deltavalue, firstrange, currange, false, fire_comp, refer_comp, bZoom, is_userbubble);
 			}
 		}
@@ -3208,7 +3228,7 @@ if (nexacro.Component) {
 
 		var root_comp = this._getFromComponent(this);
 		var listener = root_comp.onflingstart;
-		if (!listener || (listener && !listener.defaultprevented)) {
+		if (!listener || !listener.defaultprevented) {
 			if (this._isParentdefaultprevented(root_comp, "flingstart")) {
 				return true;
 			}
@@ -3224,7 +3244,7 @@ if (nexacro.Component) {
 			return;
 		}
 
-		var listener;
+		var listener, fire_event_func;
 		if (event_bubbles === undefined) {
 			if (!refer_comp) {
 				refer_comp = this;
@@ -3238,8 +3258,8 @@ if (nexacro.Component) {
 			}
 
 			if (this.visible && this._isEnable()) {
-				if (!is_userbubble || (is_userbubble && nexacro._enabletouchevent && this.enableevent)) {
-					var fire_event_func = is_userbubble ? this.on_fire_user_onflingstart : this.on_fire_sys_onflingstart;
+				if (!is_userbubble || (nexacro._enabletouchevent && this.enableevent)) {
+					fire_event_func = is_userbubble ? this.on_fire_user_onflingstart : this.on_fire_sys_onflingstart;
 					event_bubbles = fire_event_func.call(this, elem, fling_handler, xstartvalue, ystartvalue, xdeltavalue, ydeltavalue, touchlen, this, refer_comp);
 
 					if (event_bubbles === false) {
@@ -3249,7 +3269,7 @@ if (nexacro.Component) {
 			}
 
 			listener = this.onflingstart;
-			if ((!listener || (listener && !listener.stoppropagation)) && (event_bubbles !== true) && this.parent && !this.parent._is_application && !this._is_track) {
+			if ((!listener || !listener.stoppropagation) && (event_bubbles !== true) && this.parent && !this.parent._is_application && !this._is_track) {
 				if (this._is_subcontrol) {
 					return this.parent._on_bubble_flingstart(elem, fling_handler, xstartvalue, ystartvalue, xdeltavalue, ydeltavalue, touchlen, event_bubbles, null, refer_comp, is_userbubble);
 				}
@@ -3260,14 +3280,14 @@ if (nexacro.Component) {
 		}
 		else {
 			if (this.visible && this._isEnable()) {
-				if (!is_userbubble || (is_userbubble && nexacro._enabletouchevent && this.enableevent)) {
-					var fire_event_func = is_userbubble ? this.on_fire_user_onflingstart : this.on_fire_sys_onflingstart;
+				if (!is_userbubble || (nexacro._enabletouchevent && this.enableevent)) {
+					fire_event_func = is_userbubble ? this.on_fire_user_onflingstart : this.on_fire_sys_onflingstart;
 					event_bubbles = fire_event_func.call(this, elem, fling_handler, xstartvalue, ystartvalue, xdeltavalue, ydeltavalue, touchlen, fire_comp, refer_comp);
 				}
 			}
 
 			listener = this.onflingstart;
-			if ((!listener || (listener && !listener.stoppropagation)) && (event_bubbles !== true) && this.parent && !this.parent._is_application && !this._is_track) {
+			if ((!listener || !listener.stoppropagation) && (event_bubbles !== true) && this.parent && !this.parent._is_application && !this._is_track) {
 				return this.parent._on_bubble_flingstart(elem, fling_handler, xstartvalue, ystartvalue, xdeltavalue, ydeltavalue, touchlen, false, fire_comp, refer_comp, is_userbubble);
 			}
 		}
@@ -3284,7 +3304,7 @@ if (nexacro.Component) {
 
 		var root_comp = this._getFromComponent(this);
 		var listener = root_comp.onfling;
-		if (!listener || (listener && !listener.defaultprevented)) {
+		if (!listener || !listener.defaultprevented) {
 			if (this._isParentdefaultprevented(root_comp, "fling")) {
 				return true;
 			}
@@ -3301,7 +3321,7 @@ if (nexacro.Component) {
 		}
 
 		var pThis = this._getFromComponent(this);
-		var listener;
+		var listener, fire_event_func;
 		if (event_bubbles === undefined) {
 			if (!refer_comp) {
 				refer_comp = this;
@@ -3317,7 +3337,7 @@ if (nexacro.Component) {
 			if (this.visible && this._isEnable()) {
 				if ((!is_userbubble && (!pThis.onfling || (pThis.onfling && !pThis.onfling.defaultprevented)))
 					 || (is_userbubble && nexacro._enabletouchevent && this.enableevent)) {
-					var fire_event_func = is_userbubble ? this.on_fire_user_onfling : this.on_fire_sys_onfling;
+					fire_event_func = is_userbubble ? this.on_fire_user_onfling : this.on_fire_sys_onfling;
 					event_bubbles = fire_event_func.call(this, elem, fling_handler, xstartvalue, ystartvalue, xdeltavalue, ydeltavalue, touchlen, this, refer_comp);
 
 					if (event_bubbles === false) {
@@ -3327,7 +3347,7 @@ if (nexacro.Component) {
 			}
 
 			listener = this.onfling;
-			if ((!listener || (listener && !listener.stoppropagation)) && (event_bubbles !== true) && this.parent && !this.parent._is_application && !this._is_track) {
+			if ((!listener || !listener.stoppropagation) && (event_bubbles !== true) && this.parent && !this.parent._is_application && !this._is_track) {
 				if (this._is_subcontrol) {
 					return this.parent._on_bubble_fling(elem, fling_handler, xstartvalue, ystartvalue, xdeltavalue, ydeltavalue, touchlen, event_bubbles, null, refer_comp, is_userbubble);
 				}
@@ -3340,13 +3360,13 @@ if (nexacro.Component) {
 			if (this.visible && this._isEnable()) {
 				if ((!is_userbubble && (!pThis.onfling || (pThis.onfling && !pThis.onfling.defaultprevented)))
 					 || (is_userbubble && nexacro._enabletouchevent && this.enableevent)) {
-					var fire_event_func = is_userbubble ? this.on_fire_user_onfling : this.on_fire_sys_onfling;
+					fire_event_func = is_userbubble ? this.on_fire_user_onfling : this.on_fire_sys_onfling;
 					event_bubbles = fire_event_func.call(this, elem, fling_handler, xstartvalue, ystartvalue, xdeltavalue, ydeltavalue, touchlen, fire_comp, refer_comp);
 				}
 			}
 
 			listener = this.onfling;
-			if ((!listener || (listener && !listener.stoppropagation)) && (event_bubbles !== true) && this.parent && !this.parent._is_application && !this._is_track) {
+			if ((!listener || !listener.stoppropagation) && (event_bubbles !== true) && this.parent && !this.parent._is_application && !this._is_track) {
 				return this.parent._on_bubble_fling(elem, fling_handler, xstartvalue, ystartvalue, xdeltavalue, ydeltavalue, touchlen, false, fire_comp, refer_comp, is_userbubble);
 			}
 		}
@@ -3363,7 +3383,7 @@ if (nexacro.Component) {
 
 		var root_comp = this._getFromComponent(this);
 		var listener = root_comp.onflingend;
-		if (!listener || (listener && !listener.defaultprevented)) {
+		if (!listener || !listener.defaultprevented) {
 			this._on_bubble_flingend(elem, fling_handler, xstartvalue, ystartvalue, xdeltavalue, ydeltavalue, touchlen, event_bubbles, fire_comp, refer_comp, false);
 		}
 
@@ -3389,7 +3409,7 @@ if (nexacro.Component) {
 			return;
 		}
 
-		var listener;
+		var listener, fire_event_func;
 		if (event_bubbles === undefined) {
 			if (!refer_comp) {
 				refer_comp = this;
@@ -3403,8 +3423,8 @@ if (nexacro.Component) {
 			}
 
 			if (this.visible && this._isEnable()) {
-				if (!is_userbubble || (is_userbubble && nexacro._enabletouchevent && this.enableevent)) {
-					var fire_event_func = is_userbubble ? this.on_fire_user_onflingend : this.on_fire_sys_onflingend;
+				if (!is_userbubble || (nexacro._enabletouchevent && this.enableevent)) {
+					fire_event_func = is_userbubble ? this.on_fire_user_onflingend : this.on_fire_sys_onflingend;
 					event_bubbles = fire_event_func.call(this, elem, fling_handler, xstartvalue, ystartvalue, xdeltavalue, ydeltavalue, touchlen, this, refer_comp);
 
 					if (event_bubbles === false) {
@@ -3414,7 +3434,7 @@ if (nexacro.Component) {
 			}
 
 			listener = this.onflingend;
-			if ((!listener || (listener && !listener.stoppropagation)) && (event_bubbles !== true) && this.parent && !this.parent._is_application && !this._is_track) {
+			if ((!listener || !listener.stoppropagation) && (event_bubbles !== true) && this.parent && !this.parent._is_application && !this._is_track) {
 				if (this._is_subcontrol) {
 					return this.parent._on_bubble_flingend(elem, fling_handler, xstartvalue, ystartvalue, xdeltavalue, ydeltavalue, touchlen, event_bubbles, null, refer_comp, is_userbubble);
 				}
@@ -3425,14 +3445,14 @@ if (nexacro.Component) {
 		}
 		else {
 			if (this.visible && this._isEnable()) {
-				if (!is_userbubble || (is_userbubble && nexacro._enabletouchevent && this.enableevent)) {
-					var fire_event_func = is_userbubble ? this.on_fire_user_onflingend : this.on_fire_sys_onflingend;
+				if (!is_userbubble || (nexacro._enabletouchevent && this.enableevent)) {
+					fire_event_func = is_userbubble ? this.on_fire_user_onflingend : this.on_fire_sys_onflingend;
 					event_bubbles = fire_event_func.call(this, elem, fling_handler, xstartvalue, ystartvalue, xdeltavalue, ydeltavalue, touchlen, fire_comp, refer_comp);
 				}
 			}
 
 			listener = this.onflingend;
-			if ((!listener || (listener && !listener.stoppropagation)) && (event_bubbles !== true) && this.parent && !this.parent._is_application && !this._is_track) {
+			if ((!listener || !listener.stoppropagation) && (event_bubbles !== true) && this.parent && !this.parent._is_application && !this._is_track) {
 				return this.parent._on_bubble_flingend(elem, fling_handler, xstartvalue, ystartvalue, xdeltavalue, ydeltavalue, touchlen, false, fire_comp, refer_comp, is_userbubble);
 			}
 		}
@@ -3466,7 +3486,7 @@ if (nexacro.Component) {
 
 		var root_comp = this._getFromComponent(this);
 		var listener = root_comp.onlongpress;
-		if (!listener || (listener && !listener.defaultprevented)) {
+		if (!listener || !listener.defaultprevented) {
 			this._on_bubble_longpress(elem, touchinfos, event_bubbles, fire_comp, refer_comp, false);
 		}
 	};
@@ -3476,7 +3496,7 @@ if (nexacro.Component) {
 			return;
 		}
 
-		var listener;
+		var listener, fire_event_func;
 		if (event_bubbles === undefined) {
 			if (!refer_comp) {
 				refer_comp = this;
@@ -3489,8 +3509,8 @@ if (nexacro.Component) {
 				this.on_longpress_default_action(elem, touchinfos, refer_comp);
 			}
 
-			if (this.visible && this._isEnable() && (!is_userbubble || (is_userbubble && this.enableevent))) {
-				var fire_event_func = is_userbubble ? this.on_fire_user_onlongpress : this.on_fire_sys_onlongpress;
+			if (this.visible && this._isEnable() && (!is_userbubble || this.enableevent)) {
+				fire_event_func = is_userbubble ? this.on_fire_user_onlongpress : this.on_fire_sys_onlongpress;
 				event_bubbles = fire_event_func.call(this, elem, touchinfos, this, refer_comp);
 
 				if (event_bubbles === false) {
@@ -3499,7 +3519,7 @@ if (nexacro.Component) {
 			}
 
 			listener = this.onlongpress;
-			if ((!listener || (listener && !listener.stoppropagation)) && (event_bubbles !== true) && this.parent && !this.parent._is_application) {
+			if ((!listener || !listener.stoppropagation) && (event_bubbles !== true) && this.parent && !this.parent._is_application) {
 				if (this._is_subcontrol) {
 					return this.parent._on_bubble_longpress(elem, touchinfos, event_bubbles, null, refer_comp, is_userbubble);
 				}
@@ -3509,13 +3529,13 @@ if (nexacro.Component) {
 			}
 		}
 		else {
-			if (this.visible && this._isEnable() && (!is_userbubble || (is_userbubble && this.enableevent))) {
-				var fire_event_func = is_userbubble ? this.on_fire_user_onlongpress : this.on_fire_sys_onlongpress;
+			if (this.visible && this._isEnable() && (!is_userbubble || this.enableevent)) {
+				fire_event_func = is_userbubble ? this.on_fire_user_onlongpress : this.on_fire_sys_onlongpress;
 				event_bubbles = fire_event_func.call(this, elem, touchinfos, fire_comp, refer_comp);
 			}
 
 			listener = this.onlongpress;
-			if ((!listener || (listener && !listener.stoppropagation)) && (event_bubbles !== true) && this.parent && !this.parent._is_application) {
+			if ((!listener || !listener.stoppropagation) && (event_bubbles !== true) && this.parent && !this.parent._is_application) {
 				return this.parent._on_bubble_longpress(elem, touchinfos, false, fire_comp, refer_comp, is_userbubble);
 			}
 		}
@@ -3542,7 +3562,7 @@ if (nexacro.Component) {
 
 		var root_comp = this._getFromComponent(this);
 		var listener = root_comp.onslidestart;
-		if (!listener || (listener && !listener.defaultprevented)) {
+		if (!listener || !listener.defaultprevented) {
 			if (this._isParentdefaultprevented(root_comp, "slidestart")) {
 				return true;
 			}
@@ -3559,7 +3579,7 @@ if (nexacro.Component) {
 			return;
 		}
 
-		var listener;
+		var listener, fire_event_func;
 		if (event_bubbles === undefined) {
 			if (!refer_comp) {
 				refer_comp = this;
@@ -3573,8 +3593,8 @@ if (nexacro.Component) {
 			}
 
 			if (this.visible && this._isEnable()) {
-				if (!is_userbubble || (is_userbubble && nexacro._enabletouchevent && this.enableevent)) {
-					var fire_event_func = is_userbubble ? this.on_fire_user_onslidestart : this.on_fire_sys_onslidestart;
+				if (!is_userbubble || (nexacro._enabletouchevent && this.enableevent)) {
+					fire_event_func = is_userbubble ? this.on_fire_user_onslidestart : this.on_fire_sys_onslidestart;
 					event_bubbles = fire_event_func.call(this, elem, touch_manager, touchinfos, xaccvalue, yaccvalue, xdeltavalue, ydeltavalue, this, refer_comp);
 
 					if (event_bubbles === false) {
@@ -3584,7 +3604,7 @@ if (nexacro.Component) {
 			}
 
 			listener = this.onslidestart;
-			if ((!listener || (listener && !listener.stoppropagation)) && (event_bubbles !== true) && this.parent && !this.parent._is_application) {
+			if ((!listener || (!listener.stoppropagation)) && (event_bubbles !== true) && this.parent && !this.parent._is_application) {
 				if (this._is_subcontrol) {
 					return this.parent._on_bubble_slidestart(elem, touch_manager, touchinfos, xaccvalue, yaccvalue, xdeltavalue, ydeltavalue, event_bubbles, null, refer_comp, bScroll, is_userbubble);
 				}
@@ -3595,14 +3615,14 @@ if (nexacro.Component) {
 		}
 		else {
 			if (this.visible && this._isEnable()) {
-				if (!is_userbubble || (is_userbubble && nexacro._enabletouchevent && this.enableevent)) {
-					var fire_event_func = is_userbubble ? this.on_fire_user_onslidestart : this.on_fire_sys_onslidestart;
+				if (!is_userbubble || (nexacro._enabletouchevent && this.enableevent)) {
+					fire_event_func = is_userbubble ? this.on_fire_user_onslidestart : this.on_fire_sys_onslidestart;
 					event_bubbles = fire_event_func.call(this, elem, touch_manager, touchinfos, xaccvalue, yaccvalue, xdeltavalue, ydeltavalue, fire_comp, refer_comp);
 				}
 			}
 
 			listener = this.onslidestart;
-			if ((!listener || (listener && !listener.stoppropagation)) && (event_bubbles !== true) && this.parent && !this.parent._is_application) {
+			if ((!listener || !listener.stoppropagation) && (event_bubbles !== true) && this.parent && !this.parent._is_application) {
 				return this.parent._on_bubble_slidestart(elem, touch_manager, touchinfos, xaccvalue, yaccvalue, xdeltavalue, ydeltavalue, false, fire_comp, refer_comp, bScroll, is_userbubble);
 			}
 		}
@@ -3619,7 +3639,7 @@ if (nexacro.Component) {
 
 		var root_comp = this._getFromComponent(this);
 		var listener = root_comp.onslide;
-		if (!listener || (listener && !listener.defaultprevented)) {
+		if (!listener || !listener.defaultprevented) {
 			if (this._isParentdefaultprevented(root_comp, "slide")) {
 				return true;
 			}
@@ -3636,7 +3656,7 @@ if (nexacro.Component) {
 		}
 
 		var pThis = this._getFromComponent(this);
-		var listener;
+		var listener, fire_event_func;
 		if (event_bubbles === undefined) {
 			if (!refer_comp) {
 				refer_comp = this;
@@ -3652,7 +3672,7 @@ if (nexacro.Component) {
 			if (this.visible && this._isEnable()) {
 				if ((!is_userbubble && (!pThis.onslide || (pThis.onslide && !pThis.onslide.defaultprevented)))
 					 || (is_userbubble && nexacro._enabletouchevent && this.enableevent)) {
-					var fire_event_func = is_userbubble ? this.on_fire_user_onslide : this.on_fire_sys_onslide;
+					fire_event_func = is_userbubble ? this.on_fire_user_onslide : this.on_fire_sys_onslide;
 					event_bubbles = fire_event_func.call(this, elem, touch_manager, touchinfos, xaccvalue, yaccvalue, xdeltavalue, ydeltavalue, this, refer_comp);
 
 					if (event_bubbles === false) {
@@ -3662,7 +3682,7 @@ if (nexacro.Component) {
 			}
 
 			listener = this.onslide;
-			if ((!listener || (listener && !listener.stoppropagation)) && (event_bubbles !== true) && this.parent) {
+			if ((!listener || !listener.stoppropagation) && (event_bubbles !== true) && this.parent) {
 				if (this.parent._is_application) {
 					if (!is_userbubble && touch_manager._scroll_comp == null && !nexacro._cur_track_info) {
 						if (nexacro._allow_default_pinchzoom && xdeltavalue != 0 && Math.abs(xdeltavalue) > Math.abs(ydeltavalue)) {
@@ -3689,13 +3709,13 @@ if (nexacro.Component) {
 			if (this.visible && this._isEnable()) {
 				if ((!is_userbubble && (!pThis.onslide || (pThis.onslide && !pThis.onslide.defaultprevented)))
 					 || (is_userbubble && nexacro._enabletouchevent && this.enableevent)) {
-					var fire_event_func = is_userbubble ? this.on_fire_user_onslide : this.on_fire_sys_onslide;
+					fire_event_func = is_userbubble ? this.on_fire_user_onslide : this.on_fire_sys_onslide;
 					event_bubbles = fire_event_func.call(this, elem, touch_manager, touchinfos, xaccvalue, yaccvalue, xdeltavalue, ydeltavalue, fire_comp, refer_comp);
 				}
 			}
 
 			listener = this.onslide;
-			if ((!listener || (listener && !listener.stoppropagation)) && (event_bubbles !== true) && this.parent) {
+			if ((!listener || !listener.stoppropagation) && (event_bubbles !== true) && this.parent) {
 				if (this.parent._is_application) {
 					if (!is_userbubble && touch_manager._scroll_comp == null && !nexacro._cur_track_info) {
 						if (nexacro._allow_default_pinchzoom && xdeltavalue != 0 && Math.abs(xdeltavalue) > Math.abs(ydeltavalue)) {
@@ -3726,7 +3746,7 @@ if (nexacro.Component) {
 
 		var root_comp = this._getFromComponent(this);
 		var listener = root_comp.onslideend;
-		if (!listener || (listener && !listener.defaultprevented)) {
+		if (!listener || !listener.defaultprevented) {
 			this._on_bubble_slideend(elem, touch_manager, touchinfos, xaccvalue, yaccvalue, xdeltavalue, ydeltavalue, event_bubbles, fire_comp, refer_comp, bScroll, false);
 		}
 	};
@@ -3736,7 +3756,7 @@ if (nexacro.Component) {
 			return;
 		}
 
-		var listener;
+		var listener, fire_event_func;
 		if (event_bubbles === undefined) {
 			if (!refer_comp) {
 				refer_comp = this;
@@ -3750,8 +3770,8 @@ if (nexacro.Component) {
 			}
 
 			if (this.visible && this._isEnable()) {
-				if (!is_userbubble || (is_userbubble && nexacro._enabletouchevent && this.enableevent)) {
-					var fire_event_func = is_userbubble ? this.on_fire_user_onslideend : this.on_fire_sys_onslideend;
+				if (!is_userbubble || (nexacro._enabletouchevent && this.enableevent)) {
+					fire_event_func = is_userbubble ? this.on_fire_user_onslideend : this.on_fire_sys_onslideend;
 					event_bubbles = fire_event_func.call(this, elem, touch_manager, touchinfos, xaccvalue, yaccvalue, xdeltavalue, ydeltavalue, this, refer_comp);
 
 					if (event_bubbles === false) {
@@ -3761,7 +3781,7 @@ if (nexacro.Component) {
 			}
 
 			listener = this.onslideend;
-			if ((!listener || (listener && !listener.stoppropagation)) && (event_bubbles !== true) && this.parent && !this.parent._is_application) {
+			if ((!listener || (!listener.stoppropagation)) && (event_bubbles !== true) && this.parent && !this.parent._is_application) {
 				if (this._is_subcontrol) {
 					return this.parent._on_bubble_slideend(elem, touch_manager, touchinfos, xaccvalue, yaccvalue, xdeltavalue, ydeltavalue, event_bubbles, null, refer_comp, bScroll, is_userbubble);
 				}
@@ -3772,14 +3792,14 @@ if (nexacro.Component) {
 		}
 		else {
 			if (this.visible && this._isEnable()) {
-				if (!is_userbubble || (is_userbubble && nexacro._enabletouchevent && this.enableevent)) {
-					var fire_event_func = is_userbubble ? this.on_fire_user_onslideend : this.on_fire_sys_onslideend;
+				if (!is_userbubble || (nexacro._enabletouchevent && this.enableevent)) {
+					fire_event_func = is_userbubble ? this.on_fire_user_onslideend : this.on_fire_sys_onslideend;
 					event_bubbles = fire_event_func.call(this, elem, touch_manager, touchinfos, xaccvalue, yaccvalue, xdeltavalue, ydeltavalue, fire_comp, refer_comp);
 				}
 			}
 
 			listener = this.onslideend;
-			if ((!listener || (listener && !listener.stoppropagation)) && (event_bubbles !== true) && this.parent && !this.parent._is_application) {
+			if ((!listener || !listener.stoppropagation) && (event_bubbles !== true) && this.parent && !this.parent._is_application) {
 				return this.parent._on_bubble_slideend(elem, touch_manager, touchinfos, xaccvalue, yaccvalue, xdeltavalue, ydeltavalue, false, fire_comp, refer_comp, bScroll, is_userbubble);
 			}
 		}
@@ -3896,8 +3916,6 @@ if (nexacro.Component) {
 			var evt = new nexacro.ClickEventInfo(this, "onclick", button, alt_key, ctrl_key, shift_key, screenX, screenY, canvasX, canvasY, clientX, clientY, from_comp, from_refer_comp);
 			var ret = this.onclick._fireEvent(this, evt);
 			evt.destroy();
-			evt = null;
-
 			return ret;
 		}
 		return false;
@@ -4520,17 +4538,12 @@ if (nexacro.Component) {
 				var zoom_dir = deltavalue > 0 ? 1 : -1;
 				var zoom_delta = (1.0 + (zoom_dir * zoom_amount));
 				var zoom_factor = this._getZoom() || 100;
-				var before_zoom = zoom_factor;
 
 				zoom_factor = zoom_factor * zoom_delta;
 
 				if (!nexacro._allow_default_pinchzoom) {
 					var current_screen = nexacro._getCurrentScreenID();
 					if (current_screen) {
-						var autofitted_zoom_factor = 100;
-						if (this._autofittedZoomFactor !== undefined) {
-							autofitted_zoom_factor = this._autofittedZoomFactor;
-						}
 					}
 				}
 				this._on_zoom(zoom_factor, this, from_refer_comp);
@@ -4696,12 +4709,7 @@ if (nexacro.Component) {
 			var new_hpos = this._hscroll_pos;
 
 			if (this._is_bubble_fling_v === undefined && this._is_bubble_fling_h === undefined) {
-				if (old_vpos == new_vpos && old_hpos == new_hpos) {
-					return false;
-				}
-				else {
-					return true;
-				}
+				return !(old_vpos == new_vpos && old_hpos == new_hpos);
 			}
 
 			if (xdeltavalue != 0 && ydeltavalue != 0) {
@@ -4875,7 +4883,6 @@ if (nexacro.Component) {
 			}
 
 			if (scroll_mode > 0) {
-				scroll_comp = this;
 				touch_manager._scroll_end = false;
 				touch_manager._scroll_comp = this;
 				touch_manager._scroll_mode = scroll_mode;

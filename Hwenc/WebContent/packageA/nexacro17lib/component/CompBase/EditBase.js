@@ -446,9 +446,7 @@ if (!nexacro.InputEventInfo) {
 			else if (type.indexOf("full") > -1) {
 				arrType.push("wide");
 			}
-			else if (type.indexOf("normal") > -1) {
-			}
-			else {
+			else if (type.indexOf("normal") <= -1) {
 				this.imedisable = true;
 
 				if (!this.password && type.indexOf("normal") < 0
@@ -823,6 +821,8 @@ if (!nexacro.InputEventInfo) {
 		this._int_digits_max = -1;
 		this._dec_digits_min = 0;
 		this._dec_digits_max = -1;
+		this._dec_min_sharp = -1;
+		this._dec_max_sharp = -1;
 	};
 
 	_pMaskTypeNumber.setMask = function (mask) {
@@ -899,6 +899,31 @@ if (!nexacro.InputEventInfo) {
 		else {
 			int_part = mask.substring((sign_char.length + sign_sep_by_space), point_idx);
 			dec_part = mask.substring(point_idx + 1);
+
+			if (dec_part) {
+				var idx_sharp, is_fixed_min_sharp;
+				idx_sharp = dec_part.indexOf("#");
+				if (idx_sharp > -1) {
+					is_fixed_min_sharp = false;
+					this._dec_max_sharp = idx_sharp;
+					for (i = dec_part.length - 1; i >= idx_sharp; i--) {
+						if (dec_part[i] == "#") {
+							if (this._dec_min_sharp == -1) {
+								this._dec_min_sharp = i;
+							}
+							if (this._dec_max_sharp < i) {
+								this._dec_max_sharp = i;
+							}
+							if (this._dec_min_sharp > i && is_fixed_min_sharp == false) {
+								this._dec_min_sharp = i;
+							}
+						}
+						else if (this._dec_min_sharp != -1) {
+							is_fixed_min_sharp = true;
+						}
+					}
+				}
+			}
 		}
 
 		var idx, prev_idx = int_part.length - 1;
@@ -1028,7 +1053,7 @@ if (!nexacro.InputEventInfo) {
 			pos -= 1;
 			sign_char = '';
 		}
-		for (; pos < len; ) {
+		for (; pos < len; pos++) {
 			var c = text[pos];
 			if ((c >= '0' && c <= '9') || c == ',' || c == '.') {
 				break;
@@ -1036,7 +1061,6 @@ if (!nexacro.InputEventInfo) {
 			if (c != ' ') {
 				return (bfillzero ? this._masked_empty_text : "");
 			}
-			pos++;
 		}
 
 		var point_char = this._mask_decimal_point;
@@ -1141,6 +1165,23 @@ if (!nexacro.InputEventInfo) {
 			dec_part = dec_part.substring(0, dec_max);
 		}
 
+		var dec_max_sharp = this._dec_max_sharp;
+		if (dec_max_sharp >= dec_max - 1) {
+			var dec_min_zero = -1;
+			var dec_min_sharp = this._dec_min_sharp;
+			for (i = dec_max_sharp; i >= dec_min_sharp; i--) {
+				if (dec_part[i] == 0) {
+					dec_min_zero = i;
+				}
+				else if (dec_max_sharp == i) {
+					break;
+				}
+			}
+			if (dec_min_zero > -1) {
+				dec_part = dec_part.slice(0, dec_min_zero);
+			}
+		}
+
 		if (dec_part != "") {
 			masked_text += this._decimal_point;
 			masked_text += dec_part;
@@ -1203,7 +1244,7 @@ if (!nexacro.InputEventInfo) {
 			}
 		}
 
-		for (; pos < textlen; ) {
+		for (; pos < textlen; pos) {
 			ch = text[pos];
 			if ((ch >= '0' && ch <= '9') || ch == ',' || ch == '.') {
 				break;
@@ -1231,7 +1272,7 @@ if (!nexacro.InputEventInfo) {
 			}
 
 			if (!(ch >= '0' && ch <= '9')) {
-				return null;
+				continue;
 			}
 
 			intpart_last_char = ch;
@@ -1379,7 +1420,7 @@ if (!nexacro.InputEventInfo) {
 			pos++;
 		}
 
-		for (; pos < textlen; ) {
+		for (; pos < textlen; pos++) {
 			ch = text[pos];
 			if ((ch >= '0' && ch <= '9') || ch == ',' || ch == '.') {
 				break;
@@ -1387,7 +1428,6 @@ if (!nexacro.InputEventInfo) {
 			if (ch != ' ') {
 				return result_buf.join('');
 			}
-			pos++;
 		}
 
 		if (pos == textlen) {
@@ -1891,10 +1931,10 @@ if (!nexacro.InputEventInfo) {
 
 		var text = nexacro._toString(masked_text);
 
-		var ch, mask, val, bufpos = 0;
+		var ch, val, bufpos = 0;
 		var result_buf = [];
 		var is_filled = true;
-		while ((mask = mask_buf[bufpos])) {
+		while ((mask_buf[bufpos])) {
 			val = value_buf[bufpos];
 			if (val != "") {
 				ch = text[bufpos];
@@ -1966,7 +2006,7 @@ if (!nexacro.InputEventInfo) {
 			}
 		}
 		else {
-			if ((ch = value_buf[pos])) {
+			if ((value_buf[pos])) {
 				return pos;
 			}
 		}
@@ -2552,13 +2592,6 @@ if (!nexacro.InputEventInfo) {
 				break;
 			case 40:
 			case 41:
-				if (intVal < 0) {
-					intVal = 59;
-				}
-				else if (intVal > 59) {
-					intVal = 0;
-				}
-				break;
 			case 50:
 			case 51:
 				if (intVal < 0) {
@@ -2750,7 +2783,7 @@ if (!nexacro.InputEventInfo) {
 			}
 		}
 		else {
-			if ((ch = value_buf[pos])) {
+			if (value_buf[pos]) {
 				return pos;
 			}
 		}
@@ -2770,19 +2803,48 @@ if (!nexacro.InputEventInfo) {
 		}
 
 		var char_buf = this._edit_char_buf.slice(0);
+		var ch_len = ch.length;
 		var buf_len = char_buf.length;
+		var i, j;
+
+		var changed_type;
+		var changed_str = "";
+		var changed_buf = {
+		};
 
 		if (ch.length > 1) {
-			for (var i = pos_begin, j = 0; j < ch.length; i++, j++) {
+			for (i = pos_begin, j = 0; j < ch_len; i++, j++) {
 				char_buf[i] = ch[j];
 			}
 		}
 		else {
 			char_buf[pos_begin] = ch;
+
+			changed_str = ch;
+			changed_type = this._edit_type_buf[pos_begin];
+
+			for (i = pos_begin - 1; i >= 0; i--) {
+				if (changed_type == this._edit_type_buf[i]) {
+					changed_str = char_buf[i] + changed_str;
+				}
+				else {
+					break;
+				}
+			}
+			for (i = pos_begin + 1; i < char_buf.length; i++) {
+				if (changed_type == this._edit_type_buf[i]) {
+					changed_str += char_buf[i];
+				}
+				else {
+					break;
+				}
+			}
+
+			changed_buf[this.changeTypeToDate(changed_type)] = changed_str;
 		}
 
 		if (pos_end && pos_begin < pos_end) {
-			for (var i = (pos_begin + 1); i < pos_end && i < buf_len; i++) {
+			for (i = (pos_begin + 1); i < pos_end && i < buf_len; i++) {
 				char_buf[i] = "";
 			}
 		}
@@ -2818,6 +2880,19 @@ if (!nexacro.InputEventInfo) {
 
 		if ((y && isNaN(y = +y)) || (M && isNaN(M = +M)) || (d && isNaN(d = +d)) || (h && isNaN(h = +h)) || (m && isNaN(m = +m)) || (s && isNaN(s = +s)) || (ss && isNaN(ss = +ss))) {
 			return true;
+		}
+
+		for (i in changed_buf) {
+			if ((i == "MONTH")) {
+				if ((changed_str == "00")) {
+					return true;
+				}
+			}
+			else if ((i == "DAY")) {
+				if (changed_str == "00") {
+					return true;
+				}
+			}
 		}
 
 		var maxDay = this.getEndDay(y, M);
@@ -2925,7 +3000,6 @@ if (!nexacro.InputEventInfo) {
 		else {
 			ret = endDayN[month - 1];
 		}
-		endDayN = endDayL = null;
 		return ret;
 	};
 
@@ -3007,7 +3081,7 @@ if (!nexacro.InputEventInfo) {
 
 	_pMaskTypeDate.changeMaskToType = function (mask) {
 		var type = -1;
-		var i = 0, j = 0;
+		var i, j;
 		var maskList = [];
 		var map = this._dateformatMap;
 		var bFindMask = false;
@@ -3028,6 +3102,18 @@ if (!nexacro.InputEventInfo) {
 		}
 
 		return type;
+	};
+
+	_pMaskTypeDate.changeTypeToDate = function (type) {
+		if (type >= 0 && type < 10) {
+			return "YEAR";
+		}
+		else if (type >= 10 && type < 20) {
+			return "MONTH";
+		}
+		else if (type >= 20 && type < 30) {
+			return "DAY";
+		}
 	};
 
 	_pMaskTypeDate._appliedMaskString = function (info, text) {
@@ -3107,6 +3193,7 @@ if (!nexacro.InputEventInfo) {
 				break;
 			case 71:
 				ret = this._datelistL[jsDate.getDay()];
+				break;
 			default:
 				break;
 		}

@@ -30,7 +30,7 @@ if (nexacro._Browser == "Runtime") {
 				return null;
 			}
 
-			if (window && window._popupframes) {
+			if (window._popupframes) {
 				return window._popupframes;
 			}
 			else {
@@ -78,7 +78,7 @@ if (nexacro._Browser == "Runtime") {
 
 			var context = winobj ? winobj : _application._parentwindow;
 			if (use_argwin == true && winobj) {
-				window = winobj;
+				context = winobj;
 			}
 
 			if (!context) {
@@ -116,7 +116,7 @@ if (nexacro._Browser == "Runtime") {
 					var clientXY = firecur_comp._getClientXY(canvasX, canvasY);
 					ret = nexacro.__hitTestByDecorateText(elem.handle, clientXY[0], clientXY[1], function (v) {
 						if (v) {
-							if (v && (v.indexOf("tel") < 0 || !nexacro._isDesktop())) {
+							if (v.indexOf("tel") < 0 || !nexacro._isDesktop()) {
 								nexacro._execBrowser(v);
 							}
 						}
@@ -648,7 +648,6 @@ if (nexacro._Browser == "Runtime") {
 			}
 
 			_window.attachHandle(handle);
-			callback = null;
 
 			nexacro._setViewportScale(_window);
 
@@ -689,7 +688,7 @@ if (nexacro._Browser == "Runtime") {
 							continue;
 						}
 
-						if (popup_win == null || popup_win == undefined) {
+						if (popup_win == null) {
 							continue;
 						}
 
@@ -718,7 +717,6 @@ if (nexacro._Browser == "Runtime") {
 
 			var callback = nexacro.__bindEventModalWindowLoadHandler(_window, null);
 			var handle = nexacro.__createModalWindowHandle(parent_handle, _window, name, left, top, width, height, resizable, layered, lockmode, callback);
-			callback = null;
 
 			if (popup_root_win_list.length > 0) {
 				for (i = 0; i < popup_root_win_list.length; i++) {
@@ -748,7 +746,6 @@ if (nexacro._Browser == "Runtime") {
 			var callback = nexacro.__bindEventModalAsyncWindowLoadHandler(_window);
 			var handle = nexacro.__createModalAsyncWindowHandle(parent_handle, _window, name, left, top, width, height, resizable, layered, lockmode, callback);
 			_window.attachHandle(handle);
-			callback = null;
 
 			return handle;
 		};
@@ -831,8 +828,9 @@ if (nexacro._Browser == "Runtime") {
 
 			var ext_opt = ext_options.split(",");
 			var bnoactivate = false;
-			for (var i = 0; i < ext_opt.length; i++) {
-				var opt = ext_opt[i].split("=");
+			var i, opt;
+			for (i = 0; i < ext_opt.length; i++) {
+				opt = ext_opt[i].split("=");
 				if (opt[0] == "noactivate") {
 					bnoactivate = nexacro._toBoolean(opt[1]);
 					_window._bnoactivate = bnoactivate;
@@ -842,11 +840,10 @@ if (nexacro._Browser == "Runtime") {
 
 			var handle = nexacro.__createWindowHandle(parent_handle, _window, name, left, top, width, height, resizable, layered, taskbar, false, callback, bnoactivate);
 			_window.attachHandle(handle);
-			callback = null;
 
 			if (handle) {
-				for (var i = 0; i < ext_opt.length; i++) {
-					var opt = ext_opt[i].split("=");
+				for (i = 0; i < ext_opt.length; i++) {
+					opt = ext_opt[i].split("=");
 					if (opt[0] == "topmost") {
 						var btopmost = nexacro._toBoolean(opt[1]);
 						nexacro.__setWindowHandleTopmost(handle, btopmost);
@@ -973,7 +970,6 @@ if (nexacro._Browser == "Runtime") {
 			var callback = nexacro.__bindEventWindowLoadHandler(target_win);
 			var handle = nexacro.__createPopupWindowHandle(parent_handle, target_win, name, left, top, width, height, callback);
 			target_win.attachHandle(handle);
-			callback = null;
 		};
 		nexacro._closePopupWindowHandle = function (handle) {
 			nexacro.__closeWindowHandle(handle);
@@ -1363,7 +1359,6 @@ if (nexacro._Browser == "Runtime") {
 			}
 
 			if (nexacro._isDesktop()) {
-				use_autozoom = false;
 				ratio = 1.0;
 				is_scalable = false;
 			}
@@ -1435,24 +1430,25 @@ if (nexacro._Browser == "Runtime") {
 
 		nexacro._syshandler_ontray_forward = function (_window, type, id, button, alt_key, ctrl_key, shift_key, screenX, screenY) {
 			var is_runbase = nexacro._isRunBaseWindow(this);
+			var application, tray;
 			if (type == "lbuttonup") {
-				var application = nexacro.getApplication();
+				application = nexacro.getApplication();
 				if (application) {
-					var tray = application.trays[id];
+					tray = application.trays[id];
 					tray.on_fire_onlbuttonup(button, alt_key, ctrl_key, shift_key, screenX, screenY);
 				}
 			}
 			else if (type == "rbuttonup") {
-				var application = nexacro.getApplication();
+				application = nexacro.getApplication();
 				if (application) {
-					var tray = application.trays[id];
+					tray = application.trays[id];
 					tray.on_fire_onrbuttonup(button, alt_key, ctrl_key, shift_key, screenX, screenY);
 				}
 			}
 			else if (type == "dblclick") {
-				var application = nexacro.getApplication();
+				application = nexacro.getApplication();
 				if (application) {
-					var tray = application.trays[id];
+					tray = application.trays[id];
 					tray.on_fire_ondblclick(button, alt_key, ctrl_key, shift_key, screenX, screenY);
 				}
 			}

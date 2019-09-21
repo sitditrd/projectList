@@ -57,8 +57,7 @@ if (!nexacro.WebBrowser) {
 	_pWebBrowser.accessibilityrole = "webbrowser";
 	_pWebBrowser.accessibilityleavemessage = "";
 
-
-	this._event_list = {
+	_pWebBrowser._event_list = {
 		"onclick" : 1, 
 		"ondblclick" : 1, 
 		"onkeypress" : 1, 

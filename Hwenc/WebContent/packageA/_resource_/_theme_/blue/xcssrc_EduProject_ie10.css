@@ -2,6 +2,11 @@
 /* application 공통 */
 /* *********************************************************************************** */
 
+@media screen and (-ms-high-contrast: active)  
+{
+.nexacontentsbox {-ms-high-contrast-adjust:none; } 
+}
+
 html, body
 {
   position:absolute;

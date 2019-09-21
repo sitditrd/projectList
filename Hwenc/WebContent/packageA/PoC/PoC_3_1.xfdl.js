@@ -251,7 +251,7 @@
         this.fn_Search = function()
         {
         	var sId = "SEARCH";
-        	var sUrl = "http://localhost/Hwenc/service/Service_SSV_ZIP_inQuery.jsp?rowcount=" + this.cmbRowCount.value
+        	var sUrl = "http://14.63.224.112/Hwenc/service/Service_SSV_ZIP_inQuery.jsp?rowcount=" + this.cmbRowCount.value
         	var sInDs = "";
         	var sOutDs = "dsOutput=output";
         	var sParam = "";

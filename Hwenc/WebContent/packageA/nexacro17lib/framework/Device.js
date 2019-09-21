@@ -105,7 +105,8 @@ if (!nexacro.DeviceI) {
 			return false;
 		}
 
-		if ((+numberss) != (+numberss)) {
+		var num = +numberss;
+		if (num != num) {
 			return false;
 		}
 
@@ -143,7 +144,7 @@ if (!nexacro.DeviceI) {
 	};
 
 	_pDeviceI.paramck_play = function (strFilePath) {
-		if (strFilePath == null || typeof (strFilePath) == "undefined" || typeof (strFilePath) != "string") {
+		if (strFilePath == null || typeof (strFilePath) != "string") {
 			return false;
 		}
 		var strlength = strFilePath.split(" ").join("");
@@ -156,7 +157,7 @@ if (!nexacro.DeviceI) {
 
 
 	_pDeviceI.pramck_contactString = function (strProperty) {
-		if (strProperty == null || typeof (strProperty) == "undefined" || typeof (strProperty) != "string") {
+		if (strProperty == null || typeof (strProperty) != "string") {
 			return false;
 		}
 		return true;
@@ -285,10 +286,10 @@ if (!nexacro.DeviceI) {
 				colStarted = true;
 
 				var valueString;
-				if (value == null) {
+				if (value === null) {
 					valueString = 'null';
 				}
-				else if (value == undefined) {
+				else if (value === undefined) {
 					valueString = 'undefined';
 				}
 				else {
@@ -436,13 +437,9 @@ if (!nexacro.DeviceI) {
 				jsonString += '"' + colInfo.name + '":';
 
 				var valueString;
-				if (value == null) {
-					valueString = 'null';
-				}
-				else if (value == undefined) {
-					valueString = 'undefined';
-				}
-				else {
+
+				{
+
 					switch (colInfo.ntype) {
 						case 2:
 						case 3:
@@ -676,7 +673,7 @@ if (nexacro.System) {
 	};
 
 	nexacro.System.setOrientation = function (nOrientation) {
-		if ((nOrientation == null || typeof (nOrientation) == "undefined")) {
+		if (nOrientation == null) {
 			return false;
 		}
 
@@ -709,7 +706,7 @@ if (nexacro.System) {
 
 
 
-DeviceType = 
+this.DeviceType = 
 	{
 	ANDROID : 0, 
 	IOS : 1, 

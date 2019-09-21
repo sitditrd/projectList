@@ -151,7 +151,7 @@ if (!nexacro.FileDownload) {
 
 			ret = nexacro._download(url, this._hidden_frame_handle, initname, targetpath, this.filefilter, this.filefilterindex);
 		}
-		else if (downloadurl && downloadurl != undefined && downloadurl != "") {
+		else if (downloadurl != undefined && downloadurl != "") {
 			downloadurl = nexacro._getServiceLocation(downloadurl);
 			ret = nexacro._download(downloadurl, this._hidden_frame_handle, initname, targetpath, this.filefilter, this.filefilterindex);
 		}

@@ -480,7 +480,6 @@ if (!nexacro.FileUpload) {
 	};
 
 	_pFileUpload.on_apply_buttonsize = function (buttonsize) {
-		var item;
 		var items = this._items;
 		var item_len = items.length;
 		for (var i = 0; i < item_len; i++) {
@@ -498,7 +497,7 @@ if (!nexacro.FileUpload) {
 	};
 
 	_pFileUpload.on_apply_buttontext = function (buttontext) {
-		var item, itembutton;
+		var itembutton;
 		var items = this._items;
 		var item_len = items.length;
 		for (var i = 0; i < item_len; i++) {
@@ -782,7 +781,7 @@ if (!nexacro.FileUpload) {
 
 				var item = this._items[idx];
 
-				var value = "";
+				var value;
 				var fLen = newvalue.length;
 				var trustNewvalue = new Array();
 				if (fLen > 0) {
@@ -830,7 +829,6 @@ if (!nexacro.FileUpload) {
 
 			var cnt = 0;
 			var idx = 0;
-			var itemval_check;
 			var items = this._items;
 			var item_len = items.length;
 
@@ -931,6 +929,57 @@ if (!nexacro.FileUpload) {
 					if (items[i] && items[i].value) {
 						nexacro._submit(this._unique_id, uploadurl, this._hidden_frame_handle, null, items[i].value, fileinfo);
 						return true;
+					}
+				}
+			}
+			else if (nexacro._OS == "iOS" && nexacro._isHybrid && nexacro._isHybrid()) {
+				var evttarget = this;
+				var _on_manager_onload = function () {
+					return function (status, data, url, errcode, httpcode, loaded, total) {
+						var errorcode;
+						var errormsg = "fail to get";
+						try {
+							if (status == 4) {
+							}
+							else {
+								var result;
+								var fstr = data.trimLeft().slice(0, 5).toUpperCase();
+								if (fstr.indexOf("SSV") == 0) {
+									result = nexacro._Deserializer["SSV"](data);
+								}
+								else if (fstr.indexOf("<?XML") == 0) {
+									result = nexacro._Deserializer["XML"](nexacro._parseXMLDocument(data));
+								}
+
+								if (result) {
+									errorcode = result[0]["ErrorCode"];
+									errormsg = result[0]["ErrorMsg"];
+								}
+								else {
+									errormsg = data;
+								}
+
+								if (errorcode < 0) {
+									evttarget.on_fire_onerror(evttarget, "ObjectError", errormsg, evttarget, 9901, null, null, -1);
+								}
+								else {
+									evttarget.on_fire_onsuccess(result[1], errorcode, errormsg, url, result);
+								}
+							}
+						}
+						catch (e) {
+							if (e && e.message) {
+								errormsg = e.message;
+							}
+
+							evttarget.on_fire_onerror(evttarget, "ObjectError", errormsg, evttarget, 9901, null, null, -1);
+						}
+					};
+				};
+
+				for (i = 0; i < len; i++) {
+					if (items[i].value) {
+						nexacro._uploadTransferXHR(items[i]._files, "", uploadurl, _on_manager_onload());
 					}
 				}
 			}
@@ -1232,7 +1281,7 @@ if (!nexacro.FileUpload) {
 		this._editFlag = false;
 		this._buttonFlag = false;
 
-		var idx = 0;
+		var idx;
 		var items = this._items;
 		var itemLen = items.length;
 		if (itemLen) {
@@ -1325,7 +1374,6 @@ if (!nexacro.FileUpload) {
 
 	_pFileUpload.on_fire_user_onkeydown = function (keycode, alt_key, ctrl_key, shift_key, fire_comp, refer_comp) {
 		var items = this._items;
-		var tab_flag = false;
 		var idx = this.index;
 		var E = nexacro.Event;
 
@@ -1349,7 +1397,6 @@ if (!nexacro.FileUpload) {
 			if (nexacro._enableaccessibility) {
 				var focus_up = keycode == E.KEY_UP;
 				var focus_down = keycode == E.KEY_DOWN;
-
 
 				var accessibilityenable = this.accessibilityenable;
 				var buttonaccessibilityenable = this.buttonaccessibilityenable;
@@ -1406,7 +1453,7 @@ if (!nexacro.FileUpload) {
 									}
 								}
 							}
-							else if (focus_down) {
+							else {
 								if (!this._editFlag && editaccessibilityenable) {
 									idx++;
 									this._editFlag = true;
@@ -1446,10 +1493,11 @@ if (!nexacro.FileUpload) {
 	};
 	_pFileUpload._on_focus = function (self_flag, evt_name, lose_focus, refer_lose_focus, new_focus, refer_new_focus) {
 		nexacro.Component.prototype._on_focus.call(this, self_flag, evt_name, lose_focus, refer_lose_focus, new_focus, refer_new_focus);
+
+		var idx, focus_dir;
+
 		var items = this._items;
 		var itemLen = items.length;
-		var focus_dir = null;
-		var idx = this.index;
 		if (itemLen) {
 			this._want_tab = true;
 			focus_dir = evt_name == "shifttabkey";
@@ -1481,6 +1529,7 @@ if (!nexacro.FileUpload) {
 					if (focus_dir) {
 						this.index = -1;
 						idx = itemLen - 1;
+
 						if (buttonaccessibility) {
 							this._buttonFlag = true;
 						}
@@ -1493,6 +1542,7 @@ if (!nexacro.FileUpload) {
 						if (accessibility == false) {
 							idx = 0;
 							this.index = -1;
+
 							if (editaccessibility) {
 								this._editFlag = true;
 							}
@@ -1585,7 +1635,7 @@ if (!nexacro.FileUpload) {
 	_pFileUpload._createFileItem = function (index) {
 		var create_only = this._is_created ? false : true;
 		var unique = this.itemcount < 1 ? this._last_id = 0 : ++this._last_id;
-		var name = "upfile" + unique;
+
 		var item = new nexacro._FileUploadItemControl("upfile" + unique, 0, 0, 0, 0, null, null, null, null, null, null, this);
 		item._setControl();
 		item._setItemInfo(index, this.buttontext);
@@ -1688,6 +1738,15 @@ if (!nexacro.FileUpload) {
 
 	nexacro._FileUploadItemControl = function (id, left, top, width, height, right, bottom, minwidth, maxwidth, minheight, maxheight, parent) {
 		nexacro.Component.call(this, id, left, top, width, height, right, bottom, minwidth, maxwidth, minheight, maxheight, parent);
+
+		if (nexacro._OS == "iOS" && nexacro._isHybrid && nexacro._isHybrid()) {
+			this._id = nexacro.Device.makeID();
+			nexacro.Device._userCreatedObj[this._id] = this;
+
+			var params = '""';
+			var jsonstr = '{"id":' + this._id + ', "div":"FileUpload", "method":"constructor", "params":' + params + '}';
+			nexacro.Device.exec(jsonstr);
+		}
 	};
 
 	var _pFileUploadItemControl = nexacro._createPrototype(nexacro.Component, nexacro._FileUploadItemControl);
@@ -1772,6 +1831,14 @@ if (!nexacro.FileUpload) {
 		nexacro._remove_hidden_item(parent._unique_id, this.name, parent._hidden_frame_handle);
 		if (this._input_node) {
 			this._input_node = null;
+		}
+
+		if (nexacro._OS == "iOS" && nexacro._isHybrid && nexacro._isHybrid()) {
+			var params = '""';
+			delete nexacro.Device._userCreatedObj[this._id];
+
+			var jsonstr = '{"id":' + this._id + ', "div":"FileUpload", "method":"destroy", "params":' + params + '}';
+			nexacro.Device.exec(jsonstr);
 		}
 	};
 
@@ -1879,6 +1946,13 @@ if (!nexacro.FileUpload) {
 	};
 
 	_pFileUploadItemControl._on_itemedit_onchange = function (value, files, value_arr) {
+		if (nexacro._OS == "iOS" && nexacro._isHybrid && nexacro._isHybrid()) {
+			var objData = value;
+			value = objData.virtualfiles[0].name;
+			files = objData.virtualfiles;
+			value_arr = [objData.virtualfiles[0].name];
+		}
+
 		if (this.value != value) {
 			this.value = value;
 			this._oldvalue = this._newvalue;
@@ -1926,7 +2000,6 @@ if (!nexacro.FileUpload) {
 			var itembutton = this.fileitembutton;
 
 			var client_w = this._getClientWidth();
-			var client_h = this._getClientHeight();
 
 			var itembutton_size = [0, 0];
 			if (itembutton) {
@@ -2011,7 +2084,6 @@ if (!nexacro.FileUpload) {
 		this._files = [];
 		if (files) {
 			var file_list = [];
-			var numofFiles = files.length;
 			this._files.length = files.length;
 			var v_file;
 			for (var loopI = 0; loopI < this._files.length; loopI++) {

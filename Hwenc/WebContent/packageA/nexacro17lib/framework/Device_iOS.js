@@ -145,7 +145,7 @@ if (nexacro._OS == "iOS" && (window.location.pathname.split("/").pop() == "Run.h
 	nexacro._execBrowser = function (strUrl) {
 		this._id = nexacro.Device.makeID();
 
-		if (strUrl == null || strUrl == undefined) {
+		if (strUrl == null) {
 			return false;
 		}
 
@@ -176,7 +176,7 @@ if (nexacro._OS == "iOS" && (window.location.pathname.split("/").pop() == "Run.h
 			return false;
 		}
 
-		var params = '{}';
+		var params;
 
 		if (value) {
 			params = '{"key":"' + key + '","value":"' + nexacro.Device.encodeString(value) + '"}';

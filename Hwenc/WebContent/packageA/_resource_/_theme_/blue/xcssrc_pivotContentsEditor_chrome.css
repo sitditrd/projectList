@@ -197,6 +197,7 @@ textarea::-webkit-scrollbar { display: none; }
   resize:none;
   background:transparent;
   padding : 0px;
+  box-sizing:border-box;		
 }
 
 .nexaleftalign

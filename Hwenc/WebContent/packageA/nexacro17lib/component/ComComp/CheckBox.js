@@ -274,17 +274,15 @@ if (!nexacro.CheckBox) {
 				if (this.value === this.truevalue) {
 					return true;
 				}
-				else {
-					return false;
-				}
+
+				return false;
 			}
 			else {
 				if (value === this.truevalue || nexacro._toBoolean(value)) {
 					return true;
 				}
-				else {
-					return false;
-				}
+
+				return false;
 			}
 		}
 		else {
@@ -292,9 +290,8 @@ if (!nexacro.CheckBox) {
 				if (value === this.falsevalue) {
 					return false;
 				}
-				else {
-					return true;
-				}
+
+				return true;
 			}
 			else {
 				return nexacro._toBoolean(value);

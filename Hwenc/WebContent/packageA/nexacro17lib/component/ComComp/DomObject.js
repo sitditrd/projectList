@@ -13,8 +13,8 @@
 
 
 if (!nexacro.DomParser) {
-	nexacro.DomParseException = function (obj, id, level, line, column, message, description) {
-		this.id = this.eventid = id || "onParseError";
+	nexacro.DomParseErrorEventInfo = function (obj, id, level, line, column, message, description) {
+		this.id = this.eventid = id || "onerror";
 		this.fromobject = this.fromreferenceobject = obj;
 
 		this.level = level;
@@ -23,27 +23,28 @@ if (!nexacro.DomParser) {
 		this.message = message;
 		this.description = description;
 	};
-	var _pDomParseException = nexacro._createPrototype(nexacro.Event, nexacro.DomParseException);
-	nexacro.DomParseException.prototype = _pDomParseException;
+	var _pDomParseErrorEventInfo = nexacro._createPrototype(nexacro.Event, nexacro.DomParseErrorEventInfo);
+	nexacro.DomParseErrorEventInfo.prototype = _pDomParseErrorEventInfo;
 
-	_pDomParseException._type_name = "DomParseException";
+	_pDomParseErrorEventInfo._type_name = "DomParseErrorEventInfo";
 
-	delete _pDomParseException;
+	delete _pDomParseErrorEventInfo;
 
 
 	nexacro.DomParser = function (id, parent) {
 		this.id = this.name = id;
 		this.parent = parent;
-
-		this._event_list = {
-			"onParseError" : 1
-		};
 	};
+
+
 
 	var _pDomParser = nexacro._createPrototype(nexacro._EventSinkObject, nexacro.DomParser);
 	nexacro.DomParser.prototype = _pDomParser;
 
 	_pDomParser._type_name = "DomParser";
+	_pDomParser._event_list = {
+		"onerror" : 1
+	};
 
 	_pDomParser.on_created = nexacro._emptyFn;
 	_pDomParser.parseFromString = function (strText, strMineType) {
@@ -64,14 +65,29 @@ if (!nexacro.DomParser) {
 	};
 
 	_pDomParser.on_fire_onparseerror = function (level, line, column, message, description) {
-		if (this.onParseError && this.onParseError._has_handlers) {
-			var evt = new nexacro.DomParseException(this, "onParseError", level, line, column, message, description);
-			return this.onParseError._fireEvent(this, evt);
+		if (this.onerror && this.onerror._has_handlers) {
+			var evt = new nexacro.DomParseErrorEventInfo(this, "onerror", level, line, column, message, description);
+			return this.onerror._fireEvent(this, evt);
 		}
 		return false;
 	};
 
 	delete _pDomParser;
+
+	nexacro.XmlSerializer = function (id, parent) {
+		this.id = this.name = id;
+		this.parent = parent;
+	};
+
+	var _pXmlSerializer = nexacro._createPrototype(nexacro.Object, nexacro.XmlSerializer);
+	nexacro.XmlSerializer.prototype = _pXmlSerializer;
+	_pXmlSerializer.on_created = nexacro._emptyFn;
+
+	_pXmlSerializer.serializeToString = function (xmldoc) {
+		return nexacro._documentToXml(xmldoc);
+	};
+
+	delete _pXmlSerializer;
 }
 
 

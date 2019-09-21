@@ -29,8 +29,10 @@ if (!nexacro.Point) {
 			if (y != undefined) {
 				this.y = y;
 			}
-			else if (x != undefined && y == undefined) {
-				this.y = this.x;
+			else {
+				if (x != undefined) {
+					this.y = this.x;
+				}
 			}
 		}
 	};
@@ -405,7 +407,8 @@ if (!nexacro.Offset) {
 	};
 
 	_pOffset.round = function (to) {
-		if (!((+to) != (+to))) {
+		var v = +to;
+		if (!(v != v)) {
 			var factor = Math.pow(10, to);
 			this.x = Math.round(this.x * factor) / factor;
 			this.y = Math.round(this.y * factor) / factor;
@@ -470,10 +473,13 @@ if (!nexacro.Region) {
 
 	_pRegion.constrain = function (num, minV, maxV) {
 		num = parseFloat(num);
-		if (!((+minV) != (+minV))) {
+		var v = +minV;
+		if (!(v != v)) {
 			num = Math.max(num, minV);
 		}
-		if (!((+maxV) != (+maxV))) {
+
+		v = +maxV;
+		if (!(v != v)) {
 			num = Math.min(num, maxV);
 		}
 		return num;
@@ -1049,13 +1055,8 @@ if (!nexacro.Decimal) {
 			tpos += 9;
 			if (tpos > fpos) {
 				tpos = fpos;
-				frac_offset = tpos - pos;
-			}
-			else {
-				frac_offset = 9;
 			}
 
-			digits = 0;
 			while (pos < tpos) {
 				ch = numstr.charAt(pos++);
 				this.mulDouble(10.0);
@@ -1093,7 +1094,6 @@ if (!nexacro.Decimal) {
 					frac_offset = 9;
 				}
 
-				digits = 0;
 				while (pos < tpos) {
 					ch = numstr.charAt(pos++);
 					this.mulDouble(10.0);
@@ -1534,7 +1534,7 @@ if (!nexacro.Decimal) {
 	};
 	_pDecimal.sqr = function () {
 		var p1, p2;
-		var hi = this.hi, lo = this.lo;
+		var hi = this.hi, lo;
 		var temp, ht, lt;
 
 		p1 = hi * hi;
@@ -1596,7 +1596,7 @@ if (!nexacro.Decimal) {
 
 
 		var dAbs = Math.abs(y.hi);
-		var dec, off, exp = Math.floor(Math.log(dAbs) * Math.LOG10E) | 0;
+		var exp = Math.floor(Math.log(dAbs) * Math.LOG10E) | 0;
 
 		var scale = new nexacro.Decimal();
 		if (exp < -300) {
@@ -1689,7 +1689,8 @@ if (!nexacro.Decimal) {
 			--pos;
 		}
 
-		var _cvt_info = new Object();
+		var _cvt_info = {
+		};
 		_cvt_info.dec = exp + 1;
 		_cvt_info.exp = exp;
 		_cvt_info.sign = sign;
@@ -1754,7 +1755,7 @@ if (!nexacro.Decimal) {
 		else {
 			str += buf;
 			if ((dec - digits) > 0) {
-				for (var i = 0; i < (dec - digits); i++) {
+				for (var j = 0; j < (dec - digits); j++) {
 					str += '0';
 				}
 			}
@@ -1814,7 +1815,6 @@ if (!nexacro.Decimal) {
 		var locale_info = nexacro.Locale.getLocaleInfo(locale);
 		var mon_decimal_point = locale_info.mon_decimal_point;
 		var mon_thousands_sep = locale_info.mon_thousands_sep;
-		var int_currency_code = locale_info.int_curr_symbol;
 		var currency_symbol = locale_info.currency_symbol.trim();
 		var mon_grouping = locale_info.mon_grouping;
 		var int_frac_digits = locale_info.int_frac_digits;
@@ -1844,6 +1844,7 @@ if (!nexacro.Decimal) {
 
 							switch (n_sep_by_space) {
 								case 0:
+								case 2:
 									{
 
 										locale_string = "(" + currency_symbol + locale_string + ")";
@@ -1855,16 +1856,11 @@ if (!nexacro.Decimal) {
 										locale_string = "(" + currency_symbol + space_char + locale_string + ")";
 									}
 									break;
-								case 2:
-									{
-
-										locale_string = "(" + currency_symbol + locale_string + ")";
-									}
-									break;
 							}
 						}
 						break;
 					case 1:
+					case 3:
 						{
 
 							switch (n_sep_by_space) {
@@ -1914,31 +1910,6 @@ if (!nexacro.Decimal) {
 							}
 						}
 						break;
-					case 3:
-						{
-
-							switch (n_sep_by_space) {
-								case 0:
-									{
-
-										locale_string = negative_sign + currency_symbol + locale_string;
-									}
-									break;
-								case 1:
-									{
-
-										locale_string = negative_sign + currency_symbol + space_char + locale_string;
-									}
-									break;
-								case 2:
-									{
-
-										locale_string = negative_sign + space_char + currency_symbol + locale_string;
-									}
-									break;
-							}
-						}
-						break;
 					case 4:
 						{
 
@@ -1979,11 +1950,6 @@ if (!nexacro.Decimal) {
 									}
 									break;
 								case 1:
-									{
-
-										locale_string = "(" + locale_string + space_char + currency_symbol + ")";
-									}
-									break;
 								case 2:
 									{
 
@@ -2004,11 +1970,6 @@ if (!nexacro.Decimal) {
 									}
 									break;
 								case 1:
-									{
-
-										locale_string = negative_sign + locale_string + space_char + currency_symbol;
-									}
-									break;
 								case 2:
 									{
 
@@ -2019,6 +1980,7 @@ if (!nexacro.Decimal) {
 						}
 						break;
 					case 2:
+					case 4:
 						{
 
 							switch (n_sep_by_space) {
@@ -2068,31 +2030,6 @@ if (!nexacro.Decimal) {
 							}
 						}
 						break;
-					case 4:
-						{
-
-							switch (n_sep_by_space) {
-								case 0:
-									{
-
-										locale_string = locale_string + currency_symbol + negative_sign;
-									}
-									break;
-								case 1:
-									{
-
-										locale_string = locale_string + space_char + currency_symbol + negative_sign;
-									}
-									break;
-								case 2:
-									{
-
-										locale_string = locale_string + currency_symbol + space_char + negative_sign;
-									}
-									break;
-							}
-						}
-						break;
 				}
 			}
 		}
@@ -2104,6 +2041,7 @@ if (!nexacro.Decimal) {
 
 							switch (p_sep_by_space) {
 								case 0:
+								case 2:
 									{
 
 										locale_string = "(" + currency_symbol + locale_string + ")";
@@ -2115,16 +2053,11 @@ if (!nexacro.Decimal) {
 										locale_string = "(" + currency_symbol + space_char + locale_string + ")";
 									}
 									break;
-								case 2:
-									{
-
-										locale_string = "(" + currency_symbol + locale_string + ")";
-									}
-									break;
 							}
 						}
 						break;
 					case 1:
+					case 3:
 						{
 
 							switch (p_sep_by_space) {
@@ -2174,31 +2107,6 @@ if (!nexacro.Decimal) {
 							}
 						}
 						break;
-					case 3:
-						{
-
-							switch (p_sep_by_space) {
-								case 0:
-									{
-
-										locale_string = positive_sign + currency_symbol + locale_string;
-									}
-									break;
-								case 1:
-									{
-
-										locale_string = positive_sign + currency_symbol + space_char + locale_string;
-									}
-									break;
-								case 2:
-									{
-
-										locale_string = positive_sign + space_char + currency_symbol + locale_string;
-									}
-									break;
-							}
-						}
-						break;
 					case 4:
 						{
 
@@ -2239,11 +2147,6 @@ if (!nexacro.Decimal) {
 									}
 									break;
 								case 1:
-									{
-
-										locale_string = "(" + locale_string + space_char + currency_symbol + ")";
-									}
-									break;
 								case 2:
 									{
 
@@ -2264,11 +2167,6 @@ if (!nexacro.Decimal) {
 									}
 									break;
 								case 1:
-									{
-
-										locale_string = positive_sign + locale_string + space_char + currency_symbol;
-									}
-									break;
 								case 2:
 									{
 
@@ -2279,6 +2177,7 @@ if (!nexacro.Decimal) {
 						}
 						break;
 					case 2:
+					case 4:
 						{
 
 							switch (p_sep_by_space) {
@@ -2323,31 +2222,6 @@ if (!nexacro.Decimal) {
 									{
 
 										locale_string = locale_string + positive_sign + space_char + currency_symbol;
-									}
-									break;
-							}
-						}
-						break;
-					case 4:
-						{
-
-							switch (p_sep_by_space) {
-								case 0:
-									{
-
-										locale_string = locale_string + currency_symbol + positive_sign;
-									}
-									break;
-								case 1:
-									{
-
-										locale_string = locale_string + space_char + currency_symbol + positive_sign;
-									}
-									break;
-								case 2:
-									{
-
-										locale_string = locale_string + currency_symbol + space_char + positive_sign;
 									}
 									break;
 							}
@@ -2605,6 +2479,7 @@ if (!nexacro.Number) {
 
 							switch (n_sep_by_space) {
 								case 0:
+								case 2:
 									{
 
 										locale_string = "(" + currency_symbol + locale_string + ")";
@@ -2616,16 +2491,11 @@ if (!nexacro.Number) {
 										locale_string = "(" + currency_symbol + space_char + locale_string + ")";
 									}
 									break;
-								case 2:
-									{
-
-										locale_string = "(" + currency_symbol + locale_string + ")";
-									}
-									break;
 							}
 						}
 						break;
 					case 1:
+					case 3:
 						{
 
 							switch (n_sep_by_space) {
@@ -2675,31 +2545,6 @@ if (!nexacro.Number) {
 							}
 						}
 						break;
-					case 3:
-						{
-
-							switch (n_sep_by_space) {
-								case 0:
-									{
-
-										locale_string = negative_sign + currency_symbol + locale_string;
-									}
-									break;
-								case 1:
-									{
-
-										locale_string = negative_sign + currency_symbol + space_char + locale_string;
-									}
-									break;
-								case 2:
-									{
-
-										locale_string = negative_sign + space_char + currency_symbol + locale_string;
-									}
-									break;
-							}
-						}
-						break;
 					case 4:
 						{
 
@@ -2740,11 +2585,6 @@ if (!nexacro.Number) {
 									}
 									break;
 								case 1:
-									{
-
-										locale_string = "(" + locale_string + space_char + currency_symbol + ")";
-									}
-									break;
 								case 2:
 									{
 
@@ -2765,11 +2605,6 @@ if (!nexacro.Number) {
 									}
 									break;
 								case 1:
-									{
-
-										locale_string = negative_sign + locale_string + space_char + currency_symbol;
-									}
-									break;
 								case 2:
 									{
 
@@ -2780,6 +2615,7 @@ if (!nexacro.Number) {
 						}
 						break;
 					case 2:
+					case 4:
 						{
 
 							switch (n_sep_by_space) {
@@ -2829,31 +2665,6 @@ if (!nexacro.Number) {
 							}
 						}
 						break;
-					case 4:
-						{
-
-							switch (n_sep_by_space) {
-								case 0:
-									{
-
-										locale_string = locale_string + currency_symbol + negative_sign;
-									}
-									break;
-								case 1:
-									{
-
-										locale_string = locale_string + space_char + currency_symbol + negative_sign;
-									}
-									break;
-								case 2:
-									{
-
-										locale_string = locale_string + currency_symbol + space_char + negative_sign;
-									}
-									break;
-							}
-						}
-						break;
 				}
 			}
 		}
@@ -2865,6 +2676,7 @@ if (!nexacro.Number) {
 
 							switch (p_sep_by_space) {
 								case 0:
+								case 2:
 									{
 
 										locale_string = "(" + currency_symbol + locale_string + ")";
@@ -2876,16 +2688,11 @@ if (!nexacro.Number) {
 										locale_string = "(" + currency_symbol + space_char + locale_string + ")";
 									}
 									break;
-								case 2:
-									{
-
-										locale_string = "(" + currency_symbol + locale_string + ")";
-									}
-									break;
 							}
 						}
 						break;
 					case 1:
+					case 3:
 						{
 
 							switch (p_sep_by_space) {
@@ -2935,31 +2742,6 @@ if (!nexacro.Number) {
 							}
 						}
 						break;
-					case 3:
-						{
-
-							switch (p_sep_by_space) {
-								case 0:
-									{
-
-										locale_string = positive_sign + currency_symbol + locale_string;
-									}
-									break;
-								case 1:
-									{
-
-										locale_string = positive_sign + currency_symbol + space_char + locale_string;
-									}
-									break;
-								case 2:
-									{
-
-										locale_string = positive_sign + space_char + currency_symbol + locale_string;
-									}
-									break;
-							}
-						}
-						break;
 					case 4:
 						{
 
@@ -3000,11 +2782,6 @@ if (!nexacro.Number) {
 									}
 									break;
 								case 1:
-									{
-
-										locale_string = "(" + locale_string + space_char + currency_symbol + ")";
-									}
-									break;
 								case 2:
 									{
 
@@ -3025,11 +2802,6 @@ if (!nexacro.Number) {
 									}
 									break;
 								case 1:
-									{
-
-										locale_string = positive_sign + locale_string + space_char + currency_symbol;
-									}
-									break;
 								case 2:
 									{
 
@@ -3040,6 +2812,7 @@ if (!nexacro.Number) {
 						}
 						break;
 					case 2:
+					case 4:
 						{
 
 							switch (p_sep_by_space) {
@@ -3084,31 +2857,6 @@ if (!nexacro.Number) {
 									{
 
 										locale_string = locale_string + positive_sign + space_char + currency_symbol;
-									}
-									break;
-							}
-						}
-						break;
-					case 4:
-						{
-
-							switch (p_sep_by_space) {
-								case 0:
-									{
-
-										locale_string = locale_string + currency_symbol + positive_sign;
-									}
-									break;
-								case 1:
-									{
-
-										locale_string = locale_string + space_char + currency_symbol + positive_sign;
-									}
-									break;
-								case 2:
-									{
-
-										locale_string = locale_string + currency_symbol + space_char + positive_sign;
 									}
 									break;
 							}
@@ -3449,7 +3197,7 @@ if (!nexacro._HotKey) {
 	};
 	__pHotKey._load = function (value) {
 		this._clear();
-		if (value && value !== "") {
+		if (value) {
 			var ar = value.split("+");
 			for (var i = 0; i < ar.length - 1; i++) {
 				var token = ar[i].toUpperCase().trim();

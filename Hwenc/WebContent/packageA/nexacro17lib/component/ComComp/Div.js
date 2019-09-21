@@ -96,6 +96,20 @@ if (!nexacro.Div) {
 
 	_pDiv._applyElementVisible = function (v) {
 		this._control_element.setElementDisplay(v ? "" : "none");
+
+		var len = 0;
+		var form = this.form;
+		var compname;
+		if (v == true && form) {
+			len = form.components.length;
+
+			for (var i = 0; i < len; i++) {
+				compname = form.components.get_id(i);
+				if (form[compname]._notifyParentDisplayOn) {
+					form[compname]._notifyParentDisplayOn();
+				}
+			}
+		}
 	};
 
 	_pDiv.on_created_contents = function (win) {
@@ -268,12 +282,6 @@ if (!nexacro.Div) {
 			this._destroyTextElement();
 
 			this.on_apply_text();
-		}
-
-		if (form.onactivate && form.onactivate._has_handlers) {
-			var evt = new nexacro.ActivateEventInfo(form, "onactivate", true);
-			form.onactivate._fireEvent(form, evt);
-			evt = null;
 		}
 	};
 
@@ -508,6 +516,12 @@ if (!nexacro.Div) {
 		}
 	};
 
+	_pDiv.scrollTo = function (x, y) {
+		if (this.form) {
+			this.form.scrollTo(x, y);
+		}
+	};
+
 	_pDiv._on_activate = function () {
 		nexacro.Component.prototype._on_activate.call(this);
 
@@ -628,7 +642,7 @@ if (!nexacro.Div) {
 					return false;
 				}
 
-				if (fnConstructor && fnConstructor.prototype && fnConstructor.prototype._is_component) {
+				if (fnConstructor.prototype && fnConstructor.prototype._is_component) {
 					var attr = {
 					};
 					var attr_props = {
@@ -675,12 +689,10 @@ if (!nexacro.Div) {
 					this.form.addChild(obj.id, obj);
 
 					obj.show();
-					obj = null;
 				}
 			}
 			node = node.nextSibling;
 		}
-		doc = null;
 
 		return ret;
 	};
@@ -698,26 +710,8 @@ if (!nexacro.Div) {
 			this._initCSSSelector();
 		}
 
-		var border = this._getCurrentStyleBorder();
-		var border_l = 0, border_t = 0, border_r = 0, border_b = 0;
 
-		if (border) {
-			if (border.left) {
-				border_l = border.left._width;
-			}
-			if (border.top) {
-				border_t = border.top._width;
-			}
-			if (border.right) {
-				border_r = border.right._width;
-			}
-			if (border.bottom) {
-				border_b = border.bottom._width;
-			}
-		}
 
-		left = 0;
-		top = 0;
 
 		return {
 			left : left, 

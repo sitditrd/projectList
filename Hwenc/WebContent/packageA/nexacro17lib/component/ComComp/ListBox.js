@@ -81,6 +81,7 @@ if (!nexacro.ListBox) {
 	_pListBox._keep_scrolling = false;
 	_pListBox._is_listtype = true;
 	_pListBox._is_dsupdate = true;
+	_pListBox._touch_scrolling = false;
 
 
 	_pListBox._is_scrollable = true;
@@ -135,6 +136,12 @@ if (!nexacro.ListBox) {
 		"ontouchstart" : 1, 
 		"ontouchmove" : 1, 
 		"ontouchend" : 1, 
+		"onslidestart" : 1, 
+		"onslide" : 1, 
+		"onslideend" : 1, 
+		"onflingstart" : 1, 
+		"onfling" : 1, 
+		"onflingend" : 1, 
 		"oncontextmenu" : 1, 
 		"onitemmouseenter" : 1, 
 		"onvscroll" : 1, 
@@ -470,7 +477,6 @@ if (!nexacro.ListBox) {
 				}
 
 				var comp, item;
-				var index = this.index;
 				var item_len = this._getTotalContentsCount();
 
 				if (nexacro._enableaccessibility) {
@@ -1199,25 +1205,21 @@ if (!nexacro.ListBox) {
 	};
 
 	_pListBox._on_dataset_onload = function (obj, e) {
-		switch (e.reason) {
-			case 0:
-				this._redrawListBoxContents(true);
-				this._onRecalcScrollSize();
+		if (e.reason == 0) {
+			this._redrawListBoxContents(true);
+			this._onRecalcScrollSize();
 
-				if (this.index > -1) {
-					if (this._changeIndex(this.index)) {
-						this.on_apply_index(this.index);
-					}
+			if (this.index > -1) {
+				if (this._changeIndex(this.index)) {
+					this.on_apply_index(this.index);
 				}
-				else if (this.value !== "") {
-					var row = this._innerdataset.findRow(this.codecolumn, this.value);
-					if (this._changeIndex(row)) {
-						this.on_apply_index(row);
-					}
+			}
+			else if (this.value !== "") {
+				var row = this._innerdataset.findRow(this.codecolumn, this.value);
+				if (this._changeIndex(row)) {
+					this.on_apply_index(row);
 				}
-				break;
-			default:
-				break;
+			}
 		}
 	};
 
@@ -1256,8 +1258,6 @@ if (!nexacro.ListBox) {
 				}
 			}
 		}
-
-		var index = obj.index;
 
 		var focused = this._statusmap ? this._statusmap['focused'] : false;
 		obj._changeUserStatus("selected", true);
@@ -1348,8 +1348,14 @@ if (!nexacro.ListBox) {
 			visible_end = rowcount - 1;
 		}
 
-		this._createListBoxContents(visible_start, visible_end);
-		this._control_element.setElementVScrollPos(pos);
+		if (this._touch_scrolling) {
+			this._createListBoxContents(visible_start, visible_end, true);
+			this._control_element.setElementVScrollPos(pos);
+		}
+		else {
+			this._createListBoxContents(visible_start, visible_end);
+			this._control_element.setElementVScrollPos(pos);
+		}
 
 		if (this.index > -1) {
 			this._doSelect(this.index, this.multiselect);
@@ -1392,8 +1398,6 @@ if (!nexacro.ListBox) {
 			if (nexacro._enableaccessibility) {
 				var item;
 				var accIdx = this._accessibility_index;
-				var item_len = this._getTotalContentsCount();
-				var index = this.index;
 
 				var count = this._getTotalContentsCount();
 
@@ -1600,6 +1604,12 @@ if (!nexacro.ListBox) {
 		return ret;
 	};
 
+	_pListBox.on_fire_sys_onslidestart = function (elem, touch_manager, touchinfos, xaccvalue, yaccvalue, xdeltavalue, ydeltavalue, from_comp, from_refer_comp) {
+		this._touch_scrolling = true;
+
+		return nexacro.Component.prototype.on_fire_sys_onslidestart.call(this, elem, touch_manager, touchinfos, xaccvalue, yaccvalue, xdeltavalue, ydeltavalue, from_comp, from_refer_comp);
+	};
+
 	_pListBox.on_fire_sys_onslide = function (elem, touch_manager, touchinfos, xaccvalue, yaccvalue, xdeltavalue, ydeltavalue, from_comp, from_refer_comp) {
 		var ret = nexacro.Component.prototype.on_fire_sys_onslide.call(this, elem, touch_manager, touchinfos, xaccvalue, yaccvalue, xdeltavalue, ydeltavalue, from_comp, from_refer_comp);
 
@@ -1646,6 +1656,24 @@ if (!nexacro.ListBox) {
 		return ret;
 	};
 
+	_pListBox.on_fire_sys_onslideend = function (elem, touch_manager, touchinfos, xaccvalue, yaccvalue, xdeltavalue, ydeltavalue, from_comp, from_refer_comp) {
+		this._touch_scrolling = false;
+
+		return nexacro.Component.prototype.on_fire_sys_onslideend.call(this, elem, touch_manager, touchinfos, xaccvalue, yaccvalue, xdeltavalue, ydeltavalue, from_comp, from_refer_comp);
+	};
+
+	_pListBox.on_fire_sys_onflingstart = function (elem, touch_manager, touchinfos, xaccvalue, yaccvalue, xdeltavalue, ydeltavalue, from_comp, from_refer_comp) {
+		this._touch_scrolling = true;
+
+		return nexacro.Component.prototype.on_fire_sys_onflingstart.call(this, elem, touch_manager, touchinfos, xaccvalue, yaccvalue, xdeltavalue, ydeltavalue, from_comp, from_refer_comp);
+	};
+
+	_pListBox.on_fire_sys_onflingend = function (elem, touch_manager, touchinfos, xaccvalue, yaccvalue, xdeltavalue, ydeltavalue, from_comp, from_refer_comp) {
+		this._touch_scrolling = false;
+
+		return nexacro.Component.prototype.on_fire_sys_onflingend.call(this, elem, touch_manager, touchinfos, xaccvalue, yaccvalue, xdeltavalue, ydeltavalue, from_comp, from_refer_comp);
+	};
+
 	_pListBox.on_fire_onitemclick = function (obj, index, itemtext, itemvalue, button, alt_key, ctrl_key, shift_key, screenX, screenY, canvasX, canvasY, clientX, clientY) {
 		if (this.readonly) {
 			return false;
@@ -1654,7 +1682,6 @@ if (!nexacro.ListBox) {
 		if (this.onitemclick && this.onitemclick._has_handlers) {
 			var evt = new nexacro.ItemClickEventInfo(obj, "onitemclick", index, itemtext, itemvalue, button, alt_key, ctrl_key, shift_key, screenX, screenY, canvasX, canvasY, clientX, clientY);
 			var ret = this.onitemclick._fireEvent(this, evt);
-			evt = null;
 			return nexacro._toBoolean(ret);
 		}
 
@@ -1665,7 +1692,6 @@ if (!nexacro.ListBox) {
 		if (this.canitemchange && this.canitemchange._has_handlers) {
 			var evt = new nexacro.ItemChangeEventInfo(this, "canitemchange", preindex, pretext, prevalue, postindex, posttext, postvalue);
 			var ret = this.canitemchange._fireCheckEvent(this, evt);
-			evt = null;
 			return nexacro._toBoolean(ret);
 		}
 
@@ -1794,117 +1820,133 @@ if (!nexacro.ListBox) {
 		}
 	};
 
-
-	_pListBox._createListBoxContents = function (start, end) {
+	_pListBox._createListBoxContents = function (start, end, createonly) {
 		var buffer_state = this._isRange(start, end);
 
 		var page_rowcount = this._page_rowcount;
 		var pages = this._buffer_pages;
-		var page, item, index = start;
-		var del_pages = [];
-		var i, j, len;
+		var page, index;
+		var firstitem, lastitem;
+		var i, len;
 		var max_index = this._innerdataset_info._rowcount - 1;
-		switch (buffer_state) {
-			case 0:
-				while (this._buffer_pages.length) {
-					del_pages.push(this._buffer_pages.shift());
-				}
+		if (createonly) {
+			switch (buffer_state) {
+				case 0:
+					if (page_rowcount == 0) {
+						return;
+					}
 
-				if (page_rowcount == 0) {
-					return;
-				}
+					if (end == max_index || (end < page_rowcount - 1)) {
+						len = 1;
+					}
+					else {
+						len = 2;
+					}
 
-				if (end == max_index || (end < page_rowcount - 1)) {
-					len = 1;
-				}
-				else {
-					len = 2;
-				}
+					for (i = 0; i < len; i++) {
+						index = start + (i * page_rowcount);
+						if (index + page_rowcount > max_index) {
+							page_rowcount = max_index - index + 1;
+						}
+						this._addListBoxBufferPage(page_rowcount, index);
+					}
+					break;
+				case 1:
+					do {
+						page = pages[0];
+						firstitem = page[0];
 
-				for (i = 0; i < len; i++) {
-					index = start + (i * page_rowcount);
-					page = this._buffer_pages[i] = [];
-
-					for (j = 0; j < page_rowcount; j++) {
-						item = this._createListItemControl(index);
-						page.push(item);
-
-						if (index == max_index) {
-							break;
+						if (firstitem.index < page_rowcount) {
+							index = 0;
+							page_rowcount = firstitem.index;
+						}
+						else {
+							index = firstitem.index - page_rowcount;
 						}
 
-						index++;
-					}
-				}
-				break;
-			case 1:
-				del_pages.push(pages.pop());
-				page = pages[0];
-				index = page ? page[0].index - page_rowcount : index;
-				if (index < 0) {
-					index = 0;
-					page_rowcount = page[0].index;
-				}
+						this._insertListBoxBufferPage(0, page_rowcount, index);
+					} while (index > start);
+					break;
+				case 2:
+					page = pages[pages.length - 1];
+					lastitem = page[page.length - 1];
 
-				page = [];
-				for (i = 0; i < page_rowcount; i++) {
-					item = this._createListItemControl(index);
-					page.push(item);
-					index++;
-				}
-				pages.splice(0, 0, page);
-				break;
-			case 2:
-				del_pages.push(pages.shift());
-				page = pages[0];
-				index = page ? page[page.length - 1].index + 1 : index;
-				page = [];
-				for (i = 0; i < page_rowcount; i++) {
-					item = this._createListItemControl(index);
-					page.push(item);
-
-					if (index == max_index) {
-						break;
+					index = lastitem.index + 1;
+					if (index + page_rowcount > max_index) {
+						page_rowcount = max_index - lastitem.index;
 					}
 
-					index++;
-				}
-
-				pages.push(page);
-				break;
-		}
-
-		for (i in del_pages) {
-			if (del_pages.hasOwnProperty(i)) {
-				for (j in del_pages[i]) {
-					if (del_pages[i].hasOwnProperty(j)) {
-						if (del_pages[i][j]) {
-							del_pages[i][j].destroy();
-						}
-					}
-				}
+					this._addListBoxBufferPage(page_rowcount, index);
+					break;
 			}
 		}
-		del_pages = null;
+		else {
+			switch (buffer_state) {
+				case 0:
+					if (page_rowcount == 0) {
+						return;
+					}
+
+					if (end == max_index || (end < page_rowcount - 1)) {
+						len = 1;
+					}
+					else {
+						len = 2;
+					}
+
+					this._clearListBoxBufferPage();
+
+					for (i = 0; i < len; i++) {
+						index = start + (i * page_rowcount);
+						if (index + page_rowcount > max_index) {
+							page_rowcount = max_index - index + 1;
+						}
+						this._addListBoxBufferPage(page_rowcount, index);
+					}
+					break;
+				case 1:
+					page = pages[0];
+					firstitem = page[0];
+
+					index = start - page_rowcount + 1;
+					if (index < 0) {
+						index = 0;
+						page_rowcount = firstitem.index;
+					}
+
+					if (pages.length == 2) {
+						this._removeListBoxBufferPage(this._buffer_pages.length - 1);
+						this._insertListBoxBufferPage(0, page_rowcount, index);
+					}
+					else if (pages.length == 1) {
+						this._insertListBoxBufferPage(0, page_rowcount, index);
+					}
+					break;
+				case 2:
+					if (pages.length == 2) {
+						this._removeListBoxBufferPage(0);
+
+						page = pages[0];
+						lastitem = page[page.length - 1];
+
+						index = lastitem.index + 1;
+						if (index + page_rowcount > max_index) {
+							page_rowcount = max_index - lastitem.index;
+						}
+
+						this._addListBoxBufferPage(page_rowcount, index);
+					}
+					break;
+				case 3:
+					this._resetListBoxBufferPage(start, end);
+					break;
+			}
+		}
 	};
 
 	_pListBox._destroyListBoxContents = function () {
-		var i, j;
-		var pages = this._buffer_pages;
-		for (i in pages) {
-			if (pages.hasOwnProperty(i)) {
-				for (j in pages[i]) {
-					if (pages[i].hasOwnProperty(j)) {
-						if (pages[i][j]) {
-							pages[i][j].destroy();
-						}
-					}
-				}
-			}
-			pages[i] = null;
-		}
+		this._clearListBoxBufferPage();
 
-		this._buffer_pages = [];
 		this._contents_maxwidth = 0;
 		this._contents_maxheight = 0;
 	};
@@ -1915,8 +1957,6 @@ if (!nexacro.ListBox) {
 		if (data) {
 			var itemheight = this._getItemHeight();
 			var client_w = this._getClientWidth();
-			var client_h = this._getClientHeight();
-			var page_rowcount = itemheight ? client_h / itemheight : 0;
 
 			var item = this._createListItem("item_" + index, 0, index * itemheight, Math.max(this._contents_maxwidth, client_w), itemheight, null, null, null, null, null, null, this);
 			item.set_value(data.value);
@@ -1959,6 +1999,101 @@ if (!nexacro.ListBox) {
 
 	_pListBox._createListItem = function (id, left, top, width, height, right, bottom, minwidth, maxwidth, minheight, maxheight, parent) {
 		return new nexacro._ListBoxItemControl(id, left, top, width, height, right, bottom, minwidth, maxwidth, minheight, maxheight, parent);
+	};
+
+	_pListBox._addListBoxBufferPage = function (itemcount, itemindex) {
+		var i, item;
+		var page = [];
+
+		for (i = 0; i < itemcount; i++) {
+			item = this._createListItemControl(itemindex);
+			page.push(item);
+
+			itemindex++;
+		}
+		this._buffer_pages.push(page);
+	};
+
+	_pListBox._insertListBoxBufferPage = function (pageindex, itemcount, itemindex) {
+		var i, item;
+		var page = [];
+		for (i = 0; i < itemcount; i++) {
+			item = this._createListItemControl(itemindex);
+			page.push(item);
+
+			itemindex++;
+		}
+		this._buffer_pages.splice(pageindex, 0, page);
+	};
+
+	_pListBox._removeListBoxBufferPage = function (pageindex) {
+		if (this._buffer_pages[pageindex]) {
+			var del_page = this._buffer_pages.splice(pageindex, 1)[0];
+			for (var i in del_page) {
+				if (del_page.hasOwnProperty(i)) {
+					if (del_page[i]) {
+						del_page[i].destroy();
+						del_page[i] = null;
+					}
+				}
+			}
+		}
+	};
+
+	_pListBox._clearListBoxBufferPage = function () {
+		var i, j;
+		var pages = this._buffer_pages;
+		for (i in pages) {
+			if (pages.hasOwnProperty(i)) {
+				for (j in pages[i]) {
+					if (pages[i].hasOwnProperty(j)) {
+						if (pages[i][j]) {
+							pages[i][j].destroy();
+							pages[i][j] = null;
+						}
+					}
+				}
+			}
+			pages[i] = null;
+		}
+
+		this._buffer_pages = [];
+	};
+
+	_pListBox._resetListBoxBufferPage = function (startindex, endindex) {
+		var page;
+		var pages = this._buffer_pages;
+		var pages_len = pages.length;
+		if (pages_len > 2) {
+			var i;
+			var startpage, endpage;
+			for (i = 0; i < pages_len; i++) {
+				page = pages[i];
+				if (page[0].index <= startindex && page[page.length - 1].index >= startindex) {
+					startpage = i;
+				}
+				if (page[0].index <= endindex && page[page.length - 1].index >= endindex) {
+					endpage = i;
+				}
+			}
+
+			if (startpage == endpage) {
+				if (startpage == 0) {
+					endpage += 1;
+				}
+				else {
+					if (endpage == (pages_len - 1)) {
+						startpage -= 1;
+					}
+				}
+			}
+			while (pages_len) {
+				pages_len--;
+				if (startpage != pages_len && endpage != pages_len) {
+					this._removeListBoxBufferPage(pages_len);
+				}
+			}
+		}
 	};
 
 	_pListBox._recalcLayout = function () {
@@ -2082,7 +2217,6 @@ if (!nexacro.ListBox) {
 
 	_pListBox._doMultiSelect = function (rows, keepExisting, isNotFireEvent) {
 		var sel_row = rows[0];
-		var single_sel = this._selectinfo.index;
 
 		var len = rows.length;
 
@@ -2421,7 +2555,6 @@ if (!nexacro.ListBox) {
 		var len = rows.length;
 		var idx, i = 0, attempted = 0;
 		var params = [0];
-		var info = this._select_multi;
 
 		for (; i < len; i++) {
 			idx = rows[i];
@@ -2740,7 +2873,7 @@ if (!nexacro.ListBox) {
 
 	_pListBox._isRange = function (start, end) {
 		var ret = 0;
-		var page, item, index;
+		var page, item;
 		var pages = this._buffer_pages;
 
 		for (var i in pages) {
@@ -2769,21 +2902,22 @@ if (!nexacro.ListBox) {
 	};
 
 	_pListBox._get_last_visible_row = function (bPrecision) {
-		var lastrow;
+		var change_idnex;
 		if (bPrecision) {
-			lastrow = this._get_first_visible_row() + this._page_rowcount;
+			change_idnex = this._page_rowcount - 1;
 		}
 		else {
-			lastrow = this._get_first_visible_row() + this._page_rowcount_min;
+			change_idnex = this._page_rowcount_min - 1;
 		}
 
-		var rowcnt = this._innerdataset_info._rowcount;
+		var last_index = this._get_first_visible_row() + change_idnex;
+		var max_index = this._innerdataset_info._rowcount - 1;
 
-		if (lastrow >= rowcnt) {
-			lastrow = rowcnt - 1;
+		if (last_index >= max_index) {
+			last_index = max_index;
 		}
 
-		return lastrow;
+		return last_index;
 	};
 
 	_pListBox._get_page_from_rowidx = function (rowidx) {
@@ -2794,13 +2928,10 @@ if (!nexacro.ListBox) {
 	_pListBox._refreshScroll = function (rowidx, direction) {
 		var control_elem = this.getElement();
 		if (control_elem) {
-			var preidx = this.index;
-
 			var currVScrollTopPos = control_elem.scroll_top == undefined ? 0 : control_elem.scroll_top;
 			var vpos, nextTopPos, nextBottom;
 			var itemheight = this._getItemHeight();
 			var rowcount = this._innerdataset_info._rowcount;
-			var visible_end = this._get_last_visible_row(true) - 1;
 
 			if (rowidx >= rowcount) {
 				return;
@@ -2985,7 +3116,6 @@ if (!nexacro.ListBox) {
 			var font = this._getCurrentStyleInheritValue("font");
 			var wordspace = this._getCurrentStyleInheritValue("wordSpacing");
 			var letterspace = this._getCurrentStyleInheritValue("letterSpacing");
-			var wordwrap = this.wordWrap || this._getCSSStyleValue("wordWrap");
 
 			var text_size = nexacro._getTextSize(text ? text : "<가", font, false, undefined, "none", wordspace, letterspace);
 
@@ -3044,6 +3174,10 @@ if (!nexacro.ListBox) {
 
 	_pListBoxItemControl.on_apply_readonly = function (readonly) {
 		this._changeStatus("readonly", readonly);
+	};
+
+	_pListBoxItemControl.on_fire_sys_onflingstart = function (elem, touch_manager, xstartvalue, ystartvalue, xdeltavalue, ydeltavalue, touchlen, from_comp, from_refer_comp) {
+		return false;
 	};
 
 	delete _pListBoxItemControl;

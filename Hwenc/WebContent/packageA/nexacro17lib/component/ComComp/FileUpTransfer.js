@@ -58,7 +58,7 @@ if (!nexacro.FileUpTransfer) {
 			this.parent = parent;
 		}
 
-		this.filelist = [];
+		this.filelist = new nexacro.Collection();
 		this.postdatalist = new nexacro.Collection();
 	};
 	var _pFileUpTransfer = nexacro.FileUpTransfer.prototype = nexacro._createPrototype(nexacro._EventSinkObject, nexacro.FileUpTransfer);
@@ -89,8 +89,15 @@ if (!nexacro.FileUpTransfer) {
 	_pFileUpTransfer.on_created = nexacro._emptyFn;
 
 	_pFileUpTransfer.destroy = function () {
-		this.filelist = null;
-		this.postdatalist = null;
+		if (this.filelist) {
+			this.filelist.destroy();
+			this.filelist = null;
+		}
+
+		if (this.postdatalist) {
+			this.postdatalist.destroy();
+			this.postdatalist = null;
+		}
 
 		return true;
 	};
@@ -104,66 +111,36 @@ if (!nexacro.FileUpTransfer) {
 	};
 
 	_pFileUpTransfer.setFile = function (nIndex, vFile) {
-		var ret = false;
-
-		if (!vFile || !vFile instanceof nexacro.VirtualFile) {
-			return ret;
+		if (!vFile || !(vFile instanceof nexacro.VirtualFile)) {
+			return false;
 		}
 
-		if (this.filelist[nIndex]) {
-			this.filelist[nIndex] = vFile;
-			ret = true;
-		}
-
-		return ret;
+		return this.filelist.set_item(nIndex, vFile);
 	};
 
-	_pFileUpTransfer.addFile = function (vFile) {
-		var ret = -1;
-
-		if (!vFile || !vFile instanceof nexacro.VirtualFile) {
-			return ret;
+	_pFileUpTransfer.addFile = function (id, vFile) {
+		if (id === null || id === undefined || id === "" || this.filelist[id]) {
+			return -1;
 		}
 
-		var idx = this.filelist.length;
-		ret = idx;
+		if (!vFile || !(vFile instanceof nexacro.VirtualFile)) {
+			return -1;
+		}
 
-		this.filelist[idx] = vFile;
-
-		return ret;
+		return this.filelist.add_item(id, vFile);
 	};
 
-	_pFileUpTransfer.removeFile = function (vFile) {
-		var ret = -1;
-
-		if (!vFile || !vFile instanceof nexacro.VirtualFile) {
-			return ret;
-		}
-
-		for (var i = 0, filelist = this.filelist, len = filelist.length; i < len; i++) {
-			if (nexacro._isEqualTransferFile(filelist[i], vFile)) {
-				this.filelist.splice(i, 1);
-				ret = i;
-				break;
-			}
-		}
-
-		return ret;
+	_pFileUpTransfer.removeFile = function (id) {
+		return this.filelist.delete_item(id);
 	};
 
 	_pFileUpTransfer.removeFileByIndex = function (nIndex) {
-		var ret = -1;
 		nIndex = nIndex | 0;
 		if (nIndex < 0 || nIndex >= this.filelist.length) {
-			return ret;
+			return -1;
 		}
 
-		if (this.filelist[nIndex]) {
-			ret = nIndex;
-			this.filelist.splice(nIndex, 1);
-		}
-
-		return ret;
+		return this.filelist.delete_item(nIndex);
 	};
 
 	_pFileUpTransfer.getFileArrayByFileName = function (strFileName) {
@@ -186,7 +163,7 @@ if (!nexacro.FileUpTransfer) {
 	_pFileUpTransfer.getIndexArrayByFileName = function (strFileName) {
 		var ret = null;
 
-		for (var i = 0, file, filelist = this.filelist, len = filelist.length; i < len; i++) {
+		for (var i = 0, filelist = this.filelist, len = filelist.length; i < len; i++) {
 			if (strFileName == filelist[i].filename) {
 				if (!ret) {
 					ret = [];
@@ -202,7 +179,7 @@ if (!nexacro.FileUpTransfer) {
 	_pFileUpTransfer.existFile = function (vFile) {
 		var ret = false;
 
-		if (!vFile || !vFile instanceof nexacro.VirtualFile) {
+		if (!vFile || !(vFile instanceof nexacro.VirtualFile)) {
 			return ret;
 		}
 
@@ -233,7 +210,7 @@ if (!nexacro.FileUpTransfer) {
 	};
 
 	_pFileUpTransfer.clearFileList = function () {
-		this.filelist = [];
+		this.filelist.clear();
 	};
 
 	_pFileUpTransfer.clearPostDataList = function () {
@@ -249,21 +226,7 @@ if (!nexacro.FileUpTransfer) {
 			return;
 		}
 
-		var filelist = {
-		};
-		for (var i = 0, len = this.filelist.length; i < len; i++) {
-			if (this.filelist[i]._handle) {
-				filelist[this.filelist[i].id] = this.filelist[i]._handle;
-			}
-		}
-
-		var postdatalist = {
-		};
-		for (var i = 0, len = this.postdatalist.length; i < len; i++) {
-			postdatalist[this.postdatalist._idArray[i]] = this.postdatalist[i];
-		}
-
-		nexacro._uploadTransfer(filelist, postdatalist, strUrl, -1, this);
+		nexacro._uploadTransfer(this.filelist, this.postdatalist, strUrl, -1, this);
 	};
 
 	_pFileUpTransfer.on_load = function (data, url, index) {
@@ -293,7 +256,7 @@ if (!nexacro.FileUpTransfer) {
 
 		var data = e.message;
 		if (data) {
-			var data = nexacro.trimLeft(decodeURIComponent(data.replace(/\+/g, " ")));
+			data = nexacro.trimLeft(decodeURIComponent(data.replace(/\+/g, " ")));
 			var fstr = data.substring(0, 3).toUpperCase();
 			if (fstr == "SSV") {
 				data = nexacro._Deserializer["SSV"](data);
@@ -308,6 +271,7 @@ if (!nexacro.FileUpTransfer) {
 
 		this.on_load(data, request_url, request_index);
 	};
+
 	_pFileUpTransfer.on_error = function (errorcode, errormsg, httpcode, url, index) {
 		this.on_fire_onerror("ObjectError", errormsg, this, httpcode || errorcode, url, url, index);
 	};

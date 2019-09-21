@@ -402,7 +402,6 @@ if (nexacro._Browser != "Runtime" && !nexacro._init_platform_HTML5) {
 
 			nexacro._calculateZoomLevel = function () {
 				var _doc = _cur_win.document;
-				var doc_elem = _doc.documentElement;
 				var body = _doc.body;
 
 				var docBox = body.getBoundingClientRect();
@@ -1276,6 +1275,8 @@ if (nexacro._Browser != "Runtime" && !nexacro._init_platform_HTML5) {
 
 			nexacro._initHTMLSysTimerManager(_cur_win);
 
+			nexacro.__setDOMStyle_overscrollBehavior(nexacro._getWindowDestinationHandle(_win_win).style);
+
 			nexacro._createSysEvent_ForwardFuncs(_cur_win);
 			var _sysEvent = _cur_win.nexacro_HTMLSysEvent = new nexacro.HTMLSysEvent(_win_win, _win_doc, _cur_win, _cur_doc);
 			_sysEvent._initDocEventHandler();
@@ -1364,7 +1365,10 @@ if (nexacro._Browser != "Runtime" && !nexacro._init_platform_HTML5) {
 		}
 
 		var childframe = new nexacro.ChildFrame(name);
-		parent_handle._popupframes.set_item(name, childframe);
+		if (parent_handle.nexacro) {
+			var pNexacro = parent_handle.nexacro;
+			pNexacro._registerPopupFrame(name, childframe, parent_win);
+		}
 		childframe._showModeless(name, _win);
 	};
 
@@ -1502,12 +1506,18 @@ if (nexacro._Browser != "Runtime" && !nexacro._init_platform_HTML5) {
 
 			var button = (win._cur_ldown_elem ? "lbutton" : (win._cur_rdown_elem ? "rbutton" : (win._cur_mdown_elem ? "mbutton" : "none")));
 			_sysEvent._cur_win.__clearGC();
-			if (elem) {
+			if (win._cur_ldown_elem) {
+				if (win._cur_ldown_elem instanceof nexacro.InputElement) {
+					var cur_point_elem = nexacro.__getElementFromPoint(win.handle, evt.clientX, evt.clientY);
+					win._on_sys_mousemove(cur_point_elem == elem || nexacro._cur_drag_info ? cur_point_elem : null, button, evt.altKey, evt.ctrlKey, evt.shiftKey, evt.clientX, evt.clientY, evt.screenX, evt.screenY, evt.offsetX, evt.offsetY);
+				}
+				else {
+					win._on_sys_mousemove(elem, button, evt.altKey, evt.ctrlKey, evt.shiftKey, evt.clientX, evt.clientY, evt.screenX, evt.screenY, evt.offsetX, evt.offsetY);
+				}
+			}
+			else if (elem) {
 				win._on_sys_mousemove(elem, button, evt.altKey, evt.ctrlKey, evt.shiftKey, evt.clientX, evt.clientY, evt.screenX, evt.screenY, evt.offsetX, evt.offsetY);
 				return true;
-			}
-			else if (win._cur_ldown_elem) {
-				win._on_sys_mousemove(null, "lbutton", evt.altKey, evt.ctrlKey, evt.shiftKey, evt.clientX, evt.clientY, evt.screenX, evt.screenY, evt.offsetX, evt.offsetY);
 			}
 			return false;
 		};
@@ -1899,7 +1909,6 @@ if (nexacro._Browser != "Runtime" && !nexacro._init_platform_HTML5) {
 			curTime = (evt.timeStamp || Date.now());
 
 
-			var pointX, pointY;
 
 			var touches = evt.touches, changedTouches = evt.changedTouches;
 			var touch_len = touches.length, change_len = changedTouches.length;
@@ -2328,7 +2337,6 @@ if (nexacro._Browser != "Runtime" && !nexacro._init_platform_HTML5) {
 								}
 
 								if (do_scrollintoview) {
-									var scrollIntoView = false;
 									var handle = last_focused_elem.handle;
 									if (handle) {
 										nexacro._requestAnimationFrame(win, function () {
@@ -2743,8 +2751,48 @@ if (nexacro._Browser != "Runtime" && !nexacro._init_platform_HTML5) {
 			return null;
 		}
 
+		nexacro.__createOpenWindowHandleAfter(_win_handle);
+
 		return _win_handle;
 	};
+
+	if (nexacro._OS == "iOS") {
+		nexacro.__createOpenWindowHandleAfter = function (_win) {
+			if (!_win) {
+				return;
+			}
+
+			var callback_load = function () {
+				var timeout = 5000;
+				var open_doc = _win.document;
+				var open_frame = _win._linked_window;
+
+				if (open_doc && open_frame && open_frame._is_active_window !== true) {
+					var start_time = new Date().getTime();
+					var start_node = open_doc.all.length;
+
+					var timer_id = setInterval(function () {
+						var end_time = new Date().getTime();
+						var end_node = open_doc.all.length;
+						if (start_node != end_node) {
+							clearInterval(timer_id);
+							open_frame._on_sys_activate();
+							open_frame.setFocus();
+						}
+						else {
+							if ((end_time - start_time) > timeout) {
+								clearInterval(timer_id);
+							}
+						}
+					}, 100);
+				}
+			};
+			_win.addEventListener("load", callback_load);
+		};
+	}
+	else {
+		nexacro.__createOpenWindowHandleAfter = nexacro._emptyFn;
+	}
 
 
 	nexacro.__createWindowHandle = function (_handleParent, target_win, name, left, top, width, height, resizable, layered, taskbar) {
@@ -2759,16 +2807,9 @@ if (nexacro._Browser != "Runtime" && !nexacro._init_platform_HTML5) {
 		var dochandle = _handleParent ? _handleParent.ownerDocument : null;
 		var _parent_win = dochandle ? (dochandle.defaultView || dochandle.parentWindow) : window;
 		var _win_handle, opt;
-		if (false && _parent_win.showModelessDialog) {
-			opt = "dialogHeight:" + height + "px" + "; dialogLeft:" + left + "px" + "; dialogTop:" + top + "px" + "; dialogWidth:" + width + "px"
-				 + "; center:no" + (resizable ? "; resizable:yes" : "")
-				 + "; status:no";
-			_win_handle = _parent_win.showModelessDialog(document.URL + "empty.html", {
-				nexacro : _parent_win.nexacro, 
-				parent : _parent_win
-			}, opt);
-		}
-		else {
+
+		{
+
 			opt = "left=" + left + ",top=" + top + ",width=" + width + ",height=" + height + ","
 				 + "toolbar=no,location=no,directories=no,status=yes,menubar=no,scrollbars=no,"
 				 + "resizable=" + (resizable ? "yes" : "no");
@@ -2966,15 +3007,7 @@ if (nexacro._Browser != "Runtime" && !nexacro._init_platform_HTML5) {
 		};
 	}
 
-	if (nexacro._Browser == "IE" && nexacro._BrowserVersion <= 8) {
-		nexacro._getWindowHandleOuterWidth = function (_win_handle) {
-			return _win_handle.document.documentElement.offsetWidth;
-		};
-		nexacro._getWindowHandleOuterHeight = function (_win_handle) {
-			return _win_handle.document.documentElement.offsetHeight;
-		};
-	}
-	else if (nexacro._OS == "iOS" && parseFloat(nexacro._OSVersion) >= 8) {
+	if ((nexacro._Browser == "IE" && nexacro._BrowserVersion <= 8) || (nexacro._OS == "iOS" && parseFloat(nexacro._OSVersion) >= 8)) {
 		nexacro._getWindowHandleOuterWidth = function (_win_handle) {
 			return _win_handle.document.documentElement.offsetWidth;
 		};
@@ -3413,7 +3446,7 @@ if (nexacro._Browser != "Runtime" && !nexacro._init_platform_HTML5) {
 							return new nexacro.Decimal(value);
 						}
 						else if (vartype == "undefined") {
-							return value ? "undefined" : undefined;
+							return "undefined";
 						}
 						return value;
 					}
@@ -3591,7 +3624,7 @@ if (nexacro._Browser != "Runtime" && !nexacro._init_platform_HTML5) {
 								return new nexacro.Decimal(value);
 							}
 							else if (vartype == "undefined") {
-								return value ? "undefined" : undefined;
+								return "undefined";
 							}
 							return value;
 						}
@@ -3721,7 +3754,7 @@ if (nexacro._Browser != "Runtime" && !nexacro._init_platform_HTML5) {
 
 	nexacro._createPopupWindowHandle = function (parent_win, target_win, name, left, top, width, height) {
 		var _doc = parent_win._dest_doc;
-		var dest_handle = parent_win.dest_handle;
+		var dest_handle;
 
 		var parent_width = parent_win.clientWidth;
 		var parent_height = parent_win.clientHeight;
@@ -3815,12 +3848,6 @@ if (nexacro._Browser != "Runtime" && !nexacro._init_platform_HTML5) {
 		nexacro.__getRootWindowHandleOfPopupWindow = function (handle) {
 			var _doc = (handle.ownerDocument || handle.document);
 			return _doc.parentWindow;
-		};
-	}
-	else if (nexacro._Browser == "Gecko") {
-		nexacro.__getRootWindowHandleOfPopupWindow = function (handle) {
-			var _doc = (handle.ownerDocument || handle.document);
-			return _doc.defaultView;
 		};
 	}
 	else {
@@ -4033,15 +4060,6 @@ if (nexacro._Browser != "Runtime" && !nexacro._init_platform_HTML5) {
 			contents = viewport.content.split(",");
 		}
 
-		function __remove_attribute (attr_name) {
-			for (var i = 0; i < contents.length; i++) {
-				var name = nexacro.trim(contents[i].split("=")[0]);
-				if (name == attr_name) {
-					contents.splice(i, 1);
-					break;
-				}
-			}
-		}
 
 		function __set_attribute (attr_name, attr_value) {
 			var content;
@@ -4080,14 +4098,12 @@ if (nexacro._Browser != "Runtime" && !nexacro._init_platform_HTML5) {
 			__set_attribute("maximum-scale", ratio);
 		}
 
-		var screen_width = nexacro._getScreenWidth();
 		if (nexacro._OS == "Android") {
 			var cur_orientation = nexacro._getMobileOrientation();
 			if (cur_orientation == 2 || cur_orientation == 3) {
 				var is_swap_screen = nexacro._searchDeviceExceptionValue("swap_screen");
 				var force_swap = nexacro._searchDeviceExceptionValue("force_swap");
 				if (is_swap_screen == false || force_swap) {
-					screen_width = nexacro._getScreenHeight();
 				}
 			}
 
@@ -4106,33 +4122,46 @@ if (nexacro._Browser != "Runtime" && !nexacro._init_platform_HTML5) {
 		else {
 			__set_attribute("width", "");
 		}
-		if (nexacro._getDeviceName() == "iPhone") {
+		if (nexacro._OS == "iOS") {
 			if (window._linked_window == undefined) {
-				if ((nexacro._Browser == "MobileSafari" && nexacro._BrowserVersion > 10 && nexacro._BrowserVersion < 12) || (nexacro._Browser == "Chrome" && nexacro._BrowserVersion >= 73)) {
+				var deviceName = nexacro._getDeviceName();
+				if ((deviceName == "iPhone" && nexacro._BrowserVersion > 10 && nexacro._BrowserVersion < 12) || (nexacro._Browser == "Chrome" && nexacro._BrowserVersion >= 73) || (deviceName == "iPad" && nexacro._BrowserVersion < 10)) {
 					var win_handle = window;
 					var win = win_handle._linked_window;
 					var old_window_width = nexacro._getWindowHandleClientWidth(win_handle);
+					var delayTime = 5;
+					var checkMaximumCnt = 200;
+					if (deviceName == "iPad") {
+						checkMaximumCnt = 400;
+					}
 					if (win_handle.innerWidth == win_handle.document.body.clientWidth) {
 						var _timeout = 0;
 						_tester._viewport_resize_observer = setInterval(function () {
 							var cur_window_width = nexacro._getWindowHandleClientWidth(win_handle);
-							if (old_window_width != cur_window_width || _timeout > 100) {
-								clearInterval(_tester._viewport_resize_observer);
-								_tester._viewport_resize_observer = null;
 
+							if (old_window_width != cur_window_width || _timeout > checkMaximumCnt) {
 								if (!win) {
 									win = win_handle._linked_window;
 								}
 								if (win) {
 									var width = nexacro._getWindowHandleClientWidth(win_handle);
 									var height = nexacro._getWindowHandleClientHeight(win_handle);
-
 									win.setSize(width, height);
 									win.frame._setSize(width, height, 0);
 								}
+								if (deviceName == "iPad") {
+									if (parseInt(document.body.style.width) == cur_window_width || _timeout > checkMaximumCnt) {
+										clearInterval(_tester._viewport_resize_observer);
+										_tester._viewport_resize_observer = null;
+									}
+								}
+								else {
+									clearInterval(_tester._viewport_resize_observer);
+									_tester._viewport_resize_observer = null;
+								}
 							}
 							_timeout++;
-						}, 10);
+						}, delayTime);
 					}
 				}
 				var use_windowsize_as_bodysize = nexacro._searchDeviceExceptionValue("use_windowsize_as_bodysize");
@@ -4184,7 +4213,7 @@ if (nexacro._Browser != "Runtime" && !nexacro._init_platform_HTML5) {
 		viewport.setAttribute('content', contents.toString());
 		window.scrollTo(0, 0);
 
-		if (nexacro._OS == "iOS") {
+		if (nexacro._OS == "iOS" && !nexacro._isHybrid()) {
 			setTimeout(function () {
 				var _frame = window._linked_window.frame;
 				if (_frame) {

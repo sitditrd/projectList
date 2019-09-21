@@ -393,7 +393,6 @@ if (!nexacro.Menu) {
 		var popupmenu = this._popupmenu;
 		if (popupmenu) {
 			popupmenu.destroy();
-			popupmenu = null;
 		}
 
 		var i, len, items = this._items;
@@ -410,7 +409,6 @@ if (!nexacro.Menu) {
 			for (i = hotkey_list.length - 1; i > -1; i--) {
 				var item = hotkey_list[i];
 				this._unregisterItemHotkey(item.key);
-				item = null;
 			}
 		}
 
@@ -420,9 +418,6 @@ if (!nexacro.Menu) {
 		}
 
 		this._removeEventHandlerToInnerDataset();
-
-		hotkey_list = null;
-		items = null;
 	};
 
 	_pMenu._removeEventHandlerToInnerDataset = function () {
@@ -568,7 +563,6 @@ if (!nexacro.Menu) {
 				for (i = hotkey_list.length - 1; i > -1; i--) {
 					var item = hotkey_list[i];
 					this._unregisterItemHotkey(item.key);
-					item = null;
 				}
 			}
 		}
@@ -1117,7 +1111,7 @@ if (!nexacro.Menu) {
 
 	_pMenu.on_fire_sys_onkeydown = function (keycode, alt_key, ctrl_key, shift_key, fire_comp, refer_comp) {
 		var pThis = this._popupmenu_find(this);
-		var item = this._item_find(pThis);
+		var item;
 		var popupvisible = this._is_popupmenu_visible(this);
 		var menuitem = this._items;
 		var menuexpand;
@@ -1130,7 +1124,6 @@ if (!nexacro.Menu) {
 		var E = nexacro.Event;
 		var is_accessibility = nexacro._enableaccessibility;
 		var previouse_item_index;
-		var item_len;
 
 		switch (keycode) {
 			case E.KEY_UP:
@@ -1170,7 +1163,6 @@ if (!nexacro.Menu) {
 				if (!popupvisible) {
 					if (this._isNavigationVisible()) {
 						previouse_item_index = this._menuitemindex;
-						item_len = this._items.length;
 						if (previouse_item_index == 0 || previouse_item_index <= this._start_navigation_index) {
 							this._navigationprev(true);
 						}
@@ -1186,7 +1178,6 @@ if (!nexacro.Menu) {
 				if (!popupvisible) {
 					if (this._isNavigationVisible()) {
 						previouse_item_index = this._menuitemindex;
-						item_len = this._items.length;
 						if (previouse_item_index + 1 >= this._end_navigation_index) {
 							this._navigationnext(true);
 						}
@@ -1332,7 +1323,7 @@ if (!nexacro.Menu) {
 			}
 			this._previtemindex = obj.index;
 		}
-		if (this.visible && this._isEnable() && this.enableevent && obj && obj._isEnable()) {
+		if (this.visible && this._isEnable() && this.enableevent && obj._isEnable()) {
 			var rootComp = this._getRootComponent(obj);
 
 			if (!obj._canExpand) {
@@ -1552,8 +1543,6 @@ if (!nexacro.Menu) {
 				if (items_total_width) {
 					this._items_total_width = items_total_width;
 				}
-
-				item = null;
 			}
 		}
 	};
@@ -1614,7 +1603,6 @@ if (!nexacro.Menu) {
 
 		if (need_calc) {
 			for (i = end_navigation_index - 1; i >= 0; i--) {
-				item = items[i];
 				item_width = items_width[i];
 				sum_itemwidth += item_width;
 				start_navigation_index = i;

@@ -193,7 +193,7 @@ if (nexacro._Browser == "Runtime") {
 		alert = function (text) {
 			var application = nexacro.getApplication();
 			if (application) {
-				var frm = application.alert(text, application.key, 0);
+				application.alert(text, application.key, 0);
 			}
 		};
 
@@ -398,6 +398,7 @@ if (nexacro._Browser == "Runtime") {
 							if (line_size[0] > text_width) {
 								text_width = line_size[0];
 							}
+
 							text_height += line_size[1];
 						}
 						return [text_width, text_height];
@@ -472,6 +473,7 @@ if (nexacro._Browser == "Runtime") {
 			}
 
 			if (imgurl) {
+				var retval;
 				if (org_src) {
 					org_src = org_src.toString();
 					org_src = nexacro._getURIValue(org_src);
@@ -480,7 +482,7 @@ if (nexacro._Browser == "Runtime") {
 				var servicecachelevel = "none";
 				var serviceversion = service.version;
 				if (service.cachelevel == "static" || service.cachelevel == "session") {
-					var retval = nexacro._ImgInfoCacheList[imgurl];
+					retval = nexacro._ImgInfoCacheList[imgurl];
 					if (retval) {
 						return retval;
 					}
@@ -504,7 +506,7 @@ if (nexacro._Browser == "Runtime") {
 					}
 					if (basync == false) {
 						loadItem.handle = nexacro.__getImageSize(imgurl, nexacro.__bindLoadImageHandler(loadItem), servicecachelevel, serviceversion, basync);
-						var retval = nexacro._ImgInfoCacheList[imgurl];
+						retval = nexacro._ImgInfoCacheList[imgurl];
 						if (retval) {
 							return retval;
 						}
@@ -600,8 +602,25 @@ if (nexacro._Browser == "Runtime") {
 		};
 
 		nexacro._file_changed = function (item_value, item_comp, newvalue) {
+			var fullpathArray = [];
+			var filenameArray = [];
+			var filelistArray = [];
+			var newvalueArray = [];
+
+			fullpathArray = item_value.split(",");
+			filenameArray = newvalue.split(",");
+
+			for (var i = 0; i < filenameArray.length; i++) {
+				var file = {
+				};
+				file.name = filenameArray[i];
+				file.fullpath = fullpathArray[i];
+				filelistArray[i] = file;
+				newvalueArray[i] = filenameArray[i];
+			}
+
 			if (item_comp) {
-				item_comp._file_changed(item_value, newvalue);
+				item_comp._file_changed(item_value, filelistArray, newvalueArray);
 			}
 		};
 
@@ -699,7 +718,6 @@ if (nexacro._Browser == "Runtime") {
 			}
 
 			_application._beginCommProgress();
-			var checkStr = "" + item_files;
 			if (item_files) {
 				handle = nexacro.__submitFileUploadHandle(form_id, action, handle, exp_info_data, item_value, httpheaderstr, item_files);
 			}
@@ -734,6 +752,8 @@ if (nexacro._Browser == "Runtime") {
 			}
 		};
 
+		nexacro._downloadExport = nexacro._download;
+
 		nexacro._change_inputnode_name = nexacro._emptyFn;
 		nexacro._append_hidden_textitem = nexacro._emptyFn;
 		nexacro._setImportCommand = nexacro._emptyFn;
@@ -741,10 +761,10 @@ if (nexacro._Browser == "Runtime") {
 		nexacro._createFileDialogHandle = function (target) {
 			var callback_onclose = function (target) {
 				return function (reason, path, files) {
-					var vfiles;
+					var vfiles = [];
 					if (files && files.length) {
-						for (var i = 0, vfiles = []; i < files.length; i++) {
-							var vfile = new nexacro.VirtualFile("VirtualFile", "");
+						for (var i = 0; i < files.length; i++) {
+							var vfile = new nexacro.VirtualFile("vfile" + (new Date().valueOf().toString()) + i, "");
 							vfile.handle = null;
 
 							vfile.filename = files[i].filename;
@@ -778,7 +798,7 @@ if (nexacro._Browser == "Runtime") {
 				nexacro.Device.exec(jsonstr);
 			}
 		};
-		nexacro._openFileDialogHandle = function (target, strTitle, constOpenMode, strInitialPath, strFileName, strDialogtype) {
+		nexacro._openFileDialogHandle = function (target, strTitle, constOpenMode, strInitialPath, strFileName, strDialogtype, nDlgWidth, nDlgHeight) {
 			var winhandle;
 			if (target.parent) {
 				var curFrame = target.parent._getOwnerFrame();
@@ -791,7 +811,7 @@ if (nexacro._Browser == "Runtime") {
 			}
 
 			if (nexacro._isDesktop()) {
-				return nexacro.__openFileDialogHandle(target._handle, winhandle, strTitle, constOpenMode, strInitialPath, strFileName);
+				return nexacro.__openFileDialogHandle(target._handle, winhandle, strTitle, constOpenMode, strInitialPath, strFileName, nDlgWidth, nDlgHeight);
 			}
 			else {
 				if (strDialogtype === undefined || strDialogtype == "default") {
@@ -897,7 +917,7 @@ if (nexacro._Browser == "Runtime") {
 				var ret = [];
 				filelist = filelist.split("|");
 				for (var i = 0, len = filelist.length, vfile; i < len; i++) {
-					vfile = new nexacro.VirtualFile("dragdropfile" + i);
+					vfile = new nexacro.VirtualFile("vfile" + (new Date().valueOf().toString()) + i);
 
 					var strFullPath = filelist[i].split("\\").join("/");
 
@@ -975,19 +995,30 @@ if (nexacro._Browser == "Runtime") {
 				}
 			}
 
-			var postdatalistkeys = Object ? Object.keys(postdatalist) : "";
-			for (var i = 0, len = postdatalistkeys.length, postdatastr = ""; i < len; i++) {
-				postdatastr += postdatalistkeys[i];
+			var postdatastr = "";
+			for (var i = 0, len = postdatalist.length; i < len; i++) {
+				postdatastr += postdatalist._idArray[i];
 				postdatastr += "=";
-				postdatastr += postdatalist[postdatalistkeys[i]];
+				postdatastr += postdatalist[i];
 				postdatastr += (i < len - 1) ? POSTDATA_SEPERATOR : "";
+			}
+
+			var transferitem = [];
+			var transferitems = [];
+			for (i = 0, len = filelist.length; i < len; i++) {
+				transferitem[0] = filelist._idArray[i];
+				transferitem[1] = filelist[i].fullpath;
+
+				transferitems.push(transferitem);
+
+				transferitem = [];
 			}
 
 			if (!evttarget._handle) {
 				evttarget._handle = nexacro.__createFileUploadHandle(evttarget._unique_name, callback_onload(), evttarget, winhandle);
 			}
 
-			nexacro.__submitFileUploadHandle("", url, evttarget._handle, null, "", httpheaderstr, [evttarget.filelist], postdatastr);
+			nexacro.__submitFileUploadHandle("", url, evttarget._handle, null, "", httpheaderstr, transferitems, postdatastr);
 		};
 
 		nexacro._downloadTransfer = function (postdatalist, url, saveurl, evttarget) {
@@ -1030,7 +1061,7 @@ if (nexacro._Browser == "Runtime") {
 				}
 			}
 
-			var postdatalistkeys = Object ? Object.keys(postdatalist) : "";
+			var postdatalistkeys = Object.keys(postdatalist);
 			for (var i = 0, len = postdatalistkeys.length, postdatastr = ""; i < len; i++) {
 				postdatastr += postdatalistkeys[i];
 				postdatastr += "=";
@@ -1084,13 +1115,13 @@ if (nexacro._Browser == "Runtime") {
 		nexacro.__bindLoadModuleHandler = function (pthis) {
 			return function (status, data, fireerrorcode, returncode, locationurl, extramsg) {
 				var callbackList = pthis.callbackList.slice(0);
+				var item = null;
+				var target;
 
 				if (status < 0) {
-					var item = null;
-
 					if (callbackList.length > 0) {
 						while (item = callbackList.pop()) {
-							var target = item.target;
+							target = item.target;
 							if (target && target.context && target._use_transition_effect) {
 								target.context.parent.cancelTransitionEffect();
 							}
@@ -1104,11 +1135,9 @@ if (nexacro._Browser == "Runtime") {
 						pthis.on_load_module(data);
 					}
 					catch (e) {
-						var item = null;
-
 						if (callbackList.length > 0) {
 							while (item = callbackList.pop()) {
-								var target = item.target;
+								target = item.target;
 								if (target && target.context && target._use_transition_effect) {
 									target.context.parent.cancelTransitionEffect();
 								}
@@ -1398,6 +1427,8 @@ if (nexacro._Browser == "Runtime") {
 			this._is_appending = false;
 			this._useclientlayout = ds.useclientlayout;
 			this._viewrecords_length = 0;
+
+			this._progress_status = 0;
 
 			this._colLines = null;
 			this._next_line_idx = 0;
@@ -1897,7 +1928,6 @@ if (nexacro._Browser == "Runtime") {
 
 		_pProgressData._parse = function (bFinal) {
 			var bLoop = true;
-			var param_parsed = false;
 			var buffer_obj, val;
 			var env = nexacro.getEnvironment();
 			var datasetloadtype = env.datasetloadtype;
@@ -2132,7 +2162,6 @@ if (nexacro._Browser == "Runtime") {
 		_pProgressData._on_fire_onload = function (bufferObj, nLoadType) {
 			var ds = bufferObj._target_ds;
 			var data = "";
-			var line_idx;
 			var rs = this._rs;
 
 			ds._bWorkingstatus = true;
@@ -2175,16 +2204,18 @@ if (nexacro._Browser == "Runtime") {
 
 				var lines = data.split(new RegExp(rs));
 
-				ds.rowposition = -1;
+				if (bufferObj._progress_status == 0) {
+					ds.rowposition = -1;
+				}
 				switch (this._data_type) {
 					case "CSV":
-						line_idx = ds._loadFromCSVArray(bufferObj._colLines[0], lines, 0, -1, bufferObj._useclientlayout, bufferObj._is_first_load);
+						ds._loadFromCSVArray(bufferObj._colLines[0], lines, 0, -1, bufferObj._useclientlayout, bufferObj._is_first_load);
 						break;
 					case "SSV":
-						line_idx = ds._loadFromSSVArray(bufferObj._colLines, lines, 0, -1, bufferObj._useclientlayout, bufferObj._is_first_load);
+						ds._loadFromSSVArray(bufferObj._colLines, lines, 0, -1, bufferObj._useclientlayout, bufferObj._is_first_load);
 						break;
 					case "PPX":
-						line_idx = ds._loadFromPPXArray(bufferObj._colLines, lines, 0, -1, bufferObj._useclientlayout, bufferObj._is_first_load);
+						ds._loadFromPPXArray(bufferObj._colLines, lines, 0, -1, bufferObj._useclientlayout, bufferObj._is_first_load);
 						break;
 					default:
 						break;
@@ -2207,13 +2238,20 @@ if (nexacro._Browser == "Runtime") {
 
 			if (ds._eventstat) {
 				var is_appending = bufferObj._is_appending;
-				ds.on_fire_onload(0, "", is_appending ? 12 : nLoadType);
 
-				if (ds._viewRecords && ds._viewRecords.length > 0) {
-					ds._forcesetRowPosition(0, 51);
+				ds.on_fire_onload(0, "", is_appending ? 12 : nLoadType, (nLoadType == 1) ? true : ((bufferObj._progress_status != 0) ? true : false));
+				if (bufferObj._progress_status == 0) {
+					if (ds._viewRecords && ds._viewRecords.length > 0) {
+						ds._forcesetRowPosition(0, 51);
+					}
+					else {
+						ds._forcesetRowPosition(-1, 51);
+					}
+					bufferObj._progress_status = 1;
 				}
-				else {
-					ds._forcesetRowPosition(-1, 51);
+
+				if (nLoadType == 0) {
+					bufferObj._progress_status = 2;
 				}
 			}
 			else if (ds._viewRecords.length > 0) {
@@ -2255,6 +2293,7 @@ if (nexacro._Browser == "Runtime") {
 				this._parse_mode = 3;
 			}
 			else {
+				var ndp, n, next_buffer_idx, rs_len;
 				switch (this._parse_mode) {
 					case 0:
 						break;
@@ -2273,10 +2312,10 @@ if (nexacro._Browser == "Runtime") {
 						var buffer_obj = this._datasets[this._cur_dataset_id];
 
 						if (!buffer_obj._use_firefirstcount || buffer_obj._isLoadedFirstCount()) {
-							var ndp = this._getNextDatasetPos(this._cur_idx);
-							var n = ndp[0];
-							var next_buffer_idx = ndp[1];
-							var rs_len = ndp[2];
+							ndp = this._getNextDatasetPos(this._cur_idx);
+							n = ndp[0];
+							next_buffer_idx = ndp[1];
+							rs_len = ndp[2];
 							if (n >= 0) {
 								buffer_obj._row_end_idx = [next_buffer_idx, n];
 								this._cur_idx = this._getNextIdx([next_buffer_idx, n + rs_len]);
@@ -2288,10 +2327,10 @@ if (nexacro._Browser == "Runtime") {
 						}
 						break;
 					case 9:
-						var ndp = this._getNextDatasetPos(this._cur_idx);
-						var n = ndp[0];
-						var next_buffer_idx = ndp[1];
-						var rs_len = ndp[2];
+						ndp = this._getNextDatasetPos(this._cur_idx);
+						n = ndp[0];
+						next_buffer_idx = ndp[1];
+						rs_len = ndp[2];
 						if (n >= 0) {
 							this._cur_idx = this._getNextIdx([next_buffer_idx, n + rs_len]);
 							this._parse_mode = 3;
@@ -2339,6 +2378,7 @@ if (nexacro._Browser == "Runtime") {
 				this._parse_mode = 7;
 			}
 			else {
+				var ndp, n, next_buffer_idx, rs_len;
 				switch (this._parse_mode) {
 					case 0:
 						break;
@@ -2370,10 +2410,10 @@ if (nexacro._Browser == "Runtime") {
 					case 6:
 						var buffer_obj = this._datasets[this._cur_dataset_id];
 						if (!buffer_obj._use_firefirstcount || buffer_obj._isLoadedFirstCount()) {
-							var ndp = this._getNextDatasetPos(this._cur_idx);
-							var n = ndp[0];
-							var next_buffer_idx = ndp[1];
-							var rs_len = ndp[2];
+							ndp = this._getNextDatasetPos(this._cur_idx);
+							n = ndp[0];
+							next_buffer_idx = ndp[1];
+							rs_len = ndp[2];
 							if (n >= 0) {
 								buffer_obj._row_end_idx = [next_buffer_idx, n];
 								this._cur_idx = this._getNextIdx([next_buffer_idx, n + rs_len]);
@@ -2390,10 +2430,10 @@ if (nexacro._Browser == "Runtime") {
 					case 8:
 						break;
 					case 9:
-						var ndp = this._getNextDatasetPos(this._cur_idx);
-						var n = ndp[0];
-						var next_buffer_idx = ndp[1];
-						var rs_len = ndp[2];
+						ndp = this._getNextDatasetPos(this._cur_idx);
+						n = ndp[0];
+						next_buffer_idx = ndp[1];
+						rs_len = ndp[2];
 						if (n >= 0) {
 							this._cur_idx = this._getNextIdx([next_buffer_idx, n + rs_len]);
 							this._parse_mode = 3;
@@ -2439,6 +2479,7 @@ if (nexacro._Browser == "Runtime") {
 				this._parse_mode = 3;
 			}
 			else {
+				var ndp, n, next_buffer_idx, rs_len;
 				switch (this._parse_mode) {
 					case 0:
 						break;
@@ -2463,10 +2504,10 @@ if (nexacro._Browser == "Runtime") {
 					case 6:
 						var buffer_obj = this._datasets[this._cur_dataset_id];
 						if (!buffer_obj._use_firefirstcount || buffer_obj._isLoadedFirstCount()) {
-							var ndp = this._getNextDatasetPos(this._cur_idx);
-							var n = ndp[0];
-							var next_buffer_idx = ndp[1];
-							var rs_len = ndp[2];
+							ndp = this._getNextDatasetPos(this._cur_idx);
+							n = ndp[0];
+							next_buffer_idx = ndp[1];
+							rs_len = ndp[2];
 
 							if (n >= 0) {
 								buffer_obj._row_end_idx = [next_buffer_idx, n];
@@ -2479,10 +2520,10 @@ if (nexacro._Browser == "Runtime") {
 						}
 						break;
 					case 9:
-						var ndp = this._getNextDatasetPos(this._cur_idx);
-						var n = ndp[0];
-						var next_buffer_idx = ndp[1];
-						var rs_len = ndp[2];
+						ndp = this._getNextDatasetPos(this._cur_idx);
+						n = ndp[0];
+						next_buffer_idx = ndp[1];
+						rs_len = ndp[2];
 
 						if (n >= 0) {
 							this._cur_idx = this._getNextIdx([next_buffer_idx, n + rs_len]);
@@ -2674,9 +2715,8 @@ if (nexacro._Browser == "Runtime") {
 		nexacro._parseXMLDocument = function (str) {
 			var handle = nexacro.__parseXMLDocument(str);
 			var xmldoc = new nexacro.XmlDocument();
-			if (xmldoc) {
-				xmldoc.handle = handle;
-			}
+			xmldoc.handle = handle;
+
 			return xmldoc;
 		};
 		nexacro._documentToXml = function (xmldoc) {
@@ -3312,6 +3352,8 @@ if (nexacro._Browser == "Runtime") {
 				case 5:
 				case 6:
 				case 7:
+				case 11:
+				case 12:
 					{
 
 						var node = new nexacro.XmlNode(doc);
@@ -3325,15 +3367,6 @@ if (nexacro._Browser == "Runtime") {
 					return new nexacro.XmlDocument();
 				case 10:
 					return new nexacro.XmlDocumentType(doc);
-				case 11:
-				case 12:
-					{
-
-						var node = new nexacro.XmlNode(doc);
-						node._node_type = type;
-						return node;
-					}
-					break;
 			}
 			return null;
 		};
@@ -3722,7 +3755,6 @@ if (nexacro._Browser == "Runtime") {
 						this._first_child = childs[0];
 						this._last_child = childs[childs.length - 1];
 					}
-					child_handles = null;
 				}
 			}
 			return childs;
@@ -3953,6 +3985,18 @@ if (nexacro._Browser == "Runtime") {
 			configurable : false
 		});
 
+		_pXmlNode.get_source = function () {
+			if (!this.handle) {
+				return "";
+			}
+
+			return nexacro.__documentToXml(this.handle);
+		};
+		Object.defineProperty(_pXmlNode, "source", {
+			get : _pXmlNode.get_source, 
+			configurable : false
+		});
+
 
 		_pXmlNode.appendChild = function (node) {
 			if (!this.handle || !node || !node.handle || !(node instanceof nexacro.XmlNode)) {
@@ -4149,7 +4193,6 @@ if (nexacro._Browser == "Runtime") {
 				var attr_handle_map = nexacro.__xmlGetAttributes(this.handle);
 				if (attr_handle_map) {
 					attributes._setFromHandleMap(attr_handle_map, 2, this._owner_document, this);
-					attr_handle_map = null;
 				}
 			}
 			return attributes;
@@ -4225,7 +4268,6 @@ if (nexacro._Browser == "Runtime") {
 			var elem_handles = nexacro.__xmlGetElementsByTagName(this.handle, name);
 			if (elem_handles) {
 				elem_nodes._setFromHandleArray(elem_handles, 1, this._owner_document);
-				elem_handles = null;
 			}
 			return elem_nodes;
 		};
@@ -4238,7 +4280,6 @@ if (nexacro._Browser == "Runtime") {
 			var elem_handles = nexacro.__xmlGetElementsByTagName(this.handle, name, ns);
 			if (elem_handles) {
 				elem_nodes._setFromHandleArray(elem_handles, 1, this._owner_document);
-				elem_handles = null;
 			}
 			return elem_nodes;
 		};
@@ -4699,7 +4740,6 @@ if (nexacro._Browser == "Runtime") {
 			var elem_handles = nexacro.__xmlGetElementsByTagName(this.handle, name, ns);
 			if (elem_handles) {
 				elem_nodes._setFromHandleArray(elem_handles, 1, this);
-				elem_handles = null;
 			}
 			return elem_nodes;
 		};
@@ -4968,5 +5008,6 @@ if (nexacro._Browser == "Runtime") {
 		};
 
 		nexacro.__preventDefault = nexacro._emptyFn;
+		nexacro.__setDOMStyle_overscrollBehavior = nexacro._emptyFn;
 	}
 }

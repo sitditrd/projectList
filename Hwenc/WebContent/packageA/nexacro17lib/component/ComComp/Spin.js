@@ -65,8 +65,6 @@ if (!nexacro.Spin) {
 	_pSpin._default_text = "";
 	_pSpin._default_mask = "9.9";
 	_pSpin._default_commamask = "9,999.9";
-	_pSpin._onspin_start_value = undefined;
-	_pSpin._onspin_start_text = "";
 	_pSpin._want_arrow = true;
 	_pSpin._has_inputElement = true;
 
@@ -143,6 +141,8 @@ if (!nexacro.Spin) {
 
 		this._recalcLayout();
 		this._updateButton();
+		this._setDefaultProp();
+
 		if (nexacro._enableaccessibility) {
 			this._setAccessibilityInfoValueMax(this.max);
 			this._setAccessibilityInfoValueMin(this.min);
@@ -222,6 +222,7 @@ if (!nexacro.Spin) {
 
 		this._recalcLayout();
 		this._updateButton();
+		this._setDefaultProp();
 	};
 
 	_pSpin.on_change_containerRect = function (width, height) {
@@ -311,7 +312,15 @@ if (!nexacro.Spin) {
 	_pSpin._on_getAccessibilityAdditionalLabel = function () {
 		var label = "";
 		if (this.spinedit) {
-			label = this.spinedit.text ? this.spinedit.text : this._onspin_start_value > -1 ? this._onspin_start_value : this.displaynulltext ? this.displaynulltext : "";
+			if (this.spinedit.text) {
+				label = this.spinedit.text;
+			}
+			else if (this._default_value != null) {
+				label = this._default_value;
+			}
+			else if (this.displaynulltext) {
+				label = this.displaynulltext;
+			}
 		}
 		return label;
 	};
@@ -381,9 +390,6 @@ if (!nexacro.Spin) {
 			spinedit._updateAccessibilityLabel();
 			this._notifyAccessibility(spinedit.text);
 		}
-
-		this._default_value = this.value;
-		this._default_text = this.text;
 	};
 
 	_pSpin.set_usesoftkeyboard = function (v, bforce) {
@@ -436,8 +442,12 @@ if (!nexacro.Spin) {
 
 		var spinedit = this.spinedit;
 		if (spinedit) {
-			readonly = (this.type == "noneditable") ? true : readonly;
-			spinedit.set_readonly(readonly);
+			if (this.type == "noneditable") {
+				spinedit.set_readonly(true);
+			}
+			else {
+				spinedit.set_readonly(readonly);
+			}
 		}
 
 		var spinupbutton = this.spinupbutton;
@@ -449,14 +459,10 @@ if (!nexacro.Spin) {
 		if (spindownbutton) {
 			spindownbutton._setEnable(this.enable && !readonly);
 		}
-
-		spinedit = null;
-		spinupbutton = null;
-		spindownbutton = null;
 	};
 
 	_pSpin.set_type = function (v) {
-		var type_enum = ["noneeditable", "normal", "spinonly"];
+		var type_enum = ["noneditable", "normal", "spinonly"];
 		if (type_enum.indexOf(v) == -1) {
 			return;
 		}
@@ -571,6 +577,7 @@ if (!nexacro.Spin) {
 
 			this.on_apply_displaycomma(v);
 			this.on_apply_value(this.value);
+			this._setDefaultText();
 		}
 	};
 
@@ -608,6 +615,7 @@ if (!nexacro.Spin) {
 			this.on_apply_max(v);
 			this.on_apply_value(this.value);
 			this._updateButton();
+			this._setDefaultProp();
 		}
 	};
 
@@ -633,6 +641,7 @@ if (!nexacro.Spin) {
 			this.on_apply_min(v);
 			this.on_apply_value(this.value);
 			this._updateButton();
+			this._setDefaultProp();
 		}
 	};
 
@@ -714,9 +723,6 @@ if (!nexacro.Spin) {
 		if (!this.on_fire_canchange(this, pretext, prevalue, posttext, postvalue)) {
 			return false;
 		}
-
-		this._default_value = postvalue;
-		this._default_text = posttext;
 
 		if (!this.applyto_bindSource("value", postvalue)) {
 			return false;
@@ -838,11 +844,11 @@ if (!nexacro.Spin) {
 				var max = this.max;
 				var min = this.min;
 
-				var pre_value = this._onspin_start_value;
-				var pre_text = this._onspin_start_text;
+				var pre_value = this._default_value;
+				var pre_text = this._default_text;
 
 				var cur_value = this.value;
-				var cur_text = this.text;
+				var cur_text;
 				var is_input_change = false;
 
 				if (cur_value > max) {
@@ -913,11 +919,11 @@ if (!nexacro.Spin) {
 		var max = this.max;
 		var min = this.min;
 
-		var pre_value = this._onspin_start_value;
-		var pre_text = this._onspin_start_text;
+		var pre_value = this._default_value;
+		var pre_text = this._default_text;
 
 		var cur_value = this.value;
-		var cur_text = this.text;
+		var cur_text;
 
 		if (pre_value != cur_value) {
 			if (cur_value > max) {
@@ -1048,49 +1054,49 @@ if (!nexacro.Spin) {
 
 				if (!this.circulation) {
 					if (nexacro._isNull(v)) {
-						spindownbutton._setEnable(false && !this.readonly);
-						spinupbutton._setEnable(true && !this.readonly);
+						spindownbutton._setEnable(false);
+						spinupbutton._setEnable(!this.readonly);
 					}
 					else {
 						if (this.increment >= 0) {
 							if (max > v) {
-								spinupbutton._setEnable(true && !this.readonly);
+								spinupbutton._setEnable(!this.readonly);
 							}
 							else {
-								spinupbutton._setEnable(false && !this.readonly);
+								spinupbutton._setEnable(false);
 								spinupbutton._changeStatus("mouseover", false);
 							}
 
 							if (min < v) {
-								spindownbutton._setEnable(true && !this.readonly);
+								spindownbutton._setEnable(!this.readonly);
 							}
 							else {
-								spindownbutton._setEnable(false && !this.readonly);
+								spindownbutton._setEnable(false);
 								spindownbutton._changeStatus("mouseover", false);
 							}
 						}
 						else {
 							if (max > v) {
-								spindownbutton._setEnable(true && !this.readonly);
+								spindownbutton._setEnable(!this.readonly);
 							}
 							else {
-								spindownbutton._setEnable(false && !this.readonly);
+								spindownbutton._setEnable(false);
 								spindownbutton._changeStatus("mouseover", false);
 							}
 
 							if (min < v) {
-								spinupbutton._setEnable(true && !this.readonly);
+								spinupbutton._setEnable(!this.readonly);
 							}
 							else {
-								spinupbutton._setEnable(false && !this.readonly);
+								spinupbutton._setEnable(false);
 								spinupbutton._changeStatus("mouseover", false);
 							}
 						}
 					}
 				}
 				else {
-					spinupbutton._setEnable(true && !this.readonly);
-					spindownbutton._setEnable(true && !this.readonly);
+					spinupbutton._setEnable(!this.readonly);
+					spindownbutton._setEnable(!this.readonly);
 				}
 			}
 		}
@@ -1101,9 +1107,20 @@ if (!nexacro.Spin) {
 
 		this.on_apply_value(v);
 		this._updateButton();
+		this._setDefaultProp();
+	};
 
-		this._onspin_start_value = this.value;
-		this._onspin_start_text = this.text;
+	_pSpin._setDefaultProp = function () {
+		this._setDefaultValue();
+		this._setDefaultText();
+	};
+
+	_pSpin._setDefaultValue = function () {
+		this._default_value = this.value;
+	};
+
+	_pSpin._setDefaultText = function () {
+		this._default_text = this.text;
 	};
 
 	_pSpin._setLocale = function (v) {
@@ -1111,6 +1128,7 @@ if (!nexacro.Spin) {
 			this._locale = v;
 			this.on_apply_locale(v);
 			this.on_apply_value(this.value);
+			this._setDefaultText();
 		}
 	};
 

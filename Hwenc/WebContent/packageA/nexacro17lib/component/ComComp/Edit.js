@@ -840,7 +840,10 @@ if (!nexacro.Edit) {
 	};
 
 	_pEdit.updateToDataset = function () {
-		this._result_updateToDataset = this.applyto_bindSource("value", this.value);
+		if (this._result_updateToDataset = this.applyto_bindSource("value", this.value)) {
+			this._default_value = this.value;
+			this._default_text = this.text;
+		}
 		this._processing_updateToDataset = true;
 
 		return this._result_updateToDataset;
@@ -1117,8 +1120,12 @@ if (!nexacro.Edit) {
 	_pEdit.on_click_basic_action = function (elem, button) {
 		var input_elem = this._input_element;
 		if (input_elem) {
-			if (!this._onlydisplay) {
-				input_elem.setElementFocus(button);
+			var _window = this._getWindow();
+			if (_window && this._track_capture) {
+				var capture_comp = _window._getCaptureComp(true, false, this);
+				if (!this._onlydisplay && (!capture_comp || capture_comp == this)) {
+					input_elem.setElementFocus(button);
+				}
 			}
 		}
 	};
@@ -1221,7 +1228,7 @@ if (!nexacro.Edit) {
 			update_value = this._inputtype_obj.apply(update_value);
 			if (value != update_value) {
 				if (update_value && inputType == "insertFromPaste") {
-					update_value_len = update_value ? update_value.length : 0;
+					update_value_len = update_value.length;
 					input_elem._beforeinput_result_data = update_value;
 					input_elem._beforeinput_result_pos = {
 						begin : begin + update_value_len, 
@@ -1239,7 +1246,7 @@ if (!nexacro.Edit) {
 			update_value = this._inputfilter_obj.apply(update_value);
 			if (value != update_value) {
 				if (update_value && inputType == "insertFromPaste") {
-					update_value_len = update_value ? update_value.length : 0;
+					update_value_len = update_value.length;
 					input_elem._beforeinput_result_data = update_value;
 					input_elem._beforeinput_result_pos = {
 						begin : begin + update_value_len, 
@@ -1339,6 +1346,8 @@ if (!nexacro.Edit) {
 			this._undostack.push(value, (pos && pos != -1) ? pos.begin : 0, pos ? pos.end : 0);
 		}
 	};
+
+	_pEdit._setAccessibilityReadOnly = nexacro._emptyFn;
 
 	_pEdit = null;
 }

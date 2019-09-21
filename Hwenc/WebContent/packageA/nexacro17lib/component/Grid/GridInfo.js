@@ -88,6 +88,11 @@ if (!nexacro.GridFormat) {
 		};
 	};
 
+	_pGridCellInfo._clearStyle = function () {
+		this._stylecache = {
+		};
+	};
+
 	_pGridCellInfo._getSuppressInfo = function (disprowidx, make) {
 		if (disprowidx == undefined) {
 			return this._suppress_infos;
@@ -241,7 +246,7 @@ if (!nexacro.GridFormat) {
 
 	_pGridCellInfo._getTooltipText = function (rowidx) {
 		var text = this._getAttrValue(this.tooltiptext, rowidx);
-		if (!text || text == "") {
+		if (text === null || text === undefined) {
 			text = this.parent._getTooltipText(rowidx);
 		}
 		return text;
@@ -526,11 +531,8 @@ if (!nexacro.GridFormat) {
 
 	_pGridBandInfo._getTooltipText = function (rowidx) {
 		var text = this._getAttrValue(this.tooltiptext, rowidx);
-		if (!text && text == "") {
+		if (text === null || text === undefined) {
 			text = this._grid.tooltiptext;
-			if (!text) {
-				text = "";
-			}
 		}
 		return text;
 	};
@@ -680,11 +682,13 @@ if (!nexacro.GridFormat) {
 			this._bodyband = null;
 		}
 
-		if (this._headcells) {
-			var cells = this._headcells;
-			var len = cells.length;
+		var cells, len, i;
 
-			for (var i = 0; i < len; i++) {
+		if (this._headcells) {
+			cells = this._headcells;
+			len = cells.length;
+
+			for (i = 0; i < len; i++) {
 				cells[i].destroy();
 			}
 
@@ -692,10 +696,10 @@ if (!nexacro.GridFormat) {
 		}
 
 		if (this._summcells) {
-			var cells = this._summcells;
-			var len = cells.length;
+			cells = this._summcells;
+			len = cells.length;
 
-			for (var i = 0; i < len; i++) {
+			for (i = 0; i < len; i++) {
 				cells[i].destroy();
 			}
 
@@ -703,10 +707,10 @@ if (!nexacro.GridFormat) {
 		}
 
 		if (this._bodycells) {
-			var cells = this._bodycells;
-			var len = cells.length;
+			cells = this._bodycells;
+			len = cells.length;
 
-			for (var i = 0; i < len; i++) {
+			for (i = 0; i < len; i++) {
 				cells[i].destroy();
 			}
 
@@ -719,7 +723,7 @@ if (!nexacro.GridFormat) {
 		this._grid = null;
 		this.parent = null;
 
-		for (var i = 0; i < this._innerdatasets_name.length; i++) {
+		for (i = 0; i < this._innerdatasets_name.length; i++) {
 			var name = this._innerdatasets_name[i];
 			var inds = this._innerdatasets[name];
 
@@ -739,11 +743,12 @@ if (!nexacro.GridFormat) {
 		if (this._cols) {
 			var _cols = this._cols;
 			var _colsLen = this._cols.length;
+			var i;
 
 			leftwidth = bodywidth = rightwidth = 0;
 
 			if (!autofitcol_rate.length) {
-				for (var i = 0; i < _colsLen; i++) {
+				for (i = 0; i < _colsLen; i++) {
 					_cols[i].size = _cols[i].orgsize;
 					_cols[i].left = _cols[i].orgleft;
 					_cols[i].right = _cols[i].orgright;
@@ -762,7 +767,7 @@ if (!nexacro.GridFormat) {
 			}
 			else {
 				var left = 0;
-				for (var i = 0; i < _colsLen; i++) {
+				for (i = 0; i < _colsLen; i++) {
 					_cols[i].tempsize = undefined;
 
 					if (_cols[i]._area == "left") {
@@ -865,9 +870,6 @@ if (!nexacro.GridFormat) {
 	};
 
 	_pGridFormat._insertLeftColumn = function (size, addidx) {
-		var width = this.leftWidth + size;
-		var orgwidth = this._orgleftWidth + size;
-
 		if (addidx >= this._cols.length) {
 			return this._addLeftColumn(size);
 		}
@@ -901,9 +903,6 @@ if (!nexacro.GridFormat) {
 	};
 
 	_pGridFormat._insertRightColumn = function (size, addidx) {
-		var width = this.rightWidth + size;
-		var orgwidth = this._orgrightWidth + size;
-
 		if (addidx >= this._cols.length) {
 			return this._addRightColumn(size);
 		}
@@ -937,9 +936,6 @@ if (!nexacro.GridFormat) {
 	};
 
 	_pGridFormat._insertBodyColumn = function (size, addidx) {
-		var width = this.bodyWidth + size;
-		var orgwidth = this._orgbodyWidth + size;
-
 		if (addidx >= this._cols.length) {
 			return this._addBodyColumn(size);
 		}
@@ -976,7 +972,6 @@ if (!nexacro.GridFormat) {
 
 	_pGridFormat._moveColumn = function (fromcol, tocol, fromcolspan, tocolspan, cellmovingtype) {
 		var from_col_info = this._cols[fromcol];
-		var from_area = from_col_info._area;
 		var from_left = from_col_info.left;
 		var from_right = from_col_info.right;
 
@@ -1009,14 +1004,16 @@ if (!nexacro.GridFormat) {
 		this._cols.splice(fromcol, 1);
 		this._cols.splice(tocol, 0, from_col_info);
 
+		var i;
+
 		if (fromcol > tocol) {
-			for (var i = tocol; i < fromcol; i++) {
+			for (i = tocol; i < fromcol; i++) {
 				this._cols[i].left = this._cols[i + 1].left;
 				this._cols[i].right = this._cols[i + 1].right;
 			}
 		}
 		else {
-			for (var i = tocol; i > fromcol; i--) {
+			for (i = tocol; i > fromcol; i--) {
 				this._cols[i].left = this._cols[i - 1].left;
 				this._cols[i].right = this._cols[i - 1].right;
 			}
@@ -1314,10 +1311,8 @@ if (!nexacro.GridFormat) {
 	};
 
 	_pGridFormat._getCurrFormatStr = function () {
-		var hr = 0;
-		var i = 0;
+		var i;
 		var nColCount = 0;
-		var nPvtCount = 0;
 		var _cols = this._cols;
 		var _headrows = this._headrows;
 		var _bodyrows = this._bodyrows;
@@ -1355,19 +1350,19 @@ if (!nexacro.GridFormat) {
 
 				if (_headrows) {
 					var _headrowsLen = _headrows.length;
-					for (var i = 0; i < _headrowsLen; i++) {
+					for (i = 0; i < _headrowsLen; i++) {
 						strContents += "<Row band=\"head\" size=\"" + _headrows[i].size + "\"/>\n";
 					}
 				}
 				if (_bodyrows) {
 					var _bodyrowsLen = _bodyrows.length;
-					for (var i = 0; i < _bodyrowsLen; i++) {
+					for (i = 0; i < _bodyrowsLen; i++) {
 						strContents += "<Row band=\"body\" size=\"" + _bodyrows[i].size + "\"/>\n";
 					}
 				}
 				if (_summrows) {
 					var _summrowsLen = _summrows.length;
-					for (var i = 0; i < _summrowsLen; i++) {
+					for (i = 0; i < _summrowsLen; i++) {
 						strContents += "<Row band=\"summ\" size=\"" + _summrows[i].size + "\"/>\n";
 					}
 				}
@@ -1456,7 +1451,7 @@ if (!nexacro.GridFormat) {
 
 	_pGridFormat._loadFromDOM = function (formatElem) {
 		var i, j, len, cnt, bandstr, sizestr, bandtype;
-		var colstr, colval, colspanstr, colspan, rowstr, rowval, rowspanstr, rowspan, attrval;
+		var attrval;
 		var bandobj, cellobj, bandElem, cellElem;
 
 
@@ -1500,7 +1495,7 @@ if (!nexacro.GridFormat) {
 			if (bandstr == "head") {
 				this._addHeadRow((parseInt(sizestr) | 0));
 			}
-			else if (bandstr == "summ") {
+			else if (bandstr == "summ" || bandstr == "summary") {
 				this._addSummRow((parseInt(sizestr) | 0));
 			}
 			else {
@@ -1520,7 +1515,7 @@ if (!nexacro.GridFormat) {
 				prop = _property_map[k][0];
 				attrval = xmlelem.getAttribute(prop);
 
-				if (attrval) {
+				if (attrval !== null && attrval !== undefined) {
 					obj["set_" + prop](attrval);
 				}
 			}
@@ -1624,11 +1619,12 @@ if (!nexacro.GridFormat) {
 			rows = this._summrows;
 		}
 
-		for (var i = col; i < endcol; i++) {
+		var i;
+		for (i = col; i < endcol; i++) {
 			width += cols[i].orgsize;
 		}
 
-		for (var i = row; i < endrow; i++) {
+		for (i = row; i < endrow; i++) {
 			height += rows[i].orgsize;
 		}
 
@@ -1656,7 +1652,6 @@ if (!nexacro.GridFormat) {
 			}
 
 			var col;
-			var pos = 0;
 
 			for (var i = 0; i < len; i++) {
 				if (i < idx) {
@@ -1701,12 +1696,13 @@ if (!nexacro.GridFormat) {
 		var factor = bodywidth / this.bodyWidth;
 		this.bodyWidth = this._bodyWidth;
 		var len = this._cols.length;
-		var col, bodylastcol, bodylastcolidx = -1;
+		var col, bodylastcol = -1;
 		var pos = 0;
 		var tot = 0;
+		var i;
 
 		if (!autofitcol_rate.length) {
-			for (var i = 0; i < len; i++) {
+			for (i = 0; i < len; i++) {
 				col = this._cols[i];
 				if (col._area != "body") {
 					continue;
@@ -1733,12 +1729,11 @@ if (!nexacro.GridFormat) {
 
 				if (col.size > 0) {
 					bodylastcol = col;
-					bodylastcolidx = i;
 				}
 			}
 		}
 		else {
-			for (var i = 0; i < len; i++) {
+			for (i = 0; i < len; i++) {
 				col = this._cols[i];
 				if (col._area != "body") {
 					continue;
@@ -1755,7 +1750,6 @@ if (!nexacro.GridFormat) {
 				pos = pos + col.size;
 				col.right = pos;
 				bodylastcol = col;
-				bodylastcolidx = i;
 			}
 		}
 
@@ -1813,8 +1807,9 @@ if (!nexacro.GridFormat) {
 		var cellsize = (bandcells) ? bandcells.length : 0;
 		var rowsize = (bandrows) ? bandrows.length : 0;
 		var cellobj = null;
+		var i;
 
-		for (var i = 0; i < cellsize; i++) {
+		for (i = 0; i < cellsize; i++) {
 			bandcells[i]._endcol = false;
 
 			if (bandcells[i]._col >= col) {
@@ -1822,7 +1817,7 @@ if (!nexacro.GridFormat) {
 			}
 		}
 
-		for (var i = 0; i < rowsize; i++) {
+		for (i = 0; i < rowsize; i++) {
 			cellobj = new nexacro.GridCellInfo(bandtype + cellsize, bandobj, this.parent, bandtype, cellsize);
 			cellobj.celltype = bandtype;
 			cellobj._col = col;
@@ -1927,7 +1922,7 @@ if (!nexacro.GridFormat) {
 			}
 		}
 
-		var col = this._cols.length;
+		var col;
 		var colSize = this._defaultColSize;
 
 		if (areatype == "left") {
@@ -1988,24 +1983,18 @@ if (!nexacro.GridFormat) {
 
 		var areaInfos = {
 		};
-		var colIdx, fromIdx, toIdx;
+		var colIdx;
+		var i;
 
-
-		for (var i = 0; i < bandcellsLen; i++) {
+		for (i = 0; i < bandcellsLen; i++) {
 			cellobj = bandcells[i];
 			colIdx = cellobj._col;
 
-			if (colIdx == fromcol) {
-				fromIdx = colIdx;
-			}
-			if (colIdx == tocol) {
-				toIdx = colIdx;
-			}
 
 			areaInfos[colIdx] = cellobj._area;
 		}
 
-		for (var i = 0; i < bandcellsLen; i++) {
+		for (i = 0; i < bandcellsLen; i++) {
 			cellobj = bandcells[i];
 			_col = cellobj._col;
 
@@ -2049,7 +2038,7 @@ if (!nexacro.GridFormat) {
 		var rowslen = rows.length;
 		var cellslen = cells.length;
 
-		var i = 0, j = 0, k = 0;
+		var i, j = 0, k = 0;
 		var tmp = [], tmp2 = [];
 
 		for (i = 0; i < rowslen; i++) {
@@ -2078,8 +2067,9 @@ if (!nexacro.GridFormat) {
 		var rowsize = bandrows.length;
 		var cellobj = null;
 		var mergecells = [];
+		var i, j;
 
-		for (var i = 0; i < cellsize; i++) {
+		for (i = 0; i < cellsize; i++) {
 			cellobj = bandcells[i];
 
 			if (cellobj._col < insertidx && (cellobj._col + cellobj._colspan - 1) >= insertidx) {
@@ -2089,7 +2079,7 @@ if (!nexacro.GridFormat) {
 
 		var mergecell;
 		if (mergecells.length > 0) {
-			for (var i = 0; i < mergecells.length; i++) {
+			for (i = 0; i < mergecells.length; i++) {
 				mergecell = mergecells[i];
 				mergecell._colspan++;
 
@@ -2105,7 +2095,7 @@ if (!nexacro.GridFormat) {
 					this._insertCell(mergecell._subcells, cellobj, subcol, 0);
 				}
 
-				for (var j = 0; j < cellsize; j++) {
+				for (j = 0; j < cellsize; j++) {
 					cellobj = bandcells[j];
 
 					if (cellobj._col >= insertidx && cellobj._row == mergecell._row) {
@@ -2115,8 +2105,8 @@ if (!nexacro.GridFormat) {
 			}
 		}
 
-		for (var i = 0; i < rowsize; i++) {
-			for (var j = 0; j < mergecells.length; j++) {
+		for (i = 0; i < rowsize; i++) {
+			for (j = 0; j < mergecells.length; j++) {
 				mergecell = mergecells[j];
 				if (mergecell._row == i) {
 					break;
@@ -2140,7 +2130,7 @@ if (!nexacro.GridFormat) {
 		var endcol = (this._cols) ? (this._cols.length - 1) : -1;
 
 		cellsize = bandcells.length;
-		for (var i = 0; i < cellsize; i++) {
+		for (i = 0; i < cellsize; i++) {
 			cellobj = bandcells[i];
 
 			if (cellobj._col == endcol) {
@@ -2391,17 +2381,18 @@ if (!nexacro.GridFormat) {
 		}
 
 		var row = -1;
+		var bandobj, bandcells, bandrows, rowfunc, addfunc;
 
 		if (bandtype == "head") {
 			if (this._headband == null) {
 				this._headband = new nexacro.GridBandInfo("head", "head", this, this.parent);
 			}
 
-			var bandobj = this._headband;
-			var bandcells = this._headcells;
-			var bandrows = this._headrows;
-			var rowfunc = "_addHeadRow";
-			var addfunc = "_addHeadCell";
+			bandobj = this._headband;
+			bandcells = this._headcells;
+			bandrows = this._headrows;
+			rowfunc = "_addHeadRow";
+			addfunc = "_addHeadCell";
 			row = this._appendContentsRow("head", bandobj, bandcells, bandrows, rowfunc, addfunc);
 		}
 		else if (bandtype == "summ" || bandtype == "summary") {
@@ -2409,11 +2400,11 @@ if (!nexacro.GridFormat) {
 				this._summband = new nexacro.GridBandInfo("summary", "summ", this, this.parent);
 			}
 
-			var bandobj = this._summband;
-			var bandcells = this._summcells;
-			var bandrows = this._summrows;
-			var rowfunc = "_addSummRow";
-			var addfunc = "_addSummCell";
+			bandobj = this._summband;
+			bandcells = this._summcells;
+			bandrows = this._summrows;
+			rowfunc = "_addSummRow";
+			addfunc = "_addSummCell";
 			row = this._appendContentsRow("summary", bandobj, bandcells, bandrows, rowfunc, addfunc);
 		}
 		else if (bandtype == "body") {
@@ -2421,11 +2412,11 @@ if (!nexacro.GridFormat) {
 				this._bodyband = new nexacro.GridBandInfo("body", "body", this, this.parent);
 			}
 
-			var bandobj = this._bodyband;
-			var bandcells = this._bodycells;
-			var bandrows = this._bodyrows;
-			var rowfunc = "_addBodyRow";
-			var addfunc = "_addBodyCell";
+			bandobj = this._bodyband;
+			bandcells = this._bodycells;
+			bandrows = this._bodyrows;
+			rowfunc = "_addBodyRow";
+			addfunc = "_addBodyCell";
 			row = this._appendContentsRow("body", bandobj, bandcells, bandrows, rowfunc, addfunc);
 		}
 
@@ -2434,6 +2425,10 @@ if (!nexacro.GridFormat) {
 
 	_pGridFormat._deleteRowCell = function (band, row) {
 		var cells = this._bodycells;
+
+		if (band == "summary") {
+			band = "summ";
+		}
 
 		if (band == "head") {
 			cells = this._headcells;
@@ -2445,11 +2440,12 @@ if (!nexacro.GridFormat) {
 			return undefined;
 		}
 
-		var colspan, rowspan;
+		var rowspan;
+		var subcells, subcell;
+		var j, k;
 
 		for (var i = 0; i < cells.length; i++) {
 			if (cells[i]._row == row) {
-				colspan = cells[i]._colspan;
 				rowspan = cells[i]._rowspan;
 
 				if (rowspan == 1) {
@@ -2458,15 +2454,13 @@ if (!nexacro.GridFormat) {
 					i--;
 				}
 				else {
-					var subcells = cells[i]._subcells;
-					var subcell;
+					subcells = cells[i]._subcells;
 
-					for (var j = 0; j < subcells.length; j++) {
+					for (j = 0; j < subcells.length; j++) {
 						subcell = subcells[j];
 						if (subcell._row + cells[i]._row == row) {
-							delete subcell;
 							subcells.splice(j, 1);
-							for (var k = j; k < subcells.length; k++) {
+							for (k = j; k < subcells.length; k++) {
 								subcells[k]._cellidx--;
 							}
 							j--;
@@ -2486,15 +2480,13 @@ if (!nexacro.GridFormat) {
 			}
 			else {
 				if ((cells[i]._row + cells[i]._rowspan - 1) >= row) {
-					var subcells = cells[i]._subcells;
-					var subcell;
+					subcells = cells[i]._subcells;
 
-					for (var j = 0; j < subcells.length; j++) {
+					for (j = 0; j < subcells.length; j++) {
 						subcell = subcells[j];
 						if (subcell._row + cells[i]._row == row) {
-							delete subcell;
 							subcells.splice(j, 1);
-							for (var k = j; k < subcells.length; k++) {
+							for (k = j; k < subcells.length; k++) {
 								subcells[k]._cellidx--;
 							}
 							j--;
@@ -2602,7 +2594,8 @@ if (!nexacro.GridFormat) {
 		}
 
 		var mergecells = [];
-		for (var i = 0; i < cellsize; i++) {
+		var i, j;
+		for (i = 0; i < cellsize; i++) {
 			cellobj = bandcells[i];
 
 			if (cellobj._row < insertidx) {
@@ -2618,19 +2611,19 @@ if (!nexacro.GridFormat) {
 		if (mergecells.length > 0) {
 			var mergecell, subcells;
 
-			for (var i = 0; i < mergecells.length; i++) {
+			for (i = 0; i < mergecells.length; i++) {
 				mergecell = mergecells[i];
 				subcells = mergecell._subcells;
 				mergecell._rowspan++;
 
 				if (subcells.length) {
-					for (var j = 0; j < subcells.length; j++) {
+					for (j = 0; j < subcells.length; j++) {
 						if (subcells[j]._row >= insertidx - mergecell._row) {
 							subcells[j]._row++;
 						}
 					}
 
-					for (var j = mergecell._col; j < mergecell._col + mergecell._colspan; j++) {
+					for (j = mergecell._col; j < mergecell._col + mergecell._colspan; j++) {
 						cellobj = new nexacro.GridCellInfo(bandtype + mergecell._cellidx + "_sub" + subcells.length, bandobj, this.parent, bandtype, subcells.length);
 						cellobj.celltype = bandtype;
 						cellobj._col = j;
@@ -2644,20 +2637,22 @@ if (!nexacro.GridFormat) {
 				}
 			}
 
-			for (var i = (mergecell._col + mergecell._colspan); i < colsize; i++) {
-				cellobj = new nexacro.GridCellInfo(bandtype + cellsize, bandobj, this.parent, bandtype, cellsize);
-				cellobj.celltype = bandtype;
-				cellobj._col = i;
-				cellobj._colspan = 1;
-				cellobj._row = insertidx;
-				cellobj._rowspan = 1;
-				cellobj._endcol = ((i + 1) == this.endbodycol);
-				this[addfunc](cellobj);
-				cellsize++;
+			if (mergecell) {
+				for (i = (mergecell._col + mergecell._colspan); i < colsize; i++) {
+					cellobj = new nexacro.GridCellInfo(bandtype + cellsize, bandobj, this.parent, bandtype, cellsize);
+					cellobj.celltype = bandtype;
+					cellobj._col = i;
+					cellobj._colspan = 1;
+					cellobj._row = insertidx;
+					cellobj._rowspan = 1;
+					cellobj._endcol = ((i + 1) == this.endbodycol);
+					this[addfunc](cellobj);
+					cellsize++;
+				}
 			}
 		}
 		else {
-			for (var i = 0; i < colsize; i++) {
+			for (i = 0; i < colsize; i++) {
 				cellobj = new nexacro.GridCellInfo(bandtype + cellsize, bandobj, this.parent, bandtype, cellsize);
 				cellobj.celltype = bandtype;
 				cellobj._col = i;
@@ -2709,16 +2704,18 @@ if (!nexacro.GridFormat) {
 			return -1;
 		}
 
+		var bandobj, bandcells, bandrows, rowfunc, addfunc;
+
 		if (bandtype == "head") {
 			if (this._headband == null) {
 				this._headband = new nexacro.GridBandInfo("head", "head", this, this.parent);
 			}
 
-			var bandobj = this._headband;
-			var bandcells = this._headcells;
-			var bandrows = this._headrows;
-			var rowfunc = "_insertHeadRow";
-			var addfunc = "_addHeadCell";
+			bandobj = this._headband;
+			bandcells = this._headcells;
+			bandrows = this._headrows;
+			rowfunc = "_insertHeadRow";
+			addfunc = "_addHeadCell";
 
 			if (bandrows && nSubRowIndex > bandrows.length) {
 				nSubRowIndex = bandrows.length;
@@ -2731,11 +2728,11 @@ if (!nexacro.GridFormat) {
 				this._summband = new nexacro.GridBandInfo("summary", "summ", this, this.parent);
 			}
 
-			var bandobj = this._summband;
-			var bandcells = this._summcells;
-			var bandrows = this._summrows;
-			var rowfunc = "_insertSummRow";
-			var addfunc = "_addSummCell";
+			bandobj = this._summband;
+			bandcells = this._summcells;
+			bandrows = this._summrows;
+			rowfunc = "_insertSummRow";
+			addfunc = "_addSummCell";
 
 			if (bandrows && nSubRowIndex > bandrows.length) {
 				nSubRowIndex = bandrows.length;
@@ -2748,11 +2745,11 @@ if (!nexacro.GridFormat) {
 				this._bodyband = new nexacro.GridBandInfo("body", "body", this, this.parent);
 			}
 
-			var bandobj = this._bodyband;
-			var bandcells = this._bodycells;
-			var bandrows = this._bodyrows;
-			var rowfunc = "_insertBodyRow";
-			var addfunc = "_addBodyCell";
+			bandobj = this._bodyband;
+			bandcells = this._bodycells;
+			bandrows = this._bodyrows;
+			rowfunc = "_insertBodyRow";
+			addfunc = "_addBodyCell";
 
 			if (bandrows && nSubRowIndex > bandrows.length) {
 				nSubRowIndex = bandrows.length;
@@ -2789,7 +2786,6 @@ if (!nexacro.GridFormat) {
 
 				if (cells[i]._col == col) {
 					var colspan = cells[i]._colspan;
-					var rowspan = cells[i]._rowspan;
 
 					if (colspan == 1) {
 						delete cells[i];
@@ -2800,7 +2796,7 @@ if (!nexacro.GridFormat) {
 						i--;
 					}
 					else {
-						var col = cells[i]._col;
+						col = cells[i]._col;
 						cells[i]._colspan--;
 
 						delproc(cells[i]._subcells, 0);
@@ -2841,9 +2837,10 @@ if (!nexacro.GridFormat) {
 		cols.splice(col, 1);
 
 		var colsLen = cols.length;
+		var i;
 
 		if (area == "left") {
-			for (var i = col; i < colsLen; i++) {
+			for (i = col; i < colsLen; i++) {
 				if (cols[i]._area == "left") {
 					cols[i].left -= size;
 					cols[i].right -= size;
@@ -2852,7 +2849,7 @@ if (!nexacro.GridFormat) {
 			this.leftWidth -= size;
 		}
 		else if (area == "right") {
-			for (var i = col; i < colsLen; i++) {
+			for (i = col; i < colsLen; i++) {
 				if (cols[i]._area == "right") {
 					cols[i].left -= size;
 					cols[i].right -= size;
@@ -2861,7 +2858,7 @@ if (!nexacro.GridFormat) {
 			this.rightWidth -= size;
 		}
 		else {
-			for (var i = col; i < colsLen; i++) {
+			for (i = col; i < colsLen; i++) {
 				if (cols[i]._area == "body") {
 					cols[i].left -= size;
 					cols[i].right -= size;
@@ -3037,8 +3034,10 @@ if (!nexacro.GridFormat) {
 		var area;
 		var merged_check = -1;
 		var merged_matrix = [];
-		for (var i = 0; i < cellCount; i++) {
-			var cell = bandcells[i];
+		var i;
+		var cell;
+		for (i = 0; i < cellCount; i++) {
+			cell = bandcells[i];
 			if ((cell._row >= startRow && cell._row <= endRow) && (cell._col >= startCol && cell._col <= endCol)) {
 				if (area && area != bandcells[i]._area) {
 					return -1;
@@ -3072,11 +3071,7 @@ if (!nexacro.GridFormat) {
 			return -1;
 		}
 
-		for (var i = cellCount - 1; i >= 0; i--) {
-			var cell = bandcells[i];
-			var row = cell._row;
-			var col = cell._col;
-
+		for (i = cellCount - 1; i >= 0; i--) {
 			if (merged_matrix[i]) {
 				if (bKeepSubCell) {
 					if (bandcells[i]._col == startCol && bandcells[i]._row == startRow) {
@@ -3131,7 +3126,7 @@ if (!nexacro.GridFormat) {
 		}
 
 		var bandcellsLen = bandcells.length;
-		for (var i = 0; i < bandcellsLen; i++) {
+		for (i = 0; i < bandcellsLen; i++) {
 			bandcells[i]._cellidx = i;
 		}
 
@@ -3149,7 +3144,7 @@ if (!nexacro.GridFormat) {
 			band_rows = this._headrows;
 			band_cells = this._headcells;
 		}
-		else if (band_type == "summ") {
+		else if (band_type == "summ" || band_type == "summary") {
 			band_rows = this._summrows;
 			band_cells = this._summcells;
 		}
@@ -3185,9 +3180,10 @@ if (!nexacro.GridFormat) {
 			var subcells = null;
 			var current_merge_col = null;
 			var current_merge_row = null;
+			var i;
 
 			if (band_cells) {
-				for (var i = 0; i < band_cells.length; i++) {
+				for (i = 0; i < band_cells.length; i++) {
 					var row = band_cells[i]._row;
 					var col = band_cells[i]._col;
 					var area = band_cells[i]._area;
@@ -3197,10 +3193,11 @@ if (!nexacro.GridFormat) {
 					subcells = band_cells[i]._subcells;
 					current_merge_col = (band_cells[i]._colspan + band_cells[i]._col) - 1;
 					current_merge_row = (band_cells[i]._rowspan + band_cells[i]._row) - 1;
+					var j;
 
 					if (subcells.length > 0) {
 						if ((current_merge_col >= nStartCol && current_merge_col <= nEndCol) && (current_merge_row >= nStartRow && current_merge_row <= nEndRow)) {
-							for (var j = 0; j < subcells.length; j++) {
+							for (j = 0; j < subcells.length; j++) {
 								split_cell++;
 
 								subcells[j]._row = row;
@@ -3238,7 +3235,7 @@ if (!nexacro.GridFormat) {
 								if ((band_cells[i]._rowspan * band_cells[i]._colspan) > 1) {
 									var make_cell = null;
 									matrix.push(band_cells[i]);
-									for (var j = 0; j < (band_cells[i]._rowspan * band_cells[i]._colspan) - 1; j++) {
+									for (j = 0; j < (band_cells[i]._rowspan * band_cells[i]._colspan) - 1; j++) {
 										split_cell++;
 										make_cell = new nexacro.GridCellInfo(band_type + cell_idx, band_cells[i].parent, band_cells[i]._grid, band_cells[i].celltype, cell_idx++);
 
@@ -3284,14 +3281,14 @@ if (!nexacro.GridFormat) {
 					return l._cellidx - r._cellidx;
 				});
 
-				for (var i = 0; i < matrix.length; i++) {
+				for (i = 0; i < matrix.length; i++) {
 					matrix[i]._cellidx = i;
 				}
 
 				if (band_type == "head") {
 					this._headcells = matrix;
 				}
-				else if (band_type == "summ") {
+				else if (band_type == "summ" || band_type == "summary") {
 					this._summcells = matrix;
 				}
 				else {
@@ -3349,16 +3346,18 @@ if (!nexacro.GridFormat) {
 			}
 		}
 
-		if (cellinfo._subcells.length > nSubCellIdx && nSubCellIdx >= 0) {
-			cellinfo = cellinfo._subcells[nSubCellIdx];
+		if (cellinfo) {
+			if (cellinfo._subcells.length > nSubCellIdx && nSubCellIdx >= 0) {
+				cellinfo = cellinfo._subcells[nSubCellIdx];
 
-			if (cellinfo) {
-				if (cellinfo["set_" + strPropID]) {
-					cellinfo["set_" + strPropID](varValue);
+				if (cellinfo) {
+					if (cellinfo["set_" + strPropID]) {
+						cellinfo["set_" + strPropID](varValue);
+					}
+
+					this._updateFormatStr();
+					return cellinfo;
 				}
-
-				this._updateFormatStr();
-				return cellinfo;
 			}
 		}
 	};
@@ -3413,44 +3412,46 @@ if (!nexacro.GridFormat) {
 			}
 		}
 
-		if (cellinfo._subcells.length > nSubCellIdx && nSubCellIdx >= 0) {
-			cellinfo = cellinfo._subcells[nSubCellIdx];
+		if (cellinfo) {
+			if (cellinfo._subcells.length > nSubCellIdx && nSubCellIdx >= 0) {
+				cellinfo = cellinfo._subcells[nSubCellIdx];
 
-			if (cellinfo) {
-				var prop = cellinfo[strPropID];
-				if (prop == undefined) {
-					prop = cellinfo["_" + strPropID];
-				}
-
-				if (prop != undefined) {
-					var type = typeof (prop);
-
-					if (type == "number" || type == "string") {
-						return prop;
+				if (cellinfo) {
+					var prop = cellinfo[strPropID];
+					if (prop == undefined) {
+						prop = cellinfo["_" + strPropID];
 					}
-					else {
-						var val;
 
-						if (strPropID == "expr") {
-							val = prop._bindexpr;
+					if (prop != undefined) {
+						var type = typeof (prop);
+
+						if (type == "number" || type == "string") {
+							return prop;
 						}
 						else {
-							if (prop._bindtype == 2) {
+							var val;
+
+							if (strPropID == "expr") {
 								val = prop._bindexpr;
-								if (val.toLowerCase().indexOf("expr:") < 0) {
-									val = "expr:" + val;
-								}
 							}
 							else {
-								val = prop._value;
+								if (prop._bindtype == 2) {
+									val = prop._bindexpr;
+									if (val.toLowerCase().indexOf("expr:") < 0) {
+										val = "expr:" + val;
+									}
+								}
+								else {
+									val = prop._value;
+								}
 							}
-						}
 
-						if (val) {
-							return val;
-						}
-						else {
-							return prop;
+							if (val) {
+								return val;
+							}
+							else {
+								return prop;
+							}
 						}
 					}
 				}
@@ -3543,25 +3544,27 @@ if (!nexacro.GridFormat) {
 			}
 		}
 
-		if (cellinfo._subcells.length > nSubCellIdx && nSubCellIdx >= 0) {
-			cellinfo = cellinfo._subcells[nSubCellIdx];
+		if (cellinfo) {
+			if (cellinfo._subcells.length > nSubCellIdx && nSubCellIdx >= 0) {
+				cellinfo = cellinfo._subcells[nSubCellIdx];
 
-			if (cellinfo) {
-				var prop = cellinfo[strPropID];
-				if (prop == undefined) {
-					prop = cellinfo["_" + strPropID];
-				}
-
-				if (prop != undefined) {
-					var val;
-					if (prop._bindtype > 0) {
-						val = cellinfo._getAttrValue(prop, nRowidx);
-					}
-					else {
-						val = prop;
+				if (cellinfo) {
+					var prop = cellinfo[strPropID];
+					if (prop == undefined) {
+						prop = cellinfo["_" + strPropID];
 					}
 
-					return val;
+					if (prop != undefined) {
+						var val;
+						if (prop._bindtype > 0) {
+							val = cellinfo._getAttrValue(prop, nRowidx);
+						}
+						else {
+							val = prop;
+						}
+
+						return val;
+					}
 				}
 			}
 		}
@@ -3762,6 +3765,7 @@ if (!nexacro.GridFormat) {
 
 	_pGridFormat.setFormatColProperty = function (nColIdx, strPropID, nValue) {
 		if (this._cols) {
+			var i;
 			if (strPropID == "size") {
 				var column = this._cols[nColIdx];
 				var size = parseInt(nValue, 10);
@@ -3776,7 +3780,7 @@ if (!nexacro.GridFormat) {
 						var area = column._area;
 						var colleft = column.orgright;
 
-						for (var i = nColIdx + 1; i < cols_len; i++) {
+						for (i = nColIdx + 1; i < cols_len; i++) {
 							if (area == cols[i]._area) {
 								cols[i].orgleft = colleft;
 								cols[i].orgright = colleft + cols[i].orgsize;
@@ -3794,7 +3798,6 @@ if (!nexacro.GridFormat) {
 			else if (strPropID == "band") {
 				var val = nValue.toLowerCase();
 				var _cols = this._cols;
-				var _colsLen = this._cols.length;
 				var col, change = false;
 
 				function isChangeAble (bandcells) {
@@ -3820,7 +3823,7 @@ if (!nexacro.GridFormat) {
 					return false;
 				}
 
-				for (var i = 0; i < this._cols.length; i++) {
+				for (i = 0; i < this._cols.length; i++) {
 					col = _cols[i];
 					if (val == "left") {
 						if (i <= nColIdx && col._area != "left") {
@@ -3881,20 +3884,21 @@ if (!nexacro.GridFormat) {
 
 	_pGridFormat.getFormatColProperty = function (nColIdx, strPropID) {
 		if (this._cols) {
+			var column;
 			if (strPropID == "size") {
-				var column = this._cols[nColIdx];
+				column = this._cols[nColIdx];
 				if (column) {
 					return column.orgsize;
 				}
 			}
 			else if (strPropID == "band") {
-				var column = this._cols[nColIdx];
+				column = this._cols[nColIdx];
 				if (column) {
 					return column._area;
 				}
 			}
 			else if (strPropID == "fix") {
-				var column = this._cols[nColIdx];
+				column = this._cols[nColIdx];
 				if (column) {
 					if (column._area == "left" || column._area == "right") {
 						return "fixed";
@@ -3927,10 +3931,11 @@ if (!nexacro.GridFormat) {
 			if (isFinite(size)) {
 				var idx = nRowIdx;
 				var headCount = (this._headrows) ? this._headrows.length : 0;
+				var height;
 
 				if (idx < headCount) {
 					this._headrows[idx].size = size;
-					var height = this.headHeight;
+					height = this.headHeight;
 					this.headHeight = this._adjustFormatRowSize(this._headrows);
 
 					if (this.headHeight != height) {
@@ -3947,7 +3952,7 @@ if (!nexacro.GridFormat) {
 
 				if (idx < bodyCount) {
 					this._bodyrows[idx].size = size;
-					var height = this.bodyHeight;
+					height = this.bodyHeight;
 					this._body_height = this.bodyHeight = this._adjustFormatRowSize(this._bodyrows);
 
 					if (this.bodyHeight != height) {
@@ -3964,7 +3969,7 @@ if (!nexacro.GridFormat) {
 
 				if (idx < summCount) {
 					this._summrows[idx].size = size;
-					var height = this.summHeight;
+					height = this.summHeight;
 					this.summHeight = this._adjustFormatRowSize(this._summrows);
 
 					if (this.summHeight != height) {
@@ -3976,18 +3981,16 @@ if (!nexacro.GridFormat) {
 			}
 		}
 		else if (strPropID == "band") {
-			var idx = nRowIdx;
-			var val = nValue.toLowerCase();
-
 			return false;
 		}
 		return false;
 	};
 
 	_pGridFormat.getFormatRowProperty = function (nRowIdx, strPropID) {
+		var idx, headCount, bodyCount, summCount;
 		if (strPropID == "size") {
-			var idx = nRowIdx;
-			var headCount = (this._headrows) ? this._headrows.length : 0;
+			idx = nRowIdx;
+			headCount = (this._headrows) ? this._headrows.length : 0;
 
 			if (idx < headCount) {
 				return this._headrows[idx].orgsize;
@@ -3996,7 +3999,7 @@ if (!nexacro.GridFormat) {
 				idx -= headCount;
 			}
 
-			var bodyCount = (this._bodyrows) ? this._bodyrows.length : 0;
+			bodyCount = (this._bodyrows) ? this._bodyrows.length : 0;
 
 			if (idx < bodyCount) {
 				return this._bodyrows[idx].orgsize;
@@ -4005,15 +4008,15 @@ if (!nexacro.GridFormat) {
 				idx -= bodyCount;
 			}
 
-			var summCount = (this._summrows) ? this._summrows.length : 0;
+			summCount = (this._summrows) ? this._summrows.length : 0;
 
 			if (idx < summCount) {
 				return this._summrows[idx].orgsize;
 			}
 		}
 		else if (strPropID == "band") {
-			var idx = nRowIdx;
-			var headCount = (this._headrows) ? this._headrows.length : 0;
+			idx = nRowIdx;
+			headCount = (this._headrows) ? this._headrows.length : 0;
 
 			if (idx < headCount) {
 				return "head";
@@ -4022,7 +4025,7 @@ if (!nexacro.GridFormat) {
 				idx -= headCount;
 			}
 
-			var bodyCount = (this._bodyrows) ? this._bodyrows.length : 0;
+			bodyCount = (this._bodyrows) ? this._bodyrows.length : 0;
 
 			if (idx < bodyCount) {
 				return "body";
@@ -4031,7 +4034,7 @@ if (!nexacro.GridFormat) {
 				idx -= bodyCount;
 			}
 
-			var summCount = (this._summrows) ? this._summrows.length : 0;
+			summCount = (this._summrows) ? this._summrows.length : 0;
 
 			if (idx < summCount) {
 				return "summ";

@@ -2,6 +2,11 @@
 /* application 공통 */
 /* *********************************************************************************** */
 
+@media screen and (min-width:0\0) and (-ms-high-contrast: active) 
+{ 
+.nexacontentsbox {-ms-high-contrast-adjust:none; } 
+} 
+
 html, body
 {
   position:absolute;
@@ -9,9 +14,6 @@ html, body
   height:100%;
   /*font:10pt ""나눔고딕"";*/
   font:12pt Verdana;
-  -moz-user-select:none;
-  -webkit-user-select:none;
-  -ms-user-select:none;
 }
 
 div
@@ -22,6 +24,7 @@ div
   background-origin:padding-box;
   background-repeat:no-repeat;
   white-space : pre;
+  -ms-user-select:none;
   -moz-user-select:-moz-none;
   -webkit-user-select:none;
   -webkit-touch-callout:none;
@@ -186,6 +189,7 @@ input::-ms-clear,input::-ms-reveal
   resize:none;
   background:transparent;
   padding : 0px;
+  box-sizing:border-box;		
 }
 
 .nexaleftalign
@@ -212,7 +216,9 @@ input::-ms-clear,input::-ms-reveal
 {
   overflow:scroll;
   -ms-overflow-style:none;
+  color:black;
 }
+
 
 /* *********************************************************************************** */
 

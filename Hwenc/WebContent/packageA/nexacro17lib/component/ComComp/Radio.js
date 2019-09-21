@@ -451,7 +451,7 @@ if (!nexacro.Radio) {
 			var item_len = items.length;
 			if (ds && item_len) {
 				var dir = this.direction;
-				var priority_matrix = "row";
+				var priority_matrix;
 
 				var radio_columncount = this.columncount;
 				var radio_rowcount = this.rowcount;
@@ -493,7 +493,6 @@ if (!nexacro.Radio) {
 							apply_colcnt = Math.ceil(ds_rowcount / radio_rowcount);
 							if ((apply_colcnt * radio_rowcount) < ds_rowcount) {
 								apply_colcnt++;
-								apply_rowcnt = (((apply_colcnt * radio_rowcount) - ds_rowcount) >= apply_colcnt) ? radio_rowcount - 1 : radio_rowcount;
 							}
 						}
 						else {
@@ -518,7 +517,6 @@ if (!nexacro.Radio) {
 							apply_rowcnt = parseInt(ds_rowcount / radio_columncount);
 							if ((radio_columncount * apply_rowcnt) < ds_rowcount) {
 								apply_rowcnt++;
-								apply_colcnt = (((radio_columncount * apply_rowcnt) - ds_rowcount) >= apply_rowcnt) ? radio_columncount - 1 : radio_columncount;
 							}
 						}
 						else {
@@ -583,7 +581,9 @@ if (!nexacro.Radio) {
 					for (i = 0; i < apply_colcnt; i++) {
 						total_w += maxsize_col[i];
 					}
-					total_h += item_size[1] * apply_rowcnt;
+					if (item_size) {
+						total_h += item_size[1] * apply_rowcnt;
+					}
 				}
 			}
 
@@ -1096,7 +1096,6 @@ if (!nexacro.Radio) {
 			if (nexacro._enableaccessibility) {
 				if (keycode == nexacro.Event.KEY_UP || keycode == nexacro.Event.KEY_DOWN) {
 					var accIdx = this._accessibility_index;
-					var index = this.index;
 					var count = items.length;
 					var comp;
 
@@ -1148,7 +1147,6 @@ if (!nexacro.Radio) {
 		if (!this.enable || this.readonly == true) {
 			return false;
 		}
-		var items = this._items;
 
 		var pre_index = this._default_index;
 		var pre_value = this._default_value;
@@ -1329,7 +1327,7 @@ if (!nexacro.Radio) {
 			var items = this._items;
 			var item_len = items.length;
 			if (ds && item_len) {
-				var priority_matrix = "row";
+				var priority_matrix;
 				var fittocontents = this.fittocontents;
 				var dir = this.direction;
 
@@ -1438,7 +1436,6 @@ if (!nexacro.Radio) {
 							apply_rowcnt = parseInt(ds_rowcount / radio_columncount);
 							if ((radio_columncount * apply_rowcnt) < ds_rowcount) {
 								apply_rowcnt++;
-								apply_colcnt = (((radio_columncount * apply_rowcnt) - ds_rowcount) >= apply_rowcnt) ? radio_columncount - 1 : radio_columncount;
 							}
 						}
 						else {
@@ -1477,7 +1474,6 @@ if (!nexacro.Radio) {
 									item.move((item_width * j), (item_height * i), item_width, item_height);
 									item_index++;
 								}
-								item_left = 0;
 								item_top += item_height;
 							}
 						}
@@ -1545,7 +1541,6 @@ if (!nexacro.Radio) {
 									item.move((item_width * i), (item_height * j), item_width, item_height);
 									item_index++;
 								}
-								item_left = 0;
 								item_top += item_height;
 							}
 						}

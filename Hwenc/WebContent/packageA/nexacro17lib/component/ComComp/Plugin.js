@@ -120,8 +120,6 @@ if (!nexacro.Plugin) {
 
 			obj_elem.create(win);
 			obj_elem.setElementVisible(this.visible);
-
-			obj_elem.initEvent();
 		}
 	};
 
@@ -476,15 +474,17 @@ if (!nexacro.Plugin) {
 	_pPlugin.callMethod = function () {
 		var obj_elem = this._obj_elem;
 		if (obj_elem) {
-			for (var i = 0; i < arguments.length; i++) {
-				if (arguments[i] instanceof nexacro.Plugin) {
-					var plugin_elem = arguments[i]._obj_elem;
+			var conv_args = Array.prototype.slice.call(arguments);
+			for (var i = 0; i < conv_args.length; i++) {
+				if (conv_args[i] instanceof nexacro.Plugin) {
+					var plugin_elem = conv_args[i]._obj_elem;
 					if (plugin_elem) {
-						arguments[i] = plugin_elem.getPluginObject();
+						conv_args[i] = plugin_elem.getPluginObject();
 					}
 				}
 			}
-			return obj_elem.callMethod.apply(obj_elem, arguments);
+
+			return obj_elem.callMethod.apply(obj_elem, conv_args);
 		}
 	};
 
