@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="planemodel">
+	<select id="find_seat" parameterType="java.util.Map" resultType="int">
+		select seat_capacity from plane_model where plane_code = #{plane_code} and grade_code = #{grade_code}
+	</select>
+	
+	<update id="seat_count" parameterType="java.util.Map">
+		update plane_model set seat_capacity = seat_capacity - #{seat_count}
+		where plane_code = #{plane_code} and grade_code = #{grade_code}
+	</update>
+</mapper>

@@ -1,0 +1,293 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.0">
+  <Form id="login" width="1016" height="617" titletext="GSCM Development Login" onload="login_onload" onsize="login_onsize">
+    <Layouts>
+      <Layout height="617" mobileorientation="landscape" width="1016">
+        <Div id="divLogin" taborder="0" text="Div00" left="26.48%" top="40.84%" width="479" height="113">
+          <Layouts>
+            <Layout>
+              <Static id="Static08" taborder="4" left="10" top="10" height="30" cssclass="sta_WF_box02L" right="10"/>
+              <Static id="Static09" taborder="3" text="User Role" left="10" top="10" width="130" height="30" cssclass="sta_WF_box01R"/>
+              <Combo id="cmb_role" taborder="0" left="142" top="13" height="24" right="14"/>
+              <Static id="Static00" taborder="5" left="10" top="39" height="30" cssclass="sta_WF_box02L" right="10"/>
+              <Static id="Static01" taborder="6" text="User" left="10" top="39" width="130" height="30" cssclass="sta_WF_box01R"/>
+              <Button id="btn_login" taborder="1" text="Login" top="75" width="100" height="23" cssclass="btn_WF_basic01" right="242" onclick="divLogin_btn_login_onclick"/>
+              <Button id="btn_cancel" taborder="2" text="Cancel" top="75" height="23" cssclass="btn_WF_basic03" width="100" right="137" onclick="divLogin_btn_cancel_onclick"/>
+              <Combo id="cmb_userSearch" taborder="7" left="142" top="42" width="323" height="25" innerdataset="@DS_FILTER" codecolumn="STR" datacolumn="STR" type="search" onlbuttonup="divLogin_cmb_userSearch_onlbuttonup"/>
+              <Edit id="edt_user" taborder="8" left="142" top="42" width="292" height="25" border="1px solid #777777 , 0px none , 1px solid #777777 , 1px solid #777777" readonly="true" oneditclick="divLogin_edt_user_oneditclick"/>
+            </Layout>
+          </Layouts>
+        </Div>
+        <PopupDiv id="pdiv_userList" visible="false" left="401" top="429" width="700" height="390">
+          <Layouts>
+            <Layout>
+              <Static id="Static00" taborder="7" left="0" top="0" cssclass="sta_pop_bg01" right="1" bottom="1"/>
+              <Static id="Static01" taborder="6" text="User Search" left="0" top="0" height="40" cssclass="sta_pop_title01" right="0"/>
+              <Button id="btn_close" taborder="5" top="0" width="40" height="40" cssclass="btn_pop_close" right="0" onclick="pdiv_userList_btn_close_onclick"/>
+              <Static id="Static03" taborder="8" left="20" top="60" height="47" cssclass="sta_WF_box01L" right="20"/>
+              <Static id="st_userId" taborder="9" text="User Id" left="31" top="71" width="50" height="25" cssclass="sta_WF_label01R"/>
+              <Edit id="edt_searchUserId" taborder="0" left="89" top="71" width="170" height="25" imemode="alpha" onkeydown="pdiv_userList_edt_searchName_onkeydown"/>
+              <Static id="Static06" taborder="10" text="Name" left="276" top="71" width="50" height="25" cssclass="sta_WF_label01R"/>
+              <Edit id="edt_searchName" taborder="1" left="336" top="71" width="170" height="25" imemode="alpha" onkeydown="pdiv_userList_edt_searchName_onkeydown"/>
+              <Button id="btn_search" taborder="2" top="61" width="46" height="46" cssclass="btn_WF_search01" right="20" onclick="pdiv_userList_btn_search_onclick"/>
+              <Grid id="grd_userList" taborder="3" left="20" top="125" binddataset="ds_user" right="20" bottom="50" autofittype="col" oncelldblclick="pdiv_userList_grd_userList_oncelldblclick">
+                <Formats>
+                  <Format id="default">
+                    <Columns>
+                      <Column size="120"/>
+                      <Column size="220"/>
+                      <Column size="170"/>
+                      <Column size="150"/>
+                    </Columns>
+                    <Rows>
+                      <Row size="30" band="head"/>
+                      <Row size="30"/>
+                    </Rows>
+                    <Band id="head">
+                      <Cell text="userid"/>
+                      <Cell col="1" text="username"/>
+                      <Cell col="2" text="deptname"/>
+                      <Cell col="3" text="title"/>
+                    </Band>
+                    <Band id="body">
+                      <Cell text="bind:userid"/>
+                      <Cell col="1" text="bind:username"/>
+                      <Cell col="2" text="bind:deptname"/>
+                      <Cell col="3" text="bind:title"/>
+                    </Band>
+                  </Format>
+                </Formats>
+              </Grid>
+              <Button id="btn_ok" taborder="4" text="OK" width="80" height="23" cssclass="btn_WF_basic01" right="20" bottom="20" onclick="pdiv_userList_btn_ok_onclick"/>
+            </Layout>
+          </Layouts>
+        </PopupDiv>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="ds_role">
+        <ColumnInfo>
+          <Column id="gbm" type="STRING" size="32"/>
+          <Column id="role" type="STRING" size="32"/>
+          <Column id="description" type="STRING" size="32"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_user">
+        <ColumnInfo>
+          <Column id="userid" type="STRING" size="32"/>
+          <Column id="username" type="STRING" size="32"/>
+          <Column id="deptname" type="STRING" size="32"/>
+          <Column id="title" type="STRING" size="32"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_session">
+        <ColumnInfo>
+          <Column id="accessSalesidList" type="STRING" size="32"/>
+          <Column id="dpUserAuthority" type="STRING" size="32"/>
+          <Column id="fiUserAuthority" type="STRING" size="32"/>
+          <Column id="gbm" type="STRING" size="32"/>
+          <Column id="role" type="STRING" size="32"/>
+          <Column id="status" type="STRING" size="32"/>
+          <Column id="userProductScope" type="STRING" size="32"/>
+          <Column id="userid" type="STRING" size="32"/>
+          <Column id="userkorname" type="STRING" size="32"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.1"><![CDATA[this.fv_sRole     = "";
+this.fv_sUserId   = "";
+this.fv_sUserName = "";
+
+this.login_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
+{
+	// get PrivateProfile
+	this.fv_sRole     = nexacro._nvl(nexacro.getPrivateProfile("dev_role"), "SUPER");
+	this.fv_sUserId   = nexacro._nvl(nexacro.getPrivateProfile("dev_userid"), "");
+	this.fv_sUserName = nexacro._nvl(nexacro.getPrivateProfile("dev_username"), "");
+
+	// Search Role List
+	this.fn_getRole();
+	
+	// 해상도에 따른 로그인 위치 조정
+	this.moveToCenter(obj.width, obj.height);
+};
+
+this.login_onsize = function(obj:nexacro.Form,e:nexacro.SizeEventInfo)
+{
+	this.moveToCenter(e.cx, e.cy);
+};
+
+this.pdiv_userList_grd_userList_oncelldblclick = function(obj:nexacro.Grid,e:nexacro.GridClickEventInfo)
+{
+	this.fn_setUser(e.row);
+};
+
+this.divLogin_cmb_userSearch_onlbuttonup = function(obj:nexacro.Combo,e:nexacro.MouseEventInfo)
+{
+	this.fn_searchUser();
+};
+
+this.divLogin_edt_user_oneditclick = function(obj:nexacro.Edit,e:nexacro.EditClickEventInfo)
+{
+	this.fn_searchUser();
+};
+
+this.divLogin_btn_login_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	nexacro.getApplication().mainframe.childframe.set_formurl("frame::root.xfdl");
+	return;
+	
+	if (!this.divLogin.form.edt_user.value)
+	{
+		alert("로그인 대상 사용자를 선택해 주세요.");
+		return;
+	}
+	
+	var oDatas = {
+		svcid: "sel_UserLogin",
+		url: "system/xp/uxstudio/getauth.do",
+		outds: [
+			"ds_session=outDs"
+		],
+		args: [
+			"userid=" + nexacro.wrapQuote(this.divLogin.form.edt_user.userdata)
+		]
+	};
+
+	nxlib.transaction(this, oDatas, function()
+	{
+		nexacro.setPrivateProfile("dev_role",      this.divLogin.form.cmb_role.value);
+		nexacro.setPrivateProfile("dev_userid",    this.divLogin.form.edt_user.value);
+		nexacro.setPrivateProfile("dev_username",  this.divLogin.form.edt_user.userdata);
+		
+		nexacro.getApplication().mainframe.childframe.set_formurl("frame::root.xfdl");
+	});
+};
+
+this.divLogin_btn_cancel_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	nexacro.getApplication().exit();
+};
+
+this.pdiv_userList_btn_close_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.pdiv_userList.closePopup();
+};
+
+this.pdiv_userList_btn_search_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.fn_setFilter();
+};
+
+this.pdiv_userList_edt_searchName_onkeydown = function(obj:nexacro.Edit,e:nexacro.KeyEventInfo)
+{
+	if (e.keycode == 13)	this.fn_setFilter();
+};
+
+this.pdiv_userList_btn_ok_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.fn_setUser(this.ds_user.rowposition);
+};
+
+this.fn_getRole = function()
+{
+	var oDatas = {
+		svcid: "sel_RolList",
+		url: "system/xp/uxstudio/getrole.do",
+		outds: [
+			"ds_role=outDs"
+		]
+	};
+
+	nxlib.transaction(this, oDatas, function()
+	{
+		var iRow = this.ds_role.findRow("role", this.fv_sRole);
+		this.divLogin.form.cmb_role.set_index(iRow);
+		
+		this.divLogin.form.edt_user.set_value(this.fv_sUserId);
+		this.divLogin.form.edt_user.userdata = this.fv_sUserName;
+	});
+};
+
+this.fn_searchUser = function()
+{
+	var sRole = this.divLogin.form.cmb_role.value;
+	
+	if (this.fv_sLastSerachRole == sRole)
+	{
+		this.fn_showUserList();
+	}
+	else
+	{
+		this.fv_sLastSerachRole = sRole;
+		
+		var oDatas = {
+			svcid: "sel_UserList",
+			url: "system/xp/uxstudio/getuseridbyrole.do",
+			outds: [
+				"ds_user=outDs"
+			],
+			args: [
+				"role=" + nexacro.wrapQuote(sRole),
+				"userid=" + nexacro.wrapQuote(""),
+				"username=" + nexacro.wrapQuote("")
+			]
+		};
+
+		nxlib.transaction(this, oDatas, function()
+		{
+			this.fn_showUserList();
+		});
+	}
+};
+
+this.fn_showUserList = function()
+{
+	this.pdiv_userList.trackPopupByComponent(this.divLogin.form.cmb_userSearch, 0, this.divLogin.form.cmb_userSearch.height);
+};
+
+this.fn_setFilter = function()
+{
+	var sFilter = "";
+	var sSearchUserId = nexacro._nvl(this.pdiv_userList.form.edt_searchUserId.value, "");
+	var sSearchName = nexacro._nvl(this.pdiv_userList.form.edt_searchName.value, "");
+
+	if (sSearchUserId != "")
+	{
+		sFilter += "userid.toString().indexOf('" + sSearchUserId + "') >= 0";
+	}
+	if (sSearchName != "")
+	{
+		if (sFilter.length > 0) { sFilter += " && "; }
+		sFilter += "username.toString().indexOf('" + sSearchName + "') >= 0";
+	}
+	
+	this.ds_user.filter(sFilter);
+};
+
+this.fn_setUser = function(iRow)
+{
+	var sUserId   = this.ds_user.getColumn(iRow, "userid");
+	var sUserName = this.ds_user.getColumn(iRow, "username")
+	                + "/" + this.ds_user.getColumn(iRow, "title")
+	                + "/" + this.ds_user.getColumn(iRow, "deptname");
+	this.divLogin.form.edt_user.set_value(sUserName);
+	this.divLogin.form.edt_user.userdata = sUserId;
+
+	this.pdiv_userList.closePopup();
+};
+
+this.moveToCenter = function(x, y)
+{
+	var l = (x/2)-(this.divLogin.width/2);
+	var t = (y/2)-(this.divLogin.height/2);
+	
+	if (l < 0)	l = 0;
+	if (t < 0)	t = 0;
+	
+	this.divLogin.move(l, t);
+	
+	this.resetScroll();
+};]]></Script>
+  </Form>
+</FDL>

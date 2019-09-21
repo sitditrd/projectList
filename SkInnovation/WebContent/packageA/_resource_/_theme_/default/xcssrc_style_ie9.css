@@ -1,0 +1,488 @@
+﻿/* *********************************************************************************** */
+/* application 공통 */
+/* *********************************************************************************** */
+
+html, body
+{
+  position:absolute;
+  width:100%;
+  height:100%;
+  /*font:10pt ""나눔고딕"";*/
+  font:12pt Verdana;
+  -moz-user-select:none;
+  -webkit-user-select:none;
+  -ms-user-select:none;
+}
+
+div
+{
+  position:absolute;
+  box-sizing:border-box;
+  overflow:hidden;
+  background-origin:padding-box;
+  background-repeat:no-repeat;
+  white-space : pre;
+  -moz-user-select:-moz-none;
+  -webkit-user-select:none;
+  -webkit-touch-callout:none;
+  -webkit-appearance:none;
+  -webkit-tap-highlight-color:rgba(0,0,0,0);
+  outline:none;
+}
+
+table
+{
+  position:absolute;
+  box-sizing:border-box;
+  overflow:hidden;
+}
+
+input
+{
+  position:absolute;
+  box-sizing:border-box;
+  overflow:hidden;
+}
+
+img
+{
+  position:absolute;
+  box-sizing:border-box;
+}
+
+/* *********************************************************************************** */
+
+/* *********************************************************************************** */
+
+.nexacontainer
+{
+  position:absolute;
+  left:0px;
+  top:0px;
+  width:100%;
+  height:100%;
+}
+.nexacontainer.withvscroll
+{
+  right:14px;
+}
+.nexacontainer.withhscroll
+{
+  bottom:14px;
+}
+.nexacontainer.withbothscroll
+{
+  right:14px;
+  bottom:14px;
+}
+
+.nexalefttop
+{
+  left:0px;
+  top:0px;
+  background-repeat:no-repeat;
+  background-position:left top;
+  font-size:1px;
+}
+.nexaleftbottom
+{
+  left:0px;
+  bottom:0px;
+  background-repeat:no-repeat;
+  background-position:left bottom;
+  font-size:1px;
+}
+.nexarightbottom
+{
+  right:0px;
+  bottom:0px;
+  background-repeat:no-repeat;
+  background-position:right bottom;
+  font-size:1px;
+}
+.nexarighttop
+{
+  right:0px;
+  top:0px;
+  background-repeat:no-repeat;
+  background-position:right top;
+}
+.nexaedge
+{
+  width:100%;
+  height:100%;
+}
+.nexamodaloverlay
+{
+  width:100%;
+  height:100%;
+}
+.nexainnercontainer
+{
+  -ms-transform : translate3d(0px, 0px, 0);
+}
+
+.nexatransform
+{
+  -ms-transform : translate3d(0px, 0px, 0);
+}
+
+.nexacontentsbox
+{
+  position:relative;
+  display:table-cell;
+  background-position:left center;
+  background-repeat:no-repeat;
+  vertical-align:middle;
+}
+.nexatextitem
+{
+  position:relative;
+  vertical-align:middle;
+  white-space:inherit;
+  word-wrap:inherit;
+  word-break:inherit;
+  text-decoration:inherit;
+}
+.nexaiconitem
+{
+  position:relative;
+  vertical-align:middle;
+  background-position:center center;
+  background-repeat:no-repeat;
+}
+
+.nexainput
+{
+  font:inherit;
+  color:inherit;
+  cursor:inherit;
+  letter-spacing:inherit;
+  word-spacing:inherit;
+  border:none;
+  outline:none;
+  background:transparent;
+  padding : 0px;
+}
+
+.nexatextarea
+{
+  font:inherit;
+  color:inherit;
+  cursor:inherit;
+  line-height : inherit;
+  letter-spacing:inherit;
+  word-spacing:inherit;
+  white-space:pre;
+  word-wrap:normal;
+  border:none;
+  outline:none;
+  resize:none;
+  background:transparent;
+  padding : 0px;
+}
+
+.nexaleftalign
+{
+  text-align:left;
+}
+
+.nexarightalign
+{
+  text-align:right;
+}
+
+.nexacenteralign
+{
+  text-align:center;
+}
+
+.nexamap div *
+{
+  overflow:visible;
+}
+
+/* *********************************************************************************** */
+
+/* *********************************************************************************** */
+.celltreeline
+{
+  border : 1px dotted #999999;
+}
+/* *********************************************************************************** */
+
+/* *********************************************************************************** */
+.Edit, .MaskEdit, .TextArea, .EditControl, .MaskEditControl, .TextAreaControl
+{
+  cursor:text;
+}
+.Button .nexacontentsbox, .ButtonControl .nexacontentsbox
+{
+  text-align:center;
+  background-position:center center;
+}
+
+.FileDownload  .nexacontentsbox, .FileDownloadControl .nexacontentsbox
+{
+  text-align:center;
+  background-position:center center;
+}
+
+.IconTextControl .nexacontentsbox, .IconControl .nexacontentsbox
+{
+  text-align:center;
+  background-position:center center;
+}
+
+.DatePickerDayItemControl .nexacontentsbox, .DatePickerWeekItemControl .nexacontentsbox, .TitleBarButtonControl .nexacontentsbox
+{
+  text-align:center;
+  background-position:center center;
+}
+
+.MainFrame, .VScrollBarControl, .HScrollBarControl
+{
+  cursor:default;
+}
+/* *********************************************************************************** */
+
+.Grid
+{
+	background : #ffffff;
+	border-top : 2px solid #e0002a;
+	border-right : 1px solid #b7b1b2;
+	border-bottom : 1px solid #b7b1b2;
+	border-left : 1px solid #b7b1b2;
+}
+.Grid .head .row .cell
+{
+	font : bold 12px Gulim;
+	color : #2f2f2f;
+	background : #f7f7f7;
+	border : 1px solid #cacaca;
+}
+.Grid .head .row .cell > .nexacontentsbox
+{
+	text-align : center;
+	background-position-x : center;
+}
+.Grid .body .row .cell
+{
+	color : #333333;
+	border : 1px solid #dbdee2;
+}
+.GroupBox .groupboxtitle
+{
+	font : bold 12px Gulim;
+	color : #e0002a;
+}
+.Static.sta_WF_boxBg
+{
+	background : #f0f0f0;
+}
+.Static.sta_WF_label
+{
+	font : bold 12px Gulim;
+}
+.Static.sta_WF_infoBox
+{
+	background : #fff7eb;
+	color : #333333;
+}
+.Static.sta_WF_logo
+{
+	background : url('./../../../_resource_/_images_/img_WF_logo.png') no-repeat left center;
+}
+.Static.sta_WF_markWhite
+{
+	background : #ffffff;
+	border : 1px solid #777777;
+	color : #333333;
+}
+.Static.sta_WF_markBlue
+{
+	background : #96ecf1;
+	border : 1px solid #209c9a;
+	color : #333333;
+}
+.Static.sta_WF_markRed
+{
+	background : #f5bab6;
+	border : 1px solid #d97069;
+	color : #333333;
+}
+.Button.btn_WF_btnWhite
+{
+	background : #ffffff;
+	border : 1px solid #777777;
+	color : #333333;
+	font : bold 12px/normal Gulim;
+	cursor : pointer;
+}
+.Button.btn_WF_btnRed
+{
+	background : #ffffff;
+	border : 1px solid #e0002a;
+	color : #555555;
+	font : bold 12px/normal Gulim;
+	cursor : pointer;
+}
+.Button.btn_WF_btnInitial
+{
+	background : url('./../../../_resource_/_images_/btn_WF_initialize.png') no-repeat left center #ffffff;
+	border : 1px solid #e0002a;
+	color : #555555;
+	font : bold 12px/normal Gulim;
+	cursor : pointer;
+}
+.Button.btn_WF_btnSearch
+{
+	background : url('./../../../_resource_/_images_/btn_WF_search.png') no-repeat left center #ffffff;
+	border : 1px solid #e0002a;
+	color : #555555;
+	font : bold 12px/normal Gulim;
+	cursor : pointer;
+}
+.Button.btn_WF_btnExp
+{
+	background : url('./../../../_resource_/_images_/btn_WF_doc.png') no-repeat left center #ffffff;
+	border : 1px solid #e0002a;
+	color : #555555;
+	font : bold 12px/normal Gulim;
+	cursor : pointer;
+}
+#nexacontainer .Grid .body .row .cell[status=mouseover]
+{
+	background : #f8f8f8;
+}
+#nexacontainer .Button.btn_WF_btnWhite[status=focused]
+{
+	background : #ffffff;
+	border : 1px solid #777777;
+	color : #333333;
+	font : bold 12px/normal Gulim;
+	cursor : pointer;
+}
+#nexacontainer .Button.btn_WF_btnWhite[status=mouseover]
+{
+	border : 1px solid #585858;
+	background : #f9f9f9;
+}
+#nexacontainer .Button.btn_WF_btnRed[status=focused]
+{
+	background : #ffffff;
+	border : 1px solid #e0002a;
+	color : #555555;
+	font : bold 12px/normal Gulim;
+	cursor : pointer;
+}
+#nexacontainer .Button.btn_WF_btnRed[status=mouseover]
+{
+	border : 0px none;
+	background : #f9f9f9;
+}
+#nexacontainer .Button.btn_WF_btnInitial[status=focused]
+{
+	background : url('./../../../_resource_/_images_/btn_WF_initialize.png') no-repeat left center #ffffff;
+	border : 1px solid #e0002a;
+	color : #555555;
+	font : bold 12px/normal Gulim;
+	cursor : pointer;
+}
+#nexacontainer .Button.btn_WF_btnInitial[status=mouseover]
+{
+	background : url('./../../../_resource_/_images_/btn_WF_initialize.png') no-repeat left center #fffafb;
+	border : 1px solid #e0002a;
+}
+#nexacontainer .Button.btn_WF_btnSearch[status=focused]
+{
+	background : url('./../../../_resource_/_images_/btn_WF_search.png') no-repeat left center #ffffff;
+	border : 1px solid #e0002a;
+	color : #555555;
+	font : bold 12px/normal Gulim;
+	cursor : pointer;
+}
+#nexacontainer .Button.btn_WF_btnSearch[status=mouseover]
+{
+	background : url('./../../../_resource_/_images_/btn_WF_search.png') no-repeat left center #fffafb;
+	border : 1px solid #e0002a;
+}
+#nexacontainer .Button.btn_WF_btnExp[status=focused]
+{
+	background : url('./../../../_resource_/_images_/btn_WF_doc.png') no-repeat left center #ffffff;
+	border : 1px solid #e0002a;
+	color : #555555;
+	font : bold 12px/normal Gulim;
+	cursor : pointer;
+}
+#nexacontainer .Button.btn_WF_btnExp[status=mouseover]
+{
+	background : url('./../../../_resource_/_images_/btn_WF_doc.png') no-repeat left center #fffafb;
+	border : 1px solid #e0002a;
+}
+#nexacontainer .Grid .body .row .cell[userstatus=selected]
+{
+	background : #fff4f5;
+}
+#nexacontainer .Button.btn_WF_btnWhite[userstatus=pushed]
+{
+	border : 1px solid #585858;
+	background : #f9f9f9;
+}
+#nexacontainer .Button.btn_WF_btnWhite[userstatus=selected]
+{
+	border : 1px solid #585858;
+	background : #f9f9f9;
+}
+#nexacontainer .Button.btn_WF_btnRed[userstatus=pushed]
+{
+	border : 0px none;
+	background : #f9f9f9;
+}
+#nexacontainer .Button.btn_WF_btnRed[userstatus=selected]
+{
+	border : 0px none;
+	background : #f9f9f9;
+}
+#nexacontainer .Button.btn_WF_btnInitial[userstatus=pushed]
+{
+	background : url('./../../../_resource_/_images_/btn_WF_initialize.png') no-repeat left center #fffafb;
+	border : 1px solid #e0002a;
+}
+#nexacontainer .Button.btn_WF_btnInitial[userstatus=selected]
+{
+	background : url('./../../../_resource_/_images_/btn_WF_initialize.png') no-repeat left center #fffafb;
+	border : 1px solid #e0002a;
+}
+#nexacontainer .Button.btn_WF_btnSearch[userstatus=pushed]
+{
+	background : url('./../../../_resource_/_images_/btn_WF_search.png') no-repeat left center #fffafb;
+	border : 1px solid #e0002a;
+}
+#nexacontainer .Button.btn_WF_btnSearch[userstatus=selected]
+{
+	background : url('./../../../_resource_/_images_/btn_WF_search.png') no-repeat left center #fffafb;
+	border : 1px solid #e0002a;
+}
+#nexacontainer .Button.btn_WF_btnExp[userstatus=pushed]
+{
+	background : url('./../../../_resource_/_images_/btn_WF_doc.png') no-repeat left center #fffafb;
+	border : 1px solid #e0002a;
+}
+#nexacontainer .Button.btn_WF_btnExp[userstatus=selected]
+{
+	background : url('./../../../_resource_/_images_/btn_WF_doc.png') no-repeat left center #fffafb;
+	border : 1px solid #e0002a;
+}
+#nexacontainer .Grid .head .row .cell[status=disabled]
+{
+	color : #999999;
+}
+#nexacontainer .Grid .body .row .cell[status=disabled]
+{
+	color : #999999;
+}
+#nexacontainer .Grid .body .row .cell[status=disabled][userstatus=selected]
+{
+	background : #f0f0f0;
+}

@@ -1,0 +1,605 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.0">
+  <Form id="work004" height="691" titletext="대용량데이터처리" onload="work004_onload" width="1010">
+    <Layouts>
+      <Layout height="691" mobileorientation="landscape" width="1010">
+        <Static id="Static01" taborder="0" text="대용량 데이터처리" left="8" top="0" width="710" height="40" cssclass="sta_WF_emptitle"/>
+        <Static id="Static03" taborder="1" left="8" top="37" height="53" right="8" background="#ffffff" border="1px solid silver"/>
+        <Button id="btn_Search" taborder="2" top="52" width="80" height="22" cssclass="btn_WF_search01" right="17" text="Search" onclick="comm_Click"/>
+        <Static id="Static04" taborder="3" text="조회건수" left="17" top="51" width="48" height="25" textAlign="right"/>
+        <MaskEdit id="mskTemp" taborder="4" top="10" width="90" height="20" visible="false" format="###,###,###,###" right="8" onchanged="mskTemp_onchanged"/>
+        <Combo id="cmbRowCount" taborder="5" left="73" top="51" width="96" height="25" innerdataset="innerdataset" codecolumn="codecolumn" datacolumn="datacolumn" value="1000" index="0" text="1,000" onitemchanged="cmbRowCount_onitemchanged">
+          <Dataset id="innerdataset">
+            <ColumnInfo>
+              <Column id="codecolumn" size="256"/>
+              <Column id="datacolumn" size="256"/>
+            </ColumnInfo>
+            <Rows>
+              <Row>
+                <Col id="codecolumn">1000</Col>
+                <Col id="datacolumn">1,000</Col>
+              </Row>
+              <Row>
+                <Col id="codecolumn">2000</Col>
+                <Col id="datacolumn">2,000</Col>
+              </Row>
+              <Row>
+                <Col id="codecolumn">10000</Col>
+                <Col id="datacolumn">10,000</Col>
+              </Row>
+              <Row>
+                <Col id="codecolumn">100000</Col>
+                <Col id="datacolumn">100,000</Col>
+              </Row>
+              <Row>
+                <Col id="codecolumn">200000</Col>
+                <Col id="datacolumn">200,000</Col>
+              </Row>
+              <Row>
+                <Col id="codecolumn">800000</Col>
+                <Col id="datacolumn">800,000</Col>
+              </Row>
+              <Row>
+                <Col id="codecolumn">1000000</Col>
+                <Col id="datacolumn">1,000,000</Col>
+              </Row>
+              <Row>
+                <Col id="codecolumn">1600000</Col>
+                <Col id="datacolumn">1,600,000</Col>
+              </Row>
+              <Row>
+                <Col id="codecolumn">2000000</Col>
+                <Col id="datacolumn">2,000,000</Col>
+              </Row>
+              <Row>
+                <Col id="codecolumn">0</Col>
+                <Col id="datacolumn">전체</Col>
+              </Row>
+            </Rows>
+          </Dataset>
+        </Combo>
+        <Static id="Static05" taborder="6" text="Fast스크롤 기능" left="177" top="51" width="87" height="25" textAlign="right"/>
+        <Radio id="Radio00" taborder="7" left="272" top="41" width="227" height="46" innerdataset="@ds_inner_grid_scroll" codecolumn="code" datacolumn="value" columncount="2" rowcount="3" onitemchanged="Radio00_onitemchanged" index="0" text="기본" value="default"/>
+        <Button id="btn_Add" taborder="8" text="Add" left="115" top="10" width="80" height="22" onclick="comm_Click"/>
+        <Button id="btn_Excel" taborder="9" text="Excel" left="203" top="10" width="80" height="22" onclick="comm_Click"/>
+        <Static id="Static06" taborder="10" text="스크롤 모드" left="507" top="51" width="69" height="25" textAlign="right" visible="false"/>
+        <Radio id="Radio01" taborder="11" left="584" top="43" width="115" height="46" innerdataset="ds_inner_grid_scrolldisplay" codecolumn="code" datacolumn="value" onitemchanged="Radio01_onitemchanged" visible="false" value="normal" text="기본" index="0"/>
+        <Static id="Static00" taborder="12" text="조회건수" top="97" width="48" height="28" right="77" textAlign="right"/>
+        <Static id="stRowCount" taborder="13" text="0건" top="97" width="61" height="28" right="8" color="red"/>
+        <Static id="stSearchTime" taborder="14" text="0초" top="97" width="60" height="28" right="289" color="red"/>
+        <Static id="Static02" taborder="15" text="서버/네트워크 시간" top="97" width="120" height="28" right="357" textAlign="right"/>
+        <Static id="stRenderTime" taborder="16" text="0초" top="97" width="44" height="28" right="141" color="red"/>
+        <Static id="Static07" taborder="17" text="초, 렌더링시간" top="97" width="88" height="28" right="193" textAlign="right"/>
+        <Grid id="grd_SM" taborder="18" left="8" top="133" right="8" bottom="8" binddataset="dsOutput" autofittype="col">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="200"/>
+                <Column size="320"/>
+                <Column size="229"/>
+                <Column size="229"/>
+                <Column size="229"/>
+                <Column size="229"/>
+                <Column size="229"/>
+                <Column size="229"/>
+                <Column size="229"/>
+                <Column size="229"/>
+                <Column size="229"/>
+                <Column size="229"/>
+                <Column size="229"/>
+                <Column size="229"/>
+                <Column size="229"/>
+                <Column size="229"/>
+                <Column size="229"/>
+                <Column size="229"/>
+                <Column size="229"/>
+                <Column size="229"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="No"/>
+                <Cell col="1" text="제어번호"/>
+                <Cell col="2" text="자료유형코드"/>
+                <Cell col="3" text="자료유형"/>
+                <Cell col="4" text="MARC구분"/>
+                <Cell col="5" text="MARC구분"/>
+                <Cell col="6" text="자료구분코드"/>
+                <Cell col="7" text="자료구분"/>
+                <Cell col="8" text="MARC종류코드"/>
+                <Cell col="9" text="서명"/>
+                <Cell col="10" text="저자"/>
+                <Cell col="11" text="발행처"/>
+                <Cell col="12" text="발행년"/>
+                <Cell col="13" text="별치기호"/>
+                <Cell col="14" text="청구번호"/>
+                <Cell col="15" text="분류기호"/>
+                <Cell col="16" text="권차기호"/>
+                <Cell col="17" text="언어"/>
+                <Cell col="18" text="ISBN"/>
+                <Cell col="19" text="블라인드여부"/>
+              </Band>
+              <Band id="body">
+                <Cell expr="currow + 1"/>
+                <Cell col="1" text="bind:CONTROL_NO"/>
+                <Cell col="2" text="bind:DATA_TYPE_CODE"/>
+                <Cell col="3" text="bind:DATA_TYPE_CODE_NAME"/>
+                <Cell col="4" text="bind:MARC_TYPE_CODE"/>
+                <Cell col="5" text="bind:MARC_TYPE_CODE_NAME"/>
+                <Cell col="6" text="bind:DATA_DIV_CODE"/>
+                <Cell col="7" text="bind:DATA_DIV_CODE_NAME"/>
+                <Cell col="8" text="bind:MARC_KIND_CODE"/>
+                <Cell col="9" text="bind:TITLE"/>
+                <Cell col="10" text="bind:AUTHOR"/>
+                <Cell col="11" text="bind:PUBLISHER"/>
+                <Cell col="12" text="bind:PUB_YEAR"/>
+                <Cell col="13" text="bind:PLACE_CODE"/>
+                <Cell col="14" text="bind:CALL_NO"/>
+                <Cell col="15" text="bind:CLASSIFICATION_NO"/>
+                <Cell col="16" text="bind:VOLUMN_NO"/>
+                <Cell col="17" text="bind:LANG_CODE"/>
+                <Cell col="18" text="bind:ISBN"/>
+                <Cell col="19" text="bind:BLIND_YN"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="ds_inner_grid_scroll">
+        <ColumnInfo>
+          <Column id="code" type="STRING" size="256"/>
+          <Column id="value" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="code">default</Col>
+            <Col id="value">기본</Col>
+          </Row>
+          <Row>
+            <Col id="code">topdisplay</Col>
+            <Col id="value">상단</Col>
+          </Row>
+          <Row>
+            <Col id="code">centerdisplay</Col>
+            <Col id="value">중앙</Col>
+          </Row>
+          <Row>
+            <Col id="code">topbottomdisplay</Col>
+            <Col id="value">상단, 하단</Col>
+          </Row>
+          <Row>
+            <Col id="code">topcenterbottomdisplay</Col>
+            <Col id="value">상단, 중앙, 하단</Col>
+          </Row>
+          <Row>
+            <Col id="code">trackbarfollow</Col>
+            <Col id="value">스크롤 위치</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <ExcelExportObject id="ExcelExportObject"/>
+      <Dataset id="ds_inner_grid_scrolldisplay">
+        <ColumnInfo>
+          <Column id="code" type="STRING" size="256"/>
+          <Column id="value" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="code">normal</Col>
+            <Col id="value">기본</Col>
+          </Row>
+          <Row>
+            <Col id="code">page</Col>
+            <Col id="value">페이지단위</Col>
+          </Row>
+          <Row>
+            <Col id="code">line</Col>
+            <Col id="value">Row,Column단위</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="dsOutput" progressload="false">
+        <ColumnInfo>
+          <Column id="DATA_TYPE_CODE" type="STRING" size="256"/>
+          <Column id="DATA_TYPE_CODE_NAME" type="STRING" size="256"/>
+          <Column id="MARC_TYPE_CODE" type="STRING" size="256"/>
+          <Column id="MARC_TYPE_CODE_NAME" type="STRING" size="256"/>
+          <Column id="DATA_DIV_CODE" type="STRING" size="256"/>
+          <Column id="DATA_DIV_CODE_NAME" type="STRING" size="256"/>
+          <Column id="MARC_KIND_CODE" type="STRING" size="256"/>
+          <Column id="TITLE" type="STRING" size="256"/>
+          <Column id="AUTHOR" type="STRING" size="256"/>
+          <Column id="PUBLISHER" type="STRING" size="256"/>
+          <Column id="PUB_YEAR" type="STRING" size="256"/>
+          <Column id="PLACE_CODE" type="STRING" size="256"/>
+          <Column id="CALL_NO" type="STRING" size="256"/>
+          <Column id="CLASSIFICATION_NO" type="STRING" size="256"/>
+          <Column id="VOLUMN_NO" type="STRING" size="256"/>
+          <Column id="LANG_CODE" type="STRING" size="256"/>
+          <Column id="CONTROL_NO" type="STRING" size="256"/>
+          <Column id="ISBN" type="STRING" size="256"/>
+          <Column id="BLIND_YN" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.1"><![CDATA[/************************************************************************************************
+* 01. 업무구분 : 공통 - 공통
+* 02. 화면명   : 입력관리_샘플
+* 03. 화면설명 : 대용량조회
+* 04. 작성일   : 2019.03.07
+* 05. 작성자   : 안주환
+* 06. 수정이력 :
+***********************************************************************************************
+*     수정일          이  름    사유
+***********************************************************************************************
+*     
+************************************************************************************************/
+
+/************************************************************************************************
+* 공통 라이브러리 INCLUDE 영역
+************************************************************************************************/
+include "Script::CommGrid.xjs";
+include "Script::CommUtil.xjs"; 	
+include "Script::ext_CommEco.xjs";
+
+/************************************************************************************************
+* 전역 변수 영역
+************************************************************************************************/
+
+/************************************************************************************************
+* FORM 영역
+************************************************************************************************/
+this.work004_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
+{	
+	//this.gfnCompInit(obj); //헤더클릭 이벤트 없을 시 사용
+	
+	//alert(system.navigatorname); //Edge일때는 IE를 찍는 이슈가 있어서 브라우저타입에 따른 분기처리가 되지 않음.
+	
+	//alert(nexacro._BrowserType); //Chrome일때는 webKit을 찍고 나머지는 올바른 타입에 버전까지 출력
+
+	if(system.navigatorname != "nexacro") 
+	{
+		if (navigator.userAgent.match(/Trident\/.*rv\:(.+?)[\);]/)) //IE
+		{
+			this.Static06.set_visible(true);
+			this.Radio01.set_visible(true);
+			
+			this.Radio01_onitemchanged(this.Radio01);
+		}
+		else if (navigator.userAgent.match(/Edge/)) //Edge
+		{
+			
+		}
+		else if (navigator.userAgent.match(/Chrome|CriOS/)) //Chrome
+		{
+			
+		}
+	}
+};
+
+/************************************************************************************************
+* FORM 공통 FUNCTION 영역
+************************************************************************************************/
+//Excel Export
+this.fn_export = function(grid)
+{		
+	this.ExcelExportObject.clear();
+	
+	var sFileNm = "ExcelExportFile";
+	var constExportItemType = nexacro.ExportItemTypes.GRID;
+	var varExportSource = grid;
+	var strRange = "Sheet1!A1";
+	var strExportHead = "allband";
+	var strExportSelect = "allrecord";
+	var strExportMerge = "suppress";
+	var strExportValue = "allstyle";
+	var strExportImage = "none";
+	var strExceptStyle = "";
+	var strExportSize = "both";
+	//var strAcceptStyle = "cellline";
+	
+	var ret = this.ExcelExportObject.addExportItem(constExportItemType, varExportSource, strRange, strExportHead, strExportSelect, strExportMerge, strExportValue, strExportImage, strExceptStyle, strExportSize);
+	this.ExcelExportObject.set_exporttype(nexacro.ExportTypes.EXCEL);
+	this.ExcelExportObject.set_exportfilename(sFileNm);
+	//this.ExcelExportObject.set_exporturl("http://localhost/NAL/XExportImport");
+	this.ExcelExportObject.set_exporturl("http://14.63.224.112/NAL/XExportImport");
+	this.ExcelExportObject.exportData();
+}
+
+this.ExcelImportObject_onsuccess = function(obj:nexacro.ExcelExportObject, e:nexacro.ExcelExportEventInfo)
+{
+	this.alert("Excel Import Success !!");
+};
+
+this.ExcelImportObject_onerror = function(obj:nexacro.ExcelExportObject, e:nexacro.ExcelExportErrorEventInfo)
+{
+	this.alert( "Excel Import Error Type:["+ e.errortype + "] Error Msg:["+e.errormsg+"]");
+};
+
+/*********************************************************************
+ * 함 수 명 	: gfn_CheckTime
+ * 함수설명 	: 현재의 시간을 return 한다.
+ * 입    력 	: 없음 		  	  
+ * 결    과 	: 현재의 시간을 return 한다.
+ *********************************************************************/
+this.gfn_CheckTime = function()
+{
+	var objDate = new Date();
+	var strTime  = this.gfn_Right("0" + objDate.getHours(), 2);
+		strTime += this.gfn_Right("0" + objDate.getMinutes(), 2);
+		strTime += this.gfn_Right("0" + objDate.getSeconds(), 2);
+		strTime += this.gfn_Right("0" + objDate.getMilliseconds(), 3);
+		
+	return strTime;
+}
+
+/*********************************************************************
+ * 함 수 명 	: gfn_Right
+ * 함수설명 	: 문자열의 오른쪽부분을 지정한 길이만큼 Return 한다.
+ * 입    력 	: strString	- 대상 문자열
+ *			  	  nSize		- 얻어올 크기. [Default Value = 0]
+ * 결    과 	: 오른쪽 부분이 얻어진 문자열.
+ *********************************************************************/
+this.gfn_Right = function(strString, nSize)
+{
+    var nStart 	= String(strString).length;
+    var nEnd 	= Number(nStart) - Number(nSize);   
+    var rtnVal 	= strString.substring(nStart, nEnd);
+
+    return rtnVal;
+}
+
+/*******************************************************************************
+ * 함 수 명 	: gfn_diffTime
+ * 함수설명 	: 두 시간간의 차이 계산
+ * 입    력 	: sStartTime(HHmmss형태의 From 시간) 	( 예 : "033025" )
+ *              : sEndTime(HHmmss형태의 To 시간) 		( 예 : "034025" )
+ *              : sType(구하고자하는 타입(시, 분, 초)) ( 예 : "HH" )
+ * 결    과 	: integer
+******************************************************************************/
+this.gfn_diffTime = function(sStartTime, sEndTime, sType)
+{
+	this.nFrom_HH = parseInt(sStartTime.substring(0, 2));
+	this.nFrom_mm = parseInt(sStartTime.substring(2, 4));
+	this.nFrom_ss = parseInt(sStartTime.substring(4, 6));
+	this.nFrom_ms = parseInt(sStartTime.substring(6, 9));
+	
+	this.nTo_HH = parseInt(sEndTime.substring(0, 2));
+	this.nTo_mm = parseInt(sEndTime.substring(2, 4));
+	this.nTo_ss = parseInt(sEndTime.substring(4, 6));
+	this.nTo_ms = parseInt(sEndTime.substring(6, 9)) + 200;
+	this.nFromTotal_ss = (this.nFrom_HH * 3600) + (this.nFrom_mm * 60) + this.nFrom_ss + (this.nFrom_ms * 0.001);
+	this.nToTotal_ss   = (this.nTo_HH * 3600) + (this.nTo_mm * 60) + this.nTo_ss + (this.nTo_ms * 0.001);
+	
+	if (sType == "HH") {
+		return (Math.floor((this.nToTotal_ss - this.nFromTotal_ss) / 3600000));
+	} else if (sType == "mm") {
+		return (Math.floor((this.nToTotal_ss - this.nFromTotal_ss) / 60000));
+	} else if (sType == "ss") {
+		return (parseFloat(this.nToTotal_ss) - parseFloat(this.nFromTotal_ss)).toString().substr(0, 5);
+	}
+}
+
+/************************************************************************************************
+* 공통 function
+************************************************************************************************/
+/************************************************************************************************
+ * Even   : gfn_IsNull
+ * Desc   : 입력값이 null에 해당하는 경우 모두를 한번에 체크한다.
+ * Param : {Val} 체크할 문자열( 예 : null 또는 undefined 또는 "" 또는 "abc" )
+ * Return : {boolean}  Val이 undefined, null, NaN, "", Array.length = 0인 경우 = true 이외의 경우 = false
+ ************************************************************************************************/
+this.gfn_IsNull = function (Val)
+{
+	if (new String(Val).valueOf() == "undefined") {
+		return true;
+	}
+	
+	if (Val == null) {
+		return true;
+	}
+	
+	if (("x" + Val == "xNaN") && (new String(Val.length).valueOf() == "undefined")) {
+		return true;
+	}
+	
+	if (Val.length == 0) {
+		return true;
+	}
+	
+	return false;
+}
+
+/************************************************************************************************
+ * Even   : gfn_IsEmpty
+ * Desc   : value의 빈값 여부 반환
+ * Param : {value} 확인할 value
+ * Return : {boolean} empty 여부
+ ************************************************************************************************/
+this.gfn_IsEmpty = function(value)
+{
+	// null, undefined ==> true
+	if (value === null || value === undefined) return true;
+	
+	// String, Array ==> length == 0
+	if (this.gfn_IsString(value) || this.gfn_IsArray(value))
+	{
+		return value.length == 0 ? true : false;
+	}
+	else if (this.gfn_IsObject(value))
+	{
+		for (var p in value) 
+		{
+			if (value.hasOwnProperty(p)) {
+				return false;
+			}
+		}
+		
+		return true;
+	}
+	
+	return false;
+}
+
+/*******************************************************************************************
+	FUNCTION	: gfnGridSortClear(objGrid)
+	DESCRIPTION	: Grid Sort를 없애줌
+	PARAMETERS	: 
+		- objGrid	: 대상 Grid
+	RETURN		: 
+*******************************************************************************************/
+this.gfnGridDataClear = function(objGrid)
+{
+	if(!this.gfnIsEmpty(objGrid))
+	{
+		var objDataset = this.objects[objGrid.binddataset];
+		objDataset.set_enableevent(false);
+		objDataset.clearData();
+		objDataset.set_enableevent(true);
+	}
+}
+/*******************************************************************************************
+	FUNCTION	: gfnGridSortClear(objGrid)
+	DESCRIPTION	: Grid Sort를 없애줌
+	PARAMETERS	: 
+		- objGrid	: 대상 Grid
+	RETURN		: 
+*******************************************************************************************/
+this.gfnGridSortClear = function(objGrid)
+{
+	if(!this.gfnIsEmpty(objGrid))
+	{
+		var nCellCnt = objGrid.getCellCount("head");
+		var objDataset = this.objects[objGrid.binddataset];
+		for ( var i=0 ; i<nCellCnt ; i++ )
+		{
+			objDataset.keystring.current = "";
+			this.gfnClearGridSortMark(objGrid, i);
+			//objGrid.setCellProperty("head", i, "class", "");
+		}
+	}
+}
+
+/************************************************************************************************
+* TRANSACTION 및 추가 FUNCTION 영역
+************************************************************************************************/
+this.fn_Search = function()
+{
+	var type = "";
+	this.dsOutput.clearData();
+	
+	if(this.cmbRowCount.value == "All")
+	{
+		type = "전체";
+	}
+	
+	var sId = "SEARCH";
+	//var sUrl = "http://localhost/NAL/Service/Service_SSV_inQuery.jsp?rowcount=" + this.cmbRowCount.value + "&type=" + type; 
+	var sUrl = "http://14.63.224.112/NAL/Service/Service_SSV_ZIP_inQuery.jsp?rowcount=" + this.cmbRowCount.value + "&type=" + type; 
+	var sInDs = "";
+	var sOutDs = "dsOutput=output";
+	var sParam = "";
+	var sCallback = "fn_Callback";
+	
+	//this.fv_StartTime = this.gfn_CheckTime();
+	
+	this.starttime = new Date();
+	this.transaction(sId, sUrl, sInDs, sOutDs, sParam, sCallback);
+}
+
+this.fn_Callback = function(sId, nErrorCd, sErrorMsg, elapsedTime)
+{
+	if (nErrorCd < 0)
+	{
+		alert("[" + nErrorCd + "]" + sErrorMsg);
+	}
+	else 
+	{
+		if (sId == "SEARCH")
+		{	
+			//this.gfnGridSortClear(this.grd_SM);
+			
+// 			this.fv_EndTime = this.gfn_CheckTime();
+// 			var nDiffTime = this.gfn_diffTime(this.fv_StartTime, this.fv_EndTime, "ss");
+			
+			this.endtime = new Date();
+			var totaltime = nexacro.round((this.endtime - this.starttime) / 1000, 3);
+			
+			this.stSearchTime.set_text(elapsedTime + "초");
+			this.stRenderTime.set_text(nexacro.round(totaltime - elapsedTime, 3) + "초");
+			
+			var nRowCount = this.dsOutput.rowcount;
+			var sRowCount;
+			
+			this.mskTemp.set_value(nRowCount);
+			
+			sRowCount = this.mskTemp.text;
+			
+			this.stRowCount.set_text(sRowCount + "건");
+		}
+		else if (sId == "SAVE")
+		{
+			alert("저장 완료");
+		}
+	}
+}
+
+/************************************************************************************************
+* 각 COMPONENT 별 EVENT 영역
+************************************************************************************************/
+this.comm_Click = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	switch(obj.name)
+	{
+		case "btn_Search" : 
+			this.fn_Search();
+			break;
+		case "btn_Add" : 
+			var nRow = this.dsOutput.insertRow(500);
+			this.dsOutput.set_rowposition(100);
+			
+			//this.Grid00.mergeContentsCell("body",0,3,0,4,3,true);
+			break;
+		case "btn_Excel" : 
+			this.fn_export(this.grd_SM);
+			break;
+	}
+};
+
+this.Radio00_onitemchanged = function(obj:nexacro.Radio,e:nexacro.ItemChangeEventInfo)
+{
+	this.grd_SM.set_fastvscrolltype(obj.value);
+};
+
+this.Radio01_onitemchanged = function(obj:nexacro.Radio,e:nexacro.ItemChangeEventInfo)
+{
+	if(obj.value == "page")
+	{
+		this.Radio00.set_value("default");
+		this.Radio00_onitemchanged(this.Radio00);
+		this.Radio00.set_enable(false);
+	}
+	else if(obj.value == "line")
+	{
+		this.Radio00.set_value("default");
+		this.Radio00_onitemchanged(this.Radio00);
+		this.Radio00.set_enable(false);
+	}
+	else if(obj.value == "normal")
+	{
+		this.Radio00.set_enable(true);
+	}
+	
+	this.grd_SM.set_scrolldisplaymode(obj.value);
+};
+
+this.dsOutput_onload = function(obj:nexacro.NormalDataset,e:nexacro.DSLoadEventInfo)
+{
+	trace(e.eventid + " : " + e.reason);
+};]]></Script>
+  </Form>
+</FDL>

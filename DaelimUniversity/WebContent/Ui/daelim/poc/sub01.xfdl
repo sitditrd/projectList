@@ -1,0 +1,775 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.0">
+  <Form id="sub01" width="824" height="840" onload="sub01_onload">
+    <Layouts>
+      <Layout height="840" mobileorientation="portrait" width="824">
+        <Static id="Static35" taborder="0" top="10" height="46" cssclass="sta_WF_box01" left="8" right="8"/>
+        <Static id="Static05" taborder="1" text="Customer No" left="17" top="18" width="150" height="30" cssclass="sta_WF_label01"/>
+        <Button id="Button09" taborder="2" text="Exit" cssclass="btn_WF_basic04" width="60" right="10" height="24" bottom="20"/>
+        <Button id="Button05" taborder="3" text="OK" cssclass="btn_WF_basic05" width="60" right="74" height="24" bottom="20"/>
+        <Edit id="edt_customerNo" taborder="4" left="117" top="21" width="145" height="25" text="0744-001034570"/>
+        <Button id="Button07" taborder="5" text="Cust, ID History" left="331" width="114" cssclass="btn_WF_basic01" height="24" bottom="20"/>
+        <Button id="Button06" taborder="6" text="General History" left="216" width="112" cssclass="btn_WF_basic01" height="24" bottom="20"/>
+        <Button id="Button08" taborder="7" text="Address History" left="113" width="100" cssclass="btn_WF_basic01" height="24" bottom="20"/>
+        <Button id="Button10" taborder="8" text="Name History" left="10" width="100" cssclass="btn_WF_basic01" height="24" bottom="20"/>
+        <Tab id="Tab00" taborder="9" tabindex="0" left="8" right="10" top="70" bottom="50">
+          <Tabpages>
+            <Tabpage id="Tabpage1" text="General">
+              <Layouts>
+                <Layout>
+                  <Static id="Static06" taborder="0" text="Customer Name" left="2" top="3" width="150" height="30" cssclass="sta_WF_title02"/>
+                  <Static id="Static36" taborder="1" top="36" height="122" cssclass="sta_WF_box01" left="1" right="1"/>
+                  <Static id="Static37" taborder="2" top="170" cssclass="sta_WF_box01" text="" left="1" height="288" right="1"/>
+                  <Static id="Static15" taborder="3" text="Status" left="8" top="178" width="99" height="30" cssclass="sta_WF_label01"/>
+                  <Combo id="cbo_status" taborder="4" text="" left="194" top="181" width="205" height="25" innerdataset="innerdataset" codecolumn="codecolumn" datacolumn="datacolumn">
+                    <Dataset id="innerdataset">
+                      <ColumnInfo>
+                        <Column id="codecolumn" size="256"/>
+                        <Column id="datacolumn" size="256"/>
+                      </ColumnInfo>
+                      <Rows>
+                        <Row>
+                          <Col id="codecolumn">N</Col>
+                          <Col id="datacolumn">Normal</Col>
+                        </Row>
+                      </Rows>
+                    </Dataset>
+                  </Combo>
+                  <Static id="Static16" taborder="5" text="Last Update User" left="418" top="178" width="134" height="30" cssclass="sta_WF_label01"/>
+                  <Static id="Static17" taborder="6" text="Customer Status" left="8" top="208" width="140" height="30" cssclass="sta_WF_label01"/>
+                  <Static id="Static18" taborder="7" text="Customer Status Update" left="418" top="208" width="178" height="30" cssclass="sta_WF_label01"/>
+                  <Edit id="edt_customerStatusUpdate" taborder="8" left="591" top="211" width="79" height="25" text="2016/06/21"/>
+                  <Static id="Static19" taborder="9" text="Location Country" left="8" top="238" width="140" height="30" cssclass="sta_WF_label01"/>
+                  <Edit id="edt_countryCd" taborder="10" left="194" top="241" width="36" height="25" text="KR"/>
+                  <Static id="Static20" taborder="11" text="Nationality" left="418" top="238" width="140" height="30" cssclass="sta_WF_label01"/>
+                  <Static id="Static21" taborder="12" text="Customer Deposit Type" left="8" top="268" width="177" height="30" cssclass="sta_WF_label01"/>
+                  <Static id="Static22" taborder="13" text="Customer Detail Type" left="418" top="268" width="168" height="30" cssclass="sta_WF_label01"/>
+                  <Static id="Static23" taborder="14" text="Financial Institutioin Type" left="8" top="298" width="195" height="30" cssclass="sta_WF_label01"/>
+                  <Static id="Static24" taborder="15" text="Bank Code" left="418" top="298" width="140" height="30" cssclass="sta_WF_label01"/>
+                  <Edit id="edt_bankCode" taborder="16" left="590" top="301" height="25" right="8"/>
+                  <Static id="Static27" taborder="17" text="Transaction Bank Name" left="8" top="358" width="188" height="30" cssclass="sta_WF_label01"/>
+                  <Edit id="edt_transBankName" taborder="18" left="194" top="361" width="205" height="25"/>
+                  <Static id="Static28" taborder="19" text="Credit Rating(MHCB's)" left="418" top="358" width="171" height="30" cssclass="sta_WF_label01"/>
+                  <Edit id="edt_CreditRating" taborder="20" left="590" top="361" height="25" right="8"/>
+                  <Static id="Static29" taborder="21" text="BIS Rate" left="8" top="388" width="140" height="30" cssclass="sta_WF_label01"/>
+                  <Static id="Static30" taborder="22" text="Reference No" left="418" top="388" width="140" height="30" cssclass="sta_WF_label01"/>
+                  <Edit id="edt_ReferenceNo" taborder="23" left="590" top="391" height="25" right="8"/>
+                  <CheckBox id="cb_vip" taborder="24" text="VIP" left="674" top="187" height="20" right="8"/>
+                  <Static id="Static00" taborder="25" text="ABBR Customer Name" left="18" top="66" width="162" height="30" cssclass="sta_WF_label01"/>
+                  <Edit id="edt_abbrCustName" taborder="26" left="184" top="69" width="230" height="25"/>
+                  <Static id="Static01" taborder="27" text="Customer Name" left="437" top="66" width="140" height="30" cssclass="sta_WF_label01"/>
+                  <Edit id="edt_customerName" taborder="28" left="563" top="69" height="25" right="8"/>
+                  <Static id="Static02" taborder="29" text="English Name" left="12" top="43" width="140" height="30" cssclass="sta_WF_label02"/>
+                  <Static id="Static03" taborder="30" text="Korean Name" left="12" top="96" width="140" height="30" cssclass="sta_WF_label02"/>
+                  <Static id="Static04" taborder="31" text="Customer Name" left="18" top="119" width="140" height="30" cssclass="sta_WF_label01"/>
+                  <Edit id="edt_customerNameKR" taborder="32" left="184" top="122" height="25" right="8"/>
+                  <CheckBox id="cb_balckCustomer" taborder="33" text="Black Customer" left="674" top="210" height="20" right="8"/>
+                  <Edit id="edt_lastUpdateUser" taborder="34" left="591" top="181" width="79" height="25" text="3300"/>
+                  <Combo id="cbo_customerStatus" taborder="35" text="Combo00" left="194" top="211" width="205" height="25" innerdataset="innerdataset" codecolumn="codecolumn" datacolumn="datacolumn">
+                    <Dataset id="innerdataset">
+                      <ColumnInfo>
+                        <Column id="codecolumn" size="256"/>
+                        <Column id="datacolumn" size="256"/>
+                      </ColumnInfo>
+                      <Rows>
+                        <Row>
+                          <Col id="codecolumn">N</Col>
+                          <Col id="datacolumn">Normal</Col>
+                        </Row>
+                      </Rows>
+                    </Dataset>
+                  </Combo>
+                  <Edit id="edt_countryNm" taborder="36" left="234" top="241" width="165" height="25" text="REPUBLIC OF KOREA"/>
+                  <Edit id="edt_nationalityCd" taborder="37" left="591" top="241" width="36" height="25" text="KR"/>
+                  <Edit id="edt_nationalityNm" taborder="38" left="630" top="241" height="25" text="REPUBLIC OF KOREA" right="8"/>
+                  <Combo id="cbo_financialInstitytionType" taborder="39" left="194" top="301" width="205" height="25"/>
+                  <Combo id="cbo_customerDetailType" taborder="40" left="590" top="271" height="25" innerdataset="innerdataset" codecolumn="codecolumn" datacolumn="datacolumn" right="8">
+                    <Dataset id="innerdataset">
+                      <ColumnInfo>
+                        <Column id="codecolumn" size="256"/>
+                        <Column id="datacolumn" size="256"/>
+                      </ColumnInfo>
+                      <Rows>
+                        <Row>
+                          <Col id="codecolumn">PF</Col>
+                          <Col id="datacolumn">Pricate Firm</Col>
+                        </Row>
+                      </Rows>
+                    </Dataset>
+                  </Combo>
+                  <Edit id="edt_customerDepositType" taborder="41" left="194" top="271" width="205" height="25"/>
+                  <Static id="Static07" taborder="42" text="Resident Flag (Local)" left="8" top="328" width="177" height="30" cssclass="sta_WF_label01"/>
+                  <Radio id="rd_residentFlag" taborder="43" left="194" top="331" width="130" height="25" onitemchanged="Radio00_onitemchanged" innerdataset="resident_flag" codecolumn="code" datacolumn="data" direction="vertical"/>
+                  <Static id="Static08" taborder="44" text="Overseas Japanese" left="418" top="328" width="140" height="30" cssclass="sta_WF_label01"/>
+                  <Radio id="rd_overseasJapanese" taborder="45" left="589" top="331" width="130" height="25" onitemchanged="Radio00_onitemchanged" innerdataset="resident_flag" codecolumn="code" datacolumn="data" direction="vertical"/>
+                  <Static id="Static09" taborder="46" text="Tax Type (Local)" left="8" top="418" width="140" height="30" cssclass="sta_WF_label01"/>
+                  <Static id="Static10" taborder="47" text="DKB Corp, Type" left="418" top="418" width="140" height="30" cssclass="sta_WF_label01"/>
+                  <Combo id="cbo_dkbCorpType" taborder="48" left="590" top="421" height="25" innerdataset="innerdataset" codecolumn="codecolumn" datacolumn="datacolumn" right="8">
+                    <Dataset id="innerdataset">
+                      <ColumnInfo>
+                        <Column id="codecolumn" size="256"/>
+                        <Column id="datacolumn" size="256"/>
+                      </ColumnInfo>
+                      <Rows>
+                        <Row>
+                          <Col id="codecolumn">CBC</Col>
+                          <Col id="datacolumn">CBC</Col>
+                        </Row>
+                      </Rows>
+                    </Dataset>
+                  </Combo>
+                  <Grid id="Grid00" taborder="49" top="513" left="1" right="1" height="178"/>
+                  <TextArea id="ta_remark" taborder="50" top="470" height="40" left="490" right="1"/>
+                  <Static id="Static11" taborder="51" text="*Remark" left="422" top="473" width="59" height="31" cssclass="sta_WF_Helptxt"/>
+                  <Button id="Button11" taborder="52" text="Add" left="108" top="486" width="73" height="24" cssclass="btn_WF_basic06"/>
+                  <Button id="Button12" taborder="53" text="Modify" left="184" top="486" width="73" height="24" cssclass="btn_WF_basic06"/>
+                  <Button id="Button13" taborder="54" text="Remove" left="260" top="486" width="73" height="24" cssclass="btn_WF_basic06"/>
+                  <Button id="Button14" taborder="55" text="Reset" left="336" top="486" width="73" height="24" cssclass="btn_WF_basic06"/>
+                  <Button id="Button15" taborder="56" text="Issued By Help" left="1" top="486" width="104" height="24" cssclass="btn_WF_basic06"/>
+                  <Combo id="cbo_bisRate" taborder="57" left="194" top="391" width="205" height="25" innerdataset="innerdataset" codecolumn="codecolumn" datacolumn="datacolumn">
+                    <Dataset id="innerdataset">
+                      <ColumnInfo>
+                        <Column id="codecolumn" size="256"/>
+                        <Column id="datacolumn" size="256"/>
+                      </ColumnInfo>
+                      <Rows>
+                        <Row>
+                          <Col id="codecolumn">100</Col>
+                          <Col id="datacolumn">100%</Col>
+                        </Row>
+                        <Row>
+                          <Col id="codecolumn">50</Col>
+                          <Col id="datacolumn">50%</Col>
+                        </Row>
+                        <Row>
+                          <Col id="codecolumn">20</Col>
+                          <Col id="datacolumn">20%</Col>
+                        </Row>
+                        <Row>
+                          <Col id="codecolumn">10</Col>
+                          <Col id="datacolumn">10%</Col>
+                        </Row>
+                      </Rows>
+                    </Dataset>
+                  </Combo>
+                  <Combo id="cbo_taxType" taborder="58" left="194" top="421" width="205" height="25"/>
+                </Layout>
+              </Layouts>
+            </Tabpage>
+            <Tabpage id="Tabpage2" text="Individual" enable="false">
+              <Layouts>
+                <Layout/>
+              </Layouts>
+            </Tabpage>
+            <Tabpage id="Tabpage3" text="Corporation">
+              <Layouts>
+                <Layout>
+                  <Static id="Static37" taborder="0" top="5" cssclass="sta_WF_box01" text="" left="1" right="1" height="686"/>
+                  <Static id="Static15" taborder="1" text="Organization Type" left="8" top="13" width="177" height="30" cssclass="sta_WF_label01"/>
+                  <Combo id="cbo_organizationType" taborder="2" left="190" top="16" width="205" height="25" innerdataset="innerdataset" codecolumn="codecolumn" datacolumn="datacolumn">
+                    <Dataset id="innerdataset">
+                      <ColumnInfo>
+                        <Column id="codecolumn" size="256"/>
+                        <Column id="datacolumn" size="256"/>
+                      </ColumnInfo>
+                      <Rows>
+                        <Row>
+                          <Col id="codecolumn">HO</Col>
+                          <Col id="datacolumn">Head Office</Col>
+                        </Row>
+                      </Rows>
+                    </Dataset>
+                  </Combo>
+                  <Static id="Static17" taborder="3" text="Operation Type" left="8" top="43" width="173" height="30" cssclass="sta_WF_label01"/>
+                  <Static id="Static18" taborder="4" text="Holding Percentage (%)" left="413" top="43" width="178" height="30" cssclass="sta_WF_label01"/>
+                  <Edit id="edt_holingPercentage" taborder="5" left="585" top="46" width="90" height="25" text="2016/06/21"/>
+                  <Static id="Static19" taborder="6" text="Local DBA Name" left="8" top="73" width="140" height="30" cssclass="sta_WF_label01"/>
+                  <Static id="Static20" taborder="7" text="DBA Name" left="413" top="73" width="140" height="30" cssclass="sta_WF_label01"/>
+                  <Static id="Static21" taborder="8" text="Representative" left="8" top="103" width="177" height="30" cssclass="sta_WF_label01"/>
+                  <Static id="Static22" taborder="9" text="Major Product" left="413" top="103" width="168" height="30" cssclass="sta_WF_label01"/>
+                  <Static id="Static23" taborder="10" text="Business Line Type&#13;&#10;(Local)" left="8" top="138" width="195" height="30" cssclass="sta_WF_label01"/>
+                  <Static id="Static27" taborder="11" text="Incorporation Date" left="8" top="203" width="188" height="30" cssclass="sta_WF_label01"/>
+                  <Static id="Static28" taborder="12" text="Fiscal Year End (Month)" left="413" top="203" width="183" height="30" cssclass="sta_WF_label01"/>
+                  <Static id="Static29" taborder="13" text="Total Number of Shapes" left="8" top="233" width="176" height="30" cssclass="sta_WF_label01"/>
+                  <Edit id="edt_totalNumberShapes" taborder="14" left="190" top="236" width="205" height="25"/>
+                  <Static id="Static30" taborder="15" text="Number of Employees" left="413" top="233" width="168" height="30" cssclass="sta_WF_label01"/>
+                  <Edit id="edt_numberEmployees" taborder="16" left="585" top="236" height="25" right="8"/>
+                  <Combo id="cbo_operationType" taborder="17" left="190" top="46" width="205" height="25"/>
+                  <Edit id="Edit07" taborder="18" left="585" top="76" height="25" text="YOUNG STEEL KOREA CO.,LTD." right="8"/>
+                  <Static id="Static07" taborder="19" text="Business Scale Type" left="8" top="173" width="177" height="30" cssclass="sta_WF_label01"/>
+                  <Static id="Static08" taborder="20" text="Registered Flag" left="413" top="173" width="140" height="30" cssclass="sta_WF_label01"/>
+                  <Radio id="rd_RegisteredFlag" taborder="21" left="586" top="176" width="130" height="25" onitemchanged="Radio00_onitemchanged" innerdataset="resident_flag" codecolumn="code" datacolumn="data" direction="vertical"/>
+                  <Static id="Static09" taborder="22" text="Net Worth" left="8" top="263" width="140" height="30" cssclass="sta_WF_label01"/>
+                  <Edit id="cbo_netWorthNm" taborder="23" left="278" top="266" width="117" height="25"/>
+                  <Static id="Static10" taborder="24" text="Total Assets" left="413" top="263" width="140" height="30" cssclass="sta_WF_label01"/>
+                  <Edit id="edt_localDBAName" taborder="25" left="190" top="76" width="205" height="25" password="true" text="abcdef"/>
+                  <Edit id="edt_representative" taborder="26" left="190" top="106" width="205" height="25" password="true" text="abcdef"/>
+                  <Edit id="edt_BusinessLineTypeCd" taborder="27" left="190" top="136" width="100" height="25" text="370101"/>
+                  <Edit id="edt_BusinessLineTypeNm" taborder="28" left="293" top="136" width="283" height="25" text="WHOLESALER(IRON AND STEEL)"/>
+                  <Edit id="edt_majorProduct" taborder="29" left="585" top="106" height="25" right="8"/>
+                  <Combo id="cbo_businessScaleType" taborder="30" left="190" top="176" width="205" height="25" innerdataset="innerdataset" codecolumn="codecolumn" datacolumn="datacolumn">
+                    <Dataset id="innerdataset">
+                      <ColumnInfo>
+                        <Column id="codecolumn" size="256"/>
+                        <Column id="datacolumn" size="256"/>
+                      </ColumnInfo>
+                      <Rows>
+                        <Row>
+                          <Col id="codecolumn">S</Col>
+                          <Col id="datacolumn">중소기업</Col>
+                        </Row>
+                      </Rows>
+                    </Dataset>
+                  </Combo>
+                  <Calendar id="cal_IncorporationDate" taborder="31" left="190" top="206" width="205" height="25" type="spin"/>
+                  <Combo id="cbo_FiscalYearEnd" taborder="32" left="585" top="206" height="25" right="8"/>
+                  <Combo id="cbo_netWorthCd" taborder="33" left="190" top="266" width="85" height="25"/>
+                  <Edit id="edt_totalAssets" taborder="34" left="585" top="266" height="25" right="8"/>
+                  <Static id="Static00" taborder="35" text="Net Sales" left="8" top="293" width="140" height="30" cssclass="sta_WF_label01"/>
+                  <Static id="Static01" taborder="36" text="Net Income" left="413" top="293" width="140" height="30" cssclass="sta_WF_label01"/>
+                  <Static id="Static02" taborder="37" text="Operation Country" left="8" top="323" width="177" height="30" cssclass="sta_WF_label01"/>
+                  <Static id="Static03" taborder="38" text="Parent Company Name" left="413" top="323" width="168" height="30" cssclass="sta_WF_label01"/>
+                  <Edit id="edt_netIncome" taborder="39" left="585" top="296" height="25" text="YOUNG STEEL KOREA CO.,LTD." right="8"/>
+                  <Edit id="edt_parentCompanyName" taborder="40" left="585" top="326" height="25" right="8"/>
+                  <Edit id="edt_netSales" taborder="41" left="190" top="296" width="205" height="25"/>
+                  <Edit id="edt_operationCountryCd" taborder="42" left="190" top="326" width="36" height="25" text="KR"/>
+                  <Edit id="edt_operationCountryNm" taborder="43" left="229" top="326" width="166" height="25" text="REPUBLIC OF KOREA"/>
+                  <Static id="Static04" taborder="44" text="Parent company Country" left="8" top="353" width="177" height="30" cssclass="sta_WF_label01"/>
+                  <Edit id="edt_parentCompanycountrycd" taborder="45" left="190" top="356" width="36" height="25" text="JP"/>
+                  <Edit id="edt_parentCompanycountryNm" taborder="46" left="229" top="356" width="166" height="25" text="JAPAN"/>
+                  <Static id="Static06" taborder="47" text="Tax amount" left="413" top="353" width="168" height="30" cssclass="sta_WF_label01"/>
+                  <Edit id="edt_taxAmount" taborder="48" left="585" top="356" height="25" right="8"/>
+                  <Static id="Static11" taborder="49" text="Number of Locations" left="8" top="383" width="177" height="30" cssclass="sta_WF_label01"/>
+                  <MaskEdit id="edt_numberOfLocation" taborder="50" left="190" top="386" width="205" height="25"/>
+                  <Static id="Static12" taborder="51" text="Ownership Corporation" left="8" top="413" width="177" height="30" cssclass="sta_WF_label01"/>
+                  <Edit id="edt_ownershipCorporationCd" taborder="52" left="190" top="416" width="100" height="25"/>
+                  <Edit id="edt_ownershipCorporationNm" taborder="53" left="293" top="416" width="283" height="25"/>
+                  <Static id="Static13" taborder="54" text="Legal Capital" left="8" top="443" width="140" height="30" cssclass="sta_WF_label01"/>
+                  <Edit id="edt_ledalCapital" taborder="55" left="190" top="446" width="205" height="25"/>
+                  <Static id="Static14" taborder="56" text="Actual Capital" left="413" top="443" width="140" height="30" cssclass="sta_WF_label01"/>
+                  <Edit id="edt_actualCapital" taborder="57" left="585" top="446" height="25" text="YOUNG STEEL KOREA CO.,LTD." right="8"/>
+                  <Static id="Static16" taborder="58" text="Cash Turnover Per Month" left="8" top="473" width="173" height="30" cssclass="sta_WF_label01"/>
+                  <Combo id="cbo_CashTurnoverPerMobth" taborder="59" left="190" top="476" width="205" height="25"/>
+                  <Static id="Static24" taborder="60" text="Business Scope Type" left="413" top="473" width="178" height="30" cssclass="sta_WF_label01"/>
+                  <Combo id="cbo_businessScopeType" taborder="61" left="585" top="476" height="25" right="8"/>
+                </Layout>
+              </Layouts>
+            </Tabpage>
+            <Tabpage id="Tabpage4" text="Address&amp;Tel">
+              <Layouts>
+                <Layout>
+                  <Static id="Static36" taborder="0" top="4" height="88" cssclass="sta_WF_box01" left="1" right="1"/>
+                  <Static id="Static00" taborder="1" text="Mailing Address" left="9" top="18" width="162" height="30" cssclass="sta_WF_label01"/>
+                  <Static id="Static01" taborder="2" text="Email Address" left="429" top="18" width="140" height="30" cssclass="sta_WF_label01"/>
+                  <Edit id="edt_emailAddress" taborder="3" left="556" top="21" height="25" right="8"/>
+                  <Static id="Static04" taborder="4" text="Cellular Phone No" left="9" top="48" width="140" height="30" cssclass="sta_WF_label01"/>
+                  <Edit id="edt_CellularPhoneNo" taborder="5" left="150" top="51" width="240" height="25"/>
+                  <Grid id="Grid00" taborder="6" left="1" top="490" right="1" binddataset="dsContactDetail" height="197">
+                    <Formats>
+                      <Format id="default">
+                        <Columns>
+                          <Column size="120"/>
+                          <Column size="120"/>
+                          <Column size="160"/>
+                          <Column size="160"/>
+                          <Column size="160"/>
+                          <Column size="180"/>
+                          <Column size="180"/>
+                          <Column size="180"/>
+                          <Column size="60"/>
+                          <Column size="180"/>
+                          <Column size="60"/>
+                          <Column size="180"/>
+                          <Column size="60"/>
+                          <Column size="180"/>
+                          <Column size="80"/>
+                          <Column size="80"/>
+                          <Column size="80"/>
+                          <Column size="80"/>
+                          <Column size="80"/>
+                          <Column size="80"/>
+                          <Column size="80"/>
+                          <Column size="80"/>
+                          <Column size="120"/>
+                        </Columns>
+                        <Rows>
+                          <Row size="30" band="head"/>
+                          <Row size="30"/>
+                        </Rows>
+                        <Band id="head">
+                          <Cell text="Address Type"/>
+                          <Cell col="1" text="Wrong Address"/>
+                          <Cell col="2" text="Local Address Line #1"/>
+                          <Cell col="3" text="Local Address Line #2"/>
+                          <Cell col="4" text="Local Address Line #3"/>
+                          <Cell col="5" text="English Address Line #1"/>
+                          <Cell col="6" text="English Address Line #2"/>
+                          <Cell col="7" text="English Address Line #3"/>
+                          <Cell col="8" colspan="2" text="Province"/>
+                          <Cell col="10" colspan="2" text="District"/>
+                          <Cell col="12" colspan="2" text="Commune/Ward"/>
+                          <Cell col="14" text="Zip"/>
+                          <Cell col="15" colspan="4" text="Tel"/>
+                          <Cell col="19" colspan="3" text="Fax"/>
+                          <Cell col="22" text="Remarks"/>
+                        </Band>
+                        <Band id="body">
+                          <Cell text="bind:addrtype"/>
+                          <Cell col="1" text="bind:wrongAddr"/>
+                          <Cell col="2" text="bind:localAddr1"/>
+                          <Cell col="3" text="bind:localAddr2"/>
+                          <Cell col="4" text="bind:localAddr3"/>
+                          <Cell col="5" text="bind:engAddr1"/>
+                          <Cell col="6" text="bind:engAddr2"/>
+                          <Cell col="7" text="bind:engAddr3"/>
+                          <Cell col="8" text="bind:prvcCd"/>
+                          <Cell col="9" text="bind:prvcNm"/>
+                          <Cell col="10" text="bind:distcCd"/>
+                          <Cell col="11" text="bind:distcNm"/>
+                          <Cell col="12" text="bind:comuCd"/>
+                          <Cell col="13" text="bind:comuNm"/>
+                          <Cell col="14" text="bind:zip"/>
+                          <Cell col="15" text="bind:tel1"/>
+                          <Cell col="16" text="bind:tel2"/>
+                          <Cell col="17" text="bind:tel3"/>
+                          <Cell col="18" text="bind:tel4"/>
+                          <Cell col="19" text="bind:fax1"/>
+                          <Cell col="20" text="bind:fax2"/>
+                          <Cell col="21" text="bind:fax3"/>
+                          <Cell col="22" text="bind:remk"/>
+                        </Band>
+                      </Format>
+                    </Formats>
+                  </Grid>
+                  <Static id="Static06" taborder="7" top="102" height="350" cssclass="sta_WF_box01" left="1" right="1"/>
+                  <Static id="Static12" taborder="8" text="Line #1" left="20" top="172" width="77" height="30" cssclass="sta_WF_label01"/>
+                  <Edit id="edt_localaddress1" taborder="9" left="96" top="175" width="262" height="25"/>
+                  <Static id="Static13" taborder="10" text="Province" left="395" top="172" width="140" height="30" cssclass="sta_WF_label01"/>
+                  <Edit id="edt_provinceCd" taborder="11" left="513" top="175" width="67" height="25"/>
+                  <Static id="Static14" taborder="12" text="Local Address" left="14" top="147" width="140" height="30" cssclass="sta_WF_label02"/>
+                  <Static id="Static02" taborder="13" text="Pager No" left="429" top="48" width="140" height="30" cssclass="sta_WF_label01"/>
+                  <Edit id="edt_pagerNo" taborder="14" left="556" top="51" height="25" right="8"/>
+                  <Combo id="cbo_mailingAddress" taborder="15" left="150" top="21" width="240" height="25" innerdataset="innerdataset" codecolumn="codecolumn" datacolumn="datacolumn">
+                    <Dataset id="innerdataset">
+                      <ColumnInfo>
+                        <Column id="codecolumn" size="256"/>
+                        <Column id="datacolumn" size="256"/>
+                      </ColumnInfo>
+                      <Rows>
+                        <Row>
+                          <Col id="codecolumn">O</Col>
+                          <Col id="datacolumn">Office</Col>
+                        </Row>
+                      </Rows>
+                    </Dataset>
+                  </Combo>
+                  <Static id="Static03" taborder="16" text="Address Type" left="11" top="113" width="162" height="30" cssclass="sta_WF_label01"/>
+                  <Combo id="cbo_addressType" taborder="17" left="120" top="116" width="238" height="25" innerdataset="innerdataset" codecolumn="codecolumn" datacolumn="datacolumn">
+                    <Dataset id="innerdataset">
+                      <ColumnInfo>
+                        <Column id="codecolumn" size="256"/>
+                        <Column id="datacolumn" size="256"/>
+                      </ColumnInfo>
+                      <Rows>
+                        <Row>
+                          <Col id="codecolumn">O</Col>
+                          <Col id="datacolumn">Office</Col>
+                        </Row>
+                      </Rows>
+                    </Dataset>
+                  </Combo>
+                  <Static id="Static31" taborder="18" text="Wrong Address" left="395" top="113" width="140" height="30" cssclass="sta_WF_label01"/>
+                  <Edit id="edt_localaddress2" taborder="19" left="96" top="205" width="262" height="25"/>
+                  <Static id="Static32" taborder="20" text="Line #2" left="20" top="202" width="77" height="30" cssclass="sta_WF_label01"/>
+                  <Static id="Static33" taborder="21" text="Line #3" left="20" top="232" width="77" height="30" cssclass="sta_WF_label01"/>
+                  <Edit id="edt_localaddress3" taborder="22" left="96" top="235" width="262" height="25"/>
+                  <Static id="Static25" taborder="23" text="Line #1" left="20" top="292" width="77" height="30" cssclass="sta_WF_label01"/>
+                  <Edit id="edt_address1" taborder="24" left="96" top="295" width="262" height="25"/>
+                  <Static id="Static26" taborder="25" text="English Address" left="14" top="267" width="140" height="30" cssclass="sta_WF_label02"/>
+                  <Edit id="edt_address2" taborder="26" left="96" top="325" width="262" height="25"/>
+                  <Static id="Static34" taborder="27" text="Line #2" left="20" top="322" width="77" height="30" cssclass="sta_WF_label01"/>
+                  <Static id="Static38" taborder="28" text="Line #3" left="20" top="352" width="77" height="30" cssclass="sta_WF_label01"/>
+                  <Edit id="edt_address3" taborder="29" left="96" top="355" width="262" height="25"/>
+                  <Edit id="edt_provinceNm" taborder="30" left="583" top="175" height="25" right="8"/>
+                  <Static id="Static39" taborder="31" text="District" left="395" top="202" width="140" height="30" cssclass="sta_WF_label01"/>
+                  <Edit id="edt_districtCd" taborder="32" left="513" top="205" width="67" height="25"/>
+                  <Edit id="edt_districtNn" taborder="33" left="583" top="205" height="25" right="8"/>
+                  <Static id="Static40" taborder="34" text="Commune/Ward" left="395" top="232" width="140" height="30" cssclass="sta_WF_label01"/>
+                  <Edit id="edt_cummWardCd" taborder="35" left="513" top="235" width="67" height="25"/>
+                  <Edit id="edt_cummWardNm" taborder="36" left="583" top="235" height="25" right="8"/>
+                  <Static id="Static41" taborder="37" text="Zip" left="395" top="262" width="140" height="30" cssclass="sta_WF_label01"/>
+                  <Edit id="edt_zipCd" taborder="38" left="513" top="265" width="133" height="25"/>
+                  <Static id="Static42" taborder="39" left="377" top="151" width="1" height="232" cssclass="sta_WF_LineDot"/>
+                  <Static id="Static43" taborder="40" text="Tel" left="395" top="322" width="140" height="30" cssclass="sta_WF_label01"/>
+                  <Edit id="edt_contryTel" taborder="41" left="511" top="325" width="67" height="25"/>
+                  <Edit id="edt_contryArea" taborder="42" left="581" top="325" width="67" height="25"/>
+                  <Edit id="edt_contryNo" taborder="43" left="651" top="325" width="75" height="25"/>
+                  <Edit id="edt_contryExt" taborder="44" left="729" top="325" height="25" right="8"/>
+                  <Edit id="edt_countryFax" taborder="45" left="511" top="355" width="67" height="25"/>
+                  <Edit id="edt_countryArea" taborder="46" left="581" top="355" width="67" height="25"/>
+                  <Edit id="edt_countryNo" taborder="47" left="651" top="355" width="75" height="25"/>
+                  <Static id="Static44" taborder="48" text="Fax" left="395" top="352" width="140" height="30" cssclass="sta_WF_label01"/>
+                  <Static id="Static45" taborder="49" text="Country" left="512" top="301" width="64" height="25" cssclass="sta_WF_alignCenter"/>
+                  <Static id="Static46" taborder="50" text="Area" left="582" top="301" width="64" height="25" cssclass="sta_WF_alignCenter"/>
+                  <Static id="Static47" taborder="51" text="No" left="656" top="301" width="64" height="25" cssclass="sta_WF_alignCenter"/>
+                  <Static id="Static48" taborder="52" text="Ext." left="730" top="301" height="25" cssclass="sta_WF_alignCenter" right="8"/>
+                  <Radio id="ed_wrongAddress" taborder="53" left="513" top="116" width="130" height="25" onitemchanged="Radio00_onitemchanged" innerdataset="resident_flag" codecolumn="code" datacolumn="data" direction="vertical"/>
+                  <Static id="Static11" taborder="54" text="*Remark" left="13" top="402" width="59" height="31" cssclass="sta_WF_Helptxt"/>
+                  <TextArea id="ta_remark" taborder="55" top="397" width="700" height="40" right="8"/>
+                  <Button id="Button11" taborder="56" text="Add" top="463" width="73" height="24" cssclass="btn_WF_basic06" right="229"/>
+                  <Button id="Button12" taborder="57" text="Modify" top="463" width="73" height="24" cssclass="btn_WF_basic06" right="153"/>
+                  <Button id="Button13" taborder="58" text="Remove" top="463" width="73" height="24" cssclass="btn_WF_basic06" right="77"/>
+                  <Button id="Button14" taborder="59" text="Reset" top="463" width="73" height="24" cssclass="btn_WF_basic06" right="1"/>
+                </Layout>
+              </Layouts>
+            </Tabpage>
+            <Tabpage id="Tabpage5" text="Contact Person">
+              <Layouts>
+                <Layout>
+                  <Static id="Static36" taborder="0" top="5" height="355" cssclass="sta_WF_box01" left="1" right="1"/>
+                  <Static id="Static00" taborder="1" text="Full Name" left="10" top="19" width="162" height="30" cssclass="sta_WF_label01"/>
+                  <Static id="Static01" taborder="2" text="ID Type" left="427" top="19" width="140" height="30" cssclass="sta_WF_label01"/>
+                  <Static id="Static04" taborder="3" text="Title" left="10" top="49" width="140" height="30" cssclass="sta_WF_label01"/>
+                  <Edit id="edt_fullName" taborder="4" left="127" top="22" width="276" height="25"/>
+                  <Grid id="Grid00" taborder="5" left="1" top="402" right="1" height="289"/>
+                  <Static id="Static02" taborder="6" text="ID Number" left="427" top="49" width="140" height="30" cssclass="sta_WF_label01"/>
+                  <Edit id="Edit15" taborder="7" left="543" top="52" height="25" right="8"/>
+                  <Combo id="cbo_title" taborder="8" left="127" top="52" width="276" height="25"/>
+                  <Static id="Static26" taborder="9" text="Bus. Part" left="12" top="258" width="140" height="30" cssclass="sta_WF_label02"/>
+                  <Static id="Static11" taborder="10" text="*Remark" left="425" top="207" width="59" height="31" cssclass="sta_WF_Helptxt"/>
+                  <TextArea id="TextArea00" taborder="11" top="202" height="135" right="8" left="541"/>
+                  <Button id="Button11" taborder="12" text="Add" top="375" width="73" height="24" cssclass="btn_WF_basic06" right="229"/>
+                  <Button id="Button12" taborder="13" text="Modify" top="375" width="73" height="24" cssclass="btn_WF_basic06" right="153"/>
+                  <Button id="Button13" taborder="14" text="Remove" top="375" width="73" height="24" cssclass="btn_WF_basic06" right="77"/>
+                  <Button id="Button14" taborder="15" text="Reset" top="375" width="73" height="24" cssclass="btn_WF_basic06" right="1"/>
+                  <CheckBox id="CheckBox00" taborder="16" text="F/X" left="23" top="294" width="125" height="20"/>
+                  <Combo id="cbo_IdType" taborder="17" left="543" top="22" height="25" right="8"/>
+                  <Static id="Static03" taborder="18" text="Issued By" left="10" top="79" width="140" height="30" cssclass="sta_WF_label01"/>
+                  <Edit id="Edit01" taborder="19" left="127" top="82" width="68" height="25"/>
+                  <Edit id="Edit02" taborder="20" left="198" top="82" width="205" height="25"/>
+                  <Static id="Static07" taborder="21" text="Department" left="10" top="109" width="162" height="30" cssclass="sta_WF_label01"/>
+                  <Edit id="Edit04" taborder="22" left="127" top="112" width="276" height="25"/>
+                  <Static id="Static08" taborder="23" text="Cellular phone&#13;&#10;No." left="10" top="143" width="162" height="30" cssclass="sta_WF_label01"/>
+                  <Edit id="Edit05" taborder="24" left="127" top="142" width="276" height="25"/>
+                  <Static id="Static43" taborder="25" text="Tel" left="10" top="192" width="140" height="30" cssclass="sta_WF_label01"/>
+                  <Edit id="Edit32" taborder="26" left="127" top="195" width="65" height="25"/>
+                  <Edit id="Edit33" taborder="27" left="195" top="195" width="65" height="25"/>
+                  <Edit id="Edit34" taborder="28" left="263" top="195" width="72" height="25"/>
+                  <Edit id="Edit35" taborder="29" left="338" top="195" width="65" height="25"/>
+                  <Edit id="Edit36" taborder="30" left="127" top="225" width="65" height="25"/>
+                  <Edit id="Edit37" taborder="31" left="195" top="225" width="65" height="25"/>
+                  <Edit id="Edit38" taborder="32" left="263" top="225" width="72" height="25"/>
+                  <Static id="Static44" taborder="33" text="Fax" left="10" top="222" width="140" height="30" cssclass="sta_WF_label01"/>
+                  <Static id="Static45" taborder="34" text="Country" left="128" top="171" width="64" height="25" cssclass="sta_WF_alignCenter"/>
+                  <Static id="Static46" taborder="35" text="Area" left="198" top="171" width="64" height="25" cssclass="sta_WF_alignCenter"/>
+                  <Static id="Static47" taborder="36" text="No" left="272" top="171" width="64" height="25" cssclass="sta_WF_alignCenter"/>
+                  <Static id="Static48" taborder="37" text="Ext." left="346" top="171" width="64" height="25" cssclass="sta_WF_alignCenter"/>
+                  <Static id="Static09" taborder="38" text="Issued Date" left="427" top="79" width="140" height="30" cssclass="sta_WF_label01"/>
+                  <Calendar id="Calendar00" taborder="39" left="543" top="82" height="25" type="spin" right="8"/>
+                  <Static id="Static10" taborder="40" text="E-Mail Address" left="427" top="109" width="162" height="30" cssclass="sta_WF_label01"/>
+                  <Static id="Static12" taborder="41" text="Pager No" left="427" top="139" width="162" height="30" cssclass="sta_WF_label01"/>
+                  <Edit id="Edit06" taborder="42" left="543" top="112" height="25" right="8"/>
+                  <Edit id="Edit07" taborder="43" left="543" top="142" height="25" right="8"/>
+                  <Static id="Static13" taborder="44" text="H.S Code" left="427" top="169" width="140" height="30" cssclass="sta_WF_label01"/>
+                  <Edit id="Edit08" taborder="45" left="543" top="172" width="68" height="25"/>
+                  <Edit id="Edit09" taborder="46" left="614" top="172" height="25" right="8"/>
+                  <CheckBox id="CheckBox01" taborder="47" text="Derivative" left="162" top="294" width="125" height="20"/>
+                  <CheckBox id="CheckBox02" taborder="48" text="Loan" left="301" top="294" width="125" height="20"/>
+                  <CheckBox id="CheckBox03" taborder="49" text="Deposit" left="23" top="318" width="125" height="20"/>
+                  <CheckBox id="CheckBox04" taborder="50" text="Imp./Exp." left="162" top="318" width="125" height="20"/>
+                  <CheckBox id="CheckBox05" taborder="51" text="Remmittance" left="301" top="318" width="125" height="20"/>
+                  <Button id="Button15" taborder="52" text="Signature/Photo" top="375" width="114" height="24" cssclass="btn_WF_basic06" right="305"/>
+                </Layout>
+              </Layouts>
+            </Tabpage>
+          </Tabpages>
+        </Tab>
+        <Static id="Static00" taborder="10" left="0" height="10" right="0" bottom="10"/>
+      </Layout>
+    </Layouts>
+    <Script type="xscript5.1"><![CDATA[
+this.sub01_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
+{
+	if (this.getOwnerFrame().objType == "detail") 
+	{
+		var strCustomerNo = this.getOwnerFrame().objArguments;
+		var args = "custNo=" + strCustomerNo;
+		this.transaction("detail", "svc::customer/DetailInfo.do", "", "dsCust=output1 dsCorp=output2 dsContact=output3 dsContactDetail=output4 dsContactPerson=output5", args, "callback");
+		//this.edt_customerNo.set_value(strCustomerNo);
+	}else{
+		this.dsCust.addRow();
+		this.dsCorp.addRow();
+		this.dsContact.addRow();
+		this.dsContactDetail.addRow();
+		this.dsContactPerson.addRow();
+	}
+
+};
+
+this.callback = function(id, code, msg)
+{
+	switch (id)
+	{
+	case "detail":
+	/*
+		trace(this.dsCust.saveXML());
+		trace(this.dsCorp.saveXML());
+		trace(this.dsContact.saveXML());
+		trace(this.dsContactDetail.saveXML());
+		trace(this.dsContactPerson.saveXML());
+	*/
+		break;
+	
+	default:
+	}
+};]]></Script>
+    <Objects>
+      <Dataset id="resident_flag">
+        <ColumnInfo>
+          <Column id="code" type="STRING" size="256"/>
+          <Column id="data" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="code">1</Col>
+            <Col id="data">Yes</Col>
+          </Row>
+          <Row>
+            <Col id="code">2</Col>
+            <Col id="data">No</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="dsCust">
+        <ColumnInfo>
+          <Column id="bankCd" type="STRING" size="32"/>
+          <Column id="bisRt" type="STRING" size="32"/>
+          <Column id="blackCust" type="STRING" size="32"/>
+          <Column id="countryCd" type="STRING" size="32"/>
+          <Column id="countryNm" type="STRING" size="32"/>
+          <Column id="creditRt" type="STRING" size="32"/>
+          <Column id="custDepoType" type="STRING" size="32"/>
+          <Column id="custDetlType" type="STRING" size="32"/>
+          <Column id="custNo" type="STRING" size="32"/>
+          <Column id="custStatus" type="STRING" size="32"/>
+          <Column id="custStatusUpt" type="STRING" size="32"/>
+          <Column id="dkbType" type="STRING" size="32"/>
+          <Column id="engAbbrNm" type="STRING" size="32"/>
+          <Column id="engNm" type="STRING" size="32"/>
+          <Column id="fincInstType" type="STRING" size="32"/>
+          <Column id="korNm" type="STRING" size="32"/>
+          <Column id="lastUptUser" type="STRING" size="32"/>
+          <Column id="natCd" type="STRING" size="32"/>
+          <Column id="natNm" type="STRING" size="32"/>
+          <Column id="nickNm" type="STRING" size="32"/>
+          <Column id="oversJap" type="STRING" size="32"/>
+          <Column id="refNo" type="STRING" size="32"/>
+          <Column id="remk" type="STRING" size="32"/>
+          <Column id="rsdtFlag" type="STRING" size="32"/>
+          <Column id="status" type="STRING" size="32"/>
+          <Column id="taxType" type="STRING" size="32"/>
+          <Column id="tranBankNm" type="STRING" size="32"/>
+          <Column id="vip" type="STRING" size="32"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="dsCorp">
+        <ColumnInfo>
+          <Column id="actualCapital" type="STRING" size="32"/>
+          <Column id="busiLineTypeCd" type="STRING" size="32"/>
+          <Column id="busiLineTypeNm" type="STRING" size="32"/>
+          <Column id="busiScaleType" type="STRING" size="32"/>
+          <Column id="busiScopType" type="STRING" size="32"/>
+          <Column id="cashTurnPerMonth" type="STRING" size="32"/>
+          <Column id="custNo" type="STRING" size="32"/>
+          <Column id="dbaNm" type="STRING" size="32"/>
+          <Column id="fisYearEnd" type="STRING" size="32"/>
+          <Column id="hdPerc" type="BIGDECIMAL" size="16"/>
+          <Column id="incorpDt" type="STRING" size="32"/>
+          <Column id="legalCapital" type="STRING" size="32"/>
+          <Column id="localDbaNm" type="STRING" size="32"/>
+          <Column id="majPrdt" type="STRING" size="32"/>
+          <Column id="netIncome" type="BIGDECIMAL" size="16"/>
+          <Column id="netSales" type="BIGDECIMAL" size="16"/>
+          <Column id="netWorth" type="STRING" size="32"/>
+          <Column id="netWorthVal" type="STRING" size="32"/>
+          <Column id="numEmployee" type="INT" size="4"/>
+          <Column id="numLoc" type="INT" size="4"/>
+          <Column id="operCountryCd" type="STRING" size="32"/>
+          <Column id="operCountryNm" type="STRING" size="32"/>
+          <Column id="operType" type="STRING" size="32"/>
+          <Column id="orgType" type="STRING" size="32"/>
+          <Column id="ownershipCorpCd" type="STRING" size="32"/>
+          <Column id="ownershipCorpNm" type="STRING" size="32"/>
+          <Column id="parentCompCountryCd" type="STRING" size="32"/>
+          <Column id="parentCompCountryNm" type="STRING" size="32"/>
+          <Column id="parentCompNm" type="STRING" size="32"/>
+          <Column id="regtFlag" type="STRING" size="32"/>
+          <Column id="rep" type="STRING" size="32"/>
+          <Column id="taxAmt" type="BIGDECIMAL" size="16"/>
+          <Column id="totAsset" type="BIGDECIMAL" size="16"/>
+          <Column id="totNumShare" type="INT" size="4"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="dsContact">
+        <ColumnInfo>
+          <Column id="cellPhoneNo" type="STRING" size="32"/>
+          <Column id="custNo" type="STRING" size="32"/>
+          <Column id="emailAddr" type="STRING" size="32"/>
+          <Column id="mailAddr" type="STRING" size="32"/>
+          <Column id="pagerNo" type="STRING" size="32"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="dsContactDetail">
+        <ColumnInfo>
+          <Column id="addrtype" type="STRING" size="32"/>
+          <Column id="comuCd" type="STRING" size="32"/>
+          <Column id="comuNm" type="STRING" size="32"/>
+          <Column id="custNo" type="STRING" size="32"/>
+          <Column id="distcCd" type="STRING" size="32"/>
+          <Column id="distcNm" type="STRING" size="32"/>
+          <Column id="engAddr1" type="STRING" size="32"/>
+          <Column id="engAddr2" type="STRING" size="32"/>
+          <Column id="engAddr3" type="STRING" size="32"/>
+          <Column id="fax1" type="STRING" size="32"/>
+          <Column id="fax2" type="STRING" size="32"/>
+          <Column id="fax3" type="STRING" size="32"/>
+          <Column id="localAddr1" type="STRING" size="32"/>
+          <Column id="localAddr2" type="STRING" size="32"/>
+          <Column id="localAddr3" type="STRING" size="32"/>
+          <Column id="prvcCd" type="STRING" size="32"/>
+          <Column id="prvcNm" type="STRING" size="32"/>
+          <Column id="remk" type="STRING" size="32"/>
+          <Column id="tel1" type="STRING" size="32"/>
+          <Column id="tel2" type="STRING" size="32"/>
+          <Column id="tel3" type="STRING" size="32"/>
+          <Column id="tel4" type="STRING" size="32"/>
+          <Column id="wrongAddr" type="STRING" size="32"/>
+          <Column id="zip" type="STRING" size="32"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="dsContactPerson">
+        <ColumnInfo>
+          <Column id="cellPhoneNo" type="STRING" size="32"/>
+          <Column id="custNo" type="STRING" size="32"/>
+          <Column id="depYn" type="STRING" size="32"/>
+          <Column id="dept" type="STRING" size="32"/>
+          <Column id="dervYn" type="STRING" size="32"/>
+          <Column id="emailAddr" type="STRING" size="32"/>
+          <Column id="fax1" type="STRING" size="32"/>
+          <Column id="fax2" type="STRING" size="32"/>
+          <Column id="fax3" type="STRING" size="32"/>
+          <Column id="fullName" type="STRING" size="32"/>
+          <Column id="fxYn" type="STRING" size="32"/>
+          <Column id="hsCd" type="STRING" size="32"/>
+          <Column id="hsNm" type="STRING" size="32"/>
+          <Column id="idNo" type="STRING" size="32"/>
+          <Column id="idType" type="STRING" size="32"/>
+          <Column id="ieYn" type="STRING" size="32"/>
+          <Column id="issuCd" type="STRING" size="32"/>
+          <Column id="issuDt" type="STRING" size="32"/>
+          <Column id="issuNm" type="STRING" size="32"/>
+          <Column id="loanYn" type="STRING" size="32"/>
+          <Column id="pagerNo" type="STRING" size="32"/>
+          <Column id="remYn" type="STRING" size="32"/>
+          <Column id="remk" type="STRING" size="32"/>
+          <Column id="seq" type="INT" size="4"/>
+          <Column id="tel1" type="STRING" size="32"/>
+          <Column id="tel2" type="STRING" size="32"/>
+          <Column id="tel3" type="STRING" size="32"/>
+          <Column id="tel4" type="STRING" size="32"/>
+          <Column id="title" type="STRING" size="32"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+    <Bind>
+      <BindItem id="item0" compid="edt_customerNo" propid="value" datasetid="dsCust" columnid="custNo"/>
+      <BindItem id="item1" compid="Tab00.Tabpage1.form.edt_abbrCustName" propid="value" datasetid="dsCust" columnid="engAbbrNm"/>
+      <BindItem id="item2" compid="Tab00.Tabpage1.form.edt_customerName" propid="value" datasetid="dsCust" columnid="engNm"/>
+      <BindItem id="item3" compid="Tab00.Tabpage1.form.edt_customerNameKR" propid="value" datasetid="dsCust" columnid="korNm"/>
+      <BindItem id="item4" compid="Tab00.Tabpage1.form.cbo_status" propid="value" datasetid="dsCust" columnid="status"/>
+      <BindItem id="item5" compid="Tab00.Tabpage1.form.cbo_customerStatus" propid="value" datasetid="dsCust" columnid="custStatus"/>
+      <BindItem id="item6" compid="Tab00.Tabpage1.form.edt_countryCd" propid="value" datasetid="dsCust" columnid="countryCd"/>
+      <BindItem id="item7" compid="Tab00.Tabpage1.form.edt_countryNm" propid="value" datasetid="dsCust" columnid="countryNm"/>
+      <BindItem id="item8" compid="Tab00.Tabpage1.form.edt_customerDepositType" propid="value" datasetid="dsCust" columnid="custDepoType"/>
+      <BindItem id="item9" compid="Tab00.Tabpage1.form.cbo_financialInstitytionType" propid="value" datasetid="dsCust" columnid="fincInstType"/>
+      <BindItem id="item10" compid="Tab00.Tabpage1.form.rd_residentFlag" propid="value" datasetid="dsCust" columnid="rsdtFlag"/>
+      <BindItem id="item11" compid="Tab00.Tabpage1.form.edt_transBankName" propid="value" datasetid="dsCust" columnid="tranBankNm"/>
+      <BindItem id="item12" compid="Tab00.Tabpage1.form.cbo_bisRate" propid="value" datasetid="dsCust" columnid="bisRt"/>
+      <BindItem id="item13" compid="Tab00.Tabpage1.form.cbo_taxType" propid="value" datasetid="dsCust" columnid="taxType"/>
+      <BindItem id="item14" compid="Tab00.Tabpage1.form.edt_lastUpdateUser" propid="value" datasetid="dsCust" columnid="lastUptUser"/>
+      <BindItem id="item15" compid="Tab00.Tabpage1.form.edt_customerStatusUpdate" propid="value" datasetid="dsCust" columnid="custStatusUpt"/>
+      <BindItem id="item16" compid="Tab00.Tabpage1.form.cb_vip" propid="value" datasetid="dsCust" columnid="vip"/>
+      <BindItem id="item17" compid="Tab00.Tabpage1.form.cb_balckCustomer" propid="value" datasetid="dsCust" columnid="blackCust"/>
+      <BindItem id="item18" compid="Tab00.Tabpage1.form.edt_nationalityCd" propid="value" datasetid="dsCust" columnid="natCd"/>
+      <BindItem id="item19" compid="Tab00.Tabpage1.form.edt_nationalityNm" propid="value" datasetid="dsCust" columnid="natNm"/>
+      <BindItem id="item20" compid="Tab00.Tabpage1.form.cbo_customerDetailType" propid="value" datasetid="dsCust" columnid="custDetlType"/>
+      <BindItem id="item21" compid="Tab00.Tabpage1.form.edt_bankCode" propid="value" datasetid="dsCust" columnid="bankCd"/>
+      <BindItem id="item22" compid="Tab00.Tabpage1.form.rd_overseasJapanese" propid="value" datasetid="dsCust" columnid="oversJap"/>
+      <BindItem id="item23" compid="Tab00.Tabpage1.form.edt_CreditRating" propid="value" datasetid="dsCust" columnid="creditRt"/>
+      <BindItem id="item24" compid="Tab00.Tabpage1.form.edt_ReferenceNo" propid="value" datasetid="dsCust" columnid="refNo"/>
+      <BindItem id="item25" compid="Tab00.Tabpage1.form.cbo_dkbCorpType" propid="value" datasetid="dsCust" columnid="dkbType"/>
+      <BindItem id="item26" compid="Tab00.Tabpage1.form.ta_remark" propid="value" datasetid="dsCust" columnid="remk"/>
+      <BindItem id="item27" compid="Tab00.Tabpage3.form.cbo_organizationType" propid="value" datasetid="dsCorp" columnid="orgType"/>
+      <BindItem id="item28" compid="Tab00.Tabpage3.form.cbo_operationType" propid="value" datasetid="dsCorp" columnid="operType"/>
+      <BindItem id="item29" compid="Tab00.Tabpage3.form.edt_holingPercentage" propid="value" datasetid="dsCorp" columnid="hdPerc"/>
+      <BindItem id="item30" compid="Tab00.Tabpage3.form.edt_localDBAName" propid="value" datasetid="dsCorp" columnid="localDbaNm"/>
+      <BindItem id="item31" compid="Tab00.Tabpage3.form.Edit07" propid="value" datasetid="dsCorp" columnid="dbaNm"/>
+      <BindItem id="item32" compid="Tab00.Tabpage3.form.edt_netSales" propid="value" datasetid="dsCorp" columnid="netSales"/>
+      <BindItem id="item33" compid="Tab00.Tabpage3.form.edt_operationCountryCd" propid="value" datasetid="dsCorp" columnid="operCountryCd"/>
+      <BindItem id="item34" compid="Tab00.Tabpage3.form.edt_operationCountryNm" propid="value" datasetid="dsCorp" columnid="operCountryNm"/>
+      <BindItem id="item35" compid="Tab00.Tabpage3.form.edt_parentCompanycountrycd" propid="value" datasetid="dsCorp" columnid="parentCompCountryCd"/>
+      <BindItem id="item36" compid="Tab00.Tabpage3.form.edt_parentCompanycountryNm" propid="value" datasetid="dsCorp" columnid="parentCompCountryNm"/>
+      <BindItem id="item37" compid="Tab00.Tabpage3.form.edt_numberOfLocation" propid="value" datasetid="dsCorp" columnid="numLoc"/>
+      <BindItem id="item38" compid="Tab00.Tabpage3.form.edt_ownershipCorporationCd" propid="value" datasetid="dsCorp" columnid="ownershipCorpCd"/>
+      <BindItem id="item39" compid="Tab00.Tabpage3.form.edt_ownershipCorporationNm" propid="value" datasetid="dsCorp" columnid="ownershipCorpNm"/>
+      <BindItem id="item40" compid="Tab00.Tabpage3.form.edt_ledalCapital" propid="value" datasetid="dsCorp" columnid="legalCapital"/>
+      <BindItem id="item41" compid="Tab00.Tabpage3.form.cbo_CashTurnoverPerMobth" propid="value" datasetid="dsCorp" columnid="cashTurnPerMonth"/>
+      <BindItem id="item42" compid="Tab00.Tabpage3.form.edt_majorProduct" propid="value" datasetid="dsCorp" columnid="majPrdt"/>
+      <BindItem id="item43" compid="Tab00.Tabpage3.form.rd_RegisteredFlag" propid="value" datasetid="dsCorp" columnid="regtFlag"/>
+      <BindItem id="item44" compid="Tab00.Tabpage3.form.cbo_FiscalYearEnd" propid="value" datasetid="dsCorp" columnid="fisYearEnd"/>
+      <BindItem id="item45" compid="Tab00.Tabpage3.form.edt_numberEmployees" propid="value" datasetid="dsCorp" columnid="numEmployee"/>
+      <BindItem id="item46" compid="Tab00.Tabpage3.form.edt_totalAssets" propid="value" datasetid="dsCorp" columnid="totAsset"/>
+      <BindItem id="item47" compid="Tab00.Tabpage3.form.edt_netIncome" propid="value" datasetid="dsCorp" columnid="netIncome"/>
+      <BindItem id="item48" compid="Tab00.Tabpage3.form.edt_parentCompanyName" propid="value" datasetid="dsCorp" columnid="parentCompNm"/>
+      <BindItem id="item49" compid="Tab00.Tabpage3.form.edt_taxAmount" propid="value" datasetid="dsCorp" columnid="taxAmt"/>
+      <BindItem id="item50" compid="Tab00.Tabpage3.form.edt_actualCapital" propid="value" datasetid="dsCorp" columnid="actualCapital"/>
+      <BindItem id="item51" compid="Tab00.Tabpage3.form.cbo_businessScopeType" propid="value" datasetid="dsCorp" columnid="busiScopType"/>
+      <BindItem id="item52" compid="Tab00.Tabpage3.form.edt_BusinessLineTypeCd" propid="value" datasetid="dsCorp" columnid="busiLineTypeCd"/>
+      <BindItem id="item53" compid="Tab00.Tabpage3.form.edt_BusinessLineTypeNm" propid="value" datasetid="dsCorp" columnid="busiLineTypeNm"/>
+      <BindItem id="item54" compid="Tab00.Tabpage3.form.cbo_businessScaleType" propid="value" datasetid="dsCorp" columnid="busiScaleType"/>
+      <BindItem id="item55" compid="Tab00.Tabpage3.form.cal_IncorporationDate" propid="value" datasetid="dsCorp" columnid="incorpDt"/>
+      <BindItem id="item56" compid="Tab00.Tabpage3.form.edt_totalNumberShapes" propid="value" datasetid="dsCorp" columnid="totNumShare"/>
+      <BindItem id="item57" compid="Tab00.Tabpage3.form.cbo_netWorthCd" propid="value" datasetid="dsCorp" columnid="netWorth"/>
+      <BindItem id="item58" compid="Tab00.Tabpage3.form.cbo_netWorthNm" propid="value" datasetid="dsCorp" columnid="netWorthVal"/>
+      <BindItem id="item59" compid="Tab00.Tabpage4.form.cbo_mailingAddress" propid="value" datasetid="dsContact" columnid="mailAddr"/>
+      <BindItem id="item60" compid="Tab00.Tabpage4.form.edt_emailAddress" propid="value" datasetid="dsContact" columnid="emailAddr"/>
+      <BindItem id="item61" compid="Tab00.Tabpage4.form.edt_CellularPhoneNo" propid="value" datasetid="dsContact" columnid="cellPhoneNo"/>
+      <BindItem id="item62" compid="Tab00.Tabpage4.form.edt_pagerNo" propid="value" datasetid="dsContact" columnid="pagerNo"/>
+      <BindItem id="item63" compid="Tab00.Tabpage4.form.cbo_addressType" propid="value" datasetid="dsContactDetail" columnid="addrtype"/>
+      <BindItem id="item64" compid="Tab00.Tabpage4.form.ed_wrongAddress" propid="value" datasetid="dsContactDetail" columnid="wrongAddr"/>
+      <BindItem id="item65" compid="Tab00.Tabpage4.form.edt_localaddress1" propid="value" datasetid="dsContactDetail" columnid="localAddr1"/>
+      <BindItem id="item66" compid="Tab00.Tabpage4.form.edt_localaddress2" propid="value" datasetid="dsContactDetail" columnid="localAddr2"/>
+      <BindItem id="item67" compid="Tab00.Tabpage4.form.edt_localaddress3" propid="value" datasetid="dsContactDetail" columnid="localAddr3"/>
+      <BindItem id="item68" compid="Tab00.Tabpage4.form.edt_address1" propid="value" datasetid="dsContactDetail" columnid="engAddr1"/>
+      <BindItem id="item69" compid="Tab00.Tabpage4.form.edt_address2" propid="value" datasetid="dsContactDetail" columnid="engAddr2"/>
+      <BindItem id="item70" compid="Tab00.Tabpage4.form.edt_address3" propid="value" datasetid="dsContactDetail" columnid="engAddr3"/>
+      <BindItem id="item71" compid="Tab00.Tabpage4.form.edt_provinceCd" propid="value" datasetid="dsContactDetail" columnid="prvcCd"/>
+      <BindItem id="item72" compid="Tab00.Tabpage4.form.edt_provinceNm" propid="value" datasetid="dsContactDetail" columnid="prvcNm"/>
+      <BindItem id="item73" compid="Tab00.Tabpage4.form.edt_districtCd" propid="value" datasetid="dsContactDetail" columnid="distcCd"/>
+      <BindItem id="item74" compid="Tab00.Tabpage4.form.edt_districtNn" propid="value" datasetid="dsContactDetail" columnid="distcNm"/>
+      <BindItem id="item75" compid="Tab00.Tabpage4.form.edt_cummWardCd" propid="value" datasetid="dsContactDetail" columnid="comuCd"/>
+      <BindItem id="item76" compid="Tab00.Tabpage4.form.edt_cummWardNm" propid="value" datasetid="dsContactDetail" columnid="comuNm"/>
+      <BindItem id="item77" compid="Tab00.Tabpage4.form.edt_zipCd" propid="value" datasetid="dsContactDetail" columnid="zip"/>
+      <BindItem id="item78" compid="Tab00.Tabpage4.form.edt_contryTel" propid="value" datasetid="dsContactDetail" columnid="tel1"/>
+      <BindItem id="item79" compid="Tab00.Tabpage4.form.edt_contryArea" propid="value" datasetid="dsContactDetail" columnid="tel2"/>
+      <BindItem id="item80" compid="Tab00.Tabpage4.form.edt_contryNo" propid="value" datasetid="dsContactDetail" columnid="tel3"/>
+      <BindItem id="item81" compid="Tab00.Tabpage4.form.edt_contryExt" propid="value" datasetid="dsContactDetail" columnid="tel4"/>
+      <BindItem id="item82" compid="Tab00.Tabpage4.form.edt_countryFax" propid="value" datasetid="dsContactDetail" columnid="fax1"/>
+      <BindItem id="item83" compid="Tab00.Tabpage4.form.edt_countryArea" propid="value" datasetid="dsContactDetail" columnid="fax2"/>
+      <BindItem id="item84" compid="Tab00.Tabpage4.form.edt_countryNo" propid="value" datasetid="dsContactDetail" columnid="fax3"/>
+      <BindItem id="item85" compid="Tab00.Tabpage4.form.ta_remark" propid="value" datasetid="dsContactDetail" columnid="remk"/>
+      <BindItem id="item86" compid="Tab00.Tabpage3.form.edt_representative" propid="value" datasetid="dsCorp" columnid="rep"/>
+      <BindItem id="item87" compid="Tab00.Tabpage5.form.edt_fullName" propid="value" datasetid="dsContactPerson" columnid="fullName"/>
+    </Bind>
+  </Form>
+</FDL>

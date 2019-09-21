@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cancel">
+	<insert id="insert" parameterType="java.util.Map">
+		insert into cancel values(cancel_num_seq.nextval, #{member_id}, #{reserve_code}, sysdate, #{reason_cancel}) 
+	</insert>
+	
+	<select id="cancel_why" parameterType="int" resultType="String">
+		select cancel_reason from cancel where reserve_code = #{reserve_code}
+	</select>
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+ 
+ 
+ 
+ 
+ 
+ 

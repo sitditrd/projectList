@@ -1,0 +1,18 @@
+﻿{
+	"name": "webSocketComponent",
+	"version": "0",
+	"description": "",
+	"license": "",
+	"objInfo": [	
+    "webSocketComponent/metainfo/webSocketComponent.info"
+	],
+	"scripts": [
+    "webSocketComponent/webSocketComponent.js"
+	],
+	"designscripts": [
+    "webSocketComponent/Design/DesignwebSocketComponent.js"
+	],
+	"help": "",
+	"resources": ""
+}
+//# sourceURL=webSocketComponent.json

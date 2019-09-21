@@ -1,0 +1,523 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.0">
+  <Form id="sample_01" height="768" titletext="대용량데이터처리" onload="sample_01_onload" width="1024" onsize="sample_01_onsize" onlayoutchanged="sample_01_onlayoutchanged" canlayoutchange="sample_01_canlayoutchange">
+    <Layouts>
+      <Layout height="768" mobileorientation="landscape" width="1024" stepcount="0" screenid="">
+        <Static id="Static15" taborder="31" left="10" top="236" height="50" right="7" cssclass="sta_WF_boxBg" text=""/>
+        <Static id="Static04" taborder="0" text="조회건수" left="14" top="246" width="53" height="30" textAlign="left" cssclass="sta_WF_label"/>
+        <Combo id="cmbRowCount" taborder="1" left="75" top="246" width="107" height="30" innerdataset="innerdataset" codecolumn="codecolumn" datacolumn="datacolumn" value="1000" index="0" text="">
+          <Dataset id="innerdataset">
+            <ColumnInfo>
+              <Column id="codecolumn" size="256"/>
+              <Column id="datacolumn" size="256"/>
+            </ColumnInfo>
+            <Rows>
+              <Row>
+                <Col id="codecolumn">10000</Col>
+                <Col id="datacolumn">10,000</Col>
+              </Row>
+              <Row>
+                <Col id="codecolumn">100000</Col>
+                <Col id="datacolumn">100,000</Col>
+              </Row>
+              <Row>
+                <Col id="codecolumn">200000</Col>
+                <Col id="datacolumn">200,000</Col>
+              </Row>
+              <Row>
+                <Col id="codecolumn">1000000</Col>
+                <Col id="datacolumn">1,000,000</Col>
+              </Row>
+            </Rows>
+          </Dataset>
+        </Combo>
+        <Button id="btn_Clear" taborder="10" text="초기화" top="26" height="30" onclick="comm_Click" cssclass="btn_WF_btnInitial" right="256" width="80"/>
+        <Button id="btn_Search" taborder="11" text="조회" top="26" width="80" height="30" onclick="comm_Click" cssclass="btn_WF_btnSearch" left="btn_Clear:2"/>
+        <Button id="btn_Excel" taborder="2" text="Exp" top="26" width="80" height="30" onclick="comm_Click" cssclass="btn_WF_btnExp" left="btn_Search:2"/>
+        <Button id="btn_Excel00" taborder="9" text="닫기" top="26" width="80" height="30" onclick="comm_Click" cssclass="btn_WF_btnWhite" right="10"/>
+        <Static id="Static09" taborder="8" text=" 판정기준 1) % of Ref, Value : 71이상 양호, 2) % of Ref, Value : 61 ~ 70 요주의, 3) % of Ref, Value : 60 이하 불량.&#13;&#10; 참조 : Ref, (Reference, 기준Conductance)." left="10" top="293" height="65" right="10" cssclass="sta_WF_infoBox"/>
+        <Grid id="grd_SM" taborder="3" left="8" top="Static09:34" right="10" scrolldisplaymode="normal" scrollpixel="none" bottom="8" binddataset="dsOutput" useselcolor="false">
+          <Formats>
+            <Format id="default"/>
+          </Formats>
+        </Grid>
+        <Static id="Static08" taborder="6" text="조회기간" left="193" top="246" width="52" height="30" textAlign="left" cssclass="sta_WF_label"/>
+        <Calendar id="cal_Start" taborder="4" left="253" top="246" width="121" height="30" dateformat="yyyy-MM-dd "/>
+        <Static id="Static10" taborder="7" text="~" left="cal_Start:-2" top="246" width="17" height="30" textAlign="center"/>
+        <Calendar id="cal_End" taborder="5" left="Static10:-1" top="246" width="121" height="30" dateformat="yyyy-MM-dd "/>
+        <Static id="Static00" taborder="12" text="" left="10" top="62" height="50" font="normal 700 11pt/normal &quot;Arial&quot;" right="9" cssclass="sta_WF_boxBg"/>
+        <GroupBox id="GroupBox00" taborder="13" text="GENERAL DESCRIPTION" left="10" top="120" height="98" right="10"/>
+        <Static id="Static01" taborder="14" text="Piant" left="17" top="72" width="56" height="30" textAlign="left" cssclass="sta_WF_label"/>
+        <Static id="Static02" taborder="15" text="Item No" left="19" top="141" width="70" height="30" textAlign="left" cssclass="sta_WF_label"/>
+        <Static id="Static03" taborder="16" text="설비 Type" left="19" top="179" width="70" height="30" textAlign="left" cssclass="sta_WF_label"/>
+        <Combo id="Combo00" taborder="17" text="1CDU-BATT-A" left="Static02:8" top="141" width="227" height="30" index="-1"/>
+        <Edit id="Edit00" taborder="18" left="Static03:8" top="179" width="227" height="30"/>
+        <Static id="Static05" taborder="19" text="설비 명" left="Combo00:8" top="141" width="70" height="30" textAlign="left" cssclass="sta_WF_label"/>
+        <Static id="Static06" taborder="20" text="설비등급" left="Edit00:8" top="179" width="70" height="30" textAlign="left" cssclass="sta_WF_label"/>
+        <Edit id="Edit02" taborder="30" left="Static06:8" top="179" width="227" height="30" value="A" text="A"/>
+        <Static id="Static07" taborder="21" text="양호" top="311" height="30" textAlign="center" cssclass="sta_WF_markWhite" right="197" width="88"/>
+        <Static id="Static11" taborder="22" text="요주의" top="311" height="30" textAlign="center" cssclass="sta_WF_markBlue" right="108" width="88"/>
+        <Static id="Static12" taborder="23" text="불량" top="311" height="30" textAlign="center" cssclass="sta_WF_markRed" right="19" width="88"/>
+        <Combo id="Combo03" taborder="26" text="정유공장" left="81" top="72" width="227" height="30" index="-1" value=""/>
+        <Static id="Static13" taborder="24" text="Process" left="316" top="72" width="56" height="30" textAlign="left" cssclass="sta_WF_label"/>
+        <Combo id="Combo04" taborder="27" text="#1 Process" left="380" top="72" width="198" height="30" index="-1" value=""/>
+        <Static id="Static14" taborder="25" text="Unit" left="586" top="72" width="5.47%" height="30" textAlign="left" cssclass="sta_WF_label" maxwidth=""/>
+        <Combo id="Combo05" taborder="28" text="No, 1 CDU" top="72" height="30" index="-1" left="650" maxheight="" width="198"/>
+        <Edit id="Edit01" taborder="29" top="141" height="30" value="1CDU UPS-A BATTERY" text="1CDU UPS-A BATTERY" left="Static05:8" width="227"/>
+        <Static id="Static16" taborder="32" left="12" top="10" width="200" height="40" cssclass="sta_WF_logo" text=""/>
+        <Static id="Static19" taborder="36" text="Fast스크롤 기능" left="cal_End:11" top="246" width="96" height="30" textAlign="left" cssclass="sta_WF_label"/>
+        <Radio id="Radio00" taborder="35" left="Static19:6" top="240" width="213" height="46" innerdataset="@ds_inner_grid_scroll" codecolumn="code" datacolumn="value" columncount="2" rowcount="3" onitemchanged="Radio00_onitemchanged" index="0" text="기본" value="default"/>
+        <Static id="Static18" taborder="34" text="스크롤 모드" left="Radio00:-11" top="246" width="68" height="30" textAlign="left" cssclass="sta_WF_label" visible="false"/>
+        <Radio id="Radio01" taborder="33" left="Static18:11" top="239" width="114" height="46" innerdataset="ds_inner_grid_scrolldisplay" codecolumn="code" datacolumn="value" onitemchanged="Radio01_onitemchanged" visible="false" value="normal" text="기본" index="0"/>
+        <Static id="Static20" taborder="40" text="서버/네트워크 시간" top="366" width="120" height="20" right="383" textAlign="right"/>
+        <Static id="stSearchTime" taborder="39" text="0초" top="366" width="60" height="20" color="red" left="Static20:8"/>
+        <Static id="Static21" taborder="42" text="초, 렌더링시간" top="366" width="88" height="20" textAlign="right" left="stSearchTime:8"/>
+        <Static id="stRenderTime" taborder="41" text="0초" top="366" width="52" height="20" color="red" left="Static21:8"/>
+        <Static id="Static17" taborder="37" text="조회건수" top="366" width="48" height="20" textAlign="right" left="stRenderTime:32"/>
+        <Static id="stRowCount" taborder="38" text="0건" top="366" width="61" height="20" color="red" left="Static17:8"/>
+        <MaskEdit id="mskTemp" taborder="43" top="0" width="90" height="20" visible="false" format="###,###,###,###" right="-1" onchanged="mskTemp_onchanged"/>
+      </Layout>
+      <Layout name="Layout0" width="480" height="1300" mobileorientation="landscape" scrollbartype="auto autoindicator">
+        <Grid id="grd_SM" top="976" left="8" right="10" height="316"/>
+        <Static id="Static15" left="7" top="604" height="220" right="8"/>
+        <Static id="Static04" left="16" top="616" width="20.63%" height="44" minwidth="120" maxwidth="220"/>
+        <Combo id="cmbRowCount" left="Static04:8" top="616" height="44" right="17"/>
+        <Button id="btn_Clear" top="58" height="54" left="9" width="23.13%"/>
+        <Button id="btn_Search" left="btn_Clear:3" top="58" width="23.13%" height="54"/>
+        <Button id="btn_Excel" left="btn_Search:3" top="58" height="54" width="23.13%" text="Exp"/>
+        <Static id="Static09" left="9" top="863" height="81" right="8" text=" 판정기준 &#13;&#10;1) % of Ref, Value : 71이상 양호.&#13;&#10;2) % of Ref, Value : 61 ~ 70 요주의. &#13;&#10;3) % of Ref, Value : 60 이하 불량. &#13;&#10;참조 : Ref, (Reference, 기준Conductance)."/>
+        <Calendar id="cal_Start" left="Static08:8" top="667" width="149" height="44"/>
+        <Calendar id="cal_End" left="Static10:3" top="667" height="44" right="17"/>
+        <Static id="Static08" left="16" top="668" width="20.63%" height="44" minwidth="120" maxwidth="220"/>
+        <Static id="Static10" left="cal_Start:3" top="666" width="5.21%" height="44"/>
+        <Button id="btn_Excel00" left="btn_Excel:3" top="58" height="54" text="닫기" right="8"/>
+        <Static id="Static00" left="8" top="121" height="198" right="8"/>
+        <Static id="Static01" left="16" top="129" width="20.63%" height="44" minwidth="120" maxwidth="220"/>
+        <Static id="Static02" left="16" top="341" width="20.63%" height="44" minwidth="120" maxwidth="220"/>
+        <Static id="Static03" left="16" top="545" width="20.63%" height="44" minwidth="120" maxwidth="220"/>
+        <GroupBox id="GroupBox00" left="8" top="320" height="278" right="8"/>
+        <Combo id="Combo00" left="Static02:8" top="341" height="44" right="17"/>
+        <Static id="Static05" left="16" top="409" width="20.63%" height="44" minwidth="120" maxwidth="220"/>
+        <Static id="Static06" left="16" top="477" width="20.63%" height="44" minwidth="120" maxwidth="220"/>
+        <Static id="Static07" top="832" width="31.67%" height="22" left="9"/>
+        <Static id="Static11" top="832" width="31.67%" height="22" left="Static07:3"/>
+        <Edit id="Edit00" left="Static03:8" top="545" height="44" right="17"/>
+        <Static id="Static12" top="832" height="22" left="Static11:3" right="9"/>
+        <Static id="Static13" left="16" top="197" width="20.63%" height="44" minwidth="120" maxwidth="220"/>
+        <Static id="Static14" left="16" top="265" width="20.63%" height="44" minwidth="120" maxwidth="220"/>
+        <Combo id="Combo03" left="Static01:8" top="129" height="44" right="17"/>
+        <Combo id="Combo04" left="Static13:8" top="197" height="44" right="17"/>
+        <Combo id="Combo05" left="Static14:8" top="265" height="44" right="17"/>
+        <Edit id="Edit01" left="Static05:8" top="409" height="44" right="17"/>
+        <Edit id="Edit02" left="Static06:8" top="477" height="44" right="17"/>
+        <Static id="Static16" left="9" top="9" width="200" height="40"/>
+        <Radio id="Radio01" visible="false" left="123" top="773" width="115" height="46"/>
+        <Static id="Static18" visible="false" left="16" top="770" width="78" height="30"/>
+        <Radio id="Radio00" visible="true" left="123" top="719" width="227" height="46"/>
+        <Static id="Static19" visible="true" left="16" top="722" width="96" height="30"/>
+        <Static id="Static20" top="951" width="112" height="20" right="368"/>
+        <Static id="stSearchTime" left="Static20:8" top="951" width="60" height="20"/>
+        <Static id="Static21" left="stSearchTime:8" top="951" width="88" height="20"/>
+        <Static id="stRenderTime" left="Static21:8" top="951" width="52" height="20"/>
+        <Static id="Static17" left="stRenderTime:26" top="951" width="48" height="20"/>
+        <Static id="stRowCount" left="Static17:8" top="951" width="61" height="20"/>
+      </Layout>
+    </Layouts>
+    <Script type="xscript5.1"><![CDATA[/************************************************************************************************
+* 01. 업무구분 : 공통 - 공통
+* 02. 화면명   : sample_01
+* 03. 화면설명 : 대용량데이터 조회
+* 04. 작성일   : 2019.04.22
+* 05. 작성자   : 안주환
+* 06. 수정이력 :
+***********************************************************************************************
+*     수정일          이  름    사유
+***********************************************************************************************
+*     
+************************************************************************************************/
+
+/************************************************************************************************
+* 공통 라이브러리 INCLUDE 영역
+************************************************************************************************/
+include "Script::CommUtil.xjs"; 	
+include "Script::ext_CommEco.xjs";
+
+/************************************************************************************************
+* 전역 변수 영역
+************************************************************************************************/
+
+/************************************************************************************************
+* FORM 영역
+************************************************************************************************/
+this.sample_01_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
+{	
+	var date = new Date();
+	var cur = this.gfnGetDateMaskFormatString(date, "yyyyMMdd");
+	
+	this.cal_Start.set_value(cur);
+	this.cal_End.set_value(cur);
+		
+	this.fn_DisplayMode();
+};
+
+/************************************************************************************************
+* FORM 공통 FUNCTION 영역
+************************************************************************************************/
+this.fn_DisplayMode = function()
+{
+	//alert(system.navigatorname); //Edge일때는 IE를 찍는 이슈가 있어서 브라우저타입에 따른 분기처리가 되지 않음.
+	//alert(nexacro._BrowserType); //Chrome일때는 webKit을 찍고 나머지는 올바른 타입에 버전까지 출력
+	
+// 	if(nexacro._BrowserType != Runtime)
+// 	{
+// 	
+// 	}
+	
+	if(system.navigatorname != "nexacro") 
+	{
+		if (navigator.userAgent.match(/Trident\/.*rv\:(.+?)[\);]/)) //IE
+		{	
+			this.Static18.set_visible(true);
+			this.Radio01.set_visible(true);
+			
+			this.Radio01_onitemchanged(this.Radio01);
+		}
+		else if (navigator.userAgent.match(/Edge/)) //Edge
+		{
+			
+		}
+		else if (navigator.userAgent.match(/Chrome|CriOS/)) //Chrome
+		{
+			
+		}
+	}
+};
+
+this.fn_ClearMode = function()
+{	
+	this.grd_SM.set_formats("<Formats> <Format id=\"default\"/> </Formats>");
+	this.dsOutput.clearData();
+	
+	this.stSearchTime.set_text("0초");
+	this.stRenderTime.set_text("0초");
+	this.stRowCount.set_text("0건");
+};
+
+//Excel Export
+this.fn_export = function(grid)
+{		
+	this.ExcelExportObject.clear();
+	
+	var sFileNm = "ExcelExportFile";
+	var constExportItemType = nexacro.ExportItemTypes.GRID;
+	var varExportSource = grid;
+	var strRange = "Sheet1!A1";
+	var strExportHead = "allband";
+	var strExportSelect = "allrecord";
+	var strExportMerge = "suppress";
+	var strExportValue = "allstyle";
+	var strExportImage = "none";
+	var strExceptStyle = "";
+	var strExportSize = "both";
+	//var strAcceptStyle = "cellline";
+	
+	var ret = this.ExcelExportObject.addExportItem(constExportItemType, varExportSource, strRange, strExportHead, strExportSelect, strExportMerge, strExportValue, strExportImage, strExceptStyle, strExportSize);
+	this.ExcelExportObject.set_exporttype(nexacro.ExportTypes.EXCEL);
+	this.ExcelExportObject.set_exportfilename(sFileNm);
+	this.ExcelExportObject.set_exporturl("http://14.63.224.112/SkInnovation/XExportImport");
+	this.ExcelExportObject.exportData();
+}
+
+this.ExcelImportObject_onsuccess = function(obj:nexacro.ExcelExportObject, e:nexacro.ExcelExportEventInfo)
+{
+	this.alert("Excel Import Success !!");
+};
+
+this.ExcelImportObject_onerror = function(obj:nexacro.ExcelExportObject, e:nexacro.ExcelExportErrorEventInfo)
+{
+	this.alert( "Excel Import Error Type:["+ e.errortype + "] Error Msg:["+e.errormsg+"]");
+};
+
+/************************************************************************************************
+* TRANSACTION 및 추가 FUNCTION 영역
+************************************************************************************************/
+this.fn_Search = function(betweenDay)
+{
+	this.dsOutput.clearData();
+	
+	var type = "";
+	
+	if(this.cmbRowCount.value == "All")
+	{
+		type = "전체";
+	}
+	
+	var sId = "SEARCH";
+	var sUrl = "http://14.63.224.112/SkInnovation/service/Service_SSV_ZIP_inQuery.jsp?betweenDay=" + betweenDay + "&cnt=" + this.cmbRowCount.value;
+	var sInDs = "";
+	var sOutDs = "dsOutput=dsOutput";
+	var sParam = "";
+	var sCallback = "fn_Callback";
+	
+	this.starttime = new Date();
+	this.transaction(sId, sUrl, sInDs, sOutDs, sParam, sCallback);
+}
+
+this.fn_Callback = function(sId, nErrorCd, sErrorMsg, elapsedTime)
+{
+	if (nErrorCd < 0)
+	{
+		alert("[" + nErrorCd + "]" + sErrorMsg);
+	}
+	else 
+	{
+		if (sId == "SEARCH")
+		{	
+			this.endtime = new Date();
+			var totaltime = nexacro.round((this.endtime - this.starttime) / 1000, 3);
+			
+			this.stSearchTime.set_text(elapsedTime + "초");
+			this.stRenderTime.set_text(nexacro.round(totaltime - elapsedTime, 3) + "초");
+			
+			var nRowCount = this.dsOutput.rowcount;
+			var sRowCount;
+			
+			this.mskTemp.set_value(nRowCount);
+			
+			sRowCount = this.mskTemp.text;
+			
+			this.stRowCount.set_text(sRowCount + "건");
+		}
+		else if (sId == "SAVE")
+		{
+			alert("저장 완료");
+		}
+	}
+}
+
+/************************************************************************************************
+* 각 COMPONENT 별 EVENT 영역
+************************************************************************************************/
+this.comm_Click = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	switch(obj.name)
+	{
+		case "btn_Search" : 
+			var days = new Array();
+			days = [0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+			
+			//년도
+			var d_start_year = this.cal_Start.value.substr(0, 4);
+			var d_end_year = this.cal_End.value.substr(0, 4);
+			
+			//월
+			var d_start_month = this.cal_Start.value.substr(4, 2);
+			var d_end_month = this.cal_End.value.substr(4, 2);
+			
+			//일
+			var d_start_day = this.cal_Start.value.substr(6, 2);
+			var d_end_day = this.cal_End.value.substr(6, 2);
+				
+			//날짜차이
+			var startDate = new Date(d_start_year, (d_start_month - 1), d_start_day);
+			var endDate = new Date(d_end_year, (d_end_month - 1), d_end_day);
+			  
+			var betweenDay = ((endDate.getTime() - startDate.getTime()) / 1000 / 60 / 60 / 24) + 1;  
+			
+			if(parseInt(this.cal_Start.value) > parseInt(this.cal_End.value))
+			{ 
+				alert("시작일은 종료일보다 클 수 없습니다.");
+				return;
+			}
+			else	
+			{   	
+				//최대 생성 컬럼 개수는 200개
+				betweenDay = (betweenDay > 200) ? 200 : betweenDay;
+				
+			    //그리드 동적 생성
+				var strFormat1 = ' <Formats>'
+				+ '     <Format id="default">'
+				
+				+ ' 	<Columns>'
+				+ ' 		<Col size="70"/>';
+				
+				//Column Make Loop
+				for(var i=1; i<=betweenDay; i++)
+				{
+					strFormat1 += ' <Col size="100"/>';
+				}
+				
+				var strFormat2 = ' 	</Columns>'
+				+ ' 	<Rows>'
+				+ ' 		<Row band="head" size="24"/>'
+				+ ' 		<Row band="head" size="24"/>'
+				+ ' 		<Row size="40"/>'
+				+ ' 	</Rows>'
+				
+				+ ' 	<Band id="head">'
+				+ ' 		<Cell rowspan="2" text="Jar No"/>'
+				
+				+ ' 		<Cell col="1" colspan="' + betweenDay + '" text="% of Ref, Value"/>';
+
+				//Type Setting
+				//년도
+				var d_start_year = parseInt(d_start_year);
+				var d_end_year = parseInt(d_end_year);
+				
+				//월
+				var d_start_month = parseInt(d_start_month);
+				var d_end_month = parseInt(d_start_month);
+				
+				//일
+				var d_start_day = parseInt(d_start_day);
+				var d_end_day = parseInt(d_end_day);
+			
+				//date setting
+				var limitDay = days[d_start_month];
+				
+				//Column Info Loop
+				for(var i=1; i<=betweenDay; i++)
+				{	
+					//날짜가 넘어갈 때 초기화 작업
+					if(d_start_day > limitDay)
+					{
+						d_start_month++;
+						limitDay = days[d_start_month];
+						d_start_day = 1;
+					}
+					
+					//월이 넘어갈 때 초기화 작업
+					if(d_start_month > 12)
+					{
+						d_start_year++;
+						d_start_month = 1;
+					}
+					
+					strFormat2 += ' 		<Cell row="1" col="'+ i +'" text="'+ d_start_year +'-'+ d_start_month.toString().padLeft(2, 0) +'-'+ d_start_day.toString().padLeft(2, 0) +'"/>';
+					
+					d_start_day++;
+				}
+				
+				var strFormat3 = ' 	</Band>'
+				+ ' 	<Band id="body">'
+			    + ' 		<Cell expr="currow + 1"/>';
+				
+				//Body Info Loop
+				for(var i=1; i<=betweenDay; i++)
+				{
+					strFormat3 += ' 		<Cell col="'+ i +'" text="bind:COL_'+ i +'" cssclass="expr:(COL_'+ i +' &lt;= 60) ? \'Expr_Case_Background_lightpink\' : (COL_'+ i +' &gt; 60 &amp;&amp; COL_'+ i +' &lt;= 70) ? \'Expr_Case_Background_aqua\' : \'\'"/>' 
+				}
+				
+				var strFormat4 = ' 	</Band>'
+				+ '      </Format>'
+				+ ' </Formats>';
+				
+				var strFormat = strFormat1 + strFormat2 + strFormat3 + strFormat4;
+				
+				this.grd_SM.set_formats(strFormat); 
+				
+				//데이터 조회
+				this.fn_Search(betweenDay);
+			}
+			break;
+		case "btn_Excel" : 
+			this.fn_export(this.grd_SM);
+			break;
+		case "btn_Clear" : 
+			this.fn_ClearMode();
+			break;
+		case "btn_Close" : 
+			this.close();
+			break;
+	}
+};
+
+this.Radio00_onitemchanged = function(obj:nexacro.Radio,e:nexacro.ItemChangeEventInfo)
+{
+	this.grd_SM.set_fastvscrolltype(obj.value);
+};
+
+this.Radio01_onitemchanged = function(obj:nexacro.Radio,e:nexacro.ItemChangeEventInfo)
+{
+	if(obj.value == "page")
+	{
+		this.Radio00.set_value("default");
+		this.Radio00_onitemchanged(this.Radio00);
+		this.Radio00.set_enable(false);
+	}
+	else if(obj.value == "line")
+	{
+		this.Radio00.set_value("default");
+		this.Radio00_onitemchanged(this.Radio00);
+		this.Radio00.set_enable(false);
+	}
+	else if(obj.value == "normal")
+	{
+		this.Radio00.set_enable(true);
+	}
+	
+	this.grd_SM.set_scrolldisplaymode(obj.value);
+};
+
+this.sample_01_onlayoutchanged = function(obj:nexacro.Form,e:nexacro.LayoutChangeEventInfo)
+{
+	this.fn_DisplayMode();
+};]]></Script>
+    <Objects>
+      <Dataset id="dsOutput"/>
+      <Dataset id="ds_inner_grid_scroll">
+        <ColumnInfo>
+          <Column id="code" type="STRING" size="256"/>
+          <Column id="value" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="code">default</Col>
+            <Col id="value">기본</Col>
+          </Row>
+          <Row>
+            <Col id="code">topdisplay</Col>
+            <Col id="value">상단</Col>
+          </Row>
+          <Row>
+            <Col id="code">centerdisplay</Col>
+            <Col id="value">중앙</Col>
+          </Row>
+          <Row>
+            <Col id="code">topbottomdisplay</Col>
+            <Col id="value">상단, 하단</Col>
+          </Row>
+          <Row>
+            <Col id="code">topcenterbottomdisplay</Col>
+            <Col id="value">상단, 중앙, 하단</Col>
+          </Row>
+          <Row>
+            <Col id="code">trackbarfollow</Col>
+            <Col id="value">스크롤 위치</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <ExcelExportObject id="ExcelExportObject"/>
+      <Dataset id="ds_inner_grid_scrolldisplay">
+        <ColumnInfo>
+          <Column id="code" type="STRING" size="256"/>
+          <Column id="value" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="code">normal</Col>
+            <Col id="value">기본</Col>
+          </Row>
+          <Row>
+            <Col id="code">page</Col>
+            <Col id="value">페이지단위</Col>
+          </Row>
+          <Row>
+            <Col id="code">line</Col>
+            <Col id="value">Row,Column단위</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+    </Objects>
+  </Form>
+</FDL>

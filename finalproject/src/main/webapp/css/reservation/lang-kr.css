@@ -1,0 +1,157 @@
+﻿@charset "utf-8";
+body, input, select, textarea {font-family:"나눔바른고딕",Nanum Barun Gothic,"나눔 고딕","Nanum Gothic","맑은 고딕","Malgun Gothic", "돋움",dotum;}
+/*kr icon */
+.f-icon-kr{display:inline-block;font-size:0;vertical-align:middle;background-image:url(//pic.english.c-ctrip.com/common_v3/flight-sprite-kr.png);background-repeat:no-repeat;background-position:1024px 1024px;*display:inline;*zoom:1;}
+.f-icon-kr.icon-tit-flight-round{width:20px;height:32px;background-position:-1px -1px;}
+.f-icon-kr.icon-tit-flight-oneway{width:24px;height:24px;background-position:-23px 0;}
+.f-icon-kr.icon-select-seat{width:24px;height:24px;background-position:-50px 0;}
+.f-icon-kr.icon-weather{width:35px;height:25px;background-position:-80px 0;}
+.f-icon-kr.icon-flight-status{background-position:-119px 0;}
+.f-icon-kr.icon-online-chat{background-position:0 -36px;}
+.f-icon-kr.icon-send-mail{background-position:-29px -37px;}
+.f-icon-kr.icon-correct{background-position:-154px 0;height:26px;}
+.f-icon-kr.icon-flight-arrow-round{width:14px;height:18px;background-position:-186px 0;}
+.f-icon-kr.icon-flight-arrow-oneway{width:14px;height:10px;background-position:-205px 0;}
+.f-icon-kr.icon-flight-status{width:32px;height:32px;background-position:-120px 0;}
+.f-icon-kr.icon-check-hook{background-position:-224px 0;}
+.f-icon-kr.icon-multi-flight-remove{width:14px;height:14px;background-position:-240px 0;}
+.f-icon-kr.icon-recent-close{background-position:-209px -24px;}
+.f-icon-kr.icon-recent-gray-adult{width:8px;height:22px;background-position:-168px -47px;}
+.f-icon-kr.icon-recent-gray-child{width:12px;height:20px;background-position:-192px -47px;}
+.f-icon-kr.icon-recent-gray-infant{width:10px;height:20px;background-position:-216px -47px;}
+.f-icon-kr.icon-recent-arrow-round{width:20px;height:18px;background-position:-157px -26px;}
+.f-icon-kr.icon-recent-arrow-oneway{width:20px;height:10px;background-position:-183px -26px;}
+.f-icon-kr.icon-info{width:12px;height:12px;background-position:-232px -48px;}
+/* flight kr */
+.page-box-kr{background:#fff;}
+.page-box-kr .mod-index-main{background:#f4f4f4 url(//pic.english.c-ctrip.com/common_v3/search-bg-flight-kr.png) repeat;}
+    .page-box-kr .mod-m-s-f{background:#fff; border:1px solid #0288d1; border-top:0 none; color:#666;}
+    .page-box-kr .mod-m-s-f h1.mod-tit{background:#0288d1; color:#fff; margin:0 -20px 15px; font-size:18px; padding:8px 20px;}
+/* switch override */
+    .page-box-kr .mod-m-s-f .radio-switch .tab{border-radius: 0; border-color:#c7c7c7; color:#666;padding:3px 20px;}
+    .page-box-kr .mod-m-s-f .radio-switch .tab:hover{background:#747474;color:#fff;border-color:#5b5b5b;}
+    .page-box-kr .mod-m-s-f .radio-switch .active,
+    .page-box-kr .mod-m-s-f .radio-switch .active:hover{background:#747474;color:#fff;border-color:#5b5b5b;}
+
+    .page-box-kr .mod-m-s-f .s-item .c-ipt,.page-box-kr .mod-m-s-f .number-counter,.page-box-kr .mod-m-s-f .sel-class{border:1px solid #ccc;}
+    .page-box-kr .ui-checkbox .fake-checkbox{border-color:#ccc;}
+    .page-box-kr .ui-checkbox.ui-checked .fake-checkbox{background:#0288d1;border-color:#0288d1;}
+    .page-box-kr .ui-checkbox.ui-checked{color:#0288d1;}
+    .page-box-kr .ui-checkbox:hover,
+    .page-box-kr .ui-checkbox .fake-checkbox:hover{color:#0288d1;}
+    .page-box-kr .mod-m-s-f .info-tip a{color:#666;}
+    .page-box-kr .mod-m-s-f .btn-key{border-bottom:0 none;background-color:#ffa000;font-size:20px;}
+    .page-box-kr .mod-m-s-f .btn-key:hover{background-color:#ffc600;}
+    .page-box-kr .mod-m-s-f .multi-item .label{display:block;background:#0288d1;width:24px;text-align:center;height:24px;border-radius:100px;color:#fff;font-size:16px;line-height:24px;}
+    .page-box-kr .mod-m-s-f .multi-item .search-items{margin-left:45px;}
+    .page-box-kr .mod-m-s-f .multi-item .col-item{width:36.5%;}
+    .page-box-kr .mod-m-s-f .multi-item .dir-switch{left:36.5%;}
+    .page-box-kr .mod-m-s-f .multi-item .item-date{width:150px;margin-left:20px;margin-right:0;}
+    .page-box-kr .mod-m-s-f .item-infant{margin-right:39px;}
+    .page-box-kr .mod-m-s-f .remove-btn{position:absolute;top:25px;right:0;}
+    .page-box-kr .mod-m-s-f .remove-btn:hover .icon-multi-flight-remove{background-position:-259px 0;}
+    .page-box-kr .mod-m-s-f .multi-city .add-flight{display:block;border:1px dashed #ccc;width:96%; color:#0288d1;line-height:36px;font-size:14px;}
+    .page-box-kr .mod-m-s-f .multi-city .add-flight:hover{border-color:#0288d1;text-decoration:none;}
+    .page-box-kr .mod-m-s-f .button-plus,.page-box-kr .mod-m-s-f .button-minus{height:34px;}
+    .page-box-kr .mod-m-s-f .button-plus .plus-h,.page-box-kr .mod-m-s-f .button-minus .minus{margin:16px auto;}
+    .page-box-kr .mod-m-s-f .counter{line-height:34px;}
+    .page-box-kr .mod-m-s-f .add-flight .button-plus .plus-h,
+    .page-box-kr .mod-m-s-f .add-flight .button-plus .plus-v{border-color:#0288d1;}
+    .page-box-kr .mod-m-s-f .add-flight .button-plus:hover{background:#fff;}
+    .page-box-kr .mod-m-s-f .add-flight .button-plus:hover .plus-h,
+    .page-box-kr .mod-m-s-f .add-flight .button-plus:hover .plus-v{border-color:#0288d1;}
+    .page-box-kr .mod-rct-srh .tile .tile-link,.page-box-kr .mod-rct-srh .class,.page-box-kr .mod-rct-srh .passenger,.page-box-kr .mod-rct-srh .date{color:#999;font-size:14px;}
+    .page-box-kr .mod-rct-srh .tile .tile-link:hover{background:#fff;border:1px solid #0288d1; padding:7px 9px;}
+    .page-box-kr .mod-rct-srh .tit{color:#666;}
+    .page-box-kr .mod-rct-srh .recent-close{color:#666;}
+    .page-box-kr .mod-rct-srh .recent-close:hover{color:#0288d1;text-decoration:none;}
+    .page-box-kr .mod-rct-srh .recent-close:hover .icon-recent-close{background-position:-233px -24px;}
+    .page-box-kr .mod-rct-srh .tile .tile-inner{background:#fdfdfd;background:rgba(255,255,255,0.8);}
+    .page-box-kr .mod-more .more-link{color:#666;}
+    .page-box-kr .mod-more .more-link:hover{color:#0288d1;}
+    .page-box-kr .mod-hot-flt .mod-tit{color:#0288d1; font-size:18px; border:0;}
+    .page-box-kr .mod-hot-flt .txt-taxes{float:none; font-size:12px;margin-left:10px;}
+    .page-box-kr .mod-hot-flt .mod-tab a.active{background:#0288d1;}
+    .page-box-kr .mod-hot-flight .tile-con{margin-left:0;}
+    .page-box-kr .mod-hot-flight .tile-con .tile{padding:0 10px 10px 0;}
+    .page-box-kr .mod-hot-flt .tile .tile-link{border:1px solid #cbe5f2; border-radius:0;}
+    .page-box-kr .mod-hot-flt .tile .tile-link:hover{padding:12px 12px 10px 12px;border-color:#0288d1;background-color:#f2fbff;}
+    .page-box-kr .mod-hot-flt .route .city{font-size:16px;}
+    .page-box-kr .mod-hot-flt .route .city-to{font-weight:700;}
+    .page-box-kr .mod-hot-flt .date{color:#999;font-size:12px;}
+    .page-box-kr .mod-hot-flt .price-box .price-num{color:#0288d1;font-size:22px;}
+    .page-box-kr .won{color:#0288d1;font-size:16px;}
+    .page-box-kr .price-currency{font-size:12px;}
+    .page-box-kr .mod-hot-flt .oneway-deals .date{float:none;}
+    .page-box-kr .mod-hot-flt .price-box{margin-top:10px;}
+    .page-box-kr .mod-hot-flt .route{margin-bottom:3px; margin-right:0;}
+.page-box-kr .mod-toolbox{width:30.5%;}
+    .page-box-kr .mod-toolbox .mod-tit{font-size:18px;font-weight:700;color:#0288d1;}
+    .page-box-kr .mod-white-con{background:#f8f8f8;}
+    .page-box-kr .mod-toolbox .select-seat,
+    .page-box-kr .mod-toolbox .weather{width:48.5%;}
+    .page-box-kr .mod-toolbox .bk-lnk{border:0 none; background:#fff;font-size:16px;text-align:center;padding:10px 0;color:#0288d1;}
+    .page-box-kr .mod-toolbox .bk-lnk:hover{text-decoration:none;color:#fff;background-color:#0288d1;border-radius:0}
+    .page-box-kr .mod-toolbox .bk-lnk:hover .icon-select-seat{background-position:-54px -28px;}
+    .page-box-kr .mod-toolbox .bk-lnk:hover .icon-weather{background-position:-84px -30px;}
+    .page-box-kr .mod-toolbox .flight-status .tit{color:#0288d1;margin-bottom:10px;}
+    .page-box-kr .mod-toolbox .flight-status{background:#fff;border:0 none;}
+    .page-box-kr .mod-toolbox .flight-status .radio-brick{color:#0288d1;}
+    .page-box-kr .mod-toolbox .flight-status .status-input .c-ipt{border-color:#ccc; border-right:0; margin-right:0;}
+    .page-box-kr .mod-toolbox .c-btn{border-radius:0; border-bottom:0;background:#0288d1; padding:0 30px;}
+    .page-box-kr .mod-toolbox .c-btn:hover{background-color:#19afff;}
+    .page-box-kr .mod-toolbox .flight-status .status-input .c-ipt{width:69.1%;}
+    .page-box-kr .mod-toolbox .flight-status .status-input .from-ipt,.page-box-kr .mod-toolbox .flight-status .status-input .to-ipt{width:33%;max-width:33%;}
+    .page-box-kr .mod-toolbox .flight-status .status-input .from-ipt{margin-right:10px;border-right:1px solid #ccc;}
+    .page-box-kr .mod-toolbox .bk-lnk .f-icon-kr{margin-right:8px;vertical-align:top;}
+    .page-box-kr .mod-ctrip-advantage{width:39%; float:left; margin:0 30px;border-right:1px solid #e4e4e4;border-left:1px solid #e4e4e4; padding:0 30px;}
+    .page-box-kr .advantage-list li{float:none; width:100%; margin:0 0 10px;}
+    .page-box-kr .mod-ctrip-advantage .mod-tit{font-size:18px;color:#3badae;margin-bottom:15px;font-weight:700;}
+    .page-box-kr .advantage-list li .tit{font-size:16px;color:#3badae;font-weight:700;}
+    .page-box-kr .advantage-list li .content{color:#999;font-size:12px;}
+    .page-box-kr .advantage-list li a{color:#999;text-decoration:underline;}
+    .page-box-kr .advantage-list li a:hover{color:#0288d1;}
+    .page-box-kr .mod-index-contat{float:right; width:20%;}
+    .page-box-kr .mod-index-contat .chat,
+    .page-box-kr .mod-index-contat .mail{line-height:36px;text-align:center;margin-left:10px;background-color:#1299c0;border-radius:20px;display:inline-block;width:40px;height:40px;}
+    .page-box-kr .mod-index-contat .chat:hover,
+    .page-box-kr .mod-index-contat .mail:hover{background-color:#19afff;}
+    .page-box-kr .mod-index-contat .mod-tit{font-size:18px;color:#1299c0;font-weight:700;}
+    .page-box-kr .mod-index-contat .call-list{border-bottom:1px solid #e4e4e4;padding-bottom:5px;}
+    .page-box-kr .mod-index-contat .call-list-chat{border-bottom:none;margin-top:15px;}
+    .page-box-kr .mod-index-contat .call-list dt{color:#999;font-size:12px;}
+    .page-box-kr .mod-index-contat .call-list dd{font-size:16px;color:#1299c0;font-weight:700;}
+.page-box-kr .mod-mail-subscribe{background:#fff; text-align:left;}
+    .page-box-kr .mod-mail-subscribe .mod-inner{padding:30px 0;background:none;}
+    .page-box-kr .mod-ads-gallery{float:left;}
+    .page-box-kr .center-brick{float:left;margin-left:20px; margin-top:50px;}
+    .page-box-kr .mod-mail-subscribe .mod-tit{color:#ffa000;font-size:18px;font-weight:700;}
+    .page-box-kr .mod-mail-subscribe .ipt-mail{border:1px solid #ccc;border-right:0 none;margin-right:0;}
+    .page-box-kr .mod-mail-subscribe .c-btn{border-radius:0;background:#ffa000;border-bottom:0;padding:0 30px;}
+    .page-box-kr .mod-mail-subscribe .c-btn:hover{background-color:#ffc600;}
+    .page-box-kr .mod-mail-subscribe .delivered{text-align:center;}
+    .page-box-kr .mod-mail-subscribe .delivered .c-btn{border-radius:2px;}
+    .page-box-kr .mod-mail-subscribe .delivered .msg{color: #1a1a1a;}
+@media only screen and (max-width:1024px){
+    .page-box-kr .mod-toolbox{width:36%;float:left;}
+    .page-box-kr .mod-ctrip-advantage{padding:0 15px;margin:0 15px;width:36%;}
+}
+@media only screen and (max-width:768px){
+    .page-box-kr .mod-m-s-f .multi-item .col-item{width:36.2%;}
+    .page-box-kr .mod-m-s-f .multi-item .dir-switch{left:36.2%;}
+    .page-box-kr .mod-m-s-f .multi-item .item-date{margin-left:15px;}
+    .page-box-kr .mod-toolbox{width:100%;margin-bottom:20px;}
+    .page-box-kr .mod-toolbox .select-seat, .page-box-kr .mod-toolbox .weather{width:49%;}
+    .page-box-kr .mod-ctrip-advantage{border-left:0;margin-left:0;padding-left:0;width:50%;}
+    .page-box-kr .mod-index-contat{width:41%;}
+    .page-box-kr .mod-ads-gallery{width:100%}
+}
+/* flight-kr address selector*/
+.pop-sel-address{width:412px;padding-bottom:23px;}
+    .pop-sel-address .country-name{padding:2px 5px;font-size:12px;}
+    .pop-sel-address .country-single{padding:5px}
+    .pop-sel-address .country-name a{width:18.7%;padding-left:5px;}
+    .pop-sel-address .country-dpt{font-size:12px;font-weight:700;}
+    .pop-sel-address .area-name{font-size:12px;padding-left:10px; padding-top:5px;}
+    .pop-sel-address .pop-close{position:absolute; bottom:5px; right:5px;}
+

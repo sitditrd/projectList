@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ENV version="2.1">
+  <Environment themeid="theme::default" scrollbarsize="10">
+    <ScreenDefinition>
+      <Screen id="Phone_screen" type="mobile_small" themeid="theme::style_m" specifiedlocale="ar_AE"/>
+      <Screen id="Desktop_screen" type="desktop" themeid="theme::style"/>
+    </ScreenDefinition>
+    <Variables/>
+    <Cookies/>
+    <httpheader/>
+  </Environment>
+  <Script type="xscript5.1"><![CDATA[]]></Script>
+</ENV>

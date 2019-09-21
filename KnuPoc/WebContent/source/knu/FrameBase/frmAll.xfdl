@@ -1,0 +1,167 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.0">
+  <Form id="frmAll" width="1024" height="768" titletext="New Form">
+    <Layouts>
+      <Layout height="768" mobileorientation="landscape" width="1024">
+        <Div id="divWork" taborder="1" left="0" top="50" right="0" bottom="0" text="" url="work::poc_main.xfdl"/>
+        <Static id="Static00" taborder="1" left="0" top="0" height="50" right="0" cssclass="sta_TF_bg"/>
+        <Menu id="Menu00" taborder="2" left="250" top="0" height="50" captioncolumn="MENU_NM" idcolumn="MENU_CD" levelcolumn="MENU_LVL" popupitemheight="40" right="0" onmenuclick="Menu00_onmenuclick" userdatacolumn="MENU_CD" innerdataset="dsLeftMenu" autohotkey="false" fittocontents="width"/>
+        <Static id="Static01" taborder="3" left="10" top="0" width="170" height="50" cssclass="sta_TF_logo"/>
+      </Layout>
+    </Layouts>
+    <Script type="xscript5.1"><![CDATA[this.Menu00_onmenuclick = function(obj:nexacro.Menu,e:nexacro.MenuClickEventInfo)
+{
+	var sId = e.userdata;
+	var sMenuId = this.dsLeftMenu.lookup("MENU_CD", sId, "MENU_CD");
+	this.fn_openMenu(sMenuId);
+};
+
+this.fn_openMenu = function(sMenuId)
+{
+	var nFRow;
+	var sPGMPATH;
+	var sPGMID;
+	
+	var nFRowOpen;
+	var sWinId;
+	var sMenuNm;
+	var sMenuNavi;
+	
+	var objMenuDs = this.dsLeftMenu;
+	
+	nFRow 		= objMenuDs.findRow("MENU_CD", sMenuId);
+	sPGMPATH 	= objMenuDs.getColumn(nFRow, "PGM_PATH");
+	sPGMID 		= objMenuDs.getColumn(nFRow, "PGM_ID")
+	sMenuNm 	= objMenuDs.getColumn(nFRow, "MENU_NM");
+	
+	nFRowOpen = this.dsOpenMenu.findRow("MENU_CD", sMenuId);
+	sWinId = this.dsOpenMenu.getColumn(nFRowOpen, "WINID");
+	this.divWork.set_url(sPGMPATH+"::"+sPGMID);
+	
+	
+// 	if (nFRow==-1)
+// 	{
+// 		alert("Menu가 존재하지 않습니다.");
+// 		return;
+// 		
+// 	}else if(this.gfnIsNull(sPGMPATH)==true)
+// 	{
+// 		return;
+// 	}
+// 	
+// 	sWinId = "UI_"+sMenuId + "_" + this.dsOpenMenu.rowcount+ "_" + parseInt(Math.random() * 100);
+// 	//trace("sPGMPATH+:::::+sPGMID" + sWinId);
+// 	var objNewWin = new Div();
+// 	objNewWin.init(sWinId, 0, 0, null, null, 0, 0);
+// 	
+// 	objNewWin.set_async(false);
+// 	
+// 	this.divWork.form.addChild(objNewWin.name, objNewWin);
+// 	
+// 	objNewWin.show();
+// 	
+// 	objNewWin.set_url(sPGMPATH+"::"+sPGMID);
+// 	
+// 	this.fn_AddOpenMenu(sWinId, sMenuId, sMenuNm);
+};
+
+/*****************************************************************************
+함 수 명 칭 : gfnAddOpenMenu
+함 수 설 명 : 열린화면리스트 저장
+파 라 미 터 : pvWinId – 업무화면 ID
+			   pvMenuCd – 메뉴코드
+			   pvMenuNm – 메뉴명
+리 턴 내 용 : 없음
+*****************************************************************************/
+this.fn_AddOpenMenu = function(pvWinId, pvMenuCd, pvMenuNm) 
+{
+	var nAddRow = this.dsOpenMenu.addRow();
+	this.dsOpenMenu.setColumn(nAddRow, "WINID", pvWinId);
+	this.dsOpenMenu.setColumn(nAddRow, "MENU_CD", pvMenuCd);
+	this.dsOpenMenu.setColumn(nAddRow, "MENU_NM", pvMenuNm);	
+};
+
+/*****************************************************************************
+함 수 명 칭 : gfnIsNull
+함 수 설 명 : 입력값 Null 체크 함수
+파 라 미 터 : pvVal – 입력값
+리 턴 내 용 : true/false 값이 Null일 경우 true
+*****************************************************************************/
+this.gfnIsNull = function (pvVal)
+{
+	if (new String(pvVal).valueOf() == "undefined") 
+	{
+		return true;
+	}
+	if (pvVal == null) 
+	{
+		return true;
+	}
+	if (("x" + pvVal == "xNaN") && (new String(pvVal.length).valueOf() == "undefined")) 
+	{
+		return true;
+	}
+	if (pvVal.length == 0) 
+	{
+		return true;
+	}
+
+	return false;
+};]]></Script>
+    <Objects>
+      <Dataset id="dsOpenList">
+        <ColumnInfo>
+          <Column id="code" type="STRING" size="256"/>
+          <Column id="caption" type="STRING" size="256"/>
+          <Column id="BTN_ID" type="STRING" size="256"/>
+          <Column id="BTN_EX_ID" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="dsOpenMenu">
+        <ColumnInfo>
+          <Column id="MENU_CD" type="STRING" size="8"/>
+          <Column id="UP_MENU_CD" type="STRING" size="8"/>
+          <Column id="MENU_NM" type="STRING" size="50"/>
+          <Column id="MENU_LVL" type="BIGDECIMAL" size="22"/>
+          <Column id="PGM_PATH" type="STRING" size="200"/>
+          <Column id="PGM_ID" type="STRING" size="200"/>
+          <Column id="WINID" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="dsLeftMenu">
+        <ColumnInfo>
+          <Column id="MENU_CD" type="STRING" size="256"/>
+          <Column id="UP_MENU_CD" type="STRING" size="256"/>
+          <Column id="MENU_NM" type="STRING" size="256"/>
+          <Column id="MENU_LVL" type="STRING" size="256"/>
+          <Column id="PGM_PATH" type="STRING" size="256"/>
+          <Column id="PGM_ID" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="MENU_CD">0000</Col>
+            <Col id="UP_MENU_CD">0</Col>
+            <Col id="MENU_LVL">0</Col>
+            <Col id="MENU_NM">통합정보시스템</Col>
+          </Row>
+          <Row>
+            <Col id="MENU_CD">0001</Col>
+            <Col id="UP_MENU_CD">0010</Col>
+            <Col id="MENU_NM">학적기본사항관리</Col>
+            <Col id="MENU_LVL">1</Col>
+            <Col id="PGM_PATH">work</Col>
+            <Col id="PGM_ID">work01.xfdl</Col>
+          </Row>
+          <Row>
+            <Col id="MENU_LVL">1</Col>
+            <Col id="PGM_PATH">work</Col>
+            <Col id="PGM_ID">work02.xfdl</Col>
+            <Col id="MENU_NM">설문관리</Col>
+            <Col id="UP_MENU_CD">0020</Col>
+            <Col id="MENU_CD">0002</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+    </Objects>
+  </Form>
+</FDL>

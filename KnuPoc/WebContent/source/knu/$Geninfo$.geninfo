@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <GenInfo version="1.1">
+    <Rule>
+      <ENV rule_version="1.05"/>
+      <ADL rule_version="1.14"/>
+      <FDL rule_version="1.04"/>
+      <XCSS rule_version="1.03"/>
+      <Script rule_version="1.02"/>
+    </Rule>
+    <Info project="C:\Users\투비소프트\eclipse-workspace\KnuPoc\WebContent\source\knu\" generated="C:\Users\투비소프트\eclipse-workspace\KnuPoc\WebContent\generate\">
+      <File url="environment.xml" checksum="20190729145319" errormsg=""/>
+      <File url="typedefinition.xml" checksum="20190415160154" errormsg=""/>
+      <File url="appvariables.xml" checksum="20190415160149" errormsg=""/>
+      <File url="_resource_\_theme_\style_m\theme.xcss" checksum="20190415160156" errormsg=""/>
+      <File url="_resource_\_theme_\style\theme.xcss" checksum="20190415160155" errormsg=""/>
+      <File url="_resource_\_theme_\default\theme.xcss" checksum="20190415160155" errormsg=""/>
+      <File url="App_Desktop.xadl" checksum="20190729145316" errormsg=""/>
+      <File url="App_Phone.xadl" checksum="20190415160149" errormsg=""/>
+      <File url="FrameBase\frmAll.xfdl" checksum="20190904133759" errormsg=""/>
+      <File url="Mobile\frameLogin.xfdl" checksum="20190415160149" errormsg=""/>
+      <File url="Mobile\frameMenu.xfdl" checksum="20190415160149" errormsg=""/>
+      <File url="Mobile\Mobile_Main.xfdl" checksum="20190415160149" errormsg=""/>
+      <File url="sample\pagging.xfdl" checksum="20190822161656" errormsg=""/>
+      <File url="sample\pagging_comm.xfdl" checksum="20190415160154" errormsg=""/>
+      <File url="sample\poc01.xfdl" checksum="20190415160154" errormsg=""/>
+      <File url="sample\poc02.xfdl" checksum="20190415160154" errormsg=""/>
+      <File url="sample\poc_main.xfdl" checksum="20190415160154" errormsg=""/>
+      <File url="work\poc_main.xfdl" checksum="20190415160154" errormsg=""/>
+      <File url="work\Popup.xfdl" checksum="20190416143839" errormsg=""/>
+      <File url="work\work01.xfdl" checksum="20190822161656" errormsg=""/>
+      <File url="work\work02.xfdl" checksum="20190822161654" errormsg=""/>
+      <File url="Script\CommUtil.xjs" checksum="20190415160154" errormsg=""/>
+      <File url="Script\ext_CommEco.xjs" checksum="20190415160154" errormsg=""/>
+      <File url="Comm\comGridFilterDiv.xfdl" checksum="20190415160149" errormsg=""/>
+      <File url="Comm\comGridSortPop.xfdl" checksum="20190416145242" errormsg=""/>
+      <File url="Comm\CommImgFileupdown.xfdl" checksum="20190822161656" errormsg=""/>
+      <File url="Comm\commPaging.xfdl" checksum="20190417160525" errormsg=""/>
+    </Info>
+  </GenInfo>
+</root>

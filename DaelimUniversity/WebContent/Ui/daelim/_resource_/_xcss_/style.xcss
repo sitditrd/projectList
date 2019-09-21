@@ -1,0 +1,278 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<XCSS version="1.0"><![CDATA[.Grid.grd_LF_menu .body .row .cell .celltreeitem .treeitemimage[userstatus=collapse]
+{
+	background : url('theme://images/img_WF_Treecollapse1.png') no-repeat center;
+}
+.Grid.grd_LF_menu .body .row .cell .celltreeitem .treeitemimage[userstatus=expand]
+{
+	background : url('theme://images/img_WF_Treeexpand1.png') no-repeat center;
+}
+
+/* 다국어 */
+.Static.sta_WF_iconKorea
+{
+	-nexa-text-align		: center;
+	-nexa-vertical-align		: bottom;
+	font				: 11pt Malgun Gothic,Arial,Gulim;
+	background 			: url('theme://images/icon_WF_korea.png') no-repeat;
+}
+.Static.sta_WF_iconUSA
+{
+	-nexa-text-align		: center;
+	-nexa-vertical-align		: bottom;
+	background			: url('theme://images/icon_WF_usa.png') no-repeat;
+	font				: 11pt Malgun Gothic,Arial,Gulim;
+}
+.Static.sta_WF_iconChina
+{
+	-nexa-text-align		: center;
+	-nexa-vertical-align		: bottom;
+	background			: url('theme://images/icon_WF_china.png') no-repeat center top;
+	font				: 11pt Malgun Gothic,Arial,Gulim;
+}
+.Static.sta_WF_iconRussia
+{
+	-nexa-text-align		: center;
+	-nexa-vertical-align		: bottom;
+	background			: url('theme://images/icon_WF_russia.png') no-repeat center top;
+	font				: 11pt Malgun Gothic,Arial,Gulim;
+}
+.Static.sta_WF_iconCzech
+{
+	-nexa-text-align		: center;
+	-nexa-vertical-align		: bottom;
+	background			: url('theme://images/icon_WF_czech.png') no-repeat center top;
+	font				: 11pt Malgun Gothic,Arial,Gulim;
+}
+.Static.sta_WF_iconGeman
+{
+	-nexa-text-align		: center;
+	-nexa-vertical-align		: bottom;
+	background			: url('theme://images/icon_WF_geman.png') no-repeat center top;
+	font				: 11pt Malgun Gothic,Arial,Gulim;
+}
+.Static.sta_WF_iconSpain
+{
+	-nexa-text-align		: center;
+	-nexa-vertical-align		: bottom;
+	background			: url('theme://images/icon_WF_spain.png') no-repeat center top; 
+	font				: 11pt Malgun Gothic,Arial,Gulim;
+}
+.Static.sta_WF_iconArabic
+{
+	-nexa-text-align		: center;
+	-nexa-vertical-align		: bottom;
+	background			: url('theme://images/icon_WF_arabic.png') no-repeat center top;
+	font				: 11pt Malgun Gothic,Arial,Gulim;
+}
+
+/* 포틀릿 */
+
+.Div.div_WF_portBox
+{
+	background			: ;
+	-nexa-border			: 0px none;
+	cursor				: pointer;
+}
+
+.Div.div_WF_portBox2,.Div.div_WF_portBox2[status=mouseover], .Div.div_WF_portBox2[status=focused]
+{
+	background			: ;
+	-nexa-border			: 2px dotted #3366cc;
+	cursor				: pointer;
+}
+
+.Button.btn_WF_portMove,.Button.btn_WF_portMove[status=focused],
+.Button.btn_WF_portMove[userstatus=selected], .Button.btn_WF_portMove[status=disabled],
+.Button.btn_WF_portMove[status=mouseover], .Button.btn_WF_portMove[userstatus=pushed]
+{
+	background			: url('theme://images/icon_WF_move.png') no-repeat center center;
+	-nexa-border			: 0px none;
+	cursor				: move;
+}
+
+.Button.btn_WF_portBg01,.Button.btn_WF_portBg01[status=focused],
+.Button.btn_WF_portBg01[userstatus=selected], .Button.btn_WF_portBg01[status=disabled],
+.Button.btn_WF_portBg01[userstatus=pushed]
+{
+	background			: url('theme://images/img_WF_iconPort01.png') no-repeat right top #7e7e7e;
+	-nexa-border			: 0px none;
+	border-radius			: ;
+	color				: #ffffff;
+	cursor				: pointer;
+	font				: 11pt Malgun gothic,Arial,Gulim;
+	-nexa-padding			: 0px 0px 0px 10px;
+}
+.Button.btn_WF_portBg01[status=mouseover]
+{
+	background			: url('theme://images/img_WF_iconPort01.png') no-repeat right top #cc5448;
+	-nexa-border			: 0px none;
+	border-radius			: ;
+	color				: #ffffff;
+	cursor				: pointer;
+}
+.Button.btn_WF_portBg02,.Button.btn_WF_portBg02[status=focused],
+.Button.btn_WF_portBg02[userstatus=selected], .Button.btn_WF_portBg02[status=disabled],
+.Button.btn_WF_portBg02[userstatus=pushed]
+{
+	-nexa-text-align		: left;
+	-nexa-vertical-align		: top;
+	background			: url('theme://images/img_WF_iconPort02.png') no-repeat right bottom #adadad;
+	-nexa-border			: 0px none;
+	border-radius			: ;
+	color				: #ffffff;
+	cursor				: pointer;
+	font				: 11pt Malgun gothic,Arial,Gulim;
+	-nexa-padding			: 20px 0px 0px 10px;
+}
+.Button.btn_WF_portBg02[status=mouseover]
+{
+	background			: url('theme://images/img_WF_iconPort02.png') no-repeat right bottom #ee8a7d;
+	-nexa-border			: 0px none;
+	border-radius			: ;
+	color				: #ffffff;
+	cursor				: pointer;
+}
+.Button.btn_WF_portBg03,.Button.btn_WF_portBg03[status=focused],
+.Button.btn_WF_portBg03[userstatus=selected], .Button.btn_WF_portBg03[status=disabled],
+.Button.btn_WF_portBg03[userstatus=pushed]
+{
+	-nexa-text-align		: left;
+	-nexa-vertical-align		: top;
+	background			: url('theme://images/img_WF_iconPort03.png') no-repeat right bottom #e2e2e2;
+	-nexa-border			: 0px none;
+	border-radius			: ;
+	color				: #ffffff;
+	cursor				: pointer;
+	font				: 11pt Malgun gothic,Arial,Gulim;
+	-nexa-padding			: 20px 0px 0px 10px;
+}
+.Button.btn_WF_portBg03[status=mouseover]
+{
+	background			: url('theme://images/img_WF_iconPort03.png') no-repeat right bottom #ffc8c1;
+	-nexa-border			: 0px none;
+	border-radius			: ;
+	color				: #ffffff;
+	cursor				: pointer;
+}
+.Button.btn_WF_portBg04,.Button.btn_WF_portBg04[status=focused],
+.Button.btn_WF_portBg04[userstatus=selected], .Button.btn_WF_portBg04[status=disabled],
+.Button.btn_WF_portBg04[userstatus=pushed]
+{
+	-nexa-text-align		: left;
+	-nexa-vertical-align		: top;
+	background			: url('theme://images/img_WF_iconPort04.png') no-repeat right bottom #c0c0c0;
+	-nexa-border			: 0px none;
+	border-radius			: ;
+	color				: #ffffff;
+	cursor				: pointer;
+	font				: 11pt Malgun gothic,Arial,Gulim;
+	-nexa-padding			: 20px 0px 0px 10px;
+}
+.Button.btn_WF_portBg04[status=mouseover]
+{
+	background			: url('theme://images/img_WF_iconPort04.png') no-repeat right bottom #e99baa;
+	-nexa-border			: 0px none;
+	border-radius			: ;
+	color				: #ffffff;
+	cursor				: pointer;
+}
+.Button.btn_WF_portBg05,.Button.btn_WF_portBg05[status=focused],
+.Button.btn_WF_portBg05[userstatus=selected], .Button.btn_WF_portBg05[status=disabled],
+.Button.btn_WF_portBg05[userstatus=pushed]
+{
+	-nexa-text-align		: right;
+	-nexa-vertical-align		: top;
+	background			: url('theme://images/img_WF_iconPort05.png') no-repeat left bottom #a4a4a4;
+	-nexa-border			: 0px none;
+	border-radius			: ;
+	color				: #ffffff;
+	cursor				: pointer;
+	font				: 11pt Malgun gothic,Arial,Gulim;
+	-nexa-padding			: 20px 20px 0px 0px;
+}
+.Button.btn_WF_portBg05[status=mouseover]
+{
+	background			: url('theme://images/img_WF_iconPort05.png') no-repeat left bottom #c38199;
+	-nexa-border			: 0px none;
+	border-radius			: ;
+	color				: #ffffff;
+	cursor				: pointer;
+}
+.Button.btn_WF_portBg06,.Button.btn_WF_portBg06[status=focused],
+.Button.btn_WF_portBg06[userstatus=selected], .Button.btn_WF_portBg06[status=disabled],
+.Button.btn_WF_portBg06[userstatus=pushed]
+{
+	-nexa-text-align		: right;
+	-nexa-vertical-align		: top;
+	background			: url('theme://images/img_WF_iconPort06.png') no-repeat left bottom #989898;
+	-nexa-border			: 0px none;
+	border-radius			: ;
+	color				: #ffffff;
+	cursor				: pointer;
+	font				: 11pt Malgun gothic,Arial,Gulim;
+	-nexa-padding			: 20px 20px 0px 0px;
+}
+.Button.btn_WF_portBg06[status=mouseover]
+{
+	background			: url('theme://images/work/img_WF_iconPort06.png') no-repeat left bottom #cc697b;
+	-nexa-border			: 0px none;
+	border-radius			: ;
+	color				: #ffffff;
+	cursor				: pointer;
+}
+.Button.btn_WF_portBg07,.Button.btn_WF_portBg07[status=focused],
+.Button.btn_WF_portBg07[userstatus=selected], .Button.btn_WF_portBg07[status=disabled],
+.Button.btn_WF_portBg07[userstatus=pushed]
+{
+	-nexa-text-align		: right;
+	-nexa-vertical-align		: bottom;
+	background			: url('theme://images/img_WF_iconPort07.png') no-repeat left top #808080;
+	-nexa-border			: 0px none;
+	border-radius			: ;
+	color				: #ffffff;
+	cursor				: pointer;
+	font				: 11pt Malgun gothic,Arial,Gulim;
+	-nexa-padding			: 0px 20px 20px 0px;
+}
+.Button.btn_WF_portBg07[status=mouseover]
+{
+	background			: url('theme://images/img_WF_iconPort07.png') no-repeat left top #a25573;
+	-nexa-border			: 0px none;
+	border-radius			: ;
+	color				: #ffffff;
+	cursor				: pointer;
+}
+.Button.btn_WF_portBg08,.Button.btn_WF_portBg08[status=focused],
+.Button.btn_WF_portBg08[userstatus=selected], .Button.btn_WF_portBg08[status=disabled],
+.Button.btn_WF_portBg08[userstatus=pushed]
+{
+	-nexa-text-align		: right;
+	-nexa-vertical-align		: bottom;
+	background			: url('theme://images/img_WF_iconPort08.png') no-repeat left top #c0c0c0;
+	-nexa-border			: 0px none;
+	border-radius			: ;
+	color				: #ffffff;
+	cursor				: pointer;
+	font				: 11pt Malgun gothic,Arial,Gulim;
+	-nexa-padding			: 0px 20px 20px 0px;
+}
+.Button.btn_WF_portBg08[status=mouseover]
+{
+	background			: url('theme://images/img_WF_iconPort08.png') no-repeat left top #e99baa;
+	-nexa-border			: 0px none;
+	border-radius			: ;
+	color				: #ffffff;
+	cursor				: pointer;
+}
+
+/* Grid Cell Move */
+.Static.sta_grd_move
+{
+	background			: #f6f6f6;
+	-nexa-border			: 2px dotted #3366cc;
+	border-radius			: 0px;
+	color				: #555555;
+	font				: 9pt Malgun Gothic,Arial,Gulim;
+	-nexa-padding			: 0px 5px 0px 5px;
+}]]></XCSS>

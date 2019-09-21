@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <title></title>
+</head>
+<body>
+    <script type="text/javascript">
+        if (!window.NEXACROHTML) {
+            window.NEXACROHTML = {};
+        }
+        window.NEXACROHTML.FireUserNotify = function(userdata) {
+            if (window.NEXACROWEBBROWSER) {
+                window.NEXACROWEBBROWSER.on_fire_onusernotify(window.NEXACROWEBBROWSER, userdata);
+            } else {
+                window.document.title = userdata;
+            }
+        }
+        function setContent(str) {
+            window.NEXACROHTML.FireUserNotify(str);
+        }
+    </script>
+    <div>
+        <h3>브라우저 영역</h3>
+    </div>
+    <div align="center">
+        <select id="product">
+            <option selected="selected">MP</option>
+            <option>XP</option>
+            <option>NP</option>
+        </select>
+        <input id="search" type="search" value="Nexacro" placeholder="Type a value"/>
+        <input type="button" value="Submit" onclick="setContent(document.getElementById('product').value + ' / ' + document.getElementById('search').value)"/>
+    </div>
+</body>
+</html>

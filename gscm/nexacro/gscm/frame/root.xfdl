@@ -1,0 +1,173 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.0">
+  <Form id="root" width="1016" height="617" titletext="New Form" onload="root_onload">
+    <Layouts>
+      <Layout height="617" mobileorientation="landscape" width="1016">
+        <Div id="divTop" taborder="0" left="0" top="0" height="80" right="0" border="0 none" maxwidth=""/>
+        <Div id="divBottom" taborder="1" left="0" height="30" right="0" bottom="0" maxwidth=""/>
+        <Div id="divWorkFrame" taborder="2" left="0" top="80" right="0" bottom="30" maxwidth="" maxheight=""/>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="dsOpenMenu">
+        <ColumnInfo>
+          <Column id="menuId" type="STRING" size="10"/>
+          <Column id="parentMenuId" type="STRING" size="10"/>
+          <Column id="menuNm" type="STRING" size="256"/>
+          <Column id="menuLvl" type="BIGDECIMAL" size="22"/>
+          <Column id="menuUrl" type="STRING" size="256"/>
+          <Column id="bookmark" type="STRING" size="256"/>
+          <Column id="winId" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.1"><![CDATA[this.fv_ActiveWork = "";
+
+this.root_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
+{	
+	this.divTop.form.set_scrollbartype("none");
+	this.divBottom.form.set_scrollbartype("none");
+	
+	nexacro._OnceCallbackTimer.callonce(this, function()
+	{
+		this.divBottom.set_url("frame::mdi.xfdl");
+		this.divTop.set_url("frame::top.xfdl");
+	}, 10);
+};
+
+this.gfnOpenMenu = function(menuCd)
+{
+	try
+	{
+		var nFRow;
+		var nFRowOpen;
+		var sWinId;
+		var sMenuNm;
+		var sMenuUrl;
+		var inheritanceid;
+
+		var nFormLeft = 0;
+		var nFormTop = 80;
+		var nFormWidth = null;
+		var nFormHeight = null;
+		var nFormRight = 0;
+		var nFormBottom = 30;
+		var nMinWidth = 1016;
+		var nMaxWidth = null;
+		var nMinHeight = 507;
+		var nMaxHeight = null;
+
+		var objMenuDs = nexacro.getApplication().gdsMenu;
+		objMenuDs.filter("");
+		
+		nFRow = objMenuDs.findRow("menuId", menuCd);
+		
+		sMenuUrl = objMenuDs.getColumn(nFRow, "menuUrl")
+		sMenuNm = objMenuDs.getColumn(nFRow, "menuNm");
+		inheritanceid = objMenuDs.getColumn(nFRow, "inheritanceid");
+
+		nFRowOpen = this.dsOpenMenu.findRow("menuId", menuCd);
+		sWinId = this.dsOpenMenu.getColumn(nFRowOpen, "winId");
+
+		if (nFRow == -1)
+		{
+			alert("Menu가 존재하지 않습니다.");
+			return;
+		}
+		else if (Eco.isEmpty(sMenuUrl))
+		{
+			return;
+		}
+
+		if (nFRowOpen > -1)
+		{
+			this.divBottom.form["gfnActiveTabPage"].call(this.divBottom.form, sWinId);
+			return;
+		}
+
+		if (this.dsOpenMenu.rowcount > 7)
+		{
+			alert("메뉴는 8개이상 오픈할 수 없습니다.");
+			return;
+		}
+
+		sWinId = "win_" + menuCd;
+
+		var objNewWin = new Div();
+		objNewWin.init(sWinId, nFormLeft, nFormTop, nFormWidth, nFormHeight, nFormRight, nFormBottom, nMinWidth, nMaxWidth, nMinHeight, nMaxHeight);
+		
+		objNewWin.menuInfo = {winId: sWinId, menuCd: menuCd, menuNm: sMenuNm, menuUrl: sMenuUrl};
+
+		this.addChild(sWinId, objNewWin);
+
+		objNewWin.show();
+		
+		//objNewWin.set_async(false);
+		objNewWin.set_url("frame::" + inheritanceid + ".xfdl");
+		
+		this.gfnAddOpenMenu(sWinId, menuCd, sMenuNm);
+
+		this.divBottom.form["gfnAddTabPage"].call(this.divBottom.form, sWinId, sMenuNm);
+		this.divBottom.form["gfnActiveTabPage"].call(this.divBottom.form, sWinId);
+	}
+	catch(err)
+	{
+		trace("[Error] gfnOpenMenu - " + err.message);
+	}
+};
+
+this.gfnActiveWorkFrame = function(winId)
+{
+	var sWinId;
+	var result = false;
+
+	for (i = 0; i < this.dsOpenMenu.rowcount; i++)
+	{
+		sWinId = this.dsOpenMenu.getColumn(i, "winId");
+
+		if (sWinId == winId)
+		{
+			this.fv_ActiveWork = sWinId;
+ 			this.components[sWinId].set_visible(true);
+			result = true;
+		}
+		else
+		{
+			this.components[sWinId].set_visible(false);
+		}
+	}
+
+	return result;
+};
+
+this.gfnCloseWorkForm = function(winId)
+{
+	var objDelete = this.removeChild(winId);
+	
+	if (objDelete)
+	{
+		objDelete.destroy();
+		objDelete = null;
+	}
+	
+	this.gfnDelOpenMenu(winId);
+	this.divBottom.form["gfnDeleteTabpage"].call(this.divBottom.form, winId);
+};
+
+this.gfnAddOpenMenu = function(winId, menuCd, menuNm)
+{
+	var nAddRow = this.dsOpenMenu.addRow();
+	
+	this.dsOpenMenu.setColumn(nAddRow, "winId", winId);
+	this.dsOpenMenu.setColumn(nAddRow, "menuId", menuCd);
+	this.dsOpenMenu.setColumn(nAddRow, "menuNm", menuNm);
+};
+
+this.gfnDelOpenMenu = function(winId)
+{
+	var nRow = this.dsOpenMenu.findRow("winId", winId);
+
+	this.dsOpenMenu.deleteRow(nRow);
+};]]></Script>
+  </Form>
+</FDL>

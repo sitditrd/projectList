@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.0">
+  <Form id="mdi" width="1280" height="30" titletext="New Form">
+    <Layouts>
+      <Layout height="30" mobileorientation="landscape" width="1280">
+        <Static id="Static00" taborder="0" left="0" top="0" height="30" cssclass="sta_mdi_bg01" right="0"/>
+        <Static id="Static01" taborder="1" left="0" top="0" width="30" height="30" cssclass="sta_mdi_home"/>
+        <Button id="Button00" taborder="2" text="mdi 01" left="29" top="0" width="120" height="30" cssclass="btn_mdi_mdiBtn" enable="false"/>
+        <Button id="Button01" taborder="3" left="120" top="1" width="28" height="28" cssclass="btn_mdi_close"/>
+        <Button id="Button02" taborder="4" text="mdi 02" left="148" top="0" width="120" height="30" cssclass="btn_mdi_mdiBtn"/>
+        <Button id="Button03" taborder="5" left="239" top="1" width="28" height="28" cssclass="btn_mdi_close"/>
+        <Button id="Button04" taborder="6" text="mdi 03" left="267" top="0" width="120" height="30" cssclass="btn_mdi_mdiBtn"/>
+        <Button id="Button05" taborder="7" left="358" top="1" width="28" height="28" cssclass="btn_mdi_close"/>
+        <Button id="Button06" taborder="8" top="1" width="29" height="28" cssclass="btn_mdi_tabClose" right="1"/>
+      </Layout>
+    </Layouts>
+  </Form>
+</FDL>

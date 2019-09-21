@@ -1,0 +1,481 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.0">
+  <Form id="SalesPlanFilter" width="190" height="354" titletext="New Form" onload="SalesPlanFilter_onload">
+    <Layouts>
+      <Layout height="354" mobileorientation="landscape" width="190">
+        <Static id="Static05" taborder="12" left="0" top="89" height="90" cssclass="sta_WF_box02L" width="190"/>
+        <Static id="Static03" taborder="11" left="0" top="0" height="90" cssclass="sta_WF_box02L" width="190"/>
+        <Button id="btn_day" taborder="9" top="49" width="16" height="16" cssclass="CalendarWeekDropButton" right="8" visible="false" onclick="btn_day_onclick"/>
+        <CalendarWeekDouble id="cld_Date" taborder="0" left="15" top="123" width="170" height="45" onchanged="CalendarWeekDouble00_onchanged" text="">
+          <Layouts>
+            <Layout/>
+          </Layouts>
+        </CalendarWeekDouble>
+        <Static id="Static04" taborder="1" text="Start Week" left="15" top="34" width="60" height="25" cssclass="sta_WF_label01"/>
+        <Static id="Static02" taborder="2" text="Plan Comparison" left="15" top="10" height="20" cssclass="sta_WF_title02" right="5"/>
+        <Static id="Static00" taborder="3" text="End Week" left="15" top="59" width="60" height="25" cssclass="sta_WF_label01"/>
+        <Combo id="cmb_prePlan" taborder="4" left="80" top="36" height="20" innerdataset="@ds_preplan" codecolumn="planid" datacolumn="planid" displayrowcount="10" right="26" onitemchanged="cmb_prePlan_onitemchanged"/>
+        <Combo id="cmb_curPlan" taborder="5" left="80" top="61" height="20" innerdataset="@ds_curplan" codecolumn="planid" datacolumn="planid" displayrowcount="10" right="26" onitemchanged="cmb_curPlan_onitemchanged"/>
+        <Button id="btn_week" taborder="6" top="49" width="16" height="16" cssclass="CalendarWeekDropButton" right="8" visible="false" onclick="btn_week_onclick"/>
+        <Static id="Static01" taborder="7" text="View Horizon" left="14" top="98" height="20" cssclass="sta_WF_title02" right="6"/>
+        <CheckBox id="chk_planComp" taborder="8" text="" left="138" top="10" width="14" height="20" onclick="chk_planComp_onclick"/>
+        <Grid id="Grid00" taborder="10" left="240" top="34" width="270" height="316" binddataset="ds_sales" treeinitstatus="expand,all" treeuseimage="false" treeuseline="false" cssclass="grd_WF_noneLine" visible="false">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="268"/>
+              </Columns>
+              <Rows>
+                <Row size="24"/>
+              </Rows>
+              <Band id="body">
+                <Cell text="bind:name" displaytype="treeitemcontrol" edittype="tree" treecheck="bind:chk" treelevel="bind:lvl"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="ds_preplan"/>
+      <Dataset id="ds_curplan"/>
+      <Dataset id="ds_week"/>
+      <Dataset id="ds_currentdate" onload="ds_currentdate_onload"/>
+      <Dataset id="ds_sales">
+        <ColumnInfo>
+          <Column id="lvl" type="STRING" size="256"/>
+          <Column id="name" type="STRING" size="256"/>
+          <Column id="chk" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="lvl">0</Col>
+            <Col id="name">ALL</Col>
+          </Row>
+          <Row>
+            <Col id="lvl">1</Col>
+            <Col id="name">NORTH AMERICA</Col>
+          </Row>
+          <Row>
+            <Col id="name">SEA-CBD</Col>
+            <Col id="lvl">2</Col>
+          </Row>
+          <Row>
+            <Col id="lvl">3</Col>
+            <Col id="name">B2B-HOSP</Col>
+          </Row>
+          <Row>
+            <Col id="lvl">3</Col>
+            <Col id="name">BISSELL</Col>
+          </Row>
+          <Row>
+            <Col id="lvl">3</Col>
+            <Col id="name">CENTRAL</Col>
+          </Row>
+          <Row>
+            <Col id="lvl">3</Col>
+            <Col id="name">CROSS DIVISION</Col>
+          </Row>
+          <Row>
+            <Col id="lvl">3</Col>
+            <Col id="name">DISTRIBUTOR</Col>
+          </Row>
+          <Row>
+            <Col id="lvl">3</Col>
+            <Col id="name">EAST</Col>
+          </Row>
+          <Row>
+            <Col id="lvl">3</Col>
+            <Col id="name">LOWE'S</Col>
+          </Row>
+          <Row>
+            <Col id="lvl">2</Col>
+            <Col id="name">SEA-EBD</Col>
+          </Row>
+          <Row>
+            <Col id="lvl">2</Col>
+            <Col id="name">SECA</Col>
+          </Row>
+          <Row>
+            <Col id="lvl">2</Col>
+            <Col id="name">SEM</Col>
+          </Row>
+          <Row>
+            <Col id="lvl">2</Col>
+            <Col id="name">STA</Col>
+          </Row>
+          <Row>
+            <Col id="lvl">1</Col>
+            <Col id="name">LATIN AMERICA</Col>
+          </Row>
+          <Row>
+            <Col id="lvl">2</Col>
+            <Col id="name">SAMCOL</Col>
+          </Row>
+          <Row>
+            <Col id="lvl">2</Col>
+            <Col id="name">SECH</Col>
+          </Row>
+          <Row>
+            <Col id="lvl">2</Col>
+            <Col id="name">SEDA</Col>
+          </Row>
+          <Row>
+            <Col id="lvl">2</Col>
+            <Col id="name">SELA-M</Col>
+          </Row>
+          <Row>
+            <Col id="lvl">2</Col>
+            <Col id="name">SELA-P</Col>
+          </Row>
+          <Row>
+            <Col id="lvl">2</Col>
+            <Col id="name">SEPR</Col>
+          </Row>
+          <Row>
+            <Col id="lvl">1</Col>
+            <Col id="name">EROUPE</Col>
+          </Row>
+          <Row>
+            <Col id="lvl">1</Col>
+            <Col id="name">CIS</Col>
+          </Row>
+          <Row>
+            <Col id="lvl">1</Col>
+            <Col id="name">S.E ASIA</Col>
+          </Row>
+          <Row>
+            <Col id="lvl">1</Col>
+            <Col id="name">S.W ASIA</Col>
+          </Row>
+          <Row>
+            <Col id="lvl">1</Col>
+            <Col id="name">JAPAN</Col>
+          </Row>
+          <Row>
+            <Col id="lvl">1</Col>
+            <Col id="name">CHINA</Col>
+          </Row>
+          <Row>
+            <Col id="lvl">1</Col>
+            <Col id="name">MIDDLE EAST</Col>
+          </Row>
+          <Row>
+            <Col id="lvl">1</Col>
+            <Col id="name">AFRICA</Col>
+          </Row>
+          <Row>
+            <Col id="lvl">1</Col>
+            <Col id="name">KOREA</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.1"><![CDATA[this.sDayWeekViewPoint = "WEEK"; // DAY, WEEK 
+
+this.SalesPlanFilter_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
+{
+	this.fn_formInit();
+};
+
+this.fn_formInit = function()
+{
+	this.chk_planComp.set_value(true);
+	this.btn_week.set_visible(true);
+	this.btn_day.set_visible(false);
+	
+	nxlib.setDsParam(this, "viewpoint", this.sDayWeekViewPoint);
+	
+	var oDatas = {
+		svcid: "selectWeek",
+		url: "demand/plananalysis/sales/selectweeklist.do",
+		outds: [
+			"ds_curplan=ds_curplan",
+			"ds_preplan=ds_preplan"
+		]
+	};
+
+	nxlib.transaction(this, oDatas);
+};
+
+this.fn_compareCheck = function()
+{
+	if (this.chk_planComp.isChecked())
+	{
+		this.cld_Date.setStartDate(this.ds_preplan.getColumn(this.cmb_prePlan.index, "effstartdate"));
+	}
+	else
+	{
+		this.cld_Date.setStartDate(this.ds_curplan.getColumn(this.cmb_curPlan.index, "effstartdate"));
+	}
+};
+
+this.fn_defaultCurPlan = function()
+{
+	if (this.sDayWeekViewPoint == "DAY")
+	{
+		for (var i = 0; i < this.ds_curplan.rowcount; i++)
+		{
+			if (this.ds_curplan.getColumn(i, "planseq") != 4)
+			{
+				this.cmb_curPlan.set_index(i);
+				return;
+			}
+		}
+	}
+	else
+	{
+		for (var i = 0; i < this.ds_curplan.rowcount; i++)
+		{
+			if (this.ds_curplan.getColumn(i, "planseq") == 4
+			 || this.ds_curplan.getColumn(i, "planseq") == 2 
+			 || this.ds_curplan.getColumn(i, "planseq") == 1)
+			{
+				this.cmb_curPlan.set_index(i);
+				return;
+			}
+		}
+	}
+};
+
+this.fn_prePlanFilter = function(cmb_curPlanIndex)
+{
+	var sPreplanText = this.cmb_prePlan.text;
+	var sFilterExpr = " planindex > " + this.ds_curplan.getColumn(cmb_curPlanIndex, "planindex");
+	
+	this.ds_preplan.filter(sFilterExpr);
+	this.ds_preplan.set_keystring("S:+planindex");
+	
+	var iPos = this.ds_preplan.findRow("planid", sPreplanText);
+	
+	// preplan 은 이미 더 작은 week를 선택하고 있는경우는 그대로 유지
+	if (iPos < 0 || this.ds_preplan.getColumn(iPos, "planweek") >= this.ds_curplan.getColumn(cmb_curPlanIndex, "planweek"))
+	{
+		for (var i = 0; i <= this.ds_preplan.rowcount; i++)
+		{
+			if (this.ds_preplan.getColumn(i, "planseq") == "4" && this.sDayWeekViewPoint == "WEEK")
+			{
+				iPos = i;
+				if (this.ds_preplan.getColumn(i, "planweek") < this.ds_curplan.getColumn(cmb_curPlanIndex, "planweek"))
+					break;
+			}
+			if (this.ds_preplan.getColumn(i, "planseq") != "4" && this.sDayWeekViewPoint == "DAY")
+			{
+				iPos = i;
+				break;
+			}
+		}
+	}
+	
+	if (iPos < 0) iPos = 0;
+	this.cmb_prePlan.index = iPos;
+	this.fn_compareCheck();
+	this.cld_Date.setEndDate(this.ds_curplan.getColumn(this.cmb_curPlan.index, "effenddate"));
+};
+
+this.fn_setParam = function()
+{
+	nxlib.setDsParam(this.fv_objBizForm, "startdate", this.cld_Date.getStartDate());
+	nxlib.setDsParam(this.fv_objBizForm, "enddate", this.cld_Date.getEndDate());
+	nxlib.setDsParam(this.fv_objBizForm, "preplanid", this.cmb_prePlan.text);	
+	nxlib.setDsParam(this.fv_objBizForm, "curplanid", this.cmb_curPlan.text);
+	nxlib.setDsParam(this.fv_objBizForm, "plancompare", this.chk_planComp.value);
+};
+
+this.chk_planComp_onclick = function(obj:nexacro.CheckBox,e:nexacro.ClickEventInfo)
+{
+	this.fn_compareCheck();
+};
+
+this.cmb_prePlan_onitemchanged = function(obj:nexacro.Combo,e:nexacro.ItemChangeEventInfo)
+{
+	this.cld_Date.setStartDate(this.ds_preplan.getColumn(e.preindex, "effstartdate"));
+};
+
+this.cmb_curPlan_onitemchanged = function(obj:nexacro.Combo,e:nexacro.ItemChangeEventInfo)
+{
+	this.fn_prePlanFilter(e.preindex);
+};
+
+this.ds_currentdate_onload = function(obj:nexacro.NormalDataset,e:nexacro.DSLoadEventInfo)
+{
+	this.cld_Date.setStartDate(Eco.date.addDate(obj.getColumn(0, "day"), -16));
+	this.cld_Date.setEndDate(Eco.date.addDate(obj.getColumn(0, "day"), 130));
+};
+
+this.btn_week_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	if (obj.visible)
+	{
+		this.btn_week.set_visible(false);
+		this.btn_day.set_visible(true);
+		this.sDayWeekViewPoint = "DAY";
+		
+		nxlib.setDsParam(this, "viewpoint", this.sDayWeekViewPoint);
+		
+		var oDatas = {
+			svcid: "selectWeek",
+			url: "demand/plananalysis/sales/selectweeklist.do",
+			outds: [
+				"ds_curplan=ds_curplan",
+				"ds_preplan=ds_preplan"
+			]
+		};
+
+		nxlib.transaction(this, oDatas);
+	}
+};
+
+this.btn_day_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	if (obj.visible)
+	{
+		this.btn_week.set_visible(true);
+		this.btn_day.set_visible(false);
+		this.sDayWeekViewPoint = "WEEK";
+		
+		nxlib.setDsParam(this, "viewpoint", this.sDayWeekViewPoint);
+		
+		var oDatas = {
+			svcid: "selectWeek",
+			url: "demand/plananalysis/sales/selectweeklist.do",
+			outds: [
+				"ds_curplan=ds_curplan",
+				"ds_preplan=ds_preplan"
+			]
+		};
+
+		nxlib.transaction(this, oDatas);
+	}
+};
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+this.CalendarWeekDouble00_onchanged = function(obj:nexacro.CalendarWeekDouble, e:nexacro.ChangeEventInfo)
+{		
+	trace(this.parent.name); //divFilter
+	trace(this.parent.parent.name); //filter_std
+	trace(this.parent.parent.parent.name); //divLeft
+	trace(this.parent.parent.parent.parent.name); //InheritStyle02
+		
+	var objGrid = this.parent.parent.parent.parent.all["divWork"].form.all["grd_SM"];
+	var workForm = this.parent.parent.parent.parent.all["divWork"].form;
+	
+	var days = new Array();
+	days = [0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+	
+	//년도
+	var d_start_year = this.cld_Date.getStartDate().substr(0, 4);
+	var d_end_year = this.cld_Date.getEndDate().substr(0, 4);
+	
+	//월
+	var d_start_month = this.cld_Date.getStartDate().substr(4, 2);
+	var d_end_month = this.cld_Date.getEndDate().substr(4, 2);
+	
+	//일
+	var d_start_day = this.cld_Date.getStartDate().substr(6, 2);
+	var d_end_day = this.cld_Date.getEndDate().substr(6, 2);
+		
+	//날짜차이
+	var startDate = new Date(d_start_year, (d_start_month - 1), d_start_day);
+	var endDate = new Date(d_end_year, (d_end_month - 1), d_end_day);
+	  
+	var betweenDay = ((endDate.getTime() - startDate.getTime()) / 1000 / 60 / 60 / 24) + 1;  
+	
+	if(parseInt(this.cld_Date.getStartDate()) > parseInt(this.cld_Date.getEndDate()))
+	{ 
+		alert("시작일은 종료일보다 클 수 없습니다.");
+		return;
+	}
+	else	
+	{   	
+		//최대 생성 컬럼 개수는 200개
+		betweenDay = (betweenDay > 200) ? 200 : betweenDay;
+		
+		//그리드 동적 생성
+		var strFormat1 = ' <Formats>'
+		+ '     <Format id="default">'
+		
+		+ ' 	<Columns>'
+		+ ' 		<Col size="70"/>';
+		
+		//Column Make Loop
+		for(var i=1; i<=betweenDay; i++)
+		{
+			strFormat1 += ' <Col size="100"/>';
+		}
+		
+		var strFormat2 = ' 	</Columns>'
+		+ ' 	<Rows>'
+		+ ' 		<Row band="head" size="24"/>'
+		+ ' 		<Row band="head" size="24"/>'
+		+ ' 		<Row size="40"/>'
+		+ ' 	</Rows>'
+		
+		+ ' 	<Band id="head">'
+		+ ' 		<Cell rowspan="2" text="Jar No"/>'
+		
+		+ ' 		<Cell col="1" colspan="' + betweenDay + '" text="% of Ref, Value"/>';
+
+		//Type Setting
+		//년도
+		var d_start_year = parseInt(d_start_year);
+		var d_end_year = parseInt(d_end_year);
+		
+		//월
+		var d_start_month = parseInt(d_start_month);
+		var d_end_month = parseInt(d_start_month);
+		
+		//일
+		var d_start_day = parseInt(d_start_day);
+		var d_end_day = parseInt(d_end_day);
+	
+		//date setting
+		var limitDay = days[d_start_month];
+		
+		//Column Info Loop
+		for(var i=1; i<=betweenDay; i++)
+		{	
+			//날짜가 넘어갈 때 초기화 작업
+			if(d_start_day > limitDay)
+			{
+				d_start_month++;
+				limitDay = days[d_start_month];
+				d_start_day = 1;
+			}
+			
+			//월이 넘어갈 때 초기화 작업
+			if(d_start_month > 12)
+			{
+				d_start_year++;
+				d_start_month = 1;
+			}
+			
+			strFormat2 += ' 		<Cell row="1" col="'+ i +'" text="'+ d_start_year +'-'+ d_start_month.toString().padLeft(2, 0) +'-'+ d_start_day.toString().padLeft(2, 0) +'"/>';
+			
+			d_start_day++;
+		}
+		
+		var strFormat3 = ' 	</Band>'
+		+ ' 	<Band id="body">'
+		+ ' 		<Cell expr="currow + 1"/>';
+		
+		//Body Info Loop
+		for(var i=1; i<=betweenDay; i++)
+		{
+			strFormat3 += ' 		<Cell col="'+ i +'" text="bind:COL_'+ i +'" cssclass="expr:(COL_'+ i +' &lt;= 60) ? \'Expr_Case_Background_lightpink\' : (COL_'+ i +' &gt; 60 &amp;&amp; COL_'+ i +' &lt;= 70) ? \'Expr_Case_Background_aqua\' : \'\'"/>' 
+		}
+		
+		var strFormat4 = ' 	</Band>'
+		+ '      </Format>'
+		+ ' </Formats>';
+		
+		var strFormat = strFormat1 + strFormat2 + strFormat3 + strFormat4;
+		
+		objGrid.set_formats(strFormat); 
+		
+		//데이터 조회
+		workForm.fn_Search(betweenDay);
+	}
+};]]></Script>
+  </Form>
+</FDL>
