@@ -142,7 +142,7 @@
 
         	this.ExcelExportObject.set_exporttype(nexacro.ExportTypes.EXCEL);
         	this.ExcelExportObject.set_exportfilename(sFileNm);
-        	this.ExcelExportObject.set_exporturl("http://localhost/nexacro17-xeni/XExportImport");
+        	this.ExcelExportObject.set_exporturl("http://14.63.224.112/nexacro17-xeni/XExportImport");
         	this.ExcelExportObject.exportData();
         }
 
@@ -160,7 +160,7 @@
         this.fn_import = function()
         {
         	this.ExcelImportObject.set_importtype(nexacro.ImportTypes.EXCEL);
-        	this.ExcelImportObject.set_importurl("http://localhost/nexacro17-xeni/XImport");
+        	this.ExcelImportObject.set_importurl("http://14.63.224.112/nexacro17-xeni/XImport");
         	this.ExcelImportObject.set_importfilemode("local");
         	this.ExcelImportObject.importData("", "[command=getsheetdata;output=outDs;body=!A5;]", "[dsOutput=outDs]");
         }

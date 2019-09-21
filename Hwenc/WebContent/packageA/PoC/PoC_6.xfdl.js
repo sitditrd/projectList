@@ -1038,7 +1038,7 @@
 
         	//this.ExcelExportObject00.set_commcompress(compress);
         	this.ExcelExportObject00.set_exportfilename("ExcelExportTest");
-        	this.ExcelExportObject00.set_exporturl("http://localhost/nexacro17-xeni/XExportImport");
+        	this.ExcelExportObject00.set_exporturl("http://14.63.224.112/nexacro17-xeni/XExportImport");
         	this.ExcelExportObject00.exportData();
         }
 
@@ -1071,7 +1071,7 @@
         		this.importObj.addEventHandler("onerror", this.Import00_onerror, this);
         	}
 
-        	this.importObj.set_importurl("http://localhost/nexacro17-xeni/XImport");
+        	this.importObj.set_importurl("http://14.63.224.112/nexacro17-xeni/XImport");
         	this.importObj.importData("", "[command=getsheetdata;output=outDs;body=Sheet1!B2;]", "[ds_list=outDs]");
         }
 

@@ -259,7 +259,7 @@
         	this.dsOutput.clearData();
 
         	var sId = "SEARCH";
-        	var sUrl = "http://localhost/Hwenc/service/select.jsp";
+        	var sUrl = "http://14.63.224.112/Hwenc/service/select.jsp";
         	var sInDs = "";
         	var sOutDs = "dsOutput=dsOutput";
         	var sParam = "";

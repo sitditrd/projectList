@@ -91,8 +91,8 @@
         	this.transaction
         	(
         		"scrollpaging",
-        		//"http://localhost/Hwenc/service/commPaging_back.jsp",
-        		"http://localhost/Hwenc/service/commScrollPaging.jsp",
+        		//"http://14.63.224.112/Hwenc/service/commPaging_back.jsp",
+        		"http://14.63.224.112/Hwenc/service/commScrollPaging.jsp",
         		"",
         		//"ds_data1=output",
         		"ds_data1=dsOutput",
@@ -102,7 +102,7 @@
 
 
         // 		var sId = "scrollpaging";
-        // 		var sUrl = "http://localhost:8080/sicorp/service/commPaging.jsp";
+        // 		var sUrl = "http://14.63.224.112:8080/sicorp/service/commPaging.jsp";
         // 		var sInDs = "";
         // 		var sOutDs = "ds_data1=dsOutput";
         // 		var sParam = "currentPage='"+ this.currentPage +"' blockCount='"+ this.blockCount +"'";
@@ -170,8 +170,8 @@
 
         		this.transaction(
         			"onvscrollPaging",
-        			//"http://localhost/Hwenc/service/commPaging_back.jsp",
-        			"http://localhost/Hwenc/service/commScrollPaging.jsp",
+        			//"http://14.63.224.112/Hwenc/service/commPaging_back.jsp",
+        			"http://14.63.224.112/Hwenc/service/commScrollPaging.jsp",
         			"",
         			//"ds_data1=output",
         			"ds_data1=dsOutput",

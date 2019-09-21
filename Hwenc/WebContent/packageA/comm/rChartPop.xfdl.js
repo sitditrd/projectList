@@ -275,7 +275,7 @@
 
         this.fn_changeUrl = function(sUrl)
         {
-        	this.WebBrowser00.set_url("http://localhost/Hwenc/service/rChart/Samples/" + sUrl + ".html");
+        	this.WebBrowser00.set_url("http://14.63.224.112/Hwenc/service/rChart/Samples/" + sUrl + ".html");
         }
         });
         

@@ -287,11 +287,11 @@
 
         	if(type == 0 || type == 2)
         	{
-        		var sUrl = "http://localhost/Hwenc/service/pocSearch.jsp?rowcount=" + this.cmbRowCount.value + "&datatype=" + this.rdoDataType.value;
+        		var sUrl = "http://14.63.224.112/Hwenc/service/pocSearch.jsp?rowcount=" + this.cmbRowCount.value + "&datatype=" + this.rdoDataType.value;
         	}
         	else if(type == 4)
         	{
-        		var sUrl = "JSONAdp://localhost/Hwenc/service/pocSearch.jsp?rowcount=" + this.cmbRowCount.value + "&datatype=" + this.rdoDataType.value;
+        		var sUrl = "JSONAdp://14.63.224.112/Hwenc/service/pocSearch.jsp?rowcount=" + this.cmbRowCount.value + "&datatype=" + this.rdoDataType.value;
         	}
 
         	var sInDs = "";

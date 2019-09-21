@@ -336,7 +336,7 @@
         this.Button00_onclick = function(obj,e)
         {
         	var sId = "SEARCH";
-        	var sURL = "http://localhost/Hwenc/service/pivot/PivotssvRead.jsp?rowcount="+this.cmbCount.value;
+        	var sURL = "http://14.63.224.112/Hwenc/service/pivot/PivotssvRead.jsp?rowcount="+this.cmbCount.value;
         	var sInDs = "";
         	var sOutDs = "dsList=output";
         	var sParam = "";
