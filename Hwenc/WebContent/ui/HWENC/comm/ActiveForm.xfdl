@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.0">
+  <Form id="ActiveForm" width="1263" height="88" titletext="Staic 동적생성">
+    <Layouts>
+      <Layout height="88" mobileorientation="landscape" width="1263">
+        <Div id="Div00" taborder="0" text="" left="0" top="1" height="86" background="beige" right="-1">
+          <Layouts>
+            <Layout>
+              <Static id="Static64" taborder="0" left="0" top="0" height="42" textAlign="center" width="112" border="1px solid,0px none,0px none" background="#f4f4f4"/>
+              <Static id="Static65" taborder="1" text="선택" left="112" top="0" height="43" textAlign="center" width="40" border="1px solid,0px none,0px none,1px solid" background="#f4f4f4"/>
+              <Static id="Static66" taborder="2" text="필수항목" left="152" top="0" height="42" textAlign="center" width="352" border="1px solid,0px none,0px none,1px solid" background="#f4f4f4"/>
+              <Static id="Static67" taborder="3" text="*" left="354" top="14" width="12" height="14" color="red" font="normal 12pt/normal &quot;Arial&quot;" textAlign="left"/>
+              <Static id="Static68" taborder="4" text="현수준" left="503" top="0" height="42" textAlign="center" width="192" border="1px solid,0px none,0px none,1px solid" background="#f4f4f4"/>
+              <Static id="Static69" taborder="5" text="*" left="619" top="15" width="12" height="14" color="red" font="normal 12pt/normal &quot;Arial&quot;" textAlign="left"/>
+              <Static id="Static71" taborder="6" text="목표수준" left="695" top="0" height="42" textAlign="center" width="192" border="1px solid,0px none,0px none,1px solid" background="#f4f4f4"/>
+              <Static id="Static73" taborder="7" text="실적" left="887" top="0" height="42" textAlign="center" width="192" border="1px solid,0px none,0px none,1px solid" background="#f4f4f4"/>
+              <Static id="Static75" taborder="8" text="달성율" left="1079" top="0" height="42" textAlign="center" border="1px solid,0px none,0px none,1px solid" background="#f4f4f4" right="1"/>
+              <Static id="Static72" taborder="9" text="" left="0" top="42" width="112" height="42" border="1px solid,0px none,0px none"/>
+              <Static id="Static74" taborder="10" text="" left="112" top="42" width="40" height="44" border="1px solid,0px none,0px none,1px solid"/>
+              <CheckBox id="CheckBox00" taborder="11" text="CheckBox00" left="125" top="54" width="15" height="17"/>
+              <Static id="Static76" taborder="12" text="" left="152" top="42" width="351" height="42" border="1px solid,0px none,0px none,1px solid"/>
+              <Static id="Static77" taborder="13" text="" left="503" top="42" width="192" height="42" border="1px solid,0px none,0px none,1px solid"/>
+              <Static id="Static78" taborder="14" text="" left="695" top="42" width="193" height="42" border="1px solid,0px none,0px none,1px solid"/>
+              <Static id="Static79" taborder="15" text="" left="887" top="42" width="194" height="42" border="1px solid,0px none,0px none,1px solid"/>
+              <Static id="Static80" taborder="16" text="" left="1079" top="42" height="42" border="1px solid,0px none,0px none,1px solid" right="0"/>
+              <Edit id="Edit00" taborder="17" left="162" top="51" width="334" height="24"/>
+              <Edit id="Edit02" taborder="18" left="513" top="51" width="172" height="27"/>
+              <Edit id="Edit03" taborder="19" left="704" top="51" width="174" height="27"/>
+              <Edit id="Edit07" taborder="20" left="896" top="51" width="174" height="27"/>
+              <Edit id="Edit08" taborder="21" left="1088" top="51" height="27" right="10"/>
+              <Static id="Static70" taborder="22" text="*" left="817" top="15" width="12" height="14" color="red" font="normal 12pt/normal &quot;Arial&quot;" textAlign="left"/>
+            </Layout>
+          </Layouts>
+        </Div>
+      </Layout>
+    </Layouts>
+  </Form>
+</FDL>

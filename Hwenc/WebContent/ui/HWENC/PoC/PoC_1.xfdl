@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.0">
+  <Form id="PoC_1" width="1280" height="720" titletext="개발 생산성 확인">
+    <Layouts>
+      <Layout height="720" mobileorientation="landscape" width="1280">
+        <Grid id="Grid00" taborder="0" left="55" top="85" width="506" height="456" autofittype="col">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="129"/>
+                <Column size="129"/>
+                <Column size="129"/>
+                <Column size="129"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="COLUMN1"/>
+                <Cell col="1" text="COLUMN2"/>
+                <Cell col="2" text="COLUMN3"/>
+                <Cell col="3" text="COLUMN4"/>
+              </Band>
+              <Band id="body">
+                <Cell/>
+                <Cell col="1"/>
+                <Cell col="2"/>
+                <Cell col="3"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Grid id="Grid01" taborder="1" left="640" top="82" width="506" height="456"/>
+      </Layout>
+    </Layouts>
+  </Form>
+</FDL>

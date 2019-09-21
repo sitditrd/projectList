@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.0">
+  <Form id="PoC_5_1" width="1280" height="720" titletext="반응형 웹 지원 확인">
+    <Layouts>
+      <Layout height="720" mobileorientation="landscape" width="1280">
+        <Static id="Static00" taborder="0" text="성능 확인" cssclass="sta_WF_title02" left="10" top="0" width="733" height="50"/>
+      </Layout>
+    </Layouts>
+  </Form>
+</FDL>

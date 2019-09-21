@@ -1,0 +1,10 @@
+﻿{
+	"name": "goJs",
+	"version": "1.0.0.0",
+	"description": "goJs Library",
+	"license": "",
+	"scripts": [
+        "goJs/go.js"
+	]
+}
+//@ sourceURL=EcoLibrary.json

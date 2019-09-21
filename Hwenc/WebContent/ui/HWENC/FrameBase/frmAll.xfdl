@@ -1,0 +1,529 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.0">
+  <Form id="frmAll" width="1024" height="768" titletext="메인 프레임" onload="frmAll_onload">
+    <Layouts>
+      <Layout height="768" mobileorientation="landscape" width="1024">
+        <Div id="divWork" taborder="1" left="0" top="50" right="0" text="" bottom="0" url="PoC::PoC_Main.xfdl"/>
+        <Static id="Static00" taborder="0" left="0" top="0" height="50" right="0" cssclass="sta_TF_bg"/>
+        <Static id="Static01" taborder="2" left="10" top="0" width="170" height="50" cssclass="sta_TF_logo" onclick="Static01_onclick"/>
+        <Menu id="Menu01" taborder="3" left="180" top="0" height="50" captioncolumn="MENU_NM" idcolumn="MENU_CD" levelcolumn="MENU_LVL" popupitemheight="40" right="738" onmenuclick="comm_MenuClick" userdatacolumn="MENU_CD" innerdataset="dsLeftMenu_2" autohotkey="false" fittocontents="width" background="#e7590b"/>
+        <Menu id="Menu02" taborder="4" left="286" top="0" height="50" captioncolumn="MENU_NM" idcolumn="MENU_CD" levelcolumn="MENU_LVL" popupitemheight="40" right="632" onmenuclick="comm_MenuClick" userdatacolumn="MENU_CD" innerdataset="dsLeftMenu_3" autohotkey="false" fittocontents="width" background="#e7590b"/>
+        <Menu id="Menu03" taborder="5" left="392" top="0" height="50" captioncolumn="MENU_NM" idcolumn="MENU_CD" levelcolumn="MENU_LVL" popupitemheight="40" right="526" onmenuclick="comm_MenuClick" userdatacolumn="MENU_CD" innerdataset="dsLeftMenu_4" autohotkey="false" fittocontents="width" background="#e7590b"/>
+        <Menu id="Menu04" taborder="6" left="498" top="0" height="50" captioncolumn="MENU_NM" idcolumn="MENU_CD" levelcolumn="MENU_LVL" popupitemheight="40" right="420" onmenuclick="comm_MenuClick" userdatacolumn="MENU_CD" innerdataset="dsLeftMenu_5" autohotkey="false" fittocontents="width" background="#e7590b"/>
+        <Menu id="Menu05" taborder="7" left="604" top="0" height="50" captioncolumn="MENU_NM" idcolumn="MENU_CD" levelcolumn="MENU_LVL" popupitemheight="40" right="314" onmenuclick="comm_MenuClick" userdatacolumn="MENU_CD" innerdataset="dsLeftMenu_6" autohotkey="false" fittocontents="width" background="#e7590b"/>
+        <Menu id="Menu06" taborder="8" left="710" top="0" height="50" captioncolumn="MENU_NM" idcolumn="MENU_CD" levelcolumn="MENU_LVL" popupitemheight="40" right="208" onmenuclick="comm_MenuClick" userdatacolumn="MENU_CD" innerdataset="dsLeftMenu_7" autohotkey="false" fittocontents="width" background="#e7590b"/>
+        <Menu id="Menu07" taborder="9" left="816" top="0" height="50" captioncolumn="MENU_NM" idcolumn="MENU_CD" levelcolumn="MENU_LVL" popupitemheight="40" right="102" onmenuclick="comm_MenuClick" userdatacolumn="MENU_CD" innerdataset="dsLeftMenu_8" autohotkey="false" fittocontents="width" background="#e7590b"/>
+      </Layout>
+    </Layouts>
+    <Script type="xscript5.1"><![CDATA[this.comm_MenuClick = function(obj:nexacro.Menu, e:nexacro.MenuClickEventInfo)
+{
+	var objDs = obj.getInnerDataset();
+	
+	var sId = e.userdata;
+	var sMenuId = objDs.lookup("MENU_CD", sId, "MENU_CD");
+	this.fn_openMenu(sMenuId, objDs);
+};
+
+this.fn_openMenu = function(sMenuId, objDs)
+{
+	var nFRow;
+	var sPGMPATH;
+	var sPGMID;
+	
+	var nFRowOpen;
+	var sWinId;
+	var sMenuNm;
+	var sMenuNavi;
+	
+	var objMenuDs = objDs;
+	
+	nFRow 		= objMenuDs.findRow("MENU_CD", sMenuId);
+	sPGMPATH 	= objMenuDs.getColumn(nFRow, "PGM_PATH");
+	sPGMID 		= objMenuDs.getColumn(nFRow, "PGM_ID")
+	sMenuNm 	= objMenuDs.getColumn(nFRow, "MENU_NM");
+	
+	nFRowOpen = this.dsOpenMenu.findRow("MENU_CD", sMenuId);
+	sWinId = this.dsOpenMenu.getColumn(nFRowOpen, "WINID");
+	this.divWork.set_url(sPGMPATH+"::"+sPGMID);
+};
+
+/*****************************************************************************
+함 수 명 칭 : gfnAddOpenMenu
+함 수 설 명 : 열린화면리스트 저장
+파 라 미 터 : pvWinId – 업무화면 ID
+			   pvMenuCd – 메뉴코드
+			   pvMenuNm – 메뉴명
+리 턴 내 용 : 없음
+*****************************************************************************/
+this.fn_AddOpenMenu = function(pvWinId, pvMenuCd, pvMenuNm) 
+{
+	var nAddRow = this.dsOpenMenu.addRow();
+	this.dsOpenMenu.setColumn(nAddRow, "WINID", pvWinId);
+	this.dsOpenMenu.setColumn(nAddRow, "MENU_CD", pvMenuCd);
+	this.dsOpenMenu.setColumn(nAddRow, "MENU_NM", pvMenuNm);	
+};
+
+/*****************************************************************************
+함 수 명 칭 : gfnIsNull
+함 수 설 명 : 입력값 Null 체크 함수
+파 라 미 터 : pvVal – 입력값
+리 턴 내 용 : true/false 값이 Null일 경우 true
+*****************************************************************************/
+this.gfnIsNull = function (pvVal)
+{
+	if (new String(pvVal).valueOf() == "undefined") 
+	{
+		return true;
+	}
+	if (pvVal == null) 
+	{
+		return true;
+	}
+	if (("x" + pvVal == "xNaN") && (new String(pvVal.length).valueOf() == "undefined")) 
+	{
+		return true;
+	}
+	if (pvVal.length == 0) 
+	{
+		return true;
+	}
+
+	return false;
+};
+
+this.Static01_onclick = function(obj:nexacro.Static,e:nexacro.ClickEventInfo)
+{
+	this.divWork.set_url("PoC::PoC_Main.xfdl");
+};]]></Script>
+    <Objects>
+      <Dataset id="dsOpenList_">
+        <ColumnInfo>
+          <Column id="code" type="STRING" size="256"/>
+          <Column id="caption" type="STRING" size="256"/>
+          <Column id="BTN_ID" type="STRING" size="256"/>
+          <Column id="BTN_EX_ID" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="dsOpenMenu_">
+        <ColumnInfo>
+          <Column id="MENU_CD" type="STRING" size="8"/>
+          <Column id="UP_MENU_CD" type="STRING" size="8"/>
+          <Column id="MENU_NM" type="STRING" size="50"/>
+          <Column id="MENU_LVL" type="BIGDECIMAL" size="22"/>
+          <Column id="PGM_PATH" type="STRING" size="200"/>
+          <Column id="PGM_ID" type="STRING" size="200"/>
+          <Column id="WINID" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="dsMenu">
+        <ColumnInfo>
+          <Column id="MENU_CD" type="STRING" size="256"/>
+          <Column id="UP_MENU_CD" type="STRING" size="256"/>
+          <Column id="MENU_NM" type="STRING" size="256"/>
+          <Column id="MENU_LVL" type="STRING" size="256"/>
+          <Column id="PGM_PATH" type="STRING" size="256"/>
+          <Column id="PGM_ID" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="MENU_CD">0000</Col>
+            <Col id="UP_MENU_CD">0</Col>
+            <Col id="MENU_LVL">0</Col>
+            <Col id="MENU_NM">그림 1</Col>
+            <Col id="PGM_PATH">PoC</Col>
+            <Col id="PGM_ID">PoC_1.xfdl</Col>
+          </Row>
+          <Row>
+            <Col id="MENU_CD">0001</Col>
+            <Col id="UP_MENU_CD">0010</Col>
+            <Col id="MENU_NM">그림 2</Col>
+            <Col id="MENU_LVL">0</Col>
+            <Col id="PGM_PATH">PoC</Col>
+            <Col id="PGM_ID">PoC_2.xfdl</Col>
+          </Row>
+          <Row>
+            <Col id="MENU_LVL">0</Col>
+            <Col id="PGM_PATH">PoC</Col>
+            <Col id="PGM_ID">PoC_3.xfdl</Col>
+            <Col id="MENU_NM">그림 3</Col>
+            <Col id="UP_MENU_CD">0020</Col>
+            <Col id="MENU_CD">0002</Col>
+          </Row>
+          <Row>
+            <Col id="MENU_CD">0003</Col>
+            <Col id="UP_MENU_CD">0030</Col>
+            <Col id="MENU_NM">그림 4</Col>
+            <Col id="MENU_LVL">0</Col>
+            <Col id="PGM_PATH">PoC</Col>
+            <Col id="PGM_ID">PoC_4.xfdl</Col>
+          </Row>
+          <Row>
+            <Col id="MENU_CD">0004</Col>
+            <Col id="UP_MENU_CD">0040</Col>
+            <Col id="MENU_NM">그림 5</Col>
+            <Col id="MENU_LVL">0</Col>
+            <Col id="PGM_PATH">PoC</Col>
+            <Col id="PGM_ID">PoC_5.xfdl</Col>
+          </Row>
+          <Row>
+            <Col id="MENU_CD">0005</Col>
+            <Col id="UP_MENU_CD">0050</Col>
+            <Col id="MENU_NM">그림 6</Col>
+            <Col id="MENU_LVL">0</Col>
+            <Col id="PGM_PATH">PoC</Col>
+            <Col id="PGM_ID">PoC_6.xfdl</Col>
+          </Row>
+          <Row>
+            <Col id="MENU_CD">0006</Col>
+            <Col id="UP_MENU_CD">0060</Col>
+            <Col id="MENU_NM">그림 7</Col>
+            <Col id="MENU_LVL">0</Col>
+            <Col id="PGM_PATH">PoC</Col>
+            <Col id="PGM_ID">PoC_7.xfdl</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="dsOpenList">
+        <ColumnInfo>
+          <Column id="code" type="STRING" size="256"/>
+          <Column id="caption" type="STRING" size="256"/>
+          <Column id="BTN_ID" type="STRING" size="256"/>
+          <Column id="BTN_EX_ID" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="dsOpenMenu">
+        <ColumnInfo>
+          <Column id="MENU_CD" type="STRING" size="8"/>
+          <Column id="UP_MENU_CD" type="STRING" size="8"/>
+          <Column id="MENU_NM" type="STRING" size="50"/>
+          <Column id="MENU_LVL" type="BIGDECIMAL" size="22"/>
+          <Column id="PGM_PATH" type="STRING" size="200"/>
+          <Column id="PGM_ID" type="STRING" size="200"/>
+          <Column id="WINID" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="dsLeftMenu_1">
+        <ColumnInfo>
+          <Column id="MENU_CD" type="STRING" size="256"/>
+          <Column id="UP_MENU_CD" type="STRING" size="256"/>
+          <Column id="MENU_NM" type="STRING" size="256"/>
+          <Column id="MENU_LVL" type="STRING" size="256"/>
+          <Column id="PGM_PATH" type="STRING" size="256"/>
+          <Column id="PGM_ID" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="MENU_CD">0000</Col>
+            <Col id="UP_MENU_CD">0</Col>
+            <Col id="MENU_LVL">0</Col>
+            <Col id="MENU_NM">요건 1</Col>
+            <Col id="PGM_PATH"/>
+            <Col id="PGM_ID"/>
+          </Row>
+          <Row>
+            <Col id="MENU_CD">0001</Col>
+            <Col id="UP_MENU_CD">0010</Col>
+            <Col id="MENU_NM">개발 생산성 확인</Col>
+            <Col id="MENU_LVL">1</Col>
+            <Col id="PGM_PATH">PoC</Col>
+            <Col id="PGM_ID">PoC_1.xfdl</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="dsLeftMenu_2">
+        <ColumnInfo>
+          <Column id="MENU_CD" type="STRING" size="256"/>
+          <Column id="UP_MENU_CD" type="STRING" size="256"/>
+          <Column id="MENU_NM" type="STRING" size="256"/>
+          <Column id="MENU_LVL" type="STRING" size="256"/>
+          <Column id="PGM_PATH" type="STRING" size="256"/>
+          <Column id="PGM_ID" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="MENU_CD">0000</Col>
+            <Col id="UP_MENU_CD">0</Col>
+            <Col id="MENU_LVL">0</Col>
+            <Col id="MENU_NM">요건 1</Col>
+          </Row>
+          <Row>
+            <Col id="MENU_CD">0001</Col>
+            <Col id="UP_MENU_CD">0010</Col>
+            <Col id="MENU_NM">Javascript Library 적용_type1</Col>
+            <Col id="MENU_LVL">1</Col>
+            <Col id="PGM_PATH">PoC</Col>
+            <Col id="PGM_ID">PoC_2_1.xfdl</Col>
+          </Row>
+          <Row>
+            <Col id="MENU_CD">0002</Col>
+            <Col id="UP_MENU_CD">0020</Col>
+            <Col id="MENU_NM">Javascript Library 적용_type2</Col>
+            <Col id="MENU_LVL">1</Col>
+            <Col id="PGM_PATH">PoC</Col>
+            <Col id="PGM_ID">PoC_2_1_2.xfdl</Col>
+          </Row>
+          <Row>
+            <Col id="MENU_LVL">1</Col>
+            <Col id="PGM_PATH">PoC</Col>
+            <Col id="PGM_ID">PoC_2_2.xfdl</Col>
+            <Col id="MENU_NM">Chart 적용_nexacroChart</Col>
+            <Col id="UP_MENU_CD">0030</Col>
+            <Col id="MENU_CD">0003</Col>
+          </Row>
+          <Row>
+            <Col id="MENU_CD">0004</Col>
+            <Col id="UP_MENU_CD">0040</Col>
+            <Col id="MENU_NM">Chart 적용_rChart</Col>
+            <Col id="MENU_LVL">1</Col>
+            <Col id="PGM_PATH">PoC</Col>
+            <Col id="PGM_ID">PoC_2_2_2.xfdl</Col>
+          </Row>
+          <Row>
+            <Col id="MENU_CD">0005</Col>
+            <Col id="UP_MENU_CD">0050</Col>
+            <Col id="MENU_NM">데이터 통신 포맷 변경</Col>
+            <Col id="MENU_LVL">1</Col>
+            <Col id="PGM_PATH">PoC</Col>
+            <Col id="PGM_ID">PoC_2_3.xfdl</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="dsLeftMenu_3">
+        <ColumnInfo>
+          <Column id="MENU_CD" type="STRING" size="256"/>
+          <Column id="UP_MENU_CD" type="STRING" size="256"/>
+          <Column id="MENU_NM" type="STRING" size="256"/>
+          <Column id="MENU_LVL" type="STRING" size="256"/>
+          <Column id="PGM_PATH" type="STRING" size="256"/>
+          <Column id="PGM_ID" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="UP_MENU_CD">0</Col>
+            <Col id="MENU_LVL">0</Col>
+            <Col id="MENU_NM">요건 2</Col>
+            <Col id="MENU_CD">0000</Col>
+          </Row>
+          <Row>
+            <Col id="UP_MENU_CD">0010</Col>
+            <Col id="MENU_NM">대용량 데이터 렌더링 처리 시연</Col>
+            <Col id="MENU_LVL">1</Col>
+            <Col id="PGM_PATH">PoC</Col>
+            <Col id="PGM_ID">PoC_3_1.xfdl</Col>
+            <Col id="MENU_CD">0001</Col>
+          </Row>
+          <Row>
+            <Col id="MENU_NM">Copy &amp; Paste / Excel Import, Export</Col>
+            <Col id="UP_MENU_CD">0020</Col>
+            <Col id="MENU_LVL">1</Col>
+            <Col id="PGM_PATH">PoC</Col>
+            <Col id="PGM_ID">PoC_3_2.xfdl</Col>
+            <Col id="MENU_CD">0002</Col>
+          </Row>
+          <Row>
+            <Col id="MENU_NM">수식 이벤트 속도 및 결과값 측정</Col>
+            <Col id="UP_MENU_CD">0030</Col>
+            <Col id="MENU_LVL">1</Col>
+            <Col id="PGM_PATH">PoC</Col>
+            <Col id="PGM_ID">PoC_3_3.xfdl</Col>
+            <Col id="MENU_CD">0003</Col>
+          </Row>
+          <Row>
+            <Col id="MENU_NM">다양한 그리드 기능</Col>
+            <Col id="UP_MENU_CD">0040</Col>
+            <Col id="MENU_LVL">1</Col>
+            <Col id="PGM_PATH">PoC</Col>
+            <Col id="PGM_ID">PoC_3_4.xfdl</Col>
+            <Col id="MENU_CD">0004</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="dsLeftMenu_4">
+        <ColumnInfo>
+          <Column id="MENU_CD" type="STRING" size="256"/>
+          <Column id="UP_MENU_CD" type="STRING" size="256"/>
+          <Column id="MENU_NM" type="STRING" size="256"/>
+          <Column id="MENU_LVL" type="STRING" size="256"/>
+          <Column id="PGM_PATH" type="STRING" size="256"/>
+          <Column id="PGM_ID" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="MENU_CD">0000</Col>
+            <Col id="UP_MENU_CD">0</Col>
+            <Col id="MENU_LVL">0</Col>
+            <Col id="MENU_NM">요건 3</Col>
+          </Row>
+          <Row>
+            <Col id="MENU_CD">0001</Col>
+            <Col id="UP_MENU_CD">0010</Col>
+            <Col id="MENU_NM">일반 컴포넌트 지원여부 확인_1</Col>
+            <Col id="MENU_LVL">1</Col>
+            <Col id="PGM_PATH">PoC</Col>
+            <Col id="PGM_ID">PoC_4_1.xfdl</Col>
+          </Row>
+          <Row>
+            <Col id="MENU_CD">0002</Col>
+            <Col id="UP_MENU_CD">0020</Col>
+            <Col id="MENU_NM">일반 컴포넌트 지원여부 확인_2</Col>
+            <Col id="MENU_LVL">1</Col>
+            <Col id="PGM_PATH">PoC</Col>
+            <Col id="PGM_ID">PoC_4_2.xfdl</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="dsLeftMenu_5">
+        <ColumnInfo>
+          <Column id="MENU_CD" type="STRING" size="256"/>
+          <Column id="UP_MENU_CD" type="STRING" size="256"/>
+          <Column id="MENU_NM" type="STRING" size="256"/>
+          <Column id="MENU_LVL" type="STRING" size="256"/>
+          <Column id="PGM_PATH" type="STRING" size="256"/>
+          <Column id="PGM_ID" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="MENU_CD">0000</Col>
+            <Col id="UP_MENU_CD">0</Col>
+            <Col id="MENU_LVL">0</Col>
+            <Col id="MENU_NM">요건 4</Col>
+          </Row>
+          <Row>
+            <Col id="MENU_LVL">1</Col>
+            <Col id="PGM_PATH">PoC</Col>
+            <Col id="PGM_ID">PoC_5_2.xfdl</Col>
+            <Col id="MENU_NM">다국어 처리 기능 확인</Col>
+            <Col id="UP_MENU_CD">0020</Col>
+            <Col id="MENU_CD">0002</Col>
+          </Row>
+          <Row>
+            <Col id="MENU_CD">0003</Col>
+            <Col id="UP_MENU_CD">0030</Col>
+            <Col id="MENU_NM">스크롤 페이징 성능확인</Col>
+            <Col id="MENU_LVL">1</Col>
+            <Col id="PGM_PATH">PoC</Col>
+            <Col id="PGM_ID">PoC_5_3.xfdl</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="dsLeftMenu_6">
+        <ColumnInfo>
+          <Column id="MENU_CD" type="STRING" size="256"/>
+          <Column id="UP_MENU_CD" type="STRING" size="256"/>
+          <Column id="MENU_NM" type="STRING" size="256"/>
+          <Column id="MENU_LVL" type="STRING" size="256"/>
+          <Column id="PGM_PATH" type="STRING" size="256"/>
+          <Column id="PGM_ID" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="MENU_CD">0000</Col>
+            <Col id="UP_MENU_CD">0</Col>
+            <Col id="MENU_LVL">0</Col>
+            <Col id="MENU_NM">요건 5</Col>
+          </Row>
+          <Row>
+            <Col id="MENU_CD">0001</Col>
+            <Col id="UP_MENU_CD">0010</Col>
+            <Col id="MENU_NM">데이터 처리</Col>
+            <Col id="MENU_LVL">1</Col>
+            <Col id="PGM_PATH">PoC</Col>
+            <Col id="PGM_ID">PoC_6.xfdl</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="dsLeftMenu_7">
+        <ColumnInfo>
+          <Column id="MENU_CD" type="STRING" size="256"/>
+          <Column id="UP_MENU_CD" type="STRING" size="256"/>
+          <Column id="MENU_NM" type="STRING" size="256"/>
+          <Column id="MENU_LVL" type="STRING" size="256"/>
+          <Column id="PGM_PATH" type="STRING" size="256"/>
+          <Column id="PGM_ID" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="MENU_CD">0000</Col>
+            <Col id="UP_MENU_CD">0</Col>
+            <Col id="MENU_LVL">0</Col>
+            <Col id="MENU_NM">요건 6</Col>
+          </Row>
+          <Row>
+            <Col id="MENU_CD">0001</Col>
+            <Col id="UP_MENU_CD">0010</Col>
+            <Col id="MENU_NM">Validation</Col>
+            <Col id="MENU_LVL">1</Col>
+            <Col id="PGM_PATH">PoC</Col>
+            <Col id="PGM_ID">PoC_7.xfdl</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="dsLeftMenu_8">
+        <ColumnInfo>
+          <Column id="MENU_CD" type="STRING" size="256"/>
+          <Column id="UP_MENU_CD" type="STRING" size="256"/>
+          <Column id="MENU_NM" type="STRING" size="256"/>
+          <Column id="MENU_LVL" type="STRING" size="256"/>
+          <Column id="PGM_PATH" type="STRING" size="256"/>
+          <Column id="PGM_ID" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="MENU_CD">0000</Col>
+            <Col id="UP_MENU_CD">0</Col>
+            <Col id="MENU_LVL">0</Col>
+            <Col id="MENU_NM">추가</Col>
+          </Row>
+          <Row>
+            <Col id="MENU_CD">0001</Col>
+            <Col id="UP_MENU_CD">0010</Col>
+            <Col id="MENU_NM">카테고리 그리드</Col>
+            <Col id="MENU_LVL">1</Col>
+            <Col id="PGM_PATH">sample</Col>
+            <Col id="PGM_ID">CategoryGrid.xfdl</Col>
+          </Row>
+          <Row>
+            <Col id="MENU_CD">0002</Col>
+            <Col id="UP_MENU_CD">0020</Col>
+            <Col id="MENU_NM">동적 그리드</Col>
+            <Col id="MENU_LVL">1</Col>
+            <Col id="PGM_ID">Dynamic.xfdl</Col>
+            <Col id="PGM_PATH">sample</Col>
+          </Row>
+          <Row>
+            <Col id="MENU_LVL">1</Col>
+            <Col id="PGM_PATH">sample</Col>
+            <Col id="PGM_ID">DynamicTree.xfdl</Col>
+            <Col id="MENU_NM">트리 그리드</Col>
+            <Col id="UP_MENU_CD">0030</Col>
+            <Col id="MENU_CD">0003</Col>
+          </Row>
+          <Row>
+            <Col id="MENU_CD">0004</Col>
+            <Col id="UP_MENU_CD">0040</Col>
+            <Col id="MENU_NM">다양한 메뉴</Col>
+            <Col id="MENU_LVL">1</Col>
+            <Col id="PGM_PATH">sample</Col>
+            <Col id="PGM_ID">MenuList.xfdl</Col>
+          </Row>
+          <Row>
+            <Col id="MENU_CD">0005</Col>
+            <Col id="UP_MENU_CD">0050</Col>
+            <Col id="MENU_NM">피벗 그리드</Col>
+            <Col id="MENU_LVL">1</Col>
+            <Col id="PGM_PATH">sample</Col>
+            <Col id="PGM_ID">pivot.xfdl</Col>
+          </Row>
+          <Row>
+            <Col id="MENU_CD">0006</Col>
+            <Col id="UP_MENU_CD">0060</Col>
+            <Col id="MENU_NM">포틀릿</Col>
+            <Col id="MENU_LVL">1</Col>
+            <Col id="PGM_PATH">sample</Col>
+            <Col id="PGM_ID">Portlet.xfdl</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+    </Objects>
+  </Form>
+</FDL>

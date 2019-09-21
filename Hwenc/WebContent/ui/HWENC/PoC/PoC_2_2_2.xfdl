@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.0">
+  <Form id="PoC_2_2_2" width="1280" height="720" titletext="Chart 적용">
+    <Layouts>
+      <Layout height="720" mobileorientation="landscape" width="1280">
+        <Static id="Static01" taborder="0" text="3rd Party 연동" cssclass="sta_WF_title02" left="8" top="8" width="421" height="26"/>
+        <Div id="Div00" taborder="1" text="" left="8" top="Static01:8" right="8" bottom="8" url="comm::rChart.xfdl"/>
+      </Layout>
+    </Layouts>
+  </Form>
+</FDL>

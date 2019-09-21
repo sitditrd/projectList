@@ -1,0 +1,837 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.0">
+  <TypeDefinition url="..\default_typedef.xml"/>
+  <Form id="DynamicTree" classname="work004" left="0" top="0" width="1010" height="691" titletext="트리그리드" onload="DynamicTree_onload" ondrop="DynamicTree_ondrop" ondragmove="DynamicTree_ondragmove" ondragenter="DynamicTree_ondragenter">
+    <Layouts>
+      <Layout>
+        <Static id="Static05" taborder="0" text="동적 트리 그리드" cssclass="sta_WF_title01" left="10" top="0" width="421" height="50"/>
+        <Static id="Static06" taborder="1" text="트리 -&gt; 트리" cssclass="sta_WF_title02" left="10" top="50" width="200" height="30"/>
+        <Grid id="gd_tree" taborder="2" binddataset="dsMenuOrg" useinputpanel="false" selecttype="area" autofittype="col" treeusecheckbox="false" treeinitstatus="expand,null" ondrag="fn_ondrag" ondragleave="fn_ondragleave" left="10" top="80" onlbuttondown="gd_onlbuttondown" onlbuttonup="gd_onlbuttonup" height="170" right="50.10%">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="237"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell displaytype="normal" text="NAME"/>
+              </Band>
+              <Band id="body">
+                <Cell displaytype="treeitemcontrol" edittype="tree" text="bind:NAME" treelevel="bind:LEVEL"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Grid id="gd_list" taborder="3" binddataset="dsMenuTarget" useinputpanel="false" autofittype="col" nodatatext="Tree 를 Drag 해서 Drop 하세요" treeusecheckbox="false" treeinitstatus="expand,all" ondrop="fn_ondrop" left="50.10%" top="80" style="align:center middle;" height="170" right="10">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="103"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="NAME"/>
+              </Band>
+              <Band id="body">
+                <Cell displaytype="treeitemcontrol" edittype="tree" text="bind:NAME" treelevel="bind:LEVEL"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Static id="Static01" taborder="4" text="트리 -&gt; 그리드" cssclass="sta_WF_title02" left="10" top="260" width="200" height="30"/>
+        <Grid id="Grid02" taborder="5" useinputpanel="false" left="10" top="290" binddataset="dsMenuOrg2" autofittype="col" treeinitstatus="expand,null" treeusecheckbox="false" ondrag="fn_ondrag" ondragleave="fn_ondragleave" onlbuttondown="gd_onlbuttondown" onlbuttonup="gd_onlbuttonup" height="170" right="50.10%">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="80"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell displaytype="none" text="NAME"/>
+              </Band>
+              <Band id="body">
+                <Cell displaytype="treeitemcontrol" edittype="tree" text="bind:NAME" treelevel="bind:LEVEL"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Grid id="Grid03" taborder="6" useinputpanel="false" left="50.10%" top="290" nodatatext="Tree 를 Drag 해서 Drop 하세요" binddataset="dsTreetoGrid" autofittype="col" ondrop="fn_ondrop" height="170" right="10">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="80"/>
+                <Column size="80"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="NAME"/>
+                <Cell col="1" text="LEVEL"/>
+              </Band>
+              <Band id="body">
+                <Cell displaytype="normal" edittype="normal" text="bind:NAME" treelevel="bind:LEVEL" textAlign="center" verticalAlign="middle"/>
+                <Cell col="1" text="bind:LEVEL" textAlign="center" verticalAlign="middle"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Static id="Static00" taborder="7" text="트리 → 그리드 (특정 컬럼에 drag&amp;drop)" cssclass="sta_WF_title02" left="10" top="470" width="410" height="30"/>
+        <Grid id="Grid04" taborder="8" binddataset="dsMenuOrg4" useinputpanel="false" autofittype="col" treeusecheckbox="false" treeinitstatus="expand,null" ondrag="fn_ondrag" ondragleave="fn_ondragleave" left="10" top="500" onlbuttondown="gd_onlbuttondown" onlbuttonup="gd_onlbuttonup" right="50.10%" height="170">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="80"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell displaytype="none" text="NAME"/>
+              </Band>
+              <Band id="body">
+                <Cell displaytype="treeitemcontrol" edittype="tree" text="bind:NAME" treelevel="bind:LEVEL"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Grid id="Grid05" taborder="9" binddataset="dsTreetoGrid2" useinputpanel="false" autofittype="col" nodatatext="Tree 를 Drag 해서 Drop 하세요" ondrop="fn_ondrop" left="50.10%" top="500" right="10" height="170">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="80"/>
+                <Column size="80"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="NAME"/>
+                <Cell col="1" text="LEVEL"/>
+              </Band>
+              <Band id="body">
+                <Cell displaytype="normal" edittype="normal" text="bind:NAME" treelevel="bind:LEVEL" textAlign="center" verticalAlign="middle"/>
+                <Cell col="1" text="bind:LEVEL" textAlign="center" verticalAlign="middle"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Static id="stDragImg" taborder="10" visible="false" left="909" top="10" width="100" height="30" cssclass="sta_grd_move"/>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset enableevent="true" firefirstcount="0" firenextcount="0" preload="true" updatecontrol="true" useclientlayout="false" id="dsMenuTarget" oncolumnchanged="ds_menuauth_oncolumnchanged">
+        <ColumnInfo>
+          <Column id="NAME" type="STRING" size="160"/>
+          <Column id="LEVEL" type="STRING" size="1"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="dsMenuOrg" firefirstcount="0" firenextcount="0" useclientlayout="false" updatecontrol="true" enableevent="true" loadkeymode="keep" loadfiltermode="keep" reversesubsum="false">
+        <ColumnInfo>
+          <Column id="NAME" type="STRING" size="160"/>
+          <Column id="LEVEL" type="STRING" size="1"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="NAME">투비소프트</Col>
+            <Col id="LEVEL">0</Col>
+          </Row>
+          <Row>
+            <Col id="NAME">사업본부</Col>
+            <Col id="LEVEL">1</Col>
+          </Row>
+          <Row>
+            <Col id="NAME">사업그룹</Col>
+            <Col id="LEVEL">2</Col>
+          </Row>
+          <Row>
+            <Col id="NAME">사업1팀(제조)</Col>
+            <Col id="LEVEL">3</Col>
+          </Row>
+          <Row>
+            <Col id="NAME">사업2팀(공공)</Col>
+            <Col id="LEVEL">3</Col>
+          </Row>
+          <Row>
+            <Col id="NAME">사업3팀(금융)</Col>
+            <Col id="LEVEL">3</Col>
+          </Row>
+          <Row>
+            <Col id="NAME">사업4팀(전략)</Col>
+            <Col id="LEVEL">3</Col>
+          </Row>
+          <Row>
+            <Col id="NAME">기술융합그룹</Col>
+            <Col id="LEVEL">2</Col>
+          </Row>
+          <Row>
+            <Col id="NAME">프리세일즈팀</Col>
+            <Col id="LEVEL">3</Col>
+          </Row>
+          <Row>
+            <Col id="NAME">기술융합팀</Col>
+            <Col id="LEVEL">3</Col>
+          </Row>
+          <Row>
+            <Col id="NAME">교육서비스팀</Col>
+            <Col id="LEVEL">3</Col>
+          </Row>
+          <Row>
+            <Col id="NAME">기획마케팅팀</Col>
+            <Col id="LEVEL">3</Col>
+          </Row>
+          <Row>
+            <Col id="NAME">기술지원본부</Col>
+            <Col id="LEVEL">2</Col>
+          </Row>
+          <Row>
+            <Col id="NAME">제품컨설팅그룹</Col>
+            <Col id="LEVEL">3</Col>
+          </Row>
+          <Row>
+            <Col id="NAME">제품컨설팅그룹</Col>
+            <Col id="LEVEL">4</Col>
+          </Row>
+          <Row>
+            <Col id="NAME">UX컨설팅팀</Col>
+            <Col id="LEVEL">5</Col>
+          </Row>
+          <Row>
+            <Col id="NAME">디자인팀</Col>
+            <Col id="LEVEL">5</Col>
+          </Row>
+          <Row>
+            <Col id="NAME">제품컨설팅1팀(제조)</Col>
+            <Col id="LEVEL">5</Col>
+          </Row>
+          <Row>
+            <Col id="NAME">제품컨설팅2팀(공공)</Col>
+            <Col id="LEVEL">5</Col>
+          </Row>
+          <Row>
+            <Col id="NAME">제품컨설팅3팀(금융)</Col>
+            <Col id="LEVEL">5</Col>
+          </Row>
+          <Row>
+            <Col id="NAME">기술지원그룹</Col>
+            <Col id="LEVEL">4</Col>
+          </Row>
+          <Row>
+            <Col id="NAME">기술지원팀</Col>
+            <Col id="LEVEL">5</Col>
+          </Row>
+          <Row>
+            <Col id="NAME">테크솔루션팀</Col>
+            <Col id="LEVEL">5</Col>
+          </Row>
+          <Row>
+            <Col id="NAME">일본사업지원팀</Col>
+            <Col id="LEVEL">5</Col>
+          </Row>
+          <Row>
+            <Col id="NAME">서버솔루션팀</Col>
+            <Col id="LEVEL">5</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset enableevent="true" firefirstcount="0" firenextcount="0" preload="true" updatecontrol="true" useclientlayout="false" id="dsTreetoGrid" oncolumnchanged="ds_menuauth_oncolumnchanged">
+        <ColumnInfo>
+          <Column id="NAME" type="STRING" size="160"/>
+          <Column id="LEVEL" type="STRING" size="1"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="dsMenuOrg2" firefirstcount="0" firenextcount="0" useclientlayout="false" updatecontrol="true" enableevent="true" loadkeymode="keep" loadfiltermode="keep" reversesubsum="false">
+        <ColumnInfo>
+          <Column id="NAME" type="STRING" size="160"/>
+          <Column id="LEVEL" type="STRING" size="1"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="NAME">투비소프트</Col>
+            <Col id="LEVEL">0</Col>
+          </Row>
+          <Row>
+            <Col id="NAME">사업본부</Col>
+            <Col id="LEVEL">1</Col>
+          </Row>
+          <Row>
+            <Col id="NAME">사업그룹</Col>
+            <Col id="LEVEL">2</Col>
+          </Row>
+          <Row>
+            <Col id="NAME">사업1팀(제조)</Col>
+            <Col id="LEVEL">3</Col>
+          </Row>
+          <Row>
+            <Col id="NAME">사업2팀(공공)</Col>
+            <Col id="LEVEL">3</Col>
+          </Row>
+          <Row>
+            <Col id="NAME">사업3팀(금융)</Col>
+            <Col id="LEVEL">3</Col>
+          </Row>
+          <Row>
+            <Col id="NAME">사업4팀(전략)</Col>
+            <Col id="LEVEL">3</Col>
+          </Row>
+          <Row>
+            <Col id="NAME">기술융합그룹</Col>
+            <Col id="LEVEL">2</Col>
+          </Row>
+          <Row>
+            <Col id="NAME">프리세일즈팀</Col>
+            <Col id="LEVEL">3</Col>
+          </Row>
+          <Row>
+            <Col id="NAME">기술융합팀</Col>
+            <Col id="LEVEL">3</Col>
+          </Row>
+          <Row>
+            <Col id="NAME">교육서비스팀</Col>
+            <Col id="LEVEL">3</Col>
+          </Row>
+          <Row>
+            <Col id="NAME">기획마케팅팀</Col>
+            <Col id="LEVEL">3</Col>
+          </Row>
+          <Row>
+            <Col id="NAME">기술지원본부</Col>
+            <Col id="LEVEL">2</Col>
+          </Row>
+          <Row>
+            <Col id="NAME">제품컨설팅그룹</Col>
+            <Col id="LEVEL">3</Col>
+          </Row>
+          <Row>
+            <Col id="NAME">제품컨설팅그룹</Col>
+            <Col id="LEVEL">4</Col>
+          </Row>
+          <Row>
+            <Col id="NAME">UX컨설팅팀</Col>
+            <Col id="LEVEL">5</Col>
+          </Row>
+          <Row>
+            <Col id="NAME">디자인팀</Col>
+            <Col id="LEVEL">5</Col>
+          </Row>
+          <Row>
+            <Col id="NAME">제품컨설팅1팀(제조)</Col>
+            <Col id="LEVEL">5</Col>
+          </Row>
+          <Row>
+            <Col id="NAME">제품컨설팅2팀(공공)</Col>
+            <Col id="LEVEL">5</Col>
+          </Row>
+          <Row>
+            <Col id="NAME">제품컨설팅3팀(금융)</Col>
+            <Col id="LEVEL">5</Col>
+          </Row>
+          <Row>
+            <Col id="NAME">기술지원그룹</Col>
+            <Col id="LEVEL">4</Col>
+          </Row>
+          <Row>
+            <Col id="NAME">기술지원팀</Col>
+            <Col id="LEVEL">5</Col>
+          </Row>
+          <Row>
+            <Col id="NAME">테크솔루션팀</Col>
+            <Col id="LEVEL">5</Col>
+          </Row>
+          <Row>
+            <Col id="NAME">일본사업지원팀</Col>
+            <Col id="LEVEL">5</Col>
+          </Row>
+          <Row>
+            <Col id="NAME">서버솔루션팀</Col>
+            <Col id="LEVEL">5</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset enableevent="true" firefirstcount="0" firenextcount="0" preload="true" updatecontrol="true" useclientlayout="false" id="dsTreetoGrid2" oncolumnchanged="ds_menuauth_oncolumnchanged">
+        <ColumnInfo>
+          <Column id="NAME" type="STRING" size="160"/>
+          <Column id="LEVEL" type="STRING" size="1"/>
+        </ColumnInfo>
+        <Rows>
+          <Row/>
+          <Row/>
+          <Row/>
+          <Row/>
+          <Row/>
+          <Row/>
+          <Row/>
+        </Rows>
+      </Dataset>
+      <Dataset id="dsMenuOrg4" firefirstcount="0" firenextcount="0" useclientlayout="false" updatecontrol="true" enableevent="true" loadkeymode="keep" loadfiltermode="keep" reversesubsum="false">
+        <ColumnInfo>
+          <Column id="NAME" type="STRING" size="160"/>
+          <Column id="LEVEL" type="STRING" size="1"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="NAME">투비소프트</Col>
+            <Col id="LEVEL">0</Col>
+          </Row>
+          <Row>
+            <Col id="NAME">사업본부</Col>
+            <Col id="LEVEL">1</Col>
+          </Row>
+          <Row>
+            <Col id="NAME">사업그룹</Col>
+            <Col id="LEVEL">2</Col>
+          </Row>
+          <Row>
+            <Col id="NAME">사업1팀(제조)</Col>
+            <Col id="LEVEL">3</Col>
+          </Row>
+          <Row>
+            <Col id="NAME">사업2팀(공공)</Col>
+            <Col id="LEVEL">3</Col>
+          </Row>
+          <Row>
+            <Col id="NAME">사업3팀(금융)</Col>
+            <Col id="LEVEL">3</Col>
+          </Row>
+          <Row>
+            <Col id="NAME">사업4팀(전략)</Col>
+            <Col id="LEVEL">3</Col>
+          </Row>
+          <Row>
+            <Col id="NAME">기술융합그룹</Col>
+            <Col id="LEVEL">2</Col>
+          </Row>
+          <Row>
+            <Col id="NAME">프리세일즈팀</Col>
+            <Col id="LEVEL">3</Col>
+          </Row>
+          <Row>
+            <Col id="NAME">기술융합팀</Col>
+            <Col id="LEVEL">3</Col>
+          </Row>
+          <Row>
+            <Col id="NAME">교육서비스팀</Col>
+            <Col id="LEVEL">3</Col>
+          </Row>
+          <Row>
+            <Col id="NAME">기획마케팅팀</Col>
+            <Col id="LEVEL">3</Col>
+          </Row>
+          <Row>
+            <Col id="NAME">기술지원본부</Col>
+            <Col id="LEVEL">2</Col>
+          </Row>
+          <Row>
+            <Col id="NAME">제품컨설팅그룹</Col>
+            <Col id="LEVEL">3</Col>
+          </Row>
+          <Row>
+            <Col id="NAME">제품컨설팅그룹</Col>
+            <Col id="LEVEL">4</Col>
+          </Row>
+          <Row>
+            <Col id="NAME">UX컨설팅팀</Col>
+            <Col id="LEVEL">5</Col>
+          </Row>
+          <Row>
+            <Col id="NAME">디자인팀</Col>
+            <Col id="LEVEL">5</Col>
+          </Row>
+          <Row>
+            <Col id="NAME">제품컨설팅1팀(제조)</Col>
+            <Col id="LEVEL">5</Col>
+          </Row>
+          <Row>
+            <Col id="NAME">제품컨설팅2팀(공공)</Col>
+            <Col id="LEVEL">5</Col>
+          </Row>
+          <Row>
+            <Col id="NAME">제품컨설팅3팀(금융)</Col>
+            <Col id="LEVEL">5</Col>
+          </Row>
+          <Row>
+            <Col id="NAME">기술지원그룹</Col>
+            <Col id="LEVEL">4</Col>
+          </Row>
+          <Row>
+            <Col id="NAME">기술지원팀</Col>
+            <Col id="LEVEL">5</Col>
+          </Row>
+          <Row>
+            <Col id="NAME">테크솔루션팀</Col>
+            <Col id="LEVEL">5</Col>
+          </Row>
+          <Row>
+            <Col id="NAME">일본사업지원팀</Col>
+            <Col id="LEVEL">5</Col>
+          </Row>
+          <Row>
+            <Col id="NAME">서버솔루션팀</Col>
+            <Col id="LEVEL">5</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="Dataset00">
+        <ColumnInfo>
+          <Column id="Column0" type="STRING" size="256"/>
+          <Column id="Column1" type="STRING" size="256"/>
+          <Column id="Column2" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="Column0">01</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">02</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">03</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">04</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.1"><![CDATA[this.nRowBegin = 0;
+this.nRowFinish = 0;
+this.nRowBegin2 = 0;
+this.nRowFinish2 = 0;
+this.nRowBegin3 = 0;
+this.nRowFinish3 = 0;
+this.nRowBegin4 = 0;
+this.nRowFinish4 = 0;
+this.dsOrg = null;
+this.dsTarget = null;
+
+this.DynamicTree_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
+{
+	this.dsOrg = this.dsMenuOrg;
+	this.dsTarget = this.dsMenuTarget;
+}
+
+this.DynamicTree_ondragmove = function(obj:nexacro.Form,e:nexacro.DragEventInfo)
+{
+	this.stDragImg.move(e.clientx + 15, e.clienty + 15);
+}
+
+this.DynamicTree_ondrop = function(obj:nexacro.Form,e:nexacro.DragEventInfo)
+{
+	this.stDragImg.set_visible(false);
+}
+
+// Grid Drag Event
+this.fn_ondrag = function(obj:nexacro.Grid,e:nexacro.GridDragEventInfo)
+{
+	switch (obj.name)
+	{
+		case "gd_tree" : // 트리 -> 트리
+		case "Grid02" : // 트리 -> 그리드
+		case "Grid04" : // 트리 -> 그리드 (특정 컬럼에 drag&drop)
+			if (e.row > -1) {
+				this.stDragImg.bringToFront();
+				this.stDragImg.set_text(obj.getCellText(e.row, e.cell));
+				this.stDragImg.set_visible(true);
+				
+				return true;
+			}
+			return false;		
+			break;
+	}
+};
+
+// Grid Drop Event
+this.fn_ondrop = function(obj:nexacro.Grid,e:nexacro.GridDragEventInfo)
+{
+	var i = 0;
+	var nInsertRow = -9;
+	var nRow = 0, nStart, nEnd = 0;
+	
+	this.stDragImg.set_visible(false);
+		
+	switch (obj.name)
+	{
+		case "gd_list" : // 트리 -> 트리
+			if (e.row != -9) {
+				nInsertRow = e.row;
+			}
+			
+			if (this.nRowBegin < this.nRowFinish) {
+				nStart = this.nRowBegin;
+				nEnd = this.nRowFinish;
+			} else {
+				nStart = this.nRowFinish;
+				nEnd = this.nRowBegin;
+			}
+			
+			var sTargetLvl = 0;
+			this.dsTarget.set_enableevent(false);
+			var nChildCount = nexacro.toNumber(this.gd_tree.getTreeChildCount(nStart));
+			
+			if (nInsertRow >= 0) {
+				sTargetLvl = this.dsTarget.getColumn(nInsertRow, "LEVEL");
+			}
+			
+			if (nChildCount > 0) 
+			{
+				var sLvl = this.dsOrg.getColumn(nStart, "LEVEL");
+				var nMenuSubFinish = 0;
+				nMenuSubFinish = this.dsOrg.findRow("LEVEL", sLvl, nStart + 1);
+				
+				if (nMenuSubFinish > -1) {
+					nMenuSubFinish--;
+				} else {
+					nMenuSubFinish = this.dsOrg.rowcount - 1;
+				}
+				
+				sLvl = sTargetLvl;
+				
+				for (i = nStart; i <= nMenuSubFinish; i++) 
+				{
+					if (nInsertRow >= 0) 
+					{
+						nRow = this.dsTarget.insertRow(nInsertRow);
+						nInsertRow++;
+						this.dsTarget.copyRow(nRow, this.dsOrg, i);
+						
+						sLvl = this.dsOrg.getColumn(i, "LEVEL");
+						
+						if (sTargetLvl >= this.dsOrg.getColumn(i, "LEVEL")) {
+							sLvl++;
+						}
+						
+						this.dsTarget.setColumn(nRow, "LEVEL", sLvl);
+					} else {
+						nRow = this.dsTarget.addRow();
+						this.dsTarget.copyRow(nRow, this.dsOrg, i);
+					}
+				}
+			} 
+			else 
+			{
+				for (i = nStart; i <= nEnd; i++) 
+				{
+					if (nInsertRow >= 0) {
+						nRow = this.dsTarget.insertRow(nInsertRow);
+						nInsertRow++;
+					} else {
+						nRow = this.dsTarget.addRow();
+					}
+					
+					this.dsTarget.copyRow(nRow, this.dsOrg, i);
+					this.dsTarget.setColumn(nRow, "LEVEL", sTargetLvl);
+				}
+			}
+			this.dsTarget.set_enableevent(true);
+			break;
+			
+		case "Grid03" : // 트리 -> 그리드
+			if (e.row != -9) {
+				nInsertRow = e.row;
+			}
+			
+			if (this.nRowBegin2 < this.nRowFinish2) 
+			{
+				nStart = this.nRowBegin2;
+				nEnd = this.nRowFinish2;
+			} else {
+				nStart = this.nRowFinish2;
+				nEnd = this.nRowBegin2;
+			}
+			
+			var sTargetLvl = 0;
+			this.dsTreetoGrid.set_enableevent(false);
+			var nChildCount = nexacro.toNumber(this.Grid02.getTreeChildCount(nStart));
+			
+			if (nInsertRow >= 0) {
+				sTargetLvl = this.dsTreetoGrid.getColumn(nInsertRow, "LEVEL");
+			}
+			
+			if (nChildCount > 0) 
+			{
+				var sLvl = this.dsMenuOrg2.getColumn(nStart, "LEVEL");
+				var nMenuSubFinish = 0;
+				nMenuSubFinish = this.dsMenuOrg2.findRow("LEVEL", sLvl, nStart+1);
+				
+				if (nMenuSubFinish > -1) {
+					nMenuSubFinish--;
+				} else {
+					nMenuSubFinish = this.dsMenuOrg2.rowcount - 1;
+				}
+				
+				sLvl = sTargetLvl;
+				
+				for (i = nStart; i<= nMenuSubFinish; i++) 
+				{
+					if (nInsertRow >= 0) 
+					{
+						nRow = this.dsTreetoGrid.insertRow(nInsertRow);
+						nInsertRow++;
+						this.dsTreetoGrid.copyRow(nRow, this.dsMenuOrg2, i);
+						sLvl = this.dsMenuOrg2.getColumn(i, "LEVEL");
+						
+						if (sTargetLvl >= this.dsMenuOrg2.getColumn(i, "LEVEL")) {
+							sLvl++;
+						}
+						
+						this.dsTreetoGrid.setColumn(nRow, "LEVEL", sLvl);
+					} 
+					else 
+					{
+						nRow = this.dsTreetoGrid.addRow();
+						this.dsTreetoGrid.copyRow(nRow, this.dsMenuOrg2, i);
+					}
+				}
+			} 
+			else 
+			{
+				for (i = nStart; i<= nEnd; i++) 
+				{
+					if (nInsertRow >= 0) {
+						nRow = this.dsTreetoGrid.insertRow(nInsertRow);
+						nInsertRow++;
+					} else {
+						nRow = this.dsTreetoGrid.addRow();
+					}
+					
+					this.dsTreetoGrid.copyRow(nRow, this.dsMenuOrg2, i);
+					this.dsTreetoGrid.setColumn(nRow, "LEVEL", sTargetLvl);
+				}
+			}
+			this.dsTreetoGrid.set_enableevent(true);		
+			break;
+		
+		case "Grid05" : // 트리 -> 그리드 (특정 컬럼에 drag&drop)
+			if (e.row != -9) {
+				nInsertRow = e.row;
+			}
+
+			if (this.nRowBegin4 < this.nRowFinish4) {
+				nStart = this.nRowBegin4;
+				nEnd = this.nRowFinish4;
+			} else {
+				nStart = this.nRowFinish4;
+				nEnd = this.nRowBegin4;
+			}
+			
+			var sTargetLvl = 0;
+			this.dsTreetoGrid2.set_enableevent(false);
+			var nChildCount = nexacro.toNumber(this.Grid04.getTreeChildCount(nStart));
+			
+			if (nInsertRow >= 0) 
+			{
+				sTargetLvl = this.dsTreetoGrid2.getColumn(nInsertRow, "LEVEL");
+				
+				if (this.gfn_IsNull(sTargetLvl)) {
+					sTargetLvl = this.dsMenuOrg4.getColumn(nStart, "LEVEL");
+				}
+			}
+			
+			if (nChildCount > 0) 
+			{
+				var sLvl = this.dsMenuOrg4.getColumn(nStart, "LEVEL");
+				var nMenuSubFinish = 0;
+				nMenuSubFinish = this.dsMenuOrg4.findRow("LEVEL", sLvl, nStart+1);
+				
+				if (nMenuSubFinish > -1) {
+					nMenuSubFinish--;
+				} else {
+					nMenuSubFinish = this.dsMenuOrg4.rowcount - 1;
+				}
+				
+				sLvl = sTargetLvl;
+				
+				for (i = nStart; i<= nMenuSubFinish; i++) 
+				{
+					if (nInsertRow >= 0) 
+					{
+						if (nRow >= this.dsTreetoGrid2.rowcount - 1) {
+							nRow = this.dsTreetoGrid2.insertRow(nInsertRow);
+						} else {
+							nRow = nInsertRow;
+						}
+						nInsertRow++;
+						this.dsTreetoGrid2.copyRow(nRow, this.dsMenuOrg4, i);
+						
+						sLvl = this.dsMenuOrg4.getColumn(i, "LEVEL");
+						
+						this.dsTreetoGrid2.setColumn(nRow, "LEVEL", sLvl);
+					} 
+					else 
+					{
+						nRow = this.dsTreetoGrid2.addRow();
+						this.dsTreetoGrid2.copyRow(nRow, this.dsMenuOrg4, i);
+					}
+				}
+			} 
+			else 
+			{
+				for (i = nStart; i<= nEnd; i++) 
+				{
+					if (nInsertRow >= 0) 
+					{
+						if (nRow > this.dsTreetoGrid2.rowcount) {
+							nRow = this.dsTreetoGrid2.insertRow(nInsertRow);
+						} else {
+							nRow = nInsertRow;
+						}
+						nInsertRow++;
+					} 
+					else 
+					{
+						nRow = this.dsTreetoGrid2.addRow();
+					}
+					
+					this.dsTreetoGrid2.copyRow(nRow, this.dsMenuOrg4, i);
+					this.dsTreetoGrid2.setColumn(nRow, "LEVEL", sTargetLvl);
+				}
+			}
+			this.dsTreetoGrid2.set_enableevent(true);		
+			break;
+	}
+};
+
+this.fn_ondragleave = function(obj:nexacro.Grid,e:nexacro.DragEventInfo)
+{
+	switch (obj.name)
+	{
+		case "gd_tree" : // 트리 -> 트리
+			this.nRowBegin = nexacro.toNumber(obj.selectstartrow);
+			this.nRowFinish = nexacro.toNumber(obj.selectendrow);
+			break;
+			
+		case "Grid02" : // 트리 -> 그리드
+			this.nRowBegin2 = nexacro.toNumber(obj.selectstartrow);
+			this.nRowFinish2 = nexacro.toNumber(obj.selectendrow);
+			break;
+			
+		case "Grid04" : // 트리 -> 그리드 (특정 컬럼에 drag&drop)
+			this.nRowBegin4 = nexacro.toNumber(obj.selectstartrow);
+			this.nRowFinish4 = nexacro.toNumber(obj.selectendrow);		
+			break;
+	}
+};
+
+this.gfn_IsNull = function (Val)
+{
+	if (new String(Val).valueOf() == "undefined") return true;
+	if (Val == null) return true;
+	if (("x" + Val == "xNaN") && (new String(Val.length).valueOf() == "undefined")) return true;
+	if (Val.length == 0) return true;
+
+	return false;
+}]]></Script>
+  </Form>
+</FDL>

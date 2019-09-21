@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ENV version="2.1">
+  <Environment themeid="theme::blue" scrollbarsize="10">
+    <ScreenDefinition>
+      <Screen id="Desktop_screen" type="desktop" themeid="theme::blue" userzoom="false" rtl="false"/>
+    </ScreenDefinition>
+    <Variables/>
+    <Cookies/>
+    <httpheader/>
+  </Environment>
+  <Script type="xscript5.1"><![CDATA[]]></Script>
+</ENV>
