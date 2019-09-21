@@ -402,7 +402,7 @@ this.sMsg = "";
 	StepIndex : 2
 */
 /* service url : 사용경로 지정 */
-this.saveUrl = "http://localhost/Hwenc/service/";
+this.saveUrl = "http://14.63.224.112/Hwenc/service/";
 this.folderName = "fileSample";	//file directory
 
 this.fv_clickPointX; // 포인트 버튼 X 좌표
@@ -441,7 +441,7 @@ this.fnFormInit = function()
 	/*
 		StepIndex : 4
 	*/
-	this.Tab00.Tabpage2.form.web.set_url("http://localhost/Hwenc/service/cktest.jsp");
+	this.Tab00.Tabpage2.form.web.set_url("http://14.63.224.112/Hwenc/service/cktest.jsp");
 	
 	this.fnSetInterval();
 };

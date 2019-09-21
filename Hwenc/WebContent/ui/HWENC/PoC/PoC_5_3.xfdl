@@ -107,8 +107,8 @@ this.PoC_5_3_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
 	this.transaction
 	(
 		"scrollpaging",
-		//"http://localhost/Hwenc/service/commPaging_back.jsp",
-		"http://localhost/Hwenc/service/commScrollPaging.jsp",
+		//"http://14.63.224.112/Hwenc/service/commPaging_back.jsp",
+		"http://14.63.224.112/Hwenc/service/commScrollPaging.jsp",
 		"",
 		//"ds_data1=output",
 		"ds_data1=dsOutput",
@@ -118,7 +118,7 @@ this.PoC_5_3_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
 	
 	
 // 		var sId = "scrollpaging";
-// 		var sUrl = "http://localhost:8080/sicorp/service/commPaging.jsp";
+// 		var sUrl = "http://14.63.224.112:8080/sicorp/service/commPaging.jsp";
 // 		var sInDs = "";
 // 		var sOutDs = "ds_data1=dsOutput";
 // 		var sParam = "currentPage='"+ this.currentPage +"' blockCount='"+ this.blockCount +"'";
@@ -186,8 +186,8 @@ this.Grid00_onvscroll = function(obj:Grid, e:nexacro.ScrollEventInfo)
 		
 		this.transaction(
 			"onvscrollPaging",
-			//"http://localhost/Hwenc/service/commPaging_back.jsp",
-			"http://localhost/Hwenc/service/commScrollPaging.jsp",
+			//"http://14.63.224.112/Hwenc/service/commPaging_back.jsp",
+			"http://14.63.224.112/Hwenc/service/commScrollPaging.jsp",
 			"",
 			//"ds_data1=output",
 			"ds_data1=dsOutput",
