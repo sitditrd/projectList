@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.0">
+  <Form id="Main" width="824" height="608">
+    <Layouts>
+      <Layout height="608" mobileorientation="landscape" width="824">
+        <Div id="Div00" taborder="3" text="Div00" left="0" top="0" right="0" bottom="0">
+          <Layouts>
+            <Layout>
+              <Static id="Static01" taborder="0" left="164" top="29.28%" cssclass="sta_WF_mainLogo" right="203" height="130"/>
+              <Static id="Static00" taborder="1" left="0" bottom="0" right="0" cssclass="sta_WF_mainBottom" height="87"/>
+            </Layout>
+          </Layouts>
+        </Div>
+      </Layout>
+    </Layouts>
+  </Form>
+</FDL>

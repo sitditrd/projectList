@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="home" width="824" height="608">
+    <Layouts>
+      <Layout height="608" mobileorientation="landscape" width="824">
+        <Div id="Div00" taborder="3" left="0" top="0" right="0" bottom="0">
+          <Layouts>
+            <Layout>
+              <Static id="Static01" taborder="0" left="194" top="25.00%" cssclass="sta_WF_mainLogo" right="173" height="150" visible="false"/>
+              <Static id="Static02" taborder="1" text="한화시스템" left="193" top="50.16%" height="70" cssclass="sta_WF_mainTitle" right="193"/>
+              <Static id="Static00" taborder="2" left="0" bottom="0" right="0" cssclass="sta_WF_mainBottom" height="87"/>
+            </Layout>
+          </Layouts>
+        </Div>
+      </Layout>
+    </Layouts>
+  </Form>
+</FDL>

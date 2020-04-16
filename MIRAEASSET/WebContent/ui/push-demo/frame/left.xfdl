@@ -1,0 +1,110 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.0">
+  <Form id="left" width="180" height="608" onload="left_onload" ontimer="left_ontimer">
+    <Layouts>
+      <Layout width="180" height="608" screenid="Desktop_screen">
+        <Grid id="grd_menu" taborder="0" left="0" top="40" right="0" bottom="0" cssclass="grd_LF_menu" binddataset="ds_Menu" autofittype="col" treeusecheckbox="false" treeuseline="false" treeuseimage="true" treeinitstatus="expand,all" treeusebutton="use" treeuseexpandkey="false" oncellclick="grd_menu_oncellclick" oncelldblclick="grd_menu_oncelldblclick">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="199"/>
+              </Columns>
+              <Rows>
+                <Row size="32"/>
+              </Rows>
+              <Band id="body">
+                <Cell text="bind:MENU_NM" displaytype="treeitemcontrol" edittype="tree" autosizecol="default" controlautosizingtype="none" treelevel="bind:MENU_LVL"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Static id="st_title" taborder="1" text="Menu Name" height="40" top="0" left="0" right="0" cssclass="sta_LF_menuTitle"/>
+        <Button id="btn_split" taborder="3" top="0" width="8" height="608" cssclass="btn_LF_imgBar" right="-20" visible="false"/>
+        <Static id="st_titlebg" taborder="4" top="0" cssclass="sta_LF_menuTitle" width="25" height="608" visible="false" right="0"/>
+        <Button id="btn_expand" taborder="2" top="4" width="15" height="32" cssclass="btn_LF_menuClose" right="5" onclick="btn_expand_onclick" isExpanded="true"/>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="ds_Menu" firefirstcount="0" firenextcount="0" useclientlayout="false" updatecontrol="true" enableevent="true" loadkeymode="keep" loadfiltermode="keep" reversesubsum="false">
+        <ColumnInfo>
+          <Column id="MENU_GRP" type="STRING" size="256"/>
+          <Column id="MENU_NM" type="STRING" size="256"/>
+          <Column id="MENU_LVL" type="STRING" size="256"/>
+          <Column id="FORM_URL" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.1"><![CDATA[
+this.left_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
+{
+	//this.btn_expand.isExpand = true;
+	this.setTimer( 9, 100 );
+	obj.set_scrolltype("none");
+	obj.set_scrollbartype("none");
+	
+};
+
+this.left_ontimer = function(obj:nexacro.Form,e:nexacro.TimerEventInfo)
+{
+	this.killTimer(9);
+	
+	var objApp = nexacro.getApplication();
+	
+	this.ds_Menu.set_enableevent(false);
+	this.ds_Menu.copyData(objApp.gds_Menu);
+	this.ds_Menu.set_enableevent(true);
+};
+
+this.grd_menu_oncellclick = function(obj:nexacro.Grid,e:nexacro.GridClickEventInfo)
+{
+	var objDs = obj.getBindDataset();
+	
+	var lvl = objDs.getColumn(e.row, "MENU_LVL");
+	
+	if (lvl == 0)	return;
+	
+	var sID   = objDs.getColumn(e.row, "MENU_ID");		//메뉴ID Key
+	
+	if(!sID) return;
+	
+	var objApp = nexacro.getApplication();
+	var objForm = objApp.mainframe.VFrameSet.TopFrame.form;
+	
+	objForm && objForm["fnOpenMenu"].call(objForm, sID);
+};
+
+this.grd_menu_oncelldblclick = function(obj:nexacro.Grid,e:nexacro.GridClickEventInfo)
+{
+	var nTreeRow = obj.getTreeRow(e.row);
+	
+	if(this.grd_menu.getTreeStatus(nTreeRow)){
+		this.grd_menu.setTreeStatus(nTreeRow,false);
+	}else{
+		this.grd_menu.setTreeStatus(nTreeRow,true);
+	}
+};
+
+this.btn_expand_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	var objApp = nexacro.getApplication();
+	
+	if(this.btn_expand.isExpanded){
+		this.st_title.set_visible(false);
+		this.grd_menu.set_visible(false);
+		this.st_titlebg.set_visible(true);
+		objApp.mainframe.VFrameSet.HFrameSet.set_separatesize("25,*");
+		this.btn_expand.isExpanded = false;
+		this.btn_expand.set_cssclass("btn_LF_menuOpen");
+		
+	}else{
+		this.st_title.set_visible(true);
+		this.grd_menu.set_visible(true);
+		this.st_titlebg.set_visible(false);
+		objApp.mainframe.VFrameSet.HFrameSet.set_separatesize("180,*");
+		this.btn_expand.isExpanded = true;
+		this.btn_expand.set_cssclass("btn_LF_menuClose");
+	}
+};
+]]></Script>
+  </Form>
+</FDL>

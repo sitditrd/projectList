@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.0">
+  <Form id="GridChart" width="1280" height="720">
+    <Layouts>
+      <Layout height="720" mobileorientation="landscape" width="1280">
+        <Grid id="grd00" taborder="0" left="10" top="10" binddataset="ds00" right="10" bottom="10" cellsizingtype="col" autofittype="col">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="250"/>
+                <Column size="120"/>
+                <Column size="120"/>
+              </Columns>
+              <Rows>
+                <Row size="60" band="head"/>
+                <Row size="30"/>
+              </Rows>
+              <Band id="head">
+                <Cell/>
+                <Cell col="1" text="Active&#13;&#10;Contribution"/>
+                <Cell col="2" text="Active&#13;&#10;Contribution&#13;&#10;Chart"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:Column0"/>
+                <Cell col="1" text="bind:Column1"/>
+                <Cell col="2" text="bind:Column1" charttype="horizontalbar" displaytype="chartcontrol"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="ds00">
+        <ColumnInfo>
+          <Column id="Column0" type="STRING" size="256"/>
+          <Column id="Column1" type="BIGDECIMAL" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="Column0">Finance</Col>
+            <Col id="Column1">0.003</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">Technology Services</Col>
+            <Col id="Column1">-0.017</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">Electronic Technology</Col>
+            <Col id="Column1">0.004</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">Retail Trade</Col>
+            <Col id="Column1">-0.002</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">Producer Manufacturing</Col>
+            <Col id="Column1">0.001</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+    </Objects>
+  </Form>
+</FDL>

@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.0">
+  <Form id="frmWork" width="1278" height="854" titletext="Work Frame" onload="frmWork_onload" onsize="form_onsize">
+    <Layouts>
+      <Layout width="1278" height="854" screenid="ScreenDeskTop">
+        <Div id="div_work" taborder="0" left="19" top="45" right="19" bottom="18">
+          <Layouts>
+            <Layout/>
+          </Layouts>
+        </Div>
+        <Div id="divTitle" taborder="1" left="19" top="18" width="600" height="19" formscrollbartype="none none" formscrolltype="none">
+          <Layouts>
+            <Layout>
+              <Button id="Button22" taborder="0" left="0" top="3" height="16" cssclass="btn_WF_Btitle" defaultbutton="true" tabstop="false" width="13"/>
+              <Static id="stcMenuNm" taborder="1" text="소메뉴타이틀" left="19" top="-1" height="20" cssclass="sta_WF_Btitle" fittocontents="width" width="88"/>
+              <Static id="Static132" taborder="2" text="HOME &gt; 대메뉴 &gt; 중메뉴 &gt; 소메뉴" left="stcMenuNm:5" top="2" height="13" cssclass="sta_WF_Location" fittocontents="width" width="181" visible="false"/>
+              <Button id="Button30" taborder="3" left="Static132:5" top="0" width="21" height="21" cssclass="btn_WF_Help" visible="false"/>
+            </Layout>
+          </Layouts>
+        </Div>
+      </Layout>
+    </Layouts>
+    <Script type="xscript5.1"><![CDATA[
+this.frmWork_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
+{
+	var menuNm = this.parent.menuNm;
+	if (menuNm) {
+		this.divTitle.form.stcMenuNm.set_text(menuNm);
+	}
+	this.div_work.set_url(this.parent.menuUrl);
+	this.resetScroll();
+};
+
+this.form_onsize = function(obj:Form, e:nexacro.SizeEventInfo)
+{
+	this.resetScroll();
+}
+
+this.fnWorkFrameClose = function()
+{
+	this.close();
+}
+]]></Script>
+  </Form>
+</FDL>

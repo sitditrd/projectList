@@ -1,0 +1,471 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.0">
+  <Form id="work002" width="1010" height="691" titletext="PUSH연동" ontimer="work002_ontimer" onload="work002_onload">
+    <Layouts>
+      <Layout height="691" mobileorientation="landscape" width="1010">
+        <Grid id="Grid00" taborder="0" left="20" top="170" height="417" binddataset="dsList" width="990">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="40"/>
+                <Column size="40"/>
+                <Column size="130"/>
+                <Column size="120"/>
+                <Column size="120"/>
+                <Column size="42"/>
+                <Column size="120"/>
+                <Column size="120"/>
+                <Column size="120"/>
+                <Column size="120"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24" band="head"/>
+                <Row size="30"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="분"/>
+                <Cell col="1" text="뉴"/>
+                <Cell col="2" text="종목"/>
+                <Cell col="3" text="전일가"/>
+                <Cell col="4" colspan="2" text="현재가"/>
+                <Cell col="6" text="등락폭"/>
+                <Cell col="7" text="등락률"/>
+                <Cell col="8" text="매도호가"/>
+                <Cell col="9" text="매수호가"/>
+                <Cell row="1" colspan="10" text="코스피 50" textAlign="left"/>
+              </Band>
+              <Band id="body">
+                <Cell text="신1" textAlign="center"/>
+                <Cell col="1" displaytype="imagecontrol" text="bind:newImg"/>
+                <Cell col="2" text="bind:name" textAlign="center"/>
+                <Cell col="3" text="bind:beforeVal" textAlign="right" displaytype="number"/>
+                <Cell col="4" text="bind:currVal" cssclass="expr:upDnVal&gt;0?&quot;grd_WF_cellRed&quot;:&quot;grd_WF_cellBlue&quot;" textAlign="right" displaytype="number"/>
+                <Cell col="5" text="bind:currValImg" controlautosizingtype="none" displaytype="imagecontrol"/>
+                <Cell col="6" text="bind:upDnVal" cssclass="expr:upDnVal&gt;0?&quot;grd_WF_cellRed&quot;:&quot;grd_WF_cellBlue&quot;" textAlign="right" displaytype="number"/>
+                <Cell col="7" text="bind:upDnRate" cssclass="expr:upDnVal&gt;0?&quot;grd_WF_cellRed&quot;:&quot;grd_WF_cellBlue&quot;" textAlign="right" maskedittype="string"/>
+                <Cell col="8" cssclass="expr:upDnVal&gt;0?&quot;grd_WF_cellRed&quot;:&quot;grd_WF_cellBlue&quot;" text="bind:sellHo" displaytype="number" textAlign="right"/>
+                <Cell col="9" cssclass="expr:upDnVal&gt;0?&quot;grd_WF_cellRed&quot;:&quot;grd_WF_cellBlue&quot;" text="bind:buyHo" displaytype="number" textAlign="right"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Button id="btnConn" taborder="1" text="X-PUSH 연결" left="688" top="135" width="99" height="30" onclick="btnConn_onclick" cssclass="btn_WF_basic01"/>
+        <Button id="btnDisConn" taborder="2" text="X-PUSH 종료" left="904" top="135" width="99" height="30" onclick="btnDisConn_onclick" cssclass="btn_WF_basic03"/>
+        <Button id="btnSubs" taborder="3" text="TOPIC 등록" left="796" top="135" width="99" height="30" onclick="btnSubs_onclick" cssclass="btn_WF_basic02"/>
+        <Static id="Static03" taborder="4" left="20" top="40" height="30" cssclass="sta_WF_box02L" right="0"/>
+        <Static id="Static05" taborder="5" left="20" top="69" height="30" cssclass="sta_WF_box02L" right="0"/>
+        <Static id="Static09" taborder="6" left="20" top="98" height="30" cssclass="sta_WF_box02L" right="0"/>
+        <Static id="Static01" taborder="7" text="X-PUSH 연동" left="20" top="0" width="710" height="40" cssclass="sta_WF_title01"/>
+        <Static id="Static02" taborder="8" text="계좌번호" left="20" top="40" width="150" height="30" cssclass="sta_WF_box01impR"/>
+        <Static id="Static04" taborder="9" text="거래비밀" left="20" top="69" width="150" height="30" cssclass="sta_WF_box01R"/>
+        <Static id="Static08" taborder="10" text="종목코드" left="20" top="98" width="150" height="30" cssclass="sta_WF_box01R"/>
+        <Static id="Static14" taborder="11" text="매도수량" left="530" top="40" width="150" height="30" cssclass="sta_WF_box01R"/>
+        <Static id="Static15" taborder="12" text="매도단가" left="530" top="69" width="150" height="30" cssclass="sta_WF_box01R"/>
+        <Static id="Static17" taborder="13" text="주문금액" left="530" top="98" width="150" height="30" cssclass="sta_WF_box01R"/>
+        <Edit id="Edit00" taborder="14" left="309" top="44" width="40" height="23" tooltiptype="hover" value="(위탁)" text="(위탁)"/>
+        <Edit id="Edit02" taborder="15" left="340" top="102" width="80" height="23" value="투비소프트" text="투비소프트"/>
+        <Radio id="Radio00" taborder="16" left="310" top="73" width="90" height="23" innerdataset="innerdataset" codecolumn="codecolumn" datacolumn="datacolumn" direction="vertical" index="0" text="현금" value="01">
+          <Dataset id="innerdataset">
+            <ColumnInfo>
+              <Column id="codecolumn" size="256"/>
+              <Column id="datacolumn" size="256"/>
+            </ColumnInfo>
+            <Rows>
+              <Row>
+                <Col id="codecolumn">01</Col>
+                <Col id="datacolumn">현금</Col>
+              </Row>
+              <Row>
+                <Col id="codecolumn">02</Col>
+                <Col id="datacolumn">신용</Col>
+              </Row>
+            </Rows>
+          </Dataset>
+        </Radio>
+        <Combo id="Combo04" taborder="17" left="174" top="44" width="130" height="23"/>
+        <Button id="Button02" taborder="18" text="현" left="354" top="44" width="20" height="23" cssclass="btn_WF_basic04"/>
+        <Button id="Button03" taborder="19" text="체" left="377" top="44" width="20" height="23" cssclass="btn_WF_basic04"/>
+        <Button id="Button04" taborder="20" text="잔" left="400" top="44" width="20" height="23" cssclass="btn_WF_basic04"/>
+        <Button id="Button05" taborder="21" text="설" left="423" top="44" width="20" height="23" cssclass="btn_WF_basic04"/>
+        <Edit id="Edit10" taborder="22" left="174" top="73" width="130" height="23" password="true" value="1234" text="1234" textAlign="right"/>
+        <Combo id="Combo00" taborder="23" left="174" top="102" width="90" height="23" innerdataset="innerdataset" codecolumn="codecolumn" datacolumn="datacolumn" index="1" text="005930" value="02">
+          <Dataset id="innerdataset">
+            <ColumnInfo>
+              <Column id="codecolumn" size="256"/>
+              <Column id="datacolumn" size="256"/>
+            </ColumnInfo>
+            <Rows>
+              <Row>
+                <Col id="codecolumn">01</Col>
+                <Col id="datacolumn">선택</Col>
+              </Row>
+              <Row>
+                <Col id="codecolumn">02</Col>
+                <Col id="datacolumn">005930</Col>
+              </Row>
+            </Rows>
+          </Dataset>
+        </Combo>
+        <Button id="Button06" taborder="24" text="▶" left="268" top="102" width="20" height="23" cssclass="btn_WF_basic04"/>
+        <Button id="Button07" taborder="25" text="?" left="292" top="102" width="20" height="23" cssclass="btn_WF_basic04"/>
+        <Button id="Button08" taborder="26" text="관" left="316" top="102" width="20" height="23" cssclass="btn_WF_basic04"/>
+        <Button id="Button09" taborder="27" text="가능" left="424" top="102" width="30" height="23" cssclass="btn_WF_basic04"/>
+        <Button id="Button10" taborder="28" text="금액매도" left="458" top="102" width="60" height="23" cssclass="btn_WF_basic04"/>
+        <Spin id="Spin00" taborder="29" left="684" top="44" width="130" height="23" value="1000"/>
+        <Spin id="Spin01" taborder="30" left="684" top="72" width="130" height="23" value="12000" max="100000" min="0"/>
+        <Static id="Static00" taborder="31" text="주" left="818" top="44" width="12" height="25" cssclass="sta_WF_label01R"/>
+        <Static id="Static06" taborder="32" text="원" left="818" top="72" width="12" height="25" cssclass="sta_WF_label01R"/>
+        <Button id="Button00" taborder="33" text="종목별가능" left="836" top="44" width="80" height="23" cssclass="btn_WF_basic04"/>
+        <Button id="Button01" taborder="34" text="미수변제" left="919" top="44" width="60" height="23" cssclass="btn_WF_basic04"/>
+        <MaskEdit id="MaskEdit00" taborder="35" left="684" top="102" width="130" height="23"/>
+        <Button id="Button11" taborder="36" text="상세" left="819" top="102" width="30" height="23" cssclass="btn_WF_basic04"/>
+        <Edit id="edUrl" taborder="37" left="559" top="135" width="120" height="30" value="127.0.0.1" text="127.0.0.1"/>
+        <Static id="stMsg" taborder="38" left="0" top="664" height="27" cssclass="sta_WF_box01L" right="0" textAlign="right"/>
+        <Button id="btnPush" taborder="39" left="767" top="592" width="236" height="69" cssclass="btn_WF_iconPort05" text="메시지 PUSH" wordWrap="char" padding="20px 10px 10px" onclick="btnPush_onclick"/>
+        <Combo id="cbSlpTm" taborder="40" left="559" top="592" width="199" height="69" innerdataset="innerdataset" codecolumn="codecolumn" datacolumn="datacolumn" index="1" text="보통" value="100" font="24px &quot;Arial&quot;">
+          <Dataset id="innerdataset">
+            <ColumnInfo>
+              <Column id="codecolumn" size="256"/>
+              <Column id="datacolumn" size="256"/>
+            </ColumnInfo>
+            <Rows>
+              <Row>
+                <Col id="codecolumn">20</Col>
+                <Col id="datacolumn">more fast</Col>
+              </Row>
+              <Row>
+                <Col id="codecolumn">100</Col>
+                <Col id="datacolumn">fast</Col>
+              </Row>
+              <Row>
+                <Col id="codecolumn">200</Col>
+                <Col id="datacolumn">normal</Col>
+              </Row>
+              <Row>
+                <Col id="codecolumn">300</Col>
+                <Col id="datacolumn">slow</Col>
+              </Row>
+            </Rows>
+          </Dataset>
+        </Combo>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="dsList" oncolumnchanged="dsList_oncolumnchanged">
+        <ColumnInfo>
+          <Column id="msgId" type="STRING" size="256"/>
+          <Column id="newImg" type="STRING" size="256"/>
+          <Column id="name" type="STRING" size="256"/>
+          <Column id="beforeVal" type="STRING" size="256"/>
+          <Column id="currVal" type="STRING" size="256"/>
+          <Column id="currValImg" type="STRING" size="256"/>
+          <Column id="upDnVal" type="STRING" size="256"/>
+          <Column id="upDnRate" type="STRING" size="256"/>
+          <Column id="sellHo" type="STRING" size="256"/>
+          <Column id="buyHo" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="name">삼성전자</Col>
+            <Col id="currVal"/>
+            <Col id="upDnVal"/>
+            <Col id="upDnRate"/>
+            <Col id="beforeVal"/>
+            <Col id="msgId">sams</Col>
+            <Col id="newImg">imagerc::img_LF_tabIcon01.png</Col>
+          </Row>
+          <Row>
+            <Col id="name">POSCO</Col>
+            <Col id="currVal"/>
+            <Col id="upDnVal"/>
+            <Col id="upDnRate"/>
+            <Col id="beforeVal"/>
+            <Col id="msgId">posc</Col>
+            <Col id="newImg"/>
+          </Row>
+          <Row>
+            <Col id="name">현대차</Col>
+            <Col id="msgId">hdca</Col>
+            <Col id="newImg">imagerc::img_LF_tabIcon01.png</Col>
+          </Row>
+          <Row>
+            <Col id="name">한국전력</Col>
+            <Col id="msgId">koel</Col>
+          </Row>
+          <Row>
+            <Col id="name">신한지주</Col>
+            <Col id="msgId">shjj</Col>
+          </Row>
+          <Row>
+            <Col id="name">KB금융</Col>
+            <Col id="msgId">kbbk</Col>
+          </Row>
+          <Row>
+            <Col id="name">현대중공업</Col>
+            <Col id="msgId">hdid</Col>
+          </Row>
+          <Row>
+            <Col id="name">LG전자</Col>
+            <Col id="msgId">lgel</Col>
+            <Col id="newImg">imagerc::img_LF_tabIcon01.png</Col>
+          </Row>
+          <Row>
+            <Col id="name">LG화학</Col>
+            <Col id="msgId">lgcm</Col>
+          </Row>
+          <Row>
+            <Col id="name">현대모비스</Col>
+            <Col id="msgId">hdmb</Col>
+            <Col id="newImg">imagerc::img_LF_tabIcon01.png</Col>
+          </Row>
+          <Row>
+            <Col id="name">SK하이닉스</Col>
+            <Col id="msgId">skhy</Col>
+            <Col id="newImg">imagerc::img_LF_tabIcon01.png</Col>
+          </Row>
+          <Row>
+            <Col id="name">SK텔레콤</Col>
+            <Col id="msgId">sktl</Col>
+            <Col id="newImg">imagerc::img_LF_tabIcon01.png</Col>
+          </Row>
+          <Row>
+            <Col id="name">LG디스플레이</Col>
+            <Col id="msgId">lgds</Col>
+          </Row>
+          <Row>
+            <Col id="name">CJ</Col>
+            <Col id="msgId">cjjl</Col>
+          </Row>
+          <Row>
+            <Col id="name">Kakao</Col>
+            <Col id="msgId">kako</Col>
+          </Row>
+          <Row>
+            <Col id="name">KT</Col>
+            <Col id="msgId">kttl</Col>
+            <Col id="newImg">imagerc::img_LF_tabIcon01.png</Col>
+          </Row>
+          <Row>
+            <Col id="name">KT&amp;G</Col>
+            <Col id="msgId">ktng</Col>
+          </Row>
+          <Row>
+            <Col id="name">LG생활건강</Col>
+            <Col id="msgId">lghl</Col>
+          </Row>
+          <Row>
+            <Col id="name">NAVER</Col>
+            <Col id="msgId">navr</Col>
+            <Col id="newImg">imagerc::img_LF_tabIcon01.png</Col>
+          </Row>
+          <Row>
+            <Col id="name">Netmarble Games</Col>
+            <Col id="msgId">ntmb</Col>
+          </Row>
+          <Row>
+            <Col id="name">Samsung Biologics</Col>
+            <Col id="msgId">smbi</Col>
+          </Row>
+          <Row>
+            <Col id="name">Samsung C&amp;T</Col>
+            <Col id="msgId">smct</Col>
+          </Row>
+          <Row>
+            <Col id="name">Samsung Fire Marine Insur</Col>
+            <Col id="msgId">smfm</Col>
+          </Row>
+          <Row>
+            <Col id="name">Samsung SDS Co Ltd</Col>
+            <Col id="msgId">smsd</Col>
+            <Col id="newImg">imagerc::img_LF_tabIcon01.png</Col>
+          </Row>
+          <Row>
+            <Col id="name">SK Holdings</Col>
+            <Col id="msgId">skhd</Col>
+          </Row>
+          <Row>
+            <Col id="name">SK이노베이션</Col>
+            <Col id="msgId">skin</Col>
+          </Row>
+          <Row>
+            <Col id="name">Woori Bank</Col>
+            <Col id="msgId">wrbk</Col>
+            <Col id="newImg">imagerc::img_LF_tabIcon01.png</Col>
+          </Row>
+          <Row>
+            <Col id="name">강원랜드</Col>
+            <Col id="msgId">kwld</Col>
+            <Col id="newImg">imagerc::img_LF_tabIcon01.png</Col>
+          </Row>
+          <Row>
+            <Col id="name">고려아연</Col>
+            <Col id="msgId">koay</Col>
+          </Row>
+          <Row>
+            <Col id="name">기아차</Col>
+            <Col id="msgId">kica</Col>
+          </Row>
+          <Row>
+            <Col id="name">기업은행</Col>
+            <Col id="msgId">kibk</Col>
+            <Col id="newImg">imagerc::img_LF_tabIcon01.png</Col>
+          </Row>
+          <Row>
+            <Col id="name">롯데쇼핑</Col>
+            <Col id="msgId">ltsp</Col>
+          </Row>
+          <Row>
+            <Col id="name">롯데케미칼</Col>
+            <Col id="msgId">ltce</Col>
+          </Row>
+          <Row>
+            <Col id="name">삼성SDI</Col>
+            <Col id="msgId">smsi</Col>
+          </Row>
+          <Row>
+            <Col id="name">삼성생명</Col>
+            <Col id="msgId">smlf</Col>
+            <Col id="newImg">imagerc::img_LF_tabIcon01.png</Col>
+          </Row>
+          <Row>
+            <Col id="name">삼성카드</Col>
+            <Col id="msgId">smcd</Col>
+            <Col id="newImg">imagerc::img_LF_tabIcon01.png</Col>
+          </Row>
+          <Row>
+            <Col id="name">아모레G</Col>
+            <Col id="msgId">amrg</Col>
+          </Row>
+          <Row>
+            <Col id="name">아모레퍼시픽</Col>
+            <Col id="msgId">amrp</Col>
+          </Row>
+          <Row>
+            <Col id="name">엔씨소프트</Col>
+            <Col id="msgId">ncso</Col>
+            <Col id="newImg">imagerc::img_LF_tabIcon01.png</Col>
+          </Row>
+          <Row>
+            <Col id="name">이마트</Col>
+            <Col id="msgId">emat</Col>
+          </Row>
+          <Row>
+            <Col id="name">코웨이</Col>
+            <Col id="msgId">kowi</Col>
+            <Col id="newImg">imagerc::img_LF_tabIcon01.png</Col>
+          </Row>
+          <Row>
+            <Col id="name">하나금융지주</Col>
+            <Col id="msgId">hnnk</Col>
+          </Row>
+          <Row>
+            <Col id="name">한국타이어</Col>
+            <Col id="msgId">kotr</Col>
+          </Row>
+          <Row>
+            <Col id="name">한국항공우주</Col>
+            <Col id="msgId">kosp</Col>
+          </Row>
+          <Row>
+            <Col id="name">한미사이언스</Col>
+            <Col id="msgId">hmsi</Col>
+            <Col id="newImg">imagerc::img_LF_tabIcon01.png</Col>
+          </Row>
+          <Row>
+            <Col id="name">한화생명</Col>
+            <Col id="msgId">hahw</Col>
+          </Row>
+          <Row>
+            <Col id="name">현대글로비스</Col>
+            <Col id="msgId">hdgl</Col>
+          </Row>
+          <Row>
+            <Col id="name">현대모비스</Col>
+            <Col id="msgId">hdmo</Col>
+          </Row>
+          <Row>
+            <Col id="name">현대제철</Col>
+            <Col id="msgId">hdst</Col>
+            <Col id="newImg">imagerc::img_LF_tabIcon01.png</Col>
+          </Row>
+          <Row>
+            <Col id="name">투비소프트</Col>
+            <Col id="msgId">tobe</Col>
+            <Col id="newImg">imagerc::img_LF_tabIcon01.png</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <XPush id="xpush" layouturl="layout::msg1.xml" onerror="xpush_onerror" onsuccess="xpush_onsuccess"/>
+    </Objects>
+    <Script type="xscript5.1"><![CDATA[
+this.work002_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
+{
+	
+};
+
+
+this.dsList_oncolumnchanged = function(obj:nexacro.NormalDataset,e:nexacro.DSColChangeEventInfo)
+{
+	if(e.columnid=="upDnVal") {
+		if(e.newvalue>=0) {
+			obj.setColumn(e.row, "currValImg", "imagerc::grid_img_red.png");
+		} else {
+			obj.setColumn(e.row, "currValImg", "imagerc::grid_img_blue.png");
+		}
+	}
+};
+
+this.btnConn_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	if(nexacro._Browser == "Runtime") {
+		this.xpush.set_iplist(this.edUrl.value +":10081");
+	} else {
+		this.xpush.set_iplist("http://"+this.edUrl.value+ ":10080");
+	}
+	
+	this.xpush.connect("id", "pw");
+};
+
+this.xpush_onerror = function(obj:nexacro.XPush,e:nexacro.XPushErrorEventInfo)
+{
+	//trace("[this.xpush_onerror]"+e.eventid+"::"+e.errortype+"::"+e.errormsg);
+	this.stMsg.set_text(e.errormsg);
+};
+
+this.xpush_onsuccess = function(obj:nexacro.XPush,e:nexacro.XPushEventInfo)
+{
+	//trace("[xpush_onsuccess] "+e.eventid+"::"+e.message+"::"+e.returnvalue+"::"+e.action);
+	if(e.action == 0) {
+		this.stMsg.set_text("X-PUSH 연결 성공");
+	} else if(e.action == 1) {
+		this.stMsg.set_text("X-PUSH 연결 종료");
+	} else if(e.action == 2) {
+		this.stMsg.set_text("X-PUSH TOPIC 등록 성공");
+	}
+};
+
+this.btnSubs_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	for(var i=0; i<this.dsList.rowcount; i++) {
+		this.xpush.subscribe("TEST", this.dsList.getColumn(i, "msgId"), this, this.dsList, "update", "fn_PushCallback");
+	}
+};
+
+this.fn_PushCallback = function (Row, ChangeColumn, AllColumns, Type, ActionType, MessageId)  
+{	
+	trace("Row : "+Row+", ChangeColumn : "+ChangeColumn+", AllColumns : "+AllColumns+", Type : "+Type+", ActionType : "+ActionType+", MessageId : "+MessageId);
+}
+
+this.btnDisConn_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.xpush.disconnect();
+};
+
+this.btnPush_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.transaction("trPush", "svc::service/push/provider1.jsp", "", "", "url="+this.edUrl.value+" slpTm="+this.cbSlpTm.value, "callback");
+};
+]]></Script>
+  </Form>
+</FDL>

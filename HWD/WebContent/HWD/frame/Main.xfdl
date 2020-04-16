@@ -1,0 +1,343 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="Main" width="1280" height="720" titletext="New Form" onload="Main_onload" background="#f0eeed">
+    <Layouts>
+      <Layout height="720" mobileorientation="landscape" width="1280">
+        <Div id="Div01" taborder="0" text="Div01" left="0" top="0" width="100.00%" height="60" cssclass="div_TF_topBg">
+          <Layouts>
+            <Layout>
+              <Button id="btnMegaMenu" taborder="0" left="0" top="0" width="60" height="60" cssclass="btn_WF_mainFloat" onclick="fnComBtnOnClick" text=""/>
+              <Static id="Static00" taborder="1" left="65" top="0" width="215" height="60" cssclass="sta_WF_logoTop"/>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Static id="Static00" taborder="1" left="10" top="80" cssclass="sta_WF_bgWhite" bottom="90" right="30" text=""/>
+        <Static id="Static03" taborder="7" top="120" width="24.22%" cssclass="sta_WF_hwBox01" bottom="140" right="47.50%"/>
+        <Button id="btnXmlParsing" taborder="2" text="XML파싱" left="43" top="140" height="42" cssclass="btn_WF_hwBtn01" width="120" onclick="fnComBtnOnClick"/>
+        <Static id="Static01" taborder="9" top="99" width="3" cssclass="sta_WF_dashed" bottom="107" right="45.47%"/>
+        <Static id="Static02_00" taborder="6" text="시간 측정 결과 View" top="186" width="158" height="40" left="Static01:38" cssclass="sta_WF_title02"/>
+        <Button id="btnMdiMenu" taborder="3" text="가입설계(MDI)" top="140" width="130" height="42" cssclass="btn_WF_hwBtn02" left="Static01:38" onclick="fnComBtnOnClick" MenuId="1020"/>
+        <Button id="btnOpenMenu" taborder="4" text="가입설계(새창)" top="140" width="130" height="42" cssclass="btn_WF_hwBtn02" left="btnMdiMenu:3" onclick="fnComBtnOnClick" MenuUrl="Poc::hanwha01.xfdl" MenuId="1020"/>
+        <Static id="Static02" taborder="5" text="시간 측정 결과 View" left="42" top="186" width="158" height="40" cssclass="sta_WF_title02"/>
+        <Static id="Static04" taborder="10" text="Static04" left="20" height="70" right="20" bottom="20" cssclass="sta_WF_mainBtn"/>
+        <Button id="btn_1010" taborder="15" text="가입설계" left="16.33%" width="12.50%" height="60" cssclass="btn_WF_mainBtn01" onclick="QuickMenu_onclick" bottom="24"/>
+        <Button id="btn_1080" taborder="14" text="완전판매모니터링" left="btn_1010:1" width="15.63%" height="60" cssclass="btn_WF_mainBtn02" onclick="QuickMenu_onclick" bottom="24"/>
+        <Button id="btn_2090" taborder="13" text="증명서발급" left="btn_1080:0" width="13.13%" height="60" cssclass="btn_WF_mainBtn03" onclick="QuickMenu_onclick" bottom="24"/>
+        <Button id="btn_1110" taborder="12" text="필요서류안내" left="btn_2090:0" width="14.84%" height="60" cssclass="btn_WF_mainBtn04" onclick="QuickMenu_onclick" bottom="24"/>
+        <Button id="btn_2040" taborder="11" text="지점/보상센터" left="btn_1110:0" height="60" cssclass="btn_WF_mainBtn05" onclick="QuickMenu_onclick" bottom="24" width="14.84%"/>
+        <Grid id="grdXmlTime" taborder="16" left="43" top="240" width="23.98%" height="240" binddataset="dsXmlTime" autofittype="col" cssclass="grd_WF_hwGrd">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="122"/>
+                <Column size="80"/>
+              </Columns>
+              <Rows>
+                <Row size="50"/>
+                <Row size="36" band="summ"/>
+              </Rows>
+              <Band id="body">
+                <Cell text="bind:Title" cssclass="grd_label" font="bold 10pt/normal &quot;Malgun Gothic&quot;,&quot;Arial&quot;"/>
+                <Cell col="1" text="bind:Time" textAlign="center" font="bold 10pt/normal &quot;Malgun Gothic&quot;,&quot;Arial&quot;"/>
+              </Band>
+              <Band id="summary">
+                <Cell text="총 소요시간"/>
+                <Cell col="1" text="expr:comp.parent.fvTotalTime" textAlign="center"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Grid id="grdXmlList" taborder="8" top="120" width="24.22%" binddataset="dsXmlList" autofittype="col" cssclass="grd_WF_hwGrd" bottom="140" visible="true" right="47.50%">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="80"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="담보명"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:CVR_KORNM"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Grid id="Grid01_00" taborder="17" top="240" width="37.81%" height="240" binddataset="Dataset02" autofittype="col" cssclass="grd_WF_hwGrd02" left="Static01:38">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="80"/>
+              </Columns>
+              <Rows>
+                <Row size="30"/>
+                <Row size="30" band="summ"/>
+              </Rows>
+              <Band id="body">
+                <Cell text="bind:Column0"/>
+              </Band>
+              <Band id="summary">
+                <Cell/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+      </Layout>
+    </Layouts>
+    <Script type="xscript5.1"><![CDATA[/**
+*  nexacro 17 demo
+*  @MenuPath    Frame > Main
+*  @FileName  Main.xfdl 
+*  @Creator  presales
+*  @CreateDate  2020.02.05
+*  @Desction    스크립트 표준 및 주석 표준 정의
+************** 소스 수정 이력 ***********************************************
+*  date            Modifier                Description
+*******************************************************************************
+*  2020.02.05      presales                  최초 생성 
+*******************************************************************************
+*/
+
+/************************************************************************************************
+ * FORM 변수 선언 영역
+ ************************************************************************************************/
+this.fvTotalTime;
+
+/************************************************************************************************
+ * FORM EVENT 영역(onload, onbeforeclose)
+ ************************************************************************************************/
+/**
+ * @description 화면로드 시 MegaMenu를 생성하고 애니메이션을 설정한다.
+*/
+this.Main_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
+{
+	nexacro._OnceCallbackTimer.callonce(this, function() 
+	{
+		// 메인화면에 팝업 div를 생성해서 메가 메뉴를 보여준다.
+		this.gfnCreateMegaMenu(obj);
+		
+		nexacro.getApplication().mainframe.VFrameSet.Top.set_formurl("frame::Top.xfdl");
+		nexacro.getApplication().mainframe.VFrameSet.HFrameSet.VFrameSet00.Tab.set_formurl("frame::Tab.xfdl");
+	}, 10);
+};
+
+/************************************************************************************************
+ * CALLBACK 콜백 처리부분(Transaction, Popup)
+ ************************************************************************************************/
+ /************************************************************************************************
+ * CRUD 및 TRANSACTION 서비스 호출 처리
+ ************************************************************************************************/
+/************************************************************************************************
+ * 사용자 FUNCTION 영역
+ ************************************************************************************************/
+this.setProductInfo = function(productCode, productXml)
+{
+	//console.time("create ui");
+	
+	ProductXmlProvider.addXmlDom(productCode, $(productXml)); // 상품전문 추가
+	ProductXmlProvider.setCurrentXmlDom(ProductXmlProvider.getXmlDom(productCode)); // 현재 상품전문 설정
+	//console.log("===== 1. Coverage =====");
+	
+	var $coverage = nxlib.getProductXml("CVRGE"); // (jQuery 식별자) 상품전문 find 결과 값 반환
+	//console.log($coverage);
+	//console.log($coverage.length);
+	
+ 	this.dsXmlList.set_enableevent(false);
+ 	this.dsXmlList.clearData();
+	
+	var i;
+	var $thisCov; // jQuery 식별자
+	var CVR_KORNM;
+	var nAddRow;
+	
+ 	for (i = 0; i < $coverage.length; i++) 
+	{
+ 		$thisCov = $coverage.eq(i); // 상품전문 find 결과값 중 해당 인덱스에 해당하는 요소를 선택
+ 		CVR_KORNM = $thisCov.attr("cvr_kornm");	// 담보명 값 가져오기
+ 		
+		/* === Dataset 셋팅 Start === */
+  		nAddRow = this.dsXmlList.addRow();
+  		this.dsXmlList.setColumn(nAddRow, "CVR_KORNM", CVR_KORNM);
+		/* === Dataset 셋팅 End === */
+	}
+	
+ 	this.dsXmlList.set_rowposition(0);
+ 	this.dsXmlList.set_enableevent(true);
+ 	this.resetScroll();
+	
+	//console.timeEnd("create ui");
+	
+	/* XML 파싱(Object화)완료 시간 - Start */
+	var sXmlParsingTime = this.gfnTime();
+	
+	return sXmlParsingTime;
+	//trace("XML 파싱(Object화)완료 = " + sXmlParsingTime);
+	/* XML 파싱(Object화)완료 시간 - End   */	
+};
+
+/************************************************************************************************
+ * 각 COMPONENT 별 EVENT 영역
+ ************************************************************************************************/
+/**
+ * @description 팝업메뉴를 띄어준다.
+*/
+/**
+ * @description Botton OnClick 이벤트
+*/
+this.fnComBtnOnClick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	switch (obj.name)
+	{
+		case "btnMegaMenu" :
+			this.gfnOpenMegaMenu(this); // MegaMenu 호출
+			break;
+			
+		case "btnXmlParsing" :
+		    /* 버튼 클릭 시작 시간 - Start */
+			var sBtnStartTime = new nexacro.Date();
+			var sHours = sBtnStartTime.getHours();
+			var sMinutes = sBtnStartTime.getMinutes();
+			var sSeconds = sBtnStartTime.getSeconds();
+			var sMillSeconds = sBtnStartTime.getMilliseconds();
+			var sTime = String(sHours).padLeft(2, "0") + ":" + String(sMinutes).padLeft(2, "0") + ":" + String(sSeconds).padLeft(2, "0") + "." + String(sMillSeconds);
+			
+			//trace("버튼 클릭 시작 = " + sBtnStartTime + " >>> " + sTime);
+			/* 버튼 클릭 시작 시간 - End   */
+			
+			var productCode = "PRODUCT";
+			var sUrl = nexacro.getProjectPath() + "file/상품정보.xml";
+			var productCode = "PRODUCT";
+			
+			this.ajax(sUrl,
+			{
+				dataType : "XML",
+				callback: function(errorcode, response)
+				{
+					/* XML 조회 완료 시간 - Start */
+					var sXmlCompleteTime = this.gfnTime();
+					//trace("XML 조회 완료 = " + sXmlCompleteTime);
+					/* XML 조회 완료 시간 - End   */
+					
+					var productXml = response;
+					var sXmlParsingTimeRtn = this.setProductInfo(productCode, productXml);
+					
+					/* 그리드 표시 완료 시간 - Start */
+					var sGridCompleteTime = this.gfnTime();
+					//trace("그리드 표시 완료 = " + sGridCompleteTime);
+					/* 그리드 표시 완료 시간 - End   */
+					
+					/* 총 시간 시작 시간 */
+					var sEndDate = new nexacro.Date();
+					this.fvTotalTime = nexacro.round((sEndDate.getTime() - sBtnStartTime.getTime()) / 1000, 3);
+					//trace("this.fvTotalTime = " + this.fvTotalTime);
+					
+					this.dsXmlTime.set_enableevent(false);				
+					this.dsXmlTime.clearData();
+					
+					this.dsXmlTime.addRow();
+					this.dsXmlTime.setColumn(0, "Title", "버튼 클릭 시작 시간");
+					this.dsXmlTime.setColumn(0, "Time", sTime);
+					
+					this.dsXmlTime.addRow();
+					this.dsXmlTime.setColumn(1, "Title", "XML조회완료 시간");
+					this.dsXmlTime.setColumn(1, "Time", sXmlCompleteTime);
+					
+					this.dsXmlTime.addRow();
+					this.dsXmlTime.setColumn(2, "Title", "XML파싱완료(Object화)시간");
+					this.dsXmlTime.setColumn(2, "Time", sXmlParsingTimeRtn);
+					
+					this.dsXmlTime.addRow();
+					this.dsXmlTime.setColumn(3, "Title", "그리드 표시 완료 시간");
+					this.dsXmlTime.setColumn(3, "Time", sGridCompleteTime);
+					this.dsXmlTime.set_enableevent(true);
+					this.resetScroll();
+				}
+			});		
+			break;
+		case "btnMdiMenu" :
+			this.fv_StartTime = this.gfn_CheckTime();
+			this.fv_EndTime;
+			this.fv_DiffTime;
+			
+			var type = "Main"
+			this.Dataset02.setColumn(1, "Column0", this.gfnFormat(this.fv_StartTime))
+			
+			this.gfnOpenMenu(this.btnMdiMenu.MenuId, type); 
+			break;
+		case "btnOpenMenu" : 
+			this.fv_StartTime = this.gfn_CheckTime();
+			this.fv_EndTime;
+			this.fv_DiffTime;
+			
+			this.Dataset02.setColumn(1, "Column0", this.gfnFormat(this.fv_StartTime))
+			
+			var strMenuId = this.btnOpenMenu.MenuId;
+			var strMenuUrl = this.btnOpenMenu.MenuUrl;
+			
+			var strChildFrameName = "Menu_" + strMenuId;
+			var objParentFrame = nexacro.getApplication().mainframe.VFrameSet.Main;		
+			
+			var strArgument = {
+						  menuId : strMenuId
+						 ,menuUrl : strMenuUrl
+					  }
+					  
+			nexacro.open(strChildFrameName, "comm::commPopup.xfdl", objParentFrame, strArgument, null, -1, -1, 0, 0, this);
+			break;
+	}
+};]]></Script>
+    <Objects>
+      <Dataset id="dsXmlTime">
+        <ColumnInfo>
+          <Column id="Title" type="STRING" size="256"/>
+          <Column id="Time" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="Title">버튼 클릭 시작 시간</Col>
+            <Col id="Time">00:00:00.000</Col>
+          </Row>
+          <Row>
+            <Col id="Title">XML조회완료 시간</Col>
+            <Col id="Time">00:00:00.000</Col>
+          </Row>
+          <Row>
+            <Col id="Title">XML파싱완료(Object화)시간</Col>
+            <Col id="Time">00:00:00.000</Col>
+          </Row>
+          <Row>
+            <Col id="Title">그리드 표시 완료 시간</Col>
+            <Col id="Time">00:00:00.000</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="Dataset02">
+        <ColumnInfo>
+          <Column id="Column0" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="Column0">버튼 클릭 시작시간</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">00:00:00.000</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">가입설계 화면 로드 완료 시간</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">00:00:00.000</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="dsXmlList">
+        <ColumnInfo>
+          <Column id="CVR_KORNM" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+  </Form>
+</FDL>

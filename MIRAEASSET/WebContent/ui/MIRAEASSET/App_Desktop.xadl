@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ADL version="2.0">
+  <Application id="App_Desktop" screenid="Desktop_screen" licenseurl="http://14.63.224.112/Hyundai-steel_2019.07.08/license/nexacro17_client_license.xml">
+    <Layout>
+      <MainFrame id="mainframe" showtitlebar="true" showstatusbar="true" width="1024" height="768" titletext="MIRAEASSET" statusbarheight="25" titlebarbuttongap="4" titlebarbuttonsize="19 19" titlebarheight="28">
+        <ChildFrame id="chf_deskTop" formurl="FrameBase::frmAll.xfdl" showtitlebar="false"/>
+      </MainFrame>
+    </Layout>
+    <Style url="xcssrc::EduProject.xcss"/>
+    <Style url="xcssrc::layout.xcss"/>
+    <Style url="xcssrc::pivot.xcss"/>
+  </Application>
+</ADL>

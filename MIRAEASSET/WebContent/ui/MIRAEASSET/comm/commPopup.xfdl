@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.0">
+  <Form id="commPopup" width="980" height="524" titletext="공통팝업" scrollbartype="none none" scrolltype="none" onload="commPopup_onload">
+    <Layouts>
+      <Layout height="524" mobileorientation="landscape" width="980">
+        <Static id="Static00" taborder="0" left="0" top="0" right="0" background="#515151" font="normal bold 16pt/normal &quot;Baskerville Old Face&quot;" height="36" color="#5ccbf4"/>
+        <Static id="Static01" taborder="1" text="" left="0" top="493" height="31" background="#c4c4c4" color="white" font="normal 700 16pt/normal &quot;Baskerville Old Face&quot;" right="0"/>
+        <Button id="btn_Close" taborder="2" text="닫기" top="497" width="72" height="22" right="9" escapebutton="true" onclick="comm_Click" cssclass="btn_WF_btnY"/>
+        <Button id="btn_Confirm" taborder="3" text="확인" top="497" width="72" height="22" right="89" onclick="comm_Click" cssclass="btn_WF_btnY"/>
+        <Static id="stc_Exit" taborder="4" text="x" left="960" top="8" width="13" height="18" font="normal 700 13pt/normal &quot;Arial&quot;" color="white" onclick="comm_Click"/>
+        <WebBrowser id="WebBrowser00" left="8" top="44" right="7" taborder="5" height="441"/>
+      </Layout>
+    </Layouts>
+    <Script type="xscript5.1"><![CDATA[/************************************************************************************************
+* 01. 업무구분 : 공통 - 공통
+* 02. 화면명   : 팝업샘플
+* 03. 화면설명 : 
+* 04. 작성일   : 2018.11.11
+* 05. 작성자   : 안주환
+* 06. 수정이력 :
+***********************************************************************************************
+*     수정일          이  름    사유
+***********************************************************************************************
+*     
+************************************************************************************************/
+
+/************************************************************************************************
+* 공통 라이브러리 INCLUDE 영역
+************************************************************************************************/
+include "lib::lib_Form.xjs";
+include "lib::CommUtil.xjs"; 	
+include "lib::ext_CommEco.xjs";	
+
+/************************************************************************************************
+* 전역 변수 영역
+************************************************************************************************/
+
+/************************************************************************************************
+* FORM 영역
+************************************************************************************************/
+this.commPopup_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
+{
+	var rootPath = nexacro.getProjectPath();
+	this.WebBrowser00.set_url(rootPath + "../service/rChart/Samples/History_2D_Line.html");
+};
+
+/************************************************************************************************
+* FORM 공통 FUNCTION 영역
+************************************************************************************************/
+
+
+/************************************************************************************************
+* TRANSACTION 및 추가 FUNCTION 영역
+************************************************************************************************/
+
+/************************************************************************************************
+* 각 COMPONENT 별 EVENT 영역
+************************************************************************************************/
+this.comm_Click = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	switch(obj.name)
+	{
+		case "btn_Close" : 
+			this.commUtil.popupClose("");
+			break;
+			
+		case "stc_Exit" : 
+			this.commUtil.popupClose("");
+			break;
+	}
+};
+
+]]></Script>
+  </Form>
+</FDL>

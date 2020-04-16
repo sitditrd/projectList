@@ -1,0 +1,820 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.0">
+  <Form id="CompGuide01" left="0" top="0" width="1280" height="3796" titletext="Static, Edit, MaskEdit,TextArea" tooltiptype="default">
+    <Layouts>
+      <Layout height="3796" width="1280" stepcount="0">
+        <Static id="Static35" taborder="123" text="" left="123" top="3103" height="265" border="1px solid #cccccc" onclick="Static46_onclick" right="0"/>
+        <Static id="Static56" taborder="121" text="" left="123" top="1936" height="198" border="1px solid #cccccc" onclick="Static46_onclick" right="0"/>
+        <Static id="Static79" taborder="104" text="ProgressBar" left="0" top="2133" width="124" height="110" textAlign="center" border="1px solid #cccccc" background="#f7f7f7" onclick="Static46_onclick" font="12px/normal verdana"/>
+        <Static id="Static80" taborder="107" text="" left="123" top="2133" height="110" border="1px solid #cccccc" onclick="Static46_onclick" right="0"/>
+        <Static id="Static62" taborder="95" text="ImageViewer&#13;&#10;/ Sketch" left="0" top="3367" width="124" height="174" textAlign="center" border="1px solid #cccccc" background="#f7f7f7" onclick="Static46_onclick" font="12px/normal verdana"/>
+        <Static id="Static71" taborder="97" text="" left="123" top="3367" height="174" border="1px solid #cccccc" onclick="Static46_onclick" right="0"/>
+        <Static id="Static26" taborder="41" text="" left="123" top="602" height="110" border="1px solid #cccccc" onclick="Static46_onclick" right="0"/>
+        <Static id="Static02" taborder="0" text="Static" left="0" top="2460" width="124" height="219" leftbase="" topbase="" bottombase="" rightbase="" widthbase="" heightbase="" textAlign="center" border="1px solid #cccccc" background="#f7f7f7" onclick="Static46_onclick" font="12px/normal verdana"/>
+        <Static id="Static00" taborder="1" text="Component" left="0" top="0" width="124" height="30" leftbase="" topbase="" bottombase="" rightbase="" widthbase="" heightbase="" textAlign="center" background="#d1d1d1" border="1px solid #cccccc" verticalAlign="middle" onclick="Static46_onclick" font="12px/normal verdana"/>
+        <Static id="Static01" taborder="2" text="Style" left="123" top="0" height="30" leftbase="" topbase="" bottombase="" rightbase="" widthbase="" heightbase="" background="#d1d1d1" border="1px solid #cccccc" textAlign="center" onclick="Static46_onclick" right="0" font="12px/normal verdana"/>
+        <Static id="Static03" taborder="3" text="" left="123" top="2460" height="219" leftbase="" topbase="" bottombase="" rightbase="" widthbase="" heightbase="" border="1px solid #cccccc" onclick="Static46_onclick" right="0"/>
+        <Static id="Static04" taborder="4" text="" left="123" top="824" height="225" border="1px solid #cccccc" onclick="Static46_onclick" right="0"/>
+        <Static id="Static05" taborder="5" text="Edit" left="0" top="824" width="124" height="225" textAlign="center" border="1px solid #cccccc" background="#f7f7f7" onclick="Static46_onclick" font="12px/normal &quot;verdana&quot;"/>
+        <Static id="Static06" taborder="6" left="72" top="1827" height="110" border="1px solid #cccccc" onclick="Static46_onclick" right="0"/>
+        <Static id="Static07" taborder="7" text="MaskEdit" left="0" top="1827" width="124" height="110" textAlign="center" border="1px solid #cccccc" background="#f7f7f7" onclick="Static46_onclick" font="12px/normal verdana"/>
+        <Static id="Static08" taborder="8" text="Normal" left="133" top="2481" width="118" height="25" leftbase="" topbase="" bottombase="" rightbase="" widthbase="" heightbase="" color="#b7b7b7" onclick="Static46_onclick"/>
+        <Static id="Static10" taborder="9" text="가나다라마바사&#13;&#10;ABCDEFGHIJKLMNOP&#13;&#10;0123456789" left="133" top="2527" width="150" height="55" leftbase="" topbase="" bottombase="" rightbase="" widthbase="" heightbase="" onclick="Static46_onclick"/>
+        <Edit id="Edit00" taborder="10" left="133" top="880" width="127" height="21" leftbase="" topbase="" bottombase="" rightbase="" widthbase="" heightbase="" value="가나다라" text="가나다라"/>
+        <Edit id="Edit01" taborder="11" left="291" top="880" width="127" height="21" value="가나다라" enable="false" text="가나다라"/>
+        <Static id="Static17" taborder="12" text="" left="123" top="30" height="185" border="1px solid #cccccc" onclick="Static46_onclick" right="0"/>
+        <Static id="Static21" taborder="13" text="Button" left="0" top="30" width="124" height="185" textAlign="center" border="1px solid #cccccc" background="#f7f7f7" onclick="Static46_onclick" font="12px/normal &quot;verdana&quot;"/>
+        <Static id="Static09" taborder="14" text="Normal" left="133" top="846" width="118" height="25" leftbase="" topbase="" bottombase="" rightbase="" widthbase="" heightbase="" color="#b7b7b7" onclick="Static46_onclick"/>
+        <Static id="Static11" taborder="15" text="Disabled" left="293" top="846" width="118" height="25" leftbase="" topbase="" bottombase="" rightbase="" widthbase="" heightbase="" color="#b7b7b7" onclick="Static46_onclick"/>
+        <Edit id="Edit02" taborder="16" left="450" top="880" width="127" height="21" value="가나다라" enable="true" text="가나다라" readonly="true" onchanged="Edit02_onchanged"/>
+        <Static id="Static12" taborder="17" text="ReadOnly" left="452" top="846" width="118" height="25" leftbase="" topbase="" bottombase="" rightbase="" widthbase="" heightbase="" color="#b7b7b7" onclick="Static46_onclick"/>
+        <Static id="Static13" taborder="18" text="Normal" left="132" top="1855" width="118" height="25" leftbase="" topbase="" bottombase="" rightbase="" widthbase="" heightbase="" color="#b7b7b7" onclick="Static46_onclick"/>
+        <Static id="Static14" taborder="19" text="Disabled" left="289" top="1855" width="118" height="25" leftbase="" topbase="" bottombase="" rightbase="" widthbase="" heightbase="" color="#b7b7b7" onclick="Static46_onclick"/>
+        <Static id="Static15" taborder="20" text="ReadOnly" left="443" top="1855" width="118" height="25" leftbase="" topbase="" bottombase="" rightbase="" widthbase="" heightbase="" color="#b7b7b7" onclick="Static46_onclick"/>
+        <MaskEdit id="MaskEdit00" taborder="21" left="133" top="1884" width="127" height="21" type="number" value="1234567890" format="###,###"/>
+        <MaskEdit id="MaskEdit01" taborder="22" left="289" top="1884" width="127" height="21" enable="false" value="1234" format="###,###"/>
+        <MaskEdit id="MaskEdit02" taborder="23" left="444" top="1884" width="127" height="21" readonly="true" value="1234" format="###,###"/>
+        <Static id="Static16" taborder="24" text="Normal" left="133" top="57" width="118" height="25" leftbase="" topbase="" bottombase="" rightbase="" widthbase="" heightbase="" color="#b7b7b7" onclick="Static46_onclick"/>
+        <Static id="Static18" taborder="25" text="Disabled" left="193" top="57" width="118" height="25" leftbase="" topbase="" bottombase="" rightbase="" widthbase="" heightbase="" color="#b7b7b7" onclick="Static46_onclick"/>
+        <Button id="Button00" taborder="26" text="버튼" left="133" top="86" width="42" height="21"/>
+        <Button id="Button01" taborder="27" text="버튼" left="193" top="86" width="42" height="21" enable="false"/>
+        <Static id="Static19" taborder="28" text="" left="123" top="214" height="280" border="1px solid #cccccc" onclick="Static46_onclick" right="0"/>
+        <Static id="Static20" taborder="29" text="Calendar" left="0" top="214" width="124" height="280" textAlign="center" border="1px solid #cccccc" background="#f7f7f7" onclick="Static46_onclick" font="12px/normal &quot;verdana&quot;"/>
+        <Static id="Static22" taborder="30" text="Normal" left="133" top="231" width="118" height="25" leftbase="" topbase="" bottombase="" rightbase="" widthbase="" heightbase="" color="#b7b7b7" onclick="Static46_onclick"/>
+        <Static id="Static23" taborder="31" text="Disabled" left="293" top="231" width="118" height="25" leftbase="" topbase="" bottombase="" rightbase="" widthbase="" heightbase="" color="#b7b7b7" onclick="Static46_onclick"/>
+        <Calendar id="Calendar00" taborder="32" left="133" top="260" width="127" height="21" usetrailingday="true" dateformat="yyyy-MM-dd" type="normal" value="20190101"/>
+        <Calendar id="Calendar01" taborder="33" left="293" top="260" width="127" height="21" enable="false" dateformat="yyyy-MM-dd" value="20190101"/>
+        <Calendar id="Calendar02" taborder="34" left="452" top="260" width="127" height="21" readonly="true" dateformat="yyyy-MM-dd " value="20190101"/>
+        <Static id="Static24" taborder="35" text="ReadOnly" left="452" top="231" width="118" height="25" leftbase="" topbase="" bottombase="" rightbase="" widthbase="" heightbase="" color="#b7b7b7" onclick="Static46_onclick"/>
+        <Static id="Static27" taborder="36" text="Normal" left="133" top="627" width="118" height="26" leftbase="" topbase="" bottombase="" rightbase="" widthbase="" heightbase="" color="#b7b7b7" onclick="Static46_onclick"/>
+        <Static id="Static28" taborder="37" text="Disabled" left="293" top="627" width="118" height="26" leftbase="" topbase="" bottombase="" rightbase="" widthbase="" heightbase="" color="#b7b7b7" onclick="Static46_onclick"/>
+        <Static id="Static29" taborder="38" text="ReadOnly" left="452" top="627" width="118" height="26" leftbase="" topbase="" bottombase="" rightbase="" widthbase="" heightbase="" color="#b7b7b7" onclick="Static46_onclick"/>
+        <Combo id="Combo00" taborder="39" text="가나다라마바사" left="133" top="657" width="127" height="21" innerdataset="ds_combo" datacolumn="data" codecolumn="code" index="2" value="c0003" scrollbarsize="5" type="dropdown" onitemchanged="Combo00_onitemchanged"/>
+        <Static id="Static25" taborder="40" text="Combo" left="0" top="602" width="124" height="110" textAlign="center" border="1px solid #cccccc" background="#f7f7f7" onclick="Static46_onclick" font="12px/normal &quot;verdana&quot;"/>
+        <Static id="Static30" taborder="42" text="Div" left="0" top="711" width="124" height="114" textAlign="center" border="1px solid #cccccc" background="#f7f7f7" onclick="Static46_onclick" font="12px/normal &quot;verdana&quot;"/>
+        <Static id="Static31" taborder="43" text="" left="123" top="711" height="114" border="1px solid #cccccc" onclick="Static46_onclick" right="0"/>
+        <Div id="Div00" taborder="44" text="sdfdsdfsfd" left="133" top="729" width="591" height="74">
+          <Layouts>
+            <Layout>
+              <Static id="Static00" taborder="0" text="Div는 일반적으로 Form을 로드 할때 사용한다.&#13;&#10;디자인 요소가 필요할 경우 Class로 지정해서 사용한다. " left="0" top="14" width="570" height="56" onclick="Div00_Static00_onclick" font="normal 12px/24px &quot;굴림&quot;" color="#666666"/>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Static id="Static32" taborder="45" text="FileUpload" left="0" top="1048" width="124" height="109" textAlign="center" border="1px solid #cccccc" background="#f7f7f7" onclick="Static46_onclick" font="12px/normal &quot;verdana&quot;"/>
+        <Static id="Static33" taborder="46" text="" left="123" top="1048" height="109" border="1px solid #cccccc" onclick="Static46_onclick" right="0"/>
+        <Static id="Static34" taborder="47" text="Normal" left="133" top="1073" width="118" height="26" leftbase="" topbase="" bottombase="" rightbase="" widthbase="" heightbase="" color="#b7b7b7" onclick="Static46_onclick"/>
+        <Static id="Static36" taborder="48" text="MonthOnly" left="864" top="240" width="128" height="25" leftbase="" topbase="" bottombase="" rightbase="" widthbase="" heightbase="" color="#b7b7b7" onclick="Static46_onclick"/>
+        <Calendar id="Calendar03" taborder="49" left="864" top="270" width="168" height="181" usetrailingday="true" dateformat="yyyy-MM-dd" value="20190101" type="monthonly" cssclass=" Cal_MonthOnly"/>
+        <FileUpload id="FileUpload00" taborder="50" left="133" top="1103" width="200" buttontext="파일업로드" itemheight="21" onitemchanged="FileUpload00_onitemchanged" scrolltype="none" height="21"/>
+        <Calendar id="Calendar05" taborder="51" left="133" top="394" width="127" height="21" usetrailingday="true" dateformat="yyyy-MM-dd" value="20190101" type="spin"/>
+        <Static id="Static37" taborder="52" text="Spin - Normal" left="133" top="365" width="118" height="24" leftbase="" topbase="" bottombase="" rightbase="" widthbase="" heightbase="" color="#b7b7b7" onclick="Static46_onclick"/>
+        <Static id="Static38" taborder="53" text="Spin - Disabled" left="293" top="365" width="118" height="24" leftbase="" topbase="" bottombase="" rightbase="" widthbase="" heightbase="" color="#b7b7b7" onclick="Static46_onclick"/>
+        <Calendar id="Calendar06" taborder="54" left="293" top="394" width="127" height="21" usetrailingday="true" dateformat="yyyy-MM-dd" value="20190101" type="spin" cssclass="CalSpinEdit" enable="false"/>
+        <Calendar id="Calendar07" taborder="55" left="452" top="394" width="127" height="21" usetrailingday="true" dateformat="yyyy-MM-dd" value="20190101" type="spin" cssclass="CalSpinEdit" readonly="true"/>
+        <Static id="Static39" taborder="56" text="Spin - ReadOnly" left="452" top="365" width="118" height="24" leftbase="" topbase="" bottombase="" rightbase="" widthbase="" heightbase="" color="#b7b7b7" onclick="Static46_onclick"/>
+        <Combo id="Combo01" taborder="57" text="가나다라마바사" left="293" top="657" width="127" height="21" innerdataset="ds_combo" datacolumn="data" codecolumn="code" index="2" enable="false" value="c0003"/>
+        <Combo id="Combo02" taborder="58" text="가나다라마바사" left="452" top="657" width="127" height="21" innerdataset="ds_combo" datacolumn="data" codecolumn="code" index="2" value="c0003" readonly="true"/>
+        <Static id="Static40" taborder="59" text="" left="123" top="493" height="110" border="1px solid #cccccc" onclick="Static46_onclick" right="0"/>
+        <Static id="Static41" taborder="60" text="CheckBox" left="0" top="493" width="124" height="110" textAlign="center" border="1px solid #cccccc" background="#f7f7f7" onclick="Static46_onclick" font="12px/normal &quot;verdana&quot;"/>
+        <CheckBox id="CheckBox00" taborder="61" text="체크박스" left="133" top="548" width="92" height="23"/>
+        <Static id="Static42" taborder="62" text="Normal" left="133" top="528" width="118" height="14" leftbase="" topbase="" bottombase="" rightbase="" widthbase="" heightbase="" color="#b7b7b7" onclick="Static46_onclick"/>
+        <CheckBox id="CheckBox01" taborder="63" text="체크박스" left="235" top="548" width="92" height="23" value="true"/>
+        <Static id="Static43" taborder="64" text="Selected" left="235" top="528" width="118" height="14" leftbase="" topbase="" bottombase="" rightbase="" widthbase="" heightbase="" color="#b7b7b7" onclick="Static46_onclick"/>
+        <CheckBox id="CheckBox02" taborder="65" text="체크박스" left="342" top="548" width="92" height="23" enable="false"/>
+        <Static id="Static44" taborder="66" text="Disabled" left="342" top="528" width="118" height="14" leftbase="" topbase="" bottombase="" rightbase="" widthbase="" heightbase="" color="#b7b7b7" onclick="Static46_onclick"/>
+        <CheckBox id="CheckBox03" taborder="67" text="체크박스" left="452" top="548" width="92" height="23" value="true" enable="false"/>
+        <Static id="Static45" taborder="68" text="Disabled/Selected" left="452" top="528" width="118" height="14" leftbase="" topbase="" bottombase="" rightbase="" widthbase="" heightbase="" color="#b7b7b7" onclick="Static46_onclick"/>
+        <FileUpload id="FileUpload01" taborder="69" left="403" top="1103" width="200" height="21" itemheight="21" buttontext="파일업로드" enable="false"/>
+        <Static id="Static46" taborder="70" text="" left="123" top="2351" height="110" border="1px solid #cccccc" onclick="Static46_onclick" right="0"/>
+        <Static id="Static47" taborder="71" text="Normal" left="133" top="2367" width="118" height="46" leftbase="" topbase="" bottombase="" rightbase="" widthbase="" heightbase="" color="#b7b7b7" onclick="Static46_onclick"/>
+        <Static id="Static48" taborder="72" text="Disabled" left="293" top="2367" width="118" height="46" leftbase="" topbase="" bottombase="" rightbase="" widthbase="" heightbase="" color="#b7b7b7" onclick="Static46_onclick"/>
+        <Static id="Static49" taborder="73" text="ReadOnly" left="452" top="2367" width="118" height="46" leftbase="" topbase="" bottombase="" rightbase="" widthbase="" heightbase="" color="#b7b7b7" onclick="Static46_onclick"/>
+        <Static id="Static50" taborder="74" text="Spin" left="0" top="2351" width="124" height="110" textAlign="center" border="1px solid #cccccc" background="#f7f7f7" onclick="Static46_onclick" font="12px/normal verdana"/>
+        <Spin id="Spin00" taborder="75" left="133" top="2407" width="127" height="21" value="9" displaycomma="true"/>
+        <Spin id="Spin01" taborder="76" left="293" top="2406" width="127" height="21" value="9" enable="false" displaycomma="false"/>
+        <Spin id="Spin02" taborder="77" left="452" top="2406" width="127" height="21" value="9" enable="true" readonly="true" displaycomma="true"/>
+        <Static id="Static51" taborder="78" text="GroupBox" left="0" top="1156" width="124" height="149" textAlign="center" border="1px solid #cccccc" background="#f7f7f7" onclick="Static46_onclick" font="12px/normal verdana"/>
+        <Static id="Static52" taborder="79" text="" left="123" top="1156" height="149" border="1px solid #cccccc" onclick="Static46_onclick" right="0"/>
+        <Static id="Static53" taborder="80" text="Normal" left="133" top="1181" width="118" height="26" leftbase="" topbase="" bottombase="" rightbase="" widthbase="" heightbase="" color="#b7b7b7" onclick="Static46_onclick"/>
+        <GroupBox id="GroupBox00" taborder="81" text="그룹박스" left="133" top="1211" width="127" height="57"/>
+        <GroupBox id="GroupBox01" taborder="82" text="그룹박스" left="293" top="1211" width="127" height="57" enable="false"/>
+        <Static id="Static60" taborder="83" text="" left="123" top="1636" height="192" onclick="Static46_onclick" right="0" border="1px solid #cccccc"/>
+        <Static id="Static61" taborder="84" text="Normal" left="133" top="1642" width="118" height="46" leftbase="" topbase="" bottombase="" rightbase="" widthbase="" heightbase="" color="#b7b7b7" onclick="Static46_onclick"/>
+        <Static id="Static64" taborder="85" text="ListBox" left="0" top="1636" width="124" height="192" textAlign="center" border="1px solid #cccccc" background="#f7f7f7" onclick="Static46_onclick" font="12px/normal verdana"/>
+        <ListBox id="ListBox00" taborder="86" left="133" top="1682" width="127" height="111" innerdataset="ds_listBox" index="2" text="가나다라" value="003" datacolumn="data" codecolumn="code" scrollbarsize="13" scrollbardecbuttonsize="13" scrollbarincbuttonsize="13" enable="true"/>
+        <Static id="Static65" taborder="87" text="" left="123" top="2956" height="148" border="1px solid #cccccc" onclick="Static46_onclick" right="0"/>
+        <Static id="Static66" taborder="88" text="Normal" left="133" top="2971" width="118" height="46" leftbase="" topbase="" bottombase="" rightbase="" widthbase="" heightbase="" color="#b7b7b7" onclick="Static46_onclick"/>
+        <Static id="Static67" taborder="89" text="Disabled" left="289" top="2971" width="118" height="46" leftbase="" topbase="" bottombase="" rightbase="" widthbase="" heightbase="" color="#b7b7b7" onclick="Static46_onclick"/>
+        <Static id="Static68" taborder="90" text="ReadOnly" left="452" top="2971" width="118" height="46" leftbase="" topbase="" bottombase="" rightbase="" widthbase="" heightbase="" color="#b7b7b7" onclick="Static46_onclick"/>
+        <Static id="Static69" taborder="91" text="TextArea" left="0" top="2955" width="124" height="149" textAlign="center" border="1px solid #cccccc" background="#f7f7f7" onclick="Static46_onclick" font="12px/normal verdana"/>
+        <TextArea id="TextArea00" taborder="92" left="133" top="3011" width="113" height="62" value="TextArea"/>
+        <TextArea id="TextArea01" taborder="93" left="290" top="3011" width="113" height="62" value="TextArea" enable="false"/>
+        <TextArea id="TextArea02" taborder="94" left="452" top="3011" width="113" height="62" value="TextArea" readonly="true"/>
+        <Static id="Static63" taborder="96" text="Normal" left="133" top="3377" width="118" height="26" leftbase="" topbase="" bottombase="" rightbase="" widthbase="" heightbase="" color="#b7b7b7" onclick="Static46_onclick"/>
+        <ImageViewer id="ImageViewer00" taborder="98" left="133" top="3407" width="127" height="106" image="URL(&quot;theme://images/img_WF_defaultImgN.png&quot;)"/>
+        <ImageViewer id="ImageViewer01" taborder="99" left="293" top="3407" width="127" height="106" enable="false" image="URL(&quot;theme://images/img_WF_defaultImgN.png&quot;)"/>
+        <Static id="Static72" taborder="100" text="" left="123" top="2242" height="110" border="1px solid #cccccc" onclick="Static46_onclick" right="0"/>
+        <Static id="Static76" taborder="101" text="Radio" left="0" top="2242" width="124" height="110" textAlign="center" border="1px solid #cccccc" background="#f7f7f7" onclick="Static46_onclick" font="12px/normal verdana"/>
+        <Static id="Static77" taborder="102" text="Normal" left="133" top="2149" width="118" height="46" leftbase="" topbase="" bottombase="" rightbase="" widthbase="" heightbase="" color="#b7b7b7" onclick="Static46_onclick"/>
+        <Static id="Static78" taborder="103" text="Disabled" left="429" top="2149" width="118" height="46" leftbase="" topbase="" bottombase="" rightbase="" widthbase="" heightbase="" color="#b7b7b7" onclick="Static46_onclick"/>
+        <ProgressBar id="ProgressBar02" taborder="105" max="100" min="0" left="133" top="2190" width="150" height="14" pos="70" smooth="true"/>
+        <ProgressBar id="ProgressBar03" taborder="106" max="100" min="0" left="429" top="2190" width="150" height="14" pos="50" smooth="true" enable="false"/>
+        <Static id="Static81" taborder="108" text="Normal" left="133" top="2282" width="118" height="12" leftbase="" topbase="" bottombase="" rightbase="" widthbase="" heightbase="" color="#b7b7b7" onclick="Static46_onclick"/>
+        <Static id="Static82" taborder="109" text="Selected" left="234" top="2281" width="118" height="14" leftbase="" topbase="" bottombase="" rightbase="" widthbase="" heightbase="" color="#b7b7b7" onclick="Static46_onclick"/>
+        <Static id="Static83" taborder="110" text="Disabled" left="337" top="2282" width="118" height="12" leftbase="" topbase="" bottombase="" rightbase="" widthbase="" heightbase="" color="#b7b7b7" onclick="Static46_onclick"/>
+        <Static id="Static84" taborder="111" text="Disabled/Selected" left="451" top="2281" width="118" height="14" leftbase="" topbase="" bottombase="" rightbase="" widthbase="" heightbase="" color="#b7b7b7" onclick="Static46_onclick"/>
+        <Radio id="Radio00" taborder="112" left="133" top="2301" width="73" height="23" text="" index="-1" innerdataset="ds_radio" codecolumn="code" datacolumn="data" value="" onitemchanged="Radio00_onitemchanged"/>
+        <Radio id="Radio01" taborder="113" left="234" top="2301" width="65" height="23" text="선택 01" index="0" innerdataset="ds_radio" codecolumn="code" datacolumn="data" columncount="1" rowcount="1" value="001"/>
+        <Radio id="Radio02" taborder="114" left="337" top="2301" width="62" height="23" text="" index="-1" innerdataset="ds_radio" codecolumn="code" datacolumn="data" columncount="1" rowcount="1" value="" enable="false"/>
+        <Radio id="Radio03" taborder="115" left="451" top="2301" width="63" height="23" text="선택 01" index="0" innerdataset="ds_radio" codecolumn="code" datacolumn="data" columncount="1" rowcount="1" value="001" enable="false"/>
+        <Static id="Static73" taborder="116" text="Grid" left="0" top="1304" width="124" height="333" textAlign="center" border="1px solid #cccccc" background="#f7f7f7" onclick="Static46_onclick" font="12px/normal verdana"/>
+        <Static id="Static74" taborder="117" text="" left="123" top="1304" height="333" border="1px solid #cccccc" onclick="Static46_onclick" right="0"/>
+        <Grid id="Grid00" taborder="118" left="133" top="1320" height="303" binddataset="ds_grid" autofittype="col" enable="true" right="427">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="28"/>
+                <Column size="50"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="41"/>
+              </Columns>
+              <Rows>
+                <Row size="30" band="head"/>
+                <Row size="30"/>
+                <Row size="26" band="summ"/>
+              </Rows>
+              <Band id="head">
+                <Cell displaytype="checkboxcontrol" autosizecol="none" controlautosizingtype="none" edittype="checkbox"/>
+                <Cell col="1" text="순번" edittype="none"/>
+                <Cell col="2" text="Column01"/>
+                <Cell col="3" text="Column02"/>
+                <Cell col="4" text="Column03"/>
+                <Cell col="5" text="Column04"/>
+                <Cell col="6" text="Column05" cssclass="grd_MWF_headColEditBL"/>
+                <Cell col="7" text="Column06"/>
+                <Cell col="8" text="버튼" border="0px none,0px none,1px solid #c9c9c9,0px none"/>
+              </Band>
+              <Band id="body">
+                <Cell displaytype="checkboxcontrol" edittype="checkbox" text="bind:Check" controlautosizingtype="none"/>
+                <Cell col="1" text="bind:순번" displaytype="text"/>
+                <Cell col="2" text="bind:Column01" displaytype="editcontrol" edittype="text" textareascrolltype="vertical"/>
+                <Cell col="3" text="bind:Column02" displaytype="combocontrol" edittype="combo" combodataset="ds_listBox" combodatacol="data" combocodecol="code" combotype="dropdown" combodisplayrowcount="5" comboscrollbarsize="10"/>
+                <Cell col="4" text="bind:Column03" displaytype="calendarcontrol" calendardateformat="yyyy-MM-dd" autosizecol="default" edittype="date" calendartype="normal" calendarusetrailingday="true"/>
+                <Cell col="5" text="bind:Column04" displaytype="editcontrol" edittype="normal" expandshow="show" expandimage="URL(&quot;theme://images/grd_WF_expandBtn.png&quot;)" expandsize="21"/>
+                <Cell col="6" text="bind:Column05" displaytype="text" edittype="text" padding="2px 2px 2px 2px" locale="ar_JO"/>
+                <Cell col="7" text="bind:Column06" displaytype="number" edittype="none" cssclass="grd_WF_BodyCellPadding"/>
+                <Cell col="8" text="bind:Column07" displaytype="buttoncontrol" edittype="button"/>
+              </Band>
+              <Band id="summary">
+                <Cell colspan="7" text="합계" displaytype="text"/>
+                <Cell col="7" colspan="2" displaytype="number" text="1234567890" border="1px solid #a1d9e9, 0px none"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Static id="Static55" taborder="119" text="Disabled" left="293" top="3376" width="118" height="26" leftbase="" topbase="" bottombase="" rightbase="" widthbase="" heightbase="" color="#b7b7b7" onclick="Static46_onclick"/>
+        <Static id="Static54" taborder="120" text="Disabled" left="293" top="1181" width="118" height="26" leftbase="" topbase="" bottombase="" rightbase="" widthbase="" heightbase="" color="#b7b7b7" onclick="Static46_onclick"/>
+        <Static id="Static57" taborder="122" text="Menu" left="0" top="1936" width="124" height="198" textAlign="center" border="1px solid #cccccc" background="#f7f7f7" onclick="Static46_onclick" font="12px/normal verdana"/>
+        <Static id="Static70" taborder="127" text="Tree Grid" left="0" top="3103" width="124" height="265" textAlign="center" border="1px solid #cccccc" background="#f7f7f7" onclick="Static46_onclick" font="12px/normal verdana"/>
+        <Static id="Static58" taborder="124" text="Disabled" left="401" top="1075" width="118" height="26" leftbase="" topbase="" bottombase="" rightbase="" widthbase="" heightbase="" color="#b7b7b7" onclick="Static46_onclick"/>
+        <Button id="Button02" taborder="125" text="버튼" left="319" top="86" width="42" height="21" cssclass="btn_WF_SubAction"/>
+        <Static id="Static59" taborder="126" text="(보조버튼)" left="319" top="57" width="118" height="25" leftbase="" topbase="" bottombase="" rightbase="" widthbase="" heightbase="" color="#b7b7b7" onclick="Static46_onclick"/>
+        <Button id="Button03" taborder="128" text="버튼" left="413" top="86" width="42" height="21" cssclass="btn_WF_PopupAction"/>
+        <Button id="Button04" taborder="129" text="버튼" left="809" top="91" width="37" height="18" cssclass="btn_WF_Associated"/>
+        <Static id="Static75" taborder="131" text="(연관메뉴 버튼)" left="809" top="57" width="118" height="25" leftbase="" topbase="" bottombase="" rightbase="" widthbase="" heightbase="" color="#b7b7b7" onclick="Static46_onclick"/>
+        <Static id="Static85" taborder="130" text="기본 및 보조 버튼 넓이값&#13;&#10;최소 42px (두글자) 부터 한글자당 '12px'씩 증가&#13;&#10;" left="515" top="74" width="241" height="55" leftbase="" topbase="" bottombase="" rightbase="" widthbase="" heightbase="" onclick="Static46_onclick"/>
+        <Static id="Static86" taborder="132" text="연관메뉴 버튼 넓이값&#13;&#10;최소 37px (두글자) 부터 한글자당 '10px'씩 증가&#13;&#10;" left="943" top="74" width="241" height="55" leftbase="" topbase="" bottombase="" rightbase="" widthbase="" heightbase="" onclick="Static46_onclick"/>
+        <Static id="Static87" taborder="133" text="(팝업버튼)" left="413" top="57" width="118" height="25" leftbase="" topbase="" bottombase="" rightbase="" widthbase="" heightbase="" color="#b7b7b7" onclick="Static46_onclick"/>
+        <Calendar id="Calendar04" taborder="134" left="133" top="317" width="127" height="21" usetrailingday="true" dateformat="yyyy-MM-dd" type="normal" value="20190101" cssclass="com_WF_Essential"/>
+        <Static id="Static88" taborder="135" text="(필수입력)" left="133" top="289" width="118" height="25" leftbase="" topbase="" bottombase="" rightbase="" widthbase="" heightbase="" color="#b7b7b7" onclick="Static46_onclick"/>
+        <Static id="Static89" taborder="137" text="(필수입력)" left="133" top="424" width="118" height="25" leftbase="" topbase="" bottombase="" rightbase="" widthbase="" heightbase="" color="#b7b7b7" onclick="Static46_onclick"/>
+        <Calendar id="Calendar08" taborder="136" left="133" top="452" width="127" height="21" usetrailingday="true" dateformat="yyyy-MM-dd" value="20190101" type="spin" cssclass="com_WF_Essential"/>
+        <Combo id="Combo03" taborder="138" text="가나다라마바사" left="-928" top="582" width="127" height="21" innerdataset="ds_combo" datacolumn="data" codecolumn="code" index="2" value="c0003" scrollbarsize="5" type="dropdown" onitemchanged="Combo00_onitemchanged" cssclass="com_WF_Essential"/>
+        <Static id="Static91" taborder="140" text="(필수입력)" left="-928" top="552" width="118" height="26" leftbase="" topbase="" bottombase="" rightbase="" widthbase="" heightbase="" color="#b7b7b7" onclick="Static46_onclick"/>
+        <Edit id="Edit03" taborder="139" left="-928" top="805" width="127" height="21" leftbase="" topbase="" bottombase="" rightbase="" widthbase="" heightbase="" value="가나다라" text="가나다라" cssclass="com_WF_Essential"/>
+        <Static id="Static90" taborder="141" text="(필수입력)" left="-928" top="771" width="118" height="25" leftbase="" topbase="" bottombase="" rightbase="" widthbase="" heightbase="" color="#b7b7b7" onclick="Static46_onclick"/>
+        <Edit id="Edit04" taborder="142" left="133" top="977" width="127" height="21" leftbase="" topbase="" bottombase="" rightbase="" widthbase="" heightbase="" value="가나다라" text="가나다라" enable="true" onchanged="Edit04_onchanged" readonly="false" cssclass="edl_WF_MCpadding"/>
+        <Button id="Button05" taborder="143" left="240" top="978" width="19" height="19" cssclass="btn_WF_Search" enable="true"/>
+        <Static id="Static92" taborder="144" text="(Search Edit)" left="133" top="946" width="118" height="25" leftbase="" topbase="" bottombase="" rightbase="" widthbase="" heightbase="" color="#b7b7b7" onclick="Static46_onclick"/>
+        <Edit id="Edit05" taborder="145" left="292" top="977" width="127" height="21" leftbase="" topbase="" bottombase="" rightbase="" widthbase="" heightbase="" value="가나다라" text="가나다라" enable="false" onchanged="Edit04_onchanged" readonly="false" cssclass="edl_WF_MCpadding"/>
+        <Button id="Button06" taborder="146" left="399" top="978" width="19" height="19" cssclass="btn_WF_Search" enable="false"/>
+        <Edit id="Edit06" taborder="147" left="450" top="977" width="127" height="21" leftbase="" topbase="" bottombase="" rightbase="" widthbase="" heightbase="" value="가나다라" text="가나다라" enable="true" onchanged="Edit04_onchanged" readonly="true" cssclass="edl_WF_MCpadding"/>
+        <Button id="Button07" taborder="148" left="557" top="978" width="19" height="19" cssclass="btn_WF_Search" enable="true"/>
+        <Edit id="Edit08" taborder="149" left="-928" top="902" width="127" height="21" leftbase="" topbase="" bottombase="" rightbase="" widthbase="" heightbase="" value="가나다라" text="가나다라" enable="true" onchanged="Edit04_onchanged" readonly="false" cssclass="com_WF_Essential, edl_WF_MCpadding"/>
+        <Button id="Button09" taborder="151" left="Edit08:-20" top="903" width="19" height="19" cssclass="btn_WF_Search" enable="true"/>
+        <Static id="Static94" taborder="154" text="참고 : Search Edit는 Edit컴퍼넌트 와 Button컴퍼넌트로&#13;&#10;각각 구성되어 있습니다. 상태(disabled등등) 또한&#13;&#10;개별 처리되어야 합니다." left="980" top="951" width="288" height="55" leftbase="" topbase="" bottombase="" rightbase="" widthbase="" heightbase="" onclick="Static46_onclick" fittocontents="both"/>
+        <MaskEdit id="MaskEdit03" taborder="150" left="-901" top="1809" width="127" height="21" type="number" value="1234" cssclass="com_WF_Essential"/>
+        <Static id="Static93" taborder="152" text="(필수입력)" left="-901" top="1780" width="118" height="25" leftbase="" topbase="" bottombase="" rightbase="" widthbase="" heightbase="" color="#b7b7b7" onclick="Static46_onclick"/>
+        <Spin id="Spin03" taborder="153" left="-901" top="2332" width="127" height="21" value="9" cssclass="com_WF_Essential"/>
+        <Static id="Static95" taborder="155" text="(필수입력)" left="-901" top="2292" width="118" height="46" leftbase="" topbase="" bottombase="" rightbase="" widthbase="" heightbase="" color="#b7b7b7" onclick="Static46_onclick"/>
+        <Static id="Static97" taborder="156" left="142" top="2016" width="1008" height="64" background="#006cb7"/>
+        <Button id="Button08" taborder="158" text="1뎁스 메뉴01" left="157" top="2016" height="64" cssclass="btn_TF_Menu" fittocontents="width" width="89"/>
+        <Button id="Button10" taborder="157" text="메뉴02" left="Button08:12" top="2016" width="54" height="64" cssclass="btn_TF_Menu" fittocontents="width"/>
+        <Static id="Static98" taborder="159" text="(버튼컴퍼넌트 형태)" left="142" top="1968" width="118" height="46" leftbase="" topbase="" bottombase="" rightbase="" widthbase="" heightbase="" color="#b7b7b7" onclick="Static46_onclick"/>
+        <Button id="Button11" taborder="160" text="메뉴03" left="Button10:12" top="2016" width="54" height="64" cssclass="btn_TF_Menu" fittocontents="width" enable="false"/>
+        <TextArea id="TextArea03" taborder="161" left="-901" top="2660" width="113" height="62" value="TextArea" cssclass="com_WF_Essential"/>
+        <Static id="Static99" taborder="162" text="(필수입력)" left="-901" top="2620" width="118" height="46" leftbase="" topbase="" bottombase="" rightbase="" widthbase="" heightbase="" color="#b7b7b7" onclick="Static46_onclick"/>
+        <TextArea id="TextArea04" taborder="163" left="-928" top="3010" width="113" height="62" value="TextArea" cssclass="com_WF_Essential"/>
+        <Static id="Static100" taborder="164" text="(필수입력)" left="-928" top="2970" width="118" height="46" leftbase="" topbase="" bottombase="" rightbase="" widthbase="" heightbase="" color="#b7b7b7" onclick="Static46_onclick" cssclass="com_WF_Essential"/>
+        <MaskEdit id="MaskEdit04" taborder="165" left="-928" top="1809" width="127" height="21" type="number" value="1234" cssclass="com_WF_Essential"/>
+        <Static id="Static101" taborder="166" text="(필수입력)" left="-928" top="1780" width="118" height="25" leftbase="" topbase="" bottombase="" rightbase="" widthbase="" heightbase="" color="#b7b7b7" onclick="Static46_onclick"/>
+        <Spin id="Spin04" taborder="167" left="-928" top="2332" width="127" height="21" value="9" cssclass="com_WF_Essential"/>
+        <Static id="Static102" taborder="168" text="(필수입력)" left="-928" top="2292" width="118" height="46" leftbase="" topbase="" bottombase="" rightbase="" widthbase="" heightbase="" color="#b7b7b7" onclick="Static46_onclick"/>
+        <Combo id="Combo04" taborder="169" left="812" top="657" width="127" height="21" innerdataset="ds_combo" datacolumn="data" codecolumn="code" index="2" value="c0003" scrollbarsize="5" type="dropdown" onitemchanged="Combo00_onitemchanged" cssclass="com_WF_Essential" text="가나다라마바사"/>
+        <Static id="Static103" taborder="170" text="(필수입력)" left="812" top="627" width="118" height="26" leftbase="" topbase="" bottombase="" rightbase="" widthbase="" heightbase="" color="#b7b7b7" onclick="Static46_onclick"/>
+        <Edit id="Edit07" taborder="171" left="811" top="880" width="127" height="21" leftbase="" topbase="" bottombase="" rightbase="" widthbase="" heightbase="" value="가나다라" text="가나다라" cssclass="com_WF_Essential"/>
+        <Static id="Static104" taborder="172" text="(필수입력)" left="811" top="846" width="118" height="25" leftbase="" topbase="" bottombase="" rightbase="" widthbase="" heightbase="" color="#b7b7b7" onclick="Static46_onclick"/>
+        <Edit id="Edit09" taborder="173" left="811" top="977" width="127" height="21" leftbase="" topbase="" bottombase="" rightbase="" widthbase="" heightbase="" value="가나다라" text="가나다라" enable="true" onchanged="Edit04_onchanged" readonly="false" cssclass="edl_WF_MCpadding, com_WF_Essential"/>
+        <Button id="Button12" taborder="174" left="918" top="978" height="19" cssclass="btn_WF_Search" enable="true" width="19"/>
+        <MaskEdit id="MaskEdit05" taborder="175" left="790" top="1882" width="127" height="21" type="number" value="1234" cssclass="com_WF_Essential" format="###,###"/>
+        <Static id="Static105" taborder="176" text="(필수입력)" left="790" top="1853" width="118" height="25" leftbase="" topbase="" bottombase="" rightbase="" widthbase="" heightbase="" color="#b7b7b7" onclick="Static46_onclick"/>
+        <Spin id="Spin05" taborder="177" left="788" top="2407" width="127" height="21" value="9" cssclass="com_WF_Essential" displaycomma="true"/>
+        <Static id="Static106" taborder="178" text="(필수입력)" left="788" top="2367" width="118" height="46" leftbase="" topbase="" bottombase="" rightbase="" widthbase="" heightbase="" color="#b7b7b7" onclick="Static46_onclick"/>
+        <Static id="Static107" taborder="179" text="Tab" left="0" top="2678" width="124" height="279" leftbase="" topbase="" bottombase="" rightbase="" widthbase="" heightbase="" textAlign="center" border="1px solid #cccccc" background="#f7f7f7" onclick="Static46_onclick" font="12px/normal verdana"/>
+        <Static id="Static108" taborder="180" text="" left="123" top="2678" height="279" leftbase="" topbase="" bottombase="" rightbase="" widthbase="" heightbase="" border="1px solid #cccccc" onclick="Static46_onclick" right="0"/>
+        <Tab id="Tab00" taborder="181" tabindex="2" left="132" top="2749" width="671" height="190" onchanged="Tab00_onchanged" onmouseenter="Tab00_onmouseup">
+          <Tabpages>
+            <Tabpage id="Tabpage1" text="탭타이틀 01"/>
+            <Tabpage id="Tabpage2" text="탭타이틀 02"/>
+            <Tabpage id="Tabpage3" text="탭타이틀 03"/>
+            <Tabpage id="Tabpage4" text="탭타이틀 04"/>
+            <Tabpage id="Tabpage5" text="탭타이틀 05"/>
+            <Tabpage id="Tabpage6" text="탭메뉴타이틀.." tooltiptext="탭메뉴타이틀입니다."/>
+          </Tabpages>
+        </Tab>
+        <Static id="Static109" taborder="182" text="Normal" left="133" top="2708" width="118" height="25" leftbase="" topbase="" bottombase="" rightbase="" widthbase="" heightbase="" color="#b7b7b7" onclick="Static46_onclick"/>
+        <Static id="Static110" taborder="183" text="(셔틀버튼)" left="319" top="137" width="118" height="25" leftbase="" topbase="" bottombase="" rightbase="" widthbase="" heightbase="" color="#b7b7b7" onclick="Static46_onclick"/>
+        <Button id="Button13" taborder="184" left="319" top="166" width="20" height="19" cssclass="btn_WF_ShuttleBox, btn_WF_ShuttleIconL"/>
+        <Button id="Button14" taborder="185" left="346" top="166" width="20" height="19" cssclass="btn_WF_ShuttleBox, btn_WF_ShuttleIconR"/>
+        <Button id="Button15" taborder="186" left="372" top="166" width="20" height="19" cssclass="btn_WF_ShuttleBox, btn_WF_ShuttleIconD"/>
+        <Button id="Button16" taborder="187" left="398" top="166" width="20" height="19" cssclass="btn_WF_ShuttleBox, btn_WF_ShuttleIconU"/>
+        <Button id="Button17" taborder="188" left="438" top="167" width="20" height="19" cssclass="btn_WF_ShuttleBox, btn_WF_ShuttleIconL" enable="false"/>
+        <Button id="Button18" taborder="189" left="465" top="167" width="20" height="19" cssclass="btn_WF_ShuttleBox, btn_WF_ShuttleIconR" enable="false"/>
+        <Button id="Button19" taborder="190" left="491" top="167" width="20" height="19" cssclass="btn_WF_ShuttleBox, btn_WF_ShuttleIconD" enable="false"/>
+        <Button id="Button20" taborder="191" left="517" top="167" width="20" height="19" cssclass="btn_WF_ShuttleBox, btn_WF_ShuttleIconU" enable="false"/>
+        <Calendar id="Calendar09" taborder="192" left="608" top="260" width="127" height="21" usetrailingday="true" dateformat="yyyy-MM-dd" type="normal" displaynulltext="선택하세요"/>
+        <Static id="Static111" taborder="193" text="NullText" left="608" top="231" width="118" height="25" leftbase="" topbase="" bottombase="" rightbase="" widthbase="" heightbase="" color="#b7b7b7" onclick="Static46_onclick"/>
+        <Calendar id="Calendar10" taborder="194" left="608" top="394" width="127" height="21" usetrailingday="true" dateformat="yyyy-MM-dd" type="spin" displaynulltext="선택하세요"/>
+        <Static id="Static112" taborder="195" text="NullText" left="608" top="365" width="118" height="24" leftbase="" topbase="" bottombase="" rightbase="" widthbase="" heightbase="" color="#b7b7b7" onclick="Static46_onclick"/>
+        <Combo id="Combo05" taborder="196" left="608" top="657" width="127" height="21" innerdataset="ds_combo" datacolumn="data" codecolumn="code" index="-1" scrollbarsize="5" type="dropdown" onitemchanged="Combo00_onitemchanged" displaynulltext="선택하세요" text="" value=""/>
+        <Static id="Static113" taborder="197" text="NullText" left="608" top="627" width="118" height="26" leftbase="" topbase="" bottombase="" rightbase="" widthbase="" heightbase="" color="#b7b7b7" onclick="Static46_onclick"/>
+        <Edit id="Edit10" taborder="198" left="608" top="977" width="127" height="21" leftbase="" topbase="" bottombase="" rightbase="" widthbase="" heightbase="" text="가나다라" enable="true" onchanged="Edit04_onchanged" readonly="false" cssclass="edl_WF_MCpadding" displaynulltext="입력하세요"/>
+        <Button id="Button21" taborder="199" left="715" top="978" width="19" height="19" cssclass="btn_WF_Search" enable="true"/>
+        <Edit id="Edit11" taborder="200" left="608" top="880" width="127" height="21" leftbase="" topbase="" bottombase="" rightbase="" widthbase="" heightbase="" text="가나다라" displaynulltext="입력하세요"/>
+        <Static id="Static114" taborder="201" text="NullText" left="608" top="846" width="118" height="25" leftbase="" topbase="" bottombase="" rightbase="" widthbase="" heightbase="" color="#b7b7b7" onclick="Static46_onclick"/>
+        <MaskEdit id="MaskEdit06" taborder="202" left="608" top="1884" width="127" height="21" type="number" format="###,###" displaynulltext="입력하세요"/>
+        <Static id="Static115" taborder="203" text="NullText" left="608" top="1855" width="118" height="25" leftbase="" topbase="" bottombase="" rightbase="" widthbase="" heightbase="" color="#b7b7b7" onclick="Static46_onclick"/>
+        <Spin id="Spin06" taborder="204" left="608" top="2407" width="127" height="21" displaycomma="true" displaynulltext="선택하세요"/>
+        <Static id="Static116" taborder="205" text="NullText" left="608" top="2367" width="118" height="46" leftbase="" topbase="" bottombase="" rightbase="" widthbase="" heightbase="" color="#b7b7b7" onclick="Static46_onclick"/>
+        <TextArea id="TextArea05" taborder="206" left="608" top="3011" width="113" height="62" displaynulltext="입력하세요"/>
+        <Static id="Static117" taborder="207" text="NullText" left="608" top="2971" width="118" height="46" leftbase="" topbase="" bottombase="" rightbase="" widthbase="" heightbase="" color="#b7b7b7" onclick="Static46_onclick"/>
+        <Static id="Static118" taborder="208" text="가나다라마바사&#13;&#10;ABCDEFGHIJKLMNOP&#13;&#10;0123456789" left="312" top="2527" width="150" height="55" leftbase="" topbase="" bottombase="" rightbase="" widthbase="" heightbase="" onclick="Static46_onclick" enable="false"/>
+        <Static id="Static119" taborder="209" text="Disabled" left="312" top="2481" width="118" height="25" leftbase="" topbase="" bottombase="" rightbase="" widthbase="" heightbase="" color="#b7b7b7" onclick="Static46_onclick"/>
+        <Static id="Static120" taborder="210" text="(타이틀)" left="491" top="2481" width="118" height="25" leftbase="" topbase="" bottombase="" rightbase="" widthbase="" heightbase="" color="#b7b7b7" onclick="Static46_onclick"/>
+        <Static id="Static121" taborder="212" text="대타이틀" left="513" top="2526" width="58" height="14" cssclass="sta_WF_Btitle" fittocontents="width"/>
+        <Button id="Button22" taborder="211" left="493" top="2525" height="16" cssclass="btn_WF_Btitle" defaultbutton="true" tabstop="false" right="Static121:6"/>
+        <Static id="Static122" taborder="213" text="중타이틀" left="491" top="2570" width="93" height="13" cssclass="sta_WF_Mtitle" fittocontents="width"/>
+        <Static id="Static123" taborder="214" text="소타이틀" left="491" top="2616" width="93" height="12" cssclass="sta_WF_Stitle" fittocontents="width"/>
+        <Static id="Static124" taborder="215" text="(라벨)" left="704" top="2481" width="118" height="25" leftbase="" topbase="" bottombase="" rightbase="" widthbase="" heightbase="" color="#b7b7b7" onclick="Static46_onclick"/>
+        <Static id="Static125" taborder="216" text="조회필드라벨" left="705" top="2570" width="93" height="13" cssclass="sta_WF_SeaFieldLabel" fittocontents="width"/>
+        <Static id="Static126" taborder="217" text="필드라벨" left="705" top="2527" width="93" height="13" cssclass="sta_WF_FieldLabel" fittocontents="width"/>
+        <TextArea id="TextArea06" taborder="218" left="785" top="3011" width="113" height="62" value="TextArea" cssclass="com_WF_Essential"/>
+        <Static id="Static127" taborder="219" text="(필수입력)" left="785" top="2971" width="118" height="46" leftbase="" topbase="" bottombase="" rightbase="" widthbase="" heightbase="" color="#b7b7b7" onclick="Static46_onclick"/>
+        <Grid id="Grid02" taborder="220" left="132" top="3125" width="208" height="224" binddataset="ds_grid_tree" autofittype="col" treeinitstatus="collapse,all" treeusecheckbox="false" cssclass="grd_WF_treeGrd">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="176"/>
+              </Columns>
+              <Rows>
+                <Row size="24"/>
+              </Rows>
+              <Band id="body">
+                <Cell text="bind:captiion" displaytype="treeitemcontrol" edittype="tree" treelevel="bind:level"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Static id="Static128" taborder="221" text="(123,456건)" left="705" top="2616" width="93" height="13" cssclass="sta_WF_ResultLabel" fittocontents="width"/>
+        <Static id="Static129" taborder="222" text="Disabled" left="327" top="1641" width="118" height="46" leftbase="" topbase="" bottombase="" rightbase="" widthbase="" heightbase="" color="#b7b7b7" onclick="Static46_onclick"/>
+        <ListBox id="ListBox01" taborder="223" left="327" top="1681" width="127" height="111" innerdataset="ds_listBox" index="2" text="가나다라" value="003" datacolumn="data" codecolumn="code" scrollbarsize="13" scrollbardecbuttonsize="13" scrollbarincbuttonsize="13" enable="false"/>
+        <Button id="Button23" taborder="224" left="809" top="133" width="13" height="13" cssclass="btn_WF_Inc"/>
+        <Button id="Button24" taborder="225" left="826" top="133" width="13" height="13" cssclass="btn_WF_Dec"/>
+        <Button id="Button25" taborder="226" text="버튼" left="866" top="92" width="37" height="18" cssclass="btn_WF_Associated" enable="false"/>
+        <Button id="Button26" taborder="227" left="866" top="133" width="13" height="13" cssclass="btn_WF_Inc" enable="false"/>
+        <Button id="Button27" taborder="228" left="883" top="133" width="13" height="13" cssclass="btn_WF_Dec" enable="false"/>
+        <Static id="Static130" taborder="229" text="(조회영역)" left="578" top="135" width="118" height="25" leftbase="" topbase="" bottombase="" rightbase="" widthbase="" heightbase="" color="#b7b7b7" onclick="Static46_onclick"/>
+        <Button id="Button28" taborder="230" cssclass="btn_WF_SubAction, btn_WF_SearchIcon" right="660" width="40" top="167" bottom="3608"/>
+        <Button id="Button29" taborder="231" cssclass="btn_WF_SubAction, btn_WF_SearchIcon" right="589" width="40" top="167" bottom="3608" enable="false"/>
+        <Grid id="Grid01" taborder="232" left="866" top="1320" width="385" height="303" autofittype="col" binddataset="ds_grid_rowhead" enable="true">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="50"/>
+                <Column size="98"/>
+                <Column size="68"/>
+                <Column size="48"/>
+              </Columns>
+              <Rows>
+                <Row size="30" band="head"/>
+                <Row size="30" band="head"/>
+                <Row size="30"/>
+                <Row size="30"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="컬럼1"/>
+                <Cell col="1" colspan="2" text="컬럼3"/>
+                <Cell col="3" rowspan="2" text="컬럼4"/>
+                <Cell row="1" text="컬럼2"/>
+                <Cell row="1" col="1" text="컬럼3-1/컬럼3-2"/>
+                <Cell row="1" col="2" text="컬럼3-3"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:Column01" displaytype="text"/>
+                <Cell col="1" rowspan="2">
+                  <Cell text="bind:Column03" displaytype="text"/>
+                  <Cell row="1" text="bind:Column04" displaytype="text"/>
+                </Cell>
+                <Cell col="2" rowspan="2" displaytype="text" text="bind:Column05"/>
+                <Cell col="3" rowspan="2" text="bind:Column06" displaytype="text"/>
+                <Cell row="1" text="bind:Column02" displaytype="text"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Button id="Button30" taborder="233" left="809" top="168" width="21" height="21" cssclass="btn_WF_Help"/>
+        <Button id="Button31" taborder="234" left="867" top="168" width="21" height="21" cssclass="btn_WF_Help" enable="false"/>
+        <Static id="Static131" taborder="235" text="(Location)" left="871" top="2481" width="118" height="25" leftbase="" topbase="" bottombase="" rightbase="" widthbase="" heightbase="" color="#b7b7b7" onclick="Static46_onclick"/>
+        <Static id="Static132" taborder="236" text="HOME &gt; 대메뉴 &gt; 중메뉴 &gt; 소메뉴" left="874" top="2523" width="188" height="13" cssclass="sta_WF_Location" fittocontents="width"/>
+        <Button id="Button32" taborder="237" left="681" top="2033" width="30" height="30" cssclass="btn_TF_MenuLspin" enable="false"/>
+        <Button id="Button33" taborder="238" left="715" top="2033" width="30" height="30" cssclass="btn_TF_MenuRspin"/>
+        <Button id="Button34" taborder="239" left="922" top="2033" width="30" height="30" cssclass="btn_TF_LogOut"/>
+        <Button id="Button35" taborder="240" left="955" top="2033" width="30" height="30" cssclass="btn_TF_LogOut" enable="false"/>
+        <Button id="Button36" taborder="241" left="1025" top="2033" width="30" height="30" cssclass="btn_TF_Setting"/>
+        <Button id="Button37" taborder="242" left="1058" top="2033" width="30" height="30" cssclass="btn_TF_Setting" enable="false"/>
+        <Button id="Button38" taborder="243" left="819" top="2031" width="34" height="34" cssclass="btn_TF_LeftOpen"/>
+        <Button id="Button39" taborder="244" left="855" top="2031" width="34" height="34" cssclass="btn_TF_LeftOpen" enable="false"/>
+        <Button id="Button40" taborder="245" text="1뎁스 메뉴01" left="434" top="2016" height="64" cssclass="btn_TF_MenuPix" fittocontents="width" width="89"/>
+        <Static id="Static96" taborder="246" text="(선택메뉴 고정  )" left="434" top="1969" width="118" height="46" leftbase="" topbase="" bottombase="" rightbase="" widthbase="" heightbase="" color="#b7b7b7" onclick="Static46_onclick"/>
+      </Layout>
+    </Layouts>
+    <Script type="xscript5.1"><![CDATA[
+this.Static10_onclick = function(obj:nexacro.Static,e:nexacro.ClickEventInfo)
+{
+	
+};
+
+this.Static02_onclick = function(obj:nexacro.Static,e:nexacro.ClickEventInfo)
+{
+	
+};
+
+this.Static41_onclick = function(obj:nexacro.Static,e:nexacro.ClickEventInfo)
+{
+	
+};
+
+this.Static20_onclick = function(obj:nexacro.Static,e:nexacro.ClickEventInfo)
+{
+	
+};
+
+this.Div00_Static00_onclick = function(obj:nexacro.Static,e:nexacro.ClickEventInfo)
+{
+	
+};
+
+this.Static64_onclick = function(obj:nexacro.Static,e:nexacro.ClickEventInfo)
+{
+	
+};
+
+this.Static46_onclick = function(obj:nexacro.Static,e:nexacro.ClickEventInfo)
+{
+	
+};
+
+this.Menu00_onmenuclick = function(obj:nexacro.Menu,e:nexacro.MenuClickEventInfo)
+{
+	
+};
+
+this.FileUpload00_onitemchanged = function(obj:nexacro.FileUpload,e:nexacro.FileUploadItemChangeEventInfo)
+{
+	
+};
+
+this.Combo00_onitemchanged = function(obj:nexacro.Combo,e:nexacro.ItemChangeEventInfo)
+{
+	
+};
+
+this.Radio00_onitemchanged = function(obj:nexacro.Radio,e:nexacro.ItemChangeEventInfo)
+{
+	
+};
+
+this.Edit04_onchanged = function(obj:nexacro.Edit,e:nexacro.ChangeEventInfo)
+{
+	
+};
+
+this.Edit02_onchanged = function(obj:nexacro.Edit,e:nexacro.ChangeEventInfo)
+{
+	
+};
+
+this.Tab00_onchanged = function(obj:nexacro.Tab,e:nexacro.TabIndexChangeEventInfo)
+{
+	
+};
+
+
+]]></Script>
+    <Objects>
+      <Dataset id="ds_combo">
+        <ColumnInfo>
+          <Column id="code" type="STRING" size="256"/>
+          <Column id="data" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="code">c0001</Col>
+            <Col id="data">가나다</Col>
+          </Row>
+          <Row>
+            <Col id="code">c0002</Col>
+            <Col id="data">가나다라마</Col>
+          </Row>
+          <Row>
+            <Col id="code">c0003</Col>
+            <Col id="data">가나다라마바사</Col>
+          </Row>
+          <Row>
+            <Col id="code">c0004</Col>
+            <Col id="data">가나다라</Col>
+          </Row>
+          <Row>
+            <Col id="code">c0005</Col>
+            <Col id="data">가나다라마</Col>
+          </Row>
+          <Row>
+            <Col id="code">c0006</Col>
+            <Col id="data">가나다라마바사아</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="ds_listBox">
+        <ColumnInfo>
+          <Column id="code" type="STRING" size="256"/>
+          <Column id="data" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="code">001</Col>
+            <Col id="data">전체</Col>
+          </Row>
+          <Row>
+            <Col id="code">002</Col>
+            <Col id="data">가나다</Col>
+          </Row>
+          <Row>
+            <Col id="code">003</Col>
+            <Col id="data">가나다라</Col>
+          </Row>
+          <Row>
+            <Col id="code">004</Col>
+            <Col id="data">가나다라마</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="ds_radio">
+        <ColumnInfo>
+          <Column id="code" type="STRING" size="256"/>
+          <Column id="data" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="code">001</Col>
+            <Col id="data">라디오</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="ds_grid">
+        <ColumnInfo>
+          <Column id="Check" type="STRING" size="256"/>
+          <Column id="순번" type="STRING" size="256"/>
+          <Column id="Column01" type="STRING" size="256"/>
+          <Column id="Column02" type="STRING" size="256"/>
+          <Column id="Column03" type="STRING" size="256"/>
+          <Column id="Column04" type="STRING" size="256"/>
+          <Column id="Column05" type="STRING" size="256"/>
+          <Column id="Column06" type="STRING" size="256"/>
+          <Column id="Column07" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="순번">1</Col>
+            <Col id="Column01">가나다라</Col>
+            <Col id="Check">0</Col>
+            <Col id="Column02">001</Col>
+            <Col id="Column03">00000000</Col>
+            <Col id="Column04">expand</Col>
+            <Col id="Column05">가나다라마바사</Col>
+            <Col id="Column06">1234567890</Col>
+            <Col id="Column07">버튼</Col>
+          </Row>
+          <Row>
+            <Col id="순번">2</Col>
+            <Col id="Column01">가나다라마바사</Col>
+            <Col id="Check">1</Col>
+            <Col id="Column02">001</Col>
+            <Col id="Column03">00000000</Col>
+            <Col id="Column04">expand</Col>
+            <Col id="Column05">가나다라마바</Col>
+            <Col id="Column06">1234567890</Col>
+            <Col id="Column07">버튼</Col>
+          </Row>
+          <Row>
+            <Col id="Check">0</Col>
+            <Col id="순번">3</Col>
+            <Col id="Column01">가나다라마</Col>
+            <Col id="Column02">002</Col>
+            <Col id="Column04">expand</Col>
+            <Col id="Column03">00000000</Col>
+            <Col id="Column05">가나다라마사아자</Col>
+            <Col id="Column06">1234567890</Col>
+            <Col id="Column07">버튼</Col>
+          </Row>
+          <Row>
+            <Col id="Check">1</Col>
+            <Col id="순번">4</Col>
+            <Col id="Column01">가나다라</Col>
+            <Col id="Column02">004</Col>
+            <Col id="Column03">00000000</Col>
+            <Col id="Column04">expand</Col>
+            <Col id="Column05">가나다라마바</Col>
+            <Col id="Column06">1234567890</Col>
+            <Col id="Column07">버튼</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="ds_mnu">
+        <ColumnInfo>
+          <Column id="id" type="STRING" size="256"/>
+          <Column id="caption" type="STRING" size="256"/>
+          <Column id="level" type="STRING" size="256"/>
+          <Column id="enable" type="STRING" size="256"/>
+          <Column id="check" type="STRING" size="256"/>
+          <Column id="hotkey" type="STRING" size="256"/>
+          <Column id="icon" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="id">1</Col>
+            <Col id="caption">1뎁스 메뉴01</Col>
+            <Col id="level">0</Col>
+            <Col id="enable">1</Col>
+            <Col id="check">0</Col>
+            <Col id="icon"/>
+          </Row>
+          <Row>
+            <Col id="id">2</Col>
+            <Col id="caption">메뉴02</Col>
+            <Col id="level">0</Col>
+            <Col id="enable">1</Col>
+            <Col id="check">0</Col>
+            <Col id="icon"/>
+          </Row>
+          <Row>
+            <Col id="id">3</Col>
+            <Col id="caption">1뎁스 메뉴03</Col>
+            <Col id="level">0</Col>
+            <Col id="enable">0</Col>
+            <Col id="check">0</Col>
+          </Row>
+          <Row>
+            <Col id="id">4</Col>
+            <Col id="caption">1뎁스 메뉴04</Col>
+            <Col id="level">0</Col>
+            <Col id="enable">1</Col>
+            <Col id="check">0</Col>
+          </Row>
+          <Row>
+            <Col id="id">5</Col>
+            <Col id="caption">1뎁스 메뉴05</Col>
+            <Col id="level">0</Col>
+            <Col id="enable">1</Col>
+            <Col id="check">0</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="ds_grid_tree">
+        <ColumnInfo>
+          <Column id="captiion" type="STRING" size="256"/>
+          <Column id="level" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="captiion">1 Depth Menu 01</Col>
+            <Col id="level">0</Col>
+          </Row>
+          <Row>
+            <Col id="captiion">2 Depth Menu 01</Col>
+            <Col id="level">1</Col>
+          </Row>
+          <Row>
+            <Col id="captiion">2 Depth Menu 02</Col>
+            <Col id="level">1</Col>
+          </Row>
+          <Row>
+            <Col id="captiion">2 Depth Menu 03</Col>
+            <Col id="level">1</Col>
+          </Row>
+          <Row>
+            <Col id="captiion">2 Depth Menu 04</Col>
+            <Col id="level">1</Col>
+          </Row>
+          <Row>
+            <Col id="captiion">1 Depth Menu 02</Col>
+            <Col id="level">0</Col>
+          </Row>
+          <Row>
+            <Col id="captiion">2 Depth Menu 01</Col>
+            <Col id="level">1</Col>
+          </Row>
+          <Row>
+            <Col id="captiion">3 Depth Menu 01</Col>
+            <Col id="level">2</Col>
+          </Row>
+          <Row>
+            <Col id="captiion">3 Depth Menu 02</Col>
+            <Col id="level">2</Col>
+          </Row>
+          <Row>
+            <Col id="captiion">3 Depth Menu 03</Col>
+            <Col id="level">2</Col>
+          </Row>
+          <Row>
+            <Col id="captiion">3 Depth Menu 04</Col>
+            <Col id="level">2</Col>
+          </Row>
+          <Row>
+            <Col id="captiion">2 Depth Menu 02</Col>
+            <Col id="level">1</Col>
+          </Row>
+          <Row>
+            <Col id="captiion">1 Depth Menu 03</Col>
+            <Col id="level">0</Col>
+          </Row>
+          <Row>
+            <Col id="captiion">2 Depth Menu 01</Col>
+            <Col id="level">1</Col>
+          </Row>
+          <Row>
+            <Col id="captiion">2 Depth Menu 02</Col>
+            <Col id="level">1</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="ds_popmnu">
+        <ColumnInfo>
+          <Column id="id" type="STRING" size="256"/>
+          <Column id="caption" type="STRING" size="256"/>
+          <Column id="level" type="STRING" size="256"/>
+          <Column id="enable" type="STRING" size="256"/>
+          <Column id="check" type="STRING" size="256"/>
+          <Column id="hotkey" type="STRING" size="256"/>
+          <Column id="icon" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="id">1</Col>
+            <Col id="caption">전체</Col>
+            <Col id="level">0</Col>
+            <Col id="enable"/>
+            <Col id="check">0</Col>
+            <Col id="icon"/>
+          </Row>
+          <Row>
+            <Col id="id">2</Col>
+            <Col id="caption">가나다라01</Col>
+            <Col id="level">0</Col>
+            <Col id="enable"/>
+            <Col id="hotkey"/>
+            <Col id="icon">theme://images/pum_WF_mnuItemBG.png</Col>
+            <Col id="check">0</Col>
+          </Row>
+          <Row>
+            <Col id="id">3</Col>
+            <Col id="caption">가나다라02</Col>
+            <Col id="level">0</Col>
+            <Col id="check">0</Col>
+            <Col id="enable"/>
+            <Col id="icon">theme://images/chk_box_N.png</Col>
+            <Col id="hotkey"/>
+          </Row>
+          <Row>
+            <Col id="id">4</Col>
+            <Col id="caption">전체</Col>
+            <Col id="level">1</Col>
+            <Col id="enable"/>
+            <Col id="icon">theme://images/pum_WF_mnuItemBG.png</Col>
+            <Col id="check">1</Col>
+          </Row>
+          <Row>
+            <Col id="id">5</Col>
+            <Col id="caption">가나다라</Col>
+            <Col id="level">1</Col>
+            <Col id="enable"/>
+            <Col id="icon">theme://images/pum_WF_mnuItemBG.png</Col>
+            <Col id="check">0</Col>
+          </Row>
+          <Row>
+            <Col id="id">6</Col>
+            <Col id="caption">가나다라</Col>
+            <Col id="level">1</Col>
+            <Col id="enable"/>
+            <Col id="check">0</Col>
+            <Col id="icon"/>
+          </Row>
+          <Row>
+            <Col id="id">7</Col>
+            <Col id="caption">가나다라</Col>
+            <Col id="level">1</Col>
+            <Col id="enable"/>
+            <Col id="hotkey"/>
+            <Col id="icon">theme://images/pum_WF_mnuItemBG.png</Col>
+            <Col id="check">0</Col>
+          </Row>
+          <Row>
+            <Col id="id">8</Col>
+            <Col id="caption">가나다라</Col>
+            <Col id="level">1</Col>
+            <Col id="enable"/>
+            <Col id="check">1</Col>
+            <Col id="icon">theme://images/ico_check.png</Col>
+          </Row>
+          <Row>
+            <Col id="id">9</Col>
+            <Col id="caption">가나다라03</Col>
+            <Col id="level">0</Col>
+            <Col id="hotkey"/>
+            <Col id="icon">theme://images/pum_WF_mnuItemBG.png</Col>
+            <Col id="enable"/>
+            <Col id="check">0</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="ds_grid_rowhead">
+        <ColumnInfo>
+          <Column id="Column01" type="STRING" size="256"/>
+          <Column id="Column02" type="STRING" size="256"/>
+          <Column id="Column03" type="STRING" size="256"/>
+          <Column id="Column04" type="STRING" size="256"/>
+          <Column id="Column05" type="STRING" size="256"/>
+          <Column id="Column06" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="Column01">컬럼1</Col>
+            <Col id="Column02">컬럼2</Col>
+            <Col id="Column03">컬럼3-1</Col>
+            <Col id="Column04">컬럼3-2</Col>
+            <Col id="Column05">컬럼3-3</Col>
+            <Col id="Column06">컬럼4</Col>
+          </Row>
+          <Row>
+            <Col id="Column01">컬럼1</Col>
+            <Col id="Column02">컬럼2</Col>
+            <Col id="Column03">컬럼3-1</Col>
+            <Col id="Column04">컬럼3-2</Col>
+            <Col id="Column05">컬럼3-3</Col>
+            <Col id="Column06">컬럼4</Col>
+          </Row>
+          <Row>
+            <Col id="Column01">컬럼1</Col>
+            <Col id="Column02">컬럼2</Col>
+            <Col id="Column04">컬럼3-2</Col>
+            <Col id="Column03">컬럼3-1</Col>
+            <Col id="Column05">컬럼3-3</Col>
+            <Col id="Column06">컬럼4</Col>
+          </Row>
+          <Row>
+            <Col id="Column01">컬럼1</Col>
+            <Col id="Column02">컬럼2</Col>
+            <Col id="Column03">컬럼3-1</Col>
+            <Col id="Column04">컬럼3-2</Col>
+            <Col id="Column05">컬럼3-3</Col>
+            <Col id="Column06">컬럼4</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+    </Objects>
+  </Form>
+</FDL>

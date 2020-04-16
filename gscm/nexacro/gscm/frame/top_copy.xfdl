@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.0">
+  <Form id="top" width="1280" height="48" titletext="New Form" onload="top_onload" scrolltype="none">
+    <Layouts>
+      <Layout height="48" mobileorientation="landscape" width="1280">
+        <Static id="Static00" taborder="1" text="" left="0" top="0" right="0" cssclass="sta_TP_bg01" leftbase="" topbase="" bottombase="" rightbase="" widthbase="" heightbase="" height="40"/>
+        <Static id="Static01" taborder="0" text="" left="0" top="0" width="120" cssclass="sta_TP_logo" background="" leftbase="" topbase="" bottombase="" rightbase="" widthbase="" heightbase="" onclick="Static01_onclick" height="40"/>
+        <Button id="Button01" taborder="2" top="0" width="40" height="40" cssclass="btn_TP_menuIcon" right="0"/>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="dsTopMenu"/>
+    </Objects>
+    <Script type="xscript5.1"><![CDATA[
+this.top_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
+{
+	this.setTopMenu();
+};
+
+this.setTopMenu = function()
+{
+	nexacro.getApplication().gdsMenu.filter("menuLvl==0");
+    this.dsTopMenu.copyData(nexacro.getApplication().gdsMenu, true);
+    nexacro.getApplication().gdsMenu.filter("");
+    
+    var nLeft = 160,
+        nTop = 5;
+    var nWidth = 130;
+    var nHeight = 40;
+    var nGap = 0;
+
+    for (var i = 0, len = this.dsTopMenu.rowcount; i < len; i++)
+    {
+        var strMenuId = this.dsTopMenu.getColumn(i, "menuId");
+        var strMenuNm = this.dsTopMenu.getColumn(i, "menuNm");
+        var strId = "btn_" + strMenuId;
+        
+        var objButton = new Button();
+        objButton.init(strId, nLeft, nTop, nWidth, nHeight);
+        objButton.set_text(strMenuNm);
+        objButton.set_cssclass("btn_TP_menu");
+        objButton.menuId = strMenuId;
+        objButton.menuNm = strMenuNm;
+
+        this.addChild(strId, objButton);
+
+        objButton.show();
+
+        objButton.addEventHandler("onclick", this.btnTopMenu_onclick, this);
+
+        nLeft = nLeft + nWidth + nGap;
+    }
+	
+	this.dsTopMenu.clear();
+};
+
+this.btnTopMenu_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.parent.parent && this.parent.parent.divLeft.form.setMenu(obj.menuId, obj.menuNm);
+};]]></Script>
+  </Form>
+</FDL>

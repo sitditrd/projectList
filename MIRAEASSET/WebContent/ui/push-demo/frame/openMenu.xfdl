@@ -1,0 +1,409 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.0">
+  <Form id="openMenu" width="1024" height="30" onload="openMenu_onload">
+    <Layouts>
+      <Layout height="30" mobileorientation="landscape" width="1024">
+        <Static id="Static00" taborder="0" left="0" top="0" right="0" bottom="0" cssclass="sta_MF_bg"/>
+        <Static id="Static01" taborder="1" text="TR Code" left="10" top="3" width="80" height="25"/>
+        <Edit id="edt_code" taborder="2" left="69" top="3" width="101" height="24" onkeydown="edt_code_onkeydown"/>
+        <Static id="Static02" taborder="3" left="180" top="5" width="2" height="20" cssclass="sta_TF_lineBar"/>
+        <Button id="btn_searchPrev" taborder="4" left="189" top="7" width="17" height="17" cssclass="btn_TF_mdiPrev" onclick="btn_search_onclick"/>
+        <Button id="btn_searchNext" taborder="5" left="214" top="7" width="17" height="17" cssclass="btn_TF_mdiNext" onclick="btn_search_onclick"/>
+        <Div id="divButtonList" taborder="6" left="241" top="1" width="679" height="29" text="">
+          <Layouts>
+            <Layout>
+              <Button id="btn_MdiPrev" taborder="0" top="4" width="8" height="19" right="13" cssclass="btn_MF_prev" enable="false" visible="false" onclick="divButtonList_btn_MdiPrev_onclick"/>
+              <Button id="btn_MdiNext" taborder="1" top="4" width="8" height="19" right="0" cssclass="btn_MF_next" enable="false" visible="false" onclick="divButtonList_btn_MdiNext_onclick"/>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Button id="btn_closeAll" taborder="7" top="5" width="19" height="19" cssclass="btn_MF_allX" right="1" onclick="btn_closeAll_onclick"/>
+        <Button id="btn_vertical" taborder="8" top="5" width="19" height="19" cssclass="btn_MF_H" right="21" onclick="btn_arrange_onclick"/>
+        <Button id="btn_horizontal" taborder="9" top="5" width="19" height="19" cssclass="btn_MF_V" right="41" onclick="btn_arrange_onclick"/>
+        <Button id="btn_cascade" taborder="10" top="5" width="19" height="19" cssclass="btn_MF_min" right="61" onclick="btn_arrange_onclick"/>
+        <Button id="btn_maximize" taborder="11" top="5" width="19" height="19" cssclass="btn_MF_max" right="81" onclick="btn_maximize_onclick"/>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="dsOpenList">
+        <ColumnInfo>
+          <Column id="code" type="STRING" size="256"/>
+          <Column id="caption" type="STRING" size="256"/>
+          <Column id="BTN_ID" type="STRING" size="256"/>
+          <Column id="BTN_EX_ID" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.1"><![CDATA[this.numLeft = 0;
+this.numTop = 0;
+this.numWidth = 120;
+this.numHeight = 30;
+this.numExBtnLeft = 91;
+this.numExBtnTop = 1;
+this.numExBtnWidth = 28;
+this.numExBtnHeight = 28;
+this.numWidCount = 0;
+this.numStIdx = 0;
+this.numEdIdx = 0;
+this.strFocusBtn = "";
+
+this.openMenu_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
+{
+	this.numWidCount = nexacro.floor((this.divButtonList.form.btn_MdiPrev.getOffsetLeft() - 10) / (this.numWidth + 1));
+	this.divButtonList.form.set_scrollbartype("none");
+};
+
+this.fnAddTabPage = function(pvWinId, pvMenuNm)
+{
+	var nRow = this.dsOpenList.addRow();
+	this.dsOpenList.setColumn(nRow, "code", pvWinId);
+	this.dsOpenList.setColumn(nRow, "caption", pvMenuNm);
+	this.dsOpenList.setColumn(nRow, "BTN_ID", "btn_Menu_" + pvWinId);
+	this.dsOpenList.setColumn(nRow, "BTN_EX_ID", "btn_Close_" + pvWinId);
+
+	this.fnMenuClear();
+
+	var objBtn = new Button(); // 메뉴 버튼
+	objBtn.init("btn_Menu_" + pvWinId, this.numLeft, this.numTop, this.numWidth + 1, this.numHeight, null, null);
+
+	this.divButtonList.form.addChild("btn_Menu_" + pvWinId, objBtn);
+	objBtn.set_cssclass("btn_MF_tab");
+	objBtn.set_tooltiptext(pvMenuNm);
+	objBtn.set_tooltiptype("hover");
+	//objBtn.set_enable(true);
+
+	var strText = pvMenuNm.length > 15 ? pvMenuNm.substr(0, 15) + "..." : pvMenuNm;
+
+	objBtn.set_text(strText);
+	objBtn.set_visible(true);
+	objBtn.addEventHandler("onclick", this.div_main_btn_Menu_onclick, this);
+	objBtn.show();
+
+	var objCloseBtn = new Button(); // 메뉴 닫기 버튼
+	objCloseBtn.init("btn_Close_" + pvWinId, this.numExBtnLeft, this.numExBtnTop, this.numExBtnWidth, this.numExBtnHeight, null, null);
+	this.divButtonList.form.addChild("btn_Close_" + pvWinId, objCloseBtn);
+
+	objCloseBtn.set_cssclass("btn_MF_tabClose");
+	objCloseBtn.set_visible(true);
+	objCloseBtn.addEventHandler("onclick", this.div_main_btn_Close_onclick, this);
+	objCloseBtn.show();
+
+	objCloseBtn.bringToFront();
+
+	this.strFocusBtn = objBtn.name;
+
+	this.fnMenuMove("ADD");
+};
+
+this.div_main_btn_Menu_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	var strVar = obj.name.replace("btn_Menu_", "");
+	this.fnActiveTabPage(strVar);
+};
+
+this.div_main_btn_Close_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	var strVar = obj.name.replace("btn_Close_", "");
+	this.fnMenuClose(strVar);
+};
+
+this.fnMenuClose = function(pvWinId)
+{
+	var objApp = nexacro.getApplication();
+	var objDelete = objApp.mainframe.VFrameSet.HFrameSet.MDIFrameSet.removeChild(pvWinId);
+
+	if (objDelete) {
+		objDelete.destroy();
+		objDelete = null;
+	}
+
+	this.fnDeleteTabpage(pvWinId);
+};
+
+this.fnActiveTabPage = function(pvWinId)
+{
+	this.fnMenuClear();
+	var nRow = this.dsOpenList.findRow("code", pvWinId);
+	this.strFocusBtn = this.dsOpenList.getColumn(nRow, "BTN_ID");
+
+//	 if (this.divButtonList.form.components[this.strFocusBtn])
+// 	{
+// 		this.divButtonList.form.components[this.strFocusBtn].set_enable(false);
+// 	}
+
+	if (nRow < this.numStIdx)
+	{
+		this.numStIdx = nRow;
+		this.numEdIdx = this.numStIdx + this.numWidCount - 1;
+		if (this.numEdIdx == this.dsOpenList.rowcount) this.numEdIdx = this.dsOpenList.rowcount - 1;
+	}
+	else if (nRow > this.numEdIdx)
+	{
+		this.numEdIdx = nRow;
+		this.numStIdx = this.numEdIdx - this.numWidCount + 1;
+		if (this.numStIdx < 0)
+		{
+			this.numStIdx = 0;
+		}
+	}
+
+	this.fnMenuMove("");
+
+	var objApp = nexacro.getApplication();
+	objApp.mainframe.VFrameSet.HFrameSet.MDIFrameSet[pvWinId].setFocus();
+};
+
+this.fnMenuClear = function(blnVisi)
+{
+	if (!blnVisi) blnVisi = true;
+
+	var objComps = this.divButtonList.form.components;
+	for (var i = 0; i < objComps.length; i++)
+	{
+		if (objComps[i] instanceof Button && objComps[i].name.indexOf("btn_Menu_") >= 0)
+		{
+			//objComps[i].set_enable(true);
+			objComps[i].set_cssclass("btn_MF_tab");
+			objComps[i].set_visible(blnVisi);
+		}
+		else if (!blnVisi && objComps[i] instanceof Button && objComps[i].name.indexOf("btn_Close_") >= 0)
+		{
+			objComps[i].set_visible(blnVisi);
+		}
+	}
+};
+
+// NEXT
+// PREV
+// ADD
+// FIRST
+this.fnMenuMove = function(pvType)
+{
+	if (pvType == "ADD")
+	{
+		this.numEdIdx = this.dsOpenList.rowcount - 1;
+		this.numStIdx = this.numEdIdx - this.numWidCount + 1;
+		if (this.numStIdx < 0)
+		{
+			this.numStIdx = 0;
+		}
+	}
+	else if (pvType == "NEXT")
+	{
+		this.numEdIdx += 1;
+		this.numStIdx = this.numEdIdx - this.numWidCount + 1;
+		if (this.numStIdx < 0)
+		{
+			this.numStIdx = 0;
+		}
+	}
+	else if (pvType == "PREV")
+	{
+		this.numStIdx -= 1;
+		this.numEdIdx = this.numStIdx + this.numWidCount - 1;
+		if (this.numEdIdx >= this.dsOpenList.rowcount) this.numEdIdx = this.dsOpenList.rowcount - 1;
+	}
+	else if (pvType == "FIRST")
+	{
+		this.numStIdx = 0;
+		this.numEdIdx = this.numStIdx + this.numWidCount - 1;
+		if (this.numEdIdx >= this.dsOpenList.rowcount) this.numEdIdx = this.dsOpenList.rowcount - 1;
+	}
+	else if (pvType == "RESIZE")
+	{
+		var numRow = -1;
+		if (this.dsOpenList.rowcount <= this.numWidCount)
+		{
+			this.numStIdx = 0;
+			this.numEdIdx = this.numStIdx + this.numWidCount - 1;
+			if (this.numEdIdx >= this.dsOpenList.rowcount) this.numEdIdx = this.dsOpenList.rowcount - 1;
+		}
+		else
+		{
+			numRow = this.dsOpenList.findRow("BTN_ID", this.strFocusBtn);
+			if (((numRow + 1) - this.numWidCount) >= 0)
+			{
+				this.numEdIdx = numRow;
+				this.numStIdx = this.numEdIdx - this.numWidCount + 1;
+			}
+			else
+			{
+				this.numStIdx = 0;
+				this.numEdIdx = this.numStIdx + this.numWidCount - 1;
+				if (this.numEdIdx >= this.dsOpenList.rowcount) this.numEdIdx = this.dsOpenList.rowcount - 1;
+			}
+		}
+	}
+
+	this.fnMenuClear(false);
+
+	var objBtn, objExBtn;
+	var nLeft = this.numLeft;
+
+	for (var i = this.numStIdx; i <= this.numEdIdx; i++)
+	{
+		objBtn = this.divButtonList.form.components[this.dsOpenList.getColumn(i, "BTN_ID")];
+		objExBtn = this.divButtonList.form.components[this.dsOpenList.getColumn(i, "BTN_EX_ID")];
+		objBtn.move(nLeft, this.numTop);
+		objBtn.set_visible(true);
+		objExBtn.move(nLeft + this.numExBtnLeft, this.numExBtnTop);
+		objExBtn.set_visible(true);
+
+		nLeft += this.numWidth;
+	}
+
+	if (this.numStIdx <= 0)
+	{
+		this.divButtonList.form.btn_MdiPrev.set_enable(false);
+	}
+	else
+	{
+		this.divButtonList.form.btn_MdiPrev.set_enable(true);
+	}
+
+	if ((this.numEdIdx + 1) == this.dsOpenList.rowcount)
+	{
+		this.divButtonList.form.btn_MdiNext.set_enable(false);
+	}
+	else
+	{
+		this.divButtonList.form.btn_MdiNext.set_enable(true);
+	}
+
+	//this.strFocusBtn && this.divButtonList.form.components[this.strFocusBtn] && this.divButtonList.form.components[this.strFocusBtn].set_cssclass("btn_mdi_mdiBtn_s");
+
+	this.divButtonList.form.resetScroll();
+};
+
+this.fnDeleteTabpage = function(pvWinId)
+{
+	var strBtnId, strBtnExId;
+	var objDelete;
+	var nRow = this.dsOpenList.findRow("code", pvWinId);
+
+	if (nRow < 0)
+	{
+		return;
+	}
+
+	strBtnId = this.dsOpenList.getColumn(nRow, "BTN_ID");
+	strBtnExId = this.dsOpenList.getColumn(nRow, "BTN_EX_ID");
+
+	objDelete = this.divButtonList.form.removeChild(strBtnId);
+	
+	if (objDelete)
+	{
+		objDelete.destroy();
+		objDelete = null;
+	}
+
+	objDelete = this.divButtonList.form.removeChild(strBtnExId);
+	
+	if (objDelete)
+	{
+		objDelete.destroy();
+		objDelete = null;
+	}
+
+	this.dsOpenList.deleteRow(nRow);
+	this.dsOpenList.applyChange();
+	this.numEdIdx = -1;
+
+	this.fnMenuMove("RESIZE");
+
+	var objApp = nexacro.getApplication();
+	
+	objApp.gds_OpenMenu.deleteRow(objApp.gds_OpenMenu.findRow("WIN_ID", pvWinId));
+	
+	var count = objApp.gds_OpenMenu.rowcount;
+	if (count == 0) return;
+
+	//다음 포커스 설정
+	var preMenuId = objApp.gds_OpenMenu.getColumn(count - 1, "WIN_ID");
+	preMenuId && this.fnActiveTabPage(preMenuId);
+};
+
+this.divButtonList_btn_MdiPrev_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.fnMenuMove("PREV");
+};
+
+this.divButtonList_btn_MdiNext_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.fnMenuMove("NEXT");
+};
+
+this.btn_arrange_onclick = function(obj:Button,  e:nexacro.ClickEventInfo)
+{
+	var strType = nexacro.replaceAll(obj.name, "btn_", "");
+	
+	var objApp = nexacro.getApplication();
+	var objMDIFrameSet = objApp.mainframe.VFrameSet.HFrameSet.MDIFrameSet;
+	var frameCount = objMDIFrameSet.all.length;
+	
+	if (frameCount > 1)
+	{
+		for (var i = 0; i < frameCount; i++)
+		{
+			objMDIFrameSet.frames[i].set_showtitlebar(true);
+			objMDIFrameSet.frames[i].set_openstatus("normal");
+		}
+		
+		objMDIFrameSet.arrange(strType);
+	}
+};
+
+this.btn_maximize_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	var objApp = nexacro.getApplication();
+	var objMDIFrameSet = objApp.mainframe.VFrameSet.HFrameSet.MDIFrameSet;
+	var frameCount = objMDIFrameSet.all.length;
+	
+	if (frameCount > 1)
+	{
+		var activeFrame = objMDIFrameSet.getActiveFrame();
+		
+		for (var i = 0; i < frameCount; i++)
+		{
+			objMDIFrameSet.frames[i].set_showtitlebar(false);
+			objMDIFrameSet.frames[i].set_openstatus("maximize");
+		}
+		
+		activeFrame.form.setFocus();
+	}
+};
+
+this.btn_closeAll_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	var objApp = nexacro.getApplication();
+	var objMDIFrameSet = objApp.mainframe.VFrameSet.HFrameSet.MDIFrameSet;
+	var frameCount = objMDIFrameSet.all.length;
+	
+	if (frameCount > 1)
+	{
+		var activeFrame = objMDIFrameSet.getActiveFrame();
+		
+		for (var i = frameCount - 1; i > 0; i--)
+		{
+			objMDIFrameSet.frames[i].form.close();
+		}
+		
+		objApp.gds_OpenMenu.clearData();
+	}
+};
+
+this.btn_search_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	
+};
+
+this.edt_code_onkeydown = function(obj:nexacro.Edit,e:nexacro.KeyEventInfo)
+{
+	var filterstr = "";
+	if(e.keycode ==13){
+		var strCode = obj.value;
+	}
+};
+]]></Script>
+  </Form>
+</FDL>

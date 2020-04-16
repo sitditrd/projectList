@@ -1,0 +1,302 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.0">
+  <Form id="PoC_2_3" width="1010" height="691" titletext="데이터 통신 포맷 변경">
+    <Layouts>
+      <Layout height="691" mobileorientation="landscape" width="1010">
+        <Static id="Static01" taborder="0" text="3rd Party 연동" cssclass="sta_WF_title02" left="8" top="8" width="421" height="26"/>
+        <Static id="Static03" taborder="1" left="8" top="37" height="53" right="8" background="#ffffff" border="1px solid silver" text=""/>
+        <Button id="btn_Search" taborder="2" top="52" width="80" height="22" right="17" text="Search" onclick="comm_Click" cssclass="btn_WF_basic02"/>
+        <Static id="Static04" taborder="3" text="조회건수" left="17" top="51" width="48" height="25" textAlign="right"/>
+        <MaskEdit id="mskTemp" taborder="4" top="10" width="90" height="20" visible="false" format="###,###,###,###" right="8"/>
+        <Combo id="cmbRowCount" taborder="5" left="73" top="51" width="96" height="25" innerdataset="innerdataset" codecolumn="codecolumn" datacolumn="datacolumn" value="1000" index="0" text="1000" onitemchanged="cmbRowCount_onitemchanged" readonly="true">
+          <Dataset id="innerdataset">
+            <ColumnInfo>
+              <Column id="codecolumn" size="256"/>
+              <Column id="datacolumn" size="256"/>
+            </ColumnInfo>
+            <Rows>
+              <Row>
+                <Col id="codecolumn">1000</Col>
+                <Col id="datacolumn">1,000</Col>
+              </Row>
+            </Rows>
+          </Dataset>
+        </Combo>
+        <Static id="Static05" taborder="6" text="Fast스크롤 기능" left="177" top="51" width="87" height="25" textAlign="right"/>
+        <Radio id="Radio00" taborder="7" left="272" top="41" width="227" height="46" innerdataset="ds_inner_grid_scroll" codecolumn="code" datacolumn="value" columncount="2" rowcount="3" onitemchanged="Radio00_onitemchanged" index="0" text="기본" value="default"/>
+        <Static id="Static06" taborder="8" text="스크롤 모드" left="507" top="51" width="69" height="25" textAlign="right" visible="false"/>
+        <Radio id="Radio01" taborder="9" left="584" top="43" width="115" height="46" innerdataset="ds_inner_grid_scrolldisplay" codecolumn="code" datacolumn="value" onitemchanged="Radio01_onitemchanged" visible="false" value="normal" text="기본" index="0"/>
+        <Static id="Static02" taborder="10" text="조회건수" top="97" width="48" height="28" right="77" textAlign="right"/>
+        <Static id="stRowCount" taborder="11" text="0건" top="97" width="61" height="28" right="8" color="red"/>
+        <Static id="stSearchTime" taborder="12" text="0초" top="97" width="60" height="28" right="289" color="red"/>
+        <Static id="Static07" taborder="13" text="서버/네트워크 시간" top="97" width="120" height="28" right="357" textAlign="right"/>
+        <Static id="stRenderTime" taborder="14" text="0초" top="97" width="44" height="28" right="141" color="red"/>
+        <Static id="Static08" taborder="15" text="초, 렌더링시간" top="97" width="88" height="28" right="193" textAlign="right"/>
+        <Radio id="rdoDataType" taborder="16" codecolumn="codecolumn" datacolumn="datacolumn" left="82" top="100" width="190" height="24" index="1" value="2" innerdataset="innerdataset" text="SSV" direction="vertical">
+          <Dataset id="innerdataset">
+            <ColumnInfo>
+              <Column id="codecolumn" size="256"/>
+              <Column id="datacolumn" size="256"/>
+            </ColumnInfo>
+            <Rows>
+              <Row>
+                <Col id="codecolumn">0</Col>
+                <Col id="datacolumn">XML  </Col>
+              </Row>
+              <Row>
+                <Col id="codecolumn">2</Col>
+                <Col id="datacolumn">SSV  </Col>
+              </Row>
+              <Row>
+                <Col id="codecolumn">4</Col>
+                <Col id="datacolumn">JSON</Col>
+              </Row>
+            </Rows>
+          </Dataset>
+        </Radio>
+        <Static id="Static09" taborder="17" text="데이터타입" cssclass="sta_WF_condition01" left="8" top="100" width="66" height="22"/>
+        <Grid id="grd_SM" taborder="18" left="8" top="130" right="8" bottom="8" onheadclick="grd_SM_onheadclick" binddataset="dsOutput" autofittype="col">
+          <Formats>
+            <Format id="default"/>
+          </Formats>
+        </Grid>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="dsOutput"/>
+      <Dataset id="ds_inner_grid_scroll">
+        <ColumnInfo>
+          <Column id="code" type="STRING" size="256"/>
+          <Column id="value" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="code">default</Col>
+            <Col id="value">기본</Col>
+          </Row>
+          <Row>
+            <Col id="code">topdisplay</Col>
+            <Col id="value">상단</Col>
+          </Row>
+          <Row>
+            <Col id="code">centerdisplay</Col>
+            <Col id="value">중앙</Col>
+          </Row>
+          <Row>
+            <Col id="code">topbottomdisplay</Col>
+            <Col id="value">상단, 하단</Col>
+          </Row>
+          <Row>
+            <Col id="code">topcenterbottomdisplay</Col>
+            <Col id="value">상단, 중앙, 하단</Col>
+          </Row>
+          <Row>
+            <Col id="code">trackbarfollow</Col>
+            <Col id="value">스크롤 위치</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="ds_inner_grid_scrolldisplay">
+        <ColumnInfo>
+          <Column id="code" type="STRING" size="256"/>
+          <Column id="value" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="code">normal</Col>
+            <Col id="value">기본</Col>
+          </Row>
+          <Row>
+            <Col id="code">page</Col>
+            <Col id="value">페이지단위</Col>
+          </Row>
+          <Row>
+            <Col id="code">line</Col>
+            <Col id="value">Row,Column단위</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.1"><![CDATA[/************************************************************************************************
+* 01. 업무구분 : 공통 - 공통
+* 02. 화면명   : 입력관리_샘플
+* 03. 화면설명 : 데이터조회
+* 04. 작성일   : 2019.09.04
+* 05. 작성자   : 안주환
+* 06. 수정이력 :
+***********************************************************************************************
+*     수정일          이  름    사유
+***********************************************************************************************
+*     
+************************************************************************************************/
+
+/************************************************************************************************
+* 공통 라이브러리 INCLUDE 영역
+************************************************************************************************/
+include "lib::CommUtil.xjs"; 	
+include "lib::ext_CommEco.xjs";
+
+/************************************************************************************************
+* 전역 변수 영역
+************************************************************************************************/
+
+/************************************************************************************************
+* FORM 영역
+************************************************************************************************/
+this.work004_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
+{	
+	//alert(system.navigatorname); //Edge일때는 IE를 찍는 이슈가 있어서 브라우저타입에 따른 분기처리가 되지 않음.
+	//alert(nexacro._BrowserType); //Chrome일때는 webKit을 찍고 나머지는 올바른 타입에 버전까지 출력
+	
+	if (navigator.userAgent.match(/Trident\/.*rv\:(.+?)[\);]/)) //IE
+	{
+		this.Static06.set_visible(true);
+		this.Radio01.set_visible(true);
+		
+		this.Radio01_onitemchanged(this.Radio01);
+	}
+	else if (navigator.userAgent.match(/Edge/)) //Edge
+	{
+		
+	}
+	else if (navigator.userAgent.match(/Chrome|CriOS/)) //Chrome
+	{
+		
+	}
+	
+	if (this.parent.parent.parent.name=="divWork")
+	{
+		this.parent.parent.parent.parent.gfnCheckFormRanderTime();
+	}
+};
+
+/************************************************************************************************
+* FORM 공통 FUNCTION 영역
+************************************************************************************************/
+
+/*********************************************************************
+ * 함 수 명 	: gfn_Right
+ * 함수설명 	: 문자열의 오른쪽부분을 지정한 길이만큼 Return 한다.
+ * 입    력 	: strString	- 대상 문자열
+ *			  	  nSize		- 얻어올 크기. [Default Value = 0]
+ * 결    과 	: 오른쪽 부분이 얻어진 문자열.
+ *********************************************************************/
+this.gfn_Right = function(strString, nSize)
+{
+    var nStart 	= String(strString).length;
+    var nEnd 	= Number(nStart) - Number(nSize);   
+    var rtnVal 	= strString.substring(nStart, nEnd);
+
+    return rtnVal;
+}
+
+/************************************************************************************************
+* TRANSACTION 및 추가 FUNCTION 영역
+************************************************************************************************/
+this.fn_Search = function()
+{
+	var type = "";
+	
+	this.dsOutput.clearData();
+	
+	if(this.cmbRowCount.value == "All")
+	{
+		type = "전체";
+	}
+	
+	var sId = "SEARCH";
+	
+	//트랜잭션 시 전송되는 데이터 형태(SSV, XML, JSON)
+	var type = this.rdoDataType.value;
+	
+	if(type == 0 || type == 2)
+	{
+		var sUrl = "http://localhost/Hwenc/service/pocSearch.jsp?rowcount=" + this.cmbRowCount.value + "&datatype=" + this.rdoDataType.value;
+	}
+	else if(type == 4)
+	{
+		var sUrl = "JSONAdp://localhost/Hwenc/service/pocSearch.jsp?rowcount=" + this.cmbRowCount.value + "&datatype=" + this.rdoDataType.value;
+	}
+	
+	var sInDs = "";
+	var sOutDs = "dsOutput=output";
+	var sParam = "";
+	var sCallback = "fn_Callback";
+	
+	this.starttime = new Date();
+	this.transaction(sId, sUrl, sInDs, sOutDs, sParam, sCallback);
+}
+
+this.fn_Callback = function(sId, nErrorCd, sErrorMsg, elapsedTime)
+{
+	if (nErrorCd < 0)
+	{
+		alert("[" + nErrorCd + "]" + sErrorMsg);
+	}
+	else 
+	{
+		if (sId == "SEARCH")
+		{	
+			this.grd_SM.set_binddataset("dsOutput");
+			this.grd_SM.createFormat();
+			
+			this.endtime = new Date();
+			var totaltime = nexacro.round((this.endtime - this.starttime) / 1000, 3);
+			
+			this.stSearchTime.set_text(elapsedTime + "초");
+			this.stRenderTime.set_text(nexacro.round(totaltime - elapsedTime, 3) + "초");
+			
+			var nRowCount = this.dsOutput.rowcount;
+			var sRowCount;
+			
+			this.mskTemp.set_value(nRowCount);
+			
+			sRowCount = this.mskTemp.text;
+			
+			this.stRowCount.set_text(sRowCount + "건");
+		}
+	}
+}
+
+/************************************************************************************************
+* 각 COMPONENT 별 EVENT 영역
+************************************************************************************************/
+this.comm_Click = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	switch(obj.name)
+	{
+		case "btn_Search" : 
+			this.fn_Search();
+			break;
+	}
+};
+
+this.Radio00_onitemchanged = function(obj:nexacro.Radio,e:nexacro.ItemChangeEventInfo)
+{
+	this.grd_SM.set_fastvscrolltype(obj.value);
+};
+
+this.Radio01_onitemchanged = function(obj:nexacro.Radio,e:nexacro.ItemChangeEventInfo)
+{
+	if(obj.value == "page")
+	{
+		this.Radio00.set_value("default");
+		this.Radio00_onitemchanged(this.Radio00);
+		this.Radio00.set_enable(false);
+	}
+	else if(obj.value == "line")
+	{
+		this.Radio00.set_value("default");
+		this.Radio00_onitemchanged(this.Radio00);
+		this.Radio00.set_enable(false);
+	}
+	else if(obj.value == "normal")
+	{
+		this.Radio00.set_enable(true);
+	}
+	
+	this.grd_SM.set_scrolldisplaymode(obj.value);
+};
+]]></Script>
+  </Form>
+</FDL>

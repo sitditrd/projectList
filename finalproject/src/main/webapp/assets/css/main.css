@@ -1,0 +1,35 @@
+/*Hover effect*/
+iframe {
+	width: 700px;
+	height: 470px;
+	border:none;
+	padding-top: 2%;
+	padding-bottom: 1%;
+}
+.social ul{
+    padding-left: 0px;
+}
+.social li{
+    list-style-type: none;
+    display: inline-block;
+    border:1px solid black;
+    margin-right: 20px;
+}
+.social a{
+    padding: 10px;
+    color: black;
+    text-align: center;
+    text-decoration: none;
+}
+.social a:hover{
+    color: #ffffff;
+    background-color: #e1666a;
+    transition: .5s;
+}
+.social li:hover{
+	border:1px solid #e1666a;
+	transform: .5s;
+}
+.social{
+	padding-top: 20px;
+}

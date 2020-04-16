@@ -1,0 +1,1053 @@
+(function()
+{
+    return function()
+    {
+        if (!this._is_form)
+            return;
+        
+        var obj = null;
+        
+        this.on_create = function()
+        {
+            this.set_name("openMenu");
+            this.set_titletext("MDI Frame");
+            this.set_background("#e4e7ea");
+            this.set_scrolltype("none");
+            if (Form == this.constructor)
+            {
+                this._setFormPosition(1024,33);
+            }
+            
+            // Object(Dataset, ExcelExportObject) Initialize
+            obj = new Dataset("dsOpenList", this);
+            obj._setContents("<ColumnInfo><Column id=\"code\" type=\"STRING\" size=\"256\"/><Column id=\"caption\" type=\"STRING\" size=\"256\"/><Column id=\"BTN_ID\" type=\"STRING\" size=\"256\"/><Column id=\"BTN_EX_ID\" type=\"STRING\" size=\"256\"/></ColumnInfo>");
+            this.addChild(obj.name, obj);
+            
+            // UI Components Initialize
+            obj = new Div("divButtonList","53","0",null,"33","124",null,null,null,null,null,this);
+            obj.set_taborder("1");
+            this.addChild(obj.name, obj);
+
+            obj = new Button("btn_MdiPrev",null,"0","19","33","23",null,null,null,null,null,this.divButtonList.form);
+            obj.set_taborder("0");
+            obj.set_cssclass("btn_MDI_ScnBg, btn_MDI_LeftTabCha");
+            this.divButtonList.addChild(obj.name, obj);
+
+            obj = new Button("btn_MdiNext",null,"0","19","33","0",null,null,null,null,null,this.divButtonList.form);
+            obj.set_taborder("1");
+            obj.set_cssclass("btn_MDI_ScnBg, btn_MDI_RightTabCha");
+            this.divButtonList.addChild(obj.name, obj);
+
+            obj = new Static("Static00",null,"13","1","6","20",null,null,null,null,null,this.divButtonList.form);
+            obj.set_taborder("2");
+            obj.set_background("#bec0c2");
+            this.divButtonList.addChild(obj.name, obj);
+
+            obj = new Button("btn_maximize",null,"0","19","33","104",null,null,null,null,null,this);
+            obj.set_taborder("2");
+            obj.set_cssclass("btn_MDI_ScnBg, btn_MDI_ScnFull");
+            obj.set_enable("true");
+            this.addChild(obj.name, obj);
+
+            obj = new Button("btn_cascade",null,"0","19","33","82",null,null,null,null,null,this);
+            obj.set_taborder("3");
+            obj.set_cssclass("btn_MDI_ScnBg, btn_MDI_ScnWin");
+            obj.set_enable("true");
+            this.addChild(obj.name, obj);
+
+            obj = new Button("btn_horizontal",null,"0","18","33","60",null,null,null,null,null,this);
+            obj.set_taborder("4");
+            obj.set_cssclass("btn_MDI_ScnBg, btn_MDI_ScnVDiv");
+            obj.set_enable("true");
+            this.addChild(obj.name, obj);
+
+            obj = new Button("btn_tilevertical",null,"0","17","33","38",null,null,null,null,null,this);
+            obj.set_taborder("5");
+            obj.set_cssclass("btn_MDI_ScnBg, btn_MDI_ScnHDiv");
+            obj.set_enable("true");
+            this.addChild(obj.name, obj);
+
+            obj = new Button("btn_closeAll",null,"0","17","33","16",null,null,null,null,null,this);
+            obj.set_taborder("6");
+            obj.set_cssclass("btn_MDI_ScnBg, btn_MDI_ScnClose");
+            obj.set_enable("true");
+            this.addChild(obj.name, obj);
+
+            obj = new Button("btn_home","0","0","53","33",null,null,null,null,null,null,this);
+            obj.set_taborder("0");
+            obj.set_cssclass("btn_MDI_Home");
+            obj.set_enable("true");
+            this.addChild(obj.name, obj);
+
+            // Layout Functions
+            //-- Default Layout : this
+            obj = new Layout("default","",1024,33,this,function(p){});
+            obj.set_mobileorientation("landscape");
+            this.addLayout(obj.name, obj);
+            
+            // BindItem Information
+
+        };
+        
+        this.loadPreloadList = function()
+        {
+
+        };
+        
+        // User Script
+        this.registerScript("openMenu.xfdl", function() {
+
+        this.numLeft = 0;
+        this.numTop = 0;
+        this.numWidth = 120;
+        this.numHeight = 33;
+        this.numExBtnLeft = 91;
+        this.numExBtnTop = 5;
+        this.numExBtnWidth = 28;
+        this.numExBtnHeight = 28;
+        this.numWidCount = 0;
+        this.numStIdx = 0;
+        this.numEdIdx = 0;
+        this.strFocusBtn = "";
+
+        this.openMenu_onload = function(obj,e)
+        {
+        	this.numWidCount = nexacro.floor((this.divButtonList.form.btn_MdiPrev.getOffsetLeft() - 10) / (this.numWidth + 1));
+        	this.divButtonList.form.set_scrollbartype("none");
+        };
+
+        this.btn_home_onclick = function(obj,e)
+        {
+        	var objApp = nexacro.getApplication();
+        	objApp.mainframe.VFrameSet.set_separatesize("0,64,33,*,0");
+        };
+
+        this.fnAddTabPage = function(pvWinId, pvMenuNm)
+        {
+        	var nRow = this.dsOpenList.addRow();
+        	this.dsOpenList.setColumn(nRow, "code", pvWinId);
+        	this.dsOpenList.setColumn(nRow, "caption", pvMenuNm);
+        	this.dsOpenList.setColumn(nRow, "BTN_ID", "btn_Menu_" + pvWinId);
+        	this.dsOpenList.setColumn(nRow, "BTN_EX_ID", "btn_Close_" + pvWinId);
+
+        	this.fnMenuClear();
+
+        	var objBtn = new Button(); // 메뉴 버튼
+        	objBtn.init("btn_Menu_" + pvWinId, this.numLeft, this.numTop, this.numWidth + 1, this.numHeight, null, null);
+
+        	this.divButtonList.form.addChild("btn_Menu_" + pvWinId, objBtn);
+        	objBtn.set_cssclass("btn_MDI_TabFix");
+        	objBtn.set_tooltiptext(pvMenuNm);
+        	objBtn.set_tooltiptype("hover");
+
+        	var strText = pvMenuNm.length > 12 ? pvMenuNm.substr(0, 12) + "..." : pvMenuNm;
+
+        	objBtn.set_text(strText);
+        	objBtn.set_visible(true);
+        	objBtn.addEventHandler("onclick", this.div_main_btn_Menu_onclick, this);
+        	objBtn.show();
+
+        	var objCloseBtn = new Button(); // 메뉴 닫기 버튼
+        	objCloseBtn.init("btn_Close_" + pvWinId, this.numExBtnLeft, this.numExBtnTop, this.numExBtnWidth, this.numExBtnHeight, null, null);
+        	this.divButtonList.form.addChild("btn_Close_" + pvWinId, objCloseBtn);
+
+        	objCloseBtn.set_cssclass("btn_MDI_TabClose");
+        	objCloseBtn.set_visible(true);
+        	objCloseBtn.addEventHandler("onclick", this.div_main_btn_Close_onclick, this);
+        	objCloseBtn.show();
+
+        	objCloseBtn.bringToFront();
+
+        	this.strFocusBtn = objBtn.name;
+
+        	this.fnMenuMove("ADD");
+        };
+
+        this.div_main_btn_Menu_onclick = function(obj,e)
+        {
+        	var strVar = obj.name.replace("btn_Menu_", "");
+        	this.fnActiveTabPage(strVar);
+        };
+
+        this.div_main_btn_Close_onclick = function(obj,e)
+        {
+        	var strVar = obj.name.replace("btn_Close_", "");
+        	this.fnMenuClose(strVar);
+        };
+
+        this.fnMenuClose = function(pvWinId)
+        {
+        	var objApp = nexacro.getApplication();
+        	var objDelete = objApp.mainframe.VFrameSet.MDIFrameSet.removeChild(pvWinId);
+
+        	if (objDelete) {
+        		objDelete.destroy();
+        		objDelete = null;
+        	}
+
+        	this.fnDeleteTabpage(pvWinId);
+        };
+
+        this.fnActiveTabPage = function(pvWinId)
+        {
+        	this.fnMenuClear();
+        	var nRow = this.dsOpenList.findRow("code", pvWinId);
+        	this.strFocusBtn = this.dsOpenList.getColumn(nRow, "BTN_ID");
+
+        //	 if (this.divButtonList.form.components[this.strFocusBtn])
+        // 	{
+        // 		this.divButtonList.form.components[this.strFocusBtn].set_enable(false);
+        // 	}
+
+        	if (nRow < this.numStIdx)
+        	{
+        		this.numStIdx = nRow;
+        		this.numEdIdx = this.numStIdx + this.numWidCount - 1;
+        		if (this.numEdIdx == this.dsOpenList.rowcount) this.numEdIdx = this.dsOpenList.rowcount - 1;
+        	}
+        	else if (nRow > this.numEdIdx)
+        	{
+        		this.numEdIdx = nRow;
+        		this.numStIdx = this.numEdIdx - this.numWidCount + 1;
+        		if (this.numStIdx < 0)
+        		{
+        			this.numStIdx = 0;
+        		}
+        	}
+
+        	this.fnMenuMove("");
+
+        	var objApp = nexacro.getApplication();
+        	objApp.mainframe.VFrameSet.MDIFrameSet[pvWinId].setFocus();
+        };
+
+        this.fnMenuClear = function(blnVisi)
+        {
+        	if (!blnVisi) blnVisi = true;
+
+        	var objComps = this.divButtonList.form.components;
+        	for (var i = 0; i < objComps.length; i++)
+        	{
+        		if (objComps[i] instanceof Button && objComps[i].name.indexOf("btn_Menu_") >= 0)
+        		{
+        			//objComps[i].set_enable(true);
+        			objComps[i].set_cssclass("btn_MDI_Tab");
+        			objComps[i].set_visible(blnVisi);
+        		}
+        		else if (!blnVisi && objComps[i] instanceof Button && objComps[i].name.indexOf("btn_Close_") >= 0)
+        		{
+        			objComps[i].set_visible(blnVisi);
+        		}
+        	}
+        };
+
+        // NEXT
+        // PREV
+        // ADD
+        // FIRST
+        this.fnMenuMove = function(pvType)
+        {
+        	if (pvType == "ADD")
+        	{
+        		this.numEdIdx = this.dsOpenList.rowcount - 1;
+        		this.numStIdx = this.numEdIdx - this.numWidCount + 1;
+        		if (this.numStIdx < 0)
+        		{
+        			this.numStIdx = 0;
+        		}
+        	}
+        	else if (pvType == "NEXT")
+        	{
+        		this.numEdIdx += 1;
+        		this.numStIdx = this.numEdIdx - this.numWidCount + 1;
+        		if (this.numStIdx < 0)
+        		{
+        			this.numStIdx = 0;
+        		}
+        	}
+        	else if (pvType == "PREV")
+        	{
+        		this.numStIdx -= 1;
+        		this.numEdIdx = this.numStIdx + this.numWidCount - 1;
+        		if (this.numEdIdx >= this.dsOpenList.rowcount) this.numEdIdx = this.dsOpenList.rowcount - 1;
+        	}
+        	else if (pvType == "FIRST")
+        	{
+        		this.numStIdx = 0;
+        		this.numEdIdx = this.numStIdx + this.numWidCount - 1;
+        		if (this.numEdIdx >= this.dsOpenList.rowcount) this.numEdIdx = this.dsOpenList.rowcount - 1;
+        	}
+        	else if (pvType == "RESIZE")
+        	{
+        		var numRow = -1;
+        		if (this.dsOpenList.rowcount <= this.numWidCount)
+        		{
+        			this.numStIdx = 0;
+        			this.numEdIdx = this.numStIdx + this.numWidCount - 1;
+        			if (this.numEdIdx >= this.dsOpenList.rowcount) this.numEdIdx = this.dsOpenList.rowcount - 1;
+        		}
+        		else
+        		{
+        			numRow = this.dsOpenList.findRow("BTN_ID", this.strFocusBtn);
+        			if (((numRow + 1) - this.numWidCount) >= 0)
+        			{
+        				this.numEdIdx = numRow;
+        				this.numStIdx = this.numEdIdx - this.numWidCount + 1;
+        			}
+        			else
+        			{
+        				this.numStIdx = 0;
+        				this.numEdIdx = this.numStIdx + this.numWidCount - 1;
+        				if (this.numEdIdx >= this.dsOpenList.rowcount) this.numEdIdx = this.dsOpenList.rowcount - 1;
+        			}
+        		}
+        	}
+
+        	this.fnMenuClear(false);
+
+        	var objBtn, objExBtn;
+        	var nLeft = this.numLeft;
+
+        	for (var i = this.numStIdx; i <= this.numEdIdx; i++)
+        	{
+        		objBtn = this.divButtonList.form.components[this.dsOpenList.getColumn(i, "BTN_ID")];
+        		objExBtn = this.divButtonList.form.components[this.dsOpenList.getColumn(i, "BTN_EX_ID")];
+        		objBtn.move(nLeft, this.numTop);
+        		objBtn.set_visible(true);
+        		objExBtn.move(nLeft + this.numExBtnLeft, this.numExBtnTop);
+        		objExBtn.set_visible(true);
+
+        		nLeft += this.numWidth;
+        	}
+
+        	if (this.numStIdx <= 0)
+        	{
+        		this.divButtonList.form.btn_MdiPrev.set_enable(false);
+        	}
+        	else
+        	{
+        		this.divButtonList.form.btn_MdiPrev.set_enable(true);
+        	}
+
+        	if ((this.numEdIdx + 1) == this.dsOpenList.rowcount)
+        	{
+        		this.divButtonList.form.btn_MdiNext.set_enable(false);
+        	}
+        	else
+        	{
+        		this.divButtonList.form.btn_MdiNext.set_enable(true);
+        	}
+
+        	this.strFocusBtn && this.divButtonList.form.components[this.strFocusBtn] && this.divButtonList.form.components[this.strFocusBtn].set_cssclass("btn_MDI_TabFix");
+
+        	this.divButtonList.form.resetScroll();
+
+        	var objApp = nexacro.getApplication();
+        	objApp.mainframe.VFrameSet.set_separatesize("0,64,33,0,*");
+        };
+
+        this.fnDeleteTabpage = function(pvWinId)
+        {
+        	var strBtnId, strBtnExId;
+        	var objDelete;
+        	var nRow = this.dsOpenList.findRow("code", pvWinId);
+
+        	if (nRow < 0)
+        	{
+        		return;
+        	}
+
+        	strBtnId = this.dsOpenList.getColumn(nRow, "BTN_ID");
+        	strBtnExId = this.dsOpenList.getColumn(nRow, "BTN_EX_ID");
+
+        	objDelete = this.divButtonList.form.removeChild(strBtnId);
+
+        	if (objDelete)
+        	{
+        		objDelete.destroy();
+        		objDelete = null;
+        	}
+
+        	objDelete = this.divButtonList.form.removeChild(strBtnExId);
+
+        	if (objDelete)
+        	{
+        		objDelete.destroy();
+        		objDelete = null;
+        	}
+
+        	this.dsOpenList.deleteRow(nRow);
+        	this.dsOpenList.applyChange();
+        	this.numEdIdx = -1;
+
+        	this.fnMenuMove("RESIZE");
+
+        	var objApp = nexacro.getApplication();
+
+        	objApp.gdsOpenMenu.deleteRow(objApp.gdsOpenMenu.findRow("WIN_ID", pvWinId));
+
+        	var count = objApp.gdsOpenMenu.rowcount;
+        	if (count == 0) return;
+
+        	//다음 포커스 설정
+        	var preMenuId = objApp.gdsOpenMenu.getColumn(count - 1, "WIN_ID");
+        	preMenuId && this.fnActiveTabPage(preMenuId);
+        };
+
+        this.divButtonList_btn_MdiPrev_onclick = function(obj,e)
+        {
+        	this.fnMenuMove("PREV");
+        };
+
+        this.divButtonList_btn_MdiNext_onclick = function(obj,e)
+        {
+        	this.fnMenuMove("NEXT");
+        };
+
+        this.btn_arrange_onclick = function(obj,  e)
+        {
+        	var strType = nexacro.replaceAll(obj.name, "btn_", "");
+
+        	var objApp = nexacro.getApplication();
+        	var objMDIFrameSet = objApp.mainframe.VFrameSet.MDIFrameSet;
+        	var frameCount = objMDIFrameSet.all.length;
+
+        	if (frameCount > 1)
+        	{
+        		for (var i = 0; i < frameCount; i++)
+        		{
+        			objMDIFrameSet.frames[i].set_showtitlebar(true);
+        			objMDIFrameSet.frames[i].set_openstatus("normal");
+        		}
+
+        		objMDIFrameSet.arrange(strType);
+        	}
+        };
+
+        this.btn_maximize_onclick = function(obj,e)
+        {
+        	var objApp = nexacro.getApplication();
+        	var objMDIFrameSet = objApp.mainframe.VFrameSet.MDIFrameSet;
+        	var frameCount = objMDIFrameSet.all.length;
+
+        	if (frameCount > 1)
+        	{
+        		var activeFrame = objMDIFrameSet.getActiveFrame();
+
+        		for (var i = 0; i < frameCount; i++)
+        		{
+        			objMDIFrameSet.frames[i].set_showtitlebar(false);
+        			objMDIFrameSet.frames[i].set_openstatus("maximize");
+        		}
+
+        		activeFrame.form.setFocus();
+        	}
+        };
+
+        this.btn_closeAll_onclick = function(obj,e)
+        {
+        	var objApp = nexacro.getApplication();
+        	var objMDIFrameSet = objApp.mainframe.VFrameSet.MDIFrameSet;
+        	var frameCount = objMDIFrameSet.all.length;
+
+        	if (frameCount > 1)
+        	{
+        		var activeFrame = objMDIFrameSet.getActiveFrame();
+
+        		for (var i = frameCount - 1; i > 0; i--)
+        		{
+        			objMDIFrameSet.frames[i].form.close();
+        		}
+
+        		objApp.gdsOpenMenu.clearData();
+        	}
+        };
+
+        // this.fnDelTab = function(winID)
+        // {
+        // 	var nRow = this.ds_tab.findRow("WIN_ID", winID);
+        // 	if (nRow < 0) return false;
+        // 	var tabID = this.fvTabBtnPrefix + winID;
+        //
+        // 	this.fnDelTabBtn(tabID);
+        // 	this.ds_tab.deleteRow(nRow);
+        // 	this.fnRedrawTab();
+        // 	return true;
+        // };
+        //
+        // this.fnAddTab = function(winID, name)
+        // {
+        // 	var nRow = this.ds_tab.findRow("WIN_ID", winID);
+        // 	if (nRow > -1) return nRow;
+        //
+        // 	var tabID = this.fvTabBtnPrefix + winID;
+        // 	nRow = this.ds_tab.addRow();
+        // 	this.ds_tab.setColumn(nRow, "TAB_ID", tabID);
+        // 	this.ds_tab.setColumn(nRow, "WIN_ID", winID);
+        // 	this.ds_tab.setColumn(nRow, "TITLE", name);
+        //
+        // 	this.fnAddTabBtn(tabID, name);
+        //  	this.fnRedrawTab();
+        // 	this.bClose = true;
+        // 	return nRow;
+        // };
+        //
+        // this.fnAddTabBtn = function(tabID, tabName)
+        // {
+        // 	var tabObj;
+        // 	var BtnObj;
+        // 	var exBtnId = this.fvExtraBtnPrefix + tabID;   //extra button id
+        //
+        // 	var tabLength = 53;
+        // 	var objTextWidth =  "";
+        //
+        // 	if (this.gfnIsNull(this.fnFindObj(tabID)))
+        // 	{
+        // 		tabObj = new Button();
+        // 		tabObj.init(tabID, this.fnGetLeft(tabID), 0, 0, this.fvTabHeight, null, null);
+        // 		this.div_tab.addChild(tabObj.name, tabObj);
+        // 	}
+        //
+        // 	var strLimitTabNm = this.fnConvertText(tabName, 12)
+        // 	tabObj.set_text(strLimitTabNm);
+        // 	tabObj.set_tooltiptext(tabName);
+        // 	tabObj.setEventHandler("onclick", this.btnTab_OnClick, this);
+        // 	tabObj.set_visible(true);
+        // 	tabObj.show();
+        //
+        // 	var nCompWidth = this.fnGetTextSizeCal(tabName)[0]+ 40;
+        // 	tabObj.set_cssclass("btn_MDI_TabFix");
+        // 	tabObj.set_width(164);
+        //
+        // 	if (this.fnFindObj(exBtnId) == null && tabName != "MAIN" )
+        // 	{
+        // 		BtnObj = new Button();
+        // 		BtnObj.init(exBtnId, tabObj.getOffsetRight() - this.fvTabExtraRightGap, this.fvExtraTop, tabObj.getOffsetRight() - this.fvTabExtraRightGap + this.fvExtraWidth - (tabObj.getOffsetRight() - this.fvTabExtraRightGap), this.fvExtraTop + this.fvExtraHeight - this.fvExtraTop);
+        //
+        // 		this.fnAddObj(exBtnId, BtnObj);
+        //
+        // 		BtnObj.set_cursor("hand"); // set
+        // 		BtnObj.setEventHandler("onclick", this.btnExtra_OnClick, this);
+        // 		BtnObj.set_visible(true);
+        // 		BtnObj.show();
+        // 		BtnObj.set_cssclass("btn_MDI_TabClose");
+        // 	}
+        // };
+        //
+        // this.fnMoveTab = function (winID)
+        // {
+        // 	var nRow = this.ds_tab.findRow("WIN_ID", winID);
+        // 	if (nRow < 0) return nRow;
+        //
+        // 	var tabID = this.fvTabBtnPrefix + winID;
+        // 	this.fnSetActive(tabID);
+        // 	this.fnRedrawTab();
+        // };
+        //
+        // this.fnChangeTab = function (fromID, toID)
+        // {
+        // 	var nfromRow = this.ds_tab.findRow("WIN_ID", fromID);
+        // 	var ntoRow = this.ds_tab.findRow("WIN_ID", toID);
+        // 	this.ds_tab.moveRow(nfromRow, ntoRow);
+        // 	this.fnRedrawTab();
+        // };
+        //
+        // this.fnGetTab = function (winID)
+        // {
+        // 	return this.ds_tab.findRow("WIN_ID", winID);
+        // };
+        //
+        // this.fnGetCurTab = function ()
+        // {
+        // 	if (this.ds_tab.rowposition < 0)
+        // 	{
+        // 		return false;
+        // 	}
+        // 	return this.ds_tab.getColumn(this.ds_tab.rowposition, "WIN_ID");
+        // };
+        //
+        // this.fnGetTabInfo = function (winID, sCol)
+        // {
+        // 	var nRow = this.ds_tab.findRow("WIN_ID", winID);
+        // 	if (nRow < 0)
+        // 	{
+        // 		return "";
+        // 	}
+        // 	return this.ds_tab.getColumn(nRow, sCol);
+        // };
+        //
+        // this.fnGetTitle = function (winID)
+        // {
+        // 	var curRow = this.ds_tab.findRow("winID", winID);
+        // 	if (this.lookup("nRow") < 0)
+        // 	{
+        // 		return "";
+        // 	}
+        // 	return this.ds_tab.getColumn(curRow, "TITLE");
+        // };
+        //
+        // this.fnSetTitle = function (winID, sTitle)
+        // {
+        // 	var nRow = this.ds_tab.findRow("WIN_ID", winID);
+        // 	if (nRow < 0)
+        // 	{
+        // 		return "";
+        // 	}
+        //
+        // 	var tabID = this.fvTabBtnPrefix + winID;
+        // 	var panelObj = this.fnFindObj(tabID);
+        // 	if ((panelObj == null) || (panelObj == ""))
+        // 	{
+        // 		return;
+        // 	}
+        // 	panelObj.set_text(sTitle);
+        // };
+        //
+        // this.btnTab_OnClick = function (obj:Button, e:ClickEventInfo)
+        // {
+        // 	var winId = obj.name.split(this.fvTabBtnPrefix).join("");
+        // 	this.isActiveFrame(winId);
+        // };
+        //
+        // this.btnExtra_OnClick = function (obj:Button, e:ClickEventInfo)
+        // {
+        // 	var winId = obj.name.split(this.fvTabBtnPrefix).join("").split(this.fvExtraBtnPrefix).join("");
+        //
+        // 	var curTab = this.fnGetCurTab();
+        // 	this.isActiveFrame(winId);
+        //     var objFrame = this.objApp.gvWorkFrame.frames;
+        //
+        //     var rtn = objFrame[winId].form.fnWorkFrameClose();
+        // 	if(rtn) this.fnTabOnClose(winId);
+        // };
+        //
+        // this.fnTabOnClose = function (winid)
+        // {
+        //     var objFrame = this.objApp.gvWorkFrame.frames;
+        //
+        // 	var nRow = this.objApp.gdsOpenMenu.findRow(this.objApp.gvMenuColumns.winId, winid);
+        //
+        // 	var nCloseIdx = nRow;
+        // 	var bSucc  = this.objApp.gdsOpenMenu.deleteRow(nRow);
+        //
+        // 	// MDI 탭버튼 삭제
+        // 	if(!this.gfnIsNull(objFrame[winid]) && nRow > -1)
+        // 	{
+        // 		this.bClose = false;
+        // 		var rObj = this.objApp.gvWorkFrame.removeChild(winid);
+        // 		rObj.destroy();
+        // 		rObj = null;
+        // 		this.fnDelTab(winid);
+        // 	}
+        //
+        //     if(objFrame.length > 0)
+        //     {
+        // 		//window id
+        // 		var winId = this.objApp.gdsOpenMenu.getColumn(this.objApp.gdsOpenMenu.rowposition, this.objApp.gvMenuColumns.winId);
+        //
+        // 		// 탭버튼을 닫은 후에 next Tab버튼 설정
+        // 		this.fnSetActive(this.ds_tab.getColumn(this.ds_tab.findRow("WIN_ID", winId),"TAB_ID"));
+        // 	}else{
+        // 	    this.objApp.gvVFrameSet.set_separatesize("0,64,33,*,0");
+        // 	}
+        // };
+        //
+        // this.btn_nextMdi_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+        // {
+        // 	this.fnMoveFirst(this.fnGetFirstTabIndex() + 1);
+        // 	this.fnRedrawTab();
+        // };
+        //
+        // this.btn_preMdi_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+        // {
+        // 	this.fnMoveFirst(this.fnGetFirstTabIndex() - 1);
+        // 	this.fnRedrawTab();
+        // };
+        //
+        // this.fnGetFirstTabIndex = function ()
+        // {
+        // 	for(var i=0; i < this.ds_tab.rowcount;i++)
+        // 	{
+        // 		var tabID   = this.ds_tab.getColumn(i, "TAB_ID");
+        // 		var tabObj  = this.fnFindObj(tabID);
+        // 		if(0 < tabObj.left) {
+        // 			return i;
+        // 		}
+        // 	}
+        // 	return -1;
+        // };
+        //
+        // this.fnMoveFirst = function (nMoveIdx)
+        // {
+        // 	var nIndex;
+        // 	var tabID;
+        // 	var tabObj;
+        // 	var btnObj;
+        // 	var tabFirstObj;
+        //
+        // 	nIndex = this.fnGetFirstTabIndex();
+        // 	if (nIndex < 0)
+        // 	{
+        // 		return;
+        // 	}
+        //
+        // 	if (nMoveIdx < 0)
+        // 	{
+        // 		return;
+        // 	}
+        // 	if (nMoveIdx >= this.ds_tab.rowcount)
+        // 	{
+        // 		return;
+        // 	}
+        //
+        // 	tabID = this.ds_tab.getColumn(nIndex, "TAB_ID");
+        // 	var tabFirstObj = this.fnFindObj(tabID);
+        //
+        // 	tabID = this.ds_tab.getColumn(nMoveIdx, "TAB_ID");
+        // 	tabObj = this.fnFindObj(tabID);
+        //
+        // 	var nShiftPos = tabObj.getOffsetLeft() - tabFirstObj.getOffsetLeft();
+        //
+        // 	for (var i = 0; i < this.ds_tab.rowcount; i++)
+        // 	{
+        // 		tabID = this.ds_tab.getColumn(i, "TAB_ID");
+        // 		tabObj = this.fnFindObj(tabID);
+        // 		btnObj = this.fnFindObj(this.fvExtraBtnPrefix + tabID);
+        // 		tabObj.move(tabObj.getOffsetLeft() - nShiftPos, tabObj.getOffsetTop());
+        // 		if(this.gfnIsNull(btnObj) == false )
+        // 			btnObj.move(btnObj.getOffsetLeft() - nShiftPos, btnObj.getOffsetTop());
+        // 	}
+        // };
+        //
+        // this.fnSetActive = function (tabID)
+        // {
+        // 	var nRow = this.ds_tab.findRow("TAB_ID", tabID);
+        // 	if (nRow < 0)
+        // 	{
+        // 		return false;
+        // 	}
+        // 	this.ds_tab.set_rowposition(nRow);
+        // 	this.fnSetActiveBtn(tabID);
+        //
+        // 	return true;
+        // };
+        //
+        // this.fnSetActiveBtn = function (tabID)
+        // {
+        // 	var TabObj;
+        // 	var BtnObj;
+        //
+        // 	for (var i = 0; i < this.ds_tab.rowcount; i++)
+        // 	{
+        // 		TabObj = this.fnFindObj(this.ds_tab.getColumn(i, "TAB_ID"));
+        // 		BtnObj = this.fnFindObj(this.fvExtraBtnPrefix + this.ds_tab.getColumn(i, "TAB_ID"));
+        //
+        // 		if(tabID == this.ds_tab.getColumn(i, "TAB_ID"))
+        // 		{
+        // 			TabObj.set_cssclass("btn_MDI_TabFix");
+        // 			this.fnShowTabBtn(i);
+        // 		}
+        // 		else
+        // 		{
+        // 		   TabObj.set_cssclass("btn_MDI_Tab");
+        // 		}
+        // 	}
+        // };
+        //
+        // this.fnShowTabBtn = function (nIdx)
+        // {
+        // 	var i, nLeft, nRight;
+        //
+        // 	var tabObj = this.fnFindObj(this.ds_tab.getColumn(nIdx, this.lookup("_ID")));
+        // 	nLeft = tabObj.getOffsetLeft();
+        // 	nRight = tabObj.getOffsetRight();
+        //
+        // 	if(0 <= nLeft && this.div_tab.getOffsetWidth() >= nRight)
+        // 	{
+        // 		return;
+        // 	}
+        //
+        // 	nRight = tabObj.getOffsetRight();
+        // 	nLeft = tabObj.getOffsetLeft();
+        //
+        // 	if (nLeft < 0)
+        // 	{
+        // 		this.fnMoveFirst(nIdx);
+        // 		return;
+        // 	}
+        //
+        // 	for (var i = this.fnGetFirstTabIndex() + 1; i < this.ds_tab.rowcount; i++)
+        // 	{
+        // 		tabObj = this.fnFindObj(this.ds_tab.getColumn(i, "TAB_ID"));
+        // 		if (nRight - tabObj.getOffsetLeft() <= this.div_tab.getOffsetWidth())
+        // 		{
+        // 			break;
+        // 		}
+        // 		this.fnMoveFirst(i);
+        // 	}
+        // };
+        //
+        // this.fnDelTabBtn = function (tabID)
+        // {
+        // 	var exBtnId = this.fvExtraBtnPrefix + tabID;
+        // 	var TabObj = this.fnFindObj(tabID);
+        // 	var BtnObj = this.fnFindObj(exBtnId);
+        //
+        // 	var nShitLeft = TabObj.getOffsetWidth() + this.fvBtnGap;
+        // 	var curRow = this.ds_tab.findRow("TAB_ID", tabID);
+        //
+        // 	this.fnRemoveObj(exBtnId);
+        // 	this.fnRemoveObj(tabID);
+        //
+        // 	for (var i = curRow + 1; i < this.ds_tab.rowcount; i++)
+        // 	{
+        // 		TabObj = this.fnFindObj(this.ds_tab.getColumn(i, "TAB_ID"));
+        // 		BtnObj = this.fnFindObj(this.fvExtraBtnPrefix + this.ds_tab.getColumn(i, "TAB_ID"));
+        // 		TabObj.move(TabObj.getOffsetLeft() - nShitLeft, TabObj.getOffsetTop());
+        // 		BtnObj.move(BtnObj.getOffsetLeft() - nShitLeft, BtnObj.getOffsetTop());
+        // 	}
+        // 	this.bClose = true;
+        // };
+        //
+        // this.fnFindObj = function (strId)
+        // {
+        // 	return this.div_tab.form.components[strId];
+        // };
+        //
+        // this.fnRemoveObj = function (strId)
+        // {
+        // 	if (this.fnFindObj(strId) == null)
+        // 	{
+        // 		return;
+        // 	}
+        // 	var strObj = this.div_tab.removeChild(strId);
+        // 	if (strObj != null)
+        // 	{
+        // 		strObj.destroy();
+        // 	}
+        // };
+        //
+        // this.fnAddObj = function (strId, obj)
+        // {
+        // 	return this.div_tab.addChild(strId, obj);
+        // };
+        //
+        // this.fnRedrawTab = function()
+        // {
+        // 	var tabObj;
+        // 	var exBtnObj;
+        //
+        // 	this.fnCheckShowBtnAll();
+        // 	this.fnSetTabSpinBtnShow();
+        // };
+        //
+        // this.fnCheckShowBtnAll = function ()
+        // {
+        // 	if (this.ds_tab.rowcount == 0) return;
+        //
+        // 	var tabFirstObj = this.fnFindObj(this.ds_tab.getColumn(0, "TAB_ID"));
+        // 	var tabLastObj = this.fnFindObj(this.ds_tab.getColumn(this.ds_tab.rowcount - 1, "TAB_ID"));
+        // 	var nLeft = tabFirstObj.getOffsetLeft();
+        // 	var nRight = tabLastObj.getOffsetRight();
+        //
+        // 	if (this.div_tab.getOffsetWidth() >= (nRight - nLeft))
+        // 	{
+        // 		this.fnMoveFirst(0);
+        // 		return;
+        // 	}
+        // };
+        //
+        // this.fnGetLeft = function (tabID)
+        // {
+        // 	var curRow = this.ds_tab.findRow("TAB_ID", tabID);
+        // 	if (curRow == 0) return this.fvFirstGap;
+        //
+        // 	var prevTab = this.fnFindObj(this.ds_tab.getColumn(curRow - 1, "TAB_ID"));
+        // 	return prevTab.getOffsetRight() + this.fvBtnGap;
+        // };
+        //
+        // this.fnGetWidth = function (obj, name)
+        // {
+        //     var tabID = obj.name;
+        // 	var curRow = this.ds_tab.findRow("TAB_ID", tabID);
+        // 	var TabObj = this.fnFindObj(this.ds_tab.getColumn(curRow, "TAB_ID"));
+        // 	var objSize = nexacro.getTextSize(name, obj.font);
+        //
+        // 	return objSize.nx + 30;
+        // };
+
+        // this.btn_arrange_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+        // {
+        //     var strType = obj.name.replace("btn_", "");
+        // 	this.fnArrangeWin(strType);
+        // };
+        //
+        // this.fnSetTabSpinBtnShow = function ()
+        // {
+        // 	var tabObj;
+        //
+        // 	if(this.ds_tab.rowcount == 0)
+        // 	{
+        // 		this.btn_preMdi.set_enable(false);
+        // 		this.btn_nextMdi.set_enable(false);
+        // 		return;
+        // 	}
+        //
+        // 	tabObj = this.fnFindObj(this.ds_tab.getColumn(this.ds_tab.rowcount - 1, "TAB_ID"));
+        //
+        // 	if(this.div_tab.getOffsetWidth() < tabObj.getOffsetRight())
+        // 	{
+        // 		this.btn_nextMdi.set_enable(true);
+        // 	}
+        // 	else
+        // 	{
+        // 		this.btn_nextMdi.set_enable(false);
+        // 	}
+        //
+        // 	tabObj = this.fnFindObj(this.ds_tab.getColumn(0, "TAB_ID"));
+        //
+        // 	if(tabObj.getOffsetLeft() < 0)
+        // 	{
+        // 		this.btn_preMdi.set_enable(true);
+        // 	}
+        // 	else
+        // 	{
+        // 		this.btn_preMdi.set_enable(false);
+        // 	}
+        // };
+        //
+        // this.fnArrangeWin = function(strType)
+        // {
+        //     strType = strType.toLowerCase();
+        //
+        // 	// workFrame영역에 open된 childFrame 갯수
+        // 	var iFramesCnt = this.objApp.gvWorkFrame.frames.length;
+        //
+        // 	if (this.objApp.gdsOpenMenu.getRowCount() < 1) return;
+        //
+        // 	switch (strType)
+        // 	{
+        // 		case "maximize" :
+        // 		    var curWinId = this.objApp.gvWorkFrame.getActiveFrame().name;
+        // 			for (var i=0; i<iFramesCnt; i++)
+        // 			{
+        // 				this.objApp.gvWorkFrame.frames[i].set_openstatus("maximize");
+        // 				this.objApp.gvWorkFrame.frames[i].set_showtitlebar(false);
+        // 				this.objApp.gvWorkFrame.frames[i].set_border("0px solid #006666");
+        // 			}
+        //
+        // 			this.isActiveFrame(curWinId);
+        // 			break;
+        //
+        // 		case "closeall" :
+        // 		    for (var i=iFramesCnt; i>0; i--)
+        // 			{
+        // 				this.fnTabOnClose(this.objApp.gvWorkFrame.frames[i-1].name);
+        // 			}
+        // 			break;
+        //
+        // 		case "hidden" :
+        // 			for (var i=0; i<iFramesCnt; i++)
+        // 			{
+        // 				this.objApp.gvWorkFrame.frames[i].set_showtitlebar(true);
+        // 				this.objApp.gvWorkFrame.frames[i].set_border("1px solid #7f7f7b");
+        // 				this.objApp.gvWorkFrame.frames[i].set_borderRadius("3px 3px");
+        // 				this.objApp.gvWorkFrame.frames[i].set_openstatus("minimize");
+        // 			}
+        // 			this.objApp.gvWorkFrame.arrange(strType);
+        // 			break;
+        //
+        // 		default :
+        // 		this.objApp.gvVFrameSet.set_separatesize("0,64,33,0,*");
+        // 		   for (var i=0; i<iFramesCnt; i++)
+        // 			{
+        // 				this.objApp.gvWorkFrame.frames[i].set_showtitlebar(true);
+        // 				this.objApp.gvWorkFrame.frames[i].set_border("1px solid #7f7f7b");
+        // 				this.objApp.gvWorkFrame.frames[i].set_borderRadius("3px 3px");
+        // 				this.objApp.gvWorkFrame.frames[i].set_openstatus("normal");
+        // 				this.objApp.gvWorkFrame.frames[i].titlebar.closebutton.set_enable(false);
+        // 			}
+        // 			this.objApp.gvWorkFrame.arrange(strType);
+        // 			break;
+        // 	}
+        // };
+        //
+        //
+        // this.isActiveFrame = function (winid,  aArgs)
+        // {
+        // 	var framesInfo = this.objApp.gvWorkFrame.frames;
+        //
+        // 	if(this.gfnIsNull(winid)){
+        // 		return true;
+        // 	}
+        //
+        // 	if(framesInfo[winid])
+        // 	{
+        // 	    this.objApp.gvVFrameSet.set_separatesize("0,64,33,0,*");
+        // 		this.fnMoveTab(winid);   //tab이동
+        // 		framesInfo[winid].setFocus();
+        // 		return true;
+        // 	}
+        // };
+        //
+        // this.fnGetTextSizeCal = function(strText)
+        // {
+        // 	var objStatic  = new nexacro.Static();
+        // 	objStatic.init( "objStatic", 0, 0, 0, 0);
+        // 	this.addChild("objStatic", objStatic);
+        // 	objStatic.set_text(strText);
+        // 	objStatic.set_fittocontents("both");
+        // 	objStatic.set_visible(false);
+        // 	objStatic.show();
+        //
+        // 	var width = 0, height = 0;
+        //
+        // 	width = objStatic.getOffsetWidth();
+        // 	height = objStatic.getPixelHeight();
+        //
+        // 	var objDelete = this.removeChild("objStatic");
+        // 	objDelete.destroy();
+        // 	objDelete = null;
+        //
+        // 	return [width, height];
+        // };
+        //
+        // this.fnConvertText = function(strText, nlimit)
+        // {
+        // 	if(this.gfnIsNull(strText)) return "";
+        // 	if(this.gfnIsNull(nlimit)) return strText;
+        //
+        // 	var strTx = new String(strText);
+        // 	var rtnTx;
+        //
+        // 	if(strTx.length > nlimit){
+        // 		rtnTx = this.gfnLeft(strTx, nlimit) + "..";
+        // 		return rtnTx;
+        // 	}else{
+        // 		return strText;
+        // 	}
+        // };
+        });
+        
+        // Regist UI Components Event
+        this.on_initEvent = function()
+        {
+            this.addEventHandler("onload",this.openMenu_onload,this);
+            this.divButtonList.form.btn_MdiPrev.addEventHandler("onclick",this.divButtonList_btn_MdiPrev_onclick,this);
+            this.divButtonList.form.btn_MdiNext.addEventHandler("onclick",this.divButtonList_btn_MdiNext_onclick,this);
+            this.btn_maximize.addEventHandler("onclick",this.btn_maximize_onclick,this);
+            this.btn_cascade.addEventHandler("onclick",this.btn_arrange_onclick,this);
+            this.btn_horizontal.addEventHandler("onclick",this.btn_arrange_onclick,this);
+            this.btn_tilevertical.addEventHandler("onclick",this.btn_arrange_onclick,this);
+            this.btn_closeAll.addEventHandler("onclick",this.btn_closeAll_onclick,this);
+            this.btn_home.addEventHandler("onclick",this.btn_home_onclick,this);
+        };
+
+        this.loadIncludeScript("openMenu.xfdl");
+        this.loadPreloadList();
+        
+        // Remove Reference
+        obj = null;
+    };
+}
+)();

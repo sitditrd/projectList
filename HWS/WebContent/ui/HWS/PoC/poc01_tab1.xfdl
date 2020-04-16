@@ -1,0 +1,108 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="poc01" width="1000" height="250" titletext="속성변경" onload="poc01_onload" onbeforeclose="poc01_onbeforeclose" ontimer="poc01_ontimer">
+    <Layouts>
+      <Layout height="250" mobileorientation="landscape" width="1000">
+        <Static id="Static00" taborder="10" left="5" top="3" width="497" cssclass="sta_WF_box06" height="172"/>
+        <Static id="Static00_01" taborder="11" left="504" top="3" height="172" text="" right="5" cssclass="sta_WF_box06"/>
+        <Static id="Static28" taborder="0" text="접수시간" left="19" top="54" width="92" height="25" cssclass="sta_WF_label01" visible="true"/>
+        <Static id="Static17" taborder="1" text="중요도" left="292" top="54" width="92" height="25" cssclass="sta_WF_label01" visible="true" padding="0px 10px 0px 0px"/>
+        <Edit id="Edit15" taborder="2" left="101" top="54" width="160" height="25" visible="true" value="2011-05-24 14:57:51" text="2011-05-24 14:57:51" onchanged="Common_onchanged"/>
+        <Combo id="Combo00" taborder="3" text="핵심표적" left="361" top="54" width="130" height="25" innerdataset="dsCombo" codecolumn="code" datacolumn="data" index="0" value="1" onitemchanged="Div00_tabDynamic_Tabpage1_Combo00_onitemchanged"/>
+        <Static id="Static00_00" taborder="4" left="5" height="34" cssclass="sta_WF_box07" top="4" text="표적정보" textAlign="center" width="497"/>
+        <Static id="Static00_00_00" taborder="5" left="504" height="34" cssclass="sta_WF_box07" right="5" top="4" text="비고" textAlign="center"/>
+        <TextArea id="TextArea00" taborder="6" left="511" top="44" height="125" value="산술타격필요" right="14" onchanged="Common_onchanged2"/>
+        <Div id="Div00" taborder="7" text="Div00" left="6" width="496" height="131" top="95">
+          <Layouts>
+            <Layout>
+              <Static id="Static00" taborder="0" left="0" height="45" cssclass="sta_WF_box05" right="0" top="86"/>
+              <Static id="Static28_00" taborder="1" text="추진부서" left="18" top="96" width="88" height="25" cssclass="sta_WF_label01" visible="true"/>
+              <Edit id="Edit15_00" taborder="2" left="100" top="96" width="156" height="25" visible="true" onchanged="Common_onchanged"/>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Div id="Div01" taborder="8" text="Div00" left="5" width="496" height="100" visible="false" top="93">
+          <Layouts>
+            <Layout>
+              <Static id="Static19" taborder="0" text="Location Country" left="12" top="12" width="170" height="30" cssclass="sta_WF_label01"/>
+              <Edit id="Edit12" taborder="1" left="190" top="15" width="38" height="25" value="KR" text="KR" onchanged="Common_onchanged"/>
+              <Static id="Static21" taborder="2" text="Customer Deposit Type" left="12" top="42" width="170" height="30" cssclass="sta_WF_label01"/>
+              <Edit id="Edit05" taborder="3" left="229" top="15" width="165" height="25" value="REPUBLIC OF KOREA" text="REPUBLIC OF KOREA" onchanged="Common_onchanged"/>
+              <Edit id="Edit08" taborder="4" left="190" top="45" width="205" height="25" onchanged="Common_onchanged"/>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Div id="Div02" taborder="9" text="Div00" left="4" top="78" width="496" visible="false" height="105">
+          <Layouts>
+            <Layout>
+              <Static id="Static02" taborder="0" text="Operatioin Country" left="13" top="27" width="177" height="30" cssclass="sta_WF_label01"/>
+              <Edit id="Edit12" taborder="1" left="191" top="30" width="36" height="25" value="KR" text="KR" onchanged="Common_onchanged"/>
+              <Edit id="Edit14" taborder="2" left="230" top="30" width="166" height="25" value="REPUBLIC OF KOREA" text="REPUBLIC OF KOREA" onchanged="Common_onchanged"/>
+              <Static id="Static04" taborder="3" text="Parent company Country" left="13" top="57" width="177" height="30" cssclass="sta_WF_label01"/>
+              <Edit id="Edit15" taborder="4" left="191" top="60" width="36" height="25" value="JP" text="JP" onchanged="Common_onchanged"/>
+              <Edit id="Edit16" taborder="5" left="230" top="60" width="166" height="25" value="JAPAN" text="JAPAN" onchanged="Common_onchanged"/>
+            </Layout>
+          </Layouts>
+        </Div>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="dsCombo">
+        <ColumnInfo>
+          <Column id="code" type="STRING" size="256"/>
+          <Column id="data" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="code">1</Col>
+            <Col id="data">핵심표적</Col>
+          </Row>
+          <Row>
+            <Col id="code">2</Col>
+            <Col id="data">표적탐지</Col>
+          </Row>
+          <Row>
+            <Col id="code">3</Col>
+            <Col id="data">표적식별</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.1"><![CDATA[
+this.Div00_tabDynamic_Tabpage1_Combo00_onitemchanged = function(obj:nexacro.Combo,e:nexacro.ItemChangeEventInfo)
+{
+	switch(e.postvalue)
+	{
+		case "1":
+			this.Div00.set_visible(true);
+			this.Div01.set_visible(false);
+			this.Div02.set_visible(false);
+			break;
+			
+		case "2":
+			this.Div00.set_visible(false);
+			this.Div01.set_visible(true);
+			this.Div02.set_visible(false);
+			break;
+			
+		case "3":
+			this.Div00.set_visible(false);
+			this.Div01.set_visible(false);
+			this.Div02.set_visible(true);
+			break;
+	}
+	this.Common_onchanged(obj,e);
+};
+
+this.Common_onchanged = function(obj,e)
+{
+	this.getOwnerFrame().form.fnUpdated();
+};
+
+this.Common_onchanged2 = function(obj:nexacro.TextArea,e:nexacro.ChangeEventInfo)
+{
+	this.getOwnerFrame().form.fnUpdated2();
+};
+]]></Script>
+  </Form>
+</FDL>

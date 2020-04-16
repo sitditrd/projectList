@@ -1,0 +1,85 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.0">
+  <TypeDefinition url="..\default_typedef.xml"/>
+  <Form id="rChart" left="0" top="0" width="787" height="718" titletext="rChart 갤러리" onload="rChart_onload" onkeydown="rChart_onkeydown" stepshowtype="action" stepitemsize="0">
+    <Layouts>
+      <Layout>
+        <Static id="Line" taborder="0" top="6" height="95" width="142" left="-6" onclick="Static_onclick" background="URL(&quot;imagerc::line.jpg&quot;)" cursor="pointer"/>
+        <Static id="Column" taborder="1" left="159" top="0" width="142" height="95" background="URL(&quot;imagerc::column.jpg&quot;)" cursor="pointer" onclick="Static_onclick"/>
+        <Static id="Area" taborder="2" left="477" top="0" width="142" height="95" background="URL(&quot;imagerc::area.jpg&quot;)" cursor="pointer" onclick="Static_onclick"/>
+        <Static id="Pie" taborder="3" left="636" top="0" width="142" height="95" background="URL(&quot;imagerc::pie.jpg&quot;)" cursor="pointer" onclick="Static_onclick"/>
+        <Static id="Bubble" taborder="4" left="0" top="140" width="142" height="95" background="URL(&quot;imagerc::bubble.jpg&quot;)" cursor="pointer" onclick="Static_onclick"/>
+        <Static id="Plot" taborder="5" left="159" top="140" width="142" height="95" background="URL(&quot;imagerc::plot.jpg&quot;)" cursor="pointer" onclick="Static_onclick"/>
+        <Static id="FromTo" taborder="6" left="477" top="140" width="142" height="95" background="URL(&quot;imagerc::from_to.jpg&quot;)" cursor="pointer" onclick="Static_onclick"/>
+        <Static id="Radar" taborder="7" left="636" top="140" width="142" height="95" background="URL(&quot;imagerc::radar.jpg&quot;)" cursor="pointer" onclick="Static_onclick"/>
+        <Static id="Target" taborder="8" left="0" top="280" width="142" height="95" background="URL(&quot;imagerc::target.jpg&quot;)" cursor="pointer" onclick="Static_onclick"/>
+        <Static id="History" taborder="9" left="159" top="280" width="142" height="95" background="URL(&quot;imagerc::history.jpg&quot;)" cursor="pointer" onclick="Static_onclick"/>
+        <Static id="Scroll" taborder="10" left="477" top="280" width="142" height="95" background="URL(&quot;imagerc::scroll.jpg&quot;)" cursor="pointer" onclick="Static_onclick"/>
+        <Static id="Equalizer" taborder="11" left="636" top="280" width="142" height="95" background="URL(&quot;imagerc::equalizer.jpg&quot;)" cursor="pointer" onclick="Static_onclick"/>
+        <Static id="BrokenAxis" taborder="12" left="0" top="420" width="142" height="95" background="URL(&quot;imagerc::broken.jpg&quot;)" cursor="pointer" onclick="Static_onclick"/>
+        <Static id="Image" taborder="13" left="159" top="420" width="142" height="95" background="URL(&quot;imagerc::image.jpg&quot;)" cursor="pointer" onclick="Static_onclick"/>
+        <Static id="Wing" taborder="14" left="477" top="420" width="142" height="95" background="URL(&quot;imagerc::wing.jpg&quot;)" cursor="pointer" onclick="Static_onclick"/>
+        <Static id="WindRose" taborder="15" left="636" top="420" width="142" height="95" background="URL(&quot;imagerc::wind_rose.jpg&quot;)" cursor="pointer" onclick="Static_onclick"/>
+        <Static id="Static18" taborder="16" text="Line" left="0" top="101" height="20" width="142" style="align:center middle;" font="bold 10pt &quot;맑은 고딕&quot;" textAlign="center"/>
+        <Static id="Static19" taborder="17" text="Column" left="159" top="101" width="142" height="20" style="align:center middle;" font="bold 10pt &quot;맑은 고딕&quot;" textAlign="center"/>
+        <Static id="Static20" taborder="18" text="Area" left="477" top="101" width="142" height="20" style="align:center middle;" font="bold 10pt &quot;맑은 고딕&quot;" textAlign="center"/>
+        <Static id="Static21" taborder="19" text="Pie" left="636" top="101" width="142" height="20" style="align:center middle;" font="bold 10pt &quot;맑은 고딕&quot;" textAlign="center"/>
+        <Static id="Static22" taborder="20" text="Bubble" left="0" top="240" width="142" height="20" style="align:center middle;" font="bold 10pt &quot;맑은 고딕&quot;" textAlign="center"/>
+        <Static id="Static23" taborder="21" text="Plot" left="159" top="240" width="142" height="20" style="align:center middle;" font="bold 10pt &quot;맑은 고딕&quot;" textAlign="center"/>
+        <Static id="Static24" taborder="22" text="From - To" left="477" top="240" width="142" height="20" style="align:center middle;" font="bold 10pt &quot;맑은 고딕&quot;" textAlign="center"/>
+        <Static id="Static25" taborder="23" text="Radar" left="636" top="240" width="142" height="20" style="align:center middle;" font="bold 10pt &quot;맑은 고딕&quot;" textAlign="center"/>
+        <Static id="Static26" taborder="24" text="Target vs Actual" left="0" top="381" width="142" height="20" style="align:center middle;" font="bold 10pt &quot;맑은 고딕&quot;" textAlign="center"/>
+        <Static id="Static27" taborder="25" text="History" left="159" top="381" width="142" height="20" style="align:center middle;" font="bold 10pt &quot;맑은 고딕&quot;" textAlign="center"/>
+        <Static id="Static28" taborder="26" text="Scroll" left="477" top="381" width="142" height="20" style="align:center middle;" font="bold 10pt &quot;맑은 고딕&quot;" textAlign="center"/>
+        <Static id="Static29" taborder="27" text="Equalizer" left="636" top="381" width="142" height="20" style="align:center middle;" font="bold 10pt &quot;맑은 고딕&quot;" textAlign="center"/>
+        <Static id="Static30" taborder="28" text="BrokenAxis" left="0" top="521" width="142" height="20" style="align:center middle;" font="bold 10pt &quot;맑은 고딕&quot;" textAlign="center"/>
+        <Static id="Static31" taborder="29" text="Image" left="159" top="521" width="142" height="20" style="align:center middle;" font="bold 10pt &quot;맑은 고딕&quot;" textAlign="center"/>
+        <Static id="Static32" taborder="30" text="Wing" left="477" top="521" width="142" height="20" style="align:center middle;" font="bold 10pt &quot;맑은 고딕&quot;" textAlign="center"/>
+        <Static id="Static33" taborder="31" text="WindRose" left="636" top="521" width="142" height="20" style="align:center middle;" font="bold 10pt &quot;맑은 고딕&quot;" textAlign="center"/>
+        <Static id="Bar" taborder="32" onclick="Static_onclick" left="318" top="0" width="142" height="95" background="URL(&quot;imagerc::bar.jpg&quot;)" cursor="pointer"/>
+        <Static id="Combination" taborder="33" onclick="Static_onclick" left="318" top="140" width="142" height="95" background="URL(&quot;imagerc::combination.jpg&quot;)" cursor="pointer"/>
+        <Static id="RealTime" taborder="34" onclick="Static_onclick" left="318" top="280" width="142" height="95" background="URL(&quot;imagerc::realtime.jpg&quot;)" cursor="pointer"/>
+        <Static id="ImageMatrix" taborder="35" onclick="Static_onclick" left="318" top="420" width="142" height="95" background="URL(&quot;imagerc::image_matrix.jpg&quot;)" cursor="pointer"/>
+        <Static id="Static00" taborder="36" text="Bar" left="318" top="101" width="142" height="20" style="align:center middle;" font="bold 10pt &quot;맑은 고딕&quot;" textAlign="center"/>
+        <Static id="Static01" taborder="37" text="Combination" left="318" top="240" width="142" height="20" style="align:center middle;" font="bold 10pt &quot;맑은 고딕&quot;" textAlign="center"/>
+        <Static id="Static02" taborder="38" text="RealTime" left="318" top="381" width="142" height="20" style="align:center middle;" font="bold 10pt &quot;맑은 고딕&quot;" textAlign="center"/>
+        <Static id="Static03" taborder="39" text="ImageMatrix" left="318" top="521" width="142" height="20" style="align:center middle;" font="bold 10pt &quot;맑은 고딕&quot;" textAlign="center"/>
+        <Static id="Candlestick" taborder="40" onclick="Static_onclick" left="0" top="560" width="142" height="95" background="URL(&quot;imagerc::candlestick.jpg&quot;)" cursor="pointer"/>
+        <Static id="TreeMap" taborder="41" onclick="Static_onclick" left="159" top="560" width="142" height="95" background="URL(&quot;imagerc::treemap.jpg&quot;)" cursor="pointer"/>
+        <Static id="Matrix" taborder="42" onclick="Static_onclick" left="477" top="560" width="142" height="95" background="URL(&quot;imagerc::matrix.jpg&quot;)" cursor="pointer"/>
+        <Static id="OverlayBubble" taborder="43" onclick="Static_onclick" left="636" top="560" width="142" height="95" background="URL(&quot;imagerc::overlaybubble.jpg&quot;)" cursor="pointer"/>
+        <Static id="Pyramid" taborder="44" onclick="Static_onclick" left="0" top="700" width="142" height="95" background="URL(&quot;imagerc::pyramid.jpg&quot;)" cursor="pointer"/>
+        <Static id="Histogram" taborder="45" onclick="Static_onclick" left="159" top="700" width="142" height="95" background="URL(&quot;imagerc::histogram.jpg&quot;)" cursor="pointer"/>
+        <Static id="ErrorBar" taborder="46" onclick="Static_onclick" left="477" top="700" width="142" height="95" background="URL(&quot;imagerc::error_bar.jpg&quot;)" cursor="pointer"/>
+        <Static id="BoxPlot" taborder="47" onclick="Static_onclick" left="636" top="700" width="142" height="95" background="URL(&quot;imagerc::box_plot.jpg&quot;)" cursor="pointer"/>
+        <Static id="Slide" taborder="48" onclick="Static_onclick" left="0" top="840" width="142" height="95" background="URL(&quot;imagerc::slide.jpg&quot;)" cursor="pointer"/>
+        <Static id="Motion" taborder="49" onclick="Static_onclick" left="159" top="840" width="142" height="95" background="URL(&quot;imagerc::motion.jpg&quot;)" cursor="pointer"/>
+        <Static id="SimpleGauge" taborder="50" onclick="Static_onclick" left="477" top="840" width="142" height="95" background="URL(&quot;imagerc::simple_gauge.jpg&quot;)" cursor="pointer"/>
+        <Static id="Gauge" taborder="51" onclick="Static_onclick" left="636" top="840" width="142" height="95" background="URL(&quot;imagerc::gauge.jpg&quot;)" cursor="pointer"/>
+        <Static id="Static04" taborder="52" text="Candlestick" left="0" top="660" width="142" height="20" style="align:center middle;" font="bold 10pt &quot;맑은 고딕&quot;" textAlign="center"/>
+        <Static id="Static06" taborder="53" text="TreeMap" left="159" top="660" width="142" height="20" style="align:center middle;" font="bold 10pt &quot;맑은 고딕&quot;" textAlign="center"/>
+        <Static id="Static07" taborder="54" text="Matrix" left="477" top="660" width="142" height="20" style="align:center middle;" font="bold 10pt &quot;맑은 고딕&quot;" textAlign="center"/>
+        <Static id="Static08" taborder="55" text="OverlayBubble" left="636" top="660" width="142" height="20" style="align:center middle;" font="bold 10pt &quot;맑은 고딕&quot;" textAlign="center"/>
+        <Static id="Static09" taborder="56" text="Pyramid" left="0" top="801" width="142" height="20" style="align:center middle;" font="bold 10pt &quot;맑은 고딕&quot;" textAlign="center"/>
+        <Static id="Static10" taborder="57" text="Histogram" left="159" top="801" width="142" height="20" style="align:center middle;" font="bold 10pt &quot;맑은 고딕&quot;" textAlign="center"/>
+        <Static id="Static11" taborder="58" text="ErrorBar" left="477" top="801" width="142" height="20" style="align:center middle;" font="bold 10pt &quot;맑은 고딕&quot;" textAlign="center"/>
+        <Static id="Static12" taborder="59" text="BoxPlot" left="636" top="801" width="142" height="20" style="align:center middle;" font="bold 10pt &quot;맑은 고딕&quot;" textAlign="center"/>
+        <Static id="Static13" taborder="60" text="Slide" left="0" top="941" width="142" height="20" style="align:center middle;" font="bold 10pt &quot;맑은 고딕&quot;" textAlign="center"/>
+        <Static id="Static14" taborder="61" text="Motion" left="159" top="941" width="142" height="20" style="align:center middle;" font="bold 10pt &quot;맑은 고딕&quot;" textAlign="center"/>
+        <Static id="Static15" taborder="62" text="SimpleGauge" left="477" top="941" width="142" height="20" style="align:center middle;" font="bold 10pt &quot;맑은 고딕&quot;" textAlign="center"/>
+        <Static id="Static16" taborder="63" text="Gauge" left="636" top="941" width="142" height="20" style="align:center middle;" font="bold 10pt &quot;맑은 고딕&quot;" textAlign="center"/>
+        <Static id="WordCloud" taborder="64" onclick="Static_onclick" left="318" top="560" width="142" height="95" background="URL(&quot;imagerc::word_cloud.jpg&quot;)" cursor="pointer"/>
+        <Static id="Vector" taborder="65" onclick="Static_onclick" left="318" top="700" width="142" height="95" background="URL(&quot;imagerc::vector.jpg&quot;)" cursor="pointer"/>
+        <Static id="RealTimePremium" taborder="66" onclick="Static_onclick" left="318" top="840" width="142" height="95" background="URL(&quot;imagerc::realtime_premium.jpg&quot;)" cursor="pointer"/>
+        <Static id="Static17" taborder="67" text="WordCloud" left="318" top="660" width="142" height="20" style="align:center middle;" font="bold 10pt &quot;맑은 고딕&quot;" textAlign="center"/>
+        <Static id="Static34" taborder="68" text="Vector" left="318" top="801" width="142" height="20" style="align:center middle;" font="bold 10pt &quot;맑은 고딕&quot;" textAlign="center"/>
+        <Static id="Static35" taborder="69" text="RealTime-Premium" left="318" top="941" width="142" height="20" style="align:center middle;" font="bold 10pt &quot;맑은 고딕&quot;" textAlign="center"/>
+      </Layout>
+    </Layouts>
+    <Objects/>
+    <Script type="xscript5.1"><![CDATA[this.Static_onclick = function(obj:Static,  e:nexacro.ClickEventInfo)
+{
+	nxlib.openPopup(this, "rChartPop", "comm::rChartPop.xfdl", {chartType: obj.name}, "showtitlebar=false layered=true");
+}]]></Script>
+  </Form>
+</FDL>

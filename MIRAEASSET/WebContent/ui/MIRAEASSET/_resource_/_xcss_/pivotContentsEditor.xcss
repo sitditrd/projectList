@@ -1,0 +1,534 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<XCSS version="1.0"><![CDATA[/**********************Grid***********************************************/
+.Grid
+{
+	background : #ffffff;
+	-nexa-border : 1px solid #b7b1b2;
+}
+
+/*-----------------------------------head------------------------------------*/
+.Grid .head .row .cell
+{
+	font : bold 12px Gulim;
+	color : #2f2f2f;
+	-nexa-border : 1px solid #cacaca;
+	-nexa-padding : 0px;
+	-nexa-text-align : center;
+}
+
+.Grid .head .row .cell[status=disabled]
+{
+	color : #999999;
+}
+
+.Grid .body .row .cell[status=disabled][userstatus=selected]
+{
+	background : #f0f0f0;
+}
+/*-----------------------------------headcellbutton:ButtonControl과 동일------------------------------------*/
+/*-----------------------------------headcellcalendar:CalendarControl과 동일------------------------------------*/
+/*-----------------------------------headcellcheckbox:CheckBoxControl과 동일------------------------------------*/
+/*-----------------------------------headcellcombo:ComboControl과 동일------------------------------------*/
+/*-----------------------------------headcelledit:EditControl과 동일------------------------------------*/
+/*-----------------------------------headcellexpandbutton------------------------------------*/
+/*-----------------------------------headcellimage:별도스타일없음------------------------------------*/
+/*-----------------------------------headcellmaskedit:MaskEditControl과 동일------------------------------------*/
+/*-----------------------------------headcellprogressbar:ProgressBarControl과 동일------------------------------------*/
+/*-----------------------------------headcelltextarea:TextAreaControl과 동일------------------------------------*/
+/*-----------------------------------headcelltreeitem:------------------------------------*/
+
+/*-----------------------------------body------------------------------------*/
+.Grid .body .row .cell
+{
+	color : #222222;
+	-nexa-border : 1px solid #dbdee2;
+	-nexa-padding : 0px;
+}
+
+.Grid .body .row .cell[status=mouseover]
+{
+	background : #f6f6f6;
+}
+
+.Grid .body .row .cell[userstatus=selected]
+{
+	background : #f2f9ff;
+}
+
+.Grid .body .row .cell[status=disabled]
+{
+	color : #999999;
+}
+
+/*-----------------------------------bodycellbutton:ButtonControl과 동일------------------------------------*/
+/*-----------------------------------bodycellcalendar:CalendarControl과 동일------------------------------------*/
+/*-----------------------------------bodycellcheckbox:CheckBoxControl과 동일------------------------------------*/
+/*-----------------------------------bodycellcombo:ComboControl과 동일------------------------------------*/
+/*-----------------------------------bodycelledit:EditControl과 동일------------------------------------*/
+/*-----------------------------------bodycellexpandbutton------------------------------------*/
+/*-----------------------------------bodycellimage:별도스타일없음------------------------------------*/
+/*-----------------------------------bodycellmaskedit:MaskEditControl과 동일------------------------------------*/
+/*-----------------------------------bodycellprogressbar:ProgressBarControl과 동일------------------------------------*/
+/*-----------------------------------bodycelltextarea:TextAreaControl과 동일------------------------------------*/
+/*-----------------------------------bodycelltreeitem:------------------------------------*/
+
+/*-----------------------------------summary------------------------------------*/
+.Grid .summary
+{
+	-nexa-border : 1px solid #c8c1c2, 0px none, 0px none, 0px none;
+}
+
+.Grid .summary .row .cell
+{
+	font : bold 12px Gulim;
+	color : #222222;
+	background : #fdfbe5;
+	-nexa-border : 1px solid #c8c1c2;
+	-nexa-text-align : center;
+}
+
+/*-----------------------------------summarycellbutton:ButtonControl과 동일------------------------------------*/
+/*-----------------------------------summarycellcalendar:CalendarControl과 동일------------------------------------*/
+/*-----------------------------------summarycellcheckbox:CheckBoxControl과 동일------------------------------------*/
+/*-----------------------------------summarycellcombo:ComboControl과 동일------------------------------------*/
+/*-----------------------------------summarycelledit:EditControl과 동일------------------------------------*/
+/*-----------------------------------summarycellexpandbutton------------------------------------*/
+/*-----------------------------------summarycellimage:별도스타일없음------------------------------------*/
+/*-----------------------------------summarycellmaskedit:MaskEditControl과 동일------------------------------------*/
+/*-----------------------------------summarycellprogressbar:ProgressBarControl과 동일------------------------------------*/
+/*-----------------------------------summarycelltextarea:TextAreaControl과 동일------------------------------------*/
+/*-----------------------------------summarycelltreeitem:------------------------------------*/
+
+/*-----------------------------------Grid hscrollbar:------------------------------------*/
+.Grid .hscrollbar
+{
+	-nexa-border : 1px solid #b1b1b1, 0px none, 0px none, 0px none;
+}
+
+/*-----------------------------------Grid vscrollbar:------------------------------------*/
+.Grid .vscrollbar
+{
+	-nexa-border : 0px none, 0px none, 0px none, 1px solid #b1b1b1;
+}
+
+
+/**********************GridCellControl***********************************************/
+/*-----------------------------------cellbutton:ButtonControl과 동일------------------------------------*/
+.GridCellControl .cellbutton
+{
+	font : 12px Gulim;
+	color : #555555;
+	background : linear-gradient(to top,#eaeaea,#ffffff);
+	-nexa-border : 1px solid #c2c2c2;
+}
+
+.GridCellControl .cellbutton[status=mouseover],.GridCellControl .cellbutton[status=focused]
+{
+	background : linear-gradient(to top,#e7e7e7,#fefefe);
+	-nexa-border : 1px solid #a0a0a0;
+}
+
+.GridCellControl .cellbutton[userstatus=pushed],.GridCellControl .cellbutton[userstatus=selected]
+{
+	background : linear-gradient(to top,#fefefe,#e9e9e9);
+}
+
+.GridCellControl .cellbutton[status=disabled]
+{
+	color : #bbbbbb;
+	background : #f5f5f5;
+	-nexa-border : 1px solid #d9d9d9;
+}
+
+/*-----------------------------------cellcalendar:CalendarControl과 동일------------------------------------*/
+.GridCellControl .cellcalendar
+{
+	font : 12px Gulim;
+}
+
+/*-----------------------------------cellcheckbox:CheckBoxControl과 동일------------------------------------*/
+.GridCellControl .cellcheckbox
+{
+	font : 12px Gulim;
+}
+
+/*-----------------------------------cellcombo:ComboControl과 동일------------------------------------*/
+.GridCellControl .cellcombo
+{
+	font : 12px Gulim;
+}
+
+.GridCellControl .cellcombo .combolist
+{
+	font : 12px Gulim;
+	color : #333333;
+}
+
+.GridCellControl .cellcombo .combolist .listboxitem[status=mouseover]
+{
+	background : #e8e9ed;
+}
+
+/*-----------------------------------celledit:EditControl과 동일------------------------------------*/
+.GridCellControl .celledit
+{
+	font : 12px Gulim;
+	background : #ffffff;
+	-nexa-border : 1px solid #d5d5d5;
+	-nexa-padding : 1px 0px 0px 0px;
+}
+
+.GridCellControl .celledit[status=mouseover],.GridCellControl .celledit[status=focused]
+{
+	-nexa-border : 1px solid #5a86cd;
+}
+
+.GridCellControl .celledit[status=disabled]
+{
+	color : #999999;
+	background : #efefef;
+}
+
+/*-----------------------------------cellexpandbutton------------------------------------*/
+.GridCellControl .cellexpandbutton,.GridCellControl .cellexpandbutton[status=focused],
+.GridCellControl .cellexpandbutton[userstatus=pushed],.GridCellControl .cellexpandbutton[userstatus=selected]
+{
+	-nexa-icon : URL('imagerc::btn_pvEditor_customFn.png');
+	background : #f0f0f0;
+	-nexa-padding : 0px 1px;
+	-nexa-border : 1px solid #f0f0f0;	
+}
+.GridCellControl .cellexpandbutton[status=mouseover]
+{
+	-nexa-border : 1px solid #4093e7;
+	-nexa-padding : 0px 1px;
+}
+
+/*-----------------------------------cellimage:별도스타일없음------------------------------------*/
+
+/*-----------------------------------cellmaskedit:MaskEditControl과 동일------------------------------------*/
+.GridCellControl .cellmaskedit
+{
+	font : 12px Gulim;
+	background : #ffffff;
+	-nexa-border : 1px solid #d5d5d5;
+	-nexa-padding : 1px 2px 0px 2px;
+}
+
+.GridCellControl .cellmaskedit[status=mouseover],.GridCellControl .cellmaskedit[status=focused]
+{
+	-nexa-border : 1px solid #5a86cd;
+}
+
+.GridCellControl .cellmaskedit[status=disabled]
+{
+	color : #999999;
+	background : #efefef;
+}
+
+/*-----------------------------------cellprogressbar:ProgressBarControl과 동일------------------------------------*/
+.GridCellControl .cellprogressbar
+{
+	font : 12px Gulim;
+}
+
+/*-----------------------------------celltextarea:TextAreaControl과 동일------------------------------------*/
+.GridCellControl .celltextarea
+{
+	font : 12px Gulim;
+}
+
+.GridCellControl .celltreeitem .treeitemtext
+{
+	font : 12px/normal "Segoe UI";
+	color : #222222;
+	-nexa-padding : 0px;
+}
+
+.GridCellControl .celltreeitem .treeitemtext[status=disabled]
+{
+	color : #999999;
+}
+
+.GridCellControl .celltreeitem .treeitembutton[userstatus=expand]
+{
+	-nexa-icon : URL("imagerc::btn_pvEditor_treeExpand.png");	
+	-nexa-padding : 0px;
+	-nexa-text-align : left;
+}
+
+.GridCellControl .celltreeitem .treeitembutton[userstatus=collapse]
+{
+	-nexa-icon : URL("imagerc::btn_pvEditor_treeCollapse.png");
+	-nexa-padding : 0px;
+	-nexa-text-align : left;
+}
+
+.GridCellControl .celltreeitem .treeitemimage
+{
+	-nexa-padding : 0px;
+}
+
+.GridCellControl .celltreeitem .treeitemimage[userstatus=expand]
+{
+	-nexa-padding : 0px;
+}
+
+.GridCellControl .celltreeitem .treeitemimage[userstatus=collapse]
+{
+	-nexa-padding : 0px;
+}
+
+.GridCellControl .celltreeline
+{
+	-nexa-border : 1px dotted #909090;
+}
+
+.Grid .body .row .cell[userstatus=blinked]
+{
+    background : #125dae;
+	color : #ffffff;
+}
+
+.Grid .body .row .cell.cell_item_status_up,
+.Grid .body .row .cell.cell_item_status_up[status=disabled],
+.Grid .body .row .cell.cell_item_status_up[status=mouseover],
+.Grid .body .row .cell.cell_item_status_up[userstatus=selected]
+{
+	background : URL('imagerc::img_pvGrd_asc.png') no-repeat center center;
+}
+.Grid .body .row .cell.cell_item_status_down,
+.Grid .body .row .cell.cell_item_status_down[status=disabled],
+.Grid .body .row .cell.cell_item_status_down[status=mouseover],
+.Grid .body .row .cell.cell_item_status_down[userstatus=selected]
+{
+	background : URL('imagerc::img_pvGrd_desc.png') no-repeat center center;
+}
+
+.Grid .body .row .cell.cell_item_status_filter,
+.Grid .body .row .cell.cell_item_status_filter[status=disabled],
+.Grid .body .row .cell.cell_item_status_filter[status=mouseover],
+.Grid .body .row .cell.cell_item_status_filter[userstatus=selected]
+{
+	font : normal bold 12px/normal "Arial";
+	-nexa-text-align : center;
+	color : #ffffff;
+	background : URL('imagerc::img_pvGrd_filter.png') no-repeat center center;
+	
+}
+
+.Grid .body .row .cell.cell_item_status_SUM,
+.Grid .body .row .cell.cell_item_status_SUM[status=disabled],
+.Grid .body .row .cell.cell_item_status_SUM[status=mouseover],
+.Grid .body .row .cell.cell_item_status_SUM[userstatus=selected]
+{
+	font : normal bold 12px/normal "Arial";
+	-nexa-text-align : center;
+	color : #ffffff;
+	background : URL('imagerc::img_pvGrd_iconSUM.png') no-repeat center center;
+}
+
+.Grid .body .row .cell.cell_item_status_CNT,
+.Grid .body .row .cell.cell_item_status_CNT[status=disabled],
+.Grid .body .row .cell.cell_item_status_CNT[status=mouseover],
+.Grid .body .row .cell.cell_item_status_CNT[userstatus=selected]
+{
+	font : normal bold 12px/normal "Arial";
+	-nexa-text-align : center;
+	color : #ffffff;
+	background : URL('imagerc::img_pvGrd_iconCNT.png') no-repeat center center;
+}
+
+.Grid .body .row .cell.cell_item_status_AVG,
+.Grid .body .row .cell.cell_item_status_AVG[status=disabled],
+.Grid .body .row .cell.cell_item_status_AVG[status=mouseover],
+.Grid .body .row .cell.cell_item_status_AVG[userstatus=selected]
+{
+	font : normal bold 12px/normal "Arial";
+	-nexa-text-align : center;
+	color : #ffffff;
+	background : URL('imagerc::img_pvGrd_iconAVG.png') no-repeat center center;
+}
+
+.Grid .body .row .cell.cell_item_status_MAX,
+.Grid .body .row .cell.cell_item_status_MAX[status=disabled],
+.Grid .body .row .cell.cell_item_status_MAX[status=mouseover],
+.Grid .body .row .cell.cell_item_status_MAX[userstatus=selected]
+{
+	font : normal bold 12px/normal "Arial";
+	-nexa-text-align : center;
+	color : #ffffff;
+	background : URL('imagerc::img_pvGrd_iconMAX.png') no-repeat center center;
+}
+
+.Grid .body .row .cell.cell_item_status_MIN,
+.Grid .body .row .cell.cell_item_status_MIN[status=disabled],
+.Grid .body .row .cell.cell_item_status_MIN[status=mouseover],
+.Grid .body .row .cell.cell_item_status_MIN[userstatus=selected]
+{
+	font : normal bold 12px/normal "Arial";
+	-nexa-text-align : center;
+	color : #ffffff;
+	background : URL('imagerc::img_pvGrd_iconMIN.png') no-repeat center center;
+}
+
+.Grid .body .row .cell.cell_item_status_FUNC,
+.Grid .body .row .cell.cell_item_status_FUNC[status=disabled],
+.Grid .body .row .cell.cell_item_status_FUNC[status=mouseover],
+.Grid .body .row .cell.cell_item_status_FUNC[userstatus=selected]
+{
+	font : normal bold 12px/normal "Arial";
+	-nexa-text-align : center;
+	color : #ffffff;
+	background : URL('imagerc::img_pvGrd_iconFUNC.png') no-repeat center center;
+}
+.Grid.grid_nxPv_editor
+{	
+}
+.Grid.grid_nxPv_editor .body .row .cell.rowDel
+{
+	
+}
+.Grid.grid_nxPv_editor .head .row .cell
+{
+	background : #d8d8d8;
+	color: #000000;
+	-nexa-border : 1px solid #a3a4a8,1px solid #a3a4a8,1px solid #c2c2c2;
+	font : 12px/normal "Segoe UI";
+}
+.Grid.grid_nxPv_editor .body .row .cell .cellcombo
+{
+	-nexa-border : 0px none;
+	-nexa-padding : 0px 2px;
+	font : 12px/normal "Gulim";
+	color : #222222;
+}
+.Grid.grid_nxPv_editor .body .row .cell .celledit
+{
+	-nexa-border : 0px none;
+	-nexa-padding : 0px 2px;
+	font : 12px/normal "Gulim";
+	color : #222222;
+}
+.PopupMenu.popmenu_nxPv_basic
+{
+	background : #f2f2f2;	
+	box-shadow : 3px 3px 4px #888888;
+	font : 12px/normal "Segoe UI";	
+}
+.PopupMenu.popmenu_nxPv_basic .popupmenuitem
+{
+	background : #f2f2f2;
+	font : 12px/normal "Segoe UI";	
+}
+.Grid.grid_nxPv_editor .body .row .cell[userstatus=selected]
+{
+	background : #ffffff;
+	color : #222222;
+}
+.Button.btn_nxPv_tabBtn,.Button.btn_nxPv_tabBtn[status=focused],.Button.btn_nxPv_tabBtn[status=mouseover],
+.Button.btn_nxPv_tabBtn[userstatus=pushed],.Button.btn_nxPv_tabBtn[userstatus=selected]
+{
+	background : #ffffff;
+	color : #111111;
+	-nexa-border : 0px none,1px solid #a8a9af;
+	-nexa-padding : 0px;
+	font : 12px/normal "Segoe UI";	
+}
+.Button.btn_nxPv_tabBtn[status=disabled]
+{	
+	background : #ffffff;
+	color : #bbbbbb;
+	-nexa-border : 0px none,1px solid #a8a9af;
+}
+.Grid.grid_nxPv_editor .body .row .cell[status=mouseover]
+{
+	background : #ffffff;
+	
+}
+.Grid.grid_nxPv_editor .body .row .cell.rowDel .cellbutton
+{
+	background: URL('imagerc::btn_pvEditor_grdDel.png') no-repeat center #ffffff;
+	-nexa-border : 0px none;
+	
+}
+.PopupDiv.popdiv_nxPv_basic
+{
+	background : #f2f2f2;
+	-nexa-border : 2px solid #b5b5b5;	
+}
+.Static.sta_nxPv_popTitle
+{
+	font : 12px/normal "Segoe UI";		
+}
+.Edit.edit_nxPv_popEdit,.Edit.edit_nxPv_popEdit[status=focused],.Edit.edit_nxPv_popEdit[status=mouseover]
+{
+	-nexa-border : 1px solid #a3a4a8;
+	-nexa-padding : 2px;
+}
+.TextArea.txtarea_nxPv_popTxtarea,.TextArea.txtarea_nxPv_popTxtarea[status=mouseover],.TextArea.txtarea_nxPv_popTxtarea[status=focused]
+{
+	-nexa-border : 1px solid #a3a4a8;
+	-nexa-padding : 2px;
+}
+.Grid.grd_nxPv_treeGrid
+{
+	font : 12px/normal "Segoe UI";
+}
+/* tree Grid style */
+.Grid.grd_nxPv_treeGrid .body .row .cell.treeLv0,.Grid.grd_nxPv_treeGrid .body .row .cell.treeLv0[status=focused],
+.Grid.grd_nxPv_treeGrid .body .row .cell.treeLv0[status=mouseover],.Grid.grd_nxPv_treeGrid .body .row .cell.treeLv0[userstatus=selected]
+{
+	background : #eeeeee;
+	-nexa-border : 0px none,0px none,1px solid #dbdee2;
+	color : #222222;
+	-nexa-padding : 0px;
+}
+.Grid.grd_nxPv_treeGrid .body .row .cell.treeLv1,.Grid.grd_nxPv_treeGrid .body .row .cell.treeLv1[status=focused],
+.Grid.grd_nxPv_treeGrid .body .row .cell.treeLv1[status=mouseover],.Grid.grd_nxPv_treeGrid .body .row .cell.treeLv1[userstatus=selected]
+{
+	background : #ffffff;
+	-nexa-border : 1px solid #dbdee2;
+	color : #222222;
+	-nexa-padding : 0px 4px;
+}
+.Grid.grd_nxPv_treeGrid .body .row .cell .cellcombo,
+.Grid.grd_nxPv_treeGrid .body .row .cell .celledit
+{
+	-nexa-border : 0px none;
+	font : 12px/normal "Segoe UI";
+	color : #222222;
+}
+.Grid.grd_nxPv_treeGrid .body .row .cell
+{
+	font : 12px/normal "Segoe UI";
+	color : #222222;
+}
+.Grid.grd_nxPv_treeGrid .head .row .cell
+{	
+	background : #d8d8d8;
+	-nexa-border : 1px solid #a3a4a8;	
+	font : 12px/normal "Segoe UI";
+}
+.Grid.grid_nxPv_editor .body .row .cell
+{
+	font : 12px/normal "Gulim";
+	-nexa-padding : 0px 2px;
+	color : #333333;
+	-nexa-border : 1px solid #cccccc;
+}
+
+.ImageViewer.NxPivot_comp_splitterV
+{
+	background : URL('imagerc::img_pvGrd_splitterV.png') no-repeat center;
+	-nexa-border : 0px none;
+}
+.ImageViewer.NxPivot_comp_splitterH
+{
+	background : URL('imagerc::img_pvGrd_splitterH.png') no-repeat center;
+	-nexa-border : 0px none;	
+}
+.Div.div_nxPv_conBorder
+{
+	-nexa-border : 1px solid #b7b1b2;
+}]]></XCSS>

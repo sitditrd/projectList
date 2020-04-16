@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<message_layout>
+	<message type="LADD">
+		<field id="id" type="string" size="255" key="true"/>
+		<field id="code" type="string" size="255" check="true"/>
+		<field id="name" type="string" size="255" check="true"/>
+		<field id="orderQty" type="int" size="255" check="true"/>
+	</message>
+	<message type="RADD">
+		<field id="id" type="string" size="255" key="true"/>
+		<field id="code" type="string" size="255" check="true"/>
+		<field id="name" type="string" size="255" check="true"/>
+		<field id="orderQty" type="int" size="255" check="true"/>
+	</message>
+	<message type="LCHE">
+		<field id="id" type="string" size="255" key="true"/>
+		<field id="code" type="string" size="255" check="true"/>
+		<field id="qty" type="int" size="255" check="true"/>
+	</message>
+	<message type="RCHE">
+		<field id="id" type="string" size="255" key="true"/>
+		<field id="code" type="string" size="255" check="true"/>
+		<field id="qty" type="int" size="255" check="true"/>
+	</message>
+	<message type="DCHE">
+		<field id="id" type="string" size="255" key="true"/>
+		<field id="code" type="string" size="255" check="true"/>
+		<field id="qty" type="int" size="255" check="true"/>
+	</message>
+</message_layout>

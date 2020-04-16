@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.0">
+  <Form id="frameLogin" width="480" height="768" titletext="로그인" onload="frameLogin_onload">
+    <Layouts>
+      <Layout height="768" mobileorientation="portrait" width="480">
+        <Static id="sta_titlebg" taborder="0" left="70" top="153" right="70" height="102" accessibilityenable="false" cssclass="sta_WF_loginImg"/>
+        <Edit id="edId" taborder="1" left="70" top="288" height="60" value="admin" cssclass="edi_LOGIN_ID" right="70" text="admin"/>
+        <Edit id="edPw" taborder="2" left="70" top="353" height="60" value="admin" cssclass="edi_LOGIN_PW" right="70" password="true" text="admin"/>
+        <Button id="btnLogin" taborder="3" text="Login" left="70" top="418" height="60" onclick="btnLogin_onclick" cssclass="btn_Login_S" right="70"/>
+      </Layout>
+    </Layouts>
+    <Script type="xscript5.1"><![CDATA[this.objApp = nexacro.getApplication();
+
+this.frameLogin_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
+{
+};
+
+this.btnLogin_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+    this.objApp.gvBase.divMenu.form.fnMakeMenu();	
+    this.objApp.gvBase.fnAction("LOGIN", true);
+};]]></Script>
+    <Objects>
+      <Dataset id="dsMenu">
+        <ColumnInfo>
+          <Column id="level" type="STRING" size="256"/>
+          <Column id="groupId" type="STRING" size="256"/>
+          <Column id="menuId" type="STRING" size="256"/>
+          <Column id="menuNm" type="STRING" size="256"/>
+          <Column id="menuUrl" type="STRING" size="256"/>
+          <Column id="upMenuId" type="STRING" size="256"/>
+          <Column id="useYn" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="level">0</Col>
+            <Col id="groupId">SN00000005</Col>
+            <Col id="menuId">SN50000000</Col>
+            <Col id="menuNm">통합정보시스템</Col>
+            <Col id="upMenuId">SN00000000</Col>
+            <Col id="useYn">Y</Col>
+          </Row>
+          <Row>
+            <Col id="level">1</Col>
+            <Col id="groupId">SN00000005</Col>
+            <Col id="menuId">SN50100000</Col>
+            <Col id="menuNm">학적기본사항관리</Col>
+            <Col id="menuUrl">work::work01.xfdl</Col>
+            <Col id="upMenuId">SN50000000</Col>
+            <Col id="useYn">Y</Col>
+          </Row>
+          <Row>
+            <Col id="level">1</Col>
+            <Col id="groupId">SN00000005</Col>
+            <Col id="menuId">SN50110000</Col>
+            <Col id="menuNm">설문관리</Col>
+            <Col id="menuUrl">work::work02.xfdl</Col>
+            <Col id="useYn">Y</Col>
+            <Col id="upMenuId">SN50000000</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+    </Objects>
+    <Bind>
+      <BindItem id="item0" compid="edId" propid="value" datasetid="dsSearch" columnid="USER_ID"/>
+      <BindItem id="item1" compid="edPw" propid="value" datasetid="dsSearch" columnid="USER_PASSWORD"/>
+    </Bind>
+  </Form>
+</FDL>

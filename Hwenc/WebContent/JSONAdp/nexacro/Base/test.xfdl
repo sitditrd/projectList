@@ -1,0 +1,88 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.0">
+  <Form id="test" width="1280" height="720" titletext="JSON 통신 테스트">
+    <Layouts>
+      <Layout height="720" mobileorientation="landscape" width="1280">
+        <Grid id="Grid00" taborder="0" left="8" top="43" binddataset="Dataset00" right="8" bottom="8">
+          <Formats>
+            <Format id="default"/>
+          </Formats>
+        </Grid>
+        <Button id="btn_CtoS" taborder="1" text="Client-&gt;Server" top="8" width="120" height="27" onclick="comm_Click" right="136"/>
+        <Button id="btn_StoC" taborder="2" text="Server-&gt;Client" top="8" width="120" height="27" onclick="comm_Click" right="8"/>
+        <Button id="btn_Change" taborder="3" text="Txt_Change" top="8" width="120" height="27" onclick="comm_Click" right="264"/>
+      </Layout>
+    </Layouts>
+    <Script type="xscript5.1"><![CDATA[//Server -> Client
+this.fnStoCTransaction = function()
+{
+	this.transaction(
+						 "JSON"
+						,"jsonsvc::jsonTest.jsp"
+						,""
+						,"Dataset00=indata"
+						,""
+						,"fnCallBack"
+						,true
+						,2
+					);
+};
+
+//Client -> Server
+this.fnCtoSTransaction = function()
+{
+	this.transaction(
+						 "JSON"
+						,"jsonsvc::jsonTest.jsp"
+						,"indata=Dataset00:A"
+						,""
+						,"a=b"
+						,"fnCallBack"
+						,true
+						,2
+					);
+};
+
+this.fnCallBack = function(svcId, errCode, errMsg)
+{
+	if(errCode < 0)
+	{
+		this.alert("svcId : " + svcId + "\nerrCode : " + errCode + "\nerrMsg : " + errMsg);
+	}
+	else
+	{
+		if(svcId == "Common")
+		{
+			this.Grid00.createFormat();
+		}
+		else if(svcId == "JSON")
+		{
+			this.Grid00.createFormat();
+		}
+	}
+};
+
+this.comm_Click = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	switch(obj.name)
+	{
+		case "btn_CtoS" : 
+			this.fnCtoSTransaction();
+			break;
+		case "btn_StoC" : 
+			this.fnStoCTransaction();
+			break;
+		case "btn_Change" : 
+			this.Dataset00.setColumn(0, 0, "$$$$$$$$$$$$$");
+			break;
+	}
+};]]></Script>
+    <Objects>
+      <Dataset id="Dataset00">
+        <ColumnInfo>
+          <Column id="Column0" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+  </Form>
+</FDL>

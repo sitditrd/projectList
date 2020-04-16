@@ -1,0 +1,350 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.0">
+  <Form id="work011" width="1010" height="691" titletext="포틀릿화면" onload="work011_onload" onlbuttonup="work011_onlbuttonup" ondrop="work011_ondrop" ontimer="work011_ontimer" ondragmove="work011_ondragmove">
+    <Layouts>
+      <Layout height="691" mobileorientation="landscape" width="1010">
+        <Button id="btnTile01" taborder="0" left="20" top="60" width="213" height="356" cssclass="btn_WF_iconPort01" ondrag="Button_ondrag" textAlign="left" verticalAlign="bottom" text="메시지 입력" wordWrap="char" padding="10px"/>
+        <Button id="btnTile02" taborder="1" left="253" top="60" width="203" height="168" cssclass="btn_WF_iconPort02" ondrag="Button_ondrag" text="메시지 입력" wordWrap="char" padding="10px"/>
+        <Button id="btnTile03" taborder="2" left="476" top="60" width="203" height="168" cssclass="btn_WF_iconPort03" ondrag="Button_ondrag" text="메시지 입력" wordWrap="char" padding="10px"/>
+        <Button id="btnTile04" taborder="3" left="699" top="60" width="203" height="168" cssclass="btn_WF_iconPort04" ondrag="Button_ondrag" text="메시지 입력" wordWrap="char" padding="10px"/>
+        <Button id="btnTile07" taborder="4" left="922" top="60" width="178" height="522" cssclass="btn_WF_iconPort09" ondrag="Button_ondrag" text="메시지 입력" wordWrap="char" padding="10px"/>
+        <Button id="btnTile05" taborder="5" left="253" top="248" width="426" height="168" cssclass="btn_WF_iconPort05" ondrag="Button_ondrag" text="메시지 입력" wordWrap="char" padding="10px"/>
+        <Button id="btnTile06" taborder="6" left="699" top="248" width="203" height="168" cssclass="btn_WF_iconPort06" ondrag="Button_ondrag" text="메시지 입력" wordWrap="char" padding="10px"/>
+        <Button id="btnTile08" taborder="7" left="20" top="436" width="553" height="146" cssclass="btn_WF_iconPort07" ondrag="Button_ondrag" text="메시지 입력" wordWrap="char" padding="10px"/>
+        <Button id="btnTile09" taborder="8" left="593" top="436" width="309" height="146" cssclass="btn_WF_iconPort08" ondrag="Button_ondrag" text="메시지 입력" wordWrap="char" padding="10px"/>
+        <Button id="btnMove" taborder="9" left="1110" top="152" width="213" height="356" cssclass="btn_WF_iconPort01" ondrag="Button_ondrag" border="5px dashed #6f59c2" visible="false"/>
+        <Static id="Static00" taborder="10" text="포틀릿 화면 구성" cssclass="sta_WF_title01" left="10" top="0" width="421" height="50"/>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="Dataset01">
+        <ColumnInfo>
+          <Column id="Column0" type="STRING" size="256"/>
+          <Column id="Column1" type="STRING" size="256"/>
+          <Column id="Column2" type="STRING" size="256"/>
+          <Column id="Column3" type="STRING" size="256"/>
+          <Column id="Column4" type="STRING" size="256"/>
+          <Column id="Column5" type="STRING" size="256"/>
+          <Column id="Column6" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="Column1">홍길동</Col>
+            <Col id="Column2">010-1234-5678</Col>
+            <Col id="Column3">프리세일즈팀/마케팅그룹</Col>
+            <Col id="Column4">서울시 커피구 초코동 123번지 호놀루루아파트 101동 12345호</Col>
+          </Row>
+          <Row>
+            <Col id="Column1">홍길동</Col>
+            <Col id="Column2">010-1234-5678</Col>
+            <Col id="Column3">프리세일즈팀/마케팅그룹</Col>
+            <Col id="Column4">서울시 커피구 초코동 123번지 호놀루루아파트 101동 12345호</Col>
+          </Row>
+          <Row>
+            <Col id="Column1">홍길동</Col>
+            <Col id="Column2">010-1234-5678</Col>
+            <Col id="Column3">프리세일즈팀/마케팅그룹</Col>
+            <Col id="Column4">서울시 커피구 초코동 123번지 호놀루루아파트 101동 12345호</Col>
+          </Row>
+          <Row>
+            <Col id="Column1">홍길동</Col>
+            <Col id="Column2">010-1234-5678</Col>
+            <Col id="Column3">프리세일즈팀/마케팅그룹</Col>
+            <Col id="Column4">서울시 커피구 초코동 123번지 호놀루루아파트 101동 12345호</Col>
+          </Row>
+          <Row>
+            <Col id="Column1">홍길동</Col>
+            <Col id="Column2">010-1234-5678</Col>
+            <Col id="Column3">프리세일즈팀/마케팅그룹</Col>
+            <Col id="Column4">서울시 커피구 초코동 123번지 호놀루루아파트 101동 12345호</Col>
+          </Row>
+          <Row>
+            <Col id="Column1">홍길동</Col>
+            <Col id="Column2">010-1234-5678</Col>
+            <Col id="Column3">프리세일즈팀/마케팅그룹</Col>
+            <Col id="Column4">서울시 커피구 초코동 123번지 호놀루루아파트 101동 12345호</Col>
+          </Row>
+          <Row>
+            <Col id="Column1">홍길동</Col>
+            <Col id="Column2">010-1234-5678</Col>
+            <Col id="Column3">프리세일즈팀/마케팅그룹</Col>
+            <Col id="Column4">서울시 커피구 초코동 123번지 호놀루루아파트 101동 12345호</Col>
+          </Row>
+          <Row>
+            <Col id="Column1">홍길동</Col>
+            <Col id="Column2">010-1234-5678</Col>
+            <Col id="Column3">프리세일즈팀/마케팅그룹</Col>
+            <Col id="Column4">서울시 커피구 초코동 123번지 호놀루루아파트 101동 12345호</Col>
+          </Row>
+          <Row>
+            <Col id="Column1">홍길동</Col>
+            <Col id="Column2">010-1234-5678</Col>
+            <Col id="Column3">프리세일즈팀/마케팅그룹</Col>
+            <Col id="Column4">서울시 커피구 초코동 123번지 호놀루루아파트 101동 12345호</Col>
+          </Row>
+          <Row>
+            <Col id="Column1">홍길동</Col>
+            <Col id="Column2">010-1234-5678</Col>
+            <Col id="Column3">프리세일즈팀/마케팅그룹</Col>
+            <Col id="Column4">서울시 커피구 초코동 123번지 호놀루루아파트 101동 12345호</Col>
+          </Row>
+          <Row>
+            <Col id="Column1">홍길동</Col>
+            <Col id="Column2">010-1234-5678</Col>
+            <Col id="Column3">프리세일즈팀/마케팅그룹</Col>
+            <Col id="Column4">서울시 커피구 초코동 123번지 호놀루루아파트 101동 12345호</Col>
+          </Row>
+          <Row>
+            <Col id="Column1">홍길동</Col>
+            <Col id="Column2">010-1234-5678</Col>
+            <Col id="Column3">프리세일즈팀/마케팅그룹</Col>
+            <Col id="Column4">서울시 커피구 초코동 123번지 호놀루루아파트 101동 12345호</Col>
+          </Row>
+          <Row>
+            <Col id="Column1">홍길동</Col>
+            <Col id="Column2">010-1234-5678</Col>
+            <Col id="Column3">프리세일즈팀/마케팅그룹</Col>
+            <Col id="Column4">서울시 커피구 초코동 123번지 호놀루루아파트 101동 12345호</Col>
+          </Row>
+          <Row>
+            <Col id="Column1">홍길동</Col>
+            <Col id="Column2">010-1234-5678</Col>
+            <Col id="Column3">프리세일즈팀/마케팅그룹</Col>
+            <Col id="Column4">서울시 커피구 초코동 123번지 호놀루루아파트 101동 12345호</Col>
+          </Row>
+          <Row>
+            <Col id="Column1">홍길동</Col>
+            <Col id="Column2">010-1234-5678</Col>
+            <Col id="Column3">프리세일즈팀/마케팅그룹</Col>
+            <Col id="Column4">서울시 커피구 초코동 123번지 호놀루루아파트 101동 12345호</Col>
+          </Row>
+          <Row>
+            <Col id="Column1">홍길동</Col>
+            <Col id="Column2">010-1234-5678</Col>
+            <Col id="Column3">프리세일즈팀/마케팅그룹</Col>
+            <Col id="Column4">서울시 커피구 초코동 123번지 호놀루루아파트 101동 12345호</Col>
+          </Row>
+          <Row>
+            <Col id="Column1">홍길동</Col>
+            <Col id="Column2">010-1234-5678</Col>
+            <Col id="Column3">프리세일즈팀/마케팅그룹</Col>
+            <Col id="Column4">서울시 커피구 초코동 123번지 호놀루루아파트 101동 12345호</Col>
+          </Row>
+          <Row>
+            <Col id="Column1">홍길동</Col>
+            <Col id="Column2">010-1234-5678</Col>
+            <Col id="Column3">프리세일즈팀/마케팅그룹</Col>
+            <Col id="Column4">서울시 커피구 초코동 123번지 호놀루루아파트 101동 12345호</Col>
+          </Row>
+          <Row>
+            <Col id="Column1">홍길동</Col>
+            <Col id="Column2">010-1234-5678</Col>
+            <Col id="Column3">프리세일즈팀/마케팅그룹</Col>
+            <Col id="Column4">서울시 커피구 초코동 123번지 호놀루루아파트 101동 12345호</Col>
+          </Row>
+          <Row>
+            <Col id="Column1">홍길동</Col>
+            <Col id="Column2">010-1234-5678</Col>
+            <Col id="Column3">프리세일즈팀/마케팅그룹</Col>
+            <Col id="Column4">서울시 커피구 초코동 123번지 호놀루루아파트 101동 12345호</Col>
+          </Row>
+          <Row>
+            <Col id="Column1">홍길동</Col>
+            <Col id="Column2">010-1234-5678</Col>
+            <Col id="Column3">프리세일즈팀/마케팅그룹</Col>
+            <Col id="Column4">서울시 커피구 초코동 123번지 호놀루루아파트 101동 12345호</Col>
+          </Row>
+          <Row>
+            <Col id="Column1">홍길동</Col>
+            <Col id="Column2">010-1234-5678</Col>
+            <Col id="Column3">프리세일즈팀/마케팅그룹</Col>
+            <Col id="Column4">서울시 커피구 초코동 123번지 호놀루루아파트 101동 12345호</Col>
+          </Row>
+          <Row>
+            <Col id="Column1">홍길동</Col>
+            <Col id="Column2">010-1234-5678</Col>
+            <Col id="Column3">프리세일즈팀/마케팅그룹</Col>
+            <Col id="Column4">서울시 커피구 초코동 123번지 호놀루루아파트 101동 12345호</Col>
+          </Row>
+          <Row>
+            <Col id="Column1">홍길동</Col>
+            <Col id="Column2">010-1234-5678</Col>
+            <Col id="Column3">프리세일즈팀/마케팅그룹</Col>
+            <Col id="Column4">서울시 커피구 초코동 123번지 호놀루루아파트 101동 12345호</Col>
+          </Row>
+          <Row>
+            <Col id="Column1">홍길동</Col>
+            <Col id="Column2">010-1234-5678</Col>
+            <Col id="Column3">프리세일즈팀/마케팅그룹</Col>
+            <Col id="Column4">서울시 커피구 초코동 123번지 호놀루루아파트 101동 12345호</Col>
+          </Row>
+          <Row>
+            <Col id="Column1">홍길동</Col>
+            <Col id="Column2">010-1234-5678</Col>
+            <Col id="Column3">프리세일즈팀/마케팅그룹</Col>
+            <Col id="Column4">서울시 커피구 초코동 123번지 호놀루루아파트 101동 12345호</Col>
+          </Row>
+          <Row>
+            <Col id="Column1">홍길동</Col>
+            <Col id="Column2">010-1234-5678</Col>
+            <Col id="Column3">프리세일즈팀/마케팅그룹</Col>
+            <Col id="Column4">서울시 커피구 초코동 123번지 호놀루루아파트 101동 12345호</Col>
+          </Row>
+          <Row>
+            <Col id="Column1">홍길동</Col>
+            <Col id="Column2">010-1234-5678</Col>
+            <Col id="Column3">프리세일즈팀/마케팅그룹</Col>
+            <Col id="Column4">서울시 커피구 초코동 123번지 호놀루루아파트 101동 12345호</Col>
+          </Row>
+          <Row>
+            <Col id="Column1">홍길동</Col>
+            <Col id="Column2">010-1234-5678</Col>
+            <Col id="Column3">프리세일즈팀/마케팅그룹</Col>
+            <Col id="Column4">서울시 커피구 초코동 123번지 호놀루루아파트 101동 12345호</Col>
+          </Row>
+          <Row>
+            <Col id="Column1">홍길동</Col>
+            <Col id="Column2">010-1234-5678</Col>
+            <Col id="Column3">프리세일즈팀/마케팅그룹</Col>
+            <Col id="Column4">서울시 커피구 초코동 123번지 호놀루루아파트 101동 12345호</Col>
+          </Row>
+          <Row>
+            <Col id="Column1">홍길동</Col>
+            <Col id="Column2">010-1234-5678</Col>
+            <Col id="Column3">프리세일즈팀/마케팅그룹</Col>
+            <Col id="Column4">서울시 커피구 초코동 123번지 호놀루루아파트 101동 12345호</Col>
+          </Row>
+          <Row>
+            <Col id="Column1">홍길동</Col>
+            <Col id="Column2">010-1234-5678</Col>
+            <Col id="Column3">프리세일즈팀/마케팅그룹</Col>
+            <Col id="Column4">서울시 커피구 초코동 123번지 호놀루루아파트 101동 12345호</Col>
+          </Row>
+          <Row>
+            <Col id="Column1">홍길동</Col>
+            <Col id="Column2">010-1234-5678</Col>
+            <Col id="Column3">프리세일즈팀/마케팅그룹</Col>
+            <Col id="Column4">서울시 커피구 초코동 123번지 호놀루루아파트 101동 12345호</Col>
+          </Row>
+          <Row>
+            <Col id="Column1">홍길동</Col>
+            <Col id="Column2">010-1234-5678</Col>
+            <Col id="Column3">프리세일즈팀/마케팅그룹</Col>
+            <Col id="Column4">서울시 커피구 초코동 123번지 호놀루루아파트 101동 12345호</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.1"><![CDATA[this.bAni = false;
+this.fv_bDrag = false;
+this.fv_timerIdx = 0;
+this.fv_timerMax = 30;
+this.fv_objFrom;
+this.fv_objTo;
+
+this.work011_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
+{
+};
+
+this.Button_ondrag = function(obj:nexacro.Button,e:nexacro.DragEventInfo)
+{
+	this.fv_bDrag = true;
+	e.userdata = obj;
+	this.fn_makeDragObj(obj);
+	return true;
+};
+
+this.work011_ondragmove = function(obj:nexacro.Form,e:nexacro.DragEventInfo)
+{
+	this.btnMove.move(e.clientx+10, e.clienty+10);
+};
+
+this.work011_onlbuttonup = function(obj:nexacro.Form,e:nexacro.MouseEventInfo)
+{
+	if(this.fv_bDrag==true)
+	{
+		this.fv_bDrag = false;
+		this.fn_removeDragObj();
+	}
+};
+
+this.fn_makeDragObj = function(obj)
+{
+	var nWidth = obj.getOffsetWidth();
+	var nHeight = obj.getOffsetHeight();
+	var sCssClass = obj.cssclass;
+	var sMemo = obj.text;
+		
+	this.btnMove.set_cssclass(sCssClass)
+	this.btnMove.set_text(sMemo)
+	
+	this.btnMove.setOffsetWidth(nWidth);
+	this.btnMove.setOffsetHeight(nHeight);
+	this.btnMove.set_visible(true);
+}
+
+this.fn_removeDragObj = function()
+{
+	this.btnMove.set_visible(false);
+}
+
+this.work011_ondrop = function(obj:nexacro.Form,e:nexacro.DragEventInfo)
+{
+	if(this.bAni==false)
+	{
+		this.fv_objFrom = e.userdata;
+		this.fv_objTo = e.fromobject;
+		
+		if(this.fv_objTo.name.indexOf("btnTile")==-1)return;
+		
+		this.fv_objFrom.orgLeft = this.fv_objFrom.getOffsetLeft();
+		this.fv_objFrom.orgTop = this.fv_objFrom.getOffsetTop();
+		this.fv_objFrom.orgWidth = this.fv_objFrom.getOffsetWidth();
+		this.fv_objFrom.orgHeight = this.fv_objFrom.getOffsetHeight();
+		
+		this.fv_objTo.orgLeft = this.fv_objTo.getOffsetLeft();
+		this.fv_objTo.orgTop = this.fv_objTo.getOffsetTop();
+		this.fv_objTo.orgWidth = this.fv_objTo.getOffsetWidth();
+		this.fv_objTo.orgHeight = this.fv_objTo.getOffsetHeight();
+	
+		this.bAni = true;
+		this.setTimer(1, 10);
+	}
+};
+
+this.work011_ontimer = function(obj:nexacro.Form,e:nexacro.TimerEventInfo)
+{
+	if(e.timerid==1)
+	{
+		this.fv_timerIdx++;
+		var nLeft1 = this.fn_moveAni(this.fv_timerIdx, this.fv_objFrom.orgLeft, this.fv_objTo.orgLeft-this.fv_objFrom.orgLeft, this.fv_timerMax);
+		var nTop1 = this.fn_moveAni(this.fv_timerIdx, this.fv_objFrom.orgTop, this.fv_objTo.orgTop-this.fv_objFrom.orgTop, this.fv_timerMax);
+		var nWidth1 = this.fn_moveAni(this.fv_timerIdx, this.fv_objFrom.orgWidth, this.fv_objTo.orgWidth-this.fv_objFrom.orgWidth, this.fv_timerMax);
+		var nHeight1 = this.fn_moveAni(this.fv_timerIdx, this.fv_objFrom.orgHeight, this.fv_objTo.orgHeight-this.fv_objFrom.orgHeight, this.fv_timerMax);
+		
+		var nLeft2 = this.fn_moveAni(this.fv_timerIdx, this.fv_objTo.orgLeft, this.fv_objFrom.orgLeft-this.fv_objTo.orgLeft, this.fv_timerMax);
+		var nTop2 = this.fn_moveAni(this.fv_timerIdx, this.fv_objTo.orgTop, this.fv_objFrom.orgTop-this.fv_objTo.orgTop, this.fv_timerMax);
+		var nWidth2 = this.fn_moveAni(this.fv_timerIdx, this.fv_objTo.orgWidth, this.fv_objFrom.orgWidth-this.fv_objTo.orgWidth, this.fv_timerMax);
+		var nHeight2 = this.fn_moveAni(this.fv_timerIdx, this.fv_objTo.orgHeight, this.fv_objFrom.orgHeight-this.fv_objTo.orgHeight, this.fv_timerMax);
+		
+		this.fv_objFrom.move(nLeft1, nTop1, nWidth1, nHeight1);
+		this.fv_objTo.move(nLeft2, nTop2, nWidth2, nHeight2);
+		
+		if(this.fv_timerIdx==this.fv_timerMax)
+ 		{
+			this.bAni = false;
+ 			this.fv_timerIdx = 0;
+ 			this.killTimer(e.timerid);
+ 		}
+	}
+};
+
+this.fn_moveAni = function (t, b, c, d) 
+{
+	t /= d/2;
+	if (t < 1) return c/2*t*t*t + b;
+	t -= 2;
+	return c/2*(t*t*t + 2) + b;
+}]]></Script>
+  </Form>
+</FDL>

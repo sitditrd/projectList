@@ -1,0 +1,120 @@
+﻿
+        
+.nexainput.nexaleftalign
+{
+  text-align:left;
+}
+.nexainput.nexarightalign
+{
+  text-align:right;
+}
+.nexainput.nexacenteralign
+{
+  text-align:center;
+}
+
+.nexacontentsbox.nexaleftalign
+{
+  text-align:left;
+}
+.nexacontentsbox.nexarightalign
+{
+  text-align:right;
+}
+.nexacontentsbox.nexacenteralign
+{
+  text-align:center;
+}
+.celltreeline
+{
+  border : 1px dotted #999999;
+}
+.Edit, .MaskEdit, .TextArea, .EditControl, .MaskEditControl, .TextAreaControl
+{
+  cursor:text;
+}
+.Button .nexacontentsbox, .ButtonControl .nexacontentsbox
+{
+  text-align:center;
+}
+
+.FileDownload  .nexacontentsbox, .FileDownloadControl .nexacontentsbox
+{
+  text-align:center;
+}
+
+.IconTextControl .nexacontentsbox, .IconControl .nexacontentsbox
+{
+  text-align:center;
+}
+
+.DatePickerDayItemControl .nexacontentsbox, .DatePickerWeekItemControl .nexacontentsbox, .TitleBarButtonControl .nexacontentsbox
+{
+  text-align:center;
+}
+
+.MainFrame, .VScrollBarControl, .HScrollBarControl
+{
+  cursor:default;
+}
+.nexainput
+{
+  cursor:inherit;
+}
+
+.Grid .body .row .cell.cell_gray
+{
+	background : #efefef;
+}
+.Grid .body .row .cell.cell_gray.oddcell
+{
+	background : #efefef;
+}
+.Grid .body .row .cell.cell_gray[status=mouseover]
+{
+	background : #efefef;
+}
+.Grid .body .row .cell.cell_gray.oddcell[status=mouseover]
+{
+	background : #efefef;
+}
+.Grid .body .row .cell.cell_gray[status=focused]
+{
+	background : #efefef;
+}
+.Grid .body .row .cell.cell_gray.oddcell[status=focused]
+{
+	background : #efefef;
+}
+.Grid .body .row .cell.cell_gray[status=readonly]
+{
+	background : #efefef;
+}
+.Grid .body .row .cell.cell_gray.oddcell[status=readonly]
+{
+	background : #efefef;
+}
+.Grid.grd_LF_menu .body .row .cell .celltreeitem .treeitemimage[userstatus=collapse]
+{
+	background : url('./images/img_WF_Treecollapse1.png') no-repeat center;
+}
+.Grid.grd_LF_menu .body .row .cell .celltreeitem .treeitemimage[userstatus=expand]
+{
+	background : url('./images/img_WF_Treeexpand1.png') no-repeat center;
+}
+.Grid .body .row .cell.cell_gray[userstatus=selected]
+{
+	background : #efefef;
+}
+.Grid .body .row .cell.cell_gray.oddcell[userstatus=selected]
+{
+	background : #efefef;
+}
+.Grid .body .row .cell.cell_gray[status=disabled]
+{
+	background : #efefef;
+}
+.Grid .body .row .cell.cell_gray.oddcell[status=disabled]
+{
+	background : #efefef;
+}

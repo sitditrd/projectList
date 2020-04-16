@@ -1,0 +1,99 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.0">
+  <Form id="frmTop" width="1220" height="980" scrolltype="none" scrollbartype="none" onsize="frmTop_onsize">
+    <Layouts>
+      <Layout height="980" width="1220" screenid="">
+        <Div id="div_top" taborder="0" left="210" top="0" height="54" maxwidth="" background="#e7590b" formscrollbartype="none none" formscrolltype="none" text="" right="0" minwidth="610">
+          <Layouts>
+            <Layout>
+              <Button id="btn_leftMenu" taborder="0" left="3" top="9" width="34" height="34" cssclass="btn_TF_LeftOpen"/>
+              <Button id="btn_logOut" taborder="1" top="11" width="30" height="30" cssclass="btn_TF_LogOut" right="9" visible="true"/>
+              <Button id="btn_sysConfig" taborder="2" top="11" width="30" height="30" cssclass="btn_TF_Setting" right="109" visible="true"/>
+              <Static id="sta00" taborder="3" text="한화건설 공사일보" left="38" top="16" width="132" height="23" font="bold 16px/18px &quot;맑은 고딕&quot;" color="white" textAlign="center"/>
+              <Static id="sta00_00" taborder="4" text="로그아웃" top="16" width="67" height="23" font="bold 16px/18px &quot;맑은 고딕&quot;" color="white" right="35" visible="true"/>
+              <Static id="sta00_00_00" taborder="5" text="개인정보" top="16" width="67" height="23" font="bold 16px/18px &quot;맑은 고딕&quot;" color="white" right="136" visible="true"/>
+              <Edit id="edt00" taborder="6" left="32.08%" top="12" height="29" borderRadius="15px" right="35.64%"/>
+              <Button id="Button12" taborder="7" top="17" height="19" cssclass="btn_WF_Search" enable="true" width="19" right="36.44%"/>
+            </Layout>
+            <Layout name="min">
+              <Edit id="edt00" left="2.44%" top="52" height="29" right="2.44%"/>
+              <Button id="Button12" top="57" width="19" height="19" right="3.17%"/>
+              <Button id="btn_sysConfig" top="11" width="30" height="30" right="-110" visible="false"/>
+              <Static id="sta00_00" top="16" width="67" height="23" right="-184" visible="false"/>
+              <Static id="sta00_00_00" top="16" width="67" height="23" right="-83" visible="false"/>
+              <Static id="sta00" left="58" top="16" height="23" right="56"/>
+            </Layout>
+            <Layout name="mid">
+              <Button id="btn_leftMenu" taborder="0" left="3" top="9" width="34" height="34" cssclass="btn_TF_LeftOpen"/>
+              <Button id="btn_logOut" taborder="1" top="11" width="30" height="30" cssclass="btn_TF_LogOut" right="9" visible="true"/>
+              <Button id="btn_sysConfig" taborder="2" top="11" width="30" height="30" cssclass="btn_TF_Setting" right="109" visible="true"/>
+              <Static id="sta00" taborder="3" text="한화건설 공사일보" left="38" top="16" width="132" height="23" font="bold 16px/18px &quot;맑은 고딕&quot;" color="white" textAlign="center"/>
+              <Static id="sta00_00" taborder="4" text="로그아웃" top="16" width="67" height="23" font="bold 16px/18px &quot;맑은 고딕&quot;" color="white" right="35" visible="true"/>
+              <Static id="sta00_00_00" taborder="5" text="개인정보" top="16" width="67" height="23" font="bold 16px/18px &quot;맑은 고딕&quot;" color="white" right="136" visible="true"/>
+              <Edit id="edt00" taborder="6" left="32.08%" top="12" height="29" borderRadius="15px" right="35.64%"/>
+              <Button id="Button12" taborder="7" top="17" height="19" cssclass="btn_WF_Search" enable="true" width="19" right="36.44%"/>
+            </Layout>
+          </Layouts>
+          <InitValue/>
+        </Div>
+        <Div id="divLeft" taborder="1" left="0" top="0" width="210" height="981" formscrollbartype="none none" background="#515356" visible="true">
+          <Layouts>
+            <Layout>
+              <Button id="btn_leftMenu" taborder="0" left="0" top="0" width="70" height="33" cssclass=" btn_LF_SelectMenu, btn_LF_Select01" tabstop="false" visible="true"/>
+              <Button id="btn_favorite" taborder="1" left="70" top="0" width="70" height="33" cssclass="btn_LF_MenuBg, btn_LF_BookMark" tabstop="false" visible="true"/>
+              <Button id="btn_findMenu" taborder="2" left="140" top="0" width="70" height="33" cssclass="btn_LF_MenuBg, btn_LF_MenuSearch" tabstop="false" visible="true"/>
+            </Layout>
+            <Layout name="min">
+              <Button id="btn_favorite" left="70" top="0" width="70" height="33" visible="false"/>
+              <Button id="btn_leftMenu" visible="false"/>
+              <Button id="btn_findMenu" visible="false"/>
+            </Layout>
+            <Layout name="mid">
+              <Button id="btn_leftMenu" taborder="0" left="0" top="0" width="70" height="33" cssclass=" btn_LF_SelectMenu, btn_LF_Select01" tabstop="false" visible="true"/>
+              <Button id="btn_favorite" taborder="1" left="70" top="0" width="70" height="33" cssclass="btn_LF_MenuBg, btn_LF_BookMark" tabstop="false" visible="true"/>
+              <Button id="btn_findMenu" taborder="2" left="140" top="0" width="70" height="33" cssclass="btn_LF_MenuBg, btn_LF_MenuSearch" tabstop="false" visible="true"/>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Static id="sta_topMenuTitle" taborder="2" left="20" top="60" width="180" height="17" fittocontents="none" cssclass="btn_LF_MenuTitle" text="시스템" font="bold 16px/18px &quot;맑은 고딕&quot;" visible="true"/>
+        <Static id="sta_titleUp" taborder="3" text="앱설치" left="75" width="50" height="17" fittocontents="width" color="white" font="bold 16px/14px &quot;맑은 고딕&quot;" bottom="93" visible="true"/>
+        <Div id="divMain" taborder="4" left="210" top="94" maxwidth="" maxheight="" text="" bottom="0" url="sample::poc01.xfdl" right="0" minwidth="800" formscrollbartype="default">
+          <Layouts>
+            <Layout/>
+            <Layout name="mid"/>
+          </Layouts>
+        </Div>
+        <Static id="Static132_00" taborder="5" text="공종관리" left="297" top="63" width="67" height="23" fittocontents="width" font="bold 14px/18px &quot;맑은 고딕&quot;"/>
+        <Static id="Static132" taborder="6" text="일보관리  /  " left="219" top="63" width="78" height="23" fittocontents="width" font="14px/18px &quot;맑은 고딕&quot;"/>
+        <Static id="sta00" taborder="7" text="sta00" left="219" top="89" height="2" background="#e0e0e0" right="7"/>
+      </Layout>
+      <Layout height="980" width="800" screenid="" name="mid">
+        <Div id="div_top" taborder="0" left="210" top="0" height="54" maxwidth="" background="#e7590b" formscrollbartype="none none" formscrolltype="none" text="" right="0" minwidth="610"/>
+        <Div id="divLeft" taborder="1" left="0" top="0" width="210" height="981" formscrollbartype="none none" background="#515356" visible="true"/>
+        <Static id="sta_topMenuTitle" taborder="2" left="20" top="60" width="180" height="17" fittocontents="none" cssclass="btn_LF_MenuTitle" text="시스템" font="bold 16px/18px &quot;맑은 고딕&quot;" visible="true"/>
+        <Static id="sta_titleUp" taborder="3" text="앱설치" left="75" width="50" height="17" fittocontents="width" color="white" font="bold 16px/14px &quot;맑은 고딕&quot;" bottom="93" visible="true"/>
+        <Div id="divMain" taborder="4" left="210" top="94" maxwidth="" maxheight="" text="" bottom="0" url="sample::poc01.xfdl" right="0" formscrollbartype="default"/>
+        <Static id="Static132_00" taborder="5" text="공종관리" left="297" top="63" width="67" height="23" fittocontents="width" font="bold 14px/18px &quot;맑은 고딕&quot;"/>
+        <Static id="Static132" taborder="6" text="일보관리  /  " left="219" top="63" width="78" height="23" fittocontents="width" font="14px/18px &quot;맑은 고딕&quot;"/>
+        <Static id="sta00" taborder="7" text="sta00" left="219" top="89" height="2" background="#e0e0e0" right="7"/>
+      </Layout>
+      <Layout name="min" width="410" height="980">
+        <Div id="divLeft" left="535" top="0" width="210" height="981" visible="false"/>
+        <Div id="div_top" left="0" top="0" height="94" right="0" minwidth="300" maxwidth=""/>
+        <Static id="sta_topMenuTitle" left="550" top="60" width="180" height="17" visible="false"/>
+        <Static id="sta_titleUp" left="605" width="50" height="17" bottom="93" visible="false"/>
+        <Div id="divMain" left="1" top="135" right="0" bottom="-41" maxwidth="" minwidth="200" formscrollbartype="autoindicator autoindicator"/>
+        <Static id="Static132_00" left="88" top="104" width="67" height="23"/>
+        <Static id="Static132" left="10" top="104" width="78" height="23"/>
+        <Static id="sta00" left="11" top="140" height="2" maxwidth="" right="11"/>
+      </Layout>
+    </Layouts>
+    <Objects/>
+    <Script type="xscript5.1"><![CDATA[
+this.frmTop_onsize = function(obj:nexacro.Form,e:nexacro.SizeEventInfo)
+{
+	trace("==>"+this.width);
+};
+]]></Script>
+  </Form>
+</FDL>

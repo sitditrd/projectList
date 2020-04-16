@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<AppVariables version="2.0">
+  <Datasets>
+    <Dataset id="gds_Menu" firefirstcount="0" firenextcount="0">
+      <ColumnInfo>
+        <Column id="MENU_GRP" type="STRING" size="256"/>
+        <Column id="MENU_NM" type="STRING" size="256"/>
+        <Column id="MENU_ID" type="STRING" size="256"/>
+        <Column id="MENU_LVL" type="STRING" size="256"/>
+        <Column id="FORM_URL" type="STRING" size="256"/>
+        <Column id="MENU_TR" type="STRING" size="256"/>
+      </ColumnInfo>
+      <Rows>
+        <Row>
+          <Col id="MENU_GRP">POC</Col>
+          <Col id="MENU_NM">POC</Col>
+          <Col id="MENU_ID">1300</Col>
+          <Col id="MENU_LVL">0</Col>
+        </Row>
+        <Row>
+          <Col id="MENU_GRP">POC</Col>
+          <Col id="MENU_NM">(주)매매실행</Col>
+          <Col id="MENU_ID">1303</Col>
+          <Col id="MENU_LVL">1</Col>
+          <Col id="FORM_URL">poc::poc01.xfdl</Col>
+        </Row>
+      </Rows>
+    </Dataset>
+    <Dataset id="gds_OpenMenu">
+      <ColumnInfo>
+        <Column id="WIN_ID" type="STRING" size="256"/>
+        <Column id="MENU_ID" type="STRING" size="256"/>
+        <Column id="MENU_NM" type="STRING" size="256"/>
+      </ColumnInfo>
+    </Dataset>
+  </Datasets>
+  <Variables/>
+</AppVariables>

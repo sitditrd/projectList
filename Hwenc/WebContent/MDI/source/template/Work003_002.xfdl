@@ -1,0 +1,144 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.0">
+  <Form id="nbis_WF_MainForm" width="1240" height="818" titletext="기능직등록" scrolltype="none" onload="nbis_WF_MainForm_onload">
+    <Layouts>
+      <Layout height="818" mobileorientation="landscape" width="1240">
+        <Div id="Div00" taborder="0" top="0" height="21" right="0" text="" width="500" formscrollbartype="none none" formscrolltype="none">
+          <Layouts>
+            <Layout>
+              <Button id="Button05" taborder="0" text="세율변경" top="0" height="21" right="303" width="64" cssclass="btn_WF_SubAction"/>
+              <Button id="Button01" taborder="4" text="저장" top="0" height="21" right="90" width="42"/>
+              <Button id="Button02" taborder="3" text="삭제" top="0" height="21" right="135" width="42"/>
+              <Button id="Button03" taborder="2" text="입력" top="0" height="21" right="180" width="42"/>
+              <Button id="Button04" taborder="5" text="찾기" top="0" height="21" right="45" width="42"/>
+              <Button id="Button06" taborder="1" text="사진업로드" top="0" height="21" right="225" width="75" cssclass="btn_WF_SubAction"/>
+              <Button id="Button00" taborder="6" text="출력" top="0" height="21" right="0" width="42"/>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Div id="Div02" taborder="1" left="0" top="0" width="600" height="19" url="template::nbis_WF_LocationForm.xfdl" formscrollbartype="none none" formscrolltype="none"/>
+        <Grid id="Grid00" taborder="2" left="0" top="27" height="320" right="0" autofittype="col">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="90"/>
+                <Column size="90"/>
+                <Column size="110"/>
+                <Column size="70"/>
+                <Column size="70"/>
+                <Column size="70"/>
+                <Column size="70"/>
+                <Column size="100"/>
+                <Column size="340"/>
+              </Columns>
+              <Rows>
+                <Row size="28" band="head"/>
+                <Row size="26"/>
+                <Row size="26" band="summ"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="주민번호"/>
+                <Cell col="1" text="성명"/>
+                <Cell col="2" text="직종"/>
+                <Cell col="3" text="구분"/>
+                <Cell col="4" text="고용유무"/>
+                <Cell col="5" text="사회보험구분"/>
+                <Cell col="6" text="직영구분"/>
+                <Cell col="7" text="고용보험 징수구분"/>
+                <Cell col="8" text="주소"/>
+              </Band>
+              <Band id="body">
+                <Cell/>
+                <Cell col="1"/>
+                <Cell col="2"/>
+                <Cell col="3"/>
+                <Cell col="4"/>
+                <Cell col="5"/>
+                <Cell col="6"/>
+                <Cell col="7"/>
+                <Cell col="8"/>
+              </Band>
+              <Band id="summary">
+                <Cell/>
+                <Cell col="1" text="총 174명"/>
+                <Cell col="2"/>
+                <Cell col="3"/>
+                <Cell col="4"/>
+                <Cell col="5"/>
+                <Cell col="6"/>
+                <Cell col="7"/>
+                <Cell col="8" text="사용 : 19명  일용 : 153명  외국인 : 2명"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Div id="Div01" taborder="3" text="Div01" left="0" background="aliceblue" width="1240" height="169" bottom="0">
+          <Layouts>
+            <Layout>
+              <Static id="Static11" taborder="0" left="0" top="0" height="29" cssclass="sta_WF_InputBgT" right="0" onclick="Static07_onclick"/>
+              <Static id="Static49" taborder="1" left="0" top="28" height="29" cssclass="sta_WF_InputBgM" right="0" onclick="Static07_onclick"/>
+              <Static id="Static27" taborder="2" left="0" top="140" height="29" cssclass="sta_WF_InputBgB" right="0" onclick="Static07_onclick"/>
+              <Static id="Static00" taborder="3" left="0" top="56" height="29" cssclass="sta_WF_InputBgM" right="0" onclick="Static07_onclick"/>
+              <Static id="Static01" taborder="4" left="0" top="84" height="29" cssclass="sta_WF_InputBgM" right="0" onclick="Static07_onclick"/>
+              <Static id="Static02" taborder="5" left="0" top="112" height="29" cssclass="sta_WF_InputBgM" right="0" onclick="Static07_onclick"/>
+              <Static id="Static47" taborder="6" text="직원구분" left="0" top="1" width="99" height="27" cssclass="sta_WF_InputLabelL"/>
+              <Static id="Static53" taborder="7" text="주민번호" left="248" top="1" width="99" height="27" cssclass="sta_WF_InputLabel"/>
+              <Static id="Static58" taborder="8" text="성  명" left="496" top="1" width="99" height="27" cssclass="sta_WF_InputLabel"/>
+              <Static id="Static59" taborder="9" text="고용유무" left="744" top="1" width="99" height="27" cssclass="sta_WF_InputLabel"/>
+              <Static id="Static62" taborder="10" text="자격사항1" left="992" top="1" width="99" height="27" cssclass="sta_WF_InputLabel"/>
+              <Static id="Static03" taborder="11" text="지급예정금액(일.." left="0" top="29" width="99" height="27" cssclass="sta_WF_InputLabelL" tooltiptext="지급예정금액(일당)"/>
+              <Static id="Static04" taborder="12" text="시  급" left="248" top="29" width="99" height="27" cssclass="sta_WF_InputLabel"/>
+              <Static id="Static05" taborder="13" text="입사일자" left="496" top="29" width="99" height="27" cssclass="sta_WF_InputLabel"/>
+              <Static id="Static06" taborder="14" text="원천징수세율" left="744" top="29" width="99" height="27" cssclass="sta_WF_InputLabel"/>
+              <Static id="Static07" taborder="15" text="자격사항2" left="992" top="29" width="99" height="27" cssclass="sta_WF_InputLabel"/>
+              <Static id="Static08" taborder="16" text="주  소" left="0" top="57" width="99" height="27" cssclass="sta_WF_InputLabelL"/>
+              <Static id="Static10" taborder="17" text="휴대폰" left="496" top="57" width="99" height="27" cssclass="sta_WF_InputLabel"/>
+              <Static id="Static12" taborder="18" text="직영구분" left="744" top="57" width="99" height="27" cssclass="sta_WF_InputLabel"/>
+              <Static id="Static13" taborder="19" text="지급일구분" left="992" top="57" width="99" height="27" cssclass="sta_WF_InputLabel"/>
+              <Static id="Static14" taborder="20" text="자택전화번호" left="0" top="85" width="99" height="27" cssclass="sta_WF_InputLabelL"/>
+              <Static id="Static15" taborder="21" text="이메일" left="248" top="85" width="99" height="27" cssclass="sta_WF_InputLabel"/>
+              <Static id="Static16" taborder="22" text="직  종" left="496" top="85" width="99" height="27" cssclass="sta_WF_InputLabel"/>
+              <Static id="Static17" taborder="23" text="고용보험 징수.." left="992" top="113" width="99" height="27" cssclass="sta_WF_InputLabel" tooltiptext="고용보험 징수구분" onclick="Div01_Static17_onclick"/>
+              <Static id="Static18" taborder="24" text="전  공" left="744" top="85" width="99" height="27" cssclass="sta_WF_InputLabel"/>
+              <Static id="Static19" taborder="25" text="계약만료일" left="0" top="113" width="99" height="27" cssclass="sta_WF_InputLabelL"/>
+              <Static id="Static20" taborder="26" text="급여송금은행" left="248" top="113" width="99" height="27" cssclass="sta_WF_InputLabel"/>
+              <Static id="Static21" taborder="27" text="계좌번호" left="496" top="113" width="99" height="27" cssclass="sta_WF_InputLabel"/>
+              <Static id="Static22" taborder="28" text="사회보험구분관리" left="744" top="113" width="99" height="27" cssclass="sta_WF_InputLabel"/>
+              <Static id="Static23" taborder="29" text="최종학력" left="992" top="85" width="99" height="27" cssclass="sta_WF_InputLabel"/>
+              <Static id="Static24" taborder="30" text="부양가족수" left="0" top="141" width="99" height="27" cssclass="sta_WF_InputLabelL"/>
+              <Edit id="Edit06" taborder="31" left="102" top="4" width="143" height="21" leftbase="" topbase="" bottombase="" rightbase="" widthbase="" heightbase="" text="가나다라" cssclass="com_WF_Essential"/>
+              <Edit id="Edit00" taborder="32" left="350" top="4" width="143" height="21" leftbase="" topbase="" bottombase="" rightbase="" widthbase="" heightbase="" text="가나다라" cssclass="com_WF_Essential"/>
+              <Edit id="Edit01" taborder="33" left="598" top="4" width="143" height="21" leftbase="" topbase="" bottombase="" rightbase="" widthbase="" heightbase="" text="가나다라" cssclass="com_WF_Essential"/>
+              <Edit id="Edit02" taborder="34" left="846" top="4" width="143" height="21" leftbase="" topbase="" bottombase="" rightbase="" widthbase="" heightbase="" text="가나다라"/>
+              <Edit id="Edit14" taborder="35" left="1094" top="4" width="143" height="21" leftbase="" topbase="" bottombase="" rightbase="" widthbase="" heightbase="" text="가나다라" enable="true" onchanged="Edit04_onchanged" readonly="false" cssclass="edl_WF_MCpadding"/>
+              <Button id="Button05" taborder="36" left="1217" top="5" width="19" height="19" cssclass="btn_WF_Search" enable="true"/>
+              <Edit id="Edit03" taborder="37" left="1094" top="32" width="143" height="21" leftbase="" topbase="" bottombase="" rightbase="" widthbase="" heightbase="" text="가나다라" enable="true" onchanged="Edit04_onchanged" readonly="false" cssclass="edl_WF_MCpadding"/>
+              <Button id="Button00" taborder="38" left="1217" top="33" width="19" height="19" cssclass="btn_WF_Search" enable="true"/>
+              <Edit id="Edit04" taborder="39" left="102" top="32" width="143" height="21" leftbase="" topbase="" bottombase="" rightbase="" widthbase="" heightbase="" text="가나다라" cssclass="com_WF_Essential"/>
+              <Edit id="Edit05" taborder="40" left="350" top="32" width="143" height="21" leftbase="" topbase="" bottombase="" rightbase="" widthbase="" heightbase="" text="가나다라" cssclass="com_WF_Essential"/>
+              <Calendar id="Calendar04" taborder="41" left="598" top="32" width="143" height="21" usetrailingday="true" dateformat="yyyy-MM-dd" type="normal" cssclass="com_WF_Essential"/>
+              <Edit id="Edit07" taborder="42" left="846" top="32" width="143" height="21" leftbase="" topbase="" bottombase="" rightbase="" widthbase="" heightbase="" text="가나다라" readonly="true"/>
+            </Layout>
+          </Layouts>
+        </Div>
+      </Layout>
+    </Layouts>
+    <Objects/>
+    <Script type="xscript5.1"><![CDATA[
+this.Div01_Static02_onclick = function(obj:nexacro.Static,e:nexacro.ClickEventInfo)
+{
+	
+};
+
+this.Div01_Static03_onclick = function(obj:nexacro.Static,e:nexacro.ClickEventInfo)
+{
+	
+};
+
+this.Div01_Static17_onclick = function(obj:nexacro.Static,e:nexacro.ClickEventInfo)
+{
+	
+};
+]]></Script>
+  </Form>
+</FDL>

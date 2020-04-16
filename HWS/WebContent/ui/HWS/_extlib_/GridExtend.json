@@ -1,0 +1,16 @@
+﻿{
+    "name": "GridExtend",
+    "version": "1.0.0.1",
+    "description": "Common library for nexacro platform Grid",
+    "license": "",
+    "scripts": [
+        "GridExtend/GridExtend.js",
+        "GridExtend/Graphics.js",
+        "GridExtend/Chart.js",
+        "GridExtend/Sparkline.js",
+        "GridExtend/WebBrowser.js"
+    ],
+
+    "objInfo": []
+}
+//@ sourceURL=GridExtend.json

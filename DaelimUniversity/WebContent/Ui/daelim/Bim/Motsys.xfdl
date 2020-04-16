@@ -1,0 +1,88 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.0">
+  <Form id="Moar" width="824" height="608" titletext="New Form" onload="Moar_onload">
+    <Layouts>
+      <Layout height="608" mobileorientation="landscape" width="824">
+        <Tab id="tab_Set" taborder="0" tabindex="0" left="8" top="12" right="8" bottom="8">
+          <Tabpages>
+            <Tabpage id="tpg_Set" text="설정">
+              <Layouts>
+                <Layout>
+                  <Static id="stc_SchoolYear" taborder="1" text="학년도" top="4" width="88" height="22" textAlign="center" right="268" cssclass="sta_WF_label03"/>
+                  <Static id="stc_Semester" taborder="2" text="학기" top="4" width="88" height="22" textAlign="center" right="90" cssclass="sta_WF_label03"/>
+                  <Edit id="edt_SchoolYear" taborder="3" top="4" width="88" height="22" value="2018" text="2018" textAlign="center" right="181" readonly="true" cssclass="edit_WF_edit01"/>
+                  <Combo id="cmb_SemesterData" taborder="0" top="4" width="88" height="22" codecolumn="codecolumn" datacolumn="datacolumn" right="3" innerdataset="innerdataset" value="0" index="0" text="2학기">
+                    <Dataset id="innerdataset">
+                      <ColumnInfo>
+                        <Column id="codecolumn" size="256"/>
+                        <Column id="datacolumn" size="256"/>
+                      </ColumnInfo>
+                      <Rows>
+                        <Row>
+                          <Col id="codecolumn">0</Col>
+                          <Col id="datacolumn">2학기</Col>
+                        </Row>
+                      </Rows>
+                    </Dataset>
+                  </Combo>
+                </Layout>
+              </Layouts>
+            </Tabpage>
+          </Tabpages>
+        </Tab>
+        <Button id="btn_Save" taborder="1" text="저장" top="8" width="72" height="24" right="11" onclick="comm_Click" cssclass="btn_WF_basic07"/>
+      </Layout>
+    </Layouts>
+    <Script type="xscript5.1"><![CDATA[/************************************************************************************************
+* 01. 업무구분 : 
+* 02. 화면명   : 성적년도학기관리 ()
+* 03. 화면설명 : 
+* 04. 작성일   : 2019.02.07
+* 05. 작성자   : 안주환
+* 06. 수정이력 :
+***********************************************************************************************
+*     수정일          이  름    사유
+***********************************************************************************************
+*     
+************************************************************************************************/
+
+/************************************************************************************************
+* 공통 라이브러리 INCLUDE 영역
+************************************************************************************************/
+include "Script::CommUtil.xjs"; 	
+include "Script::ext_CommEco.xjs";
+
+/************************************************************************************************
+* 전역 변수 영역
+************************************************************************************************/
+
+/************************************************************************************************
+* FORM 영역
+************************************************************************************************/
+
+/************************************************************************************************
+* FORM 공통 FUNCTION 영역
+************************************************************************************************/
+
+
+/************************************************************************************************
+* TRANSACTION 및 추가 FUNCTION 영역
+************************************************************************************************/
+
+
+/************************************************************************************************
+* 각 COMPONENT 별 EVENT 영역
+************************************************************************************************/
+this.comm_Click = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{	
+	switch(obj.name)
+	{
+		case "btn_Save" : 
+			this.alert("해당 기능은 서비스 중 입니다...")
+			break;
+	}
+};
+]]></Script>
+    <Objects/>
+  </Form>
+</FDL>

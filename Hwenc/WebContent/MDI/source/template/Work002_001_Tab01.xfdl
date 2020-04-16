@@ -1,0 +1,97 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.0">
+  <Form id="Work002_001_Tab01" width="653" height="722" titletext="지급품의 Tab01" scrollbartype="none none" scrolltype="none" top="0">
+    <Layouts>
+      <Layout height="722" mobileorientation="landscape" width="653">
+        <Div id="Div00" taborder="0" left="12" top="12" right="12" bottom="12" formscrollbartype="none" text="">
+          <Layouts>
+            <Layout>
+              <Static id="Static48" taborder="0" left="0" top="0" height="29" cssclass="sta_WF_InputBgT" right="0" onclick="Static07_onclick"/>
+              <Static id="Static12" taborder="1" left="0" top="28" height="29" cssclass="sta_WF_InputBgM" right="0" onclick="Static07_onclick"/>
+              <Static id="Static13" taborder="2" left="0" top="56" cssclass="sta_WF_InputBgB" onclick="Static07_onclick" text="" right="0" height="29"/>
+              <Static id="Static49" taborder="3" text="회사구분" left="0" top="1" width="92" height="27" cssclass="sta_WF_InputLabelL"/>
+              <Static id="Static08" taborder="4" text="계약현장" left="0" top="29" width="92" height="27" cssclass="sta_WF_InputLabelL"/>
+              <Static id="Static09" taborder="5" text="업체" left="0" top="57" width="92" height="27" cssclass="sta_WF_InputLabelL"/>
+              <Static id="Static123" taborder="6" text="기성차수" left="0" top="92" width="93" height="12" cssclass="sta_WF_Stitle" fittocontents="width"/>
+              <Static id="Static00" taborder="7" left="0" top="107" height="29" cssclass="sta_WF_InputBgTB" right="0" onclick="Static07_onclick"/>
+              <Static id="Static01" taborder="8" text="기성차수" left="0" top="108" width="92" height="27" cssclass="sta_WF_InputLabelL"/>
+              <Edit id="Edit00" taborder="9" left="95" top="4" width="216" height="21" readonly="true"/>
+              <Edit id="Edit02" taborder="10" left="95" top="32" width="107" height="21" readonly="true"/>
+              <Edit id="Edit03" taborder="11" left="205" top="32" width="106" height="21" readonly="true"/>
+              <Edit id="Edit04" taborder="12" left="314" top="32" height="21" readonly="true" width="312"/>
+              <Edit id="Edit05" taborder="13" left="95" top="60" width="216" height="21" readonly="true"/>
+              <Edit id="Edit06" taborder="14" left="314" top="60" height="21" readonly="true" width="312"/>
+              <Static id="Static02" taborder="15" text="품의설정" left="0" top="143" width="93" height="12" cssclass="sta_WF_Stitle" fittocontents="width"/>
+              <Static id="Static03" taborder="16" left="0" top="158" height="29" cssclass="sta_WF_InputBgT" right="0" onclick="Static07_onclick"/>
+              <Static id="Static04" taborder="17" left="0" top="186" height="29" cssclass="sta_WF_InputBgM" right="0" onclick="Static07_onclick"/>
+              <Static id="Static05" taborder="18" left="0" top="214" cssclass="sta_WF_InputBgB" onclick="Static07_onclick" text="" right="0" height="29"/>
+              <Static id="Static06" taborder="19" text="금액" left="0" top="250" width="93" height="12" cssclass="sta_WF_Stitle" fittocontents="width"/>
+              <Static id="Static07" taborder="20" left="0" top="265" height="29" cssclass="sta_WF_InputBgT" right="0" onclick="Static07_onclick"/>
+              <Static id="Static11" taborder="21" left="0" top="293" height="29" cssclass="sta_WF_InputBgM" right="0" onclick="Static07_onclick"/>
+              <Static id="Static14" taborder="22" left="0" top="321" height="29" cssclass="sta_WF_InputBgM" right="0" onclick="Static07_onclick"/>
+              <Static id="Static10" taborder="23" left="0" top="349" cssclass="sta_WF_InputBgB" onclick="Static07_onclick" text="" right="0" height="29"/>
+              <Static id="Static15" taborder="24" text="보증상세입력" left="0" top="385" width="93" height="12" cssclass="sta_WF_Stitle" fittocontents="width"/>
+              <Static id="Static16" taborder="25" left="0" top="400" height="29" cssclass="sta_WF_InputBgT" right="0" onclick="Static07_onclick"/>
+              <Static id="Static17" taborder="26" left="0" top="428" cssclass="sta_WF_InputBgB" onclick="Static07_onclick" text="" right="0" height="29"/>
+              <Static id="Static18" taborder="27" text="고용보험" left="0" top="464" width="93" height="12" cssclass="sta_WF_Stitle" fittocontents="width"/>
+              <Static id="Static19" taborder="28" left="0" top="479" height="29" cssclass="sta_WF_InputBgTB" right="0" onclick="Static07_onclick"/>
+              <Static id="Static20" taborder="29" text="세금계산서" left="0" top="515" width="93" height="12" cssclass="sta_WF_Stitle" fittocontents="width"/>
+              <Static id="Static21" taborder="30" text="품의부서" left="0" top="159" width="92" height="27" cssclass="sta_WF_InputLabelL"/>
+              <Static id="Static22" taborder="31" text="품의일자" left="0" top="187" width="92" height="27" cssclass="sta_WF_InputLabelL"/>
+              <Static id="Static23" taborder="32" text="담당자" left="0" top="215" width="92" height="27" cssclass="sta_WF_InputLabelL"/>
+              <Static id="Static24" taborder="33" text="기성금액" left="0" top="266" width="92" height="27" cssclass="sta_WF_InputLabelL"/>
+              <Static id="Static25" taborder="34" text="부가세액" left="0" top="294" width="92" height="27" cssclass="sta_WF_InputLabelL"/>
+              <Static id="Static26" taborder="35" text="공제합계" left="0" top="322" width="92" height="27" cssclass="sta_WF_InputLabelL"/>
+              <Static id="Static27" taborder="36" text="차인지급액" left="0" top="350" width="92" height="27" cssclass="sta_WF_InputLabelL"/>
+              <Static id="Static28" taborder="37" text="보증기관" left="0" top="401" width="92" height="27" cssclass="sta_WF_InputLabelL"/>
+              <Static id="Static29" taborder="38" text="보증기간" left="0" top="429" width="92" height="27" cssclass="sta_WF_InputLabelL"/>
+              <Static id="Static30" taborder="39" text="용역비여부" left="0" top="480" width="92" height="27" cssclass="sta_WF_InputLabelL"/>
+              <Static id="Static32" taborder="40" left="0" top="532" height="29" cssclass="sta_WF_InputBgTB" right="0" onclick="Static07_onclick"/>
+              <Static id="Static33" taborder="41" text="국세청승인번호" left="0" top="533" width="92" height="27" cssclass="sta_WF_InputLabelL"/>
+              <Static id="Static35" taborder="42" text="품의번호" left="314" top="187" width="92" height="27" cssclass="sta_WF_InputLabel"/>
+              <Static id="Static37" taborder="43" text="과세분" left="314" top="266" width="92" height="27" cssclass="sta_WF_InputLabel"/>
+              <Static id="Static38" taborder="44" text="면세분" left="314" top="294" width="92" height="27" cssclass="sta_WF_InputLabel"/>
+              <Static id="Static39" taborder="45" text="지급기한" left="314" top="322" width="92" height="27" cssclass="sta_WF_InputLabel"/>
+              <Static id="Static40" taborder="46" text="지급수단" left="314" top="350" width="92" height="27" cssclass="sta_WF_InputLabel"/>
+              <Static id="Static41" taborder="47" text="보증번호" left="314" top="401" width="92" height="27" cssclass="sta_WF_InputLabel"/>
+              <Static id="Static42" taborder="48" text="기성수령일" left="314" top="429" width="92" height="27" cssclass="sta_WF_InputLabel"/>
+              <Static id="Static43" taborder="49" text="하수급인승인.." left="314" top="480" width="92" height="27" cssclass="sta_WF_InputLabel" tooltiptext="하수급인승인번호"/>
+              <Static id="Static44" taborder="50" text="세금계산서발.." left="314" top="533" width="92" height="27" cssclass="sta_WF_InputLabel" tooltiptext="세금계산서발행일"/>
+              <Edit id="Edit01" taborder="51" left="95" top="111" width="107" height="21" readonly="true"/>
+              <Edit id="Edit07" taborder="52" left="205" top="111" width="106" height="21" readonly="true"/>
+              <Edit id="Edit10" taborder="53" left="95" top="190" width="216" height="21" readonly="true"/>
+              <Edit id="Edit08" taborder="54" left="95" top="162" width="216" height="21" readonly="true"/>
+              <Edit id="Edit09" taborder="55" left="314" top="162" height="21" readonly="true" width="312"/>
+              <Edit id="Edit11" taborder="56" left="409" top="190" height="21" readonly="true" width="217"/>
+              <Edit id="Edit12" taborder="57" left="95" top="536" width="216" height="21" leftbase="" topbase="" bottombase="" rightbase="" widthbase="" heightbase="" text="C909000" enable="true" onchanged="Edit04_onchanged" readonly="true" cssclass="edl_WF_MCpadding"/>
+              <Button id="Button12" taborder="58" left="291" top="537" height="19" cssclass="btn_WF_Search" enable="true" width="19"/>
+              <Edit id="Edit13" taborder="59" left="205" top="218" width="106" height="21" readonly="true"/>
+              <MaskEdit id="MaskEdit00" taborder="60" left="95" top="269" width="216" height="21" type="number" format="###,###" value="1" readonly="true"/>
+              <MaskEdit id="MaskEdit01" taborder="61" left="95" top="297" width="216" height="21" type="number" format="###,###" value="1" readonly="true"/>
+              <MaskEdit id="MaskEdit02" taborder="62" left="95" top="325" width="216" height="21" type="number" format="###,###" value="1" readonly="true"/>
+              <MaskEdit id="MaskEdit03" taborder="63" left="95" top="353" width="216" height="21" type="number" format="###,###" value="1" readonly="true"/>
+              <MaskEdit id="MaskEdit04" taborder="64" left="409" top="269" width="217" height="21" type="number" format="###,###" value="1" readonly="true"/>
+              <MaskEdit id="MaskEdit05" taborder="65" left="409" top="297" width="217" height="21" type="number" format="###,###" value="1" readonly="true"/>
+              <Edit id="Edit14" taborder="66" left="409" top="325" height="21" readonly="true" width="217"/>
+              <Edit id="Edit15" taborder="67" left="409" top="353" height="21" readonly="true" width="217"/>
+              <Edit id="Edit16" taborder="68" left="95" top="404" width="216" height="21" readonly="true"/>
+              <Edit id="Edit18" taborder="69" left="409" top="404" height="21" readonly="true" width="217"/>
+              <Calendar id="Calendar04" taborder="70" left="95" top="432" width="101" height="21" usetrailingday="true" dateformat="yyyy-MM-dd" type="normal" readonly="true"/>
+              <Static id="Static31" taborder="71" text="~" left="196" top="432" width="12" height="21"/>
+              <Calendar id="Calendar00" taborder="72" left="210" top="432" width="101" height="21" usetrailingday="true" dateformat="yyyy-MM-dd" type="normal" readonly="true"/>
+              <Static id="Static34" taborder="73" text="~" left="511" top="432" width="12" height="21"/>
+              <Calendar id="Calendar01" taborder="74" left="525" top="432" width="101" height="21" usetrailingday="true" dateformat="yyyy-MM-dd" type="normal" readonly="true"/>
+              <Calendar id="Calendar02" taborder="75" left="409" top="432" width="101" height="21" usetrailingday="true" dateformat="yyyy-MM-dd" type="normal" readonly="true"/>
+              <Edit id="Edit17" taborder="76" left="95" top="483" width="216" height="21" readonly="true"/>
+              <Edit id="Edit19" taborder="77" left="409" top="483" height="21" readonly="true" width="217"/>
+              <Calendar id="Calendar03" taborder="78" left="409" top="536" width="217" height="21" usetrailingday="true" dateformat="yyyy-MM-dd" type="normal" readonly="true"/>
+              <Static id="Static36" taborder="79" text="통제완료" left="316" top="4" width="69" height="21" fittocontents="width" cssclass="sta_WF_Red"/>
+              <Edit id="Edit20" taborder="80" left="95" top="218" width="107" height="21" leftbase="" topbase="" bottombase="" rightbase="" widthbase="" heightbase="" text="C909000" enable="true" onchanged="Edit04_onchanged" readonly="true" cssclass="edl_WF_MCpadding"/>
+              <Button id="Button00" taborder="81" left="182" top="219" height="19" cssclass="btn_WF_Search" enable="true" width="19"/>
+            </Layout>
+          </Layouts>
+        </Div>
+      </Layout>
+    </Layouts>
+  </Form>
+</FDL>

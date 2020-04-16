@@ -1,0 +1,173 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.0">
+  <Form id="LayeredColumn" width="768" height="480" titletext="New Form">
+    <Layouts>
+      <Layout height="480" mobileorientation="landscape" width="768">
+        <BasicChart id="BasicChart00" taborder="0" left="2" top="0" right="18" bottom="0" binddataset="Dataset01" categorycolumn="bind:name" bargrouping="false" enableanimation="false" rotateaxis="true" ondrawend="BasicChart00_ondrawend">
+          <Contents><![CDATA[{
+	"title": {
+		"id": "title",
+		"text": "Bar Chart",
+		"textfont": "20pt/normal '맑은 고딕'",
+		"padding": "0px 0px 5px",
+		"visible": "false"
+	},
+	"legend": {
+		"id": "legend",
+		"padding": "3px 10px 3px 10px",
+		"itemtextfont": "9pt '맑은 고딕'",
+		"itemtextcolor": "#4c4c4c",
+		"visible": false
+	},
+	"hrangebar": {
+		"id": "hrangebar",
+		"trackbarpadding": "1px",
+		"background": "#eaeaea",
+		"linestyle": "1px solid #d5d5d5",
+		"trackbarlinestyle": "0px none",
+		"trackbarfillstyle": "#c9c9c9",
+		"size": "12",
+		"visible": false
+	},
+	"vrangebar": {
+		"id": "vrangebar",
+		"trackbarpadding": "1px",
+		"background": "#eaeaea",
+		"linestyle": "1px solid #d5d5d5",
+		"trackbarlinestyle": "0px none",
+		"trackbarfillstyle": "#c9c9c9",
+		"size": "12",
+		"visible": false
+	},
+	"tooltip": {
+		"id": "tooltip",
+		"background": "#4b4b4b",
+		"linestyle": "0px none",
+		"textcolor": "white",
+		"textfont": "10pt/normal '맑은 고딕'",
+		"padding": "5px"
+	},
+	"board": {
+		"id": "board"
+	},
+	"categoryaxis": {
+		"id": "categoryaxis",
+		"titletextcolor": "#4c4c4c",
+		"titletextfont": "bold 12pt '맑은 고딕'",
+		"labeltextcolor": "#6f6f6f",
+		"labeltextfont": "11pt '맑은 고딕'",
+		"axislinestyle": "1px solid #525252",
+		"ticklinestyle": "1px solid #525252",
+		"boardlinestyle": "1px solid #d0d0d0"
+	},
+	"seriesset": [
+		{
+			"id": "series0",
+			"titletext": "series",
+			"barvisible": true,
+			"barsize": "50",
+			"itemtextvisible": true,
+			"itemtextcolor": "#ffffff",
+			"itemtextfont": "bold 10pt '맑은 고딕'",
+			"valuecolumn": "bind:data",
+			"barfillstyle": "red",
+			"barlinestyle": "0px solid #ffffff"
+		}
+	],
+	"valueaxes": [
+		{
+			"id": "valueaxis0",
+			"boardlinevisible": true,
+			"labeltextcolor": "#6f6f6f",
+			"labeltextfont": "10pt/normal '맑은 고딕'",
+			"titletextcolor": "#4c4c4c",
+			"titletextfont": "bold 12pt '맑은 고딕'",
+			"ticklinestyle": "1px solid #525252",
+			"axislinestyle": "1px solid #525252",
+			"autotickscale": "10"
+		}
+	]
+}]]></Contents>
+        </BasicChart>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="Dataset01">
+        <ColumnInfo>
+          <Column id="data" type="BIGDECIMAL" size="256"/>
+          <Column id="name" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="data">33.2</Col>
+            <Col id="name">서울</Col>
+          </Row>
+          <Row>
+            <Col id="data">14.5</Col>
+            <Col id="name">대전</Col>
+          </Row>
+          <Row>
+            <Col id="data">11.8</Col>
+            <Col id="name">대구</Col>
+          </Row>
+          <Row>
+            <Col id="data">10.2</Col>
+            <Col id="name">광주</Col>
+          </Row>
+          <Row>
+            <Col id="data">12.3</Col>
+            <Col id="name">부산</Col>
+          </Row>
+          <Row>
+            <Col id="data">9.2</Col>
+            <Col id="name">전주</Col>
+          </Row>
+          <Row>
+            <Col id="data">4.7</Col>
+            <Col id="name">인천</Col>
+          </Row>
+          <Row>
+            <Col id="data">4.8</Col>
+            <Col id="name">경기</Col>
+          </Row>
+          <Row>
+            <Col id="data">4.9</Col>
+            <Col id="name">강원</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.1"><![CDATA[
+this.BasicChart00_ondrawend = function(obj:nexacro._ChartBase,e:nexacro.ChartDrawEndEventInfo)
+{
+	var pos, bound, item;
+	var x, y, w, h, r, b, h_half, centerx, centery;
+	for(var j=0;j<this.Dataset01.rowcount;j++)
+	{
+		// getSeriesPointPos
+		// item을 찾아 위치정보를 얻는다.
+		// param 1 : series index
+		// param 2 : data index		
+		pos = obj.getSeriesPointPos(0, j);
+		bound = pos.bound;
+		//x = bound.left;
+		y = bound.top;
+		r = bound.right;
+		//b = bound.bottom;
+		h = bound.height;
+		h_half = h * 0.5;
+
+		centerx = r + h_half;
+		centery = y + h_half;
+		
+		item = obj.addUserControl("itemarc_" + j, "arc");
+		item.setCenter(new nexacro.Point(centerx, centery));
+		item.set_width(h*1.2);
+		item.set_height(h*1.2);
+		item.set_fillstyle("red");	
+	}
+	obj.userControlDraw();		
+};
+]]></Script>
+  </Form>
+</FDL>

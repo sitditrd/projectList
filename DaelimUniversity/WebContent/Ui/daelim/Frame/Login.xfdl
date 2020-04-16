@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.0">
+  <Form id="Login" width="1024" height="768">
+    <Layouts>
+      <Layout height="768" mobileorientation="landscape" width="1024">
+        <Static id="Static00" taborder="1" left="0" top="0" right="0" bottom="0" cssclass="sta_WF_loginBg" text=""/>
+        <Static id="Static01" taborder="1" left="12%" top="17%" height="524" cssclass="sta_WF_loginBox" text="" right="12%"/>
+        <Static id="Static02" taborder="5" left="36.13%" top="31.12%" cssclass="sta_WF_loginLogo" right="37.60%" height="74"/>
+        <Edit id="Edit00" taborder="2" left="28%" top="Static02:30" height="52" displaynulltext=" 아이디" tabstop="true" cssclass="edit_WF_login" right="28%"/>
+        <Edit id="Edit01" taborder="3" left="28%" top="Edit00:10" height="52" displaynulltext="비밀번호" password="true" cssclass="edit_WF_login" right="28%"/>
+        <Button id="btn_login" taborder="4" text="LOGIN" left="28%" top="Edit01:18" height="60" cssclass="btn_WF_login" onclick="btn_login_onclick" right="28%"/>
+        <Static id="Static03" taborder="6" left="12%" top="8.85%" width="13.67%" height="7.81%" text="LOGIN" cssclass="sta_WF_loginTitle" visible="false"/>
+      </Layout>
+    </Layouts>
+    <Script type="xscript5.1"><![CDATA[this.btn_login_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	var objApp = nexacro.getApplication();
+	objApp.mainframe.VFrameSet.set_separatesize("0,70,30,*,30");
+};
+]]></Script>
+  </Form>
+</FDL>

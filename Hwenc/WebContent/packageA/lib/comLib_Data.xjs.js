@@ -1,0 +1,604 @@
+//XJS=comLib_Data.xjs
+(function()
+{
+    return function(path)
+    {
+        var obj;
+    
+        // User Script
+        this.registerScript(path, function() {
+        /************************************************************************************************
+         * Name     : comLib_Data.xjs
+         * Title    : Data 관련 함수
+         * Desc     : Data 관련 함수
+         * 작성자	: 투비소프트
+         * 작성일	: 2018-04-05
+         *************************************************************************************************
+         *      수정일          이름          사유
+         *************************************************************************************************
+         *    2018.04.05        투비소프트       최초작성
+         ************************************************************************************************/
+
+        /************************************************************************************************
+         ● gfn_findData          : dataSet object에서 키에 해당되는 Row를 찾아서 rowpostion 전달
+         ● gfn_deleteData        : dataset object에서 키에 해당되는 Row를 찾아서 삭제
+         ● gfn_moveData          : dataset object에서 키에 해당되는 Row를 찾아서 이동
+         ● gfn_editData          : dataset object에서 키에 해당되는 Row를 찾아서 값을 변경
+         ● gfn_allRowDataCall    : Dataset의 모든 행을 함수의 인자로 넘겨주고 함수 호출처리
+         ● gfn_getLookupData     : dataSet object에서 키에 해당되는 Row를 찾아서 칼럼값을 전달
+         ● gfn_dsGetUpdated      : value를 Dataset에 적용 후 Datset의 갱신여부를  Return
+         ● gfn_dsIsUpdated       : dataSet의 Row 중에서 변경된 내용이 있는지 여부를 판단하는 함수
+         ● gfn_updateToDataset   : 컨트롤이 Dataset에 bind되어 있을경우 즉시 value를 Dataset에 적용
+         ● gfn_isUpdatedRow      : dataSet의 Row가 변경되었는지 판단하는 함수
+         ● gfn_isUpdateColumn    : dataSet의 Row 에서 해당 칼럼이 변경되었는지 판단하는 함수
+         ● gfn_setComboValue     : combo dataset에 data를 추가
+         ● gfn_setYear           : 년도 콤보 셋팅
+         ● gfn_setRowValue       : 현재 Row 정보 저장
+         ● gfn_setRow            : 저장된 칼럼정보 및 칼럼 값으로 rowposition 이동
+         ● gfn_setParam          : Form 간 전달하는 값 Set
+         ● gfn_getParam          : Form 간 전달하는 값 Get
+         ● gfn_setParamClearData : Form 간 전달하는 값 Set 데이터 Clear 처리
+         ● gfn_setChkSrchDs      : 체크 된 조회조건 셋팅
+         *************************************************************************************************/
+
+        /************************************************************************************************
+         * Function Name: gfn_findData
+         * Description  : dataSet object에서 키에 해당되는 Row를 찾아서 rowpostion 전달
+         * Arguments    : ObjDs     - dataset
+         strIdCol  - 키칼럼
+         strSubCol - 서브키 칼럼
+         strSubId  - 서브키값
+         * Return       : rowpostion
+         *************************************************************************************************/
+        this.gfn_findData = function (ObjDs, strIdCol, strId, strSubCol, strSubId)
+        {
+        	if (this.gfn_isNull(strSubCol))
+        	{
+        		return ObjDs.findRow(strIdCol, strId);
+        	}
+
+        	return ObjDs.findRowExpr(strIdCol + " == '" + strId + "' && " + strSubCol + " == '" + strSubId + "'");
+        };
+
+        /************************************************************************************************
+         * Function Name: gfn_deleteData
+         * Description  : dataset object에서 키에 해당되는 Row를 찾아서 삭제
+         * Arguments    : ObjDs     - dataset
+         strIdCol  - 키칼럼
+         strSubCol - 서브키 칼럼
+         strSubId  - 서브키값
+         * Return       : 없음
+         *************************************************************************************************/
+        this.gfn_deleteData = function (ObjDs, strIdCol, strId, strSubCol, strSubId)
+        {
+        	var nCurRow = this.gfn_findData(ObjDs, strIdCol, strId, strSubCol, strSubId);
+        	ObjDs.deleteRow(nCurRow);
+        };
+
+        /************************************************************************************************
+         * Function Name: gfn_moveData
+         * Description  : dataset object에서 키에 해당되는 Row를 찾아서 이동
+         * Arguments    : ObjDs     - dataset
+         strIdCol  - 키칼럼
+         strId     - 키값
+         newRow    - 이동할 Row
+         strSubCol - 서브키 칼럼
+         strSubId  - 서브키값
+         * Return       : 없음
+         *************************************************************************************************/
+        this.gfn_moveData = function (ObjDs, strIdCol, strId, newRow, strSubCol, strSubId)
+        {
+        	var nCurRow = this.gfn_findData(ObjDs, strIdCol, strId, strSubCol, strSubId);
+        	ObjDs.moveRow(nCurRow, newRow);
+        };
+
+        /************************************************************************************************
+         * Function Name: gfn_editData
+         * Description  : dataset object에서 키에 해당되는 Row를 찾아서 값을 변경
+         * Arguments    : ObjDs     - dataset
+         strIdCol  - 키칼럼
+         strId     - 키값
+         valCol    - 변경할 칼럼
+         newVal    - 변경값
+         strSubCol - 서브키 칼럼
+         strSubId  - 서브키 값
+         * Return       : boolean
+         *************************************************************************************************/
+        this.gfn_editData = function (ObjDs, strIdCol, strId, valCol, newVal, strSubCol, strSubId)
+        {
+        	var nCurRow = this.gfn_findData(ObjDs, strIdCol, strId, strSubCol, strSubId);
+        	return ObjDs.setColumn(nCurRow, valCol, newVal);
+        };
+
+        /************************************************************************************************
+         * Function Name: gfn_allRowDataCall
+         * Description  : Dataset의 모든 행을 함수의 인자로 넘겨주고 함수 호출처리
+         * Arguments    : ObjDs         - dataset
+         callFncObj    - 호출할 함수
+         bModifiedOnly - 변경된 데이터만 호출할지 여부
+         * Return       : retVal
+         *************************************************************************************************/
+        this.gfn_allRowDataCall = function (objDs, callFncObj, bModifiedOnly)
+        {
+        	var retVal;
+        	for (var i = 0; i < objDs.getRowCount(); i++)
+        	{
+        		if (bModifiedOnly && !(objDs.getRowType(i) == 2 || objDs.getRowType(i) == 4))
+        		{
+        			continue;
+        		}
+
+        		retVal = callFncObj(objDs, i);
+        		if (this.gfn_isNull(retVal) == false)
+        		{
+        			return retVal;
+        		}
+        	}
+        };
+
+        /************************************************************************************************
+         * Function Name: gfn_getLookupData
+         * Description  : dataSet object에서 키에 해당되는 Row를 찾아서 칼럼값을 전달
+         * Arguments    : ObjDs     - dataset
+         strIdCol  - 키칼럼
+         strId     - 키값
+         strInfo   - dataSet 칼럼
+         strSubCol - 서브키칼럼
+         strSubId  - 서브키값
+         * Return       : 칼럼값
+         *************************************************************************************************/
+        this.gfn_getLookupData = function (ObjDs, strIdCol, strId, strInfo, strSubCol, strSubId)
+        {
+        	var strVal;
+        	var nCurRow = this.gfn_findData(ObjDs, strIdCol, strId, strSubCol, strSubId);
+
+        	if (nCurRow < 0)
+        	{
+        		return "";
+        	}
+
+        	strVal = ObjDs.getColumn(nCurRow, strInfo);
+        	if (this.gfn_isNull(strVal))
+        	{
+        		return "";
+        	}
+
+        	return strVal;
+        };
+
+        /************************************************************************************************
+         * Function Name: gfn_dsGetUpdated
+         * Description  : value를 Dataset에 적용 후 Datset의 갱신여부를 Return 한다.
+         * Arguments    : ObjDs     - dataset
+         * Return       : boolean
+         *************************************************************************************************/
+        this.gfn_dsGetUpdated = function (objDs)
+        {
+        	this.gfn_updateToDataset();
+        	return this.gfn_dsIsUpdated(objDs);
+        };
+
+        /************************************************************************************************
+         * Function Name: gfn_dsIsUpdated
+         * Description  : dataSet의 Row 중에서 변경된 내용이 있는지 여부
+         * Arguments    : ObjDs     - dataset
+         * Return       : boolean
+         *************************************************************************************************/
+        this.gfn_dsIsUpdated = function (objDs)
+        {
+        	if (objDs.getDeletedRowCount() > 0)
+        	{
+        		return true;
+        	}
+
+        	for (var i = 0; i < objDs.getRowCount(); i++)
+        	{
+        		if (objDs.getRowType(i) == 2 || objDs.getRowType(i) == 4 || objDs.getRowType(i) == 8)
+        		{
+        			return true;
+        		}
+        	}
+        	return false;
+        };
+
+        /************************************************************************************************
+         * Function Name: gfn_updateToDataset
+         * Description  : 컨트롤이 Dataset에 bind되어 있을 경우 즉시 value를 Dataset에 적용시킨다.
+         * Arguments    : 없음
+         * Return       : 없음
+         *************************************************************************************************/
+        this.gfn_updateToDataset = function ()
+        {
+        	var objComp = this.getFocus();
+        	if (objComp != null)
+        	{
+        		try
+        		{
+        			objComp.parent.applyChange();
+        		}
+        		catch (e)
+        		{
+        		}
+        	}
+        };
+
+        /************************************************************************************************
+         * Function Name: gfn_isUpdatedRow
+         * Description  : dataSet의 Row가 변경되었는지 판단하는 함수
+         * Arguments    : ObjDs     - dataset
+         nRow      - row값
+         * Return       : boolean
+         *************************************************************************************************/
+        this.gfn_isUpdatedRow = function (objDs, nRow)
+        {
+        	if (objDs.updatecontrol == true)
+        	{
+        		if (objDs.getRowType(nRow) == 2 || objDs.getRowType(nRow) == 4)
+        		{
+        			return true;
+        		}
+
+        		return false;
+        	}
+        	else
+        	{
+        		for (var i = 0; objDs.getColCount(); i++)
+        		{
+        			if (this.gfn_isUpdateColumn(objDs, nRow, i) == true)
+        			{
+        				return true;
+        			}
+        		}
+        	}
+
+        	return false;
+        };
+
+        /************************************************************************************************
+         * Function Name: gfn_isUpdateColumn
+         * Description  : dataSet의 Row 에서 해당 칼럼이 변경되었는지 판단하는 함수
+         * Arguments    : ObjDs     - dataset
+         nRow      - row값
+         Column    - 칼럼명
+         * Return       : boolean
+         *************************************************************************************************/
+        this.gfn_isUpdateColumn = function (objDs, nRow, Column)
+        {
+        	if (objDs.getRowType(nRow) == 2)
+        	{
+        		if (this.gfn_isNull(objDs.getColumn(nRow, Column)))
+        		{
+        			return false;
+        		}
+        	}
+        	else
+        	{
+        		if (objDs.getColumn(nRow, Column) == objDs.getOrgColumn(nRow, Column))
+        		{
+        			return false;
+        		}
+        	}
+
+        	return true;
+        };
+
+        /************************************************************************************************
+         * Function Name: gfn_setComboValue
+         * Description  : combo dataset에 data를 추가
+         * Arguments    : objCbo   - combo object
+         sCd      - code 값
+         sText    - text
+         nRow     - insert 될 row
+         nIdx     - combo에서 선택 되어질 index
+         sValue   - combo에서 선택 되어질 값
+         * Return       : boolean
+         *************************************************************************************************/
+        this.gfn_setComboValue = function (objCbo, sCd, sText, nRow, nIdx, sValue)
+        {
+        	var objDs = this.objects[objCbo.innerdataset];
+
+        	if (this.gfn_isNull(sCd))
+        	{
+        		sCd = "";
+        	}
+
+        	if (this.gfn_isNull(sText))
+        	{
+        		sText = "";
+        	}
+
+        	if (this.gfn_isNull(nIdx))
+        	{
+        		nIdx = 0;
+        	}
+
+        	if (this.gfn_isNull(nRow))
+        	{
+        		nRow = 0;
+        	}
+
+        	try
+        	{
+        		objDs.insertRow(nRow);
+        		objDs.setColumn(nRow, objCbo.codecolumn, sCd);
+        		objDs.setColumn(nRow, objCbo.datacolumn, sText);
+        	}
+        	catch (e)
+        	{
+        		trace("Combo : " + objCbo.name + " 의 innerdataset을 재지정해 주세요.");
+        	}
+        	// combo값 지정
+        	if (!this.gfn_isNull(nIdx))
+        	{
+        		// combo값을 index로 지정
+        		objCbo.set_index(nIdx);
+        	}
+
+        	if (!this.gfn_isNull(sValue))
+        	{
+        		// combo값을 값으로 지정
+        		objCbo.set_value(sValue);
+        	}
+        };
+
+        /************************************************************************************************
+         * Function Name: gfn_setYear
+         * Description  : 년도 콤보 셋팅
+         * Arguments    : objCbo   - combo object(필수)
+         sYear    - 현재 년도(없으면 현재 년도)
+         sCd      - innerdataset의 code 칼럼(없으면 CODE)
+         sText    - innerdataset의 data 칼럼(없으면 VALUE)
+         nNum     - 년도 갯수(없으면 앞뒤로 5개씩)
+         * Return       : 없음
+         *************************************************************************************************/
+        this.gfn_setYear = function (objCbo, sYear, sCd, sText, nNum)
+        {
+        	var objDs = this.objects[objCbo.innerdataset];
+
+        	if (this.gfn_isNull(sYear))
+        	{
+        		sYear = this.gfn_getYear();
+        	}
+        	if (this.gfn_isNull(sCd))
+        	{
+        		sCd = "CODE";
+        	}
+        	if (this.gfn_isNull(sText))
+        	{
+        		sText = "VALUE";
+        	}
+        	if (this.gfn_isNull(nNum))
+        	{
+        		nNum = 5;
+        	}
+
+        	var iStartYear = sYear - nNum;
+
+        	objDs.clearData();
+
+        	for (var i = 0; i <= nNum + nNum; i++)
+        	{
+        		var nRow = objDs.addRow();
+        		objDs.setColumn(nRow, sCd, iStartYear + i);
+        		objDs.setColumn(nRow, sText, iStartYear + i);
+        	}
+
+        	// combo값을 값으로 지정
+        	objCbo.set_value(sYear);
+        };
+
+        /************************************************************************************************
+         * Function Name: gfn_setRowValue
+         * Description  : 현재 Row 정보 저장
+         * Arguments    : objDs   - Dataset object(필수)
+         nRow    - 저장할 Dataset의 rowposition(필수)
+         strKey  - 칼럼명(필수)
+         * Return       : 없음
+         *************************************************************************************************/
+        this.lv_keyColumn;
+        this.lv_keyValue;
+
+        this.gfn_setRowValue = function (objDs, nRow, strKey)
+        {
+        	this.lv_keyColumn = strKey;
+        	this.lv_keyValue = "";
+
+        	var arrKeyColumn = this.gfn_split(strKey, "@");
+        	for (var i = 0; i < arrKeyColumn.length; i++)
+        	{
+        		this.lv_keyValue += objDs.getColumn(nRow, arrKeyColumn[i]) + "@";
+        	}
+
+        	this.lv_keyValue = this.gfn_subStr(this.lv_keyValue, 0, this.lv_keyValue.length - 1);
+        };
+
+        /************************************************************************************************
+         * Function Name: gfn_setRow
+         * Description  : 저장된 칼럼정보 및 칼럼 값으로 rowposition 이동
+         * Arguments    : objDs   - Dataset object(필수)
+         * Return       : 없음
+         *************************************************************************************************/
+        this.gfn_setRow = function (objDs)
+        {
+        	if (this.gfn_isNull(this.fv_keyValue))
+        	{
+        		return;
+        	}
+
+        	var arrKeyColumn = this.gfn_split(this.fv_keyColumn, "@");
+        	var arrKeyValue = this.gfn_split(this.fv_keyValue, "@");
+
+        	var strFindRow = "";
+        	for (var i = 0; i < arrKeyValue.length; i++)
+        	{
+        		strFindRow += arrKeyColumn[i] + " == '" + arrKeyValue[i] + "' && ";
+        	}
+
+        	strFindRow = this.gfn_subStr(strFindRow, 0, strFindRow.length - 4);
+
+        	var nRow = objDs.findRowExpr(strFindRow);
+        	if (nRow > -1)
+        	{
+        		objDs.set_rowposition(nRow);
+        	}
+
+        	this.fv_keyColumn = "";
+        	this.fv_keyValue = "";
+        };
+
+        /************************************************************************************************
+         * Function Name: gfn_setParam
+         * Description  : Form 간 전달하는 값 Set
+         * Arguments    : key      - key 값
+         val      - 전달할 값
+         sClearYn - 전달할 값 Clear 여부
+         * Return       : 없음
+         *************************************************************************************************/
+        this.gfn_setParam = function (key, val, sClearYn)
+        {
+        	var nRow = 0;
+        	var sKey,sVal;
+
+        	if (this.gfn_isNull(sClearYn))
+        	{
+        		sClearYn = "N";
+        	}
+
+        	if (sClearYn == "Y")
+        	{
+        		sKey = nexacro.getApplication().gds_param.findRow("key", key);
+        		nexacro.getApplication().gds_param.setColumn(sKey, "val", "");
+        	}
+
+        	if (nexacro.getApplication().gds_param.getRowCount() == 0)
+        	{
+        		var nRow = nexacro.getApplication().gds_param.addRow();
+
+        		nexacro.getApplication().gds_param.setRowType(nRow, 2); //입력
+        		nexacro.getApplication().gds_param.setColumn(nRow, "key", key);
+        		nexacro.getApplication().gds_param.setColumn(nRow, "val", val);
+        	}
+        	else
+        	{
+        		sKey = nexacro.getApplication().gds_param.findRow("key", key);
+        		sVal = nexacro.getApplication().gds_param.getColumn(sKey, "val");
+
+        		if (sKey > -1)
+        		{
+        			if (this.gfn_isNull(sVal))
+        			{
+        				nexacro.getApplication().gds_param.setColumn(sKey, "val", val);
+        			}
+        			else
+        			{
+        				return;
+        			}
+        		}
+        		else
+        		{
+        			var nRow = nexacro.getApplication().gds_param.addRow();
+
+        			nexacro.getApplication().gds_param.setRowType(nRow, 2); //입력
+        			nexacro.getApplication().gds_param.setColumn(nRow, "key", key);
+        			nexacro.getApplication().gds_param.setColumn(nRow, "val", val);
+        		}
+        	}
+        };
+
+        /************************************************************************************************
+         * Function Name: gfn_getParam
+         * Description  : Form 간 전달하는 값 Get
+         * Arguments    : key - key 값
+         * Return       : 없음
+         *************************************************************************************************/
+        this.gfn_getParam = function (key)
+        {
+        	var nRow = nexacro.getApplication().gds_param.findRow("key", key);
+        	var val = nexacro.getApplication().gds_param.getColumn(nRow, "val");
+
+        	return val;
+        };
+
+        /************************************************************************************************
+         * Function Name: gfn_setParamClearData
+         * Description  : Form 간 전달하는 값 Set 데이터 Clear 처리
+         * Arguments    : key - key 값
+         * Return       : 없음
+         *************************************************************************************************/
+        this.gfn_setParamClearData = function (key)
+        {
+        	var nRow = nexacro.getApplication().gds_param.findRow("key", key);
+        	nexacro.getApplication().gds_param.setColumn(nRow, "val", "");
+        };
+
+        /************************************************************************************************
+         * Function Name: gfn_setChkSrchDs
+         * Description  : 체크 된 조회조건 셋팅
+         * Arguments    : objForm - 현재 화면
+         objDs   - 조회조건 Dataset
+         * Return       : 없음
+         *************************************************************************************************/
+        this.gfn_setChkSrchDs = function (objForm, objDs)
+        {
+        	var arrayCompList = new Array();
+        	var arrayCompId = new Array();
+        	var cObj;
+        	var sBindColumn = "";
+
+        	objDs.clearData();
+        	objDs.addRow();
+
+        	for (var i = 0; i < objForm.div_search.components.length; i++)
+        	{
+        		arrayCompList[i] = objForm.div_search.components[i];
+        		cObj = arrayCompList[i];
+
+        		if (cObj == "[object CheckBox]")
+        		{
+        			if (arrayCompList[i].value == true)
+        			{
+        				arrayCompId[i] = arrayCompList[i].id;
+        				// trace("arrayCompId[i] = " + arrayCompId[i].name);
+        			}
+        		}
+        	}
+
+        	for (var i = 0; i < arrayCompList.length; i++)
+        	{
+        		cObj = arrayCompList[i];
+        		if (cObj == "[object Edit]" || cObj == "[object Combo]" || cObj == "[object MaskEdit]" || cObj == "[object Calendar]")
+        		{
+        			for (var j = 0; j < arrayCompId.length; j++)
+        			{
+        				sBindColumn = arrayCompList[i].bindinfo;
+        				// trace("sBindColumn = " + sBindColumn);
+        				if (!this.gfn_isNull(arrayCompId[j]))
+        				{
+        					if (arrayCompList[i].chkflag == arrayCompId[j])
+        					{
+        						objDs.setColumn(0, sBindColumn, arrayCompList[i].value);
+        					}
+
+        					if (arrayCompList[i].chkflag2 == arrayCompId[j])
+        					{
+        						objDs.setColumn(0, sBindColumn, arrayCompList[i].value);
+        					}
+
+        					if (arrayCompList[i].chkflag3 == arrayCompId[j])
+        					{
+        						objDs.setColumn(0, sBindColumn, arrayCompList[i].value);
+        					}
+        				}
+        			}
+        		}
+        	}
+        };
+
+        });
+    
+        this.loadIncludeScript(path);
+        
+        obj = null;
+    };
+}
+)();

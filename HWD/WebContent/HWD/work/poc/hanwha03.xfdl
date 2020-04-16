@@ -1,0 +1,228 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="hanwha01" width="1260" height="870" titletext="New Form" scrollbartype="autoindicator autoindicator">
+    <Layouts>
+      <Layout height="870" mobileorientation="landscape" width="1260">
+        <Static id="Static00" taborder="0" left="0" height="38" cssclass="sta_WF_mainBtn" right="0" bottom="0"/>
+        <Static id="Static01" taborder="1" text="최초 시작 시간" left="20" width="120" height="20" cssclass="sta_WF_hwLabel" bottom="9"/>
+        <Edit id="Edit00" taborder="2" left="140" width="120" height="20" text="00:00:00.000" bottom="9" font="normal 700 11pt/normal &quot;Arial&quot;" color="red"/>
+        <Static id="Static01_00" taborder="3" text="총 수행 시간 표시" left="547" width="120" height="20" cssclass="sta_WF_hwLabel" bottom="9"/>
+        <Edit id="Edit00_00" taborder="4" left="667" width="120" height="20" bottom="9" font="normal 700 11pt/normal &quot;Arial&quot;" color="red"/>
+        <Static id="Static01_00_00" taborder="5" text="최종 렌더링 완료 시간" left="270" width="147" height="20" cssclass="sta_WF_hwLabel" bottom="9"/>
+        <Edit id="Edit00_00_00" taborder="6" left="417" width="120" height="20" bottom="9" font="normal 700 11pt/normal &quot;Arial&quot;" color="red"/>
+        <Button id="Button00" taborder="7" text="값 초기화" width="80" height="24" cssclass="btn_WF_hwBtn01" bottom="7" right="93" enable="false"/>
+        <Button id="Button01" taborder="8" text="값 세팅" width="80" height="24" cssclass="btn_WF_hwBtn01" bottom="7" right="10" enable="false"/>
+        <Static id="Static02" taborder="9" left="10" top="5" height="30" right="10" cssclass="sta_WF_process"/>
+        <Static id="Static03" taborder="10" left="10" top="39" height="76" right="10" cssclass="sta_WF_box06" onclick="Static03_onclick" text=""/>
+        <Static id="Static04" taborder="11" text="계약일자" left="28" top="49" width="65" height="26" onclick="Static04_onclick" cssclass="sta_WF_condition02"/>
+        <Static id="Static04_00" taborder="12" text="조직구분" left="377" top="49" width="62" height="26" onclick="Static04_onclick" cssclass="sta_WF_condition02"/>
+        <Edit id="Edit01_00" taborder="13" left="542" top="49" width="93" height="26" text="LA2001" readonly="true"/>
+        <Button id="Button02_00" taborder="14" left="612" top="49" width="26" height="26" cssclass="btn_WF_Search"/>
+        <Static id="Static04_01" taborder="15" text="영업가족" top="49" width="71" height="26" onclick="Static04_onclick" cssclass="sta_WF_condition02" left="889"/>
+        <Edit id="Edit01_01" taborder="16" top="79" width="98" height="26" value="80123" text="80123" readonly="true" left="212"/>
+        <Button id="Button02_01" taborder="17" cssclass="btn_WF_SearchSmall" left="311" top="79" width="30" height="26"/>
+        <Static id="Static04_02" taborder="18" text="검색조건" left="28" top="79" width="65" height="26" onclick="Static04_onclick" cssclass="sta_WF_condition02"/>
+        <Calendar id="Calendar00" taborder="19" left="95" top="49" width="115" height="26" value="20191101" dateformat="yyyy-MM-dd "/>
+        <Static id="Static05" taborder="20" text="~" left="210" top="49" width="26" height="26"/>
+        <Calendar id="Calendar00_00" taborder="21" left="226" top="49" width="115" height="26" value="20101104" dateformat="yyyy-MM-dd "/>
+        <Combo id="Combo00" taborder="22" text="전체" left="450" top="49" width="90" height="26" value="" index="-1"/>
+        <Edit id="Edit01_01_00_00_01" taborder="23" text="80123" readonly="true" left="636" top="49" width="100" height="26"/>
+        <CheckBox id="CheckBox00" taborder="24" text="대리점통합" left="742" top="49" width="94" height="26" readonly="true"/>
+        <Combo id="Combo00_00" taborder="25" text="전체" left="954" top="49" width="106" height="26" value="" index="-1"/>
+        <Button id="btn_Search" taborder="26" text="조회" top="80" height="24" right="82" cssclass="btn_WF_hwBtn04" width="60" onclick="comm_Click"/>
+        <Button id="Button02_01_00_00_00_00_02_01_00" taborder="27" text="수정" top="80" height="24" right="19" cssclass="btn_WF_hwBtn03" width="60" onclick="comm_Click"/>
+        <Combo id="Combo00_00_00" taborder="28" text="선택" left="95" top="79" width="115" height="26" value="" index="-1"/>
+        <Static id="Static04_00_00" taborder="29" text="모니터링" left="377" top="79" width="62" height="26" onclick="Static04_onclick" cssclass="sta_WF_condition02"/>
+        <Combo id="Combo00_01" taborder="30" text="전체" left="450" top="79" width="90" height="26" value="" index="-1"/>
+        <CheckBox id="CheckBox00_00" taborder="31" text="모니터링오류검증" left="546" top="79" width="140" height="26"/>
+        <Static id="Static00_00" taborder="32" text="완전판매 모티터링 현황 조회" left="10" top="130" width="200" height="30" cssclass="sta_WF_title02"/>
+        <Grid id="Grid00" taborder="33" left="10" top="164" right="10" cssclass="grd_WF_hwGrd03" bottom="48" binddataset="dsJsonList" autosizebandtype="allband" cellsizingtype="col" autofittype="col">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="43"/>
+                <Column size="150"/>
+                <Column size="150"/>
+                <Column size="405"/>
+                <Column size="126"/>
+                <Column size="126"/>
+                <Column size="126"/>
+                <Column size="126"/>
+                <Column size="126"/>
+                <Column size="126"/>
+                <Column size="126"/>
+                <Column size="126"/>
+                <Column size="126"/>
+                <Column size="126"/>
+              </Columns>
+              <Rows>
+                <Row size="40" band="head"/>
+                <Row size="40" band="head"/>
+                <Row size="40" band="head"/>
+                <Row size="35"/>
+                <Row size="35"/>
+              </Rows>
+              <Band id="head">
+                <Cell rowspan="3" displaytype="checkboxcontrol" edittype="checkbox"/>
+                <Cell col="1" colspan="7" text="모니터링 대상 정보"/>
+                <Cell col="8" colspan="5" text="모니터링 현황"/>
+                <Cell col="13" text="승낙거절"/>
+                <Cell row="1" col="1" rowspan="2" text="모집처"/>
+                <Cell row="1" col="2" text="모집자"/>
+                <Cell row="1" col="3" text="증권번호"/>
+                <Cell row="1" col="4" text="대상자"/>
+                <Cell row="1" col="5" text="콜"/>
+                <Cell row="1" col="6" text="셀프"/>
+                <Cell row="1" col="7" text="서면"/>
+                <Cell row="1" col="8" text="계약일자"/>
+                <Cell row="1" col="9" text="모니터링방법"/>
+                <Cell row="1" col="10" text="모니터링결과"/>
+                <Cell row="1" col="11" text="조치방법"/>
+                <Cell row="1" col="12" text="조치결과"/>
+                <Cell row="1" col="13" text="환급처리기한"/>
+                <Cell row="2" col="2" text="사용인"/>
+                <Cell row="2" col="3" text="상품명"/>
+                <Cell row="2" col="4" text="성명"/>
+                <Cell row="2" col="5" text="제외사유"/>
+                <Cell row="2" col="6" text="제외사유"/>
+                <Cell row="2" col="7" text="제외사유"/>
+                <Cell row="2" col="8" text="모니터링기한"/>
+                <Cell row="2" col="9" text="모니터링일자"/>
+                <Cell row="2" col="10" text="세부내용"/>
+                <Cell row="2" col="11" text="조치일자"/>
+                <Cell row="2" col="12" text="최종판정"/>
+                <Cell row="2" col="13" text="지급결과"/>
+              </Band>
+              <Band id="body">
+                <Cell rowspan="2" displaytype="checkboxcontrol" edittype="checkbox"/>
+                <Cell col="1" text="bind:dhOrgnm" textAlign="center"/>
+                <Cell col="2" text="bind:dhStfnm" textAlign="center"/>
+                <Cell col="3" text="bind:plyno" textAlign="center" textDecoration="underline" color="blue"/>
+                <Cell col="4" text="bind:bjTpFlgcd" combodataset="dsContractInfo" combocodecol="code" combodatacol="value" displaytype="combotext" textAlign="center"/>
+                <Cell col="5" text="bind:callMntrAvyn" displaytype="combotext" combodataset="dsCall" combocodecol="code" combodatacol="value" textAlign="center" textDecoration="underline" color="blue"/>
+                <Cell col="6" text="bind:selfMntrAvyn" displaytype="combotext" combodataset="dsSelf" combocodecol="code" combodatacol="value" textAlign="center" textDecoration="underline" color="blue"/>
+                <Cell col="7" text="bind:wriMntrAvyn" displaytype="combotext" combodataset="dsWrite" combocodecol="code" combodatacol="value" textAlign="center" textDecoration="underline" color="blue"/>
+                <Cell col="8" text="bind:cnrdt" textAlign="center" displaytype="date" calendardateformat="yyyy-MM-dd "/>
+                <Cell col="9" text="bind:pectSlMntrChnnm" textAlign="center" color="blue" textDecoration="underline"/>
+                <Cell col="10" text="bind:cmpgBsnsFlgnm" textAlign="center"/>
+                <Cell col="11" textAlign="center"/>
+                <Cell col="12" textAlign="center"/>
+                <Cell col="13" textAlign="center"/>
+                <Cell row="1" col="1" text="bind:dhTmOrgnm" textAlign="center"/>
+                <Cell row="1" col="2" textAlign="center"/>
+                <Cell row="1" col="3" text="bind:gdnm" textAlign="center"/>
+                <Cell row="1" col="4" text="bind:ctmnm" textAlign="center"/>
+                <Cell row="1" col="5" textAlign="center"/>
+                <Cell row="1" col="6" textAlign="center"/>
+                <Cell row="1" col="7" text="bind:wriMntrXcptRs" textAlign="center"/>
+                <Cell row="1" col="8" text="bind:extdt" textAlign="center" displaytype="date" calendardateformat="yyyy-MM-dd"/>
+                <Cell row="1" col="9" text="bind:cmpgMngPerdt" textAlign="center" displaytype="date" calendardateformat="yyyy-MM-dd"/>
+                <Cell row="1" col="10" text="bind:cmpgBsnsDtFlgnm" textAlign="center"/>
+                <Cell row="1" col="11" textAlign="center"/>
+                <Cell row="1" col="12" textAlign="center"/>
+                <Cell row="1" col="13" textAlign="center"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+      </Layout>
+    </Layouts>
+    <Script type="xscript5.1"><![CDATA[this.comm_Click = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	switch(obj.name)
+	{
+		case "btn_Search" :
+		this.dsJsonList.clearData();
+		
+		this.fv_StartTime = this.gfn_CheckTime();
+		this.Edit00.set_value(this.gfnFormat(this.fv_StartTime));
+			
+		var sUrl = nexacro.getProjectPath() + "file/LageData.json";
+		
+		this.ajax(sUrl,
+		{
+			dataType : "JSON",
+			callback: function(errorcode, response)
+			{
+				//trace(response.pectSlCrstList);
+				this.dsJsonList.loadJSON(response.pectSlCrstList);
+				
+				this.fv_EndTime = this.gfn_CheckTime();
+				this.Edit00_00_00.set_value(this.gfnFormat(this.fv_EndTime));
+				this.fv_DiffTime = this.gfn_diffTime(this.fv_StartTime, this.fv_EndTime, "ss");
+				this.Edit00_00.set_value(this.fv_DiffTime);
+			}
+		});
+		
+		break;
+	}
+};]]></Script>
+    <Objects>
+      <Dataset id="dsJsonList"/>
+      <Dataset id="dsContractInfo">
+        <ColumnInfo>
+          <Column id="code" type="STRING" size="256"/>
+          <Column id="value" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="code">01</Col>
+            <Col id="value">계약자 </Col>
+          </Row>
+          <Row>
+            <Col id="code">02</Col>
+            <Col id="value">피보험자</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="dsCall">
+        <ColumnInfo>
+          <Column id="code" type="STRING" size="256"/>
+          <Column id="value" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="code">0</Col>
+            <Col id="value">불가</Col>
+          </Row>
+          <Row>
+            <Col id="code">1</Col>
+            <Col id="value">가능</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="dsSelf">
+        <ColumnInfo>
+          <Column id="code" type="STRING" size="256"/>
+          <Column id="value" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="code">0</Col>
+            <Col id="value">불가</Col>
+          </Row>
+          <Row>
+            <Col id="code">1</Col>
+            <Col id="value">가능</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="dsWrite">
+        <ColumnInfo>
+          <Column id="code" type="STRING" size="256"/>
+          <Column id="value" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="code">0</Col>
+            <Col id="value">불가</Col>
+          </Row>
+          <Row>
+            <Col id="code">1</Col>
+            <Col id="value">가능</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+    </Objects>
+  </Form>
+</FDL>

@@ -1,0 +1,121 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.0">
+  <Form id="InheritStyle02" width="1016" height="507" titletext="New Form" scrollbartype="none" onload="InheritStyle02_onload">
+    <Layouts>
+      <Layout height="507" mobileorientation="landscape" width="1016">
+        <Static id="stcTitle" taborder="0" left="20" top="0" height="40" cssclass="sta_WF_title02" text="Sales :" fittocontents="width" width="50"/>
+        <Div id="divWork" taborder="1" left="230" top="60" right="20" bottom="20"/>
+        <Div id="divLeft" taborder="2" left="20" top="60" width="200" formscrolltype="none" formscrollbartype="none none" bottom="55"/>
+        <Button id="btnApply" taborder="3" text="Apply" width="120" height="23" cssclass="btn_WF_basic01" left="60" bottom="20" onclick="btnApply_onclick"/>
+        <Static id="stcValue" taborder="4" left="73" top="0" height="40" text="ALL" fittocontents="width" width="25"/>
+        <Static id="stcFilterValue" taborder="5" left="156" top="0" height="40" text="ALL" fittocontents="width" width="25"/>
+        <Static id="stcFilter" taborder="6" left="109" top="0" height="40" text="Filter :" fittocontents="width" width="43" cssclass="sta_WF_title03" background=""/>
+      </Layout>
+    </Layouts>
+    <Script type="xscript5.1"><![CDATA[this.InheritStyle02_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
+{	
+	var sWinId = this.parent.menuInfo.winId;
+	var sMenuCd = this.parent.menuInfo.menuCd;
+	//var sMenuNm = this.parent.menuInfo.menuNm;
+	
+	//this.stcMenuNm.set_text(sMenuNm);
+
+	nexacro._OnceCallbackTimer.callonce(this, function()
+	{
+		this.divLeft.set_url("frame::filter_std.xfdl");
+		this.divWork.set_url(this.parent.menuInfo.menuUrl);
+	}, 10);
+};
+
+this.fn_child_onload = function(form)
+{	
+	form._fv_objTreeInfo = {};
+	form._fv_objFilterForm = this.divLeft.form.divFilter.form;
+	
+	var objTabInfo = form.fn_createTreeTab();
+	var objFunctionInfo = form.fn_createFunction();
+	var objFilterInfo = form.fn_createFilter();
+	
+	if (objTabInfo)
+	{
+		this.fn_createTreeTab(objTabInfo);
+	}
+	
+	if (objFunctionInfo)
+	{
+		this.fn_createFunction(objFunctionInfo);
+	}
+	
+	if (objFilterInfo)
+	{
+		this.fn_createFilter(objFilterInfo);
+	}
+};
+
+this.btnApply_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	var form = this.divWork.form;
+	
+	if (form["fn_apply"])
+	{
+		form["fn_apply"].call(form);
+	}
+	else
+	{
+		alert("업무화면에 fn_apply()가 정의되지 않았습니다.");
+	}
+};
+
+// treeTab 생성정보 설정 및 실행
+this.fn_createTreeTab = function(objInfo)
+{
+// 	var treeCtrl = new _treeCtrl();
+// 
+// 	treeCtrl.text = objInfo.text;
+// 	treeCtrl.treeId = objInfo.treeId;
+// 	treeCtrl.search = objInfo.search;
+// 	treeCtrl.option = objInfo.option;
+// 	treeCtrl.height = objInfo.height;
+// 	treeCtrl.treeDefault = objInfo.treeDefault;
+// 
+// 	treeCtrl.run();
+};
+
+// Function 생성정보 설정 및 실행
+this.fn_createFunction = function(objInfo)
+{
+// 	var functionCtrl = new _functionCtrl();
+// 
+// 	functionCtrl.titletext = objInfo.titletext;
+// 	functionCtrl.menuId = objInfo.menuId;
+// 	functionCtrl.search = objInfo.search;
+// 	functionCtrl.height = objInfo.height;
+// 
+// 	functionCtrl.run();
+};
+
+// Filter 생성정보 설정 및 실행
+this.fn_createFilter = function(objInfo)
+{
+// 	var filterCtrl = new _filterCtrl();
+// 
+// 	filterCtrl.titletext = objInfo.titletext;
+// 	filterCtrl.url = objInfo.url;
+// 	filterCtrl.height = objInfo.height;
+// 
+// 	filterCtrl.run();
+	
+	this.divLeft.form.divFilter.set_url(objInfo.url[0]);
+};]]></Script>
+    <Objects>
+      <Dataset id="_ds_param">
+        <ColumnInfo>
+          <Column id="_dummy" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row/>
+        </Rows>
+      </Dataset>
+    </Objects>
+  </Form>
+</FDL>

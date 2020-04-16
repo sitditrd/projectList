@@ -1,0 +1,134 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.0">
+  <Form id="Work001_002" width="1240" height="818" titletext="개인별옵션등록" scrolltype="none" onload="WF_MainForm_onload">
+    <Layouts>
+      <Layout height="818" mobileorientation="landscape" width="1240">
+        <Div id="Div01" taborder="1" left="0" top="27" height="39" cssclass="div_WF_Search" right="0" formscrollbartype="none" formscrolltype="none">
+          <Layouts>
+            <Layout>
+              <Button id="Button00" taborder="0" cssclass="btn_WF_SubAction, btn_WF_SearchIcon" right="12" width="40" top="8" bottom="8"/>
+              <Static id="Static03" taborder="1" text="계약자유형" left="12" top="12" height="13" cssclass="sta_WF_SeaFieldLabel" fittocontents="width" width="65"/>
+              <Combo id="Combo01" taborder="2" text="가나다라마바사" left="Static03:11" top="8" width="158" height="21" innerdataset="ds_combo" datacolumn="data" codecolumn="code" index="2" value="c0003" scrollbarsize="5" type="dropdown" onitemchanged="Combo00_onitemchanged"/>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Div id="Div02" taborder="2" left="0" top="0" width="600" height="19" url="template::WF_LocationForm.xfdl" formscrollbartype="none none" formscrolltype="none"/>
+        <Div id="Div00" taborder="0" top="0" height="21" right="0" text="" width="500" formscrollbartype="none none" formscrolltype="none">
+          <Layouts>
+            <Layout>
+              <Button id="Button04" taborder="1" text="찾기" top="0" height="21" right="0" width="42"/>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Grid id="Grid00" taborder="3" left="0" top="93" bottom="0" autofittype="col" scrolltype="vertical" scrollbartype="none default" width="500">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="65"/>
+                <Column size="65"/>
+                <Column size="60"/>
+                <Column size="48"/>
+                <Column size="48"/>
+                <Column size="48"/>
+                <Column size="48"/>
+              </Columns>
+              <Rows>
+                <Row size="28" band="head"/>
+                <Row size="26"/>
+                <Row size="28" band="summ"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="계약번호"/>
+                <Cell col="1" text="계약자이름"/>
+                <Cell col="2" text="계약동"/>
+                <Cell col="3" text="계약호"/>
+                <Cell col="4" text="평형"/>
+                <Cell col="5" text="유형"/>
+                <Cell col="6" text="전용㎡"/>
+              </Band>
+              <Band id="body">
+                <Cell/>
+                <Cell col="1"/>
+                <Cell col="2"/>
+                <Cell col="3"/>
+                <Cell col="4"/>
+                <Cell col="5"/>
+                <Cell col="6"/>
+              </Band>
+              <Band id="summary">
+                <Cell text="0건" displaytype="text"/>
+                <Cell col="1"/>
+                <Cell col="2"/>
+                <Cell col="3"/>
+                <Cell col="4"/>
+                <Cell col="5"/>
+                <Cell col="6"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Static id="Static31" taborder="4" text="계약자 정보" left="0" top="75" width="93" height="13" cssclass="sta_WF_Mtitle" fittocontents="width"/>
+        <Static id="Static00" taborder="5" text="선택항목 정보" left="510" top="75" width="93" height="13" cssclass="sta_WF_Mtitle" fittocontents="width"/>
+        <Grid id="Grid01" taborder="6" left="510" top="93" height="259" right="0" autofittype="col" scrollbartype="none default" scrolltype="vertical">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="40"/>
+                <Column size="200"/>
+                <Column size="60"/>
+                <Column size="60"/>
+                <Column size="150"/>
+              </Columns>
+              <Rows>
+                <Row size="28" band="head"/>
+                <Row size="26"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="번호"/>
+                <Cell col="1" text="옵션항목"/>
+                <Cell col="2" text="적용평형"/>
+                <Cell col="3" text="선택코드"/>
+                <Cell col="4" text="선택"/>
+              </Band>
+              <Band id="body">
+                <Cell/>
+                <Cell col="1"/>
+                <Cell col="2"/>
+                <Cell col="3"/>
+                <Cell col="4"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Tab id="Tab00" taborder="7" tabindex="0" left="510" top="381" onchanged="Tab00_onchanged" onmouseenter="Tab00_onmouseup" right="0" bottom="0">
+          <Tabpages>
+            <Tabpage id="Tabpage1" text="등록된 옵션항목" url="template::Work001_002_Tab01.xfdl"/>
+            <Tabpage id="Tabpage2" text="등록된 옵션금액"/>
+            <Tabpage id="Tabpage3" text="등록된 옵션항목금액"/>
+          </Tabpages>
+        </Tab>
+        <Div id="Div03" taborder="8" text="Div03" left="510" top="356" height="19" formscrollbartype="none none" formscrolltype="none" right="0">
+          <Layouts>
+            <Layout>
+              <Div id="Div04" taborder="0" text="Div03" left="46.85%" top="0" width="45" height="19">
+                <Layouts>
+                  <Layout>
+                    <Button id="Button15" taborder="0" left="0" top="0" width="20" height="19" cssclass="btn_WF_ShuttleBox, btn_WF_ShuttleIconD"/>
+                    <Button id="Button16" taborder="1" left="25" top="0" width="20" height="19" cssclass="btn_WF_ShuttleBox, btn_WF_ShuttleIconU"/>
+                  </Layout>
+                </Layouts>
+              </Div>
+            </Layout>
+          </Layouts>
+        </Div>
+      </Layout>
+    </Layouts>
+    <Objects/>
+    <Script type="xscript5.1"><![CDATA[
+this.Div04_TextArea01_onchanged = function(obj:nexacro.TextArea,e:nexacro.ChangeEventInfo)
+{
+	
+};
+]]></Script>
+  </Form>
+</FDL>

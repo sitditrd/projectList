@@ -1,0 +1,240 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.0">
+  <Form id="top" width="1024" height="70" onload="top_onload">
+    <Layouts>
+      <Layout width="1024" height="70" screenid="Desktop_screen">
+        <Static id="Static00" taborder="0" left="0" top="35" height="35" right="0" cssclass="sta_TF_bg01"/>
+        <Static id="Static01" taborder="1" left="0" top="0" height="35" right="0" cssclass="sta_TF_logoArea"/>
+        <Static id="Static02" taborder="2" left="0" top="0" width="130" height="35" cssclass="sta_TF_logo"/>
+        <PopupMenu id="popMenu" left="316" top="70" width="150" height="262" innerdataset="ds_Menu" levelcolumn="MENU_LVL" captioncolumn="MENU_NM" idcolumn="MENU_ID" cssclass="PM_TF_popmenu" onmenuclick="popMenu_onmenuclick"/>
+      </Layout>
+    </Layouts>
+    <Script type="xscript5.1"><![CDATA[
+this.top_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
+{
+	this.set_scrolltype("none");
+	this.set_scrollbartype("none");
+	this.initTop();
+};
+
+this.initTop = function ()
+{
+	var objApp = nexacro.getApplication();
+	objApp.gds_Menu.filter("MENU_LVL<1");
+	this.ds_Top.copyData(objApp.gds_Menu, true);
+	objApp.gds_Menu.filter("");
+	
+	var nTopWidth	= this.width;
+	var nMenuCnt	= this.ds_Top.getCount();
+	//var nWidth		= Math.floor(nTopWidth/nMenuCnt);
+	var nWidth		= 100;
+	var nLeft		= 0;
+	var nTop		= 35;
+	var nHeight		= 35;
+	var topObj, topId;
+	
+	for(var i=0; i<nMenuCnt; i++){
+		topObj = new Button();
+		topId  = this.ds_Top.getColumn(i,"MENU_GRP");
+		topObj.init("btn_"+topId, nLeft, nTop, nWidth, nHeight);
+		
+		topObj.set_text(topId);
+		topObj.set_cssclass("btn_TF_menu");
+		topObj.setEventHandler("onclick", this.btn_menu_onclick, this);
+		
+		this.addChild("btn_"+topId,topObj);
+		topObj.show();
+		
+		nLeft += nWidth;
+	}
+};
+
+this.btn_menu_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	var objName = obj.name;
+	var objGRP 	= objName.substr(4).toUpperCase();
+	
+	var objApp = nexacro.getApplication();
+	var gds = objApp.gds_Menu;
+	
+	gds.filter("MENU_GRP=='"+objGRP+"'");
+	this.ds_Menu.copyData(gds,true);
+	
+	var menu_level = 0;
+	
+	for(var i=this.ds_Menu.getRowCount(); i>-1; i--){
+		menu_level = this.ds_Menu.getColumn(i,"MENU_LVL");
+		
+		if(menu_level > 0){
+			this.ds_Menu.setColumn(i,"MENU_LVL",menu_level-1);
+		}else{
+			this.ds_Menu.deleteRow(i);
+		}
+	}
+	
+	this.popMenu.trackPopupByComponent(obj,0,obj.getOffsetHeight());
+};
+
+this.popMenu_onmenuclick = function(obj:nexacro.PopupMenu,e:nexacro.MenuClickEventInfo)
+{	
+	if(!e.id) return;
+	
+	this.fnOpenMenu(e.id);
+};
+
+this.fnOpenMenu = function(menuId, aSend, sNew, sText)
+{
+	var objApp = nexacro.getApplication();
+	var nRow = objApp.gds_Menu.findRow("MENU_ID", menuId);
+
+	if (nRow < 0) return;
+
+	var menuNm = objApp.gds_Menu.getColumn(nRow, "MENU_NM");
+	var menuUrl = objApp.gds_Menu.getColumn(nRow, "FORM_URL");
+	
+	if (!menuUrl)	return;
+	
+	var objChildFrame;
+	var winId = "win_" + menuId;
+
+	objChildFrame = objApp.mainframe.VFrameSet.HFrameSet.MDIFrameSet[winId];
+
+	if (objChildFrame && sNew != true)
+	{
+		objChildFrame.setFocus();
+
+		if (aSend && aSend != null)
+		{
+			objChildFrame.form.all["fnLinkSearch"].call(objChildFrame.form, aSend);
+		}
+
+		return;
+	}
+
+	if (sNew)
+	{
+		var openCnt = objApp.gds_OpenMenu.getCaseCount("MENU_ID=='" + menuId + "'");
+
+		for (var i = 0; i < (openCnt + 1); i++)
+		{
+			var tmp_winId = winId;
+			tmp_winId = tmp_winId + "_temp_" + (i + 1);
+
+			if (objApp.gds_OpenMenu.findRow("WIN_ID", tmp_winId) == -1)
+			{
+				winId = tmp_winId;
+				openCnt = (i + 1);
+				break;
+			}
+		}
+
+		if (sText != undefined && sText != null)
+		{
+			menuNm += " (" + openCnt + ")";
+		}
+		else
+		{
+			menuNm += " (" + sText + ")";
+		}
+	}
+	else
+	{
+		var nTempRow = objApp.gds_OpenMenu.findRow("WIN_ID", winId);
+		
+		if (nTempRow != -1)
+		{
+			objApp.mainframe.VFrameSet.HFrameSet.MDIFrameSet[winId] && objApp.mainframe.VFrameSet.HFrameSet.MDIFrameSet[winId].setFocus();
+			return;
+		}
+	}
+
+	objChildFrame = new ChildFrame();
+
+	objChildFrame.init(winId, 0, 0, 824, 608);
+
+	objChildFrame.set_formurl("frame::work.xfdl");
+	objChildFrame.set_resizable(true);
+	objChildFrame.set_openstatus("maximize");
+	objChildFrame.set_showtitlebar(false);
+	objChildFrame.set_showcascadetitletext(false);
+	objChildFrame.set_titletext(menuNm);
+
+	objChildFrame.menuId = menuId;
+	objChildFrame.menuNm = menuNm;
+	objChildFrame.menuUrl = menuUrl;
+	objChildFrame.aSend = aSend;
+
+	objChildFrame.addEventHandler("onactivate", this.workFrame_onactivate, this);
+	objChildFrame.addEventHandler("onclose", this.workFrame_onclose, this);
+
+	objApp.mainframe.VFrameSet.HFrameSet.MDIFrameSet.addChild(winId, objChildFrame);
+
+	objChildFrame.show();
+	
+	var nFromRow = objApp.gds_Menu.findRow("MENU_ID", menuId);
+	var nToRow = objApp.gds_OpenMenu.addRow();
+	
+	objApp.gds_OpenMenu.copyRow(nToRow, objApp.gds_Menu, nFromRow);
+	objApp.gds_OpenMenu.setColumn(nToRow, "WIN_ID", winId);
+	
+	try
+	{
+		var objForm = objApp.mainframe.VFrameSet.OpenMenuFrame.form;
+		objForm["fnAddTabPage"].call(objForm, winId, menuNm);
+	}
+	catch (err)
+	{
+		trace("[Error] in frame::top.xfdl fnOpenMenu : " + err.message);
+	}
+}
+
+this.workFrame_onactivate = function(obj: ChildFrame, e: nexacro.ActivateEventInfo)
+{
+	try
+	{
+		var objApp = nexacro.getApplication();
+		var objForm = objApp.mainframe.VFrameSet.OpenMenuFrame.form;
+		objForm["fnActiveTabPage"].call(objForm, obj.name);
+	}
+	catch (err)
+	{
+		trace("[Error] in frame::top.xfdl workFrame_onactivate : " + err.message);
+	}
+}
+
+this.workFrame_onclose = function(obj: ChildFrame, e: nexacro.CloseEventInfo)
+{
+	if (e.fromobject.name.substr(0, 4) != "win_")	return;
+	
+	try
+	{
+		var objApp = nexacro.getApplication();
+		var objForm = objApp.mainframe.VFrameSet.OpenMenuFrame.form;
+		objForm["fnDeleteTabpage"].call(objForm, obj.name);
+	}
+	catch (err)
+	{
+		trace("[Error] in frame::top.xfdl workFrame_onclose : " + err.message);
+	}
+}]]></Script>
+    <Objects>
+      <Dataset id="ds_Menu" firefirstcount="0" firenextcount="0" useclientlayout="false" updatecontrol="true" enableevent="true" loadkeymode="keep" loadfiltermode="keep" reversesubsum="false">
+        <ColumnInfo>
+          <Column id="MENU_GRP" type="STRING" size="256"/>
+          <Column id="MENU_NM" type="STRING" size="256"/>
+          <Column id="MENU_ID" type="STRING" size="256"/>
+          <Column id="MENU_LVL" type="STRING" size="256"/>
+          <Column id="FORM_URL" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_Top">
+        <ColumnInfo>
+          <Column id="MENU_GRP" type="STRING" size="256"/>
+          <Column id="MENU_NM" type="STRING" size="256"/>
+          <Column id="MENU_ID" type="STRING" size="256"/>
+          <Column id="MENU_LVL" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+  </Form>
+</FDL>

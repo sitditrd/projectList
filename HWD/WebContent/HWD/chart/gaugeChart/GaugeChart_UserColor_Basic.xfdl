@@ -1,0 +1,116 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.0">
+  <Form id="GaugeChart_Highlight" width="768" height="480" titletext="New Form">
+    <Layouts>
+      <Layout height="480" mobileorientation="landscape" width="768">
+        <GaugeChart id="GaugeChart02" taborder="1" left="1.3%" top="2.08%" binddataset="ds_highlight" categorycolumn="bind:Column0" gaugetype="circular" right="1.04%" bottom="2.08%" enableanimation="false">
+          <Contents><![CDATA[{
+	"title": {
+		"id": "title",
+		"text": "circular",
+		"textfont": "20pt/normal '맑은 고딕'",
+		"padding": "0px 0px 5px"
+	},
+	"legend": {
+		"id": "legend",
+		"padding": "3px 10px 3px 10px",
+		"itemtextfont": "9pt '맑은 고딕'",
+		"itemtextcolor": "#4c4c4c"
+	},
+	"tooltip": {
+		"id": "tooltip",
+		"background": "#4b4b4b",
+		"linestyle": "0px none",
+		"textcolor": "#ffffff",
+		"textfont": "10pt/normal '맑은 고딕'",
+		"padding": "5px"
+	},
+	"indicator": {
+		"id": "indicator",
+		"visible": "true",
+		"indicatorimage": "",
+		"indicatorsize": "",
+		"indicatorindent": "",
+		"indicatorfillstyle": "white",
+		"indicatorlinestyle": "1px solid black",
+		"indicatoropacity": "1",
+		"fillstyle": "#D5604D",
+		"opacity": "1",
+		"indent": "0",
+		"size": "10",
+		"linetype": "false",
+		"centerpinradius": "15",
+		"indentouter": "50",
+		"centerpinstyle": "linear-gradient(to bottom,#ddffff 23%, #0000ff 100%)",
+		"centerpinautogradation": "none"
+	},
+	"board": {
+		"id": "board"
+	},
+	"valueaxes": [
+		{
+			"id": "valueaxis0",
+			"labeltextcolor": "#6f6f6f",
+			"labeltextfont": "10pt '맑은 고딕'",
+			"axislinestyle": "1px solid #d0d0d0",
+			"tickmin": "0",
+			"tickmax": "100",
+			"tickinterval": "10",
+			"opposite": "true",
+			"gap": "10",
+			"labelgap": "0",
+			"ticklinestyle": "2px solid black",
+			"smallticklinestyle": "1px solid #cccccc",
+			"smalltickcount": "5"
+		}
+	],
+	"seriesset": [
+		{
+			"id": "series0",
+			"titletext": "series",
+			"itemtextvisible": true,
+			"itemtextcolor": "#003860",
+			"itemtextfont": "bold 20pt '맑은 고딕'",
+			"valuecolumn": "bind:Column1",
+			"highlightbarvisible": "true",
+			"highlightbarfillstyle": "white",
+			"barfillstyle": "#5587a2",
+			"fillstyle": "#5587a2",
+			"innerradius": "90",
+			"barlinestyle": "black",
+			"radius": "91",
+			"barsize": "80",
+			"itemtextgap": "0 70",
+			"startangle": "220",
+			"endangle": "275",
+			"opacity": "0.8",
+			"userrange": "[0,70,\"#aaffaa\"],[70,90,\"#FF9900\"],[90,100,\"#DC3912\"]",
+			"userrangeinnerradius": "80",
+			"userrangeradius": "90",
+			"baropacity": "0",
+			"boardouterstyle": "15px solid #cccccc",
+			"boardouterlinestyle": "1px solid #000000",
+			"boardinnerstyle": "1px solid #f1f1f1"
+		}
+	]
+}]]></Contents>
+        </GaugeChart>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="ds_highlight">
+        <ColumnInfo>
+          <Column id="Column0" type="STRING" size="256"/>
+          <Column id="Column1" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="Column0">0</Col>
+            <Col id="Column1">70</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.1"><![CDATA[ ]]></Script>
+  </Form>
+</FDL>

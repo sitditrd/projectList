@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.0">
+  <Form id="comAlert" width="300" height="150" titletext="알림창" onload="form_onload" border="3px solid black">
+    <Layouts>
+      <Layout height="150" width="300">
+        <Button id="btnOk" taborder="0" text="확인" left="21.33%" width="55" height="25" bottom="10" onclick="btnOk_onclick"/>
+        <Button id="btnClose" taborder="1" text="취소" left="58.00%" width="55" height="25" bottom="9" onclick="btnClose_onclick"/>
+        <Static id="sta00" taborder="2" text="미수신된 알림 메세지가 있습니다. &#13;&#10;확인하시겠습니까?" left="21" top="36" width="260" height="68" textAlign="center"/>
+      </Layout>
+    </Layouts>
+    <Script type="xscript5.1"><![CDATA[
+this.Arg;
+
+this.form_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
+{
+	if(nexacro.getApplication().id == "nexacro17MDI"){
+		this.Arg = nexacro.getApplication().mainframe.VFrameSet.LoginFrame.form;
+	}else{
+		this.Arg = nexacro.getApplication().mainframe.ChildFrame.form.div_lgn.form;
+	}
+		
+	trace("alert length :::::" + this.components.length);
+};
+
+this.btnOk_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	for(var i in this.Arg.MsgCheck){
+ 		// 수신 확인 메시지 전송
+ 		this.Arg.XPush00.sendResponse(this.Arg.MsgCheck[i]);
+ 	}
+	var objFrame = new ChildFrame();
+	var objParentFrame = this.getOwnerFrame();
+	objFrame.init( "pushPopup", 0, 0, 400, 400 );
+	objFrame.set_formurl( "sample::pushPopup.xfdl" );
+	objFrame.set_overlaycolor("transparent"); 
+	objFrame.set_openalign("center middle");
+	objFrame.showModal( "pushPopup", objParentFrame, null, this, this.fn_callback );
+	this.close(true);
+};
+
+this.btnClose_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.close();
+};
+]]></Script>
+  </Form>
+</FDL>

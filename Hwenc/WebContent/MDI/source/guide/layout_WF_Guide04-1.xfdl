@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.0">
+  <Form id="layout_WF_Guide01" width="1240" height="818" titletext="New Form">
+    <Layouts>
+      <Layout height="818" mobileorientation="landscape" width="1240">
+        <Static id="Static07" taborder="0" left="0" top="18" height="29" cssclass="sta_WF_InputBgT" right="0" onclick="Static07_onclick"/>
+        <Static id="Static08" taborder="1" text="가나다 라마바사" left="0" top="19" width="99" height="27" cssclass="sta_WF_InputLabelL"/>
+        <Static id="Static00" taborder="2" left="0" top="56" height="29" cssclass="sta_WF_InputBgM" right="0" onclick="Static07_onclick"/>
+        <Static id="Static02" taborder="3" left="0" top="94" height="29" cssclass="sta_WF_InputBgB" right="0" onclick="Static07_onclick"/>
+        <Static id="Static03" taborder="4" text="가나다라마바사" left="0" top="57" width="99" height="27" cssclass="sta_WF_InputLabelL"/>
+        <Static id="Static04" taborder="5" text="가나다라마바사" left="0" top="95" width="99" height="27" cssclass="sta_WF_InputLabelL"/>
+        <Static id="Static05" taborder="6" left="0" top="149" height="29" cssclass="sta_WF_InputBgT" right="0" onclick="Static07_onclick" text=""/>
+        <Static id="Static06" taborder="7" text="가나다 라마바사" left="0" top="150" width="99" height="27" cssclass="sta_WF_InputLabelL"/>
+        <Static id="Static10" taborder="8" left="0" top="187" height="29" cssclass="sta_WF_InputBgM" right="0" onclick="Static07_onclick"/>
+        <Static id="Static11" taborder="9" left="0" top="225" height="29" cssclass="sta_WF_InputBgB" right="0" onclick="Static07_onclick"/>
+        <Static id="Static12" taborder="10" text="가나다라마바사" left="0" top="188" width="99" height="27" cssclass="sta_WF_InputLabelL" onclick="Static12_onclick"/>
+        <Static id="Static13" taborder="11" text="가나다라마바사" left="0" top="226" width="99" height="27" cssclass="sta_WF_InputLabelL"/>
+        <Static id="Static14" taborder="12" text="가나다 라마바사" left="620" top="150" width="99" height="27" cssclass="sta_WF_InputLabel"/>
+        <Static id="Static15" taborder="13" text="가나다라마바사" left="620" top="188" width="99" height="27" cssclass="sta_WF_InputLabel"/>
+        <Static id="Static16" taborder="14" text="가나다라마바사" left="620" top="226" width="99" height="27" cssclass="sta_WF_InputLabel"/>
+        <Static id="Static17" taborder="15" left="0" top="282" height="29" cssclass="sta_WF_InputBgT" right="1" onclick="Static07_onclick"/>
+        <Static id="Static18" taborder="16" text="가나다 라마바사" left="0" top="283" width="99" height="27" cssclass="sta_WF_InputLabelL"/>
+        <Static id="Static20" taborder="17" left="0" top="320" height="29" cssclass="sta_WF_InputBgM" right="1" onclick="Static07_onclick"/>
+        <Static id="Static21" taborder="18" left="0" top="358" height="29" cssclass="sta_WF_InputBgB" right="1" onclick="Static07_onclick"/>
+        <Static id="Static22" taborder="19" text="가나다라마바사" left="0" top="321" width="99" height="27" cssclass="sta_WF_InputLabelL"/>
+        <Static id="Static23" taborder="20" text="가나다라마바사" left="0" top="359" width="99" height="27" cssclass="sta_WF_InputLabelL"/>
+        <Static id="Static24" taborder="21" text="가나다 라마바사" left="412" top="283" width="99" height="27" cssclass="sta_WF_InputLabel"/>
+        <Static id="Static25" taborder="22" text="가나다라마바사" left="412" top="321" width="99" height="27" cssclass="sta_WF_InputLabel"/>
+        <Static id="Static26" taborder="23" text="가나다라마바사" left="412" top="359" width="99" height="27" cssclass="sta_WF_InputLabel"/>
+        <Static id="Static27" taborder="24" text="가나다라마바사" left="825" top="359" width="99" height="27" cssclass="sta_WF_InputLabel"/>
+        <Static id="Static28" taborder="25" text="가나다라마바사" left="825" top="321" width="99" height="27" cssclass="sta_WF_InputLabel"/>
+        <Static id="Static29" taborder="26" text="가나다 라마바사" left="825" top="283" width="99" height="27" cssclass="sta_WF_InputLabel"/>
+        <Static id="Static30" taborder="27" left="0" top="410" height="29" cssclass="sta_WF_InputBgT" right="0" onclick="Static07_onclick"/>
+        <Static id="Static31" taborder="28" text="가나다 라마바사" left="0" top="411" width="99" height="27" cssclass="sta_WF_InputLabelL"/>
+        <Static id="Static33" taborder="29" left="0" top="448" height="29" cssclass="sta_WF_InputBgM" right="0" onclick="Static07_onclick"/>
+        <Static id="Static34" taborder="30" left="0" top="486" height="29" cssclass="sta_WF_InputBgB" right="0" onclick="Static07_onclick"/>
+        <Static id="Static35" taborder="31" text="가나다라마바사" left="0" top="449" width="99" height="27" cssclass="sta_WF_InputLabelL"/>
+        <Static id="Static36" taborder="32" text="가나다라마바사" left="0" top="487" width="99" height="27" cssclass="sta_WF_InputLabelL"/>
+        <Static id="Static37" taborder="33" text="가나다 라마바사" left="310" top="411" width="99" height="27" cssclass="sta_WF_InputLabel"/>
+        <Static id="Static38" taborder="34" text="가나다라마바사" left="310" top="449" width="99" height="27" cssclass="sta_WF_InputLabel"/>
+        <Static id="Static39" taborder="35" text="가나다라마바사" left="310" top="487" width="99" height="27" cssclass="sta_WF_InputLabel"/>
+        <Static id="Static40" taborder="36" text="가나다라마바사" left="620" top="487" width="99" height="27" cssclass="sta_WF_InputLabel"/>
+        <Static id="Static41" taborder="37" text="가나다라마바사" left="620" top="449" width="99" height="27" cssclass="sta_WF_InputLabel"/>
+        <Static id="Static42" taborder="38" text="가나다 라마바사" left="620" top="411" width="99" height="27" cssclass="sta_WF_InputLabel"/>
+        <Static id="Static43" taborder="39" text="가나다 라마바사" left="930" top="411" width="99" height="27" cssclass="sta_WF_InputLabel"/>
+        <Static id="Static44" taborder="40" text="가나다라마바사" left="930" top="449" width="99" height="27" cssclass="sta_WF_InputLabel"/>
+        <Static id="Static45" taborder="41" text="가나다라마바사" left="930" top="487" width="99" height="27" cssclass="sta_WF_InputLabel"/>
+        <Static id="Static46" taborder="42" left="0" top="548" height="29" cssclass="sta_WF_InputBgT" right="0" onclick="Static07_onclick"/>
+        <Static id="Static47" taborder="43" text="가나다 라마바사" left="0" top="549" width="99" height="27" cssclass="sta_WF_InputLabelL"/>
+        <Static id="Static49" taborder="44" left="0" top="586" height="29" cssclass="sta_WF_InputBgM" right="0" onclick="Static07_onclick"/>
+        <Static id="Static50" taborder="45" left="0" top="624" height="29" cssclass="sta_WF_InputBgB" right="0" onclick="Static07_onclick"/>
+        <Static id="Static51" taborder="46" text="가나다라마바사" left="0" top="587" width="99" height="27" cssclass="sta_WF_InputLabelL"/>
+        <Static id="Static52" taborder="47" text="가나다라마바사" left="0" top="625" width="99" height="27" cssclass="sta_WF_InputLabelL"/>
+        <Static id="Static53" taborder="48" text="가나다 라마바사" left="248" top="549" width="99" height="27" cssclass="sta_WF_InputLabel"/>
+        <Static id="Static54" taborder="49" text="가나다라마바사" left="248" top="587" width="99" height="27" cssclass="sta_WF_InputLabel"/>
+        <Static id="Static55" taborder="50" text="가나다라마바사" left="248" top="625" width="99" height="27" cssclass="sta_WF_InputLabel"/>
+        <Static id="Static56" taborder="51" text="가나다라마바사" left="496" top="625" width="99" height="27" cssclass="sta_WF_InputLabel"/>
+        <Static id="Static57" taborder="52" text="가나다라마바사" left="496" top="587" width="99" height="27" cssclass="sta_WF_InputLabel"/>
+        <Static id="Static58" taborder="53" text="가나다 라마바사" left="496" top="549" width="99" height="27" cssclass="sta_WF_InputLabel"/>
+        <Static id="Static59" taborder="54" text="가나다 라마바사" left="744" top="549" width="99" height="27" cssclass="sta_WF_InputLabel"/>
+        <Static id="Static60" taborder="55" text="가나다라마바사" left="744" top="587" width="99" height="27" cssclass="sta_WF_InputLabel"/>
+        <Static id="Static61" taborder="56" text="가나다라마바사" left="744" top="625" width="99" height="27" cssclass="sta_WF_InputLabel"/>
+        <Static id="Static62" taborder="57" text="가나다 라마바사" left="992" top="549" width="99" height="27" cssclass="sta_WF_InputLabel"/>
+        <Static id="Static63" taborder="58" text="가나다라마바사" left="992" top="587" width="99" height="27" cssclass="sta_WF_InputLabel"/>
+        <Static id="Static64" taborder="59" text="가나다라마바사" left="992" top="625" width="99" height="27" cssclass="sta_WF_InputLabel"/>
+      </Layout>
+    </Layouts>
+  </Form>
+</FDL>

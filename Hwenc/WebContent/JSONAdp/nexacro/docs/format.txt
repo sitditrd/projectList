@@ -1,0 +1,51 @@
+{
+	"datatype": "SSV",
+    "codepage": "utf-8",
+    "parameters": {
+      "parameter": [
+            ["int","ErrorCode",0] ,		// type , id , value
+            ["string","ErrorMsg","SUCC"] 
+      ]
+    },
+    "datasets": [
+      {
+        "ds_id": "output1",
+        "ds_colinfo": {
+          "constcolumn": [
+            ["const1","test_const1"] ,		// size , type , id , value
+			["const2","test_const2"]	
+          ],
+          "column": [
+            [255,"string","col1","",""] ,						// size , type , id, prop, sumtext
+            [255,"string","col2","",""] ,
+            [255,"string","col3","",""] ,
+            [255,"string","col4","",""]
+           ]
+        },
+        "ds_rows": {
+          "row": [
+            ["row1_col1","row1_col2","row1_col3","row1_col4"] ,		//col1 value , col2 value , col3 value , col4 value
+            ["row2_col1","row2_col2","row2_col3","row2_col4"] 
+           ]
+        }
+      },
+      {
+        "ds_id": "output2",
+        "ds_colinfo": {
+          "constcolumn": [] ,
+          "column": [
+            [255,"string","col1"] ,		// size , type , id
+            [255,"string","col2"] ,
+            [255,"string","col3"] ,
+            [255,"string","col4"]
+           ]
+        },
+        "ds_rows": {
+          "row": [
+            ["row1_col1","row1_col2","row1_col3","row1_col4"] ,		//col1 value , col2 value , col3 value , col4 value
+            ["row2_col1","row2_col2","row2_col3","row2_col4"] 
+           ]
+        }
+      }
+     ]
+}

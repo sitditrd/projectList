@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.0">
+  <Form id="Login" width="1024" height="768" titletext="New Form">
+    <Layouts>
+      <Layout height="768" mobileorientation="landscape" width="1024">
+        <Static id="Static00" taborder="1" left="0" top="0" right="0" bottom="0" cssclass="sta_WF_loginBg" text=""/>
+        <Static id="Static01" taborder="1" left="132" top="128" width="761" height="524" cssclass="sta_WF_loginBox" text=""/>
+        <Edit id="Edit00" taborder="2" left="282" top="343" width="460" height="52" displaynulltext=" 아이디" tabstop="true" cssclass="edit_WF_login" value="admin" text="admin"/>
+        <Edit id="Edit01" taborder="3" left="282" top="404" width="460" height="52" displaynulltext="비밀번호" password="true" cssclass="edit_WF_login" value="password" text="password"/>
+        <Button id="Button00" taborder="4" text="LOGIN" left="282" top="475" width="460" height="60" cssclass="btn_WF_login"/>
+        <Static id="Static02" taborder="5" left="375" top="239" width="275" height="74" cssclass="sta_WF_loginLogo"/>
+        <Static id="Static03" taborder="6" left="125" top="68" width="140" height="60" text="LOGIN" cssclass="sta_WF_loginTitle"/>
+      </Layout>
+    </Layouts>
+  </Form>
+</FDL>

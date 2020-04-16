@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app id="WebApp_ID" version="2.4" xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
+	<welcome-file-list>
+		<welcome-file>index.html</welcome-file>
+		<welcome-file>index.htm</welcome-file>
+		<welcome-file>index.jsp</welcome-file>
+		<welcome-file>default.html</welcome-file>
+		<welcome-file>default.htm</welcome-file>
+		<welcome-file>default.jsp</welcome-file>
+	</welcome-file-list>
+    
+	<servlet>
+        <servlet-name>servletMasterData</servlet-name>
+        <servlet-class>servletMasterData</servlet-class>
+    </servlet>	
+    <servlet-mapping>
+        <servlet-name>servletMasterData</servlet-name>
+        <url-pattern>/selectMasterData</url-pattern>
+    </servlet-mapping>
+    
+	<servlet>
+        <servlet-name>servletDetailData</servlet-name>
+        <servlet-class>servletDetailData</servlet-class>
+    </servlet>	
+    <servlet-mapping>
+        <servlet-name>servletDetailData</servlet-name>
+        <url-pattern>/selectDetailData</url-pattern>
+    </servlet-mapping>
+    
+    <!-- 서블릿으로 사용할 경우 -->
+    
+    <!-- <servlet>
+        <servlet-name>ExecuteDataAdd</servlet-name>
+        <servlet-class>PushProvider1</servlet-class>
+    </servlet>	
+    <servlet-mapping>
+        <servlet-name>ExecuteDataAdd</servlet-name>
+        <url-pattern>/ExecuteDataAdd</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>ExecuteEngageRate</servlet-name>
+        <servlet-class>PushProvider2</servlet-class>
+    </servlet>	
+    <servlet-mapping>
+        <servlet-name>ExecuteEngageRate</servlet-name>
+        <url-pattern>/ExecuteEngageRate</url-pattern>
+    </servlet-mapping> -->
+    
+</web-app>

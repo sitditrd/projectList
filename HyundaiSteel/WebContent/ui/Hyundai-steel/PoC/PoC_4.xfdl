@@ -1,0 +1,3114 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.0">
+  <Form id="PoC_4" width="1280" height="720" titletext="트리그리드" onload="PoC_4_onload">
+    <Layouts>
+      <Layout height="720" mobileorientation="landscape" width="1280">
+        <Static id="Static00" taborder="0" text="트리 그리드" left="10" top="5" height="34" right="10" cssclass="sta_WF_title"/>
+        <Grid id="grdList" taborder="1" treeusecheckbox="false" treeinitstatus="expand,all" top="94" onrbuttonup="grdList_onrbuttonup" autofittype="col" bottom="10" left="10" right="10" treeuseline="true" treeusebutton="use" cssclass="grd_WF_cellC">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="200"/>
+                <Column size="109"/>
+                <Column size="106"/>
+                <Column size="107"/>
+                <Column size="125"/>
+                <Column size="106"/>
+                <Column size="107"/>
+                <Column size="120"/>
+                <Column size="106"/>
+                <Column size="107"/>
+                <Column size="108"/>
+                <Column size="109"/>
+                <Column size="109"/>
+                <Column size="109"/>
+                <Column size="106"/>
+                <Column size="107"/>
+                <Column size="108"/>
+                <Column size="160"/>
+                <Column size="160"/>
+              </Columns>
+              <Rows>
+                <Row size="31" band="head"/>
+                <Row size="24" band="head"/>
+                <Row size="30"/>
+              </Rows>
+              <Band id="head">
+                <Cell rowspan="2" text="CastNo"/>
+                <Cell col="1" rowspan="2" text="HeatNo"/>
+                <Cell col="2" rowspan="2" text="지시재료&#13;&#10;구분"/>
+                <Cell col="3" rowspan="2" text="품질설계&#13;&#10;HCR구분"/>
+                <Cell col="4" colspan="4" text="주편 / SLAB매수"/>
+                <Cell col="8" colspan="4" text="STR1"/>
+                <Cell col="12" colspan="4" text="STR2"/>
+                <Cell col="16" colspan="3" text="전로"/>
+                <Cell row="1" col="4" text="HCR매수"/>
+                <Cell row="1" col="5" text="여재매수"/>
+                <Cell row="1" col="6" text="주편매수"/>
+                <Cell row="1" col="7" text="SLAB매수"/>
+                <Cell row="1" col="8" text="두께"/>
+                <Cell row="1" col="9" text="초폭"/>
+                <Cell row="1" col="10" text="말폭"/>
+                <Cell row="1" col="11" text="매수"/>
+                <Cell row="1" col="12" text="두께"/>
+                <Cell row="1" col="13" text="초폭"/>
+                <Cell row="1" col="14" text="말폭"/>
+                <Cell row="1" col="15" text="매수"/>
+                <Cell row="1" col="16" text="호기"/>
+                <Cell row="1" col="17" text="취련시작"/>
+                <Cell row="1" col="18" text="출강완료"/>
+              </Band>
+              <Band id="body">
+                <Cell displaytype="treeitemcontrol" edittype="tree" text="bind:Column0" treelevel="expr:1-dataset.getRowLevel(currow)" background="#ffffff" textAlign="left"/>
+                <Cell col="1" text="bind:Column1" background="#ffffff" textAlign="center" verticalAlign="middle"/>
+                <Cell col="2" text="bind:Column2" background="#ffffff" textAlign="center" verticalAlign="middle"/>
+                <Cell col="3" text="bind:Column3" textAlign="center" background="#ffffff"/>
+                <Cell col="4" text="bind:Column4" textAlign="right" background="#ffffff" verticalAlign="middle"/>
+                <Cell col="5" text="bind:Column5" background="#ffffff" textAlign="right" verticalAlign="middle"/>
+                <Cell col="6" text="bind:Column6" textAlign="right" background="#ffffff" verticalAlign="middle"/>
+                <Cell col="7" text="bind:Column7" textAlign="right" background="#ffffff" verticalAlign="middle"/>
+                <Cell col="8" text="bind:Column8" background="#ffffff" textAlign="right" verticalAlign="middle"/>
+                <Cell col="9" text="bind:Column9" textAlign="right" background="#ffffff" verticalAlign="middle"/>
+                <Cell col="10" text="bind:Column10" textAlign="right" background="#ffffff" verticalAlign="middle"/>
+                <Cell col="11" text="bind:Column11" background="#ffffff" textAlign="right" verticalAlign="middle"/>
+                <Cell col="12" text="bind:Column12" background="#ffffff" textAlign="right" verticalAlign="middle"/>
+                <Cell col="13" text="bind:Column13" background="#ffffff" textAlign="right" verticalAlign="middle"/>
+                <Cell col="14" text="bind:Column14" background="#ffffff" textAlign="right" verticalAlign="middle"/>
+                <Cell col="15" text="bind:Column15" textAlign="right" background="#ffffff" verticalAlign="middle"/>
+                <Cell col="16" text="bind:Column16" textAlign="right" background="#ffffff" verticalAlign="middle"/>
+                <Cell col="17" text="bind:Column17" textAlign="center" background="#ffffff" verticalAlign="middle"/>
+                <Cell col="18" text="bind:Column18" textAlign="center" background="#ffffff" verticalAlign="middle"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <PopupMenu id="popMenu" left="511" top="692" width="99" height="108" innerdataset="@ds_PopMenu" idcolumn="id" captioncolumn="caption" levelcolumn="level" onmenuclick="popMenu_onmenuclick"/>
+        <Static id="Static02" taborder="3" left="10" top="39" right="10" height="44" text="" border="1px solid" background="#f6f6f6"/>
+        <Button id="btn_search" taborder="4" cssclass="btn_WF_btnR" top="44" width="70" height="35" right="15" onclick="fn_comBtnOnClick" text="조회"/>
+        <Static id="Static01" taborder="4" text="Grid Body 영역에서 마우스 우 클릭을 하게되면, 트리 전체 펼치기 및 접기에 대해 확인할 수 있는 메뉴가 나타납니다." left="17" top="44" height="34" right="259"/>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="ds_tree" reversesubsum="true" keystring="G:Column0">
+        <ColumnInfo>
+          <Column id="Column0" type="STRING" size="256"/>
+          <Column id="Column1" type="STRING" size="256"/>
+          <Column id="Column2" type="STRING" size="256"/>
+          <Column id="Column3" type="STRING" size="256"/>
+          <Column id="Column4" type="STRING" size="256"/>
+          <Column id="Column5" type="STRING" size="256"/>
+          <Column id="Column6" type="STRING" size="256"/>
+          <Column id="Column7" type="STRING" size="256"/>
+          <Column id="Column8" type="STRING" size="256"/>
+          <Column id="Column9" type="STRING" size="256"/>
+          <Column id="Column10" type="STRING" size="256"/>
+          <Column id="Column11" type="STRING" size="256"/>
+          <Column id="Column12" type="STRING" size="256"/>
+          <Column id="Column13" type="STRING" size="256"/>
+          <Column id="Column14" type="STRING" size="256"/>
+          <Column id="Column15" type="STRING" size="256"/>
+          <Column id="Column16" type="STRING" size="256"/>
+          <Column id="Column17" type="STRING" size="256"/>
+          <Column id="Column18" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="Column0">CH0003</Col>
+            <Col id="Column1">PL8547</Col>
+            <Col id="Column2">R16719</Col>
+            <Col id="Column3">C</Col>
+            <Col id="Column6">2</Col>
+            <Col id="Column7">10</Col>
+            <Col id="Column8">250</Col>
+            <Col id="Column9">1650</Col>
+            <Col id="Column10">1650</Col>
+            <Col id="Column11">5</Col>
+            <Col id="Column12">250</Col>
+            <Col id="Column13">1650</Col>
+            <Col id="Column14">1650</Col>
+            <Col id="Column15">5</Col>
+            <Col id="Column16">4</Col>
+            <Col id="Column17">21일 20시 16분</Col>
+            <Col id="Column5">2</Col>
+            <Col id="Column18">21일 20시 49분</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">CH0003</Col>
+            <Col id="Column1">PL8548</Col>
+            <Col id="Column2">R16720</Col>
+            <Col id="Column3">C</Col>
+            <Col id="Column7">9</Col>
+            <Col id="Column8">250</Col>
+            <Col id="Column9">1650</Col>
+            <Col id="Column10">1650</Col>
+            <Col id="Column11">5</Col>
+            <Col id="Column12">250</Col>
+            <Col id="Column13">1650</Col>
+            <Col id="Column14">1650</Col>
+            <Col id="Column15">4</Col>
+            <Col id="Column16">4</Col>
+            <Col id="Column17">21일 20시 56분</Col>
+            <Col id="Column18">21일 21시 28분</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">CH0003</Col>
+            <Col id="Column1">PL8549</Col>
+            <Col id="Column2">R16721</Col>
+            <Col id="Column3">C</Col>
+            <Col id="Column7">9</Col>
+            <Col id="Column8">250</Col>
+            <Col id="Column9">1650</Col>
+            <Col id="Column10">1650</Col>
+            <Col id="Column11">4</Col>
+            <Col id="Column12">250</Col>
+            <Col id="Column13">1650</Col>
+            <Col id="Column14">1650</Col>
+            <Col id="Column15">5</Col>
+            <Col id="Column16">4</Col>
+            <Col id="Column17">21일 21시 16분</Col>
+            <Col id="Column18">21일 22시 09분</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">CH0003</Col>
+            <Col id="Column1">PL8550</Col>
+            <Col id="Column2">R16722</Col>
+            <Col id="Column3">C</Col>
+            <Col id="Column4">12</Col>
+            <Col id="Column6">2</Col>
+            <Col id="Column7">9</Col>
+            <Col id="Column8">250</Col>
+            <Col id="Column9">1650</Col>
+            <Col id="Column10">1650</Col>
+            <Col id="Column11">5</Col>
+            <Col id="Column12">250</Col>
+            <Col id="Column13">1650</Col>
+            <Col id="Column14">1650</Col>
+            <Col id="Column15">4</Col>
+            <Col id="Column16">4</Col>
+            <Col id="Column17">21일 22시 16분</Col>
+            <Col id="Column5">2</Col>
+            <Col id="Column18">22일 20시 09분</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">CH0003</Col>
+            <Col id="Column1">PL8551</Col>
+            <Col id="Column2">R16723</Col>
+            <Col id="Column3">C</Col>
+            <Col id="Column4">13</Col>
+            <Col id="Column7">9</Col>
+            <Col id="Column8">250</Col>
+            <Col id="Column9">1650</Col>
+            <Col id="Column10">1650</Col>
+            <Col id="Column11">5</Col>
+            <Col id="Column12">250</Col>
+            <Col id="Column13">1650</Col>
+            <Col id="Column14">1650</Col>
+            <Col id="Column15">5</Col>
+            <Col id="Column16">2</Col>
+            <Col id="Column17">22일 08시 03분</Col>
+            <Col id="Column18">22일 20시 09분</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">CH0003</Col>
+            <Col id="Column1">PL8552</Col>
+            <Col id="Column2">R16724</Col>
+            <Col id="Column3">C</Col>
+            <Col id="Column4">14</Col>
+            <Col id="Column7">10</Col>
+            <Col id="Column8">250</Col>
+            <Col id="Column9">1120</Col>
+            <Col id="Column10">1120</Col>
+            <Col id="Column11">7</Col>
+            <Col id="Column12">250</Col>
+            <Col id="Column13">1120</Col>
+            <Col id="Column14">1120</Col>
+            <Col id="Column15">7</Col>
+            <Col id="Column16">1</Col>
+            <Col id="Column17">21일 22시 16분</Col>
+            <Col id="Column18">21일 22시 59분</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">CH0003</Col>
+            <Col id="Column1">PL8553</Col>
+            <Col id="Column2">R16725</Col>
+            <Col id="Column3">C</Col>
+            <Col id="Column4">15</Col>
+            <Col id="Column6">1</Col>
+            <Col id="Column7">14</Col>
+            <Col id="Column8">250</Col>
+            <Col id="Column9">1150</Col>
+            <Col id="Column10">1150</Col>
+            <Col id="Column11">6</Col>
+            <Col id="Column12">250</Col>
+            <Col id="Column13">1150</Col>
+            <Col id="Column14">1150</Col>
+            <Col id="Column15">7</Col>
+            <Col id="Column16">4</Col>
+            <Col id="Column17">21일 20시 16분</Col>
+            <Col id="Column5">1</Col>
+            <Col id="Column18">21일 20시 49분</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">CH0003</Col>
+            <Col id="Column1">PL8554</Col>
+            <Col id="Column2">R16726</Col>
+            <Col id="Column3">C</Col>
+            <Col id="Column4">16</Col>
+            <Col id="Column6">2</Col>
+            <Col id="Column7">13</Col>
+            <Col id="Column8">250</Col>
+            <Col id="Column9">1300</Col>
+            <Col id="Column10">1300</Col>
+            <Col id="Column11">6</Col>
+            <Col id="Column12">250</Col>
+            <Col id="Column13">1300</Col>
+            <Col id="Column14">1300</Col>
+            <Col id="Column15">6</Col>
+            <Col id="Column16">3</Col>
+            <Col id="Column17">21일 20시 56분</Col>
+            <Col id="Column5">2</Col>
+            <Col id="Column18">21일 21시 28분</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">CH0003</Col>
+            <Col id="Column1">PL8555</Col>
+            <Col id="Column2">R16727</Col>
+            <Col id="Column3">C</Col>
+            <Col id="Column4">17</Col>
+            <Col id="Column6">3</Col>
+            <Col id="Column7">12</Col>
+            <Col id="Column8">250</Col>
+            <Col id="Column9">1320</Col>
+            <Col id="Column10">1320</Col>
+            <Col id="Column11">5</Col>
+            <Col id="Column12">250</Col>
+            <Col id="Column13">1320</Col>
+            <Col id="Column14">1320</Col>
+            <Col id="Column15">6</Col>
+            <Col id="Column16">5</Col>
+            <Col id="Column17">21일 21시 16분</Col>
+            <Col id="Column5">3</Col>
+            <Col id="Column18">21일 22시 09분</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">CH0003</Col>
+            <Col id="Column1">PL8556</Col>
+            <Col id="Column2">R16728</Col>
+            <Col id="Column3">C</Col>
+            <Col id="Column4">18</Col>
+            <Col id="Column6">4</Col>
+            <Col id="Column7">11</Col>
+            <Col id="Column8">250</Col>
+            <Col id="Column9">1190</Col>
+            <Col id="Column10">1190</Col>
+            <Col id="Column11">6</Col>
+            <Col id="Column12">250</Col>
+            <Col id="Column13">1190</Col>
+            <Col id="Column14">1190</Col>
+            <Col id="Column15">6</Col>
+            <Col id="Column16">2</Col>
+            <Col id="Column17">21일 22시 16분</Col>
+            <Col id="Column5">4</Col>
+            <Col id="Column18">22일 20시 09분</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">CH0003</Col>
+            <Col id="Column1">PL8557</Col>
+            <Col id="Column2">R16729</Col>
+            <Col id="Column3">C</Col>
+            <Col id="Column4">19</Col>
+            <Col id="Column6">2</Col>
+            <Col id="Column7">12</Col>
+            <Col id="Column8">225</Col>
+            <Col id="Column9">1620</Col>
+            <Col id="Column10">1620</Col>
+            <Col id="Column11">8</Col>
+            <Col id="Column12">225</Col>
+            <Col id="Column13">1620</Col>
+            <Col id="Column14">1620</Col>
+            <Col id="Column15">7</Col>
+            <Col id="Column16">1</Col>
+            <Col id="Column17">22일 08시 03분</Col>
+            <Col id="Column5">2</Col>
+            <Col id="Column18">22일 20시 09분</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">CH0003</Col>
+            <Col id="Column1">PL8558</Col>
+            <Col id="Column2">R16730</Col>
+            <Col id="Column3">C</Col>
+            <Col id="Column4">20</Col>
+            <Col id="Column7">13</Col>
+            <Col id="Column8">250</Col>
+            <Col id="Column9">2050</Col>
+            <Col id="Column10">2050</Col>
+            <Col id="Column11">5</Col>
+            <Col id="Column12">250</Col>
+            <Col id="Column13">2050</Col>
+            <Col id="Column14">2050</Col>
+            <Col id="Column15">7</Col>
+            <Col id="Column16">4</Col>
+            <Col id="Column17">21일 22시 16분</Col>
+            <Col id="Column18">21일 22시 59분</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">CH0003</Col>
+            <Col id="Column1">PL8559</Col>
+            <Col id="Column2">R16731</Col>
+            <Col id="Column3">C</Col>
+            <Col id="Column4">21</Col>
+            <Col id="Column7">15</Col>
+            <Col id="Column8">225</Col>
+            <Col id="Column9">1300</Col>
+            <Col id="Column10">1300</Col>
+            <Col id="Column11">6</Col>
+            <Col id="Column12">225</Col>
+            <Col id="Column13">1300</Col>
+            <Col id="Column14">1300</Col>
+            <Col id="Column15">5</Col>
+            <Col id="Column16">3</Col>
+            <Col id="Column17">21일 20시 16분</Col>
+            <Col id="Column18">21일 20시 49분</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">CH0003</Col>
+            <Col id="Column1">PL8560</Col>
+            <Col id="Column2">R16732</Col>
+            <Col id="Column3">C</Col>
+            <Col id="Column4">22</Col>
+            <Col id="Column6">2</Col>
+            <Col id="Column7">10</Col>
+            <Col id="Column8">225</Col>
+            <Col id="Column9">1370</Col>
+            <Col id="Column10">1370</Col>
+            <Col id="Column11">7</Col>
+            <Col id="Column12">225</Col>
+            <Col id="Column13">1370</Col>
+            <Col id="Column14">1370</Col>
+            <Col id="Column15">7</Col>
+            <Col id="Column16">3</Col>
+            <Col id="Column17">21일 20시 56분</Col>
+            <Col id="Column5">2</Col>
+            <Col id="Column18">21일 21시 28분</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">CH0003</Col>
+            <Col id="Column1">PL8561</Col>
+            <Col id="Column2">R16733</Col>
+            <Col id="Column3">C</Col>
+            <Col id="Column4">23</Col>
+            <Col id="Column7">13</Col>
+            <Col id="Column8">250</Col>
+            <Col id="Column9">1090</Col>
+            <Col id="Column10">1090</Col>
+            <Col id="Column11">5</Col>
+            <Col id="Column12">250</Col>
+            <Col id="Column13">1090</Col>
+            <Col id="Column14">1090</Col>
+            <Col id="Column15">7</Col>
+            <Col id="Column16">1</Col>
+            <Col id="Column17">21일 21시 16분</Col>
+            <Col id="Column18">21일 22시 09분</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">CH0003</Col>
+            <Col id="Column1">PL8562</Col>
+            <Col id="Column2">R16734</Col>
+            <Col id="Column3">C</Col>
+            <Col id="Column4">24</Col>
+            <Col id="Column7">14</Col>
+            <Col id="Column8">250</Col>
+            <Col id="Column9">1710</Col>
+            <Col id="Column10">1710</Col>
+            <Col id="Column11">5</Col>
+            <Col id="Column12">250</Col>
+            <Col id="Column13">1710</Col>
+            <Col id="Column14">1710</Col>
+            <Col id="Column15">5</Col>
+            <Col id="Column16">4</Col>
+            <Col id="Column17">21일 22시 16분</Col>
+            <Col id="Column18">22일 20시 09분</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">CH0003</Col>
+            <Col id="Column1">PL8563</Col>
+            <Col id="Column2">R16735</Col>
+            <Col id="Column3">C</Col>
+            <Col id="Column4">25</Col>
+            <Col id="Column6">1</Col>
+            <Col id="Column7">10</Col>
+            <Col id="Column8">250</Col>
+            <Col id="Column9">1210</Col>
+            <Col id="Column10">1210</Col>
+            <Col id="Column11">5</Col>
+            <Col id="Column12">250</Col>
+            <Col id="Column13">1210</Col>
+            <Col id="Column14">1210</Col>
+            <Col id="Column15">5</Col>
+            <Col id="Column16">2</Col>
+            <Col id="Column17">22일 08시 03분</Col>
+            <Col id="Column5">1</Col>
+            <Col id="Column18">22일 20시 09분</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">CH0003</Col>
+            <Col id="Column1">PL8564</Col>
+            <Col id="Column2">R16736</Col>
+            <Col id="Column3">C</Col>
+            <Col id="Column4">26</Col>
+            <Col id="Column6">2</Col>
+            <Col id="Column7">10</Col>
+            <Col id="Column8">250</Col>
+            <Col id="Column9">1150</Col>
+            <Col id="Column10">1150</Col>
+            <Col id="Column11">6</Col>
+            <Col id="Column12">250</Col>
+            <Col id="Column13">1150</Col>
+            <Col id="Column14">1150</Col>
+            <Col id="Column15">5</Col>
+            <Col id="Column16">1</Col>
+            <Col id="Column17">21일 22시 16분</Col>
+            <Col id="Column5">2</Col>
+            <Col id="Column18">21일 22시 59분</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">CH0003</Col>
+            <Col id="Column1">PL8565</Col>
+            <Col id="Column2">R16737</Col>
+            <Col id="Column3">C</Col>
+            <Col id="Column4">27</Col>
+            <Col id="Column6">3</Col>
+            <Col id="Column7">10</Col>
+            <Col id="Column8">250</Col>
+            <Col id="Column9">1650</Col>
+            <Col id="Column10">1650</Col>
+            <Col id="Column11">6</Col>
+            <Col id="Column12">250</Col>
+            <Col id="Column13">1650</Col>
+            <Col id="Column14">1650</Col>
+            <Col id="Column15">6</Col>
+            <Col id="Column16">3</Col>
+            <Col id="Column17">21일 20시 16분</Col>
+            <Col id="Column5">3</Col>
+            <Col id="Column18">21일 20시 49분</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">CH0003</Col>
+            <Col id="Column1">PL8566</Col>
+            <Col id="Column2">R16738</Col>
+            <Col id="Column3">C</Col>
+            <Col id="Column4">28</Col>
+            <Col id="Column6">4</Col>
+            <Col id="Column7">12</Col>
+            <Col id="Column8">250</Col>
+            <Col id="Column9">1650</Col>
+            <Col id="Column10">1650</Col>
+            <Col id="Column11">7</Col>
+            <Col id="Column12">250</Col>
+            <Col id="Column13">1650</Col>
+            <Col id="Column14">1650</Col>
+            <Col id="Column15">6</Col>
+            <Col id="Column16">3</Col>
+            <Col id="Column17">21일 20시 56분</Col>
+            <Col id="Column5">4</Col>
+            <Col id="Column18">21일 21시 28분</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">CH0004</Col>
+            <Col id="Column1">PL9578</Col>
+            <Col id="Column2">R12345</Col>
+            <Col id="Column3">H</Col>
+            <Col id="Column4">29</Col>
+            <Col id="Column6">2</Col>
+            <Col id="Column7">12</Col>
+            <Col id="Column8">250</Col>
+            <Col id="Column9">1650</Col>
+            <Col id="Column10">1650</Col>
+            <Col id="Column11">6</Col>
+            <Col id="Column12">250</Col>
+            <Col id="Column13">1650</Col>
+            <Col id="Column14">1650</Col>
+            <Col id="Column15">7</Col>
+            <Col id="Column16">2</Col>
+            <Col id="Column17">21일 21시 16분</Col>
+            <Col id="Column5">2</Col>
+            <Col id="Column18">21일 22시 09분</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">CH0004</Col>
+            <Col id="Column1">PL9579</Col>
+            <Col id="Column2">R12346</Col>
+            <Col id="Column3">H</Col>
+            <Col id="Column4">30</Col>
+            <Col id="Column7">14</Col>
+            <Col id="Column8">250</Col>
+            <Col id="Column9">1650</Col>
+            <Col id="Column10">1650</Col>
+            <Col id="Column11">7</Col>
+            <Col id="Column12">250</Col>
+            <Col id="Column13">1650</Col>
+            <Col id="Column14">1650</Col>
+            <Col id="Column15">6</Col>
+            <Col id="Column16">3</Col>
+            <Col id="Column17">21일 22시 16분</Col>
+            <Col id="Column18">22일 20시 09분</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">CH0004</Col>
+            <Col id="Column1">PL9580</Col>
+            <Col id="Column2">R12347</Col>
+            <Col id="Column3">H</Col>
+            <Col id="Column4">31</Col>
+            <Col id="Column7">12</Col>
+            <Col id="Column8">250</Col>
+            <Col id="Column9">1650</Col>
+            <Col id="Column10">1650</Col>
+            <Col id="Column11">5</Col>
+            <Col id="Column12">250</Col>
+            <Col id="Column13">1650</Col>
+            <Col id="Column14">1650</Col>
+            <Col id="Column15">8</Col>
+            <Col id="Column16">2</Col>
+            <Col id="Column17">22일 08시 03분</Col>
+            <Col id="Column18">22일 20시 09분</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">CH0004</Col>
+            <Col id="Column1">PL9581</Col>
+            <Col id="Column2">R12348</Col>
+            <Col id="Column3">H</Col>
+            <Col id="Column4">32</Col>
+            <Col id="Column6">2</Col>
+            <Col id="Column7">15</Col>
+            <Col id="Column8">250</Col>
+            <Col id="Column9">1120</Col>
+            <Col id="Column10">1120</Col>
+            <Col id="Column11">5</Col>
+            <Col id="Column12">250</Col>
+            <Col id="Column13">1120</Col>
+            <Col id="Column14">1120</Col>
+            <Col id="Column15">5</Col>
+            <Col id="Column16">4</Col>
+            <Col id="Column17">21일 22시 16분</Col>
+            <Col id="Column5">2</Col>
+            <Col id="Column18">21일 22시 59분</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">CH0004</Col>
+            <Col id="Column1">PL9582</Col>
+            <Col id="Column2">R12349</Col>
+            <Col id="Column3">H</Col>
+            <Col id="Column4">33</Col>
+            <Col id="Column7">10</Col>
+            <Col id="Column8">250</Col>
+            <Col id="Column9">1150</Col>
+            <Col id="Column10">1150</Col>
+            <Col id="Column11">7</Col>
+            <Col id="Column12">250</Col>
+            <Col id="Column13">1150</Col>
+            <Col id="Column14">1150</Col>
+            <Col id="Column15">5</Col>
+            <Col id="Column16">4</Col>
+            <Col id="Column17">21일 20시 16분</Col>
+            <Col id="Column18">21일 20시 49분</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">CH0004</Col>
+            <Col id="Column1">PL9583</Col>
+            <Col id="Column2">R12350</Col>
+            <Col id="Column3">H</Col>
+            <Col id="Column4">34</Col>
+            <Col id="Column7">13</Col>
+            <Col id="Column8">225</Col>
+            <Col id="Column9">1300</Col>
+            <Col id="Column10">1300</Col>
+            <Col id="Column11">7</Col>
+            <Col id="Column12">225</Col>
+            <Col id="Column13">1300</Col>
+            <Col id="Column14">1300</Col>
+            <Col id="Column15">6</Col>
+            <Col id="Column16">3</Col>
+            <Col id="Column17">21일 20시 56분</Col>
+            <Col id="Column18">21일 21시 28분</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">CH0004</Col>
+            <Col id="Column1">PL9584</Col>
+            <Col id="Column2">R12351</Col>
+            <Col id="Column3">C</Col>
+            <Col id="Column4">22</Col>
+            <Col id="Column6">1</Col>
+            <Col id="Column7">12</Col>
+            <Col id="Column8">250</Col>
+            <Col id="Column9">1320</Col>
+            <Col id="Column10">1320</Col>
+            <Col id="Column11">5</Col>
+            <Col id="Column12">250</Col>
+            <Col id="Column13">1320</Col>
+            <Col id="Column14">1320</Col>
+            <Col id="Column15">7</Col>
+            <Col id="Column16">1</Col>
+            <Col id="Column17">21일 21시 16분</Col>
+            <Col id="Column5">1</Col>
+            <Col id="Column18">21일 22시 09분</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">CH0004</Col>
+            <Col id="Column1">PL9585</Col>
+            <Col id="Column2">R12352</Col>
+            <Col id="Column3">H</Col>
+            <Col id="Column6">2</Col>
+            <Col id="Column7">13</Col>
+            <Col id="Column8">225</Col>
+            <Col id="Column9">1190</Col>
+            <Col id="Column10">1190</Col>
+            <Col id="Column11">5</Col>
+            <Col id="Column12">225</Col>
+            <Col id="Column13">1190</Col>
+            <Col id="Column14">1190</Col>
+            <Col id="Column15">5</Col>
+            <Col id="Column16">4</Col>
+            <Col id="Column17">21일 22시 16분</Col>
+            <Col id="Column5">2</Col>
+            <Col id="Column18">22일 20시 09분</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">CH0004</Col>
+            <Col id="Column1">PL9586</Col>
+            <Col id="Column2">R12353</Col>
+            <Col id="Column3">H</Col>
+            <Col id="Column6">3</Col>
+            <Col id="Column7">14</Col>
+            <Col id="Column8">225</Col>
+            <Col id="Column9">1620</Col>
+            <Col id="Column10">1620</Col>
+            <Col id="Column11">4</Col>
+            <Col id="Column12">225</Col>
+            <Col id="Column13">1620</Col>
+            <Col id="Column14">1620</Col>
+            <Col id="Column15">4</Col>
+            <Col id="Column16">4</Col>
+            <Col id="Column17">22일 08시 03분</Col>
+            <Col id="Column5">3</Col>
+            <Col id="Column18">22일 20시 09분</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">CH0004</Col>
+            <Col id="Column1">PL9587</Col>
+            <Col id="Column2">R12354</Col>
+            <Col id="Column3">H</Col>
+            <Col id="Column6">4</Col>
+            <Col id="Column7">10</Col>
+            <Col id="Column8">250</Col>
+            <Col id="Column9">2050</Col>
+            <Col id="Column10">2050</Col>
+            <Col id="Column11">5</Col>
+            <Col id="Column12">250</Col>
+            <Col id="Column13">2050</Col>
+            <Col id="Column14">2050</Col>
+            <Col id="Column15">5</Col>
+            <Col id="Column16">4</Col>
+            <Col id="Column17">21일 22시 16분</Col>
+            <Col id="Column5">4</Col>
+            <Col id="Column18">21일 22시 59분</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">CH0004</Col>
+            <Col id="Column1">PL9588</Col>
+            <Col id="Column2">R12355</Col>
+            <Col id="Column3">H</Col>
+            <Col id="Column6">2</Col>
+            <Col id="Column7">9</Col>
+            <Col id="Column8">250</Col>
+            <Col id="Column9">1300</Col>
+            <Col id="Column10">1300</Col>
+            <Col id="Column11">5</Col>
+            <Col id="Column12">250</Col>
+            <Col id="Column13">1300</Col>
+            <Col id="Column14">1300</Col>
+            <Col id="Column15">4</Col>
+            <Col id="Column16">4</Col>
+            <Col id="Column17">21일 20시 16분</Col>
+            <Col id="Column5">2</Col>
+            <Col id="Column18">21일 20시 49분</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">CH0004</Col>
+            <Col id="Column1">PL9589</Col>
+            <Col id="Column2">R12356</Col>
+            <Col id="Column3">H</Col>
+            <Col id="Column7">9</Col>
+            <Col id="Column8">250</Col>
+            <Col id="Column9">1370</Col>
+            <Col id="Column10">1370</Col>
+            <Col id="Column11">7</Col>
+            <Col id="Column12">250</Col>
+            <Col id="Column13">1370</Col>
+            <Col id="Column14">1370</Col>
+            <Col id="Column15">5</Col>
+            <Col id="Column16">2</Col>
+            <Col id="Column17">21일 20시 56분</Col>
+            <Col id="Column18">21일 21시 28분</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">CH0004</Col>
+            <Col id="Column1">PL9590</Col>
+            <Col id="Column2">R12357</Col>
+            <Col id="Column3">H</Col>
+            <Col id="Column7">9</Col>
+            <Col id="Column8">250</Col>
+            <Col id="Column9">1090</Col>
+            <Col id="Column10">1090</Col>
+            <Col id="Column11">6</Col>
+            <Col id="Column12">250</Col>
+            <Col id="Column13">1090</Col>
+            <Col id="Column14">1090</Col>
+            <Col id="Column15">7</Col>
+            <Col id="Column16">1</Col>
+            <Col id="Column17">21일 21시 16분</Col>
+            <Col id="Column18">21일 22시 09분</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">CH0004</Col>
+            <Col id="Column1">PL9591</Col>
+            <Col id="Column2">R12358</Col>
+            <Col id="Column3">C</Col>
+            <Col id="Column4">21</Col>
+            <Col id="Column6">2</Col>
+            <Col id="Column7">9</Col>
+            <Col id="Column8">250</Col>
+            <Col id="Column9">1710</Col>
+            <Col id="Column10">1710</Col>
+            <Col id="Column11">6</Col>
+            <Col id="Column12">250</Col>
+            <Col id="Column13">1710</Col>
+            <Col id="Column14">1710</Col>
+            <Col id="Column15">7</Col>
+            <Col id="Column16">4</Col>
+            <Col id="Column17">21일 22시 16분</Col>
+            <Col id="Column5">2</Col>
+            <Col id="Column18">22일 20시 09분</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">CH0004</Col>
+            <Col id="Column1">PL9592</Col>
+            <Col id="Column2">R12359</Col>
+            <Col id="Column3">H</Col>
+            <Col id="Column4">22</Col>
+            <Col id="Column7">10</Col>
+            <Col id="Column8">250</Col>
+            <Col id="Column9">1210</Col>
+            <Col id="Column10">1210</Col>
+            <Col id="Column11">5</Col>
+            <Col id="Column12">250</Col>
+            <Col id="Column13">1210</Col>
+            <Col id="Column14">1210</Col>
+            <Col id="Column15">6</Col>
+            <Col id="Column16">3</Col>
+            <Col id="Column17">22일 08시 03분</Col>
+            <Col id="Column18">22일 20시 09분</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">CH0004</Col>
+            <Col id="Column1">PL9593</Col>
+            <Col id="Column2">R12360</Col>
+            <Col id="Column3">H</Col>
+            <Col id="Column4">23</Col>
+            <Col id="Column7">14</Col>
+            <Col id="Column8">250</Col>
+            <Col id="Column9">1150</Col>
+            <Col id="Column10">1150</Col>
+            <Col id="Column11">6</Col>
+            <Col id="Column12">250</Col>
+            <Col id="Column13">1150</Col>
+            <Col id="Column14">1150</Col>
+            <Col id="Column15">6</Col>
+            <Col id="Column16">5</Col>
+            <Col id="Column17">21일 22시 16분</Col>
+            <Col id="Column18">21일 22시 59분</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">CH0004</Col>
+            <Col id="Column1">PL9594</Col>
+            <Col id="Column2">R12361</Col>
+            <Col id="Column3">H</Col>
+            <Col id="Column4">24</Col>
+            <Col id="Column6">1</Col>
+            <Col id="Column7">13</Col>
+            <Col id="Column8">250</Col>
+            <Col id="Column9">1650</Col>
+            <Col id="Column10">1650</Col>
+            <Col id="Column11">8</Col>
+            <Col id="Column12">250</Col>
+            <Col id="Column13">1650</Col>
+            <Col id="Column14">1650</Col>
+            <Col id="Column15">6</Col>
+            <Col id="Column16">2</Col>
+            <Col id="Column17">21일 20시 16분</Col>
+            <Col id="Column5">1</Col>
+            <Col id="Column18">21일 20시 49분</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">CH0004</Col>
+            <Col id="Column1">PL9595</Col>
+            <Col id="Column2">R12362</Col>
+            <Col id="Column3">H</Col>
+            <Col id="Column4">25</Col>
+            <Col id="Column6">2</Col>
+            <Col id="Column7">12</Col>
+            <Col id="Column8">250</Col>
+            <Col id="Column9">1650</Col>
+            <Col id="Column10">1650</Col>
+            <Col id="Column11">5</Col>
+            <Col id="Column12">250</Col>
+            <Col id="Column13">1650</Col>
+            <Col id="Column14">1650</Col>
+            <Col id="Column15">7</Col>
+            <Col id="Column16">1</Col>
+            <Col id="Column17">21일 20시 56분</Col>
+            <Col id="Column5">2</Col>
+            <Col id="Column18">21일 21시 28분</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">CH0004</Col>
+            <Col id="Column1">PL9596</Col>
+            <Col id="Column2">R12363</Col>
+            <Col id="Column3">H</Col>
+            <Col id="Column4">26</Col>
+            <Col id="Column6">3</Col>
+            <Col id="Column7">11</Col>
+            <Col id="Column8">250</Col>
+            <Col id="Column9">1650</Col>
+            <Col id="Column10">1650</Col>
+            <Col id="Column11">6</Col>
+            <Col id="Column12">250</Col>
+            <Col id="Column13">1650</Col>
+            <Col id="Column14">1650</Col>
+            <Col id="Column15">7</Col>
+            <Col id="Column16">4</Col>
+            <Col id="Column17">21일 21시 16분</Col>
+            <Col id="Column5">3</Col>
+            <Col id="Column18">21일 22시 09분</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">CH0004</Col>
+            <Col id="Column1">PL9597</Col>
+            <Col id="Column2">R12364</Col>
+            <Col id="Column3">H</Col>
+            <Col id="Column4">27</Col>
+            <Col id="Column6">4</Col>
+            <Col id="Column7">12</Col>
+            <Col id="Column8">250</Col>
+            <Col id="Column9">1650</Col>
+            <Col id="Column10">1650</Col>
+            <Col id="Column11">7</Col>
+            <Col id="Column12">250</Col>
+            <Col id="Column13">1650</Col>
+            <Col id="Column14">1650</Col>
+            <Col id="Column15">5</Col>
+            <Col id="Column16">3</Col>
+            <Col id="Column17">21일 22시 16분</Col>
+            <Col id="Column5">4</Col>
+            <Col id="Column18">22일 20시 09분</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">CH0004</Col>
+            <Col id="Column1">PL9598</Col>
+            <Col id="Column2">R12365</Col>
+            <Col id="Column3">C</Col>
+            <Col id="Column4">28</Col>
+            <Col id="Column6">2</Col>
+            <Col id="Column7">13</Col>
+            <Col id="Column8">225</Col>
+            <Col id="Column9">1650</Col>
+            <Col id="Column10">1650</Col>
+            <Col id="Column11">5</Col>
+            <Col id="Column12">225</Col>
+            <Col id="Column13">1650</Col>
+            <Col id="Column14">1650</Col>
+            <Col id="Column15">7</Col>
+            <Col id="Column16">3</Col>
+            <Col id="Column17">22일 08시 03분</Col>
+            <Col id="Column5">2</Col>
+            <Col id="Column18">22일 20시 09분</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">CH0004</Col>
+            <Col id="Column1">PL9599</Col>
+            <Col id="Column2">R12366</Col>
+            <Col id="Column3">C</Col>
+            <Col id="Column4">29</Col>
+            <Col id="Column7">15</Col>
+            <Col id="Column8">250</Col>
+            <Col id="Column9">1120</Col>
+            <Col id="Column10">1120</Col>
+            <Col id="Column11">5</Col>
+            <Col id="Column12">250</Col>
+            <Col id="Column13">1120</Col>
+            <Col id="Column14">1120</Col>
+            <Col id="Column15">7</Col>
+            <Col id="Column16">1</Col>
+            <Col id="Column17">21일 22시 16분</Col>
+            <Col id="Column18">21일 22시 59분</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">CH0004</Col>
+            <Col id="Column1">PL9600</Col>
+            <Col id="Column2">R12367</Col>
+            <Col id="Column3">C</Col>
+            <Col id="Column4">30</Col>
+            <Col id="Column7">10</Col>
+            <Col id="Column8">225</Col>
+            <Col id="Column9">1150</Col>
+            <Col id="Column10">1150</Col>
+            <Col id="Column11">5</Col>
+            <Col id="Column12">225</Col>
+            <Col id="Column13">1150</Col>
+            <Col id="Column14">1150</Col>
+            <Col id="Column15">5</Col>
+            <Col id="Column16">4</Col>
+            <Col id="Column17">21일 20시 16분</Col>
+            <Col id="Column18">21일 20시 49분</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">CH0005</Col>
+            <Col id="Column1">PL7245</Col>
+            <Col id="Column2">R34251</Col>
+            <Col id="Column3">H</Col>
+            <Col id="Column4">31</Col>
+            <Col id="Column6">2</Col>
+            <Col id="Column7">13</Col>
+            <Col id="Column8">225</Col>
+            <Col id="Column9">1300</Col>
+            <Col id="Column10">1300</Col>
+            <Col id="Column11">6</Col>
+            <Col id="Column12">225</Col>
+            <Col id="Column13">1300</Col>
+            <Col id="Column14">1300</Col>
+            <Col id="Column15">5</Col>
+            <Col id="Column16">2</Col>
+            <Col id="Column17">21일 20시 56분</Col>
+            <Col id="Column5">2</Col>
+            <Col id="Column18">21일 21시 28분</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">CH0005</Col>
+            <Col id="Column1">PL7246</Col>
+            <Col id="Column2">R34252</Col>
+            <Col id="Column3">C</Col>
+            <Col id="Column4">32</Col>
+            <Col id="Column7">14</Col>
+            <Col id="Column8">250</Col>
+            <Col id="Column9">1320</Col>
+            <Col id="Column10">1320</Col>
+            <Col id="Column11">6</Col>
+            <Col id="Column12">250</Col>
+            <Col id="Column13">1320</Col>
+            <Col id="Column14">1320</Col>
+            <Col id="Column15">5</Col>
+            <Col id="Column16">1</Col>
+            <Col id="Column17">21일 21시 16분</Col>
+            <Col id="Column18">21일 22시 09분</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">CH0005</Col>
+            <Col id="Column1">PL7247</Col>
+            <Col id="Column2">R34253</Col>
+            <Col id="Column3">H</Col>
+            <Col id="Column4">33</Col>
+            <Col id="Column7">10</Col>
+            <Col id="Column8">250</Col>
+            <Col id="Column9">1190</Col>
+            <Col id="Column10">1190</Col>
+            <Col id="Column11">7</Col>
+            <Col id="Column12">250</Col>
+            <Col id="Column13">1190</Col>
+            <Col id="Column14">1190</Col>
+            <Col id="Column15">6</Col>
+            <Col id="Column16">3</Col>
+            <Col id="Column17">21일 22시 16분</Col>
+            <Col id="Column18">22일 20시 09분</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">CH0005</Col>
+            <Col id="Column1">PL7248</Col>
+            <Col id="Column2">R34254</Col>
+            <Col id="Column3">C</Col>
+            <Col id="Column4">34</Col>
+            <Col id="Column6">1</Col>
+            <Col id="Column7">10</Col>
+            <Col id="Column8">250</Col>
+            <Col id="Column9">1620</Col>
+            <Col id="Column10">1620</Col>
+            <Col id="Column11">6</Col>
+            <Col id="Column12">250</Col>
+            <Col id="Column13">1620</Col>
+            <Col id="Column14">1620</Col>
+            <Col id="Column15">6</Col>
+            <Col id="Column16">3</Col>
+            <Col id="Column17">22일 08시 03분</Col>
+            <Col id="Column5">1</Col>
+            <Col id="Column18">22일 20시 09분</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">CH0005</Col>
+            <Col id="Column1">PL7249</Col>
+            <Col id="Column2">R34255</Col>
+            <Col id="Column3">H</Col>
+            <Col id="Column4">35</Col>
+            <Col id="Column6">2</Col>
+            <Col id="Column7">10</Col>
+            <Col id="Column8">250</Col>
+            <Col id="Column9">2050</Col>
+            <Col id="Column10">2050</Col>
+            <Col id="Column11">7</Col>
+            <Col id="Column12">250</Col>
+            <Col id="Column13">2050</Col>
+            <Col id="Column14">2050</Col>
+            <Col id="Column15">7</Col>
+            <Col id="Column16">2</Col>
+            <Col id="Column17">21일 22시 16분</Col>
+            <Col id="Column5">2</Col>
+            <Col id="Column18">21일 22시 59분</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">CH0005</Col>
+            <Col id="Column1">PL7250</Col>
+            <Col id="Column2">R34256</Col>
+            <Col id="Column3">C</Col>
+            <Col id="Column4">36</Col>
+            <Col id="Column6">3</Col>
+            <Col id="Column7">12</Col>
+            <Col id="Column8">250</Col>
+            <Col id="Column9">1300</Col>
+            <Col id="Column10">1300</Col>
+            <Col id="Column11">5</Col>
+            <Col id="Column12">250</Col>
+            <Col id="Column13">1300</Col>
+            <Col id="Column14">1300</Col>
+            <Col id="Column15">6</Col>
+            <Col id="Column16">3</Col>
+            <Col id="Column17">21일 20시 16분</Col>
+            <Col id="Column5">3</Col>
+            <Col id="Column18">21일 20시 49분</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">CH0005</Col>
+            <Col id="Column1">PL7251</Col>
+            <Col id="Column2">R34257</Col>
+            <Col id="Column3">H</Col>
+            <Col id="Column4">37</Col>
+            <Col id="Column6">4</Col>
+            <Col id="Column7">12</Col>
+            <Col id="Column8">250</Col>
+            <Col id="Column9">1370</Col>
+            <Col id="Column10">1370</Col>
+            <Col id="Column11">5</Col>
+            <Col id="Column12">250</Col>
+            <Col id="Column13">1370</Col>
+            <Col id="Column14">1370</Col>
+            <Col id="Column15">8</Col>
+            <Col id="Column16">2</Col>
+            <Col id="Column17">21일 20시 56분</Col>
+            <Col id="Column5">4</Col>
+            <Col id="Column18">21일 21시 28분</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">CH0006</Col>
+            <Col id="Column1">PL2200</Col>
+            <Col id="Column2">R45363</Col>
+            <Col id="Column3">C</Col>
+            <Col id="Column4">38</Col>
+            <Col id="Column6">2</Col>
+            <Col id="Column7">14</Col>
+            <Col id="Column8">250</Col>
+            <Col id="Column9">1090</Col>
+            <Col id="Column10">1090</Col>
+            <Col id="Column11">7</Col>
+            <Col id="Column12">250</Col>
+            <Col id="Column13">1090</Col>
+            <Col id="Column14">1090</Col>
+            <Col id="Column15">5</Col>
+            <Col id="Column16">4</Col>
+            <Col id="Column17">21일 21시 16분</Col>
+            <Col id="Column5">2</Col>
+            <Col id="Column18">21일 22시 09분</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">CH0006</Col>
+            <Col id="Column1">PL2201</Col>
+            <Col id="Column2">R45364</Col>
+            <Col id="Column3">H</Col>
+            <Col id="Column4">10</Col>
+            <Col id="Column7">12</Col>
+            <Col id="Column8">250</Col>
+            <Col id="Column9">1710</Col>
+            <Col id="Column10">1710</Col>
+            <Col id="Column11">7</Col>
+            <Col id="Column12">250</Col>
+            <Col id="Column13">1710</Col>
+            <Col id="Column14">1710</Col>
+            <Col id="Column15">5</Col>
+            <Col id="Column16">4</Col>
+            <Col id="Column17">21일 22시 16분</Col>
+            <Col id="Column18">22일 20시 09분</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">CH0006</Col>
+            <Col id="Column1">PL2202</Col>
+            <Col id="Column2">R45365</Col>
+            <Col id="Column3">C</Col>
+            <Col id="Column4">10</Col>
+            <Col id="Column7">15</Col>
+            <Col id="Column8">250</Col>
+            <Col id="Column9">1210</Col>
+            <Col id="Column10">1210</Col>
+            <Col id="Column11">5</Col>
+            <Col id="Column12">250</Col>
+            <Col id="Column13">1210</Col>
+            <Col id="Column14">1210</Col>
+            <Col id="Column15">6</Col>
+            <Col id="Column16">3</Col>
+            <Col id="Column17">22일 08시 03분</Col>
+            <Col id="Column18">22일 20시 09분</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">CH0006</Col>
+            <Col id="Column1">PL2203</Col>
+            <Col id="Column2">R45366</Col>
+            <Col id="Column3">C</Col>
+            <Col id="Column4">10</Col>
+            <Col id="Column6">2</Col>
+            <Col id="Column7">10</Col>
+            <Col id="Column8">250</Col>
+            <Col id="Column9">1150</Col>
+            <Col id="Column10">1150</Col>
+            <Col id="Column11">5</Col>
+            <Col id="Column12">250</Col>
+            <Col id="Column13">1150</Col>
+            <Col id="Column14">1150</Col>
+            <Col id="Column15">7</Col>
+            <Col id="Column16">1</Col>
+            <Col id="Column17">21일 22시 16분</Col>
+            <Col id="Column5">2</Col>
+            <Col id="Column18">21일 22시 59분</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">CH0006</Col>
+            <Col id="Column1">PL2204</Col>
+            <Col id="Column2">R45367</Col>
+            <Col id="Column3">C</Col>
+            <Col id="Column4">10</Col>
+            <Col id="Column7">13</Col>
+            <Col id="Column8">250</Col>
+            <Col id="Column9">1650</Col>
+            <Col id="Column10">1650</Col>
+            <Col id="Column11">4</Col>
+            <Col id="Column12">250</Col>
+            <Col id="Column13">1650</Col>
+            <Col id="Column14">1650</Col>
+            <Col id="Column15">5</Col>
+            <Col id="Column16">4</Col>
+            <Col id="Column17">21일 20시 16분</Col>
+            <Col id="Column18">21일 20시 49분</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">CH0006</Col>
+            <Col id="Column1">PL2205</Col>
+            <Col id="Column2">R45368</Col>
+            <Col id="Column3">C</Col>
+            <Col id="Column4">10</Col>
+            <Col id="Column7">12</Col>
+            <Col id="Column8">225</Col>
+            <Col id="Column9">1650</Col>
+            <Col id="Column10">1650</Col>
+            <Col id="Column11">5</Col>
+            <Col id="Column12">225</Col>
+            <Col id="Column13">1650</Col>
+            <Col id="Column14">1650</Col>
+            <Col id="Column15">4</Col>
+            <Col id="Column16">4</Col>
+            <Col id="Column17">21일 20시 56분</Col>
+            <Col id="Column18">21일 21시 28분</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">CH0007</Col>
+            <Col id="Column1">PL1250</Col>
+            <Col id="Column2">R56470</Col>
+            <Col id="Column3">C</Col>
+            <Col id="Column4">10</Col>
+            <Col id="Column6">1</Col>
+            <Col id="Column7">13</Col>
+            <Col id="Column8">250</Col>
+            <Col id="Column9">1650</Col>
+            <Col id="Column10">1650</Col>
+            <Col id="Column11">5</Col>
+            <Col id="Column12">250</Col>
+            <Col id="Column13">1650</Col>
+            <Col id="Column14">1650</Col>
+            <Col id="Column15">5</Col>
+            <Col id="Column16">4</Col>
+            <Col id="Column17">21일 21시 16분</Col>
+            <Col id="Column5">1</Col>
+            <Col id="Column18">21일 22시 09분</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">CH0007</Col>
+            <Col id="Column1">PL1251</Col>
+            <Col id="Column2">R56471</Col>
+            <Col id="Column3">C</Col>
+            <Col id="Column4">10</Col>
+            <Col id="Column6">2</Col>
+            <Col id="Column7">14</Col>
+            <Col id="Column8">225</Col>
+            <Col id="Column9">1650</Col>
+            <Col id="Column10">1650</Col>
+            <Col id="Column11">7</Col>
+            <Col id="Column12">225</Col>
+            <Col id="Column13">1650</Col>
+            <Col id="Column14">1650</Col>
+            <Col id="Column15">4</Col>
+            <Col id="Column16">4</Col>
+            <Col id="Column17">21일 22시 16분</Col>
+            <Col id="Column5">2</Col>
+            <Col id="Column18">22일 20시 09분</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">CH0007</Col>
+            <Col id="Column1">PL1252</Col>
+            <Col id="Column2">R56472</Col>
+            <Col id="Column3">C</Col>
+            <Col id="Column4">10</Col>
+            <Col id="Column6">3</Col>
+            <Col id="Column7">10</Col>
+            <Col id="Column8">225</Col>
+            <Col id="Column9">1650</Col>
+            <Col id="Column10">1650</Col>
+            <Col id="Column11">6</Col>
+            <Col id="Column12">225</Col>
+            <Col id="Column13">1650</Col>
+            <Col id="Column14">1650</Col>
+            <Col id="Column15">5</Col>
+            <Col id="Column16">2</Col>
+            <Col id="Column17">22일 08시 03분</Col>
+            <Col id="Column5">3</Col>
+            <Col id="Column18">22일 20시 09분</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">CH0007</Col>
+            <Col id="Column1">PL1253</Col>
+            <Col id="Column2">R56473</Col>
+            <Col id="Column3">C</Col>
+            <Col id="Column4">10</Col>
+            <Col id="Column6">4</Col>
+            <Col id="Column7">9</Col>
+            <Col id="Column8">250</Col>
+            <Col id="Column9">1120</Col>
+            <Col id="Column10">1120</Col>
+            <Col id="Column11">6</Col>
+            <Col id="Column12">250</Col>
+            <Col id="Column13">1120</Col>
+            <Col id="Column14">1120</Col>
+            <Col id="Column15">7</Col>
+            <Col id="Column16">1</Col>
+            <Col id="Column17">21일 22시 16분</Col>
+            <Col id="Column5">4</Col>
+            <Col id="Column18">21일 22시 59분</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">CH0007</Col>
+            <Col id="Column1">PL1254</Col>
+            <Col id="Column2">R56474</Col>
+            <Col id="Column3">C</Col>
+            <Col id="Column4">10</Col>
+            <Col id="Column6">2</Col>
+            <Col id="Column7">9</Col>
+            <Col id="Column8">250</Col>
+            <Col id="Column9">1150</Col>
+            <Col id="Column10">1150</Col>
+            <Col id="Column11">5</Col>
+            <Col id="Column12">250</Col>
+            <Col id="Column13">1150</Col>
+            <Col id="Column14">1150</Col>
+            <Col id="Column15">7</Col>
+            <Col id="Column16">4</Col>
+            <Col id="Column17">21일 20시 16분</Col>
+            <Col id="Column5">2</Col>
+            <Col id="Column18">21일 20시 49분</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">CH0007</Col>
+            <Col id="Column1">PL1255</Col>
+            <Col id="Column2">R56475</Col>
+            <Col id="Column3">C</Col>
+            <Col id="Column7">9</Col>
+            <Col id="Column8">250</Col>
+            <Col id="Column9">1300</Col>
+            <Col id="Column10">1300</Col>
+            <Col id="Column11">6</Col>
+            <Col id="Column12">250</Col>
+            <Col id="Column13">1300</Col>
+            <Col id="Column14">1300</Col>
+            <Col id="Column15">6</Col>
+            <Col id="Column16">3</Col>
+            <Col id="Column17">21일 20시 56분</Col>
+            <Col id="Column18">21일 21시 28분</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">CH0008</Col>
+            <Col id="Column1">PL3435</Col>
+            <Col id="Column2">R65411</Col>
+            <Col id="Column3">C</Col>
+            <Col id="Column7">9</Col>
+            <Col id="Column8">250</Col>
+            <Col id="Column9">1320</Col>
+            <Col id="Column10">1320</Col>
+            <Col id="Column11">8</Col>
+            <Col id="Column12">250</Col>
+            <Col id="Column13">1320</Col>
+            <Col id="Column14">1320</Col>
+            <Col id="Column15">6</Col>
+            <Col id="Column16">5</Col>
+            <Col id="Column17">21일 21시 16분</Col>
+            <Col id="Column18">21일 22시 09분</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">CH0008</Col>
+            <Col id="Column1">PL3436</Col>
+            <Col id="Column2">R65412</Col>
+            <Col id="Column3">C</Col>
+            <Col id="Column6">2</Col>
+            <Col id="Column7">10</Col>
+            <Col id="Column8">250</Col>
+            <Col id="Column9">1190</Col>
+            <Col id="Column10">1190</Col>
+            <Col id="Column11">5</Col>
+            <Col id="Column12">250</Col>
+            <Col id="Column13">1190</Col>
+            <Col id="Column14">1190</Col>
+            <Col id="Column15">6</Col>
+            <Col id="Column16">2</Col>
+            <Col id="Column17">21일 22시 16분</Col>
+            <Col id="Column5">2</Col>
+            <Col id="Column18">22일 20시 09분</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">CH0008</Col>
+            <Col id="Column1">PL3437</Col>
+            <Col id="Column2">R65413</Col>
+            <Col id="Column3">C</Col>
+            <Col id="Column7">14</Col>
+            <Col id="Column8">250</Col>
+            <Col id="Column9">1620</Col>
+            <Col id="Column10">1620</Col>
+            <Col id="Column11">6</Col>
+            <Col id="Column12">250</Col>
+            <Col id="Column13">1620</Col>
+            <Col id="Column14">1620</Col>
+            <Col id="Column15">7</Col>
+            <Col id="Column16">1</Col>
+            <Col id="Column17">22일 08시 03분</Col>
+            <Col id="Column18">22일 20시 09분</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">CH0008</Col>
+            <Col id="Column1">PL3438</Col>
+            <Col id="Column2">R65414</Col>
+            <Col id="Column3">C</Col>
+            <Col id="Column7">13</Col>
+            <Col id="Column8">250</Col>
+            <Col id="Column9">2050</Col>
+            <Col id="Column10">2050</Col>
+            <Col id="Column11">7</Col>
+            <Col id="Column12">250</Col>
+            <Col id="Column13">2050</Col>
+            <Col id="Column14">2050</Col>
+            <Col id="Column15">7</Col>
+            <Col id="Column16">4</Col>
+            <Col id="Column17">21일 22시 16분</Col>
+            <Col id="Column18">21일 22시 59분</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">CH0008</Col>
+            <Col id="Column1">PL3439</Col>
+            <Col id="Column2">R65415</Col>
+            <Col id="Column3">C</Col>
+            <Col id="Column4">13</Col>
+            <Col id="Column6">1</Col>
+            <Col id="Column7">12</Col>
+            <Col id="Column8">250</Col>
+            <Col id="Column9">1300</Col>
+            <Col id="Column10">1300</Col>
+            <Col id="Column11">5</Col>
+            <Col id="Column12">250</Col>
+            <Col id="Column13">1300</Col>
+            <Col id="Column14">1300</Col>
+            <Col id="Column15">5</Col>
+            <Col id="Column16">3</Col>
+            <Col id="Column17">21일 20시 16분</Col>
+            <Col id="Column5">1</Col>
+            <Col id="Column18">21일 20시 49분</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">CH0008</Col>
+            <Col id="Column1">PL3440</Col>
+            <Col id="Column2">R65416</Col>
+            <Col id="Column3">C</Col>
+            <Col id="Column4">14</Col>
+            <Col id="Column6">2</Col>
+            <Col id="Column7">11</Col>
+            <Col id="Column8">250</Col>
+            <Col id="Column9">1370</Col>
+            <Col id="Column10">1370</Col>
+            <Col id="Column11">5</Col>
+            <Col id="Column12">250</Col>
+            <Col id="Column13">1370</Col>
+            <Col id="Column14">1370</Col>
+            <Col id="Column15">7</Col>
+            <Col id="Column16">3</Col>
+            <Col id="Column17">21일 20시 56분</Col>
+            <Col id="Column5">2</Col>
+            <Col id="Column18">21일 21시 28분</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">CH0009</Col>
+            <Col id="Column1">PL4534</Col>
+            <Col id="Column2">R76890</Col>
+            <Col id="Column3">C</Col>
+            <Col id="Column4">15</Col>
+            <Col id="Column6">3</Col>
+            <Col id="Column7">12</Col>
+            <Col id="Column8">250</Col>
+            <Col id="Column9">1090</Col>
+            <Col id="Column10">1090</Col>
+            <Col id="Column11">5</Col>
+            <Col id="Column12">250</Col>
+            <Col id="Column13">1090</Col>
+            <Col id="Column14">1090</Col>
+            <Col id="Column15">7</Col>
+            <Col id="Column16">1</Col>
+            <Col id="Column17">21일 21시 16분</Col>
+            <Col id="Column5">3</Col>
+            <Col id="Column18">21일 22시 09분</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">CH0009</Col>
+            <Col id="Column1">PL4535</Col>
+            <Col id="Column2">R76891</Col>
+            <Col id="Column3">C</Col>
+            <Col id="Column4">16</Col>
+            <Col id="Column6">4</Col>
+            <Col id="Column7">13</Col>
+            <Col id="Column8">250</Col>
+            <Col id="Column9">1710</Col>
+            <Col id="Column10">1710</Col>
+            <Col id="Column11">6</Col>
+            <Col id="Column12">250</Col>
+            <Col id="Column13">1710</Col>
+            <Col id="Column14">1710</Col>
+            <Col id="Column15">5</Col>
+            <Col id="Column16">4</Col>
+            <Col id="Column17">21일 22시 16분</Col>
+            <Col id="Column5">4</Col>
+            <Col id="Column18">22일 20시 09분</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">CH0009</Col>
+            <Col id="Column1">PL4536</Col>
+            <Col id="Column2">R76892</Col>
+            <Col id="Column3">C</Col>
+            <Col id="Column4">17</Col>
+            <Col id="Column6">2</Col>
+            <Col id="Column7">15</Col>
+            <Col id="Column8">225</Col>
+            <Col id="Column9">1210</Col>
+            <Col id="Column10">1210</Col>
+            <Col id="Column11">6</Col>
+            <Col id="Column12">225</Col>
+            <Col id="Column13">1210</Col>
+            <Col id="Column14">1210</Col>
+            <Col id="Column15">5</Col>
+            <Col id="Column16">2</Col>
+            <Col id="Column17">22일 08시 03분</Col>
+            <Col id="Column5">2</Col>
+            <Col id="Column18">22일 20시 09분</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">CH0009</Col>
+            <Col id="Column1">PL4537</Col>
+            <Col id="Column2">R76893</Col>
+            <Col id="Column3">H</Col>
+            <Col id="Column4">18</Col>
+            <Col id="Column7">10</Col>
+            <Col id="Column8">250</Col>
+            <Col id="Column9">1150</Col>
+            <Col id="Column10">1150</Col>
+            <Col id="Column11">7</Col>
+            <Col id="Column12">250</Col>
+            <Col id="Column13">1150</Col>
+            <Col id="Column14">1150</Col>
+            <Col id="Column15">5</Col>
+            <Col id="Column16">1</Col>
+            <Col id="Column17">21일 22시 16분</Col>
+            <Col id="Column18">21일 22시 59분</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">CH0009</Col>
+            <Col id="Column1">PL4538</Col>
+            <Col id="Column2">R76894</Col>
+            <Col id="Column3">H</Col>
+            <Col id="Column4">19</Col>
+            <Col id="Column7">13</Col>
+            <Col id="Column8">225</Col>
+            <Col id="Column9">1650</Col>
+            <Col id="Column10">1650</Col>
+            <Col id="Column11">6</Col>
+            <Col id="Column12">225</Col>
+            <Col id="Column13">1650</Col>
+            <Col id="Column14">1650</Col>
+            <Col id="Column15">6</Col>
+            <Col id="Column16">3</Col>
+            <Col id="Column17">21일 20시 16분</Col>
+            <Col id="Column18">21일 20시 49분</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">CH0009</Col>
+            <Col id="Column1">PL4539</Col>
+            <Col id="Column2">R76895</Col>
+            <Col id="Column3">H</Col>
+            <Col id="Column4">20</Col>
+            <Col id="Column6">2</Col>
+            <Col id="Column7">14</Col>
+            <Col id="Column8">225</Col>
+            <Col id="Column9">1650</Col>
+            <Col id="Column10">1650</Col>
+            <Col id="Column11">7</Col>
+            <Col id="Column12">225</Col>
+            <Col id="Column13">1650</Col>
+            <Col id="Column14">1650</Col>
+            <Col id="Column15">6</Col>
+            <Col id="Column16">3</Col>
+            <Col id="Column17">21일 20시 56분</Col>
+            <Col id="Column5">2</Col>
+            <Col id="Column18">21일 21시 28분</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">CH0009</Col>
+            <Col id="Column1">PL4540</Col>
+            <Col id="Column2">R76896</Col>
+            <Col id="Column3">H</Col>
+            <Col id="Column4">21</Col>
+            <Col id="Column7">10</Col>
+            <Col id="Column8">250</Col>
+            <Col id="Column9">1650</Col>
+            <Col id="Column10">1650</Col>
+            <Col id="Column11">5</Col>
+            <Col id="Column12">250</Col>
+            <Col id="Column13">1650</Col>
+            <Col id="Column14">1650</Col>
+            <Col id="Column15">7</Col>
+            <Col id="Column16">2</Col>
+            <Col id="Column17">21일 21시 16분</Col>
+            <Col id="Column18">21일 22시 09분</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">CH0009</Col>
+            <Col id="Column1">PL4541</Col>
+            <Col id="Column2">R76897</Col>
+            <Col id="Column3">H</Col>
+            <Col id="Column4">22</Col>
+            <Col id="Column7">10</Col>
+            <Col id="Column8">250</Col>
+            <Col id="Column9">1650</Col>
+            <Col id="Column10">1650</Col>
+            <Col id="Column11">5</Col>
+            <Col id="Column12">250</Col>
+            <Col id="Column13">1650</Col>
+            <Col id="Column14">1650</Col>
+            <Col id="Column15">6</Col>
+            <Col id="Column16">3</Col>
+            <Col id="Column17">21일 22시 16분</Col>
+            <Col id="Column18">22일 20시 09분</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">CH0010</Col>
+            <Col id="Column1">PL5467</Col>
+            <Col id="Column2">R24511</Col>
+            <Col id="Column3">H</Col>
+            <Col id="Column4">23</Col>
+            <Col id="Column6">1</Col>
+            <Col id="Column7">10</Col>
+            <Col id="Column8">250</Col>
+            <Col id="Column9">1650</Col>
+            <Col id="Column10">1650</Col>
+            <Col id="Column11">7</Col>
+            <Col id="Column12">250</Col>
+            <Col id="Column13">1650</Col>
+            <Col id="Column14">1650</Col>
+            <Col id="Column15">8</Col>
+            <Col id="Column16">2</Col>
+            <Col id="Column17">22일 08시 03분</Col>
+            <Col id="Column5">1</Col>
+            <Col id="Column18">22일 20시 09분</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">CH0010</Col>
+            <Col id="Column1">PL5468</Col>
+            <Col id="Column2">R24512</Col>
+            <Col id="Column3">H</Col>
+            <Col id="Column4">24</Col>
+            <Col id="Column6">2</Col>
+            <Col id="Column7">12</Col>
+            <Col id="Column8">250</Col>
+            <Col id="Column9">1120</Col>
+            <Col id="Column10">1120</Col>
+            <Col id="Column11">7</Col>
+            <Col id="Column12">250</Col>
+            <Col id="Column13">1120</Col>
+            <Col id="Column14">1120</Col>
+            <Col id="Column15">5</Col>
+            <Col id="Column16">4</Col>
+            <Col id="Column17">21일 22시 16분</Col>
+            <Col id="Column5">2</Col>
+            <Col id="Column18">21일 22시 59분</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">CH0010</Col>
+            <Col id="Column1">PL5469</Col>
+            <Col id="Column2">R24513</Col>
+            <Col id="Column3">H</Col>
+            <Col id="Column4">12</Col>
+            <Col id="Column6">3</Col>
+            <Col id="Column7">12</Col>
+            <Col id="Column8">250</Col>
+            <Col id="Column9">1150</Col>
+            <Col id="Column10">1150</Col>
+            <Col id="Column11">5</Col>
+            <Col id="Column12">250</Col>
+            <Col id="Column13">1150</Col>
+            <Col id="Column14">1150</Col>
+            <Col id="Column15">5</Col>
+            <Col id="Column16">4</Col>
+            <Col id="Column17">21일 20시 16분</Col>
+            <Col id="Column5">3</Col>
+            <Col id="Column18">21일 20시 49분</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">CH0010</Col>
+            <Col id="Column1">PL5470</Col>
+            <Col id="Column2">R24514</Col>
+            <Col id="Column3">H</Col>
+            <Col id="Column4">12</Col>
+            <Col id="Column6">4</Col>
+            <Col id="Column7">14</Col>
+            <Col id="Column8">250</Col>
+            <Col id="Column9">1300</Col>
+            <Col id="Column10">1300</Col>
+            <Col id="Column11">5</Col>
+            <Col id="Column12">250</Col>
+            <Col id="Column13">1300</Col>
+            <Col id="Column14">1300</Col>
+            <Col id="Column15">6</Col>
+            <Col id="Column16">3</Col>
+            <Col id="Column17">21일 20시 56분</Col>
+            <Col id="Column5">4</Col>
+            <Col id="Column18">21일 21시 28분</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">CH0010</Col>
+            <Col id="Column1">PL5471</Col>
+            <Col id="Column2">R24515</Col>
+            <Col id="Column3">H</Col>
+            <Col id="Column4">12</Col>
+            <Col id="Column6">2</Col>
+            <Col id="Column7">12</Col>
+            <Col id="Column8">250</Col>
+            <Col id="Column9">1320</Col>
+            <Col id="Column10">1320</Col>
+            <Col id="Column11">4</Col>
+            <Col id="Column12">250</Col>
+            <Col id="Column13">1320</Col>
+            <Col id="Column14">1320</Col>
+            <Col id="Column15">7</Col>
+            <Col id="Column16">1</Col>
+            <Col id="Column17">21일 21시 16분</Col>
+            <Col id="Column5">2</Col>
+            <Col id="Column18">21일 22시 09분</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">CH0010</Col>
+            <Col id="Column1">PL5472</Col>
+            <Col id="Column2">R24516</Col>
+            <Col id="Column3">H</Col>
+            <Col id="Column4">12</Col>
+            <Col id="Column7">15</Col>
+            <Col id="Column8">250</Col>
+            <Col id="Column9">1190</Col>
+            <Col id="Column10">1190</Col>
+            <Col id="Column11">5</Col>
+            <Col id="Column12">250</Col>
+            <Col id="Column13">1190</Col>
+            <Col id="Column14">1190</Col>
+            <Col id="Column15">5</Col>
+            <Col id="Column16">4</Col>
+            <Col id="Column17">21일 22시 16분</Col>
+            <Col id="Column18">22일 20시 09분</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">CH0010</Col>
+            <Col id="Column1">PL5473</Col>
+            <Col id="Column2">R24517</Col>
+            <Col id="Column3">H</Col>
+            <Col id="Column4">12</Col>
+            <Col id="Column7">10</Col>
+            <Col id="Column8">250</Col>
+            <Col id="Column9">1620</Col>
+            <Col id="Column10">1620</Col>
+            <Col id="Column11">5</Col>
+            <Col id="Column12">250</Col>
+            <Col id="Column13">1620</Col>
+            <Col id="Column14">1620</Col>
+            <Col id="Column15">4</Col>
+            <Col id="Column16">4</Col>
+            <Col id="Column17">22일 08시 03분</Col>
+            <Col id="Column18">22일 20시 09분</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">CH0010</Col>
+            <Col id="Column1">PL5474</Col>
+            <Col id="Column2">R24518</Col>
+            <Col id="Column3">H</Col>
+            <Col id="Column4">12</Col>
+            <Col id="Column6">2</Col>
+            <Col id="Column7">13</Col>
+            <Col id="Column8">250</Col>
+            <Col id="Column9">2050</Col>
+            <Col id="Column10">2050</Col>
+            <Col id="Column11">7</Col>
+            <Col id="Column12">250</Col>
+            <Col id="Column13">2050</Col>
+            <Col id="Column14">2050</Col>
+            <Col id="Column15">5</Col>
+            <Col id="Column16">4</Col>
+            <Col id="Column17">21일 22시 16분</Col>
+            <Col id="Column5">2</Col>
+            <Col id="Column18">21일 22시 59분</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">CH0010</Col>
+            <Col id="Column1">PL5475</Col>
+            <Col id="Column2">R24519</Col>
+            <Col id="Column3">H</Col>
+            <Col id="Column4">12</Col>
+            <Col id="Column7">12</Col>
+            <Col id="Column8">250</Col>
+            <Col id="Column9">1300</Col>
+            <Col id="Column10">1300</Col>
+            <Col id="Column11">6</Col>
+            <Col id="Column12">250</Col>
+            <Col id="Column13">1300</Col>
+            <Col id="Column14">1300</Col>
+            <Col id="Column15">4</Col>
+            <Col id="Column16">4</Col>
+            <Col id="Column17">21일 20시 16분</Col>
+            <Col id="Column18">21일 20시 49분</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">CH0010</Col>
+            <Col id="Column1">PL5476</Col>
+            <Col id="Column2">R24520</Col>
+            <Col id="Column3">H</Col>
+            <Col id="Column4">12</Col>
+            <Col id="Column7">13</Col>
+            <Col id="Column8">225</Col>
+            <Col id="Column9">1370</Col>
+            <Col id="Column10">1370</Col>
+            <Col id="Column11">6</Col>
+            <Col id="Column12">225</Col>
+            <Col id="Column13">1370</Col>
+            <Col id="Column14">1370</Col>
+            <Col id="Column15">5</Col>
+            <Col id="Column16">2</Col>
+            <Col id="Column17">21일 20시 56분</Col>
+            <Col id="Column18">21일 21시 28분</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">CH0011</Col>
+            <Col id="Column1">PL8907</Col>
+            <Col id="Column2">R89603</Col>
+            <Col id="Column3">H</Col>
+            <Col id="Column4">12</Col>
+            <Col id="Column6">1</Col>
+            <Col id="Column7">14</Col>
+            <Col id="Column8">250</Col>
+            <Col id="Column9">1090</Col>
+            <Col id="Column10">1090</Col>
+            <Col id="Column11">5</Col>
+            <Col id="Column12">250</Col>
+            <Col id="Column13">1090</Col>
+            <Col id="Column14">1090</Col>
+            <Col id="Column15">7</Col>
+            <Col id="Column16">1</Col>
+            <Col id="Column17">21일 21시 16분</Col>
+            <Col id="Column5">1</Col>
+            <Col id="Column18">21일 22시 09분</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">CH0011</Col>
+            <Col id="Column1">PL8908</Col>
+            <Col id="Column2">R89604</Col>
+            <Col id="Column3">H</Col>
+            <Col id="Column4">12</Col>
+            <Col id="Column6">2</Col>
+            <Col id="Column7">10</Col>
+            <Col id="Column8">225</Col>
+            <Col id="Column9">1710</Col>
+            <Col id="Column10">1710</Col>
+            <Col id="Column11">6</Col>
+            <Col id="Column12">225</Col>
+            <Col id="Column13">1710</Col>
+            <Col id="Column14">1710</Col>
+            <Col id="Column15">7</Col>
+            <Col id="Column16">4</Col>
+            <Col id="Column17">21일 22시 16분</Col>
+            <Col id="Column5">2</Col>
+            <Col id="Column18">22일 20시 09분</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">CH0011</Col>
+            <Col id="Column1">PL8909</Col>
+            <Col id="Column2">R89605</Col>
+            <Col id="Column3">H</Col>
+            <Col id="Column4">12</Col>
+            <Col id="Column6">3</Col>
+            <Col id="Column7">9</Col>
+            <Col id="Column8">225</Col>
+            <Col id="Column9">1210</Col>
+            <Col id="Column10">1210</Col>
+            <Col id="Column11">8</Col>
+            <Col id="Column12">225</Col>
+            <Col id="Column13">1210</Col>
+            <Col id="Column14">1210</Col>
+            <Col id="Column15">6</Col>
+            <Col id="Column16">3</Col>
+            <Col id="Column17">22일 08시 03분</Col>
+            <Col id="Column5">3</Col>
+            <Col id="Column18">22일 20시 09분</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">CH0011</Col>
+            <Col id="Column1">PL8910</Col>
+            <Col id="Column2">R89606</Col>
+            <Col id="Column3">H</Col>
+            <Col id="Column4">12</Col>
+            <Col id="Column6">4</Col>
+            <Col id="Column7">9</Col>
+            <Col id="Column8">250</Col>
+            <Col id="Column9">1150</Col>
+            <Col id="Column10">1150</Col>
+            <Col id="Column11">5</Col>
+            <Col id="Column12">250</Col>
+            <Col id="Column13">1150</Col>
+            <Col id="Column14">1150</Col>
+            <Col id="Column15">6</Col>
+            <Col id="Column16">5</Col>
+            <Col id="Column17">21일 22시 16분</Col>
+            <Col id="Column5">4</Col>
+            <Col id="Column18">21일 22시 59분</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">CH0011</Col>
+            <Col id="Column1">PL8911</Col>
+            <Col id="Column2">R89607</Col>
+            <Col id="Column3">H</Col>
+            <Col id="Column4">12</Col>
+            <Col id="Column7">9</Col>
+            <Col id="Column8">250</Col>
+            <Col id="Column9">1650</Col>
+            <Col id="Column10">1650</Col>
+            <Col id="Column11">6</Col>
+            <Col id="Column12">250</Col>
+            <Col id="Column13">1650</Col>
+            <Col id="Column14">1650</Col>
+            <Col id="Column15">6</Col>
+            <Col id="Column16">2</Col>
+            <Col id="Column17">21일 20시 16분</Col>
+            <Col id="Column18">21일 20시 49분</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">CH0011</Col>
+            <Col id="Column1">PL8912</Col>
+            <Col id="Column2">R89608</Col>
+            <Col id="Column3">H</Col>
+            <Col id="Column4">12</Col>
+            <Col id="Column6">2</Col>
+            <Col id="Column7">9</Col>
+            <Col id="Column8">250</Col>
+            <Col id="Column9">1650</Col>
+            <Col id="Column10">1650</Col>
+            <Col id="Column11">7</Col>
+            <Col id="Column12">250</Col>
+            <Col id="Column13">1650</Col>
+            <Col id="Column14">1650</Col>
+            <Col id="Column15">7</Col>
+            <Col id="Column16">1</Col>
+            <Col id="Column17">21일 20시 56분</Col>
+            <Col id="Column5">2</Col>
+            <Col id="Column18">21일 21시 28분</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">CH0011</Col>
+            <Col id="Column1">PL8913</Col>
+            <Col id="Column2">R89609</Col>
+            <Col id="Column3">H</Col>
+            <Col id="Column4">12</Col>
+            <Col id="Column7">10</Col>
+            <Col id="Column8">250</Col>
+            <Col id="Column9">1650</Col>
+            <Col id="Column10">1650</Col>
+            <Col id="Column11">5</Col>
+            <Col id="Column12">250</Col>
+            <Col id="Column13">1650</Col>
+            <Col id="Column14">1650</Col>
+            <Col id="Column15">7</Col>
+            <Col id="Column16">4</Col>
+            <Col id="Column17">21일 21시 16분</Col>
+            <Col id="Column18">21일 22시 09분</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">CH0011</Col>
+            <Col id="Column1">PL8914</Col>
+            <Col id="Column2">R89610</Col>
+            <Col id="Column3">H</Col>
+            <Col id="Column4">12</Col>
+            <Col id="Column7">14</Col>
+            <Col id="Column8">250</Col>
+            <Col id="Column9">1650</Col>
+            <Col id="Column10">1650</Col>
+            <Col id="Column11">5</Col>
+            <Col id="Column12">250</Col>
+            <Col id="Column13">1650</Col>
+            <Col id="Column14">1650</Col>
+            <Col id="Column15">5</Col>
+            <Col id="Column16">3</Col>
+            <Col id="Column17">21일 22시 16분</Col>
+            <Col id="Column18">22일 20시 09분</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">CH0011</Col>
+            <Col id="Column1">PL8915</Col>
+            <Col id="Column2">R89611</Col>
+            <Col id="Column3">H</Col>
+            <Col id="Column4">12</Col>
+            <Col id="Column6">2</Col>
+            <Col id="Column7">13</Col>
+            <Col id="Column8">250</Col>
+            <Col id="Column9">1650</Col>
+            <Col id="Column10">1650</Col>
+            <Col id="Column11">5</Col>
+            <Col id="Column12">250</Col>
+            <Col id="Column13">1650</Col>
+            <Col id="Column14">1650</Col>
+            <Col id="Column15">7</Col>
+            <Col id="Column16">3</Col>
+            <Col id="Column17">22일 08시 03분</Col>
+            <Col id="Column5">2</Col>
+            <Col id="Column18">22일 20시 09분</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">CH0011</Col>
+            <Col id="Column1">PL8916</Col>
+            <Col id="Column2">R89612</Col>
+            <Col id="Column3">H</Col>
+            <Col id="Column4">12</Col>
+            <Col id="Column7">12</Col>
+            <Col id="Column8">250</Col>
+            <Col id="Column9">1120</Col>
+            <Col id="Column10">1120</Col>
+            <Col id="Column11">6</Col>
+            <Col id="Column12">250</Col>
+            <Col id="Column13">1120</Col>
+            <Col id="Column14">1120</Col>
+            <Col id="Column15">7</Col>
+            <Col id="Column16">1</Col>
+            <Col id="Column17">21일 22시 16분</Col>
+            <Col id="Column18">21일 22시 59분</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">CH0011</Col>
+            <Col id="Column1">PL8917</Col>
+            <Col id="Column2">R89613</Col>
+            <Col id="Column3">H</Col>
+            <Col id="Column4">12</Col>
+            <Col id="Column7">11</Col>
+            <Col id="Column8">250</Col>
+            <Col id="Column9">1150</Col>
+            <Col id="Column10">1150</Col>
+            <Col id="Column11">6</Col>
+            <Col id="Column12">250</Col>
+            <Col id="Column13">1150</Col>
+            <Col id="Column14">1150</Col>
+            <Col id="Column15">5</Col>
+            <Col id="Column16">4</Col>
+            <Col id="Column17">21일 20시 16분</Col>
+            <Col id="Column18">21일 20시 49분</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">CH0011</Col>
+            <Col id="Column1">PL8918</Col>
+            <Col id="Column2">R89614</Col>
+            <Col id="Column3">H</Col>
+            <Col id="Column4">12</Col>
+            <Col id="Column6">1</Col>
+            <Col id="Column7">12</Col>
+            <Col id="Column8">250</Col>
+            <Col id="Column9">1300</Col>
+            <Col id="Column10">1300</Col>
+            <Col id="Column11">7</Col>
+            <Col id="Column12">250</Col>
+            <Col id="Column13">1300</Col>
+            <Col id="Column14">1300</Col>
+            <Col id="Column15">5</Col>
+            <Col id="Column16">2</Col>
+            <Col id="Column17">21일 20시 56분</Col>
+            <Col id="Column5">1</Col>
+            <Col id="Column18">21일 21시 28분</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">CH0011</Col>
+            <Col id="Column1">PL8919</Col>
+            <Col id="Column2">R89615</Col>
+            <Col id="Column3">H</Col>
+            <Col id="Column4">12</Col>
+            <Col id="Column6">2</Col>
+            <Col id="Column7">13</Col>
+            <Col id="Column8">250</Col>
+            <Col id="Column9">1320</Col>
+            <Col id="Column10">1320</Col>
+            <Col id="Column11">6</Col>
+            <Col id="Column12">250</Col>
+            <Col id="Column13">1320</Col>
+            <Col id="Column14">1320</Col>
+            <Col id="Column15">5</Col>
+            <Col id="Column16">1</Col>
+            <Col id="Column17">21일 21시 16분</Col>
+            <Col id="Column5">2</Col>
+            <Col id="Column18">21일 22시 09분</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">CH0011</Col>
+            <Col id="Column1">PL8920</Col>
+            <Col id="Column2">R89616</Col>
+            <Col id="Column3">H</Col>
+            <Col id="Column4">12</Col>
+            <Col id="Column6">3</Col>
+            <Col id="Column7">15</Col>
+            <Col id="Column8">250</Col>
+            <Col id="Column9">1190</Col>
+            <Col id="Column10">1190</Col>
+            <Col id="Column11">7</Col>
+            <Col id="Column12">250</Col>
+            <Col id="Column13">1190</Col>
+            <Col id="Column14">1190</Col>
+            <Col id="Column15">6</Col>
+            <Col id="Column16">3</Col>
+            <Col id="Column17">21일 22시 16분</Col>
+            <Col id="Column5">3</Col>
+            <Col id="Column18">22일 20시 09분</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">CH0011</Col>
+            <Col id="Column1">PL8921</Col>
+            <Col id="Column2">R89617</Col>
+            <Col id="Column3">H</Col>
+            <Col id="Column4">12</Col>
+            <Col id="Column6">4</Col>
+            <Col id="Column7">10</Col>
+            <Col id="Column8">225</Col>
+            <Col id="Column9">1620</Col>
+            <Col id="Column10">1620</Col>
+            <Col id="Column11">5</Col>
+            <Col id="Column12">225</Col>
+            <Col id="Column13">1620</Col>
+            <Col id="Column14">1620</Col>
+            <Col id="Column15">6</Col>
+            <Col id="Column16">3</Col>
+            <Col id="Column17">22일 08시 03분</Col>
+            <Col id="Column5">4</Col>
+            <Col id="Column18">22일 20시 09분</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">CH0011</Col>
+            <Col id="Column1">PL8922</Col>
+            <Col id="Column2">R89618</Col>
+            <Col id="Column3">H</Col>
+            <Col id="Column4">12</Col>
+            <Col id="Column7">13</Col>
+            <Col id="Column8">250</Col>
+            <Col id="Column9">2050</Col>
+            <Col id="Column10">2050</Col>
+            <Col id="Column11">5</Col>
+            <Col id="Column12">250</Col>
+            <Col id="Column13">2050</Col>
+            <Col id="Column14">2050</Col>
+            <Col id="Column15">7</Col>
+            <Col id="Column16">2</Col>
+            <Col id="Column17">21일 22시 16분</Col>
+            <Col id="Column18">21일 22시 59분</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">CH0012</Col>
+            <Col id="Column1">PL7890</Col>
+            <Col id="Column2">R43521</Col>
+            <Col id="Column3">C</Col>
+            <Col id="Column4">12</Col>
+            <Col id="Column6">2</Col>
+            <Col id="Column7">14</Col>
+            <Col id="Column8">225</Col>
+            <Col id="Column9">1300</Col>
+            <Col id="Column10">1300</Col>
+            <Col id="Column11">7</Col>
+            <Col id="Column12">225</Col>
+            <Col id="Column13">1300</Col>
+            <Col id="Column14">1300</Col>
+            <Col id="Column15">6</Col>
+            <Col id="Column16">3</Col>
+            <Col id="Column17">21일 20시 16분</Col>
+            <Col id="Column5">2</Col>
+            <Col id="Column18">21일 20시 49분</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">CH0012</Col>
+            <Col id="Column1">PL7891</Col>
+            <Col id="Column2">R43522</Col>
+            <Col id="Column3">H</Col>
+            <Col id="Column4">12</Col>
+            <Col id="Column7">10</Col>
+            <Col id="Column8">225</Col>
+            <Col id="Column9">1370</Col>
+            <Col id="Column10">1370</Col>
+            <Col id="Column11">7</Col>
+            <Col id="Column12">225</Col>
+            <Col id="Column13">1370</Col>
+            <Col id="Column14">1370</Col>
+            <Col id="Column15">8</Col>
+            <Col id="Column16">2</Col>
+            <Col id="Column17">21일 20시 56분</Col>
+            <Col id="Column18">21일 21시 28분</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">CH0012</Col>
+            <Col id="Column1">PL7892</Col>
+            <Col id="Column2">R43523</Col>
+            <Col id="Column3">C</Col>
+            <Col id="Column4">12</Col>
+            <Col id="Column7">10</Col>
+            <Col id="Column8">250</Col>
+            <Col id="Column9">1090</Col>
+            <Col id="Column10">1090</Col>
+            <Col id="Column11">5</Col>
+            <Col id="Column12">250</Col>
+            <Col id="Column13">1090</Col>
+            <Col id="Column14">1090</Col>
+            <Col id="Column15">5</Col>
+            <Col id="Column16">4</Col>
+            <Col id="Column17">21일 21시 16분</Col>
+            <Col id="Column18">21일 22시 09분</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">CH0012</Col>
+            <Col id="Column1">PL7893</Col>
+            <Col id="Column2">R43524</Col>
+            <Col id="Column3">C</Col>
+            <Col id="Column4">12</Col>
+            <Col id="Column6">2</Col>
+            <Col id="Column7">10</Col>
+            <Col id="Column8">250</Col>
+            <Col id="Column9">1710</Col>
+            <Col id="Column10">1710</Col>
+            <Col id="Column11">5</Col>
+            <Col id="Column12">250</Col>
+            <Col id="Column13">1710</Col>
+            <Col id="Column14">1710</Col>
+            <Col id="Column15">5</Col>
+            <Col id="Column16">4</Col>
+            <Col id="Column17">21일 22시 16분</Col>
+            <Col id="Column5">2</Col>
+            <Col id="Column18">22일 20시 09분</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">CH0012</Col>
+            <Col id="Column1">PL7894</Col>
+            <Col id="Column2">R43525</Col>
+            <Col id="Column3">C</Col>
+            <Col id="Column7">12</Col>
+            <Col id="Column8">250</Col>
+            <Col id="Column9">1210</Col>
+            <Col id="Column10">1210</Col>
+            <Col id="Column11">4</Col>
+            <Col id="Column12">250</Col>
+            <Col id="Column13">1210</Col>
+            <Col id="Column14">1210</Col>
+            <Col id="Column15">6</Col>
+            <Col id="Column16">3</Col>
+            <Col id="Column17">22일 08시 03분</Col>
+            <Col id="Column18">22일 20시 09분</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">CH0012</Col>
+            <Col id="Column1">PL7895</Col>
+            <Col id="Column2">R43526</Col>
+            <Col id="Column3">H</Col>
+            <Col id="Column7">12</Col>
+            <Col id="Column8">250</Col>
+            <Col id="Column9">1150</Col>
+            <Col id="Column10">1150</Col>
+            <Col id="Column11">5</Col>
+            <Col id="Column12">250</Col>
+            <Col id="Column13">1150</Col>
+            <Col id="Column14">1150</Col>
+            <Col id="Column15">7</Col>
+            <Col id="Column16">1</Col>
+            <Col id="Column17">21일 22시 16분</Col>
+            <Col id="Column18">21일 22시 59분</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">CH0012</Col>
+            <Col id="Column1">PL7896</Col>
+            <Col id="Column2">R43527</Col>
+            <Col id="Column3">H</Col>
+            <Col id="Column6">1</Col>
+            <Col id="Column7">14</Col>
+            <Col id="Column8">250</Col>
+            <Col id="Column9">1650</Col>
+            <Col id="Column10">1650</Col>
+            <Col id="Column11">5</Col>
+            <Col id="Column12">250</Col>
+            <Col id="Column13">1650</Col>
+            <Col id="Column14">1650</Col>
+            <Col id="Column15">5</Col>
+            <Col id="Column16">4</Col>
+            <Col id="Column17">21일 20시 16분</Col>
+            <Col id="Column5">1</Col>
+            <Col id="Column18">21일 20시 49분</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">CH0012</Col>
+            <Col id="Column1">PL7897</Col>
+            <Col id="Column2">R43528</Col>
+            <Col id="Column3">H</Col>
+            <Col id="Column6">2</Col>
+            <Col id="Column7">12</Col>
+            <Col id="Column8">250</Col>
+            <Col id="Column9">1650</Col>
+            <Col id="Column10">1650</Col>
+            <Col id="Column11">7</Col>
+            <Col id="Column12">250</Col>
+            <Col id="Column13">1650</Col>
+            <Col id="Column14">1650</Col>
+            <Col id="Column15">4</Col>
+            <Col id="Column16">4</Col>
+            <Col id="Column17">21일 20시 56분</Col>
+            <Col id="Column5">2</Col>
+            <Col id="Column18">21일 21시 28분</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">CH0012</Col>
+            <Col id="Column1">PL7898</Col>
+            <Col id="Column2">R43529</Col>
+            <Col id="Column3">C</Col>
+            <Col id="Column6">3</Col>
+            <Col id="Column7">15</Col>
+            <Col id="Column8">250</Col>
+            <Col id="Column9">1650</Col>
+            <Col id="Column10">1650</Col>
+            <Col id="Column11">6</Col>
+            <Col id="Column12">250</Col>
+            <Col id="Column13">1650</Col>
+            <Col id="Column14">1650</Col>
+            <Col id="Column15">5</Col>
+            <Col id="Column16">4</Col>
+            <Col id="Column17">21일 21시 16분</Col>
+            <Col id="Column5">3</Col>
+            <Col id="Column18">21일 22시 09분</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">CH0012</Col>
+            <Col id="Column1">PL7899</Col>
+            <Col id="Column2">R43530</Col>
+            <Col id="Column3">C</Col>
+            <Col id="Column6">4</Col>
+            <Col id="Column7">10</Col>
+            <Col id="Column8">250</Col>
+            <Col id="Column9">1650</Col>
+            <Col id="Column10">1650</Col>
+            <Col id="Column11">6</Col>
+            <Col id="Column12">250</Col>
+            <Col id="Column13">1650</Col>
+            <Col id="Column14">1650</Col>
+            <Col id="Column15">4</Col>
+            <Col id="Column16">4</Col>
+            <Col id="Column17">21일 22시 16분</Col>
+            <Col id="Column5">4</Col>
+            <Col id="Column18">22일 20시 09분</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">CH0012</Col>
+            <Col id="Column1">PL7900</Col>
+            <Col id="Column2">R43531</Col>
+            <Col id="Column3">H</Col>
+            <Col id="Column6">2</Col>
+            <Col id="Column7">13</Col>
+            <Col id="Column8">250</Col>
+            <Col id="Column9">1650</Col>
+            <Col id="Column10">1650</Col>
+            <Col id="Column11">5</Col>
+            <Col id="Column12">250</Col>
+            <Col id="Column13">1650</Col>
+            <Col id="Column14">1650</Col>
+            <Col id="Column15">5</Col>
+            <Col id="Column16">2</Col>
+            <Col id="Column17">22일 08시 03분</Col>
+            <Col id="Column5">2</Col>
+            <Col id="Column18">22일 20시 09분</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">CH0012</Col>
+            <Col id="Column1">PL7901</Col>
+            <Col id="Column2">R43532</Col>
+            <Col id="Column3">C</Col>
+            <Col id="Column7">12</Col>
+            <Col id="Column8">250</Col>
+            <Col id="Column9">1120</Col>
+            <Col id="Column10">1120</Col>
+            <Col id="Column11">6</Col>
+            <Col id="Column12">250</Col>
+            <Col id="Column13">1120</Col>
+            <Col id="Column14">1120</Col>
+            <Col id="Column15">7</Col>
+            <Col id="Column16">1</Col>
+            <Col id="Column17">21일 22시 16분</Col>
+            <Col id="Column18">21일 22시 59분</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">CH0012</Col>
+            <Col id="Column1">PL7902</Col>
+            <Col id="Column2">R43533</Col>
+            <Col id="Column3">C</Col>
+            <Col id="Column4">15</Col>
+            <Col id="Column7">13</Col>
+            <Col id="Column8">250</Col>
+            <Col id="Column9">1150</Col>
+            <Col id="Column10">1150</Col>
+            <Col id="Column11">8</Col>
+            <Col id="Column12">250</Col>
+            <Col id="Column13">1150</Col>
+            <Col id="Column14">1150</Col>
+            <Col id="Column15">7</Col>
+            <Col id="Column16">4</Col>
+            <Col id="Column17">21일 20시 16분</Col>
+            <Col id="Column18">21일 20시 49분</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">CH0012</Col>
+            <Col id="Column1">PL7903</Col>
+            <Col id="Column2">R43534</Col>
+            <Col id="Column3">C</Col>
+            <Col id="Column4">15</Col>
+            <Col id="Column6">2</Col>
+            <Col id="Column7">14</Col>
+            <Col id="Column8">225</Col>
+            <Col id="Column9">1300</Col>
+            <Col id="Column10">1300</Col>
+            <Col id="Column11">5</Col>
+            <Col id="Column12">225</Col>
+            <Col id="Column13">1300</Col>
+            <Col id="Column14">1300</Col>
+            <Col id="Column15">6</Col>
+            <Col id="Column16">3</Col>
+            <Col id="Column17">21일 20시 56분</Col>
+            <Col id="Column5">2</Col>
+            <Col id="Column18">21일 21시 28분</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">CH0012</Col>
+            <Col id="Column1">PL7904</Col>
+            <Col id="Column2">R43535</Col>
+            <Col id="Column3">C</Col>
+            <Col id="Column4">15</Col>
+            <Col id="Column7">10</Col>
+            <Col id="Column8">250</Col>
+            <Col id="Column9">1320</Col>
+            <Col id="Column10">1320</Col>
+            <Col id="Column11">6</Col>
+            <Col id="Column12">250</Col>
+            <Col id="Column13">1320</Col>
+            <Col id="Column14">1320</Col>
+            <Col id="Column15">6</Col>
+            <Col id="Column16">5</Col>
+            <Col id="Column17">21일 21시 16분</Col>
+            <Col id="Column18">21일 22시 09분</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">CH0012</Col>
+            <Col id="Column1">PL7905</Col>
+            <Col id="Column2">R43536</Col>
+            <Col id="Column3">H</Col>
+            <Col id="Column4">15</Col>
+            <Col id="Column7">9</Col>
+            <Col id="Column8">225</Col>
+            <Col id="Column9">1190</Col>
+            <Col id="Column10">1190</Col>
+            <Col id="Column11">7</Col>
+            <Col id="Column12">225</Col>
+            <Col id="Column13">1190</Col>
+            <Col id="Column14">1190</Col>
+            <Col id="Column15">6</Col>
+            <Col id="Column16">2</Col>
+            <Col id="Column17">21일 22시 16분</Col>
+            <Col id="Column18">22일 20시 09분</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">CH0012</Col>
+            <Col id="Column1">PL7906</Col>
+            <Col id="Column2">R43537</Col>
+            <Col id="Column3">H</Col>
+            <Col id="Column4">15</Col>
+            <Col id="Column6">1</Col>
+            <Col id="Column7">9</Col>
+            <Col id="Column8">225</Col>
+            <Col id="Column9">1620</Col>
+            <Col id="Column10">1620</Col>
+            <Col id="Column11">5</Col>
+            <Col id="Column12">225</Col>
+            <Col id="Column13">1620</Col>
+            <Col id="Column14">1620</Col>
+            <Col id="Column15">7</Col>
+            <Col id="Column16">1</Col>
+            <Col id="Column17">22일 08시 03분</Col>
+            <Col id="Column5">1</Col>
+            <Col id="Column18">22일 20시 09분</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">CH0012</Col>
+            <Col id="Column1">PL7907</Col>
+            <Col id="Column2">R43538</Col>
+            <Col id="Column3">H</Col>
+            <Col id="Column4">15</Col>
+            <Col id="Column6">2</Col>
+            <Col id="Column7">9</Col>
+            <Col id="Column8">250</Col>
+            <Col id="Column9">2050</Col>
+            <Col id="Column10">2050</Col>
+            <Col id="Column11">5</Col>
+            <Col id="Column12">250</Col>
+            <Col id="Column13">2050</Col>
+            <Col id="Column14">2050</Col>
+            <Col id="Column15">7</Col>
+            <Col id="Column16">4</Col>
+            <Col id="Column17">21일 22시 16분</Col>
+            <Col id="Column5">2</Col>
+            <Col id="Column18">21일 22시 59분</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">CH0012</Col>
+            <Col id="Column1">PL7908</Col>
+            <Col id="Column2">R43539</Col>
+            <Col id="Column3">C</Col>
+            <Col id="Column4">15</Col>
+            <Col id="Column6">3</Col>
+            <Col id="Column7">9</Col>
+            <Col id="Column8">250</Col>
+            <Col id="Column9">1300</Col>
+            <Col id="Column10">1300</Col>
+            <Col id="Column11">5</Col>
+            <Col id="Column12">250</Col>
+            <Col id="Column13">1300</Col>
+            <Col id="Column14">1300</Col>
+            <Col id="Column15">5</Col>
+            <Col id="Column16">3</Col>
+            <Col id="Column17">21일 20시 16분</Col>
+            <Col id="Column5">3</Col>
+            <Col id="Column18">21일 20시 49분</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">CH0013</Col>
+            <Col id="Column1">PL6785</Col>
+            <Col id="Column2">R90764</Col>
+            <Col id="Column3">C</Col>
+            <Col id="Column4">15</Col>
+            <Col id="Column6">4</Col>
+            <Col id="Column7">10</Col>
+            <Col id="Column8">250</Col>
+            <Col id="Column9">1370</Col>
+            <Col id="Column10">1370</Col>
+            <Col id="Column11">6</Col>
+            <Col id="Column12">250</Col>
+            <Col id="Column13">1370</Col>
+            <Col id="Column14">1370</Col>
+            <Col id="Column15">7</Col>
+            <Col id="Column16">3</Col>
+            <Col id="Column17">21일 20시 56분</Col>
+            <Col id="Column5">4</Col>
+            <Col id="Column18">21일 21시 28분</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">CH0013</Col>
+            <Col id="Column1">PL6786</Col>
+            <Col id="Column2">R90765</Col>
+            <Col id="Column3">H</Col>
+            <Col id="Column4">15</Col>
+            <Col id="Column7">14</Col>
+            <Col id="Column8">250</Col>
+            <Col id="Column9">1090</Col>
+            <Col id="Column10">1090</Col>
+            <Col id="Column11">6</Col>
+            <Col id="Column12">250</Col>
+            <Col id="Column13">1090</Col>
+            <Col id="Column14">1090</Col>
+            <Col id="Column15">7</Col>
+            <Col id="Column16">1</Col>
+            <Col id="Column17">21일 21시 16분</Col>
+            <Col id="Column18">21일 22시 09분</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">CH0013</Col>
+            <Col id="Column1">PL6787</Col>
+            <Col id="Column2">R90766</Col>
+            <Col id="Column3">C</Col>
+            <Col id="Column4">15</Col>
+            <Col id="Column6">2</Col>
+            <Col id="Column7">13</Col>
+            <Col id="Column8">250</Col>
+            <Col id="Column9">1710</Col>
+            <Col id="Column10">1710</Col>
+            <Col id="Column11">7</Col>
+            <Col id="Column12">250</Col>
+            <Col id="Column13">1710</Col>
+            <Col id="Column14">1710</Col>
+            <Col id="Column15">5</Col>
+            <Col id="Column16">4</Col>
+            <Col id="Column17">21일 22시 16분</Col>
+            <Col id="Column5">2</Col>
+            <Col id="Column18">22일 20시 09분</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">CH0013</Col>
+            <Col id="Column1">PL6788</Col>
+            <Col id="Column2">R90767</Col>
+            <Col id="Column3">C</Col>
+            <Col id="Column4">14</Col>
+            <Col id="Column7">12</Col>
+            <Col id="Column8">250</Col>
+            <Col id="Column9">1210</Col>
+            <Col id="Column10">1210</Col>
+            <Col id="Column11">6</Col>
+            <Col id="Column12">250</Col>
+            <Col id="Column13">1210</Col>
+            <Col id="Column14">1210</Col>
+            <Col id="Column15">5</Col>
+            <Col id="Column16">2</Col>
+            <Col id="Column17">22일 08시 03분</Col>
+            <Col id="Column18">22일 20시 09분</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">CH0013</Col>
+            <Col id="Column1">PL6789</Col>
+            <Col id="Column2">R90768</Col>
+            <Col id="Column3">C</Col>
+            <Col id="Column4">14</Col>
+            <Col id="Column7">11</Col>
+            <Col id="Column8">250</Col>
+            <Col id="Column9">1150</Col>
+            <Col id="Column10">1150</Col>
+            <Col id="Column11">7</Col>
+            <Col id="Column12">250</Col>
+            <Col id="Column13">1150</Col>
+            <Col id="Column14">1150</Col>
+            <Col id="Column15">5</Col>
+            <Col id="Column16">1</Col>
+            <Col id="Column17">21일 22시 16분</Col>
+            <Col id="Column18">21일 22시 59분</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">CH0013</Col>
+            <Col id="Column1">PL6790</Col>
+            <Col id="Column2">R90769</Col>
+            <Col id="Column3">C</Col>
+            <Col id="Column4">14</Col>
+            <Col id="Column6">2</Col>
+            <Col id="Column7">12</Col>
+            <Col id="Column8">250</Col>
+            <Col id="Column9">1650</Col>
+            <Col id="Column10">1650</Col>
+            <Col id="Column11">5</Col>
+            <Col id="Column12">250</Col>
+            <Col id="Column13">1650</Col>
+            <Col id="Column14">1650</Col>
+            <Col id="Column15">6</Col>
+            <Col id="Column16">3</Col>
+            <Col id="Column17">21일 20시 16분</Col>
+            <Col id="Column5">2</Col>
+            <Col id="Column18">21일 20시 49분</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">CH0014</Col>
+            <Col id="Column1">PL9078</Col>
+            <Col id="Column2">R65342</Col>
+            <Col id="Column3">H</Col>
+            <Col id="Column4">14</Col>
+            <Col id="Column7">13</Col>
+            <Col id="Column8">250</Col>
+            <Col id="Column9">1650</Col>
+            <Col id="Column10">1650</Col>
+            <Col id="Column11">5</Col>
+            <Col id="Column12">250</Col>
+            <Col id="Column13">1650</Col>
+            <Col id="Column14">1650</Col>
+            <Col id="Column15">6</Col>
+            <Col id="Column16">3</Col>
+            <Col id="Column17">21일 20시 56분</Col>
+            <Col id="Column18">21일 21시 28분</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">CH0014</Col>
+            <Col id="Column1">PL9079</Col>
+            <Col id="Column2">R65343</Col>
+            <Col id="Column3">H</Col>
+            <Col id="Column4">14</Col>
+            <Col id="Column7">15</Col>
+            <Col id="Column8">250</Col>
+            <Col id="Column9">1650</Col>
+            <Col id="Column10">1650</Col>
+            <Col id="Column11">7</Col>
+            <Col id="Column12">250</Col>
+            <Col id="Column13">1650</Col>
+            <Col id="Column14">1650</Col>
+            <Col id="Column15">7</Col>
+            <Col id="Column16">2</Col>
+            <Col id="Column17">21일 21시 16분</Col>
+            <Col id="Column18">21일 22시 09분</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">CH0014</Col>
+            <Col id="Column1">PL9080</Col>
+            <Col id="Column2">R65344</Col>
+            <Col id="Column3">H</Col>
+            <Col id="Column4">14</Col>
+            <Col id="Column6">1</Col>
+            <Col id="Column7">10</Col>
+            <Col id="Column8">250</Col>
+            <Col id="Column9">1650</Col>
+            <Col id="Column10">1650</Col>
+            <Col id="Column11">7</Col>
+            <Col id="Column12">250</Col>
+            <Col id="Column13">1650</Col>
+            <Col id="Column14">1650</Col>
+            <Col id="Column15">6</Col>
+            <Col id="Column16">3</Col>
+            <Col id="Column17">21일 22시 16분</Col>
+            <Col id="Column5">1</Col>
+            <Col id="Column18">22일 20시 09분</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">CH0014</Col>
+            <Col id="Column1">PL9081</Col>
+            <Col id="Column2">R65345</Col>
+            <Col id="Column3">C</Col>
+            <Col id="Column4">14</Col>
+            <Col id="Column6">2</Col>
+            <Col id="Column7">13</Col>
+            <Col id="Column8">225</Col>
+            <Col id="Column9">1650</Col>
+            <Col id="Column10">1650</Col>
+            <Col id="Column11">5</Col>
+            <Col id="Column12">225</Col>
+            <Col id="Column13">1650</Col>
+            <Col id="Column14">1650</Col>
+            <Col id="Column15">8</Col>
+            <Col id="Column16">2</Col>
+            <Col id="Column17">22일 08시 03분</Col>
+            <Col id="Column5">2</Col>
+            <Col id="Column18">22일 20시 09분</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">CH0014</Col>
+            <Col id="Column1">PL9082</Col>
+            <Col id="Column2">R65346</Col>
+            <Col id="Column3">C</Col>
+            <Col id="Column4">14</Col>
+            <Col id="Column6">3</Col>
+            <Col id="Column7">14</Col>
+            <Col id="Column8">250</Col>
+            <Col id="Column9">1120</Col>
+            <Col id="Column10">1120</Col>
+            <Col id="Column11">5</Col>
+            <Col id="Column12">250</Col>
+            <Col id="Column13">1120</Col>
+            <Col id="Column14">1120</Col>
+            <Col id="Column15">5</Col>
+            <Col id="Column16">4</Col>
+            <Col id="Column17">21일 22시 16분</Col>
+            <Col id="Column5">3</Col>
+            <Col id="Column18">21일 22시 59분</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">CH0014</Col>
+            <Col id="Column1">PL9083</Col>
+            <Col id="Column2">R65347</Col>
+            <Col id="Column3">H</Col>
+            <Col id="Column4">12</Col>
+            <Col id="Column6">4</Col>
+            <Col id="Column7">10</Col>
+            <Col id="Column8">225</Col>
+            <Col id="Column9">1150</Col>
+            <Col id="Column10">1150</Col>
+            <Col id="Column11">4</Col>
+            <Col id="Column12">225</Col>
+            <Col id="Column13">1150</Col>
+            <Col id="Column14">1150</Col>
+            <Col id="Column15">5</Col>
+            <Col id="Column16">4</Col>
+            <Col id="Column17">21일 20시 16분</Col>
+            <Col id="Column5">4</Col>
+            <Col id="Column18">21일 20시 49분</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">CH0014</Col>
+            <Col id="Column1">PL9084</Col>
+            <Col id="Column2">R65348</Col>
+            <Col id="Column3">C</Col>
+            <Col id="Column4">13</Col>
+            <Col id="Column7">10</Col>
+            <Col id="Column8">225</Col>
+            <Col id="Column9">1300</Col>
+            <Col id="Column10">1300</Col>
+            <Col id="Column11">5</Col>
+            <Col id="Column12">225</Col>
+            <Col id="Column13">1300</Col>
+            <Col id="Column14">1300</Col>
+            <Col id="Column15">6</Col>
+            <Col id="Column16">3</Col>
+            <Col id="Column17">21일 20시 56분</Col>
+            <Col id="Column18">21일 21시 28분</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">CH0014</Col>
+            <Col id="Column1">PL9085</Col>
+            <Col id="Column2">R65349</Col>
+            <Col id="Column3">C</Col>
+            <Col id="Column4">14</Col>
+            <Col id="Column7">10</Col>
+            <Col id="Column8">250</Col>
+            <Col id="Column9">1320</Col>
+            <Col id="Column10">1320</Col>
+            <Col id="Column11">5</Col>
+            <Col id="Column12">250</Col>
+            <Col id="Column13">1320</Col>
+            <Col id="Column14">1320</Col>
+            <Col id="Column15">7</Col>
+            <Col id="Column16">1</Col>
+            <Col id="Column17">21일 21시 16분</Col>
+            <Col id="Column18">21일 22시 09분</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">CH0014</Col>
+            <Col id="Column1">PL9086</Col>
+            <Col id="Column2">R65350</Col>
+            <Col id="Column3">C</Col>
+            <Col id="Column4">15</Col>
+            <Col id="Column6">2</Col>
+            <Col id="Column7">12</Col>
+            <Col id="Column8">250</Col>
+            <Col id="Column9">1190</Col>
+            <Col id="Column10">1190</Col>
+            <Col id="Column11">7</Col>
+            <Col id="Column12">250</Col>
+            <Col id="Column13">1190</Col>
+            <Col id="Column14">1190</Col>
+            <Col id="Column15">5</Col>
+            <Col id="Column16">4</Col>
+            <Col id="Column17">21일 22시 16분</Col>
+            <Col id="Column5">2</Col>
+            <Col id="Column18">22일 20시 09분</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">CH0014</Col>
+            <Col id="Column1">PL9087</Col>
+            <Col id="Column2">R65351</Col>
+            <Col id="Column3">C</Col>
+            <Col id="Column4">16</Col>
+            <Col id="Column7">12</Col>
+            <Col id="Column8">250</Col>
+            <Col id="Column9">1620</Col>
+            <Col id="Column10">1620</Col>
+            <Col id="Column11">6</Col>
+            <Col id="Column12">250</Col>
+            <Col id="Column13">1620</Col>
+            <Col id="Column14">1620</Col>
+            <Col id="Column15">4</Col>
+            <Col id="Column16">4</Col>
+            <Col id="Column17">22일 08시 03분</Col>
+            <Col id="Column18">22일 20시 09분</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">CH0014</Col>
+            <Col id="Column1">PL9088</Col>
+            <Col id="Column2">R65352</Col>
+            <Col id="Column3">H</Col>
+            <Col id="Column4">17</Col>
+            <Col id="Column7">14</Col>
+            <Col id="Column8">250</Col>
+            <Col id="Column9">2050</Col>
+            <Col id="Column10">2050</Col>
+            <Col id="Column11">6</Col>
+            <Col id="Column12">250</Col>
+            <Col id="Column13">2050</Col>
+            <Col id="Column14">2050</Col>
+            <Col id="Column15">5</Col>
+            <Col id="Column16">4</Col>
+            <Col id="Column17">21일 22시 16분</Col>
+            <Col id="Column18">21일 22시 59분</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">CH0014</Col>
+            <Col id="Column1">PL9089</Col>
+            <Col id="Column2">R65353</Col>
+            <Col id="Column3">H</Col>
+            <Col id="Column4">18</Col>
+            <Col id="Column6">2</Col>
+            <Col id="Column7">12</Col>
+            <Col id="Column8">250</Col>
+            <Col id="Column9">1300</Col>
+            <Col id="Column10">1300</Col>
+            <Col id="Column11">5</Col>
+            <Col id="Column12">250</Col>
+            <Col id="Column13">1300</Col>
+            <Col id="Column14">1300</Col>
+            <Col id="Column15">4</Col>
+            <Col id="Column16">4</Col>
+            <Col id="Column17">21일 20시 16분</Col>
+            <Col id="Column5">2</Col>
+            <Col id="Column18">21일 20시 49분</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">CH0014</Col>
+            <Col id="Column1">PL9090</Col>
+            <Col id="Column2">R65354</Col>
+            <Col id="Column3">H</Col>
+            <Col id="Column4">19</Col>
+            <Col id="Column7">15</Col>
+            <Col id="Column8">250</Col>
+            <Col id="Column9">1370</Col>
+            <Col id="Column10">1370</Col>
+            <Col id="Column11">6</Col>
+            <Col id="Column12">250</Col>
+            <Col id="Column13">1370</Col>
+            <Col id="Column14">1370</Col>
+            <Col id="Column15">5</Col>
+            <Col id="Column16">2</Col>
+            <Col id="Column17">21일 20시 56분</Col>
+            <Col id="Column18">21일 21시 28분</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">CH0014</Col>
+            <Col id="Column1">PL9091</Col>
+            <Col id="Column2">R65355</Col>
+            <Col id="Column3">C</Col>
+            <Col id="Column4">20</Col>
+            <Col id="Column7">10</Col>
+            <Col id="Column8">250</Col>
+            <Col id="Column9">1090</Col>
+            <Col id="Column10">1090</Col>
+            <Col id="Column11">8</Col>
+            <Col id="Column12">250</Col>
+            <Col id="Column13">1090</Col>
+            <Col id="Column14">1090</Col>
+            <Col id="Column15">7</Col>
+            <Col id="Column16">1</Col>
+            <Col id="Column17">21일 21시 16분</Col>
+            <Col id="Column18">21일 22시 09분</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">CH0014</Col>
+            <Col id="Column1">PL9092</Col>
+            <Col id="Column2">R65356</Col>
+            <Col id="Column3">C</Col>
+            <Col id="Column4">21</Col>
+            <Col id="Column6">1</Col>
+            <Col id="Column7">13</Col>
+            <Col id="Column8">250</Col>
+            <Col id="Column9">1710</Col>
+            <Col id="Column10">1710</Col>
+            <Col id="Column11">5</Col>
+            <Col id="Column12">250</Col>
+            <Col id="Column13">1710</Col>
+            <Col id="Column14">1710</Col>
+            <Col id="Column15">7</Col>
+            <Col id="Column16">4</Col>
+            <Col id="Column17">21일 22시 16분</Col>
+            <Col id="Column5">1</Col>
+            <Col id="Column18">22일 20시 09분</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">CH0014</Col>
+            <Col id="Column1">PL9093</Col>
+            <Col id="Column2">R65357</Col>
+            <Col id="Column3">H</Col>
+            <Col id="Column4">22</Col>
+            <Col id="Column6">2</Col>
+            <Col id="Column7">12</Col>
+            <Col id="Column8">250</Col>
+            <Col id="Column9">1210</Col>
+            <Col id="Column10">1210</Col>
+            <Col id="Column11">6</Col>
+            <Col id="Column12">250</Col>
+            <Col id="Column13">1210</Col>
+            <Col id="Column14">1210</Col>
+            <Col id="Column15">6</Col>
+            <Col id="Column16">3</Col>
+            <Col id="Column17">22일 08시 03분</Col>
+            <Col id="Column5">2</Col>
+            <Col id="Column18">22일 20시 09분</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">CH0014</Col>
+            <Col id="Column1">PL9094</Col>
+            <Col id="Column2">R65358</Col>
+            <Col id="Column3">C</Col>
+            <Col id="Column4">23</Col>
+            <Col id="Column6">3</Col>
+            <Col id="Column7">13</Col>
+            <Col id="Column8">250</Col>
+            <Col id="Column9">1150</Col>
+            <Col id="Column10">1150</Col>
+            <Col id="Column11">7</Col>
+            <Col id="Column12">250</Col>
+            <Col id="Column13">1150</Col>
+            <Col id="Column14">1150</Col>
+            <Col id="Column15">6</Col>
+            <Col id="Column16">5</Col>
+            <Col id="Column17">21일 22시 16분</Col>
+            <Col id="Column5">3</Col>
+            <Col id="Column18">21일 22시 59분</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="ds_PopMenu">
+        <ColumnInfo>
+          <Column id="id" type="STRING" size="256"/>
+          <Column id="caption" type="STRING" size="256"/>
+          <Column id="level" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="id">01</Col>
+            <Col id="caption">모두펼침</Col>
+            <Col id="level">0</Col>
+          </Row>
+          <Row>
+            <Col id="id">02</Col>
+            <Col id="caption">모두닫기</Col>
+            <Col id="level">0</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.1"><![CDATA[this.PoC_4_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
+{
+};
+
+this.fn_comBtnOnClick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	switch (obj.name)
+	{
+		case "btn_search" :
+			this.ds_tree.set_enableevent(false);
+			this.grdList.set_binddataset(this.ds_tree);
+			this.ds_tree.set_enableevent(true);		
+			break;
+	}
+};
+
+this.grdList_onrbuttonup = function (obj:Grid, e:nexacro.GridMouseEventInfo)
+{
+	this.popMenu.col = e.col;
+
+	this.popMenu.trackPopupByComponent(obj, e.canvasx, e.canvasy);
+};
+
+this.popMenu_onmenuclick = function (obj:PopupMenu, e:nexacro.MenuClickEventInfo)
+{
+	if (e.id == "01") {
+		this.grdList.set_treeinitstatus("expand,null");
+	} else if (e.id == "02") {
+		this.grdList.set_treeinitstatus("collapse,null");
+	}
+};
+
+/************************************************************************************************
+ * Even   : gfn_IsEmpty
+ * Desc   : value의 빈값 여부 반환
+ * Param : {value} 확인할 value
+ * Return : {boolean} empty 여부
+ ************************************************************************************************/
+this.gfn_IsEmpty = function(value)
+{
+	// null, undefined ==> true
+	if (value === null || value === undefined) return true;
+	
+	// String, Array ==> length == 0
+	if (this.gfn_IsString(value) || this.gfn_IsArray(value)) {
+		return value.length == 0 ? true : false;
+	} else if (this.gfn_IsObject(value)) {
+		for (var p in value) 
+		{
+			if (value.hasOwnProperty(p)) {
+				return false;
+			}
+		}
+		
+		return true;
+	}
+	
+	return false;
+}
+
+/************************************************************************************************
+ * Even   : gfn_IsString
+ * Desc   : value의 string 여부 반환
+ * Param : {value} 확인할 value
+ * Return : {boolean} string 여부
+ ************************************************************************************************/
+this.gfn_IsString = function(value) 
+{
+	return typeof value === 'string';
+}
+
+/************************************************************************************************
+ * Even   : gfn_IsArray
+ * Desc   : value의 Array 여부 반환
+ * Param : {value} 확인할 value
+ * Return : {boolean} Array 여부
+ ************************************************************************************************/
+this.gfn_IsArray = function(value) 
+{
+	if (value === null || value === undefined) return false;
+	
+	return typeof value == "object" && 'constructor' in value && value.constructor === Array;
+}
+
+/************************************************************************************************
+ * Even   : gfn_IsObject
+ * Desc   : value의 Object 여부 반환
+ * Param : {value} 확인할 value
+ * Return : {boolean} Object 여부
+ ************************************************************************************************/
+this.gfn_IsObject = function(value)
+{
+	if (value == null || value == undefined) return false;
+	
+	return typeof value == "object" && 'constructor' in value && value.constructor === Object;
+}]]></Script>
+  </Form>
+</FDL>

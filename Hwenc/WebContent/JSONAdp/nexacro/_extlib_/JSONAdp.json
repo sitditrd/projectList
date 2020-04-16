@@ -1,0 +1,10 @@
+﻿{
+	"name": "JSONAdp",
+	"version": "17.0.0.1",
+	"description": "nexacro platform 17 Unified Framework Library",
+	"license": "",
+	"scripts": [
+			"JSONAdp/JSONAdp.js"
+	]
+}
+//@ sourceURL=Xecure.json

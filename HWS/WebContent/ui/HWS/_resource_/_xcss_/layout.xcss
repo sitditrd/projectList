@@ -1,0 +1,89 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<XCSS version="1.0"><![CDATA[/* BOX */
+.Static.sta_WF_box01L
+{
+	background : #101010;
+	-nexa-border : 1px solid #c7c7c7;
+	-nexa-padding : 0px 5px 0px 5px;
+	-nexa-text-align : center;
+	color : #ffffff;
+}
+.Static.sta_WF_box02L
+{
+	background : #eef1f5;
+	-nexa-border : 1px solid #c7c7c7;
+	-nexa-padding : 0px 5px 0px 5px;
+	-nexa-text-align : center;
+}
+.Static.sta_WF_box03L
+{
+	background : #ffffff;
+	-nexa-border : 1px solid #c7c7c7;
+	-nexa-padding : 0px 5px 0px 5px;
+	-nexa-text-align : center;
+	/*color : #ffffff;*/
+	color : black;
+}
+
+.Button.btn_WF_gantt01,.Button.btn_WF_gantt01[status=focused],.Button.btn_WF_gantt01[userstatus=selected],.Button.btn_WF_gantt01[status=disabled]
+{
+	background : #0075ec;
+	color : #ffffff;
+	cursor : pointer;
+	-nexa-border : 1px solid #005ebd;
+	-nexa-text-align : center;
+}
+.Button.btn_WF_gantt01[status=mouseover]
+{
+	background : #0b82fc;
+	color : #ffffff;
+	-nexa-border : 1px solid #004a96;
+}
+.Button.btn_WF_gantt01[userstatus=pushed]
+{
+	background : #0068d3;
+	color : #ffffff;
+	-nexa-border : 1px solid #005ebd;
+}
+
+.Button.btn_WF_gantt02,.Button.btn_WF_gantt02[status=focused],.Button.btn_WF_gantt02[userstatus=selected],.Button.btn_WF_gantt02[status=disabled]
+{
+	background : #f7e698;
+	color : #333333;
+	cursor : pointer;
+	-nexa-border : 1px solid #dcbf39;
+	-nexa-text-align : center;
+}
+.Button.btn_WF_gantt02[status=mouseover]
+{
+	background : #f8ebb2;
+	color : #333333;
+	-nexa-border : 1px solid #f3b01f;
+}
+.Button.btn_WF_gantt02[userstatus=pushed]
+{
+	background : #f9e175;
+	color : #333333;
+	-nexa-border : 1px solid #dcbf39;
+}
+
+.Button.btn_WF_gantt03,.Button.btn_WF_gantt03[status=focused],.Button.btn_WF_gantt03[userstatus=selected],.Button.btn_WF_gantt03[status=disabled]
+{
+	background : #ff3333;
+	color : #ffffff;
+	cursor : pointer;
+	-nexa-border : 1px solid #d61e1e;
+	-nexa-text-align : center;
+}
+.Button.btn_WF_gantt03[status=mouseover]
+{
+	background : #f64747;
+	color : #ffffff;
+	-nexa-border : 1px solid #ab0000;
+}
+.Button.btn_WF_gantt03[userstatus=pushed]
+{
+	background : #ea2929;
+	color : #ffffff;
+	-nexa-border : 1px solid #d61e1e;
+}]]></XCSS>

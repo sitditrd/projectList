@@ -1,0 +1,326 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.0">
+  <Form id="work01" width="1120" height="620" titletext="New Form">
+    <Layouts>
+      <Layout height="620" mobileorientation="landscape" width="1120">
+        <Static id="Static00" taborder="0" text="Static00" left="0" top="0" width="20" bottom="0" background="red" visible="false"/>
+        <Static id="Static01" taborder="1" text="대분류 타이틀" left="20" top="0" width="710" height="40" cssclass="sta_WF_title01"/>
+        <Static id="Static02" taborder="2" text="중분류 타이틀 01" left="20" top="40" width="710" height="30" cssclass="sta_WF_title02"/>
+        <Static id="Static03" taborder="3" left="20" top="70" height="77" cssclass="sta_WF_box01L" right="20"/>
+        <Static id="Static04" taborder="4" text="Label01" left="31" top="81" width="70" height="25" cssclass="sta_WF_label01R"/>
+        <Edit id="Edit00" taborder="5" left="106" top="81" width="120" height="25"/>
+        <Static id="Static05" taborder="6" text="Label02" left="31" top="111" width="70" height="25" cssclass="sta_WF_label01R"/>
+        <Static id="Static06" taborder="7" text="Label04" left="236" top="111" width="70" height="25" cssclass="sta_WF_label01R"/>
+        <Static id="Static07" taborder="8" text="Label03" left="236" top="81" width="70" height="25" cssclass="sta_WF_label01R"/>
+        <Edit id="Edit02" taborder="9" left="311" top="81" width="257" height="25"/>
+        <Button id="Button00" taborder="10" left="544" top="82" width="23" height="23" cssclass="btn_WF_search02"/>
+        <Calendar id="Calendar00" taborder="11" left="311" top="111" width="120" height="25"/>
+        <Static id="Static08" taborder="12" text="~" left="434" top="111" width="12" height="25" cssclass="sta_WF_label01L"/>
+        <Calendar id="Calendar01" taborder="13" left="448" top="111" width="120" height="25"/>
+        <Static id="Static09" taborder="14" text="Label05" left="578" top="81" width="70" height="25" cssclass="sta_WF_label01R"/>
+        <Static id="Static10" taborder="15" text="Label06" left="578" top="111" width="70" height="25" cssclass="sta_WF_label01R"/>
+        <Combo id="Combo00" taborder="16" text="Combo00" left="653" top="81" width="120" height="25" innerdataset="@Dataset00" codecolumn="Column0" datacolumn="Column0"/>
+        <Spin id="Spin00" taborder="17" left="653" top="111" width="120" height="25"/>
+        <CheckBox id="CheckBox00" taborder="18" text="CheckBox00" left="794" top="81" width="120" height="25"/>
+        <Radio id="Radio00" taborder="19" left="794" top="111" width="120" height="25" innerdataset="@Dataset00" codecolumn="Column0" datacolumn="Column0" direction="vertical"/>
+        <Button id="Button01" taborder="20" top="97" width="50" height="50" cssclass="btn_WF_search01" right="20"/>
+        <Static id="Static13" taborder="21" text="중분류 타이틀 02" left="20" top="157" width="710" height="30" cssclass="sta_WF_title02"/>
+        <Grid id="Grid00" taborder="22" left="20" top="187" height="359" right="20" binddataset="Dataset01" autofittype="col" cssclass="grd_WF_cellC">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="40"/>
+                <Column size="60"/>
+                <Column size="120"/>
+                <Column size="160"/>
+                <Column size="300"/>
+                <Column size="80"/>
+                <Column size="80"/>
+              </Columns>
+              <Rows>
+                <Row size="30" band="head"/>
+                <Row size="28"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="Column0"/>
+                <Cell col="1" text="Column1"/>
+                <Cell col="2" text="Column2"/>
+                <Cell col="3" text="Column3"/>
+                <Cell col="4" text="Column4"/>
+                <Cell col="5" text="Column5"/>
+                <Cell col="6" text="Column6"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:Column0" displaytype="checkboxcontrol" edittype="checkbox"/>
+                <Cell col="1" text="bind:Column1" cssclass="grd_WF_cellC"/>
+                <Cell col="2" text="bind:Column2" cssclass="grd_WF_cellC"/>
+                <Cell col="3" text="bind:Column3" cssclass="grd_WF_cellC"/>
+                <Cell col="4" text="bind:Column4" cssclass="grd_WF_cellC"/>
+                <Cell col="5" text="bind:Column5" cssclass="grd_WF_cellC" displaytype="editcontrol" edittype="text"/>
+                <Cell col="6" text="bind:Column6" cssclass="grd_WF_cellC"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Static id="Static11" taborder="23" left="20" top="546" height="30" cssclass="sta_WF_box04L" right="20"/>
+        <Button id="Button02" taborder="24" text="확인" top="161" width="43" height="23" cssclass="btn_WF_basic03" right="164"/>
+        <Button id="Button03" taborder="25" text="취소" top="161" width="43" height="23" cssclass="btn_WF_basic03" right="116"/>
+        <Button id="Button04" taborder="26" text="삭제" top="161" width="43" height="23" cssclass="btn_WF_basic03" right="68"/>
+        <Button id="Button05" taborder="27" text="저장" top="161" width="43" height="23" cssclass="btn_WF_basic01" right="20"/>
+        <Button id="Button06" taborder="28" left="261" top="551" width="37" height="21" cssclass="btn_WF_pagingFirst"/>
+        <Button id="Button07" taborder="29" left="301" top="551" width="37" height="21" cssclass="btn_WF_pagingPrev"/>
+        <Button id="Button08" taborder="30" text="1" left="351" top="551" width="37" height="21" cssclass="btn_WF_pagingNum"/>
+        <Button id="Button09" taborder="31" text="2" left="389" top="551" width="37" height="21" cssclass="btn_WF_pagingNum"/>
+        <Button id="Button10" taborder="32" text="3" left="427" top="551" width="37" height="21" cssclass="btn_WF_pagingNum"/>
+        <Button id="Button11" taborder="33" text="4" left="465" top="551" width="37" height="21" cssclass="btn_WF_pagingNum"/>
+        <Button id="Button12" taborder="34" text="5" left="503" top="551" width="37" height="21" cssclass="btn_WF_pagingNum"/>
+        <Button id="Button13" taborder="35" text="6" left="541" top="551" width="37" height="21" cssclass="btn_WF_pagingNum"/>
+        <Button id="Button14" taborder="36" text="7" left="579" top="551" width="37" height="21" cssclass="btn_WF_pagingNum"/>
+        <Button id="Button15" taborder="37" text="8" left="617" top="551" width="37" height="21" cssclass="btn_WF_pagingNum"/>
+        <Button id="Button16" taborder="38" text="9" left="655" top="551" width="37" height="21" cssclass="btn_WF_pagingNum"/>
+        <Button id="Button17" taborder="39" text="10" left="693" top="551" width="37" height="21" cssclass="btn_WF_pagingNum"/>
+        <Button id="Button18" taborder="40" left="739" top="551" width="37" height="21" cssclass="btn_WF_pagingNext"/>
+        <Button id="Button19" taborder="41" left="779" top="551" width="37" height="21" cssclass="btn_WF_pagingLast"/>
+        <MaskEdit id="MaskEdit00" taborder="42" left="106" top="111" width="120" height="25"/>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="Dataset00">
+        <ColumnInfo>
+          <Column id="Column0" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="Column0">A</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">B</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">C</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">D</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="Dataset01">
+        <ColumnInfo>
+          <Column id="Column0" type="STRING" size="256"/>
+          <Column id="Column1" type="STRING" size="256"/>
+          <Column id="Column2" type="STRING" size="256"/>
+          <Column id="Column3" type="STRING" size="256"/>
+          <Column id="Column4" type="STRING" size="256"/>
+          <Column id="Column5" type="STRING" size="256"/>
+          <Column id="Column6" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="Column1">홍길동</Col>
+            <Col id="Column2">010-1234-5678</Col>
+            <Col id="Column3">프리세일즈팀/마케팅그룹</Col>
+            <Col id="Column4">서울시 커피구 초코동 123번지 호놀루루아파트 101동 12345호</Col>
+          </Row>
+          <Row>
+            <Col id="Column1">홍길동</Col>
+            <Col id="Column2">010-1234-5678</Col>
+            <Col id="Column3">프리세일즈팀/마케팅그룹</Col>
+            <Col id="Column4">서울시 커피구 초코동 123번지 호놀루루아파트 101동 12345호</Col>
+          </Row>
+          <Row>
+            <Col id="Column1">홍길동</Col>
+            <Col id="Column2">010-1234-5678</Col>
+            <Col id="Column3">프리세일즈팀/마케팅그룹</Col>
+            <Col id="Column4">서울시 커피구 초코동 123번지 호놀루루아파트 101동 12345호</Col>
+          </Row>
+          <Row>
+            <Col id="Column1">홍길동</Col>
+            <Col id="Column2">010-1234-5678</Col>
+            <Col id="Column3">프리세일즈팀/마케팅그룹</Col>
+            <Col id="Column4">서울시 커피구 초코동 123번지 호놀루루아파트 101동 12345호</Col>
+          </Row>
+          <Row>
+            <Col id="Column1">홍길동</Col>
+            <Col id="Column2">010-1234-5678</Col>
+            <Col id="Column3">프리세일즈팀/마케팅그룹</Col>
+            <Col id="Column4">서울시 커피구 초코동 123번지 호놀루루아파트 101동 12345호</Col>
+          </Row>
+          <Row>
+            <Col id="Column1">홍길동</Col>
+            <Col id="Column2">010-1234-5678</Col>
+            <Col id="Column3">프리세일즈팀/마케팅그룹</Col>
+            <Col id="Column4">서울시 커피구 초코동 123번지 호놀루루아파트 101동 12345호</Col>
+          </Row>
+          <Row>
+            <Col id="Column1">홍길동</Col>
+            <Col id="Column2">010-1234-5678</Col>
+            <Col id="Column3">프리세일즈팀/마케팅그룹</Col>
+            <Col id="Column4">서울시 커피구 초코동 123번지 호놀루루아파트 101동 12345호</Col>
+          </Row>
+          <Row>
+            <Col id="Column1">홍길동</Col>
+            <Col id="Column2">010-1234-5678</Col>
+            <Col id="Column3">프리세일즈팀/마케팅그룹</Col>
+            <Col id="Column4">서울시 커피구 초코동 123번지 호놀루루아파트 101동 12345호</Col>
+          </Row>
+          <Row>
+            <Col id="Column1">홍길동</Col>
+            <Col id="Column2">010-1234-5678</Col>
+            <Col id="Column3">프리세일즈팀/마케팅그룹</Col>
+            <Col id="Column4">서울시 커피구 초코동 123번지 호놀루루아파트 101동 12345호</Col>
+          </Row>
+          <Row>
+            <Col id="Column1">홍길동</Col>
+            <Col id="Column2">010-1234-5678</Col>
+            <Col id="Column3">프리세일즈팀/마케팅그룹</Col>
+            <Col id="Column4">서울시 커피구 초코동 123번지 호놀루루아파트 101동 12345호</Col>
+          </Row>
+          <Row>
+            <Col id="Column1">홍길동</Col>
+            <Col id="Column2">010-1234-5678</Col>
+            <Col id="Column3">프리세일즈팀/마케팅그룹</Col>
+            <Col id="Column4">서울시 커피구 초코동 123번지 호놀루루아파트 101동 12345호</Col>
+          </Row>
+          <Row>
+            <Col id="Column1">홍길동</Col>
+            <Col id="Column2">010-1234-5678</Col>
+            <Col id="Column3">프리세일즈팀/마케팅그룹</Col>
+            <Col id="Column4">서울시 커피구 초코동 123번지 호놀루루아파트 101동 12345호</Col>
+          </Row>
+          <Row>
+            <Col id="Column1">홍길동</Col>
+            <Col id="Column2">010-1234-5678</Col>
+            <Col id="Column3">프리세일즈팀/마케팅그룹</Col>
+            <Col id="Column4">서울시 커피구 초코동 123번지 호놀루루아파트 101동 12345호</Col>
+          </Row>
+          <Row>
+            <Col id="Column1">홍길동</Col>
+            <Col id="Column2">010-1234-5678</Col>
+            <Col id="Column3">프리세일즈팀/마케팅그룹</Col>
+            <Col id="Column4">서울시 커피구 초코동 123번지 호놀루루아파트 101동 12345호</Col>
+          </Row>
+          <Row>
+            <Col id="Column1">홍길동</Col>
+            <Col id="Column2">010-1234-5678</Col>
+            <Col id="Column3">프리세일즈팀/마케팅그룹</Col>
+            <Col id="Column4">서울시 커피구 초코동 123번지 호놀루루아파트 101동 12345호</Col>
+          </Row>
+          <Row>
+            <Col id="Column1">홍길동</Col>
+            <Col id="Column2">010-1234-5678</Col>
+            <Col id="Column3">프리세일즈팀/마케팅그룹</Col>
+            <Col id="Column4">서울시 커피구 초코동 123번지 호놀루루아파트 101동 12345호</Col>
+          </Row>
+          <Row>
+            <Col id="Column1">홍길동</Col>
+            <Col id="Column2">010-1234-5678</Col>
+            <Col id="Column3">프리세일즈팀/마케팅그룹</Col>
+            <Col id="Column4">서울시 커피구 초코동 123번지 호놀루루아파트 101동 12345호</Col>
+          </Row>
+          <Row>
+            <Col id="Column1">홍길동</Col>
+            <Col id="Column2">010-1234-5678</Col>
+            <Col id="Column3">프리세일즈팀/마케팅그룹</Col>
+            <Col id="Column4">서울시 커피구 초코동 123번지 호놀루루아파트 101동 12345호</Col>
+          </Row>
+          <Row>
+            <Col id="Column1">홍길동</Col>
+            <Col id="Column2">010-1234-5678</Col>
+            <Col id="Column3">프리세일즈팀/마케팅그룹</Col>
+            <Col id="Column4">서울시 커피구 초코동 123번지 호놀루루아파트 101동 12345호</Col>
+          </Row>
+          <Row>
+            <Col id="Column1">홍길동</Col>
+            <Col id="Column2">010-1234-5678</Col>
+            <Col id="Column3">프리세일즈팀/마케팅그룹</Col>
+            <Col id="Column4">서울시 커피구 초코동 123번지 호놀루루아파트 101동 12345호</Col>
+          </Row>
+          <Row>
+            <Col id="Column1">홍길동</Col>
+            <Col id="Column2">010-1234-5678</Col>
+            <Col id="Column3">프리세일즈팀/마케팅그룹</Col>
+            <Col id="Column4">서울시 커피구 초코동 123번지 호놀루루아파트 101동 12345호</Col>
+          </Row>
+          <Row>
+            <Col id="Column1">홍길동</Col>
+            <Col id="Column2">010-1234-5678</Col>
+            <Col id="Column3">프리세일즈팀/마케팅그룹</Col>
+            <Col id="Column4">서울시 커피구 초코동 123번지 호놀루루아파트 101동 12345호</Col>
+          </Row>
+          <Row>
+            <Col id="Column1">홍길동</Col>
+            <Col id="Column2">010-1234-5678</Col>
+            <Col id="Column3">프리세일즈팀/마케팅그룹</Col>
+            <Col id="Column4">서울시 커피구 초코동 123번지 호놀루루아파트 101동 12345호</Col>
+          </Row>
+          <Row>
+            <Col id="Column1">홍길동</Col>
+            <Col id="Column2">010-1234-5678</Col>
+            <Col id="Column3">프리세일즈팀/마케팅그룹</Col>
+            <Col id="Column4">서울시 커피구 초코동 123번지 호놀루루아파트 101동 12345호</Col>
+          </Row>
+          <Row>
+            <Col id="Column1">홍길동</Col>
+            <Col id="Column2">010-1234-5678</Col>
+            <Col id="Column3">프리세일즈팀/마케팅그룹</Col>
+            <Col id="Column4">서울시 커피구 초코동 123번지 호놀루루아파트 101동 12345호</Col>
+          </Row>
+          <Row>
+            <Col id="Column1">홍길동</Col>
+            <Col id="Column2">010-1234-5678</Col>
+            <Col id="Column3">프리세일즈팀/마케팅그룹</Col>
+            <Col id="Column4">서울시 커피구 초코동 123번지 호놀루루아파트 101동 12345호</Col>
+          </Row>
+          <Row>
+            <Col id="Column1">홍길동</Col>
+            <Col id="Column2">010-1234-5678</Col>
+            <Col id="Column3">프리세일즈팀/마케팅그룹</Col>
+            <Col id="Column4">서울시 커피구 초코동 123번지 호놀루루아파트 101동 12345호</Col>
+          </Row>
+          <Row>
+            <Col id="Column1">홍길동</Col>
+            <Col id="Column2">010-1234-5678</Col>
+            <Col id="Column3">프리세일즈팀/마케팅그룹</Col>
+            <Col id="Column4">서울시 커피구 초코동 123번지 호놀루루아파트 101동 12345호</Col>
+          </Row>
+          <Row>
+            <Col id="Column1">홍길동</Col>
+            <Col id="Column2">010-1234-5678</Col>
+            <Col id="Column3">프리세일즈팀/마케팅그룹</Col>
+            <Col id="Column4">서울시 커피구 초코동 123번지 호놀루루아파트 101동 12345호</Col>
+          </Row>
+          <Row>
+            <Col id="Column1">홍길동</Col>
+            <Col id="Column2">010-1234-5678</Col>
+            <Col id="Column3">프리세일즈팀/마케팅그룹</Col>
+            <Col id="Column4">서울시 커피구 초코동 123번지 호놀루루아파트 101동 12345호</Col>
+          </Row>
+          <Row>
+            <Col id="Column1">홍길동</Col>
+            <Col id="Column2">010-1234-5678</Col>
+            <Col id="Column3">프리세일즈팀/마케팅그룹</Col>
+            <Col id="Column4">서울시 커피구 초코동 123번지 호놀루루아파트 101동 12345호</Col>
+          </Row>
+          <Row>
+            <Col id="Column1">홍길동</Col>
+            <Col id="Column2">010-1234-5678</Col>
+            <Col id="Column3">프리세일즈팀/마케팅그룹</Col>
+            <Col id="Column4">서울시 커피구 초코동 123번지 호놀루루아파트 101동 12345호</Col>
+          </Row>
+          <Row>
+            <Col id="Column1">홍길동</Col>
+            <Col id="Column2">010-1234-5678</Col>
+            <Col id="Column3">프리세일즈팀/마케팅그룹</Col>
+            <Col id="Column4">서울시 커피구 초코동 123번지 호놀루루아파트 101동 12345호</Col>
+          </Row>
+          <Row>
+            <Col id="Column1">홍길동</Col>
+            <Col id="Column2">010-1234-5678</Col>
+            <Col id="Column3">프리세일즈팀/마케팅그룹</Col>
+            <Col id="Column4">서울시 커피구 초코동 123번지 호놀루루아파트 101동 12345호</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+    </Objects>
+  </Form>
+</FDL>

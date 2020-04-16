@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.0">
+  <Form id="GridCellWebBrowser" width="1280" height="720" titletext="New Form">
+    <Layouts>
+      <Layout height="720" mobileorientation="landscape" width="1280">
+        <Grid id="grd00" taborder="0" left="10" top="10" binddataset="ds00" right="10" bottom="10">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="400"/>
+                <Column size="400"/>
+              </Columns>
+              <Rows>
+                <Row size="40" band="head"/>
+                <Row size="40"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="Data"/>
+                <Cell col="1" text="WebBrowser"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:Column0"/>
+                <Cell col="1" text="bind:Column0" displaytype="webbrowsercontrol"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="ds00">
+        <ColumnInfo>
+          <Column id="Column0" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="Column0">&lt;a href="http://en.wikipedia.org/wiki/Korea" target="_blank" title="http://en.wikipedia.org/wiki/Korea"&gt;Korea&lt;/a&gt;&lt;span&gt;&lt;img src="./_resource_/_images_/korea.png"&gt;&lt;img src="./_resource_/_images_/korea.png"&gt;&lt;/span&gt;</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">&lt;a href="http://en.wikipedia.org/wiki/USA" class="my_a_tag" target="_blank" title="http://en.wikipedia.org/wiki/USA"&gt;USA&lt;/a&gt;&lt;span&gt;&lt;img src="./_resource_/_images_/usa.png"&gt;&lt;/span&gt;</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+    </Objects>
+  </Form>
+</FDL>

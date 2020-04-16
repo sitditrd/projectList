@@ -1,0 +1,470 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.0">
+  <Form id="grd_head_pop" width="300" height="400" titletext="New Form" scrolltype="none" onload="grd_head_pop_onload">
+    <Layouts>
+      <Layout height="400" mobileorientation="landscape" width="300">
+        <Static id="Static00" taborder="0" left="0" top="0" cssclass="sta_pop_bg01" right="0" bottom="0"/>
+        <Static id="StColNm" taborder="1" text="Col Name" left="0" top="0" height="40" cssclass="sta_pop_title01" right="0"/>
+        <Button id="btn_close" taborder="2" top="0" width="20" height="40" cssclass="btn_pop_close" right="10" onclick="btn_close_onclick"/>
+        <Div id="Div01" taborder="3" left="10" top="50" right="10" bottom="10">
+          <Layouts>
+            <Layout>
+              <Button id="BtnAdd" taborder="0" text="기준 추가" left="0" top="0" width="80" height="23" cssclass="btn_WF_basic03" onclick="Div01_BtnAdd_onclick"/>
+              <Button id="BtnDel" taborder="1" text="기준 삭제" left="85" top="0" width="80" height="23" cssclass="btn_WF_basic03" onclick="Div01_BtnDel_onclick"/>
+              <Button id="BtnMSort" taborder="2" text="Ok" top="0" width="80" height="23" cssclass="btn_WF_basic01" right="0" onclick="Div01_BtnMSort_onclick"/>
+              <Grid id="Grid01" taborder="3" left="0" top="28" right="0" bottom="0" binddataset="DS_SORT" autofittype="col" autoenter="select" selecttype="cell" cellclickbound="cell">
+                <Formats>
+                  <Format id="default">
+                    <Columns>
+                      <Column size="180"/>
+                      <Column size="100"/>
+                    </Columns>
+                    <Rows>
+                      <Row size="30" band="head"/>
+                      <Row size="30"/>
+                    </Rows>
+                    <Band id="head">
+                      <Cell text="열"/>
+                      <Cell col="1" text="정렬"/>
+                    </Band>
+                    <Band id="body">
+                      <Cell text="bind:COL" displaytype="combocontrol" edittype="combo" combodataset="DS_COL" combocodecol="ID" combodatacol="NM" combodisplayrowcount="10"/>
+                      <Cell col="1" text="bind:TYPE" displaytype="combocontrol" edittype="combo" combodataset="DS_SORT_TYPE" combocodecol="ID" combodatacol="TYPE"/>
+                    </Band>
+                  </Format>
+                </Formats>
+              </Grid>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Div id="Div02" taborder="4" left="307" top="50" right="-287" bottom="10">
+          <Layouts>
+            <Layout>
+              <Button id="BtnMFilter" taborder="0" text="Ok" top="0" width="80" height="23" cssclass="btn_WF_basic01" onclick="Div02_BtnMFilter_onclick" left="200"/>
+              <Grid id="Grid01" taborder="1" left="0" top="28" right="0" bottom="29" binddataset="DS_FILTER" autofittype="col" autoenter="select" selecttype="cell" cellclickbound="cell">
+                <Formats>
+                  <Format id="default">
+                    <Columns>
+                      <Column size="30"/>
+                      <Column size="252"/>
+                    </Columns>
+                    <Rows>
+                      <Row size="24"/>
+                    </Rows>
+                    <Band id="body">
+                      <Cell text="bind:CHK" displaytype="checkboxcontrol" edittype="checkbox"/>
+                      <Cell col="1" text="bind:STR"/>
+                    </Band>
+                  </Format>
+                </Formats>
+              </Grid>
+              <Static id="St11" taborder="2" text="필터 선택" left="0" top="0" width="130" height="23" cssclass="sta_WF_title02"/>
+              <Button id="btnUserFilter" taborder="3" text="사용자지정" left="0" top="316" width="90" height="23" cssclass="btn_WF_basic03" onclick="Div02_btnUserFilter_onclick"/>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Div id="Div03" taborder="5" left="596" top="50" right="-576" bottom="10">
+          <Layouts>
+            <Layout>
+              <Button id="BtnMFilter2" taborder="0" text="Ok" top="0" width="80" height="23" cssclass="btn_WF_basic01" onclick="Div03_BtnMFilter2_onclick" left="200"/>
+              <Static id="St11" taborder="8" text="찾을 조건" left="0" top="0" width="130" height="23" cssclass="sta_WF_title02"/>
+              <Combo id="cboCond1" taborder="1" left="0" top="28" width="120" height="25" innerdataset="@DS_FILTER_COND" codecolumn="CD" datacolumn="NM"/>
+              <Combo id="cboVal1" taborder="2" left="124" top="28" width="120" height="25" innerdataset="@DS_FILTER" codecolumn="STR" datacolumn="STR" type="search" onitemchanged="Div03_cboVal1_onitemchanged"/>
+              <Edit id="edVal1" taborder="3" left="124" top="28" width="97" height="25" border="1px solid #777777 , 0px none , 1px solid #777777 , 1px solid #777777"/>
+              <Radio id="rdoType" taborder="4" left="65" top="65" width="150" height="25" innerdataset="@DS_FILTER_ADD" codecolumn="CD" datacolumn="NM" direction="vertical" columncount="2" value="1" text="그리고" index="0"/>
+              <Combo id="cboCond2" taborder="5" left="0" top="98" width="120" height="25" innerdataset="@DS_FILTER_COND" codecolumn="CD" datacolumn="NM"/>
+              <Combo id="cboVal2" taborder="6" left="124" top="98" width="120" height="25" innerdataset="@DS_FILTER" codecolumn="STR" datacolumn="STR" type="search" onitemchanged="Div03_cboVal2_onitemchanged"/>
+              <Edit id="edVal2" taborder="7" left="124" top="98" width="97" height="25" border="1px solid #777777 , 0px none , 1px solid #777777 , 1px solid #777777"/>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Button id="BtnCancel" taborder="6" top="0" width="30" height="40" right="29" visible="false" cssclass="btn_pop_close" onclick="BtnCancel_onclick"/>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="DS_COL">
+        <ColumnInfo>
+          <Column id="ID" type="STRING" size="256"/>
+          <Column id="NM" type="STRING" size="256"/>
+          <Column id="ISNEW" type="STRING" size="1"/>
+          <Column id="FSTR" type="STRING" size="1024000"/>
+          <Column id="FSTT" type="STRING" size="1024000"/>
+          <Column id="FSEA" type="STRING" size="256"/>
+          <Column id="SORT" type="STRING" size="1"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="DS_SORT">
+        <ColumnInfo>
+          <Column id="COL" type="STRING" size="256"/>
+          <Column id="TYPE" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="DS_SORT_TYPE">
+        <ColumnInfo>
+          <Column id="ID" type="STRING" size="256"/>
+          <Column id="TYPE" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="ID">+</Col>
+            <Col id="TYPE">오름차순</Col>
+          </Row>
+          <Row>
+            <Col id="ID">-</Col>
+            <Col id="TYPE">내림차순</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="DS_FILTER" oncolumnchanged="DS_FILTER_oncolumnchanged">
+        <ColumnInfo>
+          <Column id="COL" type="STRING" size="256"/>
+          <Column id="CHK" type="STRING" size="1"/>
+          <Column id="STR" type="STRING" size="256"/>
+          <Column id="TYPE" type="STRING" size="1"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="CHK">1</Col>
+            <Col id="STR">모두 선택</Col>
+            <Col id="TYPE">D</Col>
+          </Row>
+          <Row>
+            <Col id="CHK">1</Col>
+            <Col id="STR">값 없음</Col>
+            <Col id="TYPE">D</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="DS_FILTER_COND">
+        <ColumnInfo>
+          <Column id="CD" type="STRING" size="10"/>
+          <Column id="NM" type="STRING" size="50"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="CD">00</Col>
+          </Row>
+          <Row>
+            <Col id="NM">=</Col>
+            <Col id="CD">01</Col>
+          </Row>
+          <Row>
+            <Col id="NM">!=</Col>
+            <Col id="CD">02</Col>
+          </Row>
+          <Row>
+            <Col id="NM">&gt;</Col>
+            <Col id="CD">03</Col>
+          </Row>
+          <Row>
+            <Col id="NM">&gt;=</Col>
+            <Col id="CD">04</Col>
+          </Row>
+          <Row>
+            <Col id="NM">&lt;</Col>
+            <Col id="CD">05</Col>
+          </Row>
+          <Row>
+            <Col id="NM">&lt;=</Col>
+            <Col id="CD">06</Col>
+          </Row>
+          <Row>
+            <Col id="NM">시작문자</Col>
+            <Col id="CD">11</Col>
+          </Row>
+          <Row>
+            <Col id="NM">제외할 시작문자</Col>
+            <Col id="CD">12</Col>
+          </Row>
+          <Row>
+            <Col id="NM">끝 문자</Col>
+            <Col id="CD">13</Col>
+          </Row>
+          <Row>
+            <Col id="NM">제외할 끝 문자</Col>
+            <Col id="CD">14</Col>
+          </Row>
+          <Row>
+            <Col id="NM">포함</Col>
+            <Col id="CD">15</Col>
+          </Row>
+          <Row>
+            <Col id="NM">포함하지 않음</Col>
+            <Col id="CD">16</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="DS_FILTER_ADD">
+        <ColumnInfo>
+          <Column id="CD" type="STRING" size="10"/>
+          <Column id="NM" type="STRING" size="50"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="CD">1</Col>
+            <Col id="NM">그리고</Col>
+          </Row>
+          <Row>
+            <Col id="NM">또는</Col>
+            <Col id="CD">2</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.1"><![CDATA[this.v_Keystring = "";
+this.v_Filterstring = "";
+this.gridNm;
+
+this.grd_head_pop_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
+{
+	this.Div02.move(this.Div01.left, this.Div01.top);
+	this.Div03.move(this.Div01.left, this.Div01.top);
+};
+
+this.copyDataset = function(arrData, ds)
+{
+	ds.clearData();
+	
+	for (var i = 0; i < arrData.length; i++)
+	{
+		var nRow = ds.addRow();
+		var data = arrData[i];
+		
+		for (var k in data)
+		{
+			ds.setColumn(nRow, k, data[k]);
+		}
+	}
+};
+
+this.convertDataset = function(ds)
+{
+	var arrData = [];
+	
+	for (var i = 0; i < ds.rowcount; i++)
+	{
+		var data = {};
+		
+		for (var j = 0; j < ds.colcount; j++)
+		{
+			data[ds.getColID(j)] = ds.getColumn(i, j);
+		}
+		
+		arrData.push(data);
+	}
+	
+	return arrData;
+};
+
+this.setGridNm = function(strGridNm)
+{
+	this.gridNm = strGridNm;
+};
+
+this.fn_div_go = function(DivNm)
+{
+	if ( DivNm == "Div01" )
+	{
+		this.Div01.set_visible(true);
+		this.Div02.set_visible(false);
+		this.Div03.set_visible(false);
+		
+		this.BtnCancel.set_visible(false);
+	}
+	else if ( DivNm == "Div02" )
+	{
+		this.DS_FILTER.filter("");
+		this.Div01.set_visible(false);
+		this.Div02.set_visible(true);
+		this.Div03.set_visible(false);
+		
+		this.BtnCancel.set_visible(false);
+	}
+	else if ( DivNm == "Div03" )
+	{
+		this.Div01.set_visible(false);
+		this.Div02.set_visible(false);
+		this.Div03.set_visible(true);
+		
+		this.BtnCancel.set_visible(true);
+	}
+};
+
+this.BtnCancel_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.fn_div_go("Div02");
+};
+
+this.btn_close_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.parent.closePopup();
+};
+
+this.Div01_BtnAdd_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.DS_SORT.addRow();
+};
+
+this.Div01_BtnDel_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	if (this.DS_SORT.rowposition >= 0 && this.DS_SORT.rowposition < this.DS_SORT.rowcount)
+	{
+		this.DS_SORT.deleteRow(this.DS_SORT.rowposition);
+	}
+};
+
+this.Div01_BtnMSort_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.v_Keystring = "S:";
+
+	for (var i = 0; i < this.DS_COL.rowcount; i++)
+	{
+		this.DS_COL.setColumn(i, "SORT", "");
+	}
+	var trow = 0;
+	for (var i = 0; i < this.DS_SORT.rowcount; i++)
+	{
+		if (nexacro._isNull(this.DS_SORT.getColumn(i, "COL")) == false && nexacro._isNull(this.DS_SORT.getColumn(i,"TYPE")) == false)
+		{
+			this.v_Keystring = this.v_Keystring + this.DS_SORT.getColumn(i, "TYPE");
+			this.v_Keystring = this.v_Keystring + this.DS_SORT.getColumn(i, "COL");
+			trow = this.DS_COL.findRow("ID", this.DS_SORT.getColumn(i, "COL"));
+			this.DS_COL.setColumn(trow, "SORT", this.DS_SORT.getColumn(i, "TYPE"));
+		}
+	}
+	this.DS_SORT.applyChange();
+
+	var gridObj = this.parent.parent.components[this.gridNm];
+	gridObj._colList = this.convertDataset(this.DS_COL);
+	gridObj._sortInfo = this.convertDataset(this.DS_SORT);
+	
+	if (this.v_Keystring != "S:")
+	{
+		this.parent.closePopup("SM||" + this.gridNm + "||" + this.v_Keystring);
+	}
+	else
+	{
+		this.parent.closePopup("");
+	}
+};
+
+this.Div02_BtnMFilter_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.Div03.form.cboCond1.set_value("");
+	this.Div03.form.cboVal1.set_value("");
+	this.Div03.form.edVal1.set_value("");
+	this.Div03.form.rdoType.set_value("");
+	this.Div03.form.cboCond2.set_value("");
+	this.Div03.form.cboVal2.set_value("");
+	this.Div03.form.edVal2.set_value("");
+		
+	this.v_Filterstring = "";
+	var tNullVal = 0;
+	if (this.DS_FILTER.getColumn(0, "CHK") != "1")
+	{
+		for (var i = 1; i < this.DS_FILTER.rowcount; i++)
+		{
+			if (this.DS_FILTER.getColumn(i, "CHK") == "1")
+			{
+				if (this.DS_FILTER.getColumn(i, "STR") == "값 없음")
+				{
+					tNullVal = 1;
+				}
+				if (this.v_Filterstring != "")	this.v_Filterstring = this.v_Filterstring + "$$";
+				this.v_Filterstring = this.v_Filterstring + this.DS_FILTER.getColumn(i, "STR");
+			}
+		}
+
+		if (tNullVal == 1)
+		{
+			if (this.v_Filterstring != "") this.v_Filterstring = this.v_Filterstring + "$$";
+			this.v_Filterstring = this.v_Filterstring + "^^";
+		}
+	}
+	if (this.v_Filterstring == "" || this.v_Filterstring.length < 1)
+	{
+		this.v_Filterstring = "@@";
+	}
+	
+	var gridObj = this.parent.parent.components[this.gridNm];
+	gridObj._colList = this.convertDataset(this.DS_COL);
+
+	this.parent.closePopup("FM||1||" + this.gridNm + "||" + this.v_Filterstring);
+};
+
+this.Div02_btnUserFilter_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.fn_div_go("Div03");
+};
+
+this.Div03_BtnMFilter2_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	for (var i = 0; i < this.DS_FILTER.rowcount;i++)
+	{
+		this.DS_FILTER.setColumn(i, "CHK", "1");
+	}
+
+	if (nexacro._isNull(this.Div03.form.cboCond1.value) || this.Div03.form.cboCond1.value == "00" || nexacro._isNull(this.Div03.form.edVal1.text))
+	{
+		this.Div03.form.cboCond1.set_value("");
+		this.Div03.form.edVal1.set_value("");
+	}
+
+	if (nexacro._isNull(this.Div03.form.cboCond2.value) || this.Div03.form.cboCond2.value == "00" || nexacro._isNull(this.Div03.form.edVal2.text))
+	{
+		this.Div03.form.cboCond2.set_value("");
+		this.Div03.form.edVal2.set_value("");
+	}
+
+	this.v_Filterstring = "";
+	
+	this.v_Filterstring = this.v_Filterstring + this.Div03.form.cboCond1.value + "$#";
+	this.v_Filterstring = this.v_Filterstring + this.Div03.form.edVal1.text + "$#";
+	this.v_Filterstring = this.v_Filterstring + this.Div03.form.rdoType.value + "$#";
+	this.v_Filterstring = this.v_Filterstring + this.Div03.form.cboCond2.value + "$#";
+	this.v_Filterstring = this.v_Filterstring + this.Div03.form.edVal2.text;
+
+	var gridObj = this.parent.parent.components[this.gridNm];
+	gridObj._colList = this.convertDataset(this.DS_COL);
+	
+	this.parent.closePopup("FM||2||" + this.gridNm + "||" + this.v_Filterstring);
+};
+
+this.DS_FILTER_oncolumnchanged = function(obj:nexacro.NormalDataset,e:nexacro.DSColChangeEventInfo)
+{
+	if (e.row == 0)
+	{
+		if (e.columnid == "CHK")
+		{
+			obj.set_enableevent(false);
+			for (var i = 1; i < obj.rowcount;i++)
+			{
+				obj.setColumn(i, "CHK", e.newvalue);
+			}
+			obj.set_enableevent(true);
+		}
+	}
+	else
+	{
+		if (e.columnid == "CHK")
+		{
+			if (e.newvalue != "1")
+			{
+				obj.setColumn(0, "CHK", "0");
+			}
+		}
+	}
+};
+
+this.Div03_cboVal1_onitemchanged = function(obj:nexacro.Combo,e:nexacro.ItemChangeEventInfo)
+{
+	this.Div03.form.edVal1.set_value(e.posttext);
+};
+
+this.Div03_cboVal2_onitemchanged = function(obj:nexacro.Combo,e:nexacro.ItemChangeEventInfo)
+{
+	this.Div03.form.edVal2.set_value(e.posttext);
+};
+]]></Script>
+  </Form>
+</FDL>

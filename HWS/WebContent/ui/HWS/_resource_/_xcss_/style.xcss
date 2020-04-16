@@ -1,0 +1,445 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<XCSS version="1.0"><![CDATA[/* 셀컬러 선택 */
+.Grid .body .row .cell.Pink,
+.Grid .body .row .cell.Pink[userstatus=selected]
+{
+	background : #febbbc;
+}
+
+.Grid .body .row .cell.Melon,
+.Grid .body .row .cell.Melon[userstatus=selected]
+{
+	background : #d0eac5;
+}
+
+.Grid .body .row .cell.Orange,
+.Grid .body .row .cell.Orange[userstatus=selected]
+{
+	background : #feab81;
+}
+
+.Grid .body .row .cell.White,
+.Grid .body .row .cell.White[userstatus=selected]
+{
+	background : #e7e7e7;
+}
+
+.Grid .body .row .cell.Mint,
+.Grid .body .row .cell.Mint[userstatus=selected]
+{
+	background : #8bcfb6;
+}
+
+.Grid .body .row .cell.Periwinkle,
+.Grid .body .row .cell.Periwinkle[userstatus=selected] 
+{
+	background : #C7CEEA;
+}
+
+/* btn_toggle_up */
+.Button.btn_toggle_up,
+.Button.btn_toggle_up[status=focused]
+{
+	background : #ffffff;
+	-nexa-icon : URL('imagerc::btn_WF_toggleUp.png');	
+	-nexa-border : 0px none,0px none,1px solid #cbcbcb,0px none;
+}
+.Button.btn_toggle_up[status=mouseover],
+.Button.btn_toggle_up[userstatus=pushed],
+.Button.btn_toggle_up[userstatus=selected]
+{
+	background : #ffffff;
+	-nexa-icon : URL('imagerc::btn_WF_toggleUpP.png');
+	-nexa-border : 0px none,0px none,1px solid #cbcbcb,0px none;
+}
+.Button.btn_toggle_up[status=disabled]
+{
+	background : #ffffff;
+	-nexa-icon : URL('imagerc::btn_WF_toggleUpD.png');
+	-nexa-border : 0px none,0px none,1px solid #cbcbcb,0px none;
+}
+
+/* btn_toggle_down */
+.Button.btn_toggle_down,
+.Button.btn_toggle_down[status=focused]
+{
+	background : transparent;
+	-nexa-icon : URL('imagerc::btn_WF_toggleDown.png');
+	-nexa-border : 1px solid #cbcbcb,0px none,0px none,0px none;
+}
+.Button.btn_toggle_down[status=mouseover],
+.Button.btn_toggle_down[userstatus=pushed],
+.Button.btn_toggle_down[userstatus=selected]
+{
+	background : transparent;
+	-nexa-icon : URL('imagerc::btn_WF_toggleDownP.png');
+	-nexa-border : 1px solid #cbcbcb,0px none,0px none,0px none;
+}
+.Button.btn_toggle_down[status=disabled]
+{
+	background : transparent;
+	-nexa-icon : URL('imagerc::btn_WF_toggleDownD.png');
+	-nexa-border : 1px solid #cbcbcb,0px none,0px none,0px none;
+}
+
+/* Blick */
+.Grid .body .row .cell[userstatus=blinked]
+{
+	background : #fd958a;
+	color : #ffffff;
+}
+
+.Static.sta_WF_mainImg
+{
+	background : url('imagerc::img_WF_mainImg.png') no-repeat center;
+}
+.Menu.menu_WF_work
+{
+	background : #505050;
+	color : #ffffff;
+	-nexa-border : 0px none;
+	
+}
+.Menu.menu_WF_work .menuitem
+{
+	color : #ffffff;
+}
+.Static.sta_WF_label01
+{
+	font : bold 13px "Malgun Gothic","Arial";
+	color : #4b4b4b;	
+}
+.Static.sta_WF_label02
+{
+	background : url('imagerc::img_WF_label02.png') no-repeat left center;
+	font : bold 13px "Malgun Gothic","Arial";
+	color : #f37321;	
+	-nexa-padding : 0px 0px 0px 9px;
+}
+/* Basic Button */
+.Button.btn_WF_basic01, .Button.btn_WF_basic01[status=focused]
+{
+	-nexa-text-align		: center;
+	-nexa-vertical-align		: middle;
+	background			: #ffffff;
+	-nexa-border			: 1px solid #b3b5b4;
+	border-radius			: 0px;
+	color				: #333333;
+	cursor				: pointer;
+	font				: 10pt "Malgun Gothic","Arial";
+}
+.Button.btn_WF_basic01[status=mouseover], .Button.btn_WF_basic01[userstatus=pushed],
+.Button.btn_WF_basic01[userstatus=selected]
+{
+	background			: #f5f5f5;
+	-nexa-border			: 1px solid #b3b5b4;
+	border-radius			: 0px;
+}
+.Button.btn_WF_basic01[status=disabled]
+{
+	background			: #dddddd;
+	-nexa-border			: 1px solid #aaaaaa;
+	border-radius			: 0px;
+	color				: #aaaaaa;
+}
+.Button.btn_WF_basic02, .Button.btn_WF_basic02[status=focused]
+{
+	-nexa-text-align		: center;
+	-nexa-vertical-align		: middle;
+	background			: #f28138;
+	-nexa-border			: 1px solid #e8752b;
+	border-radius			: 0px;
+	color				: #ffffff;
+	cursor				: pointer;
+	font				: bold 10pt "Malgun Gothic","Arial";
+}
+.Button.btn_WF_basic02[status=mouseover], .Button.btn_WF_basic02[userstatus=pushed],
+.Button.btn_WF_basic02[userstatus=selected]
+{
+	background			: #e97d37;
+	-nexa-border			: 1px solid #e1682c;
+	border-radius			: 0px;
+}
+.Button.btn_WF_basic02[status=disabled]
+{
+	background			: #dddddd;
+	-nexa-border			: 1px solid #aaaaaa;
+	border-radius			: 0px;
+	color				: #aaaaaa;
+}
+.Button.btn_WF_basic03, .Button.btn_WF_basic03[status=focused]
+{
+	-nexa-text-align		: center;
+	-nexa-vertical-align		: middle;
+	background			: #53c0c1;
+	-nexa-border			: 1px solid #1e9495;
+	border-radius			: 0px;
+	color				: #ffffff;
+	cursor				: pointer;
+	font				: 10pt "Malgun Gothic","Arial";
+}
+.Button.btn_WF_basic03[status=mouseover], .Button.btn_WF_basic03[userstatus=pushed],
+.Button.btn_WF_basic03[userstatus=selected]
+{
+	background			: #49acad;
+	-nexa-border			: 1px solid #1e9495;
+	border-radius			: 0px;
+}
+.Button.btn_WF_basic03[status=disabled]
+{
+	background			: #dddddd;
+	-nexa-border			: 1px solid #aaaaaa;
+	border-radius			: 0px;
+	color				: #aaaaaa;
+}
+.Button.btn_WF_basic04, .Button.btn_WF_basic04[status=focused]
+{
+	-nexa-text-align		: center;
+	-nexa-vertical-align		: middle;
+	background			: #555555;
+	-nexa-border			: 1px solid #454545;
+	border-radius			: 0px;
+	color				: #ffffff;
+	cursor				: pointer;
+	font				: 10pt "Malgun Gothic","Arial";
+}
+.Button.btn_WF_basic04[status=mouseover], .Button.btn_WF_basic04[userstatus=pushed],
+.Button.btn_WF_basic04[userstatus=selected]
+{
+	background			: #4b4b4b;
+	-nexa-border			: 1px solid #454545;
+	border-radius			: 0px;
+}
+.Button.btn_WF_basic04[status=disabled]
+{
+	background			: #dddddd;
+	-nexa-border			: 1px solid #aaaaaa;
+	border-radius			: 0px;
+	color				: #aaaaaa;
+}
+.Button.btn_WF_basic05, .Button.btn_WF_basic05[status=focused]
+{
+	-nexa-text-align		: center;
+	-nexa-vertical-align		: middle;
+	background			: #e8e8e8;
+	-nexa-border			: 1px solid #bdbdbd;
+	border-radius			: 0px;
+	color				: #555555;
+	cursor				: pointer;
+	font				: bold 10pt "Malgun Gothic","Arial";
+}
+.Button.btn_WF_basic05[status=mouseover], .Button.btn_WF_basic05[userstatus=pushed],
+.Button.btn_WF_basic05[userstatus=selected]
+{
+	background			: #d8d8d8;
+	-nexa-border			: 1px solid #afafaf;
+	border-radius			: 0px;
+}
+.Button.btn_WF_basic05[status=disabled]
+{
+	background			: #dddddd;
+	-nexa-border			: 1px solid #aaaaaa;
+	border-radius			: 0px;
+	color				: #aaaaaa;
+}
+
+/*조회박스*/
+.Static.sta_WF_box01
+{
+	background			: #f7f7f7;
+	-nexa-border			: 1px solid #9c9c9c;
+}
+.Static.sta_WF_box02
+{
+	background		: #e7edf1;
+	-nexa-border		: 1px solid #b9c5dc;
+	border-radius		: 0px;
+	font 			: normal 700 14px/normal "Malgun Gothic","Arial";
+}
+.Static.sta_WF_box02C
+{
+	-nexa-text-align		: center;
+	-nexa-vertical-align		: middle;
+	background			: #f6f6f6;
+	-nexa-border			: 1px solid #cbcbcb;
+	font				: 11pt "Malgun Gothic","Arial";
+}
+.Static.sta_WF_box03
+{
+	-nexa-border : 1px solid #d9d9d9;
+	border-radius : 0px;
+	-nexa-padding : 10px;
+	background : #fdfaf9;
+	color : #111111;
+}
+.Static.sta_WF_box04
+{
+	-nexa-text-align		: center;
+	-nexa-vertical-align		: middle;
+	background			: #fff7f1;
+	-nexa-border			: 1px solid #fbb584;
+	color				: #1b1b1b;
+	font				: bold 15px "Malgun Gothic","Arial";	
+	-nexa-padding			: 10px;
+}
+.Static.sta_WF_box05
+{
+	background : #f6f6f6;
+	-nexa-border : 1px solid #c7c7c7;
+}
+.Static.sta_WF_box06
+{
+	background : #ffffff;	
+	-nexa-border : 1px solid #c7c7c7;
+}
+.Static.sta_WF_box07
+{
+	-nexa-border : 0px none,1px solid #c7c7c7,1px dashed #f89c6d;
+	background : #ffefe4;
+	
+}
+.Tab.tab_WF_multi
+{
+}
+.Tab.tab_WF_multi .tabbuttonitem
+{
+	background : #ffffff;
+	color : #555555;
+	-nexa-border : 1px solid #dfdfdf;
+}
+.Tab.tab_WF_multi .tabbuttonitem[status=mouseover]
+{
+	font : bold 9pt "Gulim";	
+}
+.Tab.tab_WF_multi .tabpage
+{
+}
+.Tab.tab_WF_multi .tabbuttonitem .tabbuttonitemtext
+{
+	
+}
+
+/*서브타이틀*/
+.Static.sta_WF_title01, .Static.sta_WF_title01[status=mouseover]
+{
+	background			: url('theme://images/sta_WF_Subtitle02.png') no-repeat left center;
+	color				: #333333;
+	font				: bold 14px "Malgun Gothic","Arial";
+	-nexa-padding			: 0px 0px 0px 5px;		
+}
+.Static.sta_WF_title02,.Static.sta_WF_title02[status=mouseover]
+{
+	font : normal bold 14px/normal "Malgun Gothic","Arial";
+	color : #ef5512;
+}.Menu.menu_WF_work .menuitem[status=mouseover]
+{
+	background : #ffffff;
+	color : #f37321;
+	-nexa-border : 0px none;	
+}
+.Menu.menu_WF_work .menuitem[status=focused]
+{
+}
+.Menu.menu_WF_work .menuitem[userstatus=selected]
+{
+}
+.Menu.menu_WF_work .menupopupmenu
+{
+}
+.Menu.menu_WF_work .menupopupmenu .popupmenuitem
+{
+	-nexa-padding : 3px 20px 3px 8px;
+}
+.Menu.menu_WF_work .menupopupmenu .popupmenuitem .popupmenuitemtext
+{
+	font : 14px "Malgun Gothic","Arial";
+}
+.Menu.menu_WF_work .menupopupmenu .popupmenuitem .popupmenuitemtext[status=mouseover]
+{
+	font : bold 14px "Malgun Gothic","Arial";
+}
+.Menu.menu_WF_work .menupopupmenu .popupmenuitem[status=mouseover]
+{
+	-nexa-border : 0px none;	
+}
+.Button.btn_WF_moveRight,.Button.btn_WF_moveRight[status=focused]
+{
+	-nexa-icon : URL('imagerc::btn_WF_moveRight.png');
+	-nexa-border : 0px none;
+	background : transparent;
+}
+.Button.btn_WF_moveRight[status=mouseover],
+.Button.btn_WF_moveRight[userstatus=pushed],
+.Button.btn_WF_moveRight[userstatus=selected]
+{
+	-nexa-icon : URL('imagerc::btn_WF_moveRightP.png');
+	-nexa-border : 0px none;
+	background : transparent;
+}
+.Button.btn_WF_moveRight[status=disabled]
+{
+	-nexa-icon : URL('imagerc::btn_WF_moveRightD.png');
+	-nexa-border : 0px none;
+	background : transparent;
+}
+.Button.btn_WF_moveLeft,.Button.btn_WF_moveLeft[status=focused]
+{
+	-nexa-icon : URL('imagerc::btn_WF_moveLeft.png');
+	-nexa-border : 0px none;
+	background : transparent;
+}
+.Button.btn_WF_moveLeft[status=mouseover],
+.Button.btn_WF_moveLeft[userstatus=pushed],
+.Button.btn_WF_moveLeft[userstatus=selected]
+{
+	-nexa-icon : URL('imagerc::btn_WF_moveLeftP.png');
+	-nexa-border : 0px none;
+	background : transparent;
+}
+.Button.btn_WF_moveLeft[status=disabled]
+{
+	-nexa-icon : URL('imagerc::btn_WF_moveLeftD.png');
+	-nexa-border : 0px none;
+	background : transparent;
+}
+.Button.btn_WF_moveUp,.Button.btn_WF_moveUp[status=focused]
+{
+	-nexa-icon : URL('imagerc::btn_WF_moveUp.png');
+	-nexa-border : 0px none;
+	background : transparent;
+}
+.Button.btn_WF_moveUp[status=mouseover],
+.Button.btn_WF_moveUp[userstatus=pushed],
+.Button.btn_WF_moveUp[userstatus=selected]
+{
+	-nexa-icon : URL('imagerc::btn_WF_moveUpP.png');
+	-nexa-border : 0px none;
+	background : transparent;
+}
+.Button.btn_WF_moveUp[status=disabled]
+{
+	-nexa-icon : URL('imagerc::btn_WF_moveUpD.png');
+	-nexa-border : 0px none;
+	background : transparent;
+}
+.Button.btn_WF_moveDown,.Button.btn_WF_moveDown[status=focused]
+{
+	-nexa-icon : URL('imagerc::btn_WF_moveDown.png');
+	-nexa-border : 0px none;
+	background : transparent;
+}
+.Button.btn_WF_moveDown[status=mouseover],
+.Button.btn_WF_moveDown[userstatus=pushed],
+.Button.btn_WF_moveDown[userstatus=selected]
+{
+	-nexa-icon : URL('imagerc::btn_WF_moveDownP.png');
+	-nexa-border : 0px none;
+	background : transparent;
+}
+.Button.btn_WF_moveDown[status=disabled]
+{
+	-nexa-icon : URL('imagerc::btn_WF_moveDownD.png');
+	-nexa-border : 0px none;
+	background : transparent;
+}
+]]></XCSS>

@@ -1,0 +1,177 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.0">
+  <Form id="poc01" width="1010" height="818" titletext="공종관리" onload="WF_MainForm_onload">
+    <Layouts>
+      <Layout height="818" mobileorientation="landscape" width="1010" screenid="">
+        <Div id="Div01" taborder="0" left="10" top="6" height="49" cssclass="div_WF_Search" right="10" formscrollbartype="none" formscrolltype="none">
+          <Layouts>
+            <Layout>
+              <Button id="Button00" taborder="0" cssclass="btn_WF_SubAction, btn_WF_SearchIcon" right="7" width="58" top="8" bottom="11" text="조회" textPadding="0px 0px 0px 5px" font="14px/18px &quot;맑은 고딕&quot;" onclick="Div01_Button00_onclick"/>
+              <Static id="Static03" taborder="1" text="사업본부" left="12" top="8" height="28" fittocontents="width" width="65" font="14px/18px &quot;맑은 고딕&quot;"/>
+              <Combo id="Combo01" taborder="2" text="건축" left="Static03:11" top="8" width="188" height="28" innerdataset="innerdataset" datacolumn="datacolumn" codecolumn="codecolumn" index="0" value="0" scrollbarsize="5" type="dropdown" onitemchanged="Combo00_onitemchanged" font="14px/18px &quot;맑은 고딕&quot;">
+                <Dataset id="innerdataset">
+                  <ColumnInfo>
+                    <Column id="codecolumn" size="256"/>
+                    <Column id="datacolumn" size="256"/>
+                  </ColumnInfo>
+                  <Rows>
+                    <Row>
+                      <Col id="datacolumn">건축</Col>
+                      <Col id="codecolumn">0</Col>
+                    </Row>
+                  </Rows>
+                </Dataset>
+              </Combo>
+            </Layout>
+            <Layout name="min">
+              <Button id="Button00" top="31" width="58" right="7" bottom="8"/>
+              <Combo id="Combo01" left="18" top="31" height="28" right="82"/>
+              <Static id="Static03" left="12" top="4" width="65" height="28"/>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Grid id="Grid00" taborder="1" left="10" top="101" bottom="11" scrollbartype="default default" right="36.63%" binddataset="ds00" autofittype="col">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="50"/>
+                <Column size="89"/>
+                <Column size="155"/>
+                <Column size="20"/>
+                <Column size="65"/>
+                <Column size="48"/>
+              </Columns>
+              <Rows>
+                <Row size="28" band="head"/>
+                <Row size="26"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="순번"/>
+                <Cell col="1" text="&lt;fc v='red'&gt;* &lt;/fc&gt;공종명" displaytype="decoratetext"/>
+                <Cell col="2" text="설명"/>
+                <Cell col="3" displaytype="checkboxcontrol" border="0px none,0px none,1px solid #d3d3d3" textAlign="right"/>
+                <Cell col="4" text="사용여부" textAlign="left"/>
+                <Cell col="5" text="순서"/>
+              </Band>
+              <Band id="body">
+                <Cell text="expr:currow + 1" background="#F2F2F2" textAlign="center"/>
+                <Cell col="1"/>
+                <Cell col="2"/>
+                <Cell col="3" colspan="2"/>
+                <Cell col="5"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Grid id="Grid01" taborder="2" left="65.35%" top="101" right="10" autofittype="col" scrollbartype="default default" bottom="11">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="50"/>
+                <Column size="181"/>
+                <Column size="20"/>
+                <Column size="69"/>
+              </Columns>
+              <Rows>
+                <Row size="28" band="head"/>
+                <Row size="26"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="순번"/>
+                <Cell col="1" text="직종"/>
+                <Cell col="2" displaytype="checkboxcontrol" border="0px none,0px none,1px solid #d3d3d3" textAlign="right"/>
+                <Cell col="3" text="사용여부" textAlign="left"/>
+              </Band>
+              <Band id="body">
+                <Cell/>
+                <Cell col="1"/>
+                <Cell col="2" colspan="2"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Static id="Static65" taborder="3" left="0" top="0" width="86" height="6" background="#ff1414" opacity="0.5" text="6" font="normal 11px/normal &quot;Arial&quot;" color="#ffffff" visible="false"/>
+        <Static id="Static65_00" taborder="4" left="0" top="0" width="10" height="56" background="#ff1414" opacity="0.5" text="10" font="normal 11px/normal &quot;Arial&quot;" color="#ffffff" visible="false"/>
+        <Static id="Static65_00_00" taborder="5" left="1000" top="0" width="10" height="56" background="#ff1414" opacity="0.5" text="10" font="normal 11px/normal &quot;Arial&quot;" color="#ffffff" visible="false"/>
+        <Static id="Static65_00_00_00" taborder="6" left="1000" top="607" width="10" height="56" background="#ff1414" opacity="0.5" text="10" font="normal 11px/normal &quot;Arial&quot;" color="#ffffff" visible="false"/>
+        <Static id="Static65_00_01" taborder="7" left="0" top="607" width="10" height="56" background="#ff1414" opacity="0.5" text="10" font="normal 11px/normal &quot;Arial&quot;" color="#ffffff" visible="false"/>
+        <Static id="Static65_00_00_00_00" taborder="8" left="1000" top="763" width="10" height="56" background="#ff1414" opacity="0.5" text="10" font="normal 11px/normal &quot;Arial&quot;" color="#ffffff" visible="false"/>
+        <Static id="Static65_00_01_00" taborder="9" left="0" top="763" width="10" height="56" background="#ff1414" opacity="0.5" text="10" font="normal 11px/normal &quot;Arial&quot;" color="#ffffff" visible="false"/>
+        <Static id="Static65_01_00" taborder="10" left="0" top="812" width="86" height="6" background="#ff1414" opacity="0.5" text="6" font="normal 11px/normal &quot;Arial&quot;" color="#ffffff" visible="false"/>
+        <Static id="Static65_01_00_00" taborder="11" left="922" top="812" width="86" height="6" background="#ff1414" opacity="0.5" text="6" font="normal 11px/normal &quot;Arial&quot;" color="#ffffff" visible="false"/>
+        <Button id="Button04_00_00_00" taborder="16" text="저장" top="69" height="25" cssclass="btn_WF_Associated" width="39" right="36.44%"/>
+        <Button id="Button04" taborder="12" text="공종추가" top="69" height="25" cssclass="btn_WF_Associated" right="Button04_00_00_00:155" width="69"/>
+        <Static id="Static65_01" taborder="13" left="0" top="95" width="86" height="6" background="#ff1414" opacity="0.5" text="6" font="normal 11px/normal &quot;Arial&quot;" color="#ffffff" visible="false"/>
+        <Button id="Button04_00" taborder="14" text="하위공종추가" top="69" height="25" cssclass="btn_WF_Associated" right="Button04_00_00_00:58" width="88"/>
+        <Button id="Button04_00_00" taborder="15" text="삭제" top="69" height="25" cssclass="btn_WF_Associated" right="Button04_00_00_00:10" width="39"/>
+        <Button id="Button04_01" taborder="17" text="직종추가" top="68" width="68" height="25" cssclass="btn_WF_Associated" right="105"/>
+        <Button id="Button04_00_00_01" taborder="18" text="삭제" top="68" width="38" height="25" cssclass="btn_WF_Associated" right="59"/>
+        <Button id="Button04_00_00_00_00" taborder="19" text="저장" top="68" width="38" height="25" cssclass="btn_WF_Associated" right="13"/>
+      </Layout>
+      <Layout name="min" width="410" height="818" mobileorientation="landscape" screenid="">
+        <Grid id="Grid01" top="670" right="9" height="400" left="10"/>
+        <Button id="Button04_01" top="635" width="68" height="25" right="102"/>
+        <Button id="Button04_00_00_01" top="635" width="38" height="25" right="56"/>
+        <Button id="Button04_00_00_00_00" top="635" width="38" height="25" right="10"/>
+        <Button id="Button04_00_00_00" top="89" width="39" height="25" right="2.20%"/>
+        <Button id="Button04" top="89" width="69" height="25" right="Button04_00_00_00:156"/>
+        <Button id="Button04_00" top="89" width="88" height="25" right="Button04_00_00_00:59"/>
+        <Button id="Button04_00_00" top="89" width="39" height="25" right="59"/>
+        <Grid id="Grid00" left="10" top="121" height="486" right="9"/>
+        <Static id="Static65_01" left="0" top="115" width="86" height="6"/>
+        <Div id="Div01" left="10" top="6" height="69" right="10"/>
+        <Static id="Static65_00_00" left="400" top="0" width="10" height="56"/>
+        <Static id="Static65_00_00_00_00" left="400" top="763" width="10" height="56"/>
+        <Static id="Static65_01_00_00" left="324" top="812" width="86" height="6"/>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="ds00">
+        <ColumnInfo>
+          <Column id="Column0" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row/>
+          <Row/>
+          <Row/>
+          <Row/>
+          <Row/>
+          <Row/>
+          <Row/>
+          <Row/>
+          <Row/>
+          <Row/>
+          <Row/>
+          <Row/>
+          <Row/>
+          <Row/>
+          <Row/>
+          <Row/>
+          <Row/>
+          <Row/>
+          <Row/>
+          <Row/>
+          <Row/>
+          <Row/>
+          <Row/>
+          <Row/>
+          <Row/>
+          <Row/>
+          <Row/>
+          <Row/>
+          <Row/>
+          <Row/>
+          <Row/>
+          <Row/>
+          <Row/>
+        </Rows>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.1"><![CDATA[
+this.Div01_Button00_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	alert("조회버튼 클릭하였습니다.");
+};
+]]></Script>
+  </Form>
+</FDL>

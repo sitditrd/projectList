@@ -1,0 +1,16 @@
+﻿{
+	"name": "StandardGrid",
+	"version": "0",
+	"description": "",
+	"license": "",
+	"objInfo": [	
+    "StandardGrid/metainfo/StandardGrid.info"
+	],
+	"scripts": [
+    "StandardGrid/StandardGrid.js"
+	],
+	"designscripts": [
+    "StandardGrid/Design/DesignStandardGrid.js"
+	]
+}
+//# sourceURL=StandardGrid.json

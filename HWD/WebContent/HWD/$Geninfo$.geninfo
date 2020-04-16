@@ -1,0 +1,150 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <GenInfo version="1.1">
+    <Rule>
+      <ENV rule_version="1.05"/>
+      <ADL rule_version="1.14"/>
+      <FDL rule_version="1.04"/>
+      <XCSS rule_version="1.04"/>
+      <Script rule_version="1.02"/>
+    </Rule>
+    <Info project="C:\Users\투비소프트\eclipse-workspace\HWD\WebContent\HWD\" generated="C:\Users\투비소프트\eclipse-workspace\HWD\WebContent\generate\">
+      <File url="environment.xml" checksum="20200210175723" errormsg=""/>
+      <File url="typedefinition.xml" checksum="20200210175727" errormsg=""/>
+      <File url="appvariables.xml" checksum="20200210175723" errormsg=""/>
+      <File url="_resource_\_theme_\demo19\theme.xcss" checksum="20200210175730" errormsg=""/>
+      <File url="_resource_\_xcss_\component.xcss" checksum="20200210175730" errormsg=""/>
+      <File url="_resource_\_xcss_\grid.xcss" checksum="20200210175730" errormsg=""/>
+      <File url="nexacro17lib\framework\Framework.json" checksum="20200210175726" errormsg=""/>
+      <File url="nexacro17lib\resources\Resource.json" checksum="20200210175727" errormsg=""/>
+      <File url="nexacro17lib\component\CompBase.json" checksum="20200210175725" errormsg=""/>
+      <File url="nexacro17lib\component\ComComp.json" checksum="20200210175725" errormsg=""/>
+      <File url="nexacro17lib\component\Grid.json" checksum="20200210175726" errormsg=""/>
+      <File url="nexacro17lib\component\DeviceAPI.json" checksum="20200210175726" errormsg=""/>
+      <File url="_extlib_\extlibLoad.json" checksum="20200210175728" errormsg=""/>
+      <File url="App_Desktop.xadl" checksum="20200210175723" errormsg=""/>
+      <File url="lib\rMateChartH5.xjs" checksum="20200210175723" errormsg=""/>
+      <File url="lib\rMateChartH5License.xjs" checksum="20200210175723" errormsg=""/>
+      <File url="frame\Main.xfdl" checksum="20200210175723" errormsg=""/>
+      <File url="frame\MegaMenu.xfdl" checksum="20200210175723" errormsg=""/>
+      <File url="frame\Tab.xfdl" checksum="20200210175723" errormsg=""/>
+      <File url="frame\TabButton.xfdl" checksum="20200210175723" errormsg=""/>
+      <File url="frame\Top.xfdl" checksum="20200210175723" errormsg=""/>
+      <File url="frame\Work.xfdl" checksum="20200210175723" errormsg=""/>
+      <File url="work\comm\commPopup.xfdl" checksum="20200210175727" errormsg=""/>
+      <File url="work\grid\CellTypes.xfdl" checksum="20200210175727" errormsg=""/>
+      <File url="work\grid\Dynamic.xfdl" checksum="20200210175727" errormsg=""/>
+      <File url="work\grid\DynamicColRow.xfdl" checksum="20200210175727" errormsg=""/>
+      <File url="work\grid\DynamicTree.xfdl" checksum="20200210175727" errormsg=""/>
+      <File url="work\grid\ExcelFormula.xfdl" checksum="20200210175727" errormsg=""/>
+      <File url="work\grid\Functions.xfdl" checksum="20200210175727" errormsg=""/>
+      <File url="work\grid\GridFilterDiv.xfdl" checksum="20200210175727" errormsg=""/>
+      <File url="work\grid\GridFilterDiv_.xfdl" checksum="20200210175727" errormsg=""/>
+      <File url="work\grid\GridFilterPop.xfdl" checksum="20200210175727" errormsg=""/>
+      <File url="work\grid\GridSortPop.xfdl" checksum="20200210175727" errormsg=""/>
+      <File url="work\grid\GridType.xfdl" checksum="20200210175727" errormsg=""/>
+      <File url="work\grid\Personalization.xfdl" checksum="20200210175727" errormsg=""/>
+      <File url="work\comp\Components.xfdl" checksum="20200210175727" errormsg=""/>
+      <File url="work\comp\ComponentsArrange.xfdl" checksum="20200210175727" errormsg=""/>
+      <File url="work\comp\Components_step.xfdl" checksum="20200210175727" errormsg=""/>
+      <File url="work\comp\DynamicComponent.xfdl" checksum="20200210175727" errormsg=""/>
+      <File url="work\comp\FileUpDown.xfdl" checksum="20200210175727" errormsg=""/>
+      <File url="work\comp\FitToContents.xfdl" checksum="20200210175727" errormsg=""/>
+      <File url="work\comp\TwoWayDataBinding.xfdl" checksum="20200210175727" errormsg=""/>
+      <File url="work\ext\nexacroChart.xfdl" checksum="20200210175727" errormsg=""/>
+      <File url="work\ext\rChart.xfdl" checksum="20200210175727" errormsg=""/>
+      <File url="work\ext\rChartPop.xfdl" checksum="20200210175727" errormsg=""/>
+      <File url="work\ext\rMateChart2.xfdl" checksum="20200210175727" errormsg=""/>
+      <File url="work\example\OpenAPI_Sample.xfdl" checksum="20200210175727" errormsg=""/>
+      <File url="work\poc\hanwha01.xfdl" checksum="20200210175727" errormsg=""/>
+      <File url="work\poc\hanwha02.xfdl" checksum="20200210175727" errormsg=""/>
+      <File url="work\poc\hanwha03.xfdl" checksum="20200210175727" errormsg=""/>
+      <File url="chart\basicChart\BarAndLine_MultiAxis.xfdl" checksum="20200210175723" errormsg=""/>
+      <File url="chart\basicChart\bar_arc_postaction.xfdl" checksum="20200210175723" errormsg=""/>
+      <File url="chart\basicChart\bar_color.xfdl" checksum="20200210175723" errormsg=""/>
+      <File url="chart\basicChart\bar_color_copy.xfdl" checksum="20200210175723" errormsg=""/>
+      <File url="chart\basicChart\bar_dualcolor_postaction.xfdl" checksum="20200210175723" errormsg=""/>
+      <File url="chart\basicChart\bar_group.xfdl" checksum="20200210175723" errormsg=""/>
+      <File url="chart\basicChart\bar_round.xfdl" checksum="20200210175723" errormsg=""/>
+      <File url="chart\basicChart\bar_scriptcolor_categoryinterval.xfdl" checksum="20200210175723" errormsg=""/>
+      <File url="chart\basicChart\bar_shadow.xfdl" checksum="20200210175723" errormsg=""/>
+      <File url="chart\basicChart\bar_stacktotal.xfdl" checksum="20200210175723" errormsg=""/>
+      <File url="chart\basicChart\bar_stacktotal_bargradation.xfdl" checksum="20200210175723" errormsg=""/>
+      <File url="chart\basicChart\canvas_form.xfdl" checksum="20200210175723" errormsg=""/>
+      <File url="chart\basicChart\ColumnAndLine.xfdl" checksum="20200210175723" errormsg=""/>
+      <File url="chart\basicChart\CurveLine.xfdl" checksum="20200210175723" errormsg=""/>
+      <File url="chart\basicChart\Data_Divergent.xfdl" checksum="20200210175723" errormsg=""/>
+      <File url="chart\basicChart\Data_Negative.xfdl" checksum="20200210175723" errormsg=""/>
+      <File url="chart\basicChart\Data_TimeAxis.xfdl" checksum="20200210175723" errormsg=""/>
+      <File url="chart\basicChart\Data_TimeAxis_copy.xfdl" checksum="20200210175723" errormsg=""/>
+      <File url="chart\basicChart\divform.xfdl" checksum="20200210175723" errormsg=""/>
+      <File url="chart\basicChart\FeatureExample.xfdl" checksum="20200210175723" errormsg=""/>
+      <File url="chart\basicChart\GroupedBar.xfdl" checksum="20200210175723" errormsg=""/>
+      <File url="chart\basicChart\GroupedBar_NegativeValue.xfdl" checksum="20200210175723" errormsg=""/>
+      <File url="chart\basicChart\GroupedColumn.xfdl" checksum="20200210175723" errormsg=""/>
+      <File url="chart\basicChart\GroupedColumn_copy.xfdl" checksum="20200210175723" errormsg=""/>
+      <File url="chart\basicChart\GroupedColumn_NegativeValue.xfdl" checksum="20200210175723" errormsg=""/>
+      <File url="chart\basicChart\GroupedStackBar.xfdl" checksum="20200210175723" errormsg=""/>
+      <File url="chart\basicChart\GroupedStackColumn.xfdl" checksum="20200210175723" errormsg=""/>
+      <File url="chart\basicChart\LayeredBar.xfdl" checksum="20200210175723" errormsg=""/>
+      <File url="chart\basicChart\LayeredColumn.xfdl" checksum="20200210175723" errormsg=""/>
+      <File url="chart\basicChart\LineAndPoint.xfdl" checksum="20200210175723" errormsg=""/>
+      <File url="chart\basicChart\line_event.xfdl" checksum="20200210175723" errormsg=""/>
+      <File url="chart\basicChart\line_shadow.xfdl" checksum="20200210175723" errormsg=""/>
+      <File url="chart\basicChart\PercentStackedArea.xfdl" checksum="20200210175723" errormsg=""/>
+      <File url="chart\basicChart\PercentStackedBar.xfdl" checksum="20200210175723" errormsg=""/>
+      <File url="chart\basicChart\PercentStackedColumn.xfdl" checksum="20200210175723" errormsg=""/>
+      <File url="chart\basicChart\PointMarkers.xfdl" checksum="20200210175723" errormsg=""/>
+      <File url="chart\basicChart\PointMarkers_withLine.xfdl" checksum="20200210175723" errormsg=""/>
+      <File url="chart\basicChart\SegmentLine.xfdl" checksum="20200210175723" errormsg=""/>
+      <File url="chart\basicChart\SimpleArea.xfdl" checksum="20200210175723" errormsg=""/>
+      <File url="chart\basicChart\StackedArea.xfdl" checksum="20200210175723" errormsg=""/>
+      <File url="chart\basicChart\StackedBar.xfdl" checksum="20200210175723" errormsg=""/>
+      <File url="chart\basicChart\StackedColumn.xfdl" checksum="20200210175723" errormsg=""/>
+      <File url="chart\basicChart\StepLine.xfdl" checksum="20200210175723" errormsg=""/>
+      <File url="chart\bubbleChart\Scatter.xfdl" checksum="20200210175723" errormsg=""/>
+      <File url="chart\bubbleChart\SimpleBubble.xfdl" checksum="20200210175723" errormsg=""/>
+      <File url="chart\floatChart\floatbase.xfdl" checksum="20200210175723" errormsg=""/>
+      <File url="chart\floatChart\floatbase_copy.xfdl" checksum="20200210175723" errormsg=""/>
+      <File url="chart\floatChart\floatbase_plan.xfdl" checksum="20200210175723" errormsg=""/>
+      <File url="chart\floatChart\floatbase_plan_hour.xfdl" checksum="20200210175723" errormsg=""/>
+      <File url="chart\floatChart\floatbase_waterful.xfdl" checksum="20200210175723" errormsg=""/>
+      <File url="chart\gaugeChart\GaugeChart_Basic_circular.xfdl" checksum="20200210175723" errormsg=""/>
+      <File url="chart\gaugeChart\GaugeChart_Basic_horizontal.xfdl" checksum="20200210175723" errormsg=""/>
+      <File url="chart\gaugeChart\GaugeChart_Basic_vertical.xfdl" checksum="20200210175723" errormsg=""/>
+      <File url="chart\gaugeChart\GaugeChart_gender survey.xfdl" checksum="20200210175723" errormsg=""/>
+      <File url="chart\gaugeChart\GaugeChart_postaction.xfdl" checksum="20200210175723" errormsg=""/>
+      <File url="chart\gaugeChart\GaugeChart_Sales.xfdl" checksum="20200210175723" errormsg=""/>
+      <File url="chart\gaugeChart\GaugeChart_speed.xfdl" checksum="20200210175723" errormsg=""/>
+      <File url="chart\gaugeChart\GaugeChart_UserColor_Basic.xfdl" checksum="20200210175723" errormsg=""/>
+      <File url="chart\gaugeChart\GaugeChart_UserColor_Black.xfdl" checksum="20200210175723" errormsg=""/>
+      <File url="chart\gaugeChart\GaugeChart_UserColor_centerpingradation.xfdl" checksum="20200210175723" errormsg=""/>
+      <File url="chart\gaugeChart\GaugeChart_UserColor_Meter.xfdl" checksum="20200210175723" errormsg=""/>
+      <File url="chart\gaugeChart\GaugeChart_weather.xfdl" checksum="20200210175723" errormsg=""/>
+      <File url="chart\pieChart\AngularDoughnut.xfdl" checksum="20200210175723" errormsg=""/>
+      <File url="chart\pieChart\AngularPie.xfdl" checksum="20200210175723" errormsg=""/>
+      <File url="chart\pieChart\doughnut_autogradient_center.xfdl" checksum="20200210175723" errormsg=""/>
+      <File url="chart\pieChart\doughnut_autogradient_dark.xfdl" checksum="20200210175723" errormsg=""/>
+      <File url="chart\pieChart\FeatureExample.xfdl" checksum="20200210175723" errormsg=""/>
+      <File url="chart\pieChart\SelectDoughnut.xfdl" checksum="20200210175723" errormsg=""/>
+      <File url="chart\pieChart\SelectPie.xfdl" checksum="20200210175723" errormsg=""/>
+      <File url="chart\pieChart\SimpleDoughnut.xfdl" checksum="20200210175723" errormsg=""/>
+      <File url="chart\pieChart\SimplePie.xfdl" checksum="20200210175723" errormsg=""/>
+      <File url="chart\pieChart\SimplePie_hilight.xfdl" checksum="20200210175723" errormsg=""/>
+      <File url="chart\pieChart\SimplePie_script.xfdl" checksum="20200210175723" errormsg=""/>
+      <File url="chart\pyramidChart\SimpleFunnel.xfdl" checksum="20200210175723" errormsg=""/>
+      <File url="chart\pyramidChart\SimplePyramid.xfdl" checksum="20200210175723" errormsg=""/>
+      <File url="chart\pyramidChart\SimplePyramidScript.xfdl" checksum="20200210175723" errormsg=""/>
+      <File url="chart\radarChart\BasicChartandRadarChart.xfdl" checksum="20200210175723" errormsg=""/>
+      <File url="chart\radarChart\Dynamic_RadarChart.xfdl" checksum="20200210175723" errormsg=""/>
+      <File url="chart\radarChart\Multi Polygon Chart.xfdl" checksum="20200210175723" errormsg=""/>
+      <File url="chart\radarChart\RadarChart_2010_2013.xfdl" checksum="20200210175723" errormsg=""/>
+      <File url="chart\radarChart\RadarChart_Basic.xfdl" checksum="20200210175723" errormsg=""/>
+      <File url="chart\radarChart\RadarChart_Budget_vs_Spending.xfdl" checksum="20200210175723" errormsg=""/>
+      <File url="chart\radarChart\RadarChart_MultiSeries.xfdl" checksum="20200210175723" errormsg=""/>
+      <File url="chart\radarChart\RadarChart_Weather.xfdl" checksum="20200210175723" errormsg=""/>
+      <File url="chart\roseChart\RoseBase.xfdl" checksum="20200210175723" errormsg=""/>
+      <File url="chart\roseChart\RoseStack.xfdl" checksum="20200210175723" errormsg=""/>
+    </Info>
+  </GenInfo>
+</root>

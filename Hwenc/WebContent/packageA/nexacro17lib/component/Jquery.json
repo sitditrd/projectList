@@ -1,0 +1,10 @@
+﻿{
+	"name": "Jquery",
+	"version": "1.0.0.0",
+	"description": "Slide Animation",
+	"license": "",
+	"scripts": [
+        "Jquery/jquery-1.10.2.js"
+	]
+}
+//@ sourceURL=EcoLibrary.json

@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.0">
+  <Form id="work01" width="824" height="608" titletext="New Form">
+    <Layouts>
+      <Layout height="608" mobileorientation="landscape" width="824"/>
+    </Layouts>
+  </Form>
+</FDL>

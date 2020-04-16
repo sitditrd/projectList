@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<message_layout>
+	<message type="GRP1">
+		<field id="ID" type="string" size="255" key="true"/>
+		<field id="ROW" type="string" size="255" check="true"/>
+		<field id="COL" type="string" size="255" check="true"/>
+		<field id="FLAG" type="string" size="255" check="true"/>
+	</message>
+	<message type="GRP2">
+		<field id="ID" type="string" size="255" key="true"/>
+		<field id="BCD" type="string" size="255"/>
+		<field id="GCC" type="string" size="255" />
+		<field id="ALO" type="string" size="255" />
+		<field id="SAJ" type="int" size="255"/>
+	</message>
+	<message type="GRP3">
+		<field id="ID" type="string" size="255" key="true"/>
+		<field id="WIRD" type="string" size="255"   />
+		<field id="FRD" type="string" size="255" />
+		<field id="CON" type="int" size="255"     />
+	</message>
+</message_layout>

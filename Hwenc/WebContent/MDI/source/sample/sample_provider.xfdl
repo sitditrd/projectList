@@ -1,0 +1,174 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.0">
+  <Form id="PROVIDER" width="862" height="623" titletext="Employees" onload="EMPLOYEES_onload">
+    <Layouts>
+      <Layout height="623" mobileorientation="landscape" width="862">
+        <Div id="Div00" taborder="0" text="Div00" left="37" top="89" width="726" height="45" leftbase="" topbase="" bottombase="" rightbase="" widthbase="" heightbase="" cssclass="div_WF_searchArea">
+          <Layouts>
+            <Layout>
+              <Static id="Static00" taborder="0" text="UserID:" left="260" top="10" width="95" height="21" leftbase="" topbase="" bottombase="" rightbase="" widthbase="" heightbase="" cssclass="sta_WF_label"/>
+              <Static id="Static01" taborder="1" text="PW:" left="400" top="10" width="62" height="21" leftbase="" topbase="" bottombase="" rightbase="" widthbase="" heightbase="" cssclass="sta_WF_label"/>
+              <Static id="Static02" taborder="2" text="IP:" left="30" top="10" width="21" height="21" leftbase="" topbase="" bottombase="" rightbase="" widthbase="" heightbase="" cssclass="sta_WF_label"/>
+              <Static id="Static03" taborder="3" text="Port:" left="144" top="10" width="37" height="21" leftbase="" topbase="" bottombase="" rightbase="" widthbase="" heightbase="" cssclass="sta_WF_label"/>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Static id="Static05" taborder="1" text="Topic Type (Message Type)" left="66" top="166" width="167" height="41" cssclass="sta_WF_table_required" leftbase="" topbase="" bottombase="" rightbase="" widthbase="" heightbase="" textAlign="right"/>
+        <Static id="Static06" taborder="2" text="" left="232" top="166" width="282" height="41" leftbase="" topbase="" bottombase="" rightbase="" widthbase="" heightbase="" cssclass="sta_WF_tablebg"/>
+        <Static id="Static22" taborder="3" text="" left="232" top="256" width="483" height="164" cssclass="sta_WF_tablebg"/>
+        <Static id="Static07" taborder="4" text="Topic ID (Message Group)" left="66" top="203" width="167" height="41" cssclass="sta_WF_table_required" textAlign="right"/>
+        <Static id="Static14" taborder="5" text="메시지" left="113" top="256" width="120" height="164" cssclass="sta_WF_tablelabel" leftbase="" topbase="" bottombase="" rightbase="" widthbase="" heightbase="" textAlign="right"/>
+        <TextArea id="TextArea00" taborder="6" left="258" top="286" width="417" height="100" scrollbarbarminsize="20" scrollbarbaroutsize="20" scrollbarsize="10" scrollbartrackbarsize="25" value="메시지전송"/>
+        <Static id="Static00" taborder="7" text="" left="514" top="163" width="201" height="81" leftbase="" topbase="" bottombase="" rightbase="" widthbase="" heightbase="" cssclass="sta_WF_tablebg"/>
+        <Radio id="Radio00" taborder="8" left="580" top="95" width="136" height="35" direction="vertical" innerdataset="RadioDs" datacolumn="Action" index="1" codecolumn="Code" text="RELI" value="2" onitemchanged="Radio00_onitemchanged"/>
+        <Button id="Button05" taborder="9" text="메세지 전송" left="485" top="430" width="124" height="29" onclick="Button05_onclick"/>
+        <Edit id="Edit02" taborder="10" left="220" top="103" width="60" height="17" value="10082" text="10082"/>
+        <Edit id="Edit03" taborder="11" left="350" top="103" width="72" height="16" value="tobesoft" text="tobesoft"/>
+        <Edit id="Edit04" taborder="12" left="466" top="102" width="60" height="17" value="xpush" text="xpush"/>
+        <Edit id="Edit05" taborder="13" left="260" top="179" width="162" height="18" text="NOTI" value="NOTI"/>
+        <Edit id="Edit01" taborder="14" left="100" top="102" width="72" height="17" value="14.63.224.112" text="14.63.224.112"/>
+        <Button id="Button01" taborder="15" text="사용자 등록" left="336" top="430" width="124" height="29" onclick="Button01_onclick"/>
+        <Static id="Static01" taborder="16" text="User ID" left="113" top="241" width="120" height="41" cssclass="sta_WF_table_required" textAlign="right"/>
+        <Edit id="UserID" taborder="17" left="261" top="250" width="162" height="20" text="GROUP"/>
+        <Div id="divSearch" taborder="18" text="" left="0" top="0" height="39" right="2" cssclass="div_WF_Search">
+          <Layouts>
+            <Layout>
+              <Button id="btnSearch" taborder="0" top="8" width="40" height="21" right="7" onclick="fnSearch" cssclass="btn_WF_SubAction, btn_WF_SearchIcon"/>
+              <Static id="Static01" taborder="1" text="X-PUSH Provider" left="10" top="10" width="264" height="16" cssclass="sta_WF_SeaFieldLabel"/>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Combo id="cbo00" taborder="19" text="GROUP" left="260" top="214" width="162" height="20" innerdataset="innerdataset" codecolumn="codecolumn" datacolumn="datacolumn" index="0" value="GROUP">
+          <Dataset id="innerdataset">
+            <ColumnInfo>
+              <Column id="codecolumn" size="256"/>
+              <Column id="datacolumn" size="256"/>
+            </ColumnInfo>
+            <Rows>
+              <Row>
+                <Col id="codecolumn">GROUP</Col>
+                <Col id="datacolumn">GROUP</Col>
+              </Row>
+              <Row>
+                <Col id="codecolumn">T01</Col>
+                <Col id="datacolumn">T01</Col>
+              </Row>
+              <Row>
+                <Col id="codecolumn">T02</Col>
+                <Col id="datacolumn">T02</Col>
+              </Row>
+              <Row>
+                <Col id="codecolumn">T03</Col>
+                <Col id="datacolumn">T03</Col>
+              </Row>
+              <Row>
+                <Col id="codecolumn">T04</Col>
+                <Col id="datacolumn">T04</Col>
+              </Row>
+              <Row>
+                <Col id="codecolumn">ADMIN</Col>
+                <Col id="datacolumn">ADMIN</Col>
+              </Row>
+            </Rows>
+          </Dataset>
+        </Combo>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="RadioDs">
+        <ColumnInfo>
+          <Column id="Code" type="STRING" size="256"/>
+          <Column id="Action" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="Action">PUSH</Col>
+            <Col id="Code">1</Col>
+          </Row>
+          <Row>
+            <Col id="Action">RELI</Col>
+            <Col id="Code">2</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="dsSend">
+        <ColumnInfo>
+          <Column id="host" type="STRING" size="256"/>
+          <Column id="port" type="STRING" size="256"/>
+          <Column id="id" type="STRING" size="256"/>
+          <Column id="pw" type="STRING" size="256"/>
+          <Column id="topicType" type="STRING" size="256"/>
+          <Column id="topicID" type="STRING" size="256"/>
+          <Column id="messages" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="host">localhost</Col>
+            <Col id="port">10082</Col>
+            <Col id="topicType">NOTI</Col>
+            <Col id="id">tobesoft</Col>
+            <Col id="pw">xpush</Col>
+            <Col id="topicID">GROUP</Col>
+            <Col id="messages">메세지전송</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="dsResponse"/>
+    </Objects>
+    <Script type="xscript5.1"><![CDATA[var topicType = this.Edit05.value;
+var topicID = this.Edit06.value;
+this.Arg = nexacro.getApplication().mainframe.VFrameSet.LoginFrame.form;
+this.Button05_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+ 	var ip = this.Edit01.value;
+ 	var port = this.Edit02.value;
+  	var id = this.Edit03.value;
+  	var pw = this.Edit04.value;
+ 	var messages = this.TextArea00.value;
+	topicType = this.Edit05.value;
+	topicID = this.Edit06.value;
+	
+	this.dsSend.setColumn(0, "host", ip);
+	this.dsSend.setColumn(0,"port",port);
+	this.dsSend.setColumn(0,"id",id);
+	this.dsSend.setColumn(0,"pw",pw);
+	this.dsSend.setColumn(0,"topicType",topicType);
+	this.dsSend.setColumn(0,"topicID",topicID);
+	this.dsSend.setColumn(0,"messages", messages);
+	
+	var url = "http://14.63.224.112:80/xpush-provider-api/xpush/v1/api/send";
+	//var arg="ip="+ip + " port="+port +" id="+id + " pw="+pw + " messages="+messages + " topicType="+topicType +" topicID="+topicID;
+	var arg = "";
+	
+	var callback = "fn_callback";
+	var inDataSet = "inDs01=dsSend:U";
+	var outDataSet = "";
+	var serviceId = "providerService";
+	this.transaction(serviceId , url , inDataSet , outDataSet , arg , callback);
+};
+
+
+
+this.fn_callback = function(serviceID, errorCode, errorMessage)
+{	
+	if(errorCode == 0){
+		this.alert("메세지 전송에 성공하였습니다");
+	}else{
+		this.alert("메세지 전송에 실패하였습니다. 원인 :: " + errorMessage);
+	}
+}
+
+// this.Button00_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+// {
+// 	topicType = this.Edit05.value;
+// 	topicID = this.Edit06.value;
+// };
+
+this.Button01_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	trace("topicType ::" + topicType + "topicID ::" + topicID);
+	this.Arg.XPush00.registerTopicWithUserID(topicType, topicID, this.UserID.value);
+};
+]]></Script>
+  </Form>
+</FDL>

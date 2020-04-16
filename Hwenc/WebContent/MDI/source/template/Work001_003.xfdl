@@ -1,0 +1,265 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.0">
+  <Form id="Work001_003" width="1240" height="818" titletext="업체평가" scrolltype="none" onload="WF_MainForm_onload">
+    <Layouts>
+      <Layout height="818" mobileorientation="landscape" width="1240">
+        <Div id="Div01" taborder="1" left="0" top="27" height="39" cssclass="div_WF_Search" right="0" formscrollbartype="none" formscrolltype="none">
+          <Layouts>
+            <Layout>
+              <Button id="Button00" taborder="0" cssclass="btn_WF_SubAction, btn_WF_SearchIcon" right="12" width="40" top="8" bottom="8"/>
+              <Static id="Static03" taborder="1" text="평가시작일" left="12" top="12" height="13" cssclass="sta_WF_SeaFieldLabel" fittocontents="width" width="65"/>
+              <Static id="Static20" taborder="2" text="~" left="183" top="8" width="12" height="21"/>
+              <Calendar id="Calendar01" taborder="3" left="84" top="8" width="98" height="21" usetrailingday="true" dateformat="yyyy-MM-dd" type="normal"/>
+              <Calendar id="Calendar00" taborder="4" left="197" top="8" width="98" height="21" usetrailingday="true" dateformat="yyyy-MM-dd" type="normal"/>
+              <Static id="Static125" taborder="5" text="평가명" left="307" top="12" width="43" height="13" cssclass="sta_WF_SeaFieldLabel" fittocontents="width"/>
+              <Edit id="Edit00" taborder="6" left="Static125:11" top="8" width="217" height="21" text="Width - 217"/>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Div id="Div02" taborder="2" left="0" top="0" width="600" height="19" url="template::WF_LocationForm.xfdl" formscrollbartype="none none" formscrolltype="none"/>
+        <Div id="Div00" taborder="0" top="0" height="21" right="0" text="" width="500" formscrollbartype="none none" formscrolltype="none">
+          <Layouts>
+            <Layout>
+              <Button id="Button04" taborder="1" text="찾기" top="0" height="21" right="0" width="42"/>
+              <Button id="Button00" taborder="1" text="평가제출" top="0" height="21" right="45" width="64" cssclass="btn_WF_SubAction"/>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Grid id="Grid00" taborder="3" left="0" top="93" autofittype="col" scrolltype="vertical" scrollbartype="none default" width="530" height="262">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="100"/>
+                <Column size="65"/>
+                <Column size="60"/>
+                <Column size="48"/>
+                <Column size="48"/>
+                <Column size="48"/>
+              </Columns>
+              <Rows>
+                <Row size="28" band="head"/>
+                <Row size="26"/>
+                <Row size="26" band="summ"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="평가명"/>
+                <Cell col="1" text="평가상태"/>
+                <Cell col="2" text="평가구분"/>
+                <Cell col="3" text="평가시작일"/>
+                <Cell col="4" text="평가종료일"/>
+                <Cell col="5" text="평가"/>
+              </Band>
+              <Band id="body">
+                <Cell/>
+                <Cell col="1"/>
+                <Cell col="2"/>
+                <Cell col="3"/>
+                <Cell col="4"/>
+                <Cell col="5"/>
+              </Band>
+              <Band id="summary">
+                <Cell text="총 00 건" displaytype="text"/>
+                <Cell col="1"/>
+                <Cell col="2"/>
+                <Cell col="3"/>
+                <Cell col="4"/>
+                <Cell col="5"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Static id="Static31" taborder="4" text="평가" left="0" top="75" width="93" height="13" cssclass="sta_WF_Mtitle" fittocontents="width"/>
+        <Static id="Static00" taborder="5" text="평가대상 업체" left="540" top="75" width="93" height="13" cssclass="sta_WF_Mtitle" fittocontents="width"/>
+        <Grid id="Grid01" taborder="6" left="540" top="93" height="262" right="0" autofittype="none" scrollbartype="default default" scrolltype="both">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="120"/>
+                <Column size="140"/>
+                <Column size="60"/>
+                <Column size="60"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="54"/>
+                <Column size="54"/>
+                <Column size="54"/>
+                <Column size="48"/>
+                <Column size="48"/>
+                <Column size="48"/>
+                <Column size="48"/>
+                <Column size="80"/>
+                <Column size="48"/>
+              </Columns>
+              <Rows>
+                <Row size="28" band="head"/>
+                <Row size="26"/>
+                <Row size="26" band="summ"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="사업자번호"/>
+                <Cell col="1" text="업체명" autosizecol="default"/>
+                <Cell col="2" text="구분"/>
+                <Cell col="3" text="상태"/>
+                <Cell col="4" text="신용평가사"/>
+                <Cell col="5" text="신용평가일"/>
+                <Cell col="6" text="부문"/>
+                <Cell col="7" text="공종"/>
+                <Cell col="8" text="등록유형"/>
+                <Cell col="9" text="제출"/>
+                <Cell col="10" text="업체번호"/>
+                <Cell col="11" text="추천사"/>
+                <Cell col="12" text="부서코드"/>
+                <Cell col="13" text="평가부서"/>
+                <Cell col="14" text="SEQ"/>
+              </Band>
+              <Band id="body">
+                <Cell/>
+                <Cell col="1"/>
+                <Cell col="2"/>
+                <Cell col="3"/>
+                <Cell col="4"/>
+                <Cell col="5"/>
+                <Cell col="6"/>
+                <Cell col="7"/>
+                <Cell col="8"/>
+                <Cell col="9"/>
+                <Cell col="10"/>
+                <Cell col="11"/>
+                <Cell col="12"/>
+                <Cell col="13"/>
+                <Cell col="14"/>
+              </Band>
+              <Band id="summary">
+                <Cell displaytype="text" text="총 00 건"/>
+                <Cell col="1"/>
+                <Cell col="2"/>
+                <Cell col="3"/>
+                <Cell col="4"/>
+                <Cell col="5"/>
+                <Cell col="6"/>
+                <Cell col="7"/>
+                <Cell col="8"/>
+                <Cell col="9"/>
+                <Cell col="10"/>
+                <Cell col="11"/>
+                <Cell col="12"/>
+                <Cell col="13"/>
+                <Cell col="14"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Grid id="Grid02" taborder="7" left="0" top="365" right="0" bottom="0">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="50"/>
+                <Column size="50"/>
+                <Column size="120"/>
+                <Column size="120"/>
+                <Column size="120"/>
+                <Column size="48"/>
+                <Column size="48"/>
+                <Column size="30"/>
+                <Column size="120"/>
+                <Column size="30"/>
+                <Column size="120"/>
+                <Column size="30"/>
+                <Column size="120"/>
+                <Column size="30"/>
+                <Column size="120"/>
+                <Column size="30"/>
+                <Column size="120"/>
+                <Column size="30"/>
+                <Column size="120"/>
+                <Column size="48"/>
+                <Column size="90"/>
+                <Column size="90"/>
+                <Column size="90"/>
+                <Column size="160"/>
+              </Columns>
+              <Rows>
+                <Row size="56" band="head"/>
+                <Row size="26"/>
+                <Row size="20" band="summ"/>
+                <Row size="20" band="summ"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="NO"/>
+                <Cell col="1" text="평가&#13;&#10;주관"/>
+                <Cell col="2" text="평가항목&#13;&#10;(대분류)"/>
+                <Cell col="3" text="평가항목&#13;&#10;(중분류)"/>
+                <Cell col="4" text="평가항목&#13;&#10;(세분류)"/>
+                <Cell col="5" text="배점"/>
+                <Cell col="6" text="점수"/>
+                <Cell col="7" displaytype="checkboxcontrol"/>
+                <Cell col="8" text="-5(10)점&#13;&#10;감사(10)점&#13;&#10;A(100%)"/>
+                <Cell col="9" displaytype="checkboxcontrol" edittype="checkbox"/>
+                <Cell col="10" text="-4(8)점&#13;&#10;감사(0)점&#13;&#10;B(80%)"/>
+                <Cell col="11" displaytype="checkboxcontrol" edittype="checkbox"/>
+                <Cell col="12" text="-3(6)점&#13;&#10;감사(8 or 3)점&#13;&#10;C(60%)"/>
+                <Cell col="13" displaytype="checkboxcontrol" edittype="checkbox"/>
+                <Cell col="14" text="-2(4)점&#13;&#10;감사(7 or 2)점&#13;&#10;D(40%)"/>
+                <Cell col="15" displaytype="checkboxcontrol" edittype="checkbox"/>
+                <Cell col="16" text="-1(2)점&#13;&#10;감사(6 or 1)점&#13;&#10;E(20%)"/>
+                <Cell col="17" displaytype="checkboxcontrol" edittype="checkbox"/>
+                <Cell col="18" text="-0점&#13;&#10;감사(5)점&#13;&#10;F(20%미만)"/>
+                <Cell col="19" text="제출"/>
+                <Cell col="20" text="부서코드"/>
+                <Cell col="21" text="평가부서"/>
+                <Cell col="22" text="수정자"/>
+                <Cell col="23" text="최종수정일시"/>
+              </Band>
+              <Band id="body">
+                <Cell/>
+                <Cell col="1"/>
+                <Cell col="2"/>
+                <Cell col="3"/>
+                <Cell col="4"/>
+                <Cell col="5"/>
+                <Cell col="6"/>
+                <Cell col="7"/>
+                <Cell col="8"/>
+                <Cell col="9"/>
+                <Cell col="10"/>
+                <Cell col="11"/>
+                <Cell col="12"/>
+                <Cell col="13"/>
+                <Cell col="14"/>
+                <Cell col="15"/>
+                <Cell col="16"/>
+                <Cell col="17"/>
+                <Cell col="18"/>
+                <Cell col="19"/>
+                <Cell col="20"/>
+                <Cell col="21"/>
+                <Cell col="22"/>
+                <Cell col="23"/>
+              </Band>
+              <Band id="summary">
+                <Cell rowspan="2" colspan="5" text="총 00 건" displaytype="text"/>
+                <Cell col="5" rowspan="2">
+                  <Cell text="공사" displaytype="text"/>
+                  <Cell row="1" displaytype="text" text="감사"/>
+                </Cell>
+                <Cell col="6" rowspan="2">
+                  <Cell displaytype="text" text="00.00"/>
+                  <Cell row="1" displaytype="text" text="00.00"/>
+                </Cell>
+                <Cell col="7" rowspan="2" colspan="17" displaytype="text" text="73"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Static id="Static01" taborder="8" text=" 그리드 데이터 셀 폰트색상 Class명&#13;&#10;&#13;&#10;녹색 : grd_WF_BodyCellGreen&#13;&#10;파랑 : grd_WF_BodyCellBlue&#13;&#10;빨강 : grd_WF_BodyCellRed&#13;&#10;&#13;&#10;" left="427" top="522" width="346" height="170" background="yellow" boxShadow="10px 10px 10px gray" padding="10px 10px 10px 30px" font="14px/21px &quot;Malgun Gothic&quot;"/>
+      </Layout>
+    </Layouts>
+    <Objects/>
+    <Script type="xscript5.1"><![CDATA[
+this.Div04_TextArea01_onchanged = function(obj:nexacro.TextArea,e:nexacro.ChangeEventInfo)
+{
+	
+};
+]]></Script>
+  </Form>
+</FDL>

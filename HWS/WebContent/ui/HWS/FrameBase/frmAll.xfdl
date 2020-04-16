@@ -1,0 +1,278 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="frmAll" width="1024" height="768" titletext="메인 프레임" onload="frmAll_onload">
+    <Layouts>
+      <Layout height="768" mobileorientation="landscape" width="1024">
+        <Div id="divWork" taborder="1" left="0" top="60" right="0" text="" bottom="0" url="PoC::PoC_Main.xfdl"/>
+        <Static id="Static00" taborder="0" left="0" top="0" height="60" right="0" cssclass="sta_TF_bg"/>
+        <Static id="Static01" taborder="2" left="10" top="5" width="170" height="50" onclick="Static01_onclick" cssclass="sta_TF_logo"/>
+        <Menu id="Menu00" taborder="3" left="206" top="0" height="60" captioncolumn="MENU_NM" idcolumn="MENU_CD" levelcolumn="MENU_LVL" popupitemheight="40" right="414" onmenuclick="comm_MenuClick" userdatacolumn="MENU_CD" autohotkey="false" fittocontents="width" background="#ffffff" innerdataset="dsMenu"/>
+        <Menu id="Menu01" taborder="4" left="610" top="0" height="60" captioncolumn="MENU_NM" idcolumn="MENU_CD" levelcolumn="MENU_LVL" popupitemheight="40" onmenuclick="comm_MenuClick" userdatacolumn="MENU_CD" autohotkey="false" fittocontents="width" innerdataset="dsSubMenu" width="90" background="#ffffff" visible="false"/>
+      </Layout>
+    </Layouts>
+    <Script type="xscript5.1"><![CDATA[this.comm_MenuClick = function(obj:nexacro.Menu, e:nexacro.MenuClickEventInfo)
+{
+	var objDs = obj.getInnerDataset();
+	
+	var sId = e.userdata;
+	var sMenuId = objDs.lookup("MENU_CD", sId, "MENU_CD");
+	
+	var objApp = nexacro.getApplication();
+	var nLeft,nTop,nWidth,nHeight;
+	
+	nWidth =  objApp.mainframe.width - 150;
+	nHeight = objApp.mainframe.height- 100;
+	
+	nLeft =   (objApp.mainframe.width / 2) - Math.round(nWidth / 2);
+	nTop  =  (objApp.mainframe.height / 2) - Math.round(nHeight / 2) ;				
+	
+	if(sMenuId == "0000")
+	{
+		var objFrame = new ChildFrame("poc01", nLeft, nTop, nWidth, nHeight, null, null, "PoC::poc01.xfdl");
+		objFrame.set_titletext("poc01");
+		objFrame.set_background("transparent");
+		objFrame.set_dragmovetype(true);
+		objFrame.set_showtitlebar(true);
+		objFrame.set_autosize(false);
+		objFrame.set_resizable(true);
+		//objFrame.set_openalign("center middle");
+		objFrame.set_layered(true);
+		objFrame.set_showcascadetitletext(false);
+		objFrame.set_titlebarheight(30);
+		
+		//사이즈 조절 - 전체화면보다 조금만 더 작게
+		
+		
+		var vRtn = objFrame.showModal( this.getOwnerFrame(), {a:'aaa', b:'bbb'}, this, this.fn_popCallback );
+	}
+	else
+	{
+		this.fn_openMenu(sMenuId, objDs);
+	}
+};
+
+this.fn_openMenu = function(sMenuId, objDs)
+{
+	var nFRow;
+	var sPGMPATH;
+	var sPGMID;
+	
+	var nFRowOpen;
+	var sWinId;
+	var sMenuNm;
+	var sMenuNavi;
+	
+	var objMenuDs = objDs;
+	
+	nFRow 		= objMenuDs.findRow("MENU_CD", sMenuId);
+	sPGMPATH 	= objMenuDs.getColumn(nFRow, "PGM_PATH");
+	sPGMID 		= objMenuDs.getColumn(nFRow, "PGM_ID")
+	sMenuNm 	= objMenuDs.getColumn(nFRow, "MENU_NM");
+	
+	nFRowOpen = this.dsOpenMenu.findRow("MENU_CD", sMenuId);
+	sWinId = this.dsOpenMenu.getColumn(nFRowOpen, "WINID");
+	this.divWork.set_url(sPGMPATH+"::"+sPGMID);
+};
+
+/*****************************************************************************
+함 수 명 칭 : gfnAddOpenMenu
+함 수 설 명 : 열린화면리스트 저장
+파 라 미 터 : pvWinId – 업무화면 ID
+			   pvMenuCd – 메뉴코드
+			   pvMenuNm – 메뉴명
+리 턴 내 용 : 없음
+*****************************************************************************/
+this.fn_AddOpenMenu = function(pvWinId, pvMenuCd, pvMenuNm) 
+{
+	var nAddRow = this.dsOpenMenu.addRow();
+	this.dsOpenMenu.setColumn(nAddRow, "WINID", pvWinId);
+	this.dsOpenMenu.setColumn(nAddRow, "MENU_CD", pvMenuCd);
+	this.dsOpenMenu.setColumn(nAddRow, "MENU_NM", pvMenuNm);	
+};
+
+/*****************************************************************************
+함 수 명 칭 : gfnIsNull
+함 수 설 명 : 입력값 Null 체크 함수
+파 라 미 터 : pvVal – 입력값
+리 턴 내 용 : true/false 값이 Null일 경우 true
+*****************************************************************************/
+this.gfnIsNull = function (pvVal)
+{
+	if (new String(pvVal).valueOf() == "undefined") 
+	{
+		return true;
+	}
+	if (pvVal == null) 
+	{
+		return true;
+	}
+	if (("x" + pvVal == "xNaN") && (new String(pvVal.length).valueOf() == "undefined")) 
+	{
+		return true;
+	}
+	if (pvVal.length == 0) 
+	{
+		return true;
+	}
+
+	return false;
+};
+
+this.Static01_onclick = function(obj:nexacro.Static,e:nexacro.ClickEventInfo)
+{
+	this.divWork.set_url("PoC::PoC_Main.xfdl");
+};]]></Script>
+    <Objects>
+      <Dataset id="dsOpenList_">
+        <ColumnInfo>
+          <Column id="code" type="STRING" size="256"/>
+          <Column id="caption" type="STRING" size="256"/>
+          <Column id="BTN_ID" type="STRING" size="256"/>
+          <Column id="BTN_EX_ID" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="dsOpenMenu_">
+        <ColumnInfo>
+          <Column id="MENU_CD" type="STRING" size="8"/>
+          <Column id="UP_MENU_CD" type="STRING" size="8"/>
+          <Column id="MENU_NM" type="STRING" size="50"/>
+          <Column id="MENU_LVL" type="BIGDECIMAL" size="22"/>
+          <Column id="PGM_PATH" type="STRING" size="200"/>
+          <Column id="PGM_ID" type="STRING" size="200"/>
+          <Column id="WINID" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="dsMenu">
+        <ColumnInfo>
+          <Column id="MENU_CD" type="STRING" size="256"/>
+          <Column id="UP_MENU_CD" type="STRING" size="256"/>
+          <Column id="MENU_NM" type="STRING" size="256"/>
+          <Column id="MENU_LVL" type="STRING" size="256"/>
+          <Column id="PGM_PATH" type="STRING" size="256"/>
+          <Column id="PGM_ID" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="MENU_CD">0000</Col>
+            <Col id="UP_MENU_CD">0</Col>
+            <Col id="MENU_LVL">0</Col>
+            <Col id="MENU_NM">시나리오1</Col>
+            <Col id="PGM_PATH">PoC</Col>
+            <Col id="PGM_ID">poc01.xfdl</Col>
+          </Row>
+          <Row>
+            <Col id="MENU_CD">0001</Col>
+            <Col id="UP_MENU_CD">0010</Col>
+            <Col id="MENU_NM">시나리오2</Col>
+            <Col id="MENU_LVL">0</Col>
+            <Col id="PGM_PATH">PoC</Col>
+            <Col id="PGM_ID">poc02.xfdl</Col>
+          </Row>
+          <Row>
+            <Col id="MENU_LVL">0</Col>
+            <Col id="PGM_PATH">PoC</Col>
+            <Col id="PGM_ID">poc03.xfdl</Col>
+            <Col id="MENU_NM">시나리오3</Col>
+            <Col id="UP_MENU_CD">0020</Col>
+            <Col id="MENU_CD">0002</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="dsOpenList">
+        <ColumnInfo>
+          <Column id="code" type="STRING" size="256"/>
+          <Column id="caption" type="STRING" size="256"/>
+          <Column id="BTN_ID" type="STRING" size="256"/>
+          <Column id="BTN_EX_ID" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="dsOpenMenu">
+        <ColumnInfo>
+          <Column id="MENU_CD" type="STRING" size="8"/>
+          <Column id="UP_MENU_CD" type="STRING" size="8"/>
+          <Column id="MENU_NM" type="STRING" size="50"/>
+          <Column id="MENU_LVL" type="BIGDECIMAL" size="22"/>
+          <Column id="PGM_PATH" type="STRING" size="200"/>
+          <Column id="PGM_ID" type="STRING" size="200"/>
+          <Column id="WINID" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="dsSubMenu">
+        <ColumnInfo>
+          <Column id="MENU_CD" type="STRING" size="256"/>
+          <Column id="UP_MENU_CD" type="STRING" size="256"/>
+          <Column id="MENU_NM" type="STRING" size="256"/>
+          <Column id="MENU_LVL" type="STRING" size="256"/>
+          <Column id="PGM_PATH" type="STRING" size="256"/>
+          <Column id="PGM_ID" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="MENU_CD">0000</Col>
+            <Col id="UP_MENU_CD">0</Col>
+            <Col id="MENU_NM">추가</Col>
+            <Col id="MENU_LVL">0</Col>
+            <Col id="PGM_PATH"/>
+            <Col id="PGM_ID"/>
+          </Row>
+          <Row>
+            <Col id="MENU_CD">0001</Col>
+            <Col id="UP_MENU_CD">0010</Col>
+            <Col id="MENU_NM">rChartGallery</Col>
+            <Col id="MENU_LVL">1</Col>
+            <Col id="PGM_PATH">Sample</Col>
+            <Col id="PGM_ID">rChartGallery.xfdl</Col>
+          </Row>
+          <Row>
+            <Col id="MENU_CD">0002</Col>
+            <Col id="UP_MENU_CD">0020</Col>
+            <Col id="MENU_NM">nexaChartGallery</Col>
+            <Col id="MENU_LVL">1</Col>
+            <Col id="PGM_PATH">Sample</Col>
+            <Col id="PGM_ID">nexaChartGallery.xfdl</Col>
+          </Row>
+          <Row>
+            <Col id="MENU_CD">0003</Col>
+            <Col id="UP_MENU_CD">0030</Col>
+            <Col id="MENU_NM">GridChart</Col>
+            <Col id="MENU_LVL">1</Col>
+            <Col id="PGM_PATH">Sample</Col>
+            <Col id="PGM_ID">GridChart.xfdl</Col>
+          </Row>
+          <Row>
+            <Col id="MENU_CD">0004</Col>
+            <Col id="UP_MENU_CD">0040</Col>
+            <Col id="MENU_NM">Sparkline</Col>
+            <Col id="MENU_LVL">1</Col>
+            <Col id="PGM_PATH">Sample</Col>
+            <Col id="PGM_ID">Sparkline.xfdl</Col>
+          </Row>
+          <Row>
+            <Col id="MENU_CD">0005</Col>
+            <Col id="UP_MENU_CD">0050</Col>
+            <Col id="MENU_NM">PivotGrid</Col>
+            <Col id="MENU_LVL">1</Col>
+            <Col id="PGM_PATH">Sample</Col>
+            <Col id="PGM_ID">pivot.xfdl</Col>
+          </Row>
+          <Row>
+            <Col id="MENU_CD">0006</Col>
+            <Col id="UP_MENU_CD">0060</Col>
+            <Col id="MENU_NM">CategoryGrid</Col>
+            <Col id="MENU_LVL">1</Col>
+            <Col id="PGM_PATH">Sample</Col>
+            <Col id="PGM_ID">CategoryGrid.xfdl</Col>
+          </Row>
+          <Row>
+            <Col id="MENU_CD">0007</Col>
+            <Col id="UP_MENU_CD">0070</Col>
+            <Col id="MENU_NM">Functions</Col>
+            <Col id="MENU_LVL">1</Col>
+            <Col id="PGM_PATH">Sample</Col>
+            <Col id="PGM_ID">Functions.xfdl</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+    </Objects>
+  </Form>
+</FDL>

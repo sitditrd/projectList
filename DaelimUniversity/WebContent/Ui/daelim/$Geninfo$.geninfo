@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <GenInfo version="1.1">
+    <Rule>
+      <ENV rule_version="1.05"/>
+      <ADL rule_version="1.14"/>
+      <FDL rule_version="1.04"/>
+      <XCSS rule_version="1.03"/>
+      <Script rule_version="1.02"/>
+    </Rule>
+    <Info project="C:\Users\투비소프트\eclipse-workspace\DaelimUniversity\WebContent\Ui\daelim\" generated="C:\Users\투비소프트\eclipse-workspace\DaelimUniversity\WebContent\PackageA\"><File url="environment.xml" checksum="20190416112531" errormsg=""/><File url="typedefinition.xml" checksum="20190916091523" errormsg=""/><File url="appvariables.xml" checksum="20190416112531" errormsg=""/><File url="_resource_\_theme_\default\theme.xcss" checksum="20190416112532" errormsg=""/><File url="_resource_\_xcss_\style.xcss" checksum="20190416112532" errormsg=""/><File url="App_Desktop.xadl" checksum="20190416112531" errormsg=""/><File url="frame\Frame_Bottom.xfdl" checksum="20190416112531" errormsg=""/><File url="frame\Frame_Left.xfdl" checksum="20190416112531" errormsg=""/><File url="frame\Frame_Mdi.xfdl" checksum="20190416112531" errormsg=""/><File url="frame\Frame_Top.xfdl" checksum="20190628094229" errormsg=""/><File url="frame\Login.xfdl" checksum="20190416112531" errormsg=""/><File url="frame\Main.xfdl" checksum="20190416112531" errormsg=""/><File url="poc\poc01.xfdl" checksum="20190416112531" errormsg=""/><File url="poc\poc02.xfdl" checksum="20190416112531" errormsg=""/><File url="poc\poc03.xfdl" checksum="20190416112531" errormsg=""/><File url="poc\poc04.xfdl" checksum="20190416112531" errormsg=""/><File url="poc\poc05.xfdl" checksum="20190416112531" errormsg=""/><File url="poc\sub00.xfdl" checksum="20190416112531" errormsg=""/><File url="poc\sub01.xfdl" checksum="20190416112531" errormsg=""/><File url="lib\lib_Form.xjs" checksum="20190416112531" errormsg=""/><File url="lib\lib_String.xjs" checksum="20190416112531" errormsg=""/><File url="Bim\Moar.xfdl" checksum="20190416112531" errormsg=""/><File url="Bim\Motsys.xfdl" checksum="20190416112531" errormsg=""/><File url="Cpm\Elp.xfdl" checksum="20190627180457" errormsg=""/><File url="Pim\Pi.xfdl" checksum="20190627180725" errormsg=""/><File url="Common\Tc.xfdl" checksum="20190416112531" errormsg=""/><File url="Script\CommUtil.xjs" checksum="20190627173454" errormsg=""/><File url="Script\ext_CommEco.xjs" checksum="20190416112531" errormsg=""/><File url="Script\CommTrans.xjs" checksum="20190627181006" errormsg=""/></Info>
+  </GenInfo>
+</root>

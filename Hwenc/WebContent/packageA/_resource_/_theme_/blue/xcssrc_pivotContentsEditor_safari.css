@@ -1,0 +1,1854 @@
+﻿/* *********************************************************************************** */
+/* application 공통 */
+/* *********************************************************************************** */
+
+html, body
+{
+  position:absolute;
+  width:100%;
+  height:100%;
+  /*font:10pt ""나눔고딕"";*/
+  font:12pt Verdana;
+  -moz-user-select:none;
+  -webkit-user-select:none;
+  -ms-user-select:none;
+}
+
+div
+{
+  position:absolute;
+  box-sizing:border-box;
+  overflow:hidden;
+  background-origin:padding-box;
+  background-repeat:no-repeat;
+  white-space : pre;
+  -moz-user-select:-moz-none;
+  -webkit-user-select:none;
+  -webkit-touch-callout:none;
+  -webkit-appearance:none;
+  -webkit-tap-highlight-color:rgba(0,0,0,0);
+  outline:none;
+  /*
+  transform : translate3d(0px, 0px, 0);
+  -webkit-transform : translate3d(0px, 0px, 0);
+  */
+}
+
+table
+{
+  position:absolute;
+  box-sizing:border-box;
+  overflow:hidden;
+}
+
+input
+{
+  position:absolute;
+  box-sizing:border-box;
+  overflow:hidden;
+}
+
+img
+{
+  position:absolute;
+  box-sizing:border-box;
+}
+
+textarea::-webkit-scrollbar { display: none; }
+
+/* *********************************************************************************** */
+
+/* *********************************************************************************** */
+
+div.nexacontainer
+{
+  position:absolute;
+  left:0px;
+  top:0px;
+  width:100%;
+  height:100%;
+}
+.nexacontainer.nexartl
+{ 
+  right:0px;
+}
+
+div.nexacontainer.withvscroll
+{
+  right:14px;
+}
+.nexacontainer.nexartl.withvscroll
+{
+  left:14px;
+}
+div.nexacontainer.withhscroll
+{
+  bottom:14px;
+}
+div.nexacontainer.withbothscroll
+{
+  right:14px;
+  bottom:14px;
+}
+.nexacontainer.nexartl.withbothscroll
+{
+  left:14px;
+  bottom:14px;
+}
+div.nexalefttop
+{
+  left:0px;
+  top:0px;
+  background-repeat:no-repeat;
+  background-position:left top;
+  font-size:1px;
+}
+.nexalefttop.nexartl
+{
+  background-position:right top;
+}
+div.nexaleftbottom
+{
+  left:0px;
+  bottom:0px;
+  background-repeat:no-repeat;
+  background-position:left bottom;
+  font-size:1px;
+}
+.nexaleftbottom.nexartl
+{
+  background-position:right bottom;
+}
+div.nexarightbottom
+{
+  right:0px;
+  bottom:0px;
+  background-repeat:no-repeat;
+  background-position:right bottom;
+  font-size:1px;
+}
+.nexarightbottom.nexartl
+{
+  background-position:left bottom;
+}
+div.nexarighttop
+{
+  right:0px;
+  top:0px;
+  background-repeat:no-repeat;
+  background-position:right top;
+}
+.nexarighttop.nexartl
+{
+  background-position:left top;
+}
+div.nexaedge
+{
+  width:100%;
+  height:100%;
+}
+div.nexamodaloverlay
+{
+  width:100%;
+  height:100%;
+}
+div.nexainnercontainer
+{
+  /*
+  transform : translate3d(0px, 0px, 0);
+  -webkit-transform : translate3d(0px, 0px, 0);
+  */
+}
+div.nexatransform
+{
+  /*
+  transform : translate3d(0px, 0px, 0);
+  -webkit-transform : translate3d(0px, 0px, 0);
+  */
+}
+div.nexacontentsbox
+{
+  position:relative;
+  display:table-cell;
+  background-position:left center;
+  background-repeat:no-repeat;
+  vertical-align:middle;
+}
+.nexacontentsbox.nexartl
+{
+  background-position:right center;
+}
+.nexatextitem
+{
+  position:relative;
+  vertical-align:middle;
+  white-space:inherit;
+  word-wrap:inherit;
+  word-break:inherit;
+  text-decoration:inherit;
+}
+.nexaiconitem
+{
+  position:relative;
+  vertical-align:middle;
+  background-position:center center;
+  background-repeat:no-repeat;
+}
+.nexainput
+{
+  font:inherit;
+  color:inherit;
+  cursor:inherit;
+  letter-spacing:inherit;
+  word-spacing:inherit;
+  border:none;
+  outline:none;
+  background:transparent;
+  padding : 0px;
+  /*
+  transform : translate3d(0px, 0px, 0);
+  -webkit-transform : translate3d(0px, 0px, 0);
+  */
+}
+.nexatextarea
+{
+  font:inherit;
+  color:inherit;
+  cursor:inherit;
+  line-height : inherit;
+  letter-spacing:inherit;
+  word-spacing:inherit;
+  white-space:pre;
+  word-wrap:normal;
+  border:none;
+  outline:none;
+  resize:none;
+  background:transparent;
+  padding : 0px;
+}
+div.nexaleftalign, input.nexaleftalign
+{
+  text-align:left;
+}
+.nexaleftalign.nexartl
+{
+  text-align:right;
+}
+div.nexarightalign, input.nexarightalign
+{
+  text-align:right;
+}
+.nexarightalign.nexartl
+{
+  text-align:left;
+}
+div.nexacenteralign,input.nexacenteralign
+{
+  text-align:center;
+}
+div.nexamap div *
+{
+  overflow:visible;
+}
+
+/* *********************************************************************************** */
+div.ProgressBar, div.ProgressBarControl
+{
+  /*
+  transform : translate3d(0px, 0px, 0);
+  -webkit-transform : translate3d(0px, 0px, 0);
+  */
+}
+/* *********************************************************************************** */
+
+/* *********************************************************************************** */
+div.celltreeline
+{
+  border : 1px dotted #999999;
+}
+/* *********************************************************************************** */
+
+/* *********************************************************************************** */
+div.Edit, div.MaskEdit, div.TextArea, div.EditControl, div.MaskEditControl, div.TextAreaControl
+{
+  cursor:text;
+}
+div.Button .nexacontentsbox, div.ButtonControl .nexacontentsbox
+{
+  text-align:center;
+  background-position:center center;
+}
+div.FileDownload  .nexacontentsbox, div.FileDownloadControl .nexacontentsbox
+{
+  text-align:center;
+  background-position:center center;
+}
+div.IconTextControl .nexacontentsbox, div.IconControl .nexacontentsbox
+{
+  text-align:center;
+  background-position:center center;
+}
+div.DatePickerDayItemControl .nexacontentsbox, div.DatePickerWeekItemControl .nexacontentsbox, div.TitleBarButtonControl .nexacontentsbox
+{
+  text-align:center;
+  background-position:center center;
+}
+div.MainFrame, div.VScrollBarControl, div.HScrollBarControl
+{
+  cursor:default;
+}
+/* *********************************************************************************** */
+
+div.Grid
+{
+	background : #ffffff;
+	border : 1px solid #b7b1b2;
+}
+.Grid.nexartl
+{
+	background : #ffffff;
+	border : 1px solid #b7b1b2;
+}
+div.Grid .head .row .cell
+{
+	font : bold 12px Gulim;
+	color : #2f2f2f;
+	border : 1px solid #cacaca;
+}
+div.Grid .head .row .cell > .nexacontentsbox
+{
+	text-align : center;
+	background-position-x : center;
+}
+.Grid.nexartl .head .row .cell
+{
+	border : 1px solid #cacaca;
+}
+.Grid.nexartl .head .row .cell > .nexacontentsbox
+{
+	text-align : center;
+	background-position-x : center;
+}
+div.Grid .body .row .cell
+{
+	color : #222222;
+	border : 1px solid #dbdee2;
+}
+.Grid.nexartl .body .row .cell
+{
+	border : 1px solid #dbdee2;
+}
+div.Grid .summary
+{
+	border-top : 1px solid #c8c1c2;
+	border-right : 0px none;
+	border-bottom : 0px none;
+	border-left : 0px none;
+}
+.Grid.nexartl .summary
+{
+	border-top : 1px solid #c8c1c2;
+	border-right : 0px none;
+	border-bottom : 0px none;
+	border-left : 0px none;
+}
+div.Grid .summary .row .cell
+{
+	font : bold 12px Gulim;
+	color : #222222;
+	background : #fdfbe5;
+	border : 1px solid #c8c1c2;
+}
+div.Grid .summary .row .cell > .nexacontentsbox
+{
+	text-align : center;
+	background-position-x : center;
+}
+.Grid.nexartl .summary .row .cell
+{
+	background : #fdfbe5;
+	border : 1px solid #c8c1c2;
+}
+.Grid.nexartl .summary .row .cell > .nexacontentsbox
+{
+	text-align : center;
+	background-position-x : center;
+}
+div.Grid .hscrollbar
+{
+	border-top : 1px solid #b1b1b1;
+	border-right : 0px none;
+	border-bottom : 0px none;
+	border-left : 0px none;
+}
+.Grid.nexartl .hscrollbar
+{
+	border-top : 1px solid #b1b1b1;
+	border-right : 0px none;
+	border-bottom : 0px none;
+	border-left : 0px none;
+}
+div.Grid .vscrollbar
+{
+	border-top : 0px none;
+	border-right : 0px none;
+	border-bottom : 0px none;
+	border-left : 1px solid #b1b1b1;
+}
+.Grid.nexartl .vscrollbar
+{
+	border-top : 0px none;
+	border-right : 1px solid #b1b1b1;
+	border-bottom : 0px none;
+	border-left : 0px none;
+}
+div.GridCellControl .cellbutton
+{
+	font : 12px Gulim;
+	color : #555555;
+	background : #eaeaea;
+	background : -webkit-linear-gradient(to top,#eaeaea,#ffffff);
+	background : linear-gradient(to top,#eaeaea,#ffffff);
+	border : 1px solid #c2c2c2;
+}
+.GridCellControl.nexartl .cellbutton
+{
+	background : #eaeaea;
+	background : -webkit-linear-gradient(to top,#eaeaea,#ffffff);
+	background : linear-gradient(to top,#eaeaea,#ffffff);
+	border : 1px solid #c2c2c2;
+}
+div.GridCellControl .cellcalendar
+{
+	font : 12px Gulim;
+}
+div.GridCellControl .cellcheckbox
+{
+	font : 12px Gulim;
+}
+div.GridCellControl .cellcombo
+{
+	font : 12px Gulim;
+}
+div.ListBoxControl.popupGridCellControlcellcombocombolist.dummy.dummy
+{
+	font : 12px Gulim;
+	color : #333333;
+}
+div.GridCellControl .celledit
+{
+	font : 12px Gulim;
+	background : #ffffff;
+	border : 1px solid #d5d5d5;
+}
+div.GridCellControl .celledit .nexainput
+{
+	padding : 1px 0px 0px 0px;
+}
+.GridCellControl.nexartl .celledit
+{
+	background : #ffffff;
+	border : 1px solid #d5d5d5;
+}
+.GridCellControl.nexartl .celledit .nexainput
+{
+	padding : 1px 0px 0px 0px;
+}
+div.GridCellControl .cellexpandbutton
+{
+	background : #f0f0f0;
+	border : 1px solid #f0f0f0;
+}
+.GridCellControl.nexartl .cellexpandbutton
+{
+	background : #f0f0f0;
+	border : 1px solid #f0f0f0;
+}
+div.GridCellControl .cellmaskedit
+{
+	font : 12px Gulim;
+	background : #ffffff;
+	border : 1px solid #d5d5d5;
+}
+div.GridCellControl .cellmaskedit .nexainput
+{
+	padding : 1px 2px 0px 2px;
+}
+.GridCellControl.nexartl .cellmaskedit
+{
+	background : #ffffff;
+	border : 1px solid #d5d5d5;
+}
+.GridCellControl.nexartl .cellmaskedit .nexainput
+{
+	padding : 1px 2px 0px 2px;
+}
+div.GridCellControl .cellprogressbar
+{
+	font : 12px Gulim;
+}
+div.GridCellControl .celltextarea
+{
+	font : 12px Gulim;
+}
+div.GridCellControl .celltreeitem .treeitemtext
+{
+	font : 12px/normal "Segoe UI";
+	color : #222222;
+}
+div.GridCellControl .celltreeline
+{
+	border : 1px dotted #909090;
+}
+.GridCellControl.nexartl .celltreeline
+{
+	border : 1px dotted #909090;
+}
+div.Grid .body .row .cell.cell_item_status_up.dummy.dummy.dummy
+{
+	background : URL('./../../../_resource_/_images_/img_pvGrd_asc.png') no-repeat center center;
+}
+.Grid.nexartl .body .row .cell.cell_item_status_up
+{
+	background : url('./../../../_resource_/_images_/img_pvGrd_asc.png') no-repeat center center;
+}
+div.Grid .body .row .cell.cell_item_status_down.dummy.dummy.dummy
+{
+	background : URL('./../../../_resource_/_images_/img_pvGrd_desc.png') no-repeat center center;
+}
+.Grid.nexartl .body .row .cell.cell_item_status_down
+{
+	background : url('./../../../_resource_/_images_/img_pvGrd_desc.png') no-repeat center center;
+}
+div.Grid .body .row .cell.cell_item_status_filter.dummy.dummy.dummy
+{
+	font : normal bold 12px/normal "Arial";
+	color : #ffffff;
+	background : URL('./../../../_resource_/_images_/img_pvGrd_filter.png') no-repeat center center;
+}
+div.Grid .body .row .cell.cell_item_status_filter.dummy.dummy.dummy > .nexacontentsbox
+{
+	text-align : center;
+	background-position-x : center;
+}
+.Grid.nexartl .body .row .cell.cell_item_status_filter
+{
+	background : url('./../../../_resource_/_images_/img_pvGrd_filter.png') no-repeat center center;
+}
+.Grid.nexartl .body .row .cell.cell_item_status_filter > .nexacontentsbox
+{
+	text-align : center;
+	background-position-x : center;
+}
+div.Grid .body .row .cell.cell_item_status_SUM.dummy.dummy.dummy
+{
+	font : normal bold 12px/normal "Arial";
+	color : #ffffff;
+	background : URL('./../../../_resource_/_images_/img_pvGrd_iconSUM.png') no-repeat center center;
+}
+div.Grid .body .row .cell.cell_item_status_SUM.dummy.dummy.dummy > .nexacontentsbox
+{
+	text-align : center;
+	background-position-x : center;
+}
+.Grid.nexartl .body .row .cell.cell_item_status_SUM
+{
+	background : url('./../../../_resource_/_images_/img_pvGrd_iconSUM.png') no-repeat center center;
+}
+.Grid.nexartl .body .row .cell.cell_item_status_SUM > .nexacontentsbox
+{
+	text-align : center;
+	background-position-x : center;
+}
+div.Grid .body .row .cell.cell_item_status_CNT.dummy.dummy.dummy
+{
+	font : normal bold 12px/normal "Arial";
+	color : #ffffff;
+	background : URL('./../../../_resource_/_images_/img_pvGrd_iconCNT.png') no-repeat center center;
+}
+div.Grid .body .row .cell.cell_item_status_CNT.dummy.dummy.dummy > .nexacontentsbox
+{
+	text-align : center;
+	background-position-x : center;
+}
+.Grid.nexartl .body .row .cell.cell_item_status_CNT
+{
+	background : url('./../../../_resource_/_images_/img_pvGrd_iconCNT.png') no-repeat center center;
+}
+.Grid.nexartl .body .row .cell.cell_item_status_CNT > .nexacontentsbox
+{
+	text-align : center;
+	background-position-x : center;
+}
+div.Grid .body .row .cell.cell_item_status_AVG.dummy.dummy.dummy
+{
+	font : normal bold 12px/normal "Arial";
+	color : #ffffff;
+	background : URL('./../../../_resource_/_images_/img_pvGrd_iconAVG.png') no-repeat center center;
+}
+div.Grid .body .row .cell.cell_item_status_AVG.dummy.dummy.dummy > .nexacontentsbox
+{
+	text-align : center;
+	background-position-x : center;
+}
+.Grid.nexartl .body .row .cell.cell_item_status_AVG
+{
+	background : url('./../../../_resource_/_images_/img_pvGrd_iconAVG.png') no-repeat center center;
+}
+.Grid.nexartl .body .row .cell.cell_item_status_AVG > .nexacontentsbox
+{
+	text-align : center;
+	background-position-x : center;
+}
+div.Grid .body .row .cell.cell_item_status_MAX.dummy.dummy.dummy
+{
+	font : normal bold 12px/normal "Arial";
+	color : #ffffff;
+	background : URL('./../../../_resource_/_images_/img_pvGrd_iconMAX.png') no-repeat center center;
+}
+div.Grid .body .row .cell.cell_item_status_MAX.dummy.dummy.dummy > .nexacontentsbox
+{
+	text-align : center;
+	background-position-x : center;
+}
+.Grid.nexartl .body .row .cell.cell_item_status_MAX
+{
+	background : url('./../../../_resource_/_images_/img_pvGrd_iconMAX.png') no-repeat center center;
+}
+.Grid.nexartl .body .row .cell.cell_item_status_MAX > .nexacontentsbox
+{
+	text-align : center;
+	background-position-x : center;
+}
+div.Grid .body .row .cell.cell_item_status_MIN.dummy.dummy.dummy
+{
+	font : normal bold 12px/normal "Arial";
+	color : #ffffff;
+	background : URL('./../../../_resource_/_images_/img_pvGrd_iconMIN.png') no-repeat center center;
+}
+div.Grid .body .row .cell.cell_item_status_MIN.dummy.dummy.dummy > .nexacontentsbox
+{
+	text-align : center;
+	background-position-x : center;
+}
+.Grid.nexartl .body .row .cell.cell_item_status_MIN
+{
+	background : url('./../../../_resource_/_images_/img_pvGrd_iconMIN.png') no-repeat center center;
+}
+.Grid.nexartl .body .row .cell.cell_item_status_MIN > .nexacontentsbox
+{
+	text-align : center;
+	background-position-x : center;
+}
+div.Grid .body .row .cell.cell_item_status_FUNC.dummy.dummy.dummy
+{
+	font : normal bold 12px/normal "Arial";
+	color : #ffffff;
+	background : URL('./../../../_resource_/_images_/img_pvGrd_iconFUNC.png') no-repeat center center;
+}
+div.Grid .body .row .cell.cell_item_status_FUNC.dummy.dummy.dummy > .nexacontentsbox
+{
+	text-align : center;
+	background-position-x : center;
+}
+.Grid.nexartl .body .row .cell.cell_item_status_FUNC
+{
+	background : url('./../../../_resource_/_images_/img_pvGrd_iconFUNC.png') no-repeat center center;
+}
+.Grid.nexartl .body .row .cell.cell_item_status_FUNC > .nexacontentsbox
+{
+	text-align : center;
+	background-position-x : center;
+}
+div.Grid.grid_nxPv_editor .head .row .cell
+{
+	background : #d8d8d8;
+	color : #000000;
+	border-top : 1px solid #a3a4a8;
+	border-right : 1px solid #a3a4a8;
+	border-bottom : 1px solid #c2c2c2;
+	border-left : 1px solid #a3a4a8;
+	font : 12px/normal "Segoe UI";
+}
+.Grid.nexartl.grid_nxPv_editor .head .row .cell
+{
+	background : #d8d8d8;
+	border-top : 1px solid #a3a4a8;
+	border-right : 1px solid #a3a4a8;
+	border-bottom : 1px solid #c2c2c2;
+	border-left : 1px solid #a3a4a8;
+}
+div.Grid.grid_nxPv_editor .body .row .cell .cellcombo
+{
+	border : 0px none;
+	font : 12px/normal "Gulim";
+	color : #222222;
+}
+.Grid.nexartl.grid_nxPv_editor .body .row .cell .cellcombo
+{
+	border : 0px none;
+}
+div.Grid.grid_nxPv_editor .body .row .cell .celledit
+{
+	border : 0px none;
+	font : 12px/normal "Gulim";
+	color : #222222;
+}
+div.Grid.grid_nxPv_editor .body .row .cell .celledit .nexainput
+{
+	padding : 0px 2px;
+}
+.Grid.nexartl.grid_nxPv_editor .body .row .cell .celledit
+{
+	border : 0px none;
+}
+.Grid.nexartl.grid_nxPv_editor .body .row .cell .celledit .nexainput
+{
+	padding : 0px 2px;
+}
+div.PopupMenu.popmenu_nxPv_basic
+{
+	background : #f2f2f2;
+	box-shadow : 3px 3px 4px #888888;
+	font : 12px/normal "Segoe UI";
+}
+.PopupMenu.nexartl.popmenu_nxPv_basic
+{
+	background : #f2f2f2;
+	box-shadow : -3px 3px 4px #888888;
+}
+div.PopupMenu.popmenu_nxPv_basic .popupmenuitem
+{
+	background : #f2f2f2;
+	font : 12px/normal "Segoe UI";
+}
+.PopupMenu.nexartl.popmenu_nxPv_basic .popupmenuitem
+{
+	background : #f2f2f2;
+}
+div.Button.btn_nxPv_tabBtn
+{
+	background : #ffffff;
+	color : #111111;
+	border-top : 0px none;
+	border-right : 1px solid #a8a9af;
+	border-bottom : 0px none;
+	border-left : 1px solid #a8a9af;
+	font : 12px/normal "Segoe UI";
+}
+.Button.nexartl.btn_nxPv_tabBtn
+{
+	background : #ffffff;
+	border-top : 0px none;
+	border-right : 1px solid #a8a9af;
+	border-bottom : 0px none;
+	border-left : 1px solid #a8a9af;
+}
+div.Grid.grid_nxPv_editor .body .row .cell.rowDel.dummy.dummy.dummy .cellbutton
+{
+	background : URL('./../../../_resource_/_images_/btn_pvEditor_grdDel.png') no-repeat center #ffffff;
+	border : 0px none;
+}
+.Grid.nexartl.grid_nxPv_editor .body .row .cell.rowDel .cellbutton
+{
+	background : url('./../../../_resource_/_images_/btn_pvEditor_grdDel.png') no-repeat center #ffffff;
+	border : 0px none;
+}
+div.PopupDiv.popdiv_nxPv_basic
+{
+	background : #f2f2f2;
+	border : 2px solid #b5b5b5;
+}
+.PopupDiv.nexartl.popdiv_nxPv_basic
+{
+	background : #f2f2f2;
+	border : 2px solid #b5b5b5;
+}
+div.Static.sta_nxPv_popTitle
+{
+	font : 12px/normal "Segoe UI";
+}
+div.Edit.edit_nxPv_popEdit
+{
+	border : 1px solid #a3a4a8;
+}
+div.Edit.edit_nxPv_popEdit .nexainput
+{
+	padding : 2px;
+}
+.Edit.nexartl.edit_nxPv_popEdit
+{
+	border : 1px solid #a3a4a8;
+}
+.Edit.nexartl.edit_nxPv_popEdit .nexainput
+{
+	padding : 2px;
+}
+div.TextArea.txtarea_nxPv_popTxtarea
+{
+	border : 1px solid #a3a4a8;
+}
+div.TextArea.txtarea_nxPv_popTxtarea .nexatextarea
+{
+	padding : 2px;
+}
+.TextArea.nexartl.txtarea_nxPv_popTxtarea
+{
+	border : 1px solid #a3a4a8;
+}
+.TextArea.nexartl.txtarea_nxPv_popTxtarea .nexatextarea
+{
+	padding : 2px;
+}
+div.Grid.grd_nxPv_treeGrid
+{
+	font : 12px/normal "Segoe UI";
+}
+div.Grid.grd_nxPv_treeGrid .body .row .cell.treeLv0.dummy.dummy.dummy
+{
+	background : #eeeeee;
+	border-top : 0px none;
+	border-right : 0px none;
+	border-bottom : 1px solid #dbdee2;
+	border-left : 0px none;
+	color : #222222;
+}
+.Grid.nexartl.grd_nxPv_treeGrid .body .row .cell.treeLv0
+{
+	background : #eeeeee;
+	border-top : 0px none;
+	border-right : 0px none;
+	border-bottom : 1px solid #dbdee2;
+	border-left : 0px none;
+}
+div.Grid.grd_nxPv_treeGrid .body .row .cell.treeLv1.dummy.dummy.dummy
+{
+	background : #ffffff;
+	border : 1px solid #dbdee2;
+	color : #222222;
+}
+.Grid.nexartl.grd_nxPv_treeGrid .body .row .cell.treeLv1
+{
+	background : #ffffff;
+	border : 1px solid #dbdee2;
+}
+div.Grid.grd_nxPv_treeGrid .body .row .cell .cellcombo
+{
+	border : 0px none;
+	font : 12px/normal "Segoe UI";
+	color : #222222;
+}
+.Grid.nexartl.grd_nxPv_treeGrid .body .row .cell .cellcombo
+{
+	border : 0px none;
+}
+div.Grid.grd_nxPv_treeGrid .body .row .cell .celledit
+{
+	border : 0px none;
+	font : 12px/normal "Segoe UI";
+	color : #222222;
+}
+.Grid.nexartl.grd_nxPv_treeGrid .body .row .cell .celledit
+{
+	border : 0px none;
+}
+div.Grid.grd_nxPv_treeGrid .body .row .cell
+{
+	font : 12px/normal "Segoe UI";
+	color : #222222;
+}
+div.Grid.grd_nxPv_treeGrid .head .row .cell
+{
+	background : #d8d8d8;
+	border : 1px solid #a3a4a8;
+	font : 12px/normal "Segoe UI";
+}
+.Grid.nexartl.grd_nxPv_treeGrid .head .row .cell
+{
+	background : #d8d8d8;
+	border : 1px solid #a3a4a8;
+}
+div.Grid.grid_nxPv_editor .body .row .cell
+{
+	font : 12px/normal "Gulim";
+	color : #333333;
+	border : 1px solid #cccccc;
+}
+.Grid.nexartl.grid_nxPv_editor .body .row .cell
+{
+	border : 1px solid #cccccc;
+}
+div.ImageViewer.NxPivot_comp_splitterV
+{
+	background : URL('./../../../_resource_/_images_/img_pvGrd_splitterV.png') no-repeat center;
+	border : 0px none;
+}
+.ImageViewer.nexartl.NxPivot_comp_splitterV
+{
+	background : url('./../../../_resource_/_images_/img_pvGrd_splitterV.png') no-repeat center;
+	border : 0px none;
+}
+div.ImageViewer.NxPivot_comp_splitterH
+{
+	background : URL('./../../../_resource_/_images_/img_pvGrd_splitterH.png') no-repeat center;
+	border : 0px none;
+}
+.ImageViewer.nexartl.NxPivot_comp_splitterH
+{
+	background : url('./../../../_resource_/_images_/img_pvGrd_splitterH.png') no-repeat center;
+	border : 0px none;
+}
+div.Div.div_nxPv_conBorder
+{
+	border : 1px solid #b7b1b2;
+}
+.Div.nexartl.div_nxPv_conBorder
+{
+	border : 1px solid #b7b1b2;
+}
+div#nexacontainer .Grid .body .row .cell[status=mouseover]
+{
+	background : #f6f6f6;
+}
+.Grid.nexartl .body .row .cell[status=mouseover]
+{
+	background : #f6f6f6;
+}
+div#nexacontainer .GridCellControl .cellbutton[status=mouseover]
+{
+	background : #e7e7e7;
+	background : -webkit-linear-gradient(to top,#e7e7e7,#fefefe);
+	background : linear-gradient(to top,#e7e7e7,#fefefe);
+	border : 1px solid #a0a0a0;
+}
+.GridCellControl.nexartl .cellbutton[status=mouseover]
+{
+	background : #e7e7e7;
+	background : -webkit-linear-gradient(to top,#e7e7e7,#fefefe);
+	background : linear-gradient(to top,#e7e7e7,#fefefe);
+	border : 1px solid #a0a0a0;
+}
+div#nexacontainer .GridCellControl .cellbutton[status=focused]
+{
+	background : #e7e7e7;
+	background : -webkit-linear-gradient(to top,#e7e7e7,#fefefe);
+	background : linear-gradient(to top,#e7e7e7,#fefefe);
+	border : 1px solid #a0a0a0;
+}
+.GridCellControl.nexartl .cellbutton[status=focused]
+{
+	background : #e7e7e7;
+	background : -webkit-linear-gradient(to top,#e7e7e7,#fefefe);
+	background : linear-gradient(to top,#e7e7e7,#fefefe);
+	border : 1px solid #a0a0a0;
+}
+div#nexacontainer .ListBoxControl.popupGridCellControlcellcombocombolist.dummy.dummy .listboxitem[status=mouseover]
+{
+	background : #e8e9ed;
+}
+.GridCellControl.nexartl .cellcombo .combolist .listboxitem[status=mouseover]
+{
+	background : #e8e9ed;
+}
+div#nexacontainer .GridCellControl .celledit[status=mouseover]
+{
+	border : 1px solid #5a86cd;
+}
+.GridCellControl.nexartl .celledit[status=mouseover]
+{
+	border : 1px solid #5a86cd;
+}
+div#nexacontainer .GridCellControl .celledit[status=focused]
+{
+	border : 1px solid #5a86cd;
+}
+.GridCellControl.nexartl .celledit[status=focused]
+{
+	border : 1px solid #5a86cd;
+}
+div#nexacontainer .GridCellControl .cellexpandbutton[status=focused]
+{
+	background : #f0f0f0;
+	border : 1px solid #f0f0f0;
+}
+.GridCellControl.nexartl .cellexpandbutton[status=focused]
+{
+	background : #f0f0f0;
+	border : 1px solid #f0f0f0;
+}
+div#nexacontainer .GridCellControl .cellexpandbutton[status=mouseover]
+{
+	border : 1px solid #4093e7;
+}
+.GridCellControl.nexartl .cellexpandbutton[status=mouseover]
+{
+	border : 1px solid #4093e7;
+}
+div#nexacontainer .GridCellControl .cellmaskedit[status=mouseover]
+{
+	border : 1px solid #5a86cd;
+}
+.GridCellControl.nexartl .cellmaskedit[status=mouseover]
+{
+	border : 1px solid #5a86cd;
+}
+div#nexacontainer .GridCellControl .cellmaskedit[status=focused]
+{
+	border : 1px solid #5a86cd;
+}
+.GridCellControl.nexartl .cellmaskedit[status=focused]
+{
+	border : 1px solid #5a86cd;
+}
+div#nexacontainer .Grid .body .row .cell.cell_item_status_up.dummy.dummy.dummy[status=mouseover]
+{
+	background : URL('./../../../_resource_/_images_/img_pvGrd_asc.png') no-repeat center center;
+}
+.Grid.nexartl .body .row .cell.cell_item_status_up[status=mouseover]
+{
+	background : url('./../../../_resource_/_images_/img_pvGrd_asc.png') no-repeat center center;
+}
+div#nexacontainer .Grid .body .row .cell.cell_item_status_down.dummy.dummy.dummy[status=mouseover]
+{
+	background : URL('./../../../_resource_/_images_/img_pvGrd_desc.png') no-repeat center center;
+}
+.Grid.nexartl .body .row .cell.cell_item_status_down[status=mouseover]
+{
+	background : url('./../../../_resource_/_images_/img_pvGrd_desc.png') no-repeat center center;
+}
+div#nexacontainer .Grid .body .row .cell.cell_item_status_filter.dummy.dummy.dummy[status=mouseover]
+{
+	font : normal bold 12px/normal "Arial";
+	color : #ffffff;
+	background : URL('./../../../_resource_/_images_/img_pvGrd_filter.png') no-repeat center center;
+}
+div#nexacontainer .Grid .body .row .cell.cell_item_status_filter.dummy.dummy.dummy[status=mouseover] > .nexacontentsbox
+{
+	text-align : center;
+	background-position-x : center;
+}
+.Grid.nexartl .body .row .cell.cell_item_status_filter[status=mouseover]
+{
+	background : url('./../../../_resource_/_images_/img_pvGrd_filter.png') no-repeat center center;
+}
+.Grid.nexartl .body .row .cell.cell_item_status_filter[status=mouseover] > .nexacontentsbox
+{
+	text-align : center;
+	background-position-x : center;
+}
+div#nexacontainer .Grid .body .row .cell.cell_item_status_SUM.dummy.dummy.dummy[status=mouseover]
+{
+	font : normal bold 12px/normal "Arial";
+	color : #ffffff;
+	background : URL('./../../../_resource_/_images_/img_pvGrd_iconSUM.png') no-repeat center center;
+}
+div#nexacontainer .Grid .body .row .cell.cell_item_status_SUM.dummy.dummy.dummy[status=mouseover] > .nexacontentsbox
+{
+	text-align : center;
+	background-position-x : center;
+}
+.Grid.nexartl .body .row .cell.cell_item_status_SUM[status=mouseover]
+{
+	background : url('./../../../_resource_/_images_/img_pvGrd_iconSUM.png') no-repeat center center;
+}
+.Grid.nexartl .body .row .cell.cell_item_status_SUM[status=mouseover] > .nexacontentsbox
+{
+	text-align : center;
+	background-position-x : center;
+}
+div#nexacontainer .Grid .body .row .cell.cell_item_status_CNT.dummy.dummy.dummy[status=mouseover]
+{
+	font : normal bold 12px/normal "Arial";
+	color : #ffffff;
+	background : URL('./../../../_resource_/_images_/img_pvGrd_iconCNT.png') no-repeat center center;
+}
+div#nexacontainer .Grid .body .row .cell.cell_item_status_CNT.dummy.dummy.dummy[status=mouseover] > .nexacontentsbox
+{
+	text-align : center;
+	background-position-x : center;
+}
+.Grid.nexartl .body .row .cell.cell_item_status_CNT[status=mouseover]
+{
+	background : url('./../../../_resource_/_images_/img_pvGrd_iconCNT.png') no-repeat center center;
+}
+.Grid.nexartl .body .row .cell.cell_item_status_CNT[status=mouseover] > .nexacontentsbox
+{
+	text-align : center;
+	background-position-x : center;
+}
+div#nexacontainer .Grid .body .row .cell.cell_item_status_AVG.dummy.dummy.dummy[status=mouseover]
+{
+	font : normal bold 12px/normal "Arial";
+	color : #ffffff;
+	background : URL('./../../../_resource_/_images_/img_pvGrd_iconAVG.png') no-repeat center center;
+}
+div#nexacontainer .Grid .body .row .cell.cell_item_status_AVG.dummy.dummy.dummy[status=mouseover] > .nexacontentsbox
+{
+	text-align : center;
+	background-position-x : center;
+}
+.Grid.nexartl .body .row .cell.cell_item_status_AVG[status=mouseover]
+{
+	background : url('./../../../_resource_/_images_/img_pvGrd_iconAVG.png') no-repeat center center;
+}
+.Grid.nexartl .body .row .cell.cell_item_status_AVG[status=mouseover] > .nexacontentsbox
+{
+	text-align : center;
+	background-position-x : center;
+}
+div#nexacontainer .Grid .body .row .cell.cell_item_status_MAX.dummy.dummy.dummy[status=mouseover]
+{
+	font : normal bold 12px/normal "Arial";
+	color : #ffffff;
+	background : URL('./../../../_resource_/_images_/img_pvGrd_iconMAX.png') no-repeat center center;
+}
+div#nexacontainer .Grid .body .row .cell.cell_item_status_MAX.dummy.dummy.dummy[status=mouseover] > .nexacontentsbox
+{
+	text-align : center;
+	background-position-x : center;
+}
+.Grid.nexartl .body .row .cell.cell_item_status_MAX[status=mouseover]
+{
+	background : url('./../../../_resource_/_images_/img_pvGrd_iconMAX.png') no-repeat center center;
+}
+.Grid.nexartl .body .row .cell.cell_item_status_MAX[status=mouseover] > .nexacontentsbox
+{
+	text-align : center;
+	background-position-x : center;
+}
+div#nexacontainer .Grid .body .row .cell.cell_item_status_MIN.dummy.dummy.dummy[status=mouseover]
+{
+	font : normal bold 12px/normal "Arial";
+	color : #ffffff;
+	background : URL('./../../../_resource_/_images_/img_pvGrd_iconMIN.png') no-repeat center center;
+}
+div#nexacontainer .Grid .body .row .cell.cell_item_status_MIN.dummy.dummy.dummy[status=mouseover] > .nexacontentsbox
+{
+	text-align : center;
+	background-position-x : center;
+}
+.Grid.nexartl .body .row .cell.cell_item_status_MIN[status=mouseover]
+{
+	background : url('./../../../_resource_/_images_/img_pvGrd_iconMIN.png') no-repeat center center;
+}
+.Grid.nexartl .body .row .cell.cell_item_status_MIN[status=mouseover] > .nexacontentsbox
+{
+	text-align : center;
+	background-position-x : center;
+}
+div#nexacontainer .Grid .body .row .cell.cell_item_status_FUNC.dummy.dummy.dummy[status=mouseover]
+{
+	font : normal bold 12px/normal "Arial";
+	color : #ffffff;
+	background : URL('./../../../_resource_/_images_/img_pvGrd_iconFUNC.png') no-repeat center center;
+}
+div#nexacontainer .Grid .body .row .cell.cell_item_status_FUNC.dummy.dummy.dummy[status=mouseover] > .nexacontentsbox
+{
+	text-align : center;
+	background-position-x : center;
+}
+.Grid.nexartl .body .row .cell.cell_item_status_FUNC[status=mouseover]
+{
+	background : url('./../../../_resource_/_images_/img_pvGrd_iconFUNC.png') no-repeat center center;
+}
+.Grid.nexartl .body .row .cell.cell_item_status_FUNC[status=mouseover] > .nexacontentsbox
+{
+	text-align : center;
+	background-position-x : center;
+}
+div#nexacontainer .Button.btn_nxPv_tabBtn[status=focused]
+{
+	background : #ffffff;
+	color : #111111;
+	border-top : 0px none;
+	border-right : 1px solid #a8a9af;
+	border-bottom : 0px none;
+	border-left : 1px solid #a8a9af;
+	font : 12px/normal "Segoe UI";
+}
+.Button.nexartl.btn_nxPv_tabBtn[status=focused]
+{
+	background : #ffffff;
+	border-top : 0px none;
+	border-right : 1px solid #a8a9af;
+	border-bottom : 0px none;
+	border-left : 1px solid #a8a9af;
+}
+div#nexacontainer .Button.btn_nxPv_tabBtn[status=mouseover]
+{
+	background : #ffffff;
+	color : #111111;
+	border-top : 0px none;
+	border-right : 1px solid #a8a9af;
+	border-bottom : 0px none;
+	border-left : 1px solid #a8a9af;
+	font : 12px/normal "Segoe UI";
+}
+.Button.nexartl.btn_nxPv_tabBtn[status=mouseover]
+{
+	background : #ffffff;
+	border-top : 0px none;
+	border-right : 1px solid #a8a9af;
+	border-bottom : 0px none;
+	border-left : 1px solid #a8a9af;
+}
+div#nexacontainer .Grid.grid_nxPv_editor .body .row .cell[status=mouseover]
+{
+	background : #ffffff;
+}
+.Grid.nexartl.grid_nxPv_editor .body .row .cell[status=mouseover]
+{
+	background : #ffffff;
+}
+div#nexacontainer .Edit.edit_nxPv_popEdit[status=focused]
+{
+	border : 1px solid #a3a4a8;
+}
+div#nexacontainer .Edit.edit_nxPv_popEdit[status=focused] .nexainput
+{
+	padding : 2px;
+}
+.Edit.nexartl.edit_nxPv_popEdit[status=focused]
+{
+	border : 1px solid #a3a4a8;
+}
+.Edit.nexartl.edit_nxPv_popEdit[status=focused] .nexainput
+{
+	padding : 2px;
+}
+div#nexacontainer .Edit.edit_nxPv_popEdit[status=mouseover]
+{
+	border : 1px solid #a3a4a8;
+}
+div#nexacontainer .Edit.edit_nxPv_popEdit[status=mouseover] .nexainput
+{
+	padding : 2px;
+}
+.Edit.nexartl.edit_nxPv_popEdit[status=mouseover]
+{
+	border : 1px solid #a3a4a8;
+}
+.Edit.nexartl.edit_nxPv_popEdit[status=mouseover] .nexainput
+{
+	padding : 2px;
+}
+div#nexacontainer .TextArea.txtarea_nxPv_popTxtarea[status=mouseover]
+{
+	border : 1px solid #a3a4a8;
+}
+div#nexacontainer .TextArea.txtarea_nxPv_popTxtarea[status=mouseover] .nexatextarea
+{
+	padding : 2px;
+}
+.TextArea.nexartl.txtarea_nxPv_popTxtarea[status=mouseover]
+{
+	border : 1px solid #a3a4a8;
+}
+.TextArea.nexartl.txtarea_nxPv_popTxtarea[status=mouseover] .nexatextarea
+{
+	padding : 2px;
+}
+div#nexacontainer .TextArea.txtarea_nxPv_popTxtarea[status=focused]
+{
+	border : 1px solid #a3a4a8;
+}
+div#nexacontainer .TextArea.txtarea_nxPv_popTxtarea[status=focused] .nexatextarea
+{
+	padding : 2px;
+}
+.TextArea.nexartl.txtarea_nxPv_popTxtarea[status=focused]
+{
+	border : 1px solid #a3a4a8;
+}
+.TextArea.nexartl.txtarea_nxPv_popTxtarea[status=focused] .nexatextarea
+{
+	padding : 2px;
+}
+div#nexacontainer .Grid.grd_nxPv_treeGrid .body .row .cell.treeLv0.dummy.dummy.dummy[status=focused]
+{
+	background : #eeeeee;
+	border-top : 0px none;
+	border-right : 0px none;
+	border-bottom : 1px solid #dbdee2;
+	border-left : 0px none;
+	color : #222222;
+}
+.Grid.nexartl.grd_nxPv_treeGrid .body .row .cell.treeLv0[status=focused]
+{
+	background : #eeeeee;
+	border-top : 0px none;
+	border-right : 0px none;
+	border-bottom : 1px solid #dbdee2;
+	border-left : 0px none;
+}
+div#nexacontainer .Grid.grd_nxPv_treeGrid .body .row .cell.treeLv0.dummy.dummy.dummy[status=mouseover]
+{
+	background : #eeeeee;
+	border-top : 0px none;
+	border-right : 0px none;
+	border-bottom : 1px solid #dbdee2;
+	border-left : 0px none;
+	color : #222222;
+}
+.Grid.nexartl.grd_nxPv_treeGrid .body .row .cell.treeLv0[status=mouseover]
+{
+	background : #eeeeee;
+	border-top : 0px none;
+	border-right : 0px none;
+	border-bottom : 1px solid #dbdee2;
+	border-left : 0px none;
+}
+div#nexacontainer .Grid.grd_nxPv_treeGrid .body .row .cell.treeLv1.dummy.dummy.dummy[status=focused]
+{
+	background : #ffffff;
+	border : 1px solid #dbdee2;
+	color : #222222;
+}
+.Grid.nexartl.grd_nxPv_treeGrid .body .row .cell.treeLv1[status=focused]
+{
+	background : #ffffff;
+	border : 1px solid #dbdee2;
+}
+div#nexacontainer .Grid.grd_nxPv_treeGrid .body .row .cell.treeLv1.dummy.dummy.dummy[status=mouseover]
+{
+	background : #ffffff;
+	border : 1px solid #dbdee2;
+	color : #222222;
+}
+.Grid.nexartl.grd_nxPv_treeGrid .body .row .cell.treeLv1[status=mouseover]
+{
+	background : #ffffff;
+	border : 1px solid #dbdee2;
+}
+div#nexacontainer .Grid .body .row .cell[userstatus=selected]
+{
+	background : #f2f9ff;
+}
+.Grid.nexartl .body .row .cell[userstatus=selected]
+{
+	background : #f2f9ff;
+}
+div#nexacontainer .GridCellControl .cellbutton[userstatus=pushed]
+{
+	background : #fefefe;
+	background : -webkit-linear-gradient(to top,#fefefe,#e9e9e9);
+	background : linear-gradient(to top,#fefefe,#e9e9e9);
+}
+.GridCellControl.nexartl .cellbutton[userstatus=pushed]
+{
+	background : #fefefe;
+	background : -webkit-linear-gradient(to top,#fefefe,#e9e9e9);
+	background : linear-gradient(to top,#fefefe,#e9e9e9);
+}
+div#nexacontainer .GridCellControl .cellbutton[userstatus=selected]
+{
+	background : #fefefe;
+	background : -webkit-linear-gradient(to top,#fefefe,#e9e9e9);
+	background : linear-gradient(to top,#fefefe,#e9e9e9);
+}
+.GridCellControl.nexartl .cellbutton[userstatus=selected]
+{
+	background : #fefefe;
+	background : -webkit-linear-gradient(to top,#fefefe,#e9e9e9);
+	background : linear-gradient(to top,#fefefe,#e9e9e9);
+}
+div#nexacontainer .GridCellControl .cellexpandbutton[userstatus=pushed]
+{
+	background : #f0f0f0;
+	border : 1px solid #f0f0f0;
+}
+.GridCellControl.nexartl .cellexpandbutton[userstatus=pushed]
+{
+	background : #f0f0f0;
+	border : 1px solid #f0f0f0;
+}
+div#nexacontainer .GridCellControl .cellexpandbutton[userstatus=selected]
+{
+	background : #f0f0f0;
+	border : 1px solid #f0f0f0;
+}
+.GridCellControl.nexartl .cellexpandbutton[userstatus=selected]
+{
+	background : #f0f0f0;
+	border : 1px solid #f0f0f0;
+}
+div#nexacontainer .GridCellControl .celltreeitem .treeitembutton[userstatus=expand] .nexacontentsbox
+{
+	text-align : left;
+	background-position-x : left;
+}
+.GridCellControl.nexartl .celltreeitem .treeitembutton[userstatus=expand] .nexacontentsbox
+{
+	text-align : right;
+	background-position-x : right;
+}
+div#nexacontainer .GridCellControl .celltreeitem .treeitembutton[userstatus=collapse] .nexacontentsbox
+{
+	text-align : left;
+	background-position-x : left;
+}
+.GridCellControl.nexartl .celltreeitem .treeitembutton[userstatus=collapse] .nexacontentsbox
+{
+	text-align : right;
+	background-position-x : right;
+}
+div#nexacontainer .Grid .body .row .cell[userstatus=blinked]
+{
+	background : #125dae;
+	color : #ffffff;
+}
+.Grid.nexartl .body .row .cell[userstatus=blinked]
+{
+	background : #125dae;
+}
+div#nexacontainer .Grid .body .row .cell.cell_item_status_up.dummy.dummy.dummy[userstatus=selected]
+{
+	background : URL('./../../../_resource_/_images_/img_pvGrd_asc.png') no-repeat center center;
+}
+.Grid.nexartl .body .row .cell.cell_item_status_up[userstatus=selected]
+{
+	background : url('./../../../_resource_/_images_/img_pvGrd_asc.png') no-repeat center center;
+}
+div#nexacontainer .Grid .body .row .cell.cell_item_status_down.dummy.dummy.dummy[userstatus=selected]
+{
+	background : URL('./../../../_resource_/_images_/img_pvGrd_desc.png') no-repeat center center;
+}
+.Grid.nexartl .body .row .cell.cell_item_status_down[userstatus=selected]
+{
+	background : url('./../../../_resource_/_images_/img_pvGrd_desc.png') no-repeat center center;
+}
+div#nexacontainer .Grid .body .row .cell.cell_item_status_filter.dummy.dummy.dummy[userstatus=selected]
+{
+	font : normal bold 12px/normal "Arial";
+	color : #ffffff;
+	background : URL('./../../../_resource_/_images_/img_pvGrd_filter.png') no-repeat center center;
+}
+div#nexacontainer .Grid .body .row .cell.cell_item_status_filter.dummy.dummy.dummy[userstatus=selected] > .nexacontentsbox
+{
+	text-align : center;
+	background-position-x : center;
+}
+.Grid.nexartl .body .row .cell.cell_item_status_filter[userstatus=selected]
+{
+	background : url('./../../../_resource_/_images_/img_pvGrd_filter.png') no-repeat center center;
+}
+.Grid.nexartl .body .row .cell.cell_item_status_filter[userstatus=selected] > .nexacontentsbox
+{
+	text-align : center;
+	background-position-x : center;
+}
+div#nexacontainer .Grid .body .row .cell.cell_item_status_SUM.dummy.dummy.dummy[userstatus=selected]
+{
+	font : normal bold 12px/normal "Arial";
+	color : #ffffff;
+	background : URL('./../../../_resource_/_images_/img_pvGrd_iconSUM.png') no-repeat center center;
+}
+div#nexacontainer .Grid .body .row .cell.cell_item_status_SUM.dummy.dummy.dummy[userstatus=selected] > .nexacontentsbox
+{
+	text-align : center;
+	background-position-x : center;
+}
+.Grid.nexartl .body .row .cell.cell_item_status_SUM[userstatus=selected]
+{
+	background : url('./../../../_resource_/_images_/img_pvGrd_iconSUM.png') no-repeat center center;
+}
+.Grid.nexartl .body .row .cell.cell_item_status_SUM[userstatus=selected] > .nexacontentsbox
+{
+	text-align : center;
+	background-position-x : center;
+}
+div#nexacontainer .Grid .body .row .cell.cell_item_status_CNT.dummy.dummy.dummy[userstatus=selected]
+{
+	font : normal bold 12px/normal "Arial";
+	color : #ffffff;
+	background : URL('./../../../_resource_/_images_/img_pvGrd_iconCNT.png') no-repeat center center;
+}
+div#nexacontainer .Grid .body .row .cell.cell_item_status_CNT.dummy.dummy.dummy[userstatus=selected] > .nexacontentsbox
+{
+	text-align : center;
+	background-position-x : center;
+}
+.Grid.nexartl .body .row .cell.cell_item_status_CNT[userstatus=selected]
+{
+	background : url('./../../../_resource_/_images_/img_pvGrd_iconCNT.png') no-repeat center center;
+}
+.Grid.nexartl .body .row .cell.cell_item_status_CNT[userstatus=selected] > .nexacontentsbox
+{
+	text-align : center;
+	background-position-x : center;
+}
+div#nexacontainer .Grid .body .row .cell.cell_item_status_AVG.dummy.dummy.dummy[userstatus=selected]
+{
+	font : normal bold 12px/normal "Arial";
+	color : #ffffff;
+	background : URL('./../../../_resource_/_images_/img_pvGrd_iconAVG.png') no-repeat center center;
+}
+div#nexacontainer .Grid .body .row .cell.cell_item_status_AVG.dummy.dummy.dummy[userstatus=selected] > .nexacontentsbox
+{
+	text-align : center;
+	background-position-x : center;
+}
+.Grid.nexartl .body .row .cell.cell_item_status_AVG[userstatus=selected]
+{
+	background : url('./../../../_resource_/_images_/img_pvGrd_iconAVG.png') no-repeat center center;
+}
+.Grid.nexartl .body .row .cell.cell_item_status_AVG[userstatus=selected] > .nexacontentsbox
+{
+	text-align : center;
+	background-position-x : center;
+}
+div#nexacontainer .Grid .body .row .cell.cell_item_status_MAX.dummy.dummy.dummy[userstatus=selected]
+{
+	font : normal bold 12px/normal "Arial";
+	color : #ffffff;
+	background : URL('./../../../_resource_/_images_/img_pvGrd_iconMAX.png') no-repeat center center;
+}
+div#nexacontainer .Grid .body .row .cell.cell_item_status_MAX.dummy.dummy.dummy[userstatus=selected] > .nexacontentsbox
+{
+	text-align : center;
+	background-position-x : center;
+}
+.Grid.nexartl .body .row .cell.cell_item_status_MAX[userstatus=selected]
+{
+	background : url('./../../../_resource_/_images_/img_pvGrd_iconMAX.png') no-repeat center center;
+}
+.Grid.nexartl .body .row .cell.cell_item_status_MAX[userstatus=selected] > .nexacontentsbox
+{
+	text-align : center;
+	background-position-x : center;
+}
+div#nexacontainer .Grid .body .row .cell.cell_item_status_MIN.dummy.dummy.dummy[userstatus=selected]
+{
+	font : normal bold 12px/normal "Arial";
+	color : #ffffff;
+	background : URL('./../../../_resource_/_images_/img_pvGrd_iconMIN.png') no-repeat center center;
+}
+div#nexacontainer .Grid .body .row .cell.cell_item_status_MIN.dummy.dummy.dummy[userstatus=selected] > .nexacontentsbox
+{
+	text-align : center;
+	background-position-x : center;
+}
+.Grid.nexartl .body .row .cell.cell_item_status_MIN[userstatus=selected]
+{
+	background : url('./../../../_resource_/_images_/img_pvGrd_iconMIN.png') no-repeat center center;
+}
+.Grid.nexartl .body .row .cell.cell_item_status_MIN[userstatus=selected] > .nexacontentsbox
+{
+	text-align : center;
+	background-position-x : center;
+}
+div#nexacontainer .Grid .body .row .cell.cell_item_status_FUNC.dummy.dummy.dummy[userstatus=selected]
+{
+	font : normal bold 12px/normal "Arial";
+	color : #ffffff;
+	background : URL('./../../../_resource_/_images_/img_pvGrd_iconFUNC.png') no-repeat center center;
+}
+div#nexacontainer .Grid .body .row .cell.cell_item_status_FUNC.dummy.dummy.dummy[userstatus=selected] > .nexacontentsbox
+{
+	text-align : center;
+	background-position-x : center;
+}
+.Grid.nexartl .body .row .cell.cell_item_status_FUNC[userstatus=selected]
+{
+	background : url('./../../../_resource_/_images_/img_pvGrd_iconFUNC.png') no-repeat center center;
+}
+.Grid.nexartl .body .row .cell.cell_item_status_FUNC[userstatus=selected] > .nexacontentsbox
+{
+	text-align : center;
+	background-position-x : center;
+}
+div#nexacontainer .Grid.grid_nxPv_editor .body .row .cell[userstatus=selected]
+{
+	background : #ffffff;
+	color : #222222;
+}
+.Grid.nexartl.grid_nxPv_editor .body .row .cell[userstatus=selected]
+{
+	background : #ffffff;
+}
+div#nexacontainer .Button.btn_nxPv_tabBtn[userstatus=pushed]
+{
+	background : #ffffff;
+	color : #111111;
+	border-top : 0px none;
+	border-right : 1px solid #a8a9af;
+	border-bottom : 0px none;
+	border-left : 1px solid #a8a9af;
+	font : 12px/normal "Segoe UI";
+}
+.Button.nexartl.btn_nxPv_tabBtn[userstatus=pushed]
+{
+	background : #ffffff;
+	border-top : 0px none;
+	border-right : 1px solid #a8a9af;
+	border-bottom : 0px none;
+	border-left : 1px solid #a8a9af;
+}
+div#nexacontainer .Button.btn_nxPv_tabBtn[userstatus=selected]
+{
+	background : #ffffff;
+	color : #111111;
+	border-top : 0px none;
+	border-right : 1px solid #a8a9af;
+	border-bottom : 0px none;
+	border-left : 1px solid #a8a9af;
+	font : 12px/normal "Segoe UI";
+}
+.Button.nexartl.btn_nxPv_tabBtn[userstatus=selected]
+{
+	background : #ffffff;
+	border-top : 0px none;
+	border-right : 1px solid #a8a9af;
+	border-bottom : 0px none;
+	border-left : 1px solid #a8a9af;
+}
+div#nexacontainer .Grid.grd_nxPv_treeGrid .body .row .cell.treeLv0.dummy.dummy.dummy[userstatus=selected]
+{
+	background : #eeeeee;
+	border-top : 0px none;
+	border-right : 0px none;
+	border-bottom : 1px solid #dbdee2;
+	border-left : 0px none;
+	color : #222222;
+}
+.Grid.nexartl.grd_nxPv_treeGrid .body .row .cell.treeLv0[userstatus=selected]
+{
+	background : #eeeeee;
+	border-top : 0px none;
+	border-right : 0px none;
+	border-bottom : 1px solid #dbdee2;
+	border-left : 0px none;
+}
+div#nexacontainer .Grid.grd_nxPv_treeGrid .body .row .cell.treeLv1.dummy.dummy.dummy[userstatus=selected]
+{
+	background : #ffffff;
+	border : 1px solid #dbdee2;
+	color : #222222;
+}
+.Grid.nexartl.grd_nxPv_treeGrid .body .row .cell.treeLv1[userstatus=selected]
+{
+	background : #ffffff;
+	border : 1px solid #dbdee2;
+}
+div#nexacontainer .Grid .head .row .cell[status=disabled]
+{
+	color : #999999;
+}
+div#nexacontainer .Grid .body .row .cell[status=disabled]
+{
+	color : #999999;
+}
+div#nexacontainer .GridCellControl .cellbutton[status=disabled]
+{
+	color : #bbbbbb;
+	background : #f5f5f5;
+	border : 1px solid #d9d9d9;
+}
+.GridCellControl.nexartl .cellbutton[status=disabled]
+{
+	background : #f5f5f5;
+	border : 1px solid #d9d9d9;
+}
+div#nexacontainer .GridCellControl .celledit[status=disabled]
+{
+	color : #999999;
+	background : #efefef;
+}
+.GridCellControl.nexartl .celledit[status=disabled]
+{
+	background : #efefef;
+}
+div#nexacontainer .GridCellControl .cellmaskedit[status=disabled]
+{
+	color : #999999;
+	background : #efefef;
+}
+.GridCellControl.nexartl .cellmaskedit[status=disabled]
+{
+	background : #efefef;
+}
+div#nexacontainer .GridCellControl .celltreeitem .treeitemtext[status=disabled]
+{
+	color : #999999;
+}
+div#nexacontainer .Grid .body .row .cell.cell_item_status_up.dummy.dummy.dummy[status=disabled]
+{
+	background : URL('./../../../_resource_/_images_/img_pvGrd_asc.png') no-repeat center center;
+}
+.Grid.nexartl .body .row .cell.cell_item_status_up[status=disabled]
+{
+	background : url('./../../../_resource_/_images_/img_pvGrd_asc.png') no-repeat center center;
+}
+div#nexacontainer .Grid .body .row .cell.cell_item_status_down.dummy.dummy.dummy[status=disabled]
+{
+	background : URL('./../../../_resource_/_images_/img_pvGrd_desc.png') no-repeat center center;
+}
+.Grid.nexartl .body .row .cell.cell_item_status_down[status=disabled]
+{
+	background : url('./../../../_resource_/_images_/img_pvGrd_desc.png') no-repeat center center;
+}
+div#nexacontainer .Grid .body .row .cell.cell_item_status_filter.dummy.dummy.dummy[status=disabled]
+{
+	font : normal bold 12px/normal "Arial";
+	color : #ffffff;
+	background : URL('./../../../_resource_/_images_/img_pvGrd_filter.png') no-repeat center center;
+}
+div#nexacontainer .Grid .body .row .cell.cell_item_status_filter.dummy.dummy.dummy[status=disabled] > .nexacontentsbox
+{
+	text-align : center;
+	background-position-x : center;
+}
+.Grid.nexartl .body .row .cell.cell_item_status_filter[status=disabled]
+{
+	background : url('./../../../_resource_/_images_/img_pvGrd_filter.png') no-repeat center center;
+}
+.Grid.nexartl .body .row .cell.cell_item_status_filter[status=disabled] > .nexacontentsbox
+{
+	text-align : center;
+	background-position-x : center;
+}
+div#nexacontainer .Grid .body .row .cell.cell_item_status_SUM.dummy.dummy.dummy[status=disabled]
+{
+	font : normal bold 12px/normal "Arial";
+	color : #ffffff;
+	background : URL('./../../../_resource_/_images_/img_pvGrd_iconSUM.png') no-repeat center center;
+}
+div#nexacontainer .Grid .body .row .cell.cell_item_status_SUM.dummy.dummy.dummy[status=disabled] > .nexacontentsbox
+{
+	text-align : center;
+	background-position-x : center;
+}
+.Grid.nexartl .body .row .cell.cell_item_status_SUM[status=disabled]
+{
+	background : url('./../../../_resource_/_images_/img_pvGrd_iconSUM.png') no-repeat center center;
+}
+.Grid.nexartl .body .row .cell.cell_item_status_SUM[status=disabled] > .nexacontentsbox
+{
+	text-align : center;
+	background-position-x : center;
+}
+div#nexacontainer .Grid .body .row .cell.cell_item_status_CNT.dummy.dummy.dummy[status=disabled]
+{
+	font : normal bold 12px/normal "Arial";
+	color : #ffffff;
+	background : URL('./../../../_resource_/_images_/img_pvGrd_iconCNT.png') no-repeat center center;
+}
+div#nexacontainer .Grid .body .row .cell.cell_item_status_CNT.dummy.dummy.dummy[status=disabled] > .nexacontentsbox
+{
+	text-align : center;
+	background-position-x : center;
+}
+.Grid.nexartl .body .row .cell.cell_item_status_CNT[status=disabled]
+{
+	background : url('./../../../_resource_/_images_/img_pvGrd_iconCNT.png') no-repeat center center;
+}
+.Grid.nexartl .body .row .cell.cell_item_status_CNT[status=disabled] > .nexacontentsbox
+{
+	text-align : center;
+	background-position-x : center;
+}
+div#nexacontainer .Grid .body .row .cell.cell_item_status_AVG.dummy.dummy.dummy[status=disabled]
+{
+	font : normal bold 12px/normal "Arial";
+	color : #ffffff;
+	background : URL('./../../../_resource_/_images_/img_pvGrd_iconAVG.png') no-repeat center center;
+}
+div#nexacontainer .Grid .body .row .cell.cell_item_status_AVG.dummy.dummy.dummy[status=disabled] > .nexacontentsbox
+{
+	text-align : center;
+	background-position-x : center;
+}
+.Grid.nexartl .body .row .cell.cell_item_status_AVG[status=disabled]
+{
+	background : url('./../../../_resource_/_images_/img_pvGrd_iconAVG.png') no-repeat center center;
+}
+.Grid.nexartl .body .row .cell.cell_item_status_AVG[status=disabled] > .nexacontentsbox
+{
+	text-align : center;
+	background-position-x : center;
+}
+div#nexacontainer .Grid .body .row .cell.cell_item_status_MAX.dummy.dummy.dummy[status=disabled]
+{
+	font : normal bold 12px/normal "Arial";
+	color : #ffffff;
+	background : URL('./../../../_resource_/_images_/img_pvGrd_iconMAX.png') no-repeat center center;
+}
+div#nexacontainer .Grid .body .row .cell.cell_item_status_MAX.dummy.dummy.dummy[status=disabled] > .nexacontentsbox
+{
+	text-align : center;
+	background-position-x : center;
+}
+.Grid.nexartl .body .row .cell.cell_item_status_MAX[status=disabled]
+{
+	background : url('./../../../_resource_/_images_/img_pvGrd_iconMAX.png') no-repeat center center;
+}
+.Grid.nexartl .body .row .cell.cell_item_status_MAX[status=disabled] > .nexacontentsbox
+{
+	text-align : center;
+	background-position-x : center;
+}
+div#nexacontainer .Grid .body .row .cell.cell_item_status_MIN.dummy.dummy.dummy[status=disabled]
+{
+	font : normal bold 12px/normal "Arial";
+	color : #ffffff;
+	background : URL('./../../../_resource_/_images_/img_pvGrd_iconMIN.png') no-repeat center center;
+}
+div#nexacontainer .Grid .body .row .cell.cell_item_status_MIN.dummy.dummy.dummy[status=disabled] > .nexacontentsbox
+{
+	text-align : center;
+	background-position-x : center;
+}
+.Grid.nexartl .body .row .cell.cell_item_status_MIN[status=disabled]
+{
+	background : url('./../../../_resource_/_images_/img_pvGrd_iconMIN.png') no-repeat center center;
+}
+.Grid.nexartl .body .row .cell.cell_item_status_MIN[status=disabled] > .nexacontentsbox
+{
+	text-align : center;
+	background-position-x : center;
+}
+div#nexacontainer .Grid .body .row .cell.cell_item_status_FUNC.dummy.dummy.dummy[status=disabled]
+{
+	font : normal bold 12px/normal "Arial";
+	color : #ffffff;
+	background : URL('./../../../_resource_/_images_/img_pvGrd_iconFUNC.png') no-repeat center center;
+}
+div#nexacontainer .Grid .body .row .cell.cell_item_status_FUNC.dummy.dummy.dummy[status=disabled] > .nexacontentsbox
+{
+	text-align : center;
+	background-position-x : center;
+}
+.Grid.nexartl .body .row .cell.cell_item_status_FUNC[status=disabled]
+{
+	background : url('./../../../_resource_/_images_/img_pvGrd_iconFUNC.png') no-repeat center center;
+}
+.Grid.nexartl .body .row .cell.cell_item_status_FUNC[status=disabled] > .nexacontentsbox
+{
+	text-align : center;
+	background-position-x : center;
+}
+div#nexacontainer .Button.btn_nxPv_tabBtn[status=disabled]
+{
+	background : #ffffff;
+	color : #bbbbbb;
+	border-top : 0px none;
+	border-right : 1px solid #a8a9af;
+	border-bottom : 0px none;
+	border-left : 1px solid #a8a9af;
+}
+.Button.nexartl.btn_nxPv_tabBtn[status=disabled]
+{
+	background : #ffffff;
+	border-top : 0px none;
+	border-right : 1px solid #a8a9af;
+	border-bottom : 0px none;
+	border-left : 1px solid #a8a9af;
+}
+div#nexacontainer .Grid .body .row .cell[status=disabled][userstatus=selected]
+{
+	background : #f0f0f0;
+}
+.Grid.nexartl .body .row .cell[status=disabled][userstatus=selected]
+{
+	background : #f0f0f0;
+}

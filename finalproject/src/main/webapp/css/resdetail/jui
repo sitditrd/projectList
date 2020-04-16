@@ -1,0 +1,1358 @@
+var jf5 = (function(jf5){
+	// test pageId.
+	//var pageId = "PGCZA00001";
+	
+	
+	/**
+	 * 로그 출력
+	 * @method	printLog
+	 * @for		jf5
+	 * @param	{String}[msg]로그에 출력할 메세지
+	 * @private
+	 */
+	function printLog(msg){
+		console.log(msg);
+	}
+	/**
+	 * Undefined 판단
+	 * @method	isUndefined
+	 * @for		jf5
+	 * @param	{Object|String}[_obj]
+	 * @return	{boolean} undefined 이면 true, 아니면 false
+	 * @private
+	 */
+	function isUndefined(_obj){
+		if(_obj === undefined){
+			return true;
+		}else{
+			return false;
+		}
+	}
+	/**
+	 * Object가 undefined 또는 null 인지 판단
+	 * @method	isObj
+	 * @for		jf5
+	 * @param	{Object}[_obj] 판별할 객체
+	 * @return	{boolean}_obj가 null이 아니거나 undefined 이면 false, 아니면 true
+	 * @private
+	 */
+	function isObj(_obj){
+		if( !isUndefined(_obj) && !isNull(_obj) ){
+			return true;
+		}else{
+			return false;
+		}
+	}
+	/**
+	 * type이 string 인지 판단
+	 * @method	isString
+	 * @for		jf5
+	 * @param	{String|Object}[_obj]String인지 판단할 객체
+	 * @return	{Boolean}_obj의 type이 String 이면 true, 아니면 false
+	 * @private
+	 */
+	function isString(_obj){
+		if((typeof _obj) === "string"){
+			return true;
+		}else{
+			return false;
+		}
+	}
+	/**
+	 * null 판단
+	 * @method	isNull
+	 * @for		jf5
+	 * @param	{String|Object}[_obj]null인지 판단할 객체
+	 * @return	{boolean}_obj가 null 이면 true, 아니면 false
+	 * @private
+	 */
+	function isNull(_obj){
+		if(_obj === null){
+			return true;
+		}else{
+			return false;
+		}
+	}
+	/**
+	 * 
+	 */
+	function hasClass(eleId,clsNm){
+		return document.getElementById(eleId).className.match(new RegExp('(\\s|^)'+clsNm+'(\\s|$)'));
+	}
+	/**
+	 * @default use
+	 */
+	var status = "use";
+	/**
+	 * JSON RPC 통신을 위한 function
+	 * <pre>
+	 * --- JSON RPC spec ---    : key               -   method,     value - jr(Json Rpc)
+	 * setFieldParameter        : key - FParam      -   reqParameters (f)
+	 * setStructureParameter    : key - SParam      -   structure
+	 * setTableParameter        : key - TParam      -   table
+	 * setFieldOutParameter     : key - FOutParam   -   fout
+	 * addOutFilter             : key - OutFilter   -   outFilter 배열로 받아야함
+	 * getInParameterList       : 내부에서 사용
+	 * getOutFilter             : 내부에서 사용
+	 * setRequestParameter      : 내부에서 사용
+	 * getData                  : 내부에서 사용
+	 * </pre>
+	 * @method	makeDataService
+	 * @for		.
+	 * @example
+	 *	{
+	 *		 methodType         :	""
+	 *		,reqType            :	""
+	 *		,isDBTransaction   :	boolean
+	 *		,sourceName         :	""
+	 *		,soukrceExtension   :	""
+	 *		,functionName       :	""
+	 *		,reqParameters      :	{key1:value1, key2:value2, ...}
+	 *		,structure          :	{key1:value1, key2:value2, ...}
+	 *		,table              :	{key1:value1, key2:value2, ...}
+	 *		,fout               :	{key1:value1, key2:value2, ...}
+	 *		,outFilter          :	{key1:value1, key2:value2, ...}
+	 *		,success            :	function object // result를 파라메터로 넘겨줌
+	 *		,error              :	function object // 인자 없음
+	 *	}
+	 * @param	{Object} param JSON RPC 통신을 위한 Parameter
+	 * @return	{Object|undefined} sync 모드인 경우 통신 결과값 JSON Data
+	 * @private
+	 */
+	function makeDataService(dataServiceURI){
+		if(dataServiceURI){
+			if(!jf5.Biz._bizModelObject.hasOwnProperty(dataServiceURI)){
+				try{
+					jf5.Biz._bizModelObject[dataServiceURI] = new DataService(dataServiceURI);
+				}catch(ee){}
+			}
+			return jf5.Biz._bizModelObject[dataServiceURI];
+		}else{
+			return jf5.dataService;
+		}
+	}
+	/**
+	 * AJAX 통신을 위한 함수
+	 * @method	makeAJAX
+	 * @for		.
+	 * @return	{jQuery.ajax} AJAX 객체
+	 * @private
+	 */
+	function makeAJAX(){
+		//TODO : 프로그램 코드 넘기는 코딩해야 함
+		return { ajax : function(_param){
+							var tempParam = {};
+							try{
+								tempParam = _param;
+								
+								// 파라메터를 일치할 수 있도록 코딩, action, reqParameters, actionMethod, successCallBack, errorCallBack을 2순위
+								if(!isUndefined(_param.action)){
+									tempParam.url = _param.action;
+								}
+								
+								tempParam.data = _param.reqParameters || _param.data;
+								tempParam.type = _param.actionMethod || _param.type;
+								tempParam.success = _param.successCallBack || _param.success;
+								tempParam.error = _param.errorCallBack || _param.error;
+								
+								delete tempParam.action;
+								delete tempParam.reqParameters;
+								delete tempParam.actionMethod;
+								delete tempParam.successCallBack;
+								delete tempParam.errorCallBack;
+								//printLog( tempParam ); 
+								jQuery.ajax(tempParam);
+							}catch(e){
+								printLog(e);
+							}finally{
+								tempParam = null;
+							}
+						}
+		};
+	}
+	/**
+	 * Form 전송시 사용
+	 * body 태그에 form 태그 생성
+	 * @method	makeForm
+	 * @for		jf5
+	 * @return {Object}form 통신 할수 있는 객체반환
+	 */
+	function makeForm(){
+		return {
+			/**
+			 * @method	submit
+			 * @for		jf5.makeForm
+			 * @param	{Object}[_param]
+			 * @param	{String}[_param.action]
+			 * @param	{Object}[_param.data]전송될 데이터
+			 * @param	{String}[_param.type] 전송 type get|post (default : post)
+			 * @param	{String}[_param.target]_blank|_self|_parent|_top|framename (default : _self)
+			 * @param	{String}[_param.name]form의 name
+			 */
+			submit : function(_param){
+				var tempParam = {};
+				var f;
+				try{
+					if(!isUndefined(_param.action)){
+						tempParam.action = _param.action;
+					}else{
+						printLog("필수 값이 지정되지 않았습니다.('action')");
+						return false;
+					}
+					
+					tempParam.type = _param.type || "post";
+					tempParam.target = _param.target || "_self";
+					tempParam.name = _param.nemt || "_formName";
+					
+					f = document.createElement("form");
+					f.setAttribute("method",tempParam.type);
+					f.setAttribute("action",tempParam.action);
+					f.setAttribute("name",tempParam.name);
+					f.setAttribute("target",tempParam.target);
+					
+					for(key in _param.data){
+						var i = document.createElement("input");
+						i.setAttribute("type","hidden");
+						i.setAttribute("name",key);
+						i.setAttribute("id",key);
+						i.setAttribute("value",_param.data[key]);
+						f.appendChild(i);
+					}
+					document.body.appendChild(f);
+					f.submit();
+				}catch(ee){
+					printLog(ee);
+				}finally{
+					tempParam = null;
+					f = null;
+				}
+			}
+		};
+	}
+	jf5.Biz = {
+			busy : false
+			,_bizModelObject : {}
+			/**
+			 * gateway 통신 객체 생성 함수
+			 * @method	getInstance
+			 * @for		Biz
+			 * @chainable
+			 * @param	{String} method 통신 방법 지정 키워드 (ep : enterprise portal, ajax : jQuery.ajax Object )
+			 * @param	{String} serviceUrl required - base uri of the service to request data from; additional URL parameters appended here will be appended to every request
+			 * @param	{String|Object} (optional) true to request data as JSON
+			 * @param	{String} (optional) userID user
+			 * @param	{String} (optional) password password
+			 * @param	{Object} (optional) headers map of custom headers which should be set in each request.
+			 * @param	{Boolean} (optional) tokenHandling enable/disable XCSRF-Token handling
+			 * @param	{Boolean} (optional) withCredentials (optional, experimental) true when user credentials are to be included in a cross-origin request. Please note that this works only if all requests are asynchronous.
+			 * @param	{Object} (optional) loadMetadataAsync (optional) determined if the service metadata request is sent synchronous or asynchronous. Default is false. Please note that if this is set to true attach to the metadataLoaded event to get notified when the metadata has been loaded before accessing the service metadata.
+			 * @param	{String} (optional) annotationURI (optional) the URL from which the annotation metadata should be loaded
+			 * @param	{Boolean} (optional) loadAnnotationsJoined (optional) Whether or not to fire the metadataLoaded-event only after annotations have been loaded as well.
+			 * @return	{j5.makeODataModel|j5.dataService} Object
+			 */
+			,getInstance :function(method, serviceUrl, isJSON, userID, password, headers, tokenHandling, withCredentials, loadMetadataAsync, annotationURI, loadAnnotationsJoined){
+				if(!isUndefined(method) ){
+					if(!isUndefined(serviceUrl)){
+						if(method.toLowerCase() == "ep"){
+							return makeDataService(serviceUrl);
+						}
+					}else if(method.toLowerCase() == "ajax"){
+						return makeAJAX();
+					}else if(method.toLowerCase() == "form"){
+						return makeForm();
+					}else{
+						printLog("인자가 형식에 맞지 않습니다(3 : serviceUrl is undefined)");
+						return ;
+					}
+				}else{
+					printLog("인자가 형식에 맞지 않습니다(4 : method is undefined)");
+					return ;
+				}
+			}
+	}
+
+	/**
+	 * panel 생성 및 관리
+	 */
+	jf5.panel = (function(panel){
+		/**
+		 * {
+		 * 		panel_ID : {
+		 * 			"panelObj"	: panel_Obj
+		 * 			,"script"	: function(){}
+		 * 			,"onload"	: function(){}
+		 * 			,"isPopup"	: false
+		 * 		}
+		 * }
+		 */
+		var _panelList = {};
+		/**
+		 * {
+		 * 		panel_0 : [],
+		 * 		tabGroup1 : [],
+		 * }
+		 * 
+		 * popup은 포함되지 않음
+		 * tabInfo 포함되지 않은 panel은 "_panel_inde"에 넣음
+		 */
+		var _panelStructure = {};
+		var _panelOrder = [];
+		/**
+		 * panel 탭 사용시 지정
+		 * 
+		 * jf5.panel.tabInfo = {
+		 * 		tabGroup1 :{"panelId":{title:"panelTitle","panelId":{title:"panelTitle"}},
+		 * 		tabGroup2 :{"panelId":{title:"panelTitle","panelId":{title:"panelTitle"}},
+		 * }
+		 */
+		panel.tabInfo = {}; 
+		
+		topPopup = [];
+		
+		var _index = 0;
+		/**
+		 * window.onLoad 실행
+		 * @method	init
+		 * @for		jf5.panel
+		 */
+		panel.init = function(){
+			initRendering();
+		}
+		/**
+		 * panel 추가
+		 * @method	add
+		 * @for		jf5.panel
+		 * @param	{String} [_id] Panel ID
+		 * @param	{Object} [_obj] Panel Object
+		 */
+		panel.add = function(_id,_obj,_isPopup,_isDisplay){
+			try{
+				if(!isUndefined(_id)&&isString(_id)&&_panelList.hasOwnProperty(_id)){
+					if(_isPopup === true ||_isPopup === "true" ){
+						_panelList[_id]["isPopup"] = true;
+					}
+					if(_isDisplay === false || _isDisplay === "false"){
+						_panelList[_id]["isDisplay"] = false;
+					}else{
+						_panelList[_id]["isDisplay"] = true;
+					}
+					_panelList[_id]["panelObj"] = _obj;
+				}else{
+					printLog("잘못된 ID 입니다. [" + _id +"]");
+				}
+			}catch(ee){printLog("[" + _id +"]paenl.add>>"+ee);}
+		}
+		/**
+		 * Get Panel
+		 * @method	get
+		 * @for		jf5.panel
+		 * @param	{String} [_id] Panel ID
+		 * @return	{Object} Panel Object 
+		 */
+		panel.get = function(_id){
+			try{
+				if(!isUndefined(_id)&&isString(_id)&&_panelList.hasOwnProperty(_id)){
+					if(_panelList[_id]["script"]!=="done"){
+						tabClick(_id,false);
+					}
+					return _panelList[_id]["panelObj"];
+				}else{
+					printLog("_id가 없습니다. ["+_id+"]");
+					return false;
+				}
+			}catch(ee){printLog("[" + _id +"]paenl.get>>"+ee);}
+		}
+		/**
+		 * 사용안함.
+		 */
+		function popInit(_id){
+			$("body").css("overflow","hidden");
+			document.getElementById(_id).tabIndex = "0";
+			//팝업 open 시 해당 div 포커스
+			document.getElementById(_id).focus();
+			
+			$("#"+_id+" .close a").on("keydown",function(oEvent){
+				if(event.keyCode == 9){
+					document.getElementById(_id).focus();
+				}
+			});
+		}
+		/**
+		 * Open LayerPopup
+		 * @method	open
+		 * @for		jf5.panel
+		 * @param	{String}[_id]Panel ID
+		 * @return	{Object} 팝업 Panel 반환
+		 */
+		panel.open = function(_id){
+			try{
+				topPopup.push(_id);
+				if(!isUndefined(_id)&&isString(_id)&&_panelList.hasOwnProperty(_id)){
+					if(_panelList[_id]["script"] !== "done"){
+						runScript(_id);
+					}
+					_index++;
+					document.getElementById(_id).style.display = "block";
+					//popup 포커스 설정
+					//popInit(_id);
+					if(!hasClass(_id,"popActive")){
+						document.getElementById(_id).className += " popActive";
+					}
+					document.getElementById(_id).style.zIndex = (900+_index)+"";
+					if(_panelList[_id][onload] !== "done"){
+						document.getElementById(_id).style.position = "fixed"
+						runOnloadScript(_id);
+					}
+					PopCommon2(_id);
+					
+					$("body, html").css("overflow","hidden");
+					$("body, html").css("overflow-y","auto");
+					return panel.get(_id);
+				}else{
+					printLog("잘못된 ID 입니다. [" + _id +"]");
+				}
+			}catch(ee){printLog("[" + _id +"]paenl.open>>"+ee);}
+		}
+		/**
+		 * Close LayerPopup
+		 * @method	close
+		 * @for		jf5.panel
+		 * @param	{String}[_id]Panel ID
+		 */
+		panel.close = function(_id,targetId){
+			try{
+				topPopup.pop();
+				if(!isUndefined(_id)&&isString(_id)&&_panelList.hasOwnProperty(_id)){
+					document.getElementById(_id).style.display = "none";
+					//document.getElementById(_id).removeAttribute("tabIndex");
+					//$("body").removeAttr( 'style' );
+					$("body, html").removeAttr( 'style' );
+					if(hasClass(_id,"popActive")){
+						var reg = new RegExp('(\\s|^)'+"popActive"+'(\\s|$)');
+						document.getElementById(_id).className = document.getElementById(_id).className.replace(reg,'');
+					}
+					closePop(_id,targetId);
+					_index--;
+				}else{
+					printLog("잘못된 ID 입니다.[" + _id +"]");
+				}
+			}catch(ee){printLog("[" + _id +"]paenl.close>>"+ee);}
+		}
+		
+		/**
+		 * 
+		 */
+		panel.getTopPopup = function(){
+			return topPopup[topPopup.length-1];
+		}
+		
+		/**
+		 * Panel 전역 스크립트 정의
+		 * 화면 로딩시 가장먼저 호출되는 function
+		 * @method	setScript
+		 * @for		jf5.panel
+		 * @param	{String}[_id] Panel ID
+		 * @param	{Function}[_funObj] Panel Script function object
+		 * @param	{boolean}[_isPopup]LayerPopup 여부
+		 * @private
+		 */
+		panel.setScript = function(_id,_funObj){
+			try{
+				_panelList[_id]={"index" : _index};
+				//_index++;
+				
+				addPanelStructure(_id);
+				
+				var reg = /^function(\s)?\((\s)*\)(\s)*\{/;
+				var temp = _funObj.toString().replace(reg, "");
+				temp = temp.substring(0, temp.lastIndexOf("}"));
+				_panelList[_id]["script"] = temp
+				//if(!_isPopup && isEmptyTabInfo()){
+					runScript(_id);
+				//}
+				temp = null;
+			}catch(ee){printLog("[" + _id +"]paenl.setScript>>"+ee);}
+		}
+		/**
+		 * Panel window.onLoad 실행 스크립트
+		 * @method	setOnloadScript
+		 * @for		jf5.panel
+		 * @param	{String}[_id] Panel ID
+		 * @param	{Function}[_funObj] Panel onLoad Script function object
+		 * @private
+		 */
+		panel.setOnloadScript = function(_id,_funObj){
+			try{
+				_panelList[_id]["onload"] = _funObj;
+			}catch(ee){printLog("[" + _id +"]paenl.setOnloadScript>>"+ee);}
+		}
+		
+		/**
+		 * 전역스크립트 실행
+		 * @method	runScript
+		 * @for		jf5.panel
+		 * @param	{String}[_id]Panel ID
+		 * @private
+		 */
+		function runScript(_id){
+			var _scriptObj, _scriptEle, headEle
+			try{
+				_scriptObj = document.createTextNode(_panelList[_id]["script"]);
+				_scriptEle = document.createElement("script");
+				_scriptEle.type = "text/javascript";
+				_scriptEle.appendChild( _scriptObj );
+				headEle = document.getElementsByTagName("head")[0];
+				//head 안에 <scrip/> 중 가장 하단에 추가
+				headEle.appendChild( _scriptEle );
+				//headwrapperId.insertBefore( _scriptEle , headwrapperId.lastChild );
+				_panelList[_id]["script"] = "done";
+			}catch(ee){
+				printLog("["+_id+"] runScript >>" + ee);
+			}finally{
+				headEle = null;
+				_scriptEle = null;
+				_scriptObj = null;
+			}
+		}
+		/**
+		 * onLoad 스크립트 실행
+		 * @method	runOnloadScript
+		 * @for		jf5.panel
+		 * @param	{String}[_id]Panel ID
+		 * @private
+		 */
+		function runOnloadScript(_id){
+			try{
+				if(_panelList[_id]["onload"] !== "done" && _panelList[_id]["onload"] !== undefined){
+					_panelList[_id]["onload"]();
+					_panelList[_id]["onload"] = "done"
+				}
+			}catch(ee){
+				throw ee;
+				printLog("["+_id+"] runOnloadScript >>" + ee);
+			}
+		}
+		/**
+		 * TabInfo가 설정 유무
+		 * @method	isEmptyTabInfo
+		 * @for		jf5.panel
+		 * @return	{Boolean} tabInfo 설정 유무 반환
+		 * @private
+		 */
+		function isEmptyTabInfo(){
+			var _result = true;
+			for(key in panel.tabInfo){
+				_result = false;
+				break;
+			}
+			return _result;
+		}
+		/**
+		 * jf5.panel.init에서 호출되며 
+		 * tab에 해당되는 패널은 tab을 만들며 가장 첫 Panel만 랜더링
+		 * tab,popup에 포함되지 않은 Panel은 바로 랜더링함.
+		 * @method	initRendering
+		 * @for		jf5.panel
+		 * @private
+		 */
+		function initRendering(){
+			//for(key in _panelStructure){
+			for(var j=0;j<_panelOrder.length;j++){
+				//tabInfo에 포함된 패널
+				if(_panelOrder[j].substring(0,6) !== "_panel"){
+					var divEle = document.createElement("div");
+					divEle.className = "tabPanel";
+					var ulEle = document.createElement("ul");
+					for(var i=0;i<_panelStructure[_panelOrder[j]].length;i++){
+						ulEle.appendChild(createTabHead(_panelStructure[_panelOrder[j]][i]));
+					}
+					divEle.appendChild(ulEle);
+					
+					//panel의 구조와 레이아웃의 구조를 정확하지 않아 변경가능함.
+					var firstTab = document.getElementById(_panelStructure[_panelOrder[j]][0]);
+					var firstTabp = firstTab.parentNode;
+					firstTabp.insertBefore(divEle, firstTab);
+					//탭그룸의 첫번째 panel 랜더링
+					tabClick(_panelStructure[_panelOrder[j]][0],true);
+					
+					ulEle = null;
+					divEle = null;
+					firstTabp = null;
+					firstTab = null;
+				}
+				//tab,popup에 속하지 않은 panel
+				else{
+					for(var i=0;i<_panelStructure[_panelOrder[j]].length;i++){
+						if(_panelList[_panelStructure[_panelOrder[j]][i]]["isDisplay"] === false){
+							tabClick(_panelStructure[_panelOrder[j]][i],false);
+						}else{
+							tabClick(_panelStructure[_panelOrder[j]][i],true);
+						}
+						
+					}
+				}
+			}
+		}
+		/**
+		 * 탭헤더 생성
+		 * <li><a href="#" title="" onclick="">Panel Title</a><li>
+		 * @method	createTabHead
+		 * @for		jf5.panel
+		 * @param	{String}[_id]Panel ID
+		 * @return	{Element}li 로 생성된 탭헤더
+		 * @private
+		 */
+		function createTabHead(_id){
+			var liEle = document.createElement("li");
+			var aEle = document.createElement("a");
+			aEle.appendChild( document.createTextNode(_panelList[_id]["title"]));
+			aEle.setAttribute("name", _id);
+			aEle.setAttribute("href", "#;");
+			aEle.setAttribute("title", _panelList[_id]["title"]);
+			aEle.addEventListener("click", function(_evt){
+				tabClick(_evt.target.getAttribute("name"),true);
+			});
+			liEle.appendChild(aEle);
+		
+			return liEle;
+		}
+		/**
+		 * script,onload,display 변경한다.
+		 * @method	tabClick
+		 * @for		jf5.panel
+		 * @param	[String][_id]Panel ID
+		 * @param	[Boolean][isDisplay]Panel display 여부
+		 * @private
+		 */
+		function tabClick(_id,isDisplay){
+			if(_panelList[_id]["script"] !== "done"){
+				runScript(_id);
+			}
+			if(!_panelList[_id]["isPopup"]){
+				if(isDisplay){
+					if(!isUndefined(_panelList[_id]["_groupID"])){
+						for(var i=0;i<_panelStructure[_panelList[_id]["_groupID"]].length;i++){
+							document.getElementById(_panelStructure[_panelList[_id]["_groupID"]][i]).style.display = "none";
+						}
+					}
+					if(document.getElementById(_id) !== null){
+						document.getElementById(_id).style.display = "block";
+					}
+					
+				}
+				if(_panelList[_id][onload] !== "done"){
+					runOnloadScript(_id);
+				}
+			}
+		}
+		var _beforeType = "";
+		var _panelInx = 0;
+		/**
+		 * 전체적인 panel 구조 
+		 * _panelStructure 생성.
+		 * @method	addPanelStructure
+		 * @for		jf5
+		 * @param	{String}[_id]Panel ID
+		 * @private
+		 */
+		function addPanelStructure(_id){
+			var _tabType = "";
+			if(isEmptyTabInfo()){
+				_tabType = "_panel_0";
+			}else{
+				for(tab in panel.tabInfo){
+					for(_panelID in panel.tabInfo[tab]){
+						if(_panelID === _id){
+							_tabType = tab;
+							_panelList[_id]["title"] = panel.tabInfo[tab][_panelID]["title"];
+							_panelList[_id]["_groupID"] = tab;
+							break;
+						}
+					}
+				}
+			}
+			if(_tabType === ""){
+				if(!(_beforeType === "" && _beforeType===_tabType)){
+					_panelInx++;
+				}
+				_tabType = "_panel_"+_panelInx;
+			}
+			_beforeType = _tabType;
+			
+			if(isUndefined(_panelStructure[_tabType])){
+				_panelStructure[_tabType] = [];
+				_panelOrder.push(_tabType);
+			}
+			_panelStructure[_tabType].push(_id);
+		}
+		
+		return panel;
+
+	})(jf5.panel || {})
+	
+	/**
+	 * loadingView 관련 설정
+	 * @property	loadingView
+	 * @type		Object
+	 */
+	var loadingView = {init:false,index:0,id:"popft"};
+	/**
+	 * loading view 생성
+	 * @method	initLoading
+	 * @for		jf5
+	 * @private
+	 */
+	function initLoading(){
+		var _id = loadingView.id;
+		var loadingHtml = [
+							'<div id="'+_id+'" class="loading" style="display:block;">',
+							'	<div class="ab">',
+							'		<div class="r_wrap">',
+							'			<img src="https://zeimage.eastarjet.com/newstar/images/Loading2.gif" alt="로딩중" class="gif"/>',
+							'		</div>',
+							'	</div>',
+							'</div>'
+		              	].join('');
+		$("body").append(loadingHtml);
+		/*
+		$(".logoArea").css({
+			"margin-left" : -1*($(".logoArea").outerWidth()/2) + "px",
+			"margin-top" : -1*($(".logoArea").outerHeight()/2) + "px"
+		});
+		*/
+		loadingHtml = null;
+		loadingView.init = true;
+	}
+	/**
+	 * loading view display show
+	 * @mothod	showLoading
+	 * @for		jf5
+	 * @param	{string}[msg]Loading 에 표시된 메세지
+	 */
+	jf5.showLoading = function(msg){
+		if(!loadingView.init){
+			initLoading();
+		}else{
+			if($("#"+loadingView.id +".loading").css("display") === "none"){
+				$("#"+loadingView.id +".loading").css("display","block");
+			}
+		}
+		loadingView.index++;
+		if(msg == undefined){
+			msg = "로딩중입니다";
+		}
+		$("#"+loadingView.id+"_msg").text(msg);
+	}
+	/**
+	 * loading view display hide
+	 * @mothod	hideLoading
+	 * @for		jf5
+	 */
+	jf5.hideLoading = function(){
+		//console.log("hideLoading");
+		try{
+			if(loadingView.index === 0){
+				return;
+			}
+			loadingView.index--;
+			if(loadingView.index === 0){
+				$("#"+loadingView.id +".loading").css("display","none");
+			}
+		}catch(ee){
+			printLog("hideLoading >> " + ee);
+			jf5.hideLoading();
+		}
+	}
+	
+	var displayCheck = "";
+	
+	/**
+	 * 
+	 */
+	jf5.pagination = (function(pagination){
+		//최상의 부모ID
+		var p_id, totalPage=0, displayPage=10, displayIndex=0, currentIndex=0, currentPage=1, checkCurrentPage=0, startPage=undefined, endPage=undefined, movePageEvent;
+		pagination.make = function(ele_id, dPage, index, oFunction){
+			
+			
+			p_id = ele_id;
+			displayPage = dPage;
+			displayIndex = index;
+			movePageEvent = oFunction;
+			if(displayIndex > 0) movePageEvent((Number(displayIndex)));currentPage = displayIndex;
+			render();
+		}
+		pagination.setPaging = function(_totalPage,setIdx){
+			if(_totalPage>=0){
+				totalPage = parseInt(_totalPage,10);
+				$("#"+p_id+">div").css("display","");
+			}
+			setPageList(setIdx);
+		}
+		
+		function render(){
+			var sObj = '<div class="bbs_page" style="display: none;"><ul id="'+p_id+'_first_ul" class="c_wrap">';
+			var prevObj = [
+					'<li class="move">'
+						,'<ul class="prev">'
+							,'<li><a href="#" id="'+p_id+'_first"><img src="https://zeimage.eastarjet.com/newstar/images/btn_bbsFirst.png" alt="맨 앞으로"></a></li>'
+							,'<li><a href="#" id="'+p_id+'_prev"><img src="https://zeimage.eastarjet.com/newstar/images/btn_bbsPrev.png" alt="이전으로"></a></li>'
+						,'</ul>'
+					,'</li>'
+				].join('');
+			var nextObj = [
+					'<li class="move">'
+						,'<ul class="next">'
+							,'<li><a href="#" id="'+p_id+'_next"><img src="https://zeimage.eastarjet.com/newstar/images/btn_bbsNext.png" alt="다음으로"></a></li>'
+							,'<li><a href="#" id="'+p_id+'_last"><img src="https://zeimage.eastarjet.com/newstar/images/btn_bbsLast.png" alt="맨 뒤로"></a></li>'
+						,'</ul>'
+					,'</li>'
+				].join('');
+			var eObj = '</ul></div>';
+			
+			var list = '<li class="num"><ul id="'+p_id+'_pageList" class="c_wrap"></ul></li>';
+			
+			$("#"+p_id).append(sObj+prevObj+list+nextObj+eObj);
+			//이벤트 설정
+			$("#"+p_id+"_first").on("click",{"index":"first","pIndex":displayIndex},jf5.pagination.pageClick);
+			$("#"+p_id+"_prev").on("click",{"index":"prev","pIndex":displayIndex},jf5.pagination.pageClick);
+			$("#"+p_id+"_next").on("click",{"index":"next","pIndex":displayIndex},jf5.pagination.pageClick);
+			$("#"+p_id+"_last").on("click",{"index":"last","pIndex":displayIndex},jf5.pagination.pageClick);
+		}
+		
+		function pageListRender(){
+			var list = [];
+			//console.log("pageListRender >>> startPage :"+startPage+", endPage : "+endPage+", currentPage : "+currentPage+", totalPage : "+totalPage);
+			for(var i=startPage;i<endPage+1;i++){
+				
+				//displayIndex --> 검색 파라미터 값.
+				//currentPage  --> 페이지 버튼 클릭 시 
+				if(displayIndex == currentPage){
+					if(i == displayIndex){
+						list.push('<li class="on"><a href="#" id="'+p_id+"_page_"+i+'">'+i+'</a></li>')
+					}else{
+						list.push('<li><a href="#" id="'+p_id+"_page_"+i+'">'+i+'</a></li>');
+					}
+				}else{
+					if(i === currentPage){
+						list.push('<li class="on"><a href="#" id="'+p_id+"_page_"+i+'">'+i+'</a></li>')
+					}else{
+						list.push('<li><a href="#" id="'+p_id+"_page_"+i+'">'+i+'</a></li>');
+					}
+				}
+			}
+			
+			return result = list.join('');
+		}
+		function setPageList(setIdx){
+			
+			if(startPage !== undefined){
+				//이벤트 해제
+				for(var i=startPage;i<endPage+1;i++){
+					$("#"+p_id+"_page_"+i).off("click",jf5.pagination.pageClick);
+				}
+				//ele 삭제
+				$("#"+p_id+"_pageList").empty();
+			}
+			//startPage, endPage 셋팅
+			if(displayIndex > displayPage){
+				var calcCurrentIndex = Math.floor((displayIndex / displayPage)); //페이지 계산시 내림.
+				var calcIndexRemain = (displayIndex % displayPage); 
+
+				if(calcIndexRemain == 0){
+					calcCurrentIndex = calcCurrentIndex - 1;
+				}else{
+					calcCurrentIndex = calcCurrentIndex;
+				}
+				startPage = calcCurrentIndex * displayPage + 1;
+				endPage = (Number(calcCurrentIndex) + 1) * displayPage;
+			}else{
+				startPage = currentIndex * displayPage + 1;
+				endPage = (currentIndex+1) * displayPage;
+			}
+			//console.log("currentIndex :"+currentIndex+", displayPage : "+displayPage);
+			if(endPage>totalPage){
+				if(totalPage == 0){
+					endPage = 1;
+				}else{
+					endPage = totalPage;
+				}
+			}
+			if(setIdx !== undefined && setIdx !== ""){
+				currentIndex = 0;
+				currentPage = setIdx;
+				pagination.currentPage = setIdx;
+				startPage = 1;
+				endPage = (currentIndex+1)*displayPage;
+				
+				if(endPage>totalPage){
+					if(totalPage == 0){
+						endPage = 1;
+					}else{
+						endPage = totalPage;
+					}
+				}
+				
+			}else{
+				if(currentPage > endPage){
+					currentPage = 1;
+					pagination.currentPage = 1;
+				}
+			}
+			
+			/*if(startPage === endPage + 1){
+				startPage = endPage;
+			}*/
+			
+			$("#"+p_id+"_pageList").append(pageListRender());
+			//이벤트 설정
+			for(var i=startPage;i<endPage+1;i++){
+				$("#"+p_id+"_page_"+i).on("click",{"index":i,"pIndex":displayIndex},jf5.pagination.pageClick);
+			}
+		}
+		/**
+		 * a 클릭 호출되는 function
+		 */
+		pagination.pageClick = function(oEvent){
+			//console.log("oEvent :"+oEvent.data.index+ ", Math.floor(totalPage/displayPage) : "+Math.floor(totalPage/displayPage));
+			//console.log("pageClick >>> startPage :"+startPage+", endPage : "+endPage+", currentPage : "+currentPage+", totalPage : "+totalPage+", oEvent :"+oEvent.data.index+ ", Math.floor(totalPage/displayPage) : "+Math.floor(totalPage/displayPage));
+			if(oEvent.data.index === "first"){
+				displayIndex = 0;
+				if(currentIndex !== 0){
+					currentIndex = 0;
+					currentPage = 1;
+					pagination.currentPage = 1;
+					setPageList();
+					movePageEvent(currentPage);
+				}
+				if(currentPage !==1){
+					currentPage = 1;
+					pagination.currentPage = 1;
+					$("#"+p_id+"_pageList li").removeClass("on");
+					$("#"+p_id+"_pageList li:eq(0)").addClass("on");
+					movePageEvent(currentPage);
+				}
+			}else if(oEvent.data.index === "prev"){
+				
+				if(displayIndex > 1){
+					var calcCurrentIndex = Math.floor((displayIndex / displayPage)); //페이지 계산시 내림.
+					var calcIndexRemain = (displayIndex % displayPage); 
+
+					if(calcIndexRemain == 0){
+						calcCurrentIndex = calcCurrentIndex - 1;
+					}else{
+						calcCurrentIndex = calcCurrentIndex;
+					}
+					
+					currentIndex = calcCurrentIndex;
+					
+					currentIndex--;
+					currentPage = (currentIndex+1)*displayPage;
+				}else{
+					if(currentIndex > 0){
+						currentIndex--;
+						currentPage = (currentIndex+1)*displayPage;
+					}
+				}
+				if(currentIndex > -1){
+					displayIndex = 0;
+					setPageList();
+					movePageEvent(currentPage);
+				}
+			}else if(oEvent.data.index === "next"){
+				var temp = String(totalPage/displayPage);
+
+				if(displayIndex > 1){
+					var calcCurrentIndex = Math.floor((displayIndex / displayPage)); //페이지 계산시 내림.
+					var calcIndexRemain = (displayIndex % displayPage);
+					
+					if(calcIndexRemain == 0){
+						calcCurrentIndex = calcCurrentIndex;
+					}else{
+						calcCurrentIndex = calcCurrentIndex + 1;
+					}
+					
+					currentIndex = calcCurrentIndex;
+					currentPage = ((currentIndex)*displayPage) + 1;
+					
+					if(currentIndex > 1){
+						displayIndex = 0;
+						setPageList();
+						movePageEvent(currentPage);
+					}
+					
+				}else{
+					//기존 소스
+					if(temp.indexOf(".") == -1){
+						if(currentIndex +1 !== totalPage/displayPage){
+							if(displayIndex > 1){
+								currentIndex = Number(currentIndex +1);
+								currentIndex++;
+								currentPage = currentIndex*displayPage + 1;
+								pagination.currentPage = currentIndex*displayPage + 1;
+							}else{
+								currentIndex++;
+								currentPage = currentIndex*displayPage + 1;
+								pagination.currentPage = currentIndex*displayPage + 1;
+							}
+							
+							setPageList();
+							movePageEvent(currentPage);
+						}
+					}else{
+						if(currentIndex !== Math.floor(totalPage/displayPage)){
+							currentIndex++;
+							currentPage = currentIndex*displayPage + 1;
+							pagination.currentPage = currentIndex*displayPage + 1;
+							setPageList();
+							movePageEvent(currentPage);
+						}
+					}
+					//기존 소스
+				}
+				
+			}else if(oEvent.data.index === "last"){
+				displayIndex = 0;
+				//if(totalPage/displayPage !== 1){
+					
+					var temp = String(totalPage/displayPage);
+					
+					//console.log("last temp :"+temp)
+					
+					if(temp.indexOf(".") == -1){
+						
+						if(currentIndex +1 !== totalPage/displayPage){
+							currentIndex = totalPage/displayPage - 1;
+							currentPage = totalPage;
+							pagination.currentPage = totalPage;
+							setPageList();
+							movePageEvent(currentPage);
+						}
+						if(currentPage !== totalPage){
+							currentPage = totalPage;
+							pagination.currentPage = totalPage;
+							$("#"+p_id+"_pageList li").removeClass("on");
+							$("#"+p_id+"_pageList li:last()").addClass("on");
+							movePageEvent(currentPage);
+						}
+					
+					}else{
+					
+						if(currentIndex !== Math.floor(totalPage/displayPage)){
+							currentIndex = Math.floor(totalPage/displayPage);
+							currentPage = totalPage;
+							pagination.currentPage = totalPage;
+							setPageList();
+							movePageEvent(currentPage);
+						}
+						if(currentPage !== totalPage){
+							currentPage = totalPage;
+							pagination.currentPage = totalPage;
+							$("#"+p_id+"_pageList li").removeClass("on");
+							$("#"+p_id+"_pageList li:last()").addClass("on");
+							movePageEvent(currentPage);
+						}
+					}
+				//}
+			}else{
+				currentPage = oEvent.data.index;
+				checkCurrentPage = oEvent.data.index;
+				$("#"+p_id+"_pageList li").removeClass("on");
+				$(this).parent().addClass("on");
+				movePageEvent(currentPage);
+			}
+			return false;
+		}
+		return pagination;
+	})(jf5.pagination||{})
+	
+	
+var DataService=function(dataServiceURI){var _logKey;var _logMsg;var _inParameterList=[];var _outFilter={};this.setRequestParameter=function(programCode,requestExecuteType,isDBTransaction,sourceName,sourceExtension,functionName,panelId,methodType){var requestParameter={};requestParameter["javaClass"]="com.jein.framework.connectivity.parameter.RequestParameter";requestParameter["requestUniqueCode"]=programCode;requestParameter["requestExecuteType"]=requestExecuteType;if(isDBTransaction==null||isDBTransaction==""){requestParameter["DBTransaction"]=false;}else{requestParameter["DBTransaction"]=isDBTransaction;}
+requestParameter["sourceName"]=sourceName;requestParameter["sourceExtension"]=sourceExtension;requestParameter["functionName"]=functionName;requestParameter["panelId"]=panelId;requestParameter["methodType"]=methodType
+try{return requestParameter;}finally{requestParameter=null;}};this.setFieldParameter=function(paramName,paramValue){var inParam={};var inputData={};var map={};var pList={};var list=[];inParam["javaClass"]="com.jein.framework.connectivity.parameter.InParameter";inParam["paramName"]=paramName;inParam["ioType"]="IN";inParam["structureType"]="FIELD";inputData["javaClass"]="java.util.List";if(paramValue!=null&&paramValue!="undefined"){map[paramName]=InputParamRecursive(paramValue);pList["map"]=map;pList["javaClass"]="java.util.Map";list[0]=pList;inputData["list"]=list;inParam["data"]=inputData;_inParameterList[_inParameterList.length]=inParam;}
+list=null;pList=null;map=null;inputData=null;inParam=null;};this.setFieldOutParameter=function(paramName,paramValue){var inParam={};var inputData={};var map={};var pList={};var list=[];inParam["javaClass"]="com.jein.framework.connectivity.parameter.InParameter";inParam["paramName"]=paramName;inParam["ioType"]="OUT";inParam["structureType"]="FIELD";inputData["javaClass"]="java.util.List";if(paramValue!=null&&paramValue!="undefined"){map[paramName]=""+paramValue;pList["map"]=map;pList["javaClass"]="java.util.Map";list[0]=pList;inputData["list"]=list;inParam["data"]=inputData;_inParameterList[_inParameterList.length]=inParam;}else{map[paramName]=null;pList["map"]=map;pList["javaClass"]="java.util.Map";list[0]=pList;inputData["list"]=list;inParam["data"]=inputData;_inParameterList[_inParameterList.length]=inParam;}
+list=null;pList=null;map=null;inputData=null;inParam=null;}
+this.setStructureParameter=function(paramName,paramValue){var inParam={};var inputData={};var list=[];inParam["javaClass"]="com.jein.framework.connectivity.parameter.InParameter";inParam["paramName"]=paramName;inParam["ioType"]="IN";inParam["structureType"]="STRUCTURE";inputData["javaClass"]="java.util.List";if(paramValue!=null&&paramValue!="undefined"){list[0]=InputParamRecursive(paramValue);inputData["list"]=list;inParam["data"]=inputData;_inParameterList[_inParameterList.length]=inParam;}
+list=null;inputData=null;inParam=null;};function InputParamRecursive(paramValue){if(typeof(paramValue)=="string"||typeof(paramValue)=="number"||typeof(paramValue)=="boolean"){return""+paramValue;}else if(Array.isArray(paramValue)){var tempList=[];var data={};try{for(var i=0;i<paramValue.length;i++){tempList[i]=InputParamRecursive(paramValue[i]);}
+data["list"]=tempList;data["javaClass"]="java.util.List";return data;}finally{tempList=null;data=null;}}else if(typeof(paramValue)=="object"){var tempMap={};var data={};try{for(var key in paramValue){tempMap[key]=InputParamRecursive(paramValue[key]);}
+data["map"]=tempMap;data["javaClass"]="java.util.Map";return data;}finally{tempMap=null;data=null;}}}
+this.setTableParameter=function(paramName,paramValue){var inParam=new Object();var data=new Object();var list=new Array();inParam["javaClass"]="com.jein.framework.connectivity.parameter.InParameter";inParam["paramName"]=paramName;inParam["ioType"]="IN";inParam["structureType"]="TABLE";if(paramValue!=null&&paramValue!="undefined"){inParam["data"]=InputParamRecursive(paramValue);_inParameterList[_inParameterList.length]=inParam;}
+list=null;data=null;inParam=null;};this.returnData=function(){return _inParameterList;};this.addOutFilter=function(filterName,filterValue){var obj={};obj["javaClass"]="java.util.List";obj["list"]=filterValue;_outFilter[filterName]=obj;};this.getInParameterList=function(){var obj={};obj["javaClass"]="java.util.List";obj["list"]=_inParameterList;try{return obj;}finally{obj=null;_inParameterList=null;_inParameterList=[];}};this.getOutFilter=function(){var obj={};obj["javaClass"]="java.util.Map";obj["map"]=_outFilter;try{return obj;}finally{obj=null;}};this.jsonRpcClient=new JSONRpcClient(dataServiceURI);function showErrorMsg(_logKey,_logMsg,dispMsg,guideMsg){function convertToMsg(_logKey,_logMsg,guideMsg){var msg=[];msg.push(_logKey);msg.push("<br/>");msg.push("<br/>");msg.push("<br/>");msg.push(guideMsg);msg.push("<br/>");return msg.join("");}
+if(document.getElementById("errorDivTagID")){document.getElementById("msg__Div").innerHTML=convertToMsg(_logKey,_logMsg,guideMsg);document.getElementById("errorDivTagID").style.visibility="visible";}else{var scriptStr=[];scriptStr.push('function closeExceptionMsg(){');scriptStr.push(' try{');scriptStr.push('  document.getElementById("errorDivTagID").style.visibility = "hidden"; //visibility: hidden;');scriptStr.push(' }catch(e){');scriptStr.push('  console.error(e);');scriptStr.push(' }');scriptStr.push('}');var scriptObj=document.createTextNode(scriptStr.join("\n"));var _scriptEle=document.createElement("script");_scriptEle.appendChild(scriptObj);var headwrapperId=document.getElementsByTagName("head")[0];headwrapperId.insertBefore(_scriptEle,headwrapperId.lastChild);var errorDivTag=document.createElement("div");errorDivTag.style.position="fixed";errorDivTag.style.top="0";errorDivTag.style.left="0";errorDivTag.style.width="100%";errorDivTag.style.height="100%";errorDivTag.style.zIndex="99999999";errorDivTag.id="errorDivTagID";var wrapperId=document.getElementsByTagName("body")[0];wrapperId.insertBefore(errorDivTag,wrapperId.lastChild);var htmlStrArr=[];htmlStrArr.push('<div style="position: fixed; top:0; left:0; width:100%; height:100%;">');htmlStrArr.push(' <div style="position:absolute; z-index:100; top:50%; left:50%; width:540px; margin-top:-140px; margin-left:-270px; border:5px solid #d8d8d8; border-radius:8px; background-color:#fff; box-shadow:2px 5px 10px rgba(0,0,0,.1), -2px -5px 10px rgba(197,197,197,.1); background:linear-gradient(#fff 50%, #f1f1f1 100%);">');htmlStrArr.push('  <div style="width:480px; margin:0 auto; text-align:center; padding-top:25px; padding-bottom:17px; font:bold 40px tahoma,arial,malgul gothic; color:#ffae2c;"><strong style="font:bold 44px verdana,tahoma,arial,malgul gothic; color:#f95710;"></strong>',dispMsg,'</div>');htmlStrArr.push('  <div id="msg__Div" style="max-height: 180px; width:480px; border:1px solid #e7e7e7; border-radius:8px; background-color:#f1f1f1; margin:0 auto; text-align:center; padding:20px 15px; font:normal 12px/150% tahoma,arial; color:#8c8c8c; text-align:left; box-shadow:inset 1px 1px 5px rgba(190,190,190,.1); overflow-y:auto;">');htmlStrArr.push(convertToMsg(_logKey,_logMsg,guideMsg));htmlStrArr.push('  </div>');htmlStrArr.push('  <div style="width:480px; margin:0 auto; text-align:center; padding-top:15px; padding-bottom:20px; font:normal 14px arial; color:#4d4d4d; text-align:right;"><a href="javascript:closeExceptionMsg();">Close Message</a></div>');htmlStrArr.push(' </div>');htmlStrArr.push(' <div style="position: fixed; top:0; left:0; width:100%; height:100%; background-color:#000000; opacity:0.7;"></div>');htmlStrArr.push('</div>');document.getElementById("errorDivTagID").innerHTML=htmlStrArr.join("");}}
+this.submit=function(param){try{try{var fieldParamObj=param.reqParameters;var structureParamObj=param.structure;var tableParamObj=param.table;var fieldOutParamObj=param.fout;var outFilterObj=param.outFilter;var userParam=param.userParam;if(param.reqType==='REST'||param.reqType==='SOAP'||param.reqType==='BIZ'){var _obj={}
+for(var key in fieldParamObj){if(typeof(fieldParamObj[key])=="object"){_obj[key]=JSON.stringify(fieldParamObj[key]);}else{_obj[key]=fieldParamObj[key];}}
+fieldParamObj=_obj;}
+if(isObj(fieldParamObj)){for(var properties in fieldParamObj){this.setFieldParameter(properties,fieldParamObj[properties]+"");}}
+if(isObj(structureParamObj)){for(var properties in structureParamObj){this.setStructureParameter(properties,structureParamObj[properties]);}}
+if(isObj(tableParamObj)){for(var properties in tableParamObj){this.setTableParameter(properties,tableParamObj[properties]);}}
+if(isObj(fieldOutParamObj)){for(var properties in fieldOutParamObj){this.setFieldOutParameter(properties,(fieldOutParamObj[properties]===null?fieldOutParamObj[properties]:fieldOutParamObj[properties]+""));}}
+if(isObj(outFilterObj)){for(var properties in outFilterObj){this.addOutFilter(properties,outFilterObj[properties]);}}
+var requestParameter=this.setRequestParameter("PGWRA00002",param.reqType,param.isDBTransaction,param.sourceName,param.sourceExtension,param.functionName,param.panelId,param.methodType);var callBack={};if(param.hasOwnProperty("successCallBack")){callBack.success=param.successCallBack;}
+if(param.hasOwnProperty("errorCallBack")&&param.errorCallBack!==undefined&&typeof param.errorCallBack==="function"){callBack.error=param.errorCallBack;}
+if(isUndefined(callBack.success)){return this.getData(this.jsonRpcClient,requestParameter);}else{this.getData(this.jsonRpcClient,requestParameter,callBack,userParam);}}catch(_e){console.error(_e);throw _e;}finally{fieldParamObj=null;structureParamObj=null;tableParamObj=null;fieldOutParamObj=null;outFilterObj=null;param=null;requestParameter=null;}}catch(_e){try{console.log(_e);jf5.hideLoading();}catch(__e){console.log(__e);}}};this.comm=function(param){if(!isUndefined(param.listData)&&!isNull(param.listData)&&Array.isArray(param.listData)){try{try{var userParam=param.userParam;var listDataObj=param.listData;var fieldParamObj;var structureParamObj;var tableParamObj;var isError=false;for(var i=0;i<listDataObj.length;i++){isError=false;fieldParamObj=null;structureParamObj=null;tableParamObj=null;var itemObj=listDataObj[i];for(var propertyName in itemObj){if(isError){throw"listData property does not conform to the format.(1)";}else{var onlyOneObj=itemObj[propertyName];if(!isUndefined(onlyOneObj)&&!isNull(onlyOneObj)&&Array.isArray(onlyOneObj)){this.setTableParameter(propertyName,onlyOneObj);}else{this.setStructureParameter(propertyName,onlyOneObj);}}
+isError=true;}}
+var requestParameter=this.setRequestParameter("PGWRA00002",param.reqType,param.isDBTransaction,param.sourceName,param.sourceExtension,param.functionName,param.panelId,param.methodType);var callBack={};if(param.hasOwnProperty("successCallBack")){callBack.success=param.successCallBack;}
+if(param.hasOwnProperty("errorCallBack")&&param.errorCallBack!==undefined&&typeof param.errorCallBack==="function"){callBack.error=param.errorCallBack;}
+if(isUndefined(callBack.success)){return this.getData(this.jsonRpcClient,requestParameter);}else{this.getData(this.jsonRpcClient,requestParameter,callBack,userParam);}}catch(_e){console.error(_e);throw _e;}finally{listDataObj=null;fieldParamObj=null;structureParamObj=null;tableParamObj=null;fieldOutParamObj=null;param=null;requestParameter=null;}}catch(_e){try{console.log(_e);jf5.hideLoading();}catch(__e){console.log(__e);}}}else{console.log("listData property does not conform to the format.(2)");}};this.getData=function(_jsonRpcClient,_requestParameter,_callbackFunction,_userParam){_requestParameter["inParameters"]=this.getInParameterList();_requestParameter["filterParameter"]=this.getOutFilter();var _resultReturnData;var isSuccess=true;var dispMsg;var guideMsg;var _returnData=[];var index=0;for(var prop in _outFilter){_returnData[index++]=prop.toUpperCase();}
+_outFilter=null;_outFilter={};var _callback=function(_resultObj,_exception){var _errorData={};try{if(_exception){console.log("_callBack - _exception >>"+_exception);throw _exception;}else{_resultReturnData={};if(_returnData.length>0){for(var i=0;i<_resultObj.length;i++){if(_resultObj[i].name=="SERVICE_STATUS"){var tempData=_resultObj[i].resultData;if(tempData[0]["STATUS"]=="F"){isSuccess=false;_logKey=tempData[0]["LOGKEY"];_logMsg=tempData[0]["LOGMSG"];dispMsg=tempData[0]["DISPMSG"];guideMsg=tempData[0]["GUIDEMSG"];_errorData["LOGKEY"]=tempData[0]["LOGKEY"];_errorData["LOGMSG"]=tempData[0]["LOGMSG"];_errorData["DISPMSG"]=tempData[0]["DISPMSG"];_errorData["GUIDEMSG"]=tempData[0]["GUIDEMSG"];break;}else if(tempData[0]["STATUS"]=="S"){}
+tempData=null;}else{for(var k=0;k<_returnData.length;k++){if(_resultObj[i].name==_returnData[k]){_resultReturnData[_resultObj[i].name]=_resultObj[i].resultData;}}}}}else{for(var i=0;i<_resultObj.length;i++){if(_resultObj[i].name=="SERVICE_STATUS"){var tempData=_resultObj[i].resultData;if(tempData[0]["STATUS"]=="F"){isSuccess=false;_logKey=tempData[0]["LOGKEY"];_logMsg=tempData[0]["LOGMSG"];dispMsg=tempData[0]["DISPMSG"];guideMsg=tempData[0]["GUIDEMSG"];_errorData["LOGKEY"]=tempData[0]["LOGKEY"];_errorData["LOGMSG"]=tempData[0]["LOGMSG"];_errorData["DISPMSG"]=tempData[0]["DISPMSG"];_errorData["GUIDEMSG"]=tempData[0]["GUIDEMSG"];break;}else if(tempData[0]["STATUS"]=="S"){}}else{_resultReturnData[_resultObj[i].name]=_resultObj[i].resultData;}}}
+try{if(isSuccess){_callbackFunction.success(_resultReturnData,_userParam);}else{try{jf5.hideLoading();}catch(e){printLog("dataservice.js->>"+e);}
+if(_callbackFunction.hasOwnProperty("error")&&_callbackFunction.error!==undefined&&typeof _callbackFunction.error==="function"){if(_errorData["LOGMSG"]==="-0915"){showErrorMsg(_logKey,_logMsg,"장시간 미사용으로 인하여 세션이 만료되었습니다.","새로고침 후 다시 시도해 주십시오.");printLog("Session Error");}else{_callbackFunction.error(_errorData,_userParam);}}else{showErrorMsg(_logKey,_logMsg,dispMsg,guideMsg);printLog("Undefined errorCallBack");}}}finally{_resultObj=null;_resultReturnData=null;_returnData=null;_userParam=null;}}}catch(e){jf5.hideLoading();console.log("_callBack>>"+e);_errorData["LOGKEY"]="";_errorData["LOGMSG"]="";_errorData["DISPMSG"]="시스템 오류가 발생하였습니다.";_errorData["GUIDEMSG"]="새로고침 후 다시 시도해 주십시오.";if(_callbackFunction.hasOwnProperty("error")&&_callbackFunction.error!==undefined&&typeof _callbackFunction.error==="function"){_callbackFunction.error(_errorData,_userParam);}else{showErrorMsg(_logKey,_logMsg,"시스템 오류가 발생하였습니다.","새로고침 후 다시 시도해 주십시오.");printLog("uncatched error");}
+throw e;}};function setDataReqTimeStart(__requestParameter){if(__requestParameter.requestExecuteType==="TNS"){var listData=__requestParameter.inParameters.list;var dtIdArr=[];for(var i=0;i<listData.length;i++){dtIdArr.push(listData[i].paramName);}}else{}}
+if(_callbackFunction!=null&&_callbackFunction!="undefined"){setDataReqTimeStart(_requestParameter);_jsonRpcClient.DataService.service(_callback,_requestParameter);}else{setDataReqTimeStart(_requestParameter);_tempData=_jsonRpcClient.DataService.service(_requestParameter);_resultReturnData={};var _errorData={};if(_returnData.length>0){for(var i=0;i<_tempData.length;i++){if(_tempData[i].name=="SERVICE_STATUS"){var tempData=_tempData[i].resultData;if(tempData[0]["STATUS"]=="F"){isSuccess=false;_logKey=tempData[0]["LOGKEY"];_logMsg=tempData[0]["LOGMSG"];dispMsg=tempData[0]["DISPMSG"];guideMsg=tempData[0]["GUIDEMSG"];_errorData["LOGKEY"]=tempData[0]["LOGKEY"];_errorData["LOGMSG"]=tempData[0]["LOGMSG"];_errorData["DISPMSG"]=tempData[0]["DISPMSG"];_errorData["GUIDEMSG"]=tempData[0]["GUIDEMSG"];break;}else if(tempData[0]["STATUS"]=="S"){}
+tempData=null;}else{for(var k=0;k<_returnData.length;k++){if(_tempData[i].name==_returnData[k]){_resultReturnData[_tempData[i].name]=_tempData[i].resultData;}}}}}else{for(var i=0;i<_tempData.length;i++){if(_tempData[i].name=="SERVICE_STATUS"){var tempData=_tempData[i].resultData;if(tempData[0]["STATUS"]=="F"){isSuccess=false;_logKey=tempData[0]["LOGKEY"];_logMsg=tempData[0]["LOGMSG"];dispMsg=tempData[0]["DISPMSG"];guideMsg=tempData[0]["GUIDEMSG"];_errorData["LOGKEY"]=tempData[0]["LOGKEY"];_errorData["LOGMSG"]=tempData[0]["LOGMSG"];_errorData["DISPMSG"]=tempData[0]["DISPMSG"];_errorData["GUIDEMSG"]=tempData[0]["GUIDEMSG"];break;}else if(tempData[0]["STATUS"]=="S"){}}else{_resultReturnData[_tempData[i].name]=_tempData[i].resultData;}}}
+try{if(isSuccess){return _resultReturnData;}else{try{jf5.hideLoading();}catch(e){printLog("dataservice.js->>"+e);}
+showErrorMsg(_logKey,_logMsg,dispMsg,guideMsg);return;}}finally{_resultReturnData=null;_returnData=null;__D_R_T=null;}}};};
+escapeJSONChar=function escapeJSONChar(c){if(c=="\""||c=="\\")
+return"\\"+c;else if(c=="\b")
+return"\\b";else if(c=="\f")
+return"\\f";else if(c=="\n")
+return"\\n";else if(c=="\r")
+return"\\r";else if(c=="\t")
+return"\\t";var hex=c.charCodeAt(0).toString(16);if(hex.length==1)
+return"\\u000"+hex;else if(hex.length==2)
+return"\\u00"+hex;else if(hex.length==3)
+return"\\u0"+hex;else
+return"\\u"+hex;};escapeJSONString=function escapeJSONString(s){var parts=s.split("");for(var i=0;i<parts.length;i++){var c=parts[i];if(c=='"'||c=='\\'||c.charCodeAt(0)<32||c.charCodeAt(0)>=128)
+parts[i]=escapeJSONChar(parts[i]);}
+return"\""+parts.join("")+"\"";};toJSON=function toJSON(o){if(o==null){return"null";}else if(o.constructor==String){return escapeJSONString(o);}else if(o.constructor==Number){return o.toString();}else if(o.constructor==Boolean){return o.toString();}else if(o.constructor==Date){return'{javaClass: "java.util.Date", time: '+o.valueOf()+'}';}else if(o.constructor==Array){var v=[];for(var i=0;i<o.length;i++)
+v.push(toJSON(o[i]));return"["+v.join(", ")+"]";}else{var v=[];for(attr in o){if(o[attr]==null)
+v.push("\""+attr+"\": null");else if(typeof o[attr]=="function");else
+v.push(escapeJSONString(attr)+": "+toJSON(o[attr]));}
+return"{"+v.join(", ")+"}";}};JSONRpcClient=function JSONRpcClient_ctor(serverURL,user,pass,objectID){this.serverURL=serverURL;this.user=user;this.pass=pass;this.objectID=objectID;if(this.objectID){this._addMethods(["listMethods"]);var req=this._makeRequest("listMethods",[]);}else{this._addMethods(["system.listMethods"]);var req=this._makeRequest("system.listMethods",[]);}
+var m=this._sendRequest(req);this._addMethods(m);};JSONRpcClient.Exception=function JSONRpcClient_Exception_ctor(code,message,javaStack){this.code=code;var name;if(javaStack){this.javaStack=javaStack;var m=javaStack.match(/^([^:]*)/);if(m)
+name=m[0];}
+this.name="ClientRPCException";this.message=message;};JSONRpcClient.Exception.CODE_REMOTE_EXCEPTION=490;JSONRpcClient.Exception.CODE_ERR_CLIENT=550;JSONRpcClient.Exception.CODE_ERR_PARSE=590;JSONRpcClient.Exception.CODE_ERR_NOMETHOD=591;JSONRpcClient.Exception.CODE_ERR_UNMARSHALL=592;JSONRpcClient.Exception.CODE_ERR_MARSHALL=593;JSONRpcClient.Exception.prototype=new Error();JSONRpcClient.Exception.prototype.toString=function JSONRpcClient_Exception_toString(code,msg){return this.name+"\n[CODE : "+this.code+"][MESSAGE : "+this.message+"]";};JSONRpcClient.default_ex_handler=function JSONRpcClient_default_ex_handler(e){console.log("JSONRpcClient.default_ex_handler\n"+e);};JSONRpcClient.toplevel_ex_handler=JSONRpcClient.default_ex_handler;JSONRpcClient.profile_async=false;JSONRpcClient.max_req_active=50;JSONRpcClient.requestId=1;JSONRpcClient.prototype._createMethod=function JSONRpcClient_createMethod(methodName){var fn=function(){var args=[];var callback=null;for(var i=0;i<arguments.length;i++)
+args.push(arguments[i]);if(typeof args[0]=="function")
+callback=args.shift();var req=fn.client._makeRequest.call(fn.client,fn.methodName,args,callback);if(callback==null){return fn.client._sendRequest.call(fn.client,req);}else{JSONRpcClient.async_requests.push(req);JSONRpcClient.kick_async();return req.requestId;}};fn.client=this;fn.methodName=methodName;return fn;};JSONRpcClient.prototype._addMethods=function JSONRpcClient_addMethods(methodNames){for(var i=0;i<methodNames.length;i++){var obj=this;var names=methodNames[i].split(".");for(var n=0;n<names.length-1;n++){var name=names[n];if(obj[name]){obj=obj[name];}else{obj[name]=new Object();obj=obj[name];}}
+var name=names[names.length-1];if(!obj[name]){var method=this._createMethod(methodNames[i]);obj[name]=method;}}};JSONRpcClient._getCharsetFromHeaders=function JSONRpcClient_getCharsetFromHeaders(http){try{var contentType=http.getResponseHeader("Content-type");var parts=contentType.split(/\s*;\s*/);for(var i=0;i<parts.length;i++){if(parts[i].substring(0,8)=="charset=")
+return parts[i].substring(8,parts[i].length);}}catch(e){}
+return"UTF-8";};JSONRpcClient.async_requests=[];JSONRpcClient.async_inflight={};JSONRpcClient.async_responses=[];JSONRpcClient.async_timeout=null;JSONRpcClient.num_req_active=0;JSONRpcClient._async_handler=function JSONRpcClient_async_handler(){JSONRpcClient.async_timeout=null;while(JSONRpcClient.async_responses.length>0){var res=JSONRpcClient.async_responses.shift();if(res.canceled)
+continue;if(res.profile)
+res.profile.dispatch=new Date();try{res.cb(res.result,res.ex,res.profile);}catch(e){JSONRpcClient.toplevel_ex_handler(e);}}
+while(JSONRpcClient.async_requests.length>0&&JSONRpcClient.num_req_active<JSONRpcClient.max_req_active){var req=JSONRpcClient.async_requests.shift();if(req.canceled)
+continue;req.client._sendRequest.call(req.client,req);}};JSONRpcClient.kick_async=function JSONRpcClient_kick_async(){if(JSONRpcClient.async_timeout==null)
+JSONRpcClient.async_timeout=setTimeout(JSONRpcClient._async_handler,0);};JSONRpcClient.cancelRequest=function JSONRpcClient_cancelRequest(requestId){if(JSONRpcClient.async_inflight[requestId]){JSONRpcClient.async_inflight[requestId].canceled=true;return true;}
+for(var i in JSONRpcClient.async_requests){if(JSONRpcClient.async_requests[i].requestId==requestId){JSONRpcClient.async_requests[i].canceled=true;return true;}}
+for(var i in JSONRpcClient.async_responses){if(JSONRpcClient.async_responses[i].requestId==requestId){JSONRpcClient.async_responses[i].canceled=true;return true;}}
+return false;};JSONRpcClient.prototype._makeRequest=function JSONRpcClient_makeRequest(methodName,args,cb){var req={};req.client=this;req.requestId=JSONRpcClient.requestId++;var obj={};obj.id=req.requestId;if(this.objectID)
+obj.method=".obj#"+this.objectID+"."+methodName;else
+obj.method=methodName;obj.params=args;if(cb)
+req.cb=cb;if(JSONRpcClient.profile_async)
+req.profile={"submit":new Date()};req.data=toJSON(obj);return req;};JSONRpcClient.prototype._sendRequest=function JSONRpcClient_sendRequest(req){if(req.profile)
+req.profile.start=new Date();var http=JSONRpcClient.poolGetHTTPRequest();JSONRpcClient.num_req_active++;if(typeof(this.user)=="undefined"){http.open("POST",this.serverURL,(req.cb!=null));}else{http.open("POST",this.serverURL,(req.cb!=null),this.user,this.pass);}
+try{http.setRequestHeader("Content-type","text/plain");}catch(e){}
+if(req.cb){var self=this;http.onreadystatechange=function(){if(http.readyState==4){http.onreadystatechange=function(){};var res={"cb":req.cb,"result":null,"ex":null};if(req.profile){res.profile=req.profile;res.profile.end=new Date();}
+try{res.result=self._handleResponse(http,req.requestId);}catch(e){res.ex=e;}
+if(!JSONRpcClient.async_inflight[req.requestId].canceled)
+JSONRpcClient.async_responses.push(res);delete JSONRpcClient.async_inflight[req.requestId];http=null;JSONRpcClient.kick_async();}};}else{http.onreadystatechange=function(){};}
+JSONRpcClient.async_inflight[req.requestId]=req;try{http.send(req.data);}catch(e){JSONRpcClient.poolReturnHTTPRequest(http);JSONRpcClient.num_req_active--;http=null;throw new JSONRpcClient.Exception(JSONRpcClient.Exception.CODE_ERR_CLIENT,"Connection failed[Http Send Error]");}
+if(!req.cb){var ret=this._handleResponse(http,req.requestId);http=null;return ret;}};JSONRpcClient.prototype._handleResponse=function JSONRpcClient_handleResponse(http,requestId){if(!this.charset){this.charset=JSONRpcClient._getCharsetFromHeaders(http);}
+var status,statusText,data="";try{status=http.status;statusText=http.statusText;data=http.responseText;}catch(e){JSONRpcClient.poolReturnHTTPRequest(http);JSONRpcClient.num_req_active--;JSONRpcClient.kick_async();throw new JSONRpcClient.Exception(JSONRpcClient.Exception.CODE_ERR_CLIENT,"Connection failed");}
+JSONRpcClient.poolReturnHTTPRequest(http);JSONRpcClient.num_req_active--;if(status!=200&&status!=0){throw new JSONRpcClient.Exception(status,statusText);}
+var obj;if(status!=0){try{eval("obj = "+data);}catch(e){throw new JSONRpcClient.Exception(550,"error parsing result");}
+if(obj.error){throw new JSONRpcClient.Exception(obj.error.code,obj.error.msg,obj.error.trace);}
+var res=obj.result;if(res&&res.objectID&&res.JSONRPCType=="CallableReference"){return new JSONRpcClient(this.serverURL,this.user,this.pass,res.objectID);}
+return res;}else{return"";}};JSONRpcClient.poolGetHTTPRequest=function JSONRpcClient_pool_getHTTPRequest(){return JSONRpcClient.getHTTPRequest();};JSONRpcClient.poolReturnHTTPRequest=function JSONRpcClient_poolReturnHTTPRequest(http){http=null;};JSONRpcClient.getHTTPRequest=function JSONRpcClient_getHTTPRequest(){if(window.ActiveXObject){try{return new ActiveXObject("Msxml2.XMLHTTP");}catch(e){try{return new ActiveXObject("Microsoft.XMLHTTP");}catch(e1){return null;}}}else if(window.XMLHttpRequest){return new XMLHttpRequest();}else{throw new JSONRpcClient.Exception(0,"Can't create XMLHttpRequest object");}};function isIE(){var name=navigator.appName;if(name=="Microsoft Internet Explorer"){return true;}else{return false;}}
+	
+	return jf5;
+})(window.jf5 || {});
+
+
+/**
+ * alert, confirm
+ * 
+ */
+
+var msgBox  = (function(msgBox){
+	
+	var alertHtml = [
+		'<div class="popCon active id_alertHtml" id="alertBox">',
+		'	<div class="top">',
+		'		<strong class="pop_tit"></strong>',	
+		'	</div>',
+		'	<div class="msg_wrap t_center">',
+		'		<div class="c_wrap msg"></div>',
+		'		<ul class="c_wrap btn_ul">',
+		'			<li><a href="#" onclick="msgBox.callBack(\'true\');return false;" class="btn btn02 btn-color04 href true">확 인<!--완료--></a></li>',
+		'		</ul>',
+		'	</div>',
+		'	<div class="close">',
+		'		<a href="#" onclick="msgBox.callBack(\'true\'); return false;" class="closePpo href"><img src="https://zeimage.eastarjet.com/newstar/images/pop_close.png" alt="닫기" /><!--닫기--></a>',
+		'	</div>',
+		'</div>'
+	].join('');
+	var confirmHtml = [
+		'<div class="popCon active id_alertHtml" id="confirmBox">',
+		'	<div class="top">',
+		'		<strong class="pop_tit"></strong>',	
+		'	</div>',
+		'	<div class="msg_wrap t_center">',
+		'		<div class="c_wrap msg"></div>',
+		'		<ul class="c_wrap btn_ul">',
+		'			<li><a href="#" onclick="msgBox.callBack(\'false\');return false;" class="btn btn02 btn-color03 href false">취 소<!--취소--></a></li>',
+		'			<li><a href="#" onclick="msgBox.callBack(\'true\');return false;" class="btn btn02 btn-color04 submit true">확 인<!--완료--></a></li>',
+		'		</ul>',
+		'	</div>',
+		'	<div class="close">',
+		'		<a href="#" onclick="msgBox.callBack(\'false\'); return false;" class="closePpo href"><img src="https://zeimage.eastarjet.com/newstar/images/pop_close.png" alt="닫기" /><!--닫기--></a>',
+		'	</div>',
+		'</div>'
+	].join('');
+	var noticeHtml = [
+		'<div class="popCon w500" id="noticeBox" style="width:500px;">',
+		'	<div class="top">',
+		'		<strong class="pop_tit"></strong>',	
+		'	</div>',
+		'	<div class="msg_wrap">',
+		'		<div class="c_wrap msg"></div>',
+		'	</div>',
+		'	<div class="close">',
+		'		<a href="#" onclick="msgBox.callBack(\'false\'); return false;" class="closePpo href"><img src="https://zeimage.eastarjet.com/newstar/images/pop_close.png" alt="닫기" /><!--닫기--></a>',
+		'	</div>',
+		'</div>'
+    ].join('');	
+	
+	/**
+	 * initPop
+	 */
+	
+	var oMsgInfo={},runInitPop = false;
+	
+	msgBox.initPop = function(){
+		runInitPop = true;
+		$("#msgBox").remove();
+		$("body").append('<div id="msgBox" class="id_pop msgBox popActive"><div id="popft" ></div></div>');
+		$("#msgBox, #msgBox.msgBox #popft").show();
+	}
+	
+	function messageBox(type,oArgs){
+		if(!runInitPop){
+			msgBox.initPop();
+		}
+		oMsgInfo = {"type" : type};
+		if(typeof oArgs[0] === "object" && oArgs.length ===1){
+			oMsgInfo["title"] = oArgs[0]["title"];
+			oMsgInfo["message"] = oArgs[0]["message"];
+			oMsgInfo["callback"] = oArgs[0]["callback"];
+			oMsgInfo["thisArg"] = oArgs[0]["thisArg"];
+			oMsgInfo["targetId"] = oArgs[0]["targetId"];
+			oMsgInfo["btnTitle"] = oArgs[0]["btnTitle"];
+			oMsgInfo["align"] = oArgs[0]["align"];
+		}else{
+			oMsgInfo["title"] = oArgs[0];
+			oMsgInfo["message"] = oArgs[1];
+			oMsgInfo["callback"] = oArgs[2];
+			oMsgInfo["thisArg"] = oArgs[3];
+			oMsgInfo["targetId"] = oArgs[4];
+			oMsgInfo["btnTitle"] = oArgs[5]
+		}
+		
+		if(oMsgInfo["callback"] && typeof oMsgInfo["callback"] === "function"){
+			oMsgInfo["callback"] = oMsgInfo["callback"];
+		}else{
+			oMsgInfo["callback"] = new Function();
+		}
+		
+		var htmlObj ="";
+		
+		switch(type){
+			case "alert"	: htmlObj = alertHtml; break;
+			case "confirm"	: htmlObj = confirmHtml; break;
+			case "notice"	: htmlObj = noticeHtml; break;
+		}
+		
+		$("#msgBox").append(htmlObj);
+		if(oMsgInfo["title"] == "" || oMsgInfo["title"] == undefined){
+			$("#msgBox .pop_tit").css("display","none");
+			$("#msgBox .id_alertHtml").addClass("no_tit");
+		}else{
+			$("#msgBox .pop_tit").text(oMsgInfo["title"]);
+		}
+		
+		var align = "t_center";
+		if(oMsgInfo["align"] == "left") {
+			align = "t_left";
+		}else if(oMsgInfo["align"] == "right") {
+			align = "t_right";
+		}
+		
+		var tempArr = oMsgInfo["message"].split("\n"), tempStr = "";
+		for(var i=0;i<tempArr.length;i++){
+			tempStr += "<p class='" + align + "'>"+tempArr[i]+"</p>"
+		}
+		//$("#msgBox p.t_center").text(oMsgInfo["message"]);
+		if(typeof oMsgInfo["btnTitle"] === "string"){
+			oMsgInfo["btnTitle"] = {"true" : oMsgInfo["btnTitle"],"false":""};
+		}
+		if(oMsgInfo["btnTitle"] != undefined){
+			$("#msgBox .btn_ul a.true").text(oMsgInfo["btnTitle"]["true"]);
+			$("#msgBox .btn_ul a.false").text(oMsgInfo["btnTitle"]["false"]);
+		}
+		$("#msgBox div.msg").append(tempStr);
+		$("#"+type+"Box").addClass("active");
+		$("#msgBox .id_alertHtml").addClass("join_confm1");
+		PopCommon2("msgBox");
+	}
+	
+	msgBox.callBack = function(_result){
+		runInitPop = false;
+		if(_result === "true"){
+			oMsgInfo["callback"].apply(oMsgInfo["thisArg"],[true]);
+		}else if(_result==="false"){
+			oMsgInfo["callback"].apply(oMsgInfo["thisArg"],[false]);
+		}
+		oMsgInfo["callback"] = null;
+		oMsgInfo["thisArg"] = null;
+		
+		msgBox.closePop("msgBox");
+		if(oMsgInfo['targetId'] != undefined){$("#"+oMsgInfo['targetId']).focus();}
+	}
+	
+	/**
+	 * closePop
+	 */
+	msgBox.closePop = function(){
+		runInitPop = false;
+		closePop("msgBox");
+		$("#msgBox").remove();
+	}
+	/**
+	 * alert
+	 */
+	msgBox.alert = function(){
+		messageBox("alert",arguments);
+	}
+	/**
+	 * confirm
+	 */
+	msgBox.confirm = function(){
+		messageBox("confirm",arguments);
+	}
+	/**
+	 * notice
+	 */
+	msgBox.notice = function(){
+		messageBox("notice",arguments);
+	}
+	return msgBox;
+	
+	
+})(window.msgBox||{});
+
+$(document).ready(function(){
+	try{
+		jf5.panel.init();
+	}catch(ee){
+		throw ee;
+		console.log("onload 오류 >>" + ee );
+	}
+});
+
+/*
+window.onload = function(){
+	
+}
+*/
+
+

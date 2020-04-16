@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.0">
+  <Form id="top" width="1280" height="48" titletext="New Form">
+    <Layouts>
+      <Layout height="48" mobileorientation="landscape" width="1280">
+        <Static id="Static00" taborder="0" left="0" top="0" height="40" cssclass="sta_TP_bg01" right="0"/>
+        <Static id="Static01" taborder="1" left="0" top="0" width="120" height="40" cssclass="sta_TP_logo"/>
+        <Button id="Button00" taborder="2" text="Top Menu01" left="140" top="0" width="120" height="40" cssclass="btn_TP_menu"/>
+        <Button id="Button01" taborder="3" top="0" width="40" height="40" cssclass="btn_TP_menuIcon" right="0"/>
+        <Button id="Button02" taborder="4" text="Top Menu02" left="260" top="0" width="120" height="40" cssclass="btn_TP_menu"/>
+        <Button id="Button03" taborder="5" text="Top Menu04" left="500" top="0" width="120" height="40" cssclass="btn_TP_menu"/>
+        <Button id="Button04" taborder="6" text="Top Menu03" left="380" top="0" width="120" height="40" cssclass="btn_TP_menu"/>
+        <Button id="Button05" taborder="7" text="Top Menu06" left="740" top="0" width="120" height="40" cssclass="btn_TP_menu" enable="false"/>
+        <Button id="Button06" taborder="8" text="Top Menu05" left="620" top="0" width="120" height="40" cssclass="btn_TP_menu"/>
+        <Menu id="Menu00" taborder="9" left="140" top="104" width="815" height="40" innerdataset="@Dataset00" captioncolumn="Column0" idcolumn="Column2" levelcolumn="Column1" userdatacolumn="Column0" visible="false"/>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="Dataset00">
+        <ColumnInfo>
+          <Column id="Column0" type="STRING" size="256"/>
+          <Column id="Column1" type="STRING" size="256"/>
+          <Column id="Column2" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="Column1">0</Col>
+            <Col id="Column0">Top Menu01</Col>
+          </Row>
+          <Row>
+            <Col id="Column1">1</Col>
+            <Col id="Column0">Sub Menu01</Col>
+          </Row>
+          <Row>
+            <Col id="Column1">1</Col>
+            <Col id="Column0">Sub Menu02</Col>
+          </Row>
+          <Row>
+            <Col id="Column1">1</Col>
+            <Col id="Column0">Sub Menu03</Col>
+          </Row>
+          <Row>
+            <Col id="Column1">2</Col>
+            <Col id="Column0">3Depth Menu01</Col>
+          </Row>
+          <Row>
+            <Col id="Column1">2</Col>
+            <Col id="Column0">3Depth Menu02</Col>
+          </Row>
+          <Row>
+            <Col id="Column1">2</Col>
+            <Col id="Column0">3Depth Menu03</Col>
+          </Row>
+          <Row>
+            <Col id="Column1">0</Col>
+            <Col id="Column0">Top Menu02</Col>
+          </Row>
+          <Row>
+            <Col id="Column1">0</Col>
+            <Col id="Column0">Top Menu03</Col>
+          </Row>
+          <Row>
+            <Col id="Column1">0</Col>
+            <Col id="Column0">Top Menu04</Col>
+          </Row>
+          <Row>
+            <Col id="Column1">0</Col>
+            <Col id="Column0">Top Menu05</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">Top Menu06</Col>
+            <Col id="Column1">0</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+    </Objects>
+  </Form>
+</FDL>

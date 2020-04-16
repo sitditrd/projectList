@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <GenInfo version="1.1">
+    <Rule>
+      <ENV rule_version="1.05"/>
+      <ADL rule_version="1.14"/>
+      <FDL rule_version="1.04"/>
+      <XCSS rule_version="1.03"/>
+      <Script rule_version="1.02"/>
+    </Rule>
+    <Info project="C:\Users\투비소프트\eclipse-workspace\Hyundai-steel_2019.07.08\WebContent\ui\Hyundai-steel\" generated="C:\Users\투비소프트\eclipse-workspace\Hyundai-steel_2019.07.08\WebContent\packageA\"><File url="environment.xml" checksum="20190719102049" errormsg=""/><File url="typedefinition.xml" checksum="20190719102053" errormsg=""/><File url="appvariables.xml" checksum="20190719102049" errormsg=""/><File url="_resource_\_theme_\blue\theme.xcss" checksum="20190719102054" errormsg=""/><File url="_resource_\_xcss_\EduProject.xcss" checksum="20190719102054" errormsg=""/><File url="_resource_\_xcss_\layout.xcss" checksum="20190719102054" errormsg=""/><File url="App_Desktop.xadl" checksum="20190719102049" errormsg=""/><File url="Base\po0702.xfdl" checksum="20190708102908" errormsg=""/><File url="Base\poc02.xfdl" checksum="20190708102908" errormsg=""/><File url="Base\poc02_Gantt.xfdl" checksum="20190708102908" errormsg=""/><File url="FrameBase\frmAll.xfdl" checksum="20190709141256" errormsg=""/><File url="PoC\PoC_2.xfdl" checksum="20190709095728" errormsg=""/><File url="PoC\PoC_3.xfdl" checksum="20190710144944" errormsg=""/><File url="PoC\PoC_4.xfdl" checksum="20190709092443" errormsg=""/><File url="PoC\PoC_5.xfdl" checksum="20190724140113" errormsg=""/><File url="PoC\PoC_6.xfdl" checksum="20190711172829" errormsg=""/><File url="PoC\PoC_Main.xfdl" checksum="20190904130932" errormsg=""/><File url="lib\comLib_Comm.xjs" checksum="20190708173609" errormsg=""/><File url="lib\CommUtil.xjs" checksum="20190522152038" errormsg=""/><File url="lib\ext_CommEco.xjs" checksum="20190523104358" errormsg=""/><File url="PoC\Test.xfdl" checksum="20190709093946" errormsg=""/><File url="PoC\Gif.xfdl" checksum="20190710120631" errormsg=""/></Info>
+  </GenInfo>
+</root>

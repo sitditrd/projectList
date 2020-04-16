@@ -1,0 +1,17 @@
+﻿{
+    "name": "nxlib",
+    "version": "17.0.0.1",
+    "description": "nxlib",
+    "license": "",
+    "scripts": [
+		"nxlib/Common.js",
+		"nxlib/jquery-3.3.1.js",
+		"nxlib/ProductXmlProvider.js",
+        "nxlib/papaparse.js",
+		"nxlib/JSONBinding.js",
+        "nxlib/xhr.js"
+    ],
+
+    "objInfo": []
+}
+//@ sourceURL=nxlib.json

@@ -1,0 +1,240 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.0">
+  <Form id="left" width="280" titletext="Left Frame" scrollbartype="none none" scrolltype="none" background="#515356" height="800" onload="left_onload">
+    <Layouts>
+      <Layout height="800" mobileorientation="landscape" width="280">
+        <Button id="btn_leftMenu" taborder="0" left="0" top="0" width="70" height="33" cssclass=" btn_LF_SelectMenu, btn_LF_Select01" tabstop="false" onclick="btn_leftMenu_onclick"/>
+        <Button id="btn_favorite" taborder="1" left="70" top="0" width="70" height="33" cssclass="btn_LF_MenuBg, btn_LF_BookMark" tabstop="false" onclick="btn_favorite_onclick"/>
+        <Button id="btn_findMenu" taborder="2" left="140" top="0" width="70" height="33" cssclass="btn_LF_MenuBg, btn_LF_MenuSearch" tabstop="false" onclick="btn_findMenu_onclick"/>
+        <Button id="btn_log" taborder="3" left="210" top="0" width="70" height="33" cssclass="btn_LF_MenuBg, btn_LF_MenuHistory" tabstop="false" onclick="btn_log_onclick"/>
+        <Div id="div_left" taborder="4" left="0" top="33" right="0" bottom="0" formscrollbartype="none none" formscrolltype="none" maxheight="" background="#515356">
+          <Layouts>
+            <Layout>
+              <Static id="sta_topMenuTitle" taborder="0" left="20" top="20" width="250" height="17" fittocontents="none" cssclass="btn_LF_MenuTitle"/>
+              <Grid id="grd_leftMenu" taborder="1" left="0" top="48" width="280" cssclass="grd_LF_TreeGrd" binddataset="ds_leftMenu" autofittype="col" treeusecheckbox="false" treeuseimage="false" treeuseline="false" autosizingtype="none" autoupdatetype="none" mouseovertype="default" scrollbartype="default default" bottom="37" oncellclick="grd_leftMenu_oncellclick">
+                <Formats>
+                  <Format id="default">
+                    <Columns>
+                      <Column size="280"/>
+                    </Columns>
+                    <Rows>
+                      <Row size="30"/>
+                    </Rows>
+                    <Band id="body">
+                      <Cell text="bind:MENU_NM" displaytype="treeitemcontrol" edittype="tree" treelevel="bind:LVL" cssclass="expr:comp.parent.fn_chkLevel(currow);" suppressalign="first"/>
+                    </Band>
+                  </Format>
+                </Formats>
+              </Grid>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Div id="div_leftFavorite" taborder="5" left="330" top="33" right="-330" bottom="0" formscrollbartype="none none" formscrolltype="none" maxheight="" visible="false" background="#515356">
+          <Layouts>
+            <Layout>
+              <Grid id="grd_menuFavorite" taborder="0" left="0" top="12" right="0" bottom="59" cssclass="grd_LF_MenuGrid, grd_LF_MenuBookMark" autofittype="none" scrollbartype="default default">
+                <Formats>
+                  <Format id="default">
+                    <Columns>
+                      <Column size="280"/>
+                    </Columns>
+                    <Rows>
+                      <Row size="32"/>
+                    </Rows>
+                    <Band id="body">
+                      <Cell displaytype="normal" text="bind:MENU_NM"/>
+                    </Band>
+                  </Format>
+                </Formats>
+              </Grid>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Div id="div_leftFindMenu" taborder="6" left="630" top="33" right="-630" bottom="0" formscrollbartype="none none" formscrolltype="none" maxheight="" visible="false" background="#515356">
+          <Layouts>
+            <Layout>
+              <Grid id="grd_findMenu" taborder="2" left="0" top="54" right="0" bottom="81" cssclass="grd_LF_MenuGrid, btn_LF_MenuSearch" autofittype="none">
+                <Formats>
+                  <Format id="default">
+                    <Columns>
+                      <Column size="280"/>
+                    </Columns>
+                    <Rows>
+                      <Row size="32"/>
+                    </Rows>
+                    <Band id="body">
+                      <Cell displaytype="normal" text="bind:MENU_NM"/>
+                    </Band>
+                  </Format>
+                </Formats>
+              </Grid>
+              <Edit id="edt_findMenu" taborder="0" left="20" top="12" height="33" displaynulltext="화면명 입력" cssclass="edi_LF_SearchEdit" right="20"/>
+              <Button id="btn_findMenu" taborder="1" cssclass="btn_LF_Search, btn_WF_SearchIcon" right="17" width="20" top="12" height="33" opacity="0.6"/>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Div id="div_leftLog" taborder="7" left="930" top="33" right="-930" bottom="0" formscrollbartype="none none" formscrolltype="none" maxheight="" visible="false" background="#515356">
+          <Layouts>
+            <Layout>
+              <Grid id="grd_recentTop5" taborder="0" left="0" top="53" right="0" cssclass="grd_LF_HistoryGrid, btn_LF_MenuHistory" autofittype="col" height="161" scrollbartype="none none" scrolltype="none" autosizingtype="none" selectscrollmode="select" tabstop="false">
+                <Formats>
+                  <Format id="default">
+                    <Columns>
+                      <Column size="84"/>
+                      <Column size="48"/>
+                    </Columns>
+                    <Rows>
+                      <Row size="32"/>
+                    </Rows>
+                    <Band id="body">
+                      <Cell displaytype="normal" text="bind:MENU_NM" cssclass="grd_LF_HistoryTit" tooltiptext="bind:MENU_NM"/>
+                      <Cell col="1" text="bind:LOG_DATE" cssclass="grd_LF_HistoryInfo"/>
+                    </Band>
+                  </Format>
+                </Formats>
+              </Grid>
+              <Static id="sta_titleUp" taborder="2" text="최근 접속한 메뉴" left="20" top="23" width="134" height="17" cssclass="btn_LF_MenuTitle" fittocontents="width"/>
+              <ImageViewer id="img_logTopUp" taborder="3" left="159" top="22" width="56" height="19" cssclass="img_TF_Bg" image="url('theme://images/img_LF_top5Icon.png')"/>
+              <Static id="sta_titleDown" taborder="4" text="자주 접속한 화면" left="21" top="244" width="134" height="17" cssclass="btn_LF_MenuTitle" fittocontents="width"/>
+              <ImageViewer id="img_logTopDown" taborder="5" left="160" top="243" width="56" height="19" cssclass="img_TF_Bg" image="url('theme://images/img_LF_top5Icon.png')"/>
+              <Grid id="grd_hitTop5" taborder="1" left="0" top="274" height="161" cssclass="grd_LF_HistoryGrid, btn_LF_MenuHistory" right="0" autofittype="col" tabstop="false" scrollbartype="none none" scrolltype="none">
+                <Formats>
+                  <Format id="default">
+                    <Columns>
+                      <Column size="84"/>
+                      <Column size="48"/>
+                    </Columns>
+                    <Rows>
+                      <Row size="32"/>
+                    </Rows>
+                    <Band id="body">
+                      <Cell text="bind:MENU_NM" cssclass="grd_LF_HistoryTit" background="url('file://D:/HC/workspace/hc/WebContent/hc_out/_resource_/_theme_/nbisThemeKit/nbisImg/grd_LF_historyBgN.png') no-repeat left center" tooltiptext="bind:MENU_NM"/>
+                      <Cell col="1" text="bind:LOG_DATE" cssclass="grd_LF_HistoryInfo"/>
+                    </Band>
+                  </Format>
+                </Formats>
+              </Grid>
+            </Layout>
+          </Layouts>
+        </Div>
+      </Layout>
+    </Layouts>
+    <Script type="xscript5.1"><![CDATA[this.maxLvl = "";
+
+this.left_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
+{
+	this.div_leftFavorite.move(0, 33, null, null, 0, 0);
+	this.div_leftFindMenu.move(0, 33, null, null, 0, 0);
+	this.div_leftLog.move(0, 33, null, null, 0, 0);
+};
+
+this.btn_leftMenu_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.btn_leftMenu.set_cssclass("btn_LF_Select01, btn_LF_SelectMenu");
+	this.btn_favorite.set_cssclass("btn_LF_MenuBg, btn_LF_BookMark");
+	this.btn_findMenu.set_cssclass("btn_LF_MenuBg, btn_LF_MenuSearch");
+	this.btn_log.set_cssclass("btn_LF_MenuBg, btn_LF_MenuHistory");
+	
+	this.div_left.set_visible(true);
+	this.div_leftFavorite.set_visible(false);
+	this.div_leftFindMenu.set_visible(false);
+	this.div_leftLog.set_visible(false);
+};
+
+this.btn_favorite_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.btn_leftMenu.set_cssclass("btn_LF_MenuBg, btn_LF_Menu");
+	this.btn_favorite.set_cssclass("btn_LF_Select02, btn_LF_SelectMenu");
+	this.btn_findMenu.set_cssclass("btn_LF_MenuBg, btn_LF_MenuSearch");
+	this.btn_log.set_cssclass("btn_LF_MenuBg, btn_LF_MenuHistory");
+	
+	this.div_left.set_visible(false);
+	this.div_leftFavorite.set_visible(true);
+	this.div_leftFindMenu.set_visible(false);
+	this.div_leftLog.set_visible(false);
+};
+
+this.btn_findMenu_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.btn_leftMenu.set_cssclass("btn_LF_MenuBg, btn_LF_Menu");
+	this.btn_favorite.set_cssclass("btn_LF_MenuBg, btn_LF_BookMark");
+	this.btn_findMenu.set_cssclass("btn_LF_Select03, btn_LF_SelectMenu");
+	this.btn_log.set_cssclass("btn_LF_MenuBg, btn_LF_MenuHistory");
+	
+	this.div_left.set_visible(false);
+	this.div_leftFavorite.set_visible(false);
+	this.div_leftFindMenu.set_visible(true);
+	this.div_leftLog.set_visible(false);
+};
+
+this.btn_log_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.btn_leftMenu.set_cssclass("btn_LF_MenuBg, btn_LF_Menu");
+	this.btn_favorite.set_cssclass("btn_LF_MenuBg, btn_LF_BookMark");
+	this.btn_findMenu.set_cssclass("btn_LF_MenuBg, btn_LF_MenuSearch");
+	this.btn_log.set_cssclass("btn_LF_Select04, btn_LF_SelectMenu");
+	
+	this.div_left.set_visible(false);
+	this.div_leftFavorite.set_visible(false);
+	this.div_leftFindMenu.set_visible(false);
+	this.div_leftLog.set_visible(true);
+};
+
+this.fnChangeMenu = function (topMenuId, topMenuNm, topGrpId)
+{
+	var objApp = nexacro.getApplication();
+	this.maxLvl = "";
+	
+	var filterExpr = "GROUP_ID==" + nexacro.wrapQuote(topGrpId) + "&&LVL!=0";
+	objApp.gdsMenu.set_enableevent(false);
+	this.ds_leftMenu.set_enableevent(false);
+	objApp.gdsMenu.filter(filterExpr);
+	this.ds_leftMenu.clearData();
+	this.ds_leftMenu.copyData(objApp.gdsMenu, true);
+	this.div_left.form.sta_topMenuTitle.set_text(topMenuNm);
+	this.maxLvl = this.ds_leftMenu.getMax("LVL");
+	objApp.gdsMenu.filter("");
+	objApp.gdsMenu.set_enableevent(true);
+	this.ds_leftMenu.set_enableevent(true);
+};
+
+this.grd_leftMenu_oncellclick = function(obj:nexacro.Grid,e:nexacro.GridClickEventInfo)
+{
+	var sID= this.ds_leftMenu.getColumn(e.row, "MENU_ID");
+	
+	if(!sID) return;
+	
+	var objApp = nexacro.getApplication();
+	var objForm = objApp.mainframe.VFrameSet.TopFrame.form;
+	
+	objForm && objForm["fnOpenMenu"].call(objForm, sID);
+};
+
+this.fn_chkLevel = function(currow)
+{
+	var strLevel = this.ds_leftMenu.getColumn(currow, "LVL");
+	if (this.maxLvl == 3) {
+		if (strLevel == 2) {
+			return "grd_LF_TreeGrd2D";
+		} else if(strLevel == 3) {
+			return "grd_LF_TreeGrd3D";
+		}
+	} else if (this.maxLvl == 2) {
+		if (strLevel == 2) {
+			return "grd_LF_TreeGrd3D";
+		}
+	}else if (this.maxLvl == 1) {
+		return "grd_LF_TreeGrd3D";
+	}
+};
+]]></Script>
+    <Objects>
+      <Dataset id="ds_leftMenu">
+        <ColumnInfo>
+          <Column id="MENU_NM" type="STRING" size="256"/>
+          <Column id="LVL" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+  </Form>
+</FDL>

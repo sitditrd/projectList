@@ -1,0 +1,2252 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.0">
+  <Form id="Sparkline" width="1280" height="720">
+    <Layouts>
+      <Layout height="720" mobileorientation="landscape" width="1280">
+        <Grid id="grd00" taborder="0" left="10" top="10" binddataset="ds00" right="10" bottom="10" cellsizingtype="col" autofittype="col">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="48"/>
+                <Column size="100"/>
+                <Column size="100"/>
+                <Column size="200"/>
+                <Column size="200"/>
+                <Column size="200"/>
+                <Column size="60"/>
+                <Column size="60"/>
+                <Column size="60"/>
+                <Column size="60"/>
+                <Column size="60"/>
+                <Column size="60"/>
+                <Column size="60"/>
+                <Column size="60"/>
+                <Column size="60"/>
+                <Column size="60"/>
+                <Column size="60"/>
+              </Columns>
+              <Rows>
+                <Row size="40" band="head"/>
+                <Row size="40"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="No."/>
+                <Cell col="1" text="Continent"/>
+                <Cell col="2" text="Country"/>
+                <Cell col="3" text="꺽은선형(line)"/>
+                <Cell col="4" text="열(column)"/>
+                <Cell col="5" text="승패(win-loss)"/>
+                <Cell col="6" text="2000"/>
+                <Cell col="7" text="2001"/>
+                <Cell col="8" text="2002"/>
+                <Cell col="9" text="2003"/>
+                <Cell col="10" text="2004"/>
+                <Cell col="11" text="2005"/>
+                <Cell col="12" text="2006"/>
+                <Cell col="13" text="2007"/>
+                <Cell col="14" text="2008"/>
+                <Cell col="15" text="2009"/>
+                <Cell col="16" text="2010"/>
+              </Band>
+              <Band id="body">
+                <Cell expr="currow+1" textAlign="center"/>
+                <Cell col="1" text="bind:continent"/>
+                <Cell col="2" text="bind:country"/>
+                <Cell col="3" text="expr:dataset.parent.getSparklineData(currow)" displaytype="sparklinecontrol" sparklineoptions="{&quot;type&quot;:&quot;line&quot;}"/>
+                <Cell col="4" text="expr:dataset.parent.getSparklineData(currow)" displaytype="sparklinecontrol" sparklineoptions="{&quot;type&quot;:&quot;column&quot;}"/>
+                <Cell col="5" text="expr:dataset.parent.getSparklineData(currow)" displaytype="sparklinecontrol" sparklineoptions="{&quot;type&quot;:&quot;winloss&quot;}"/>
+                <Cell col="6" text="bind:2000" textAlign="right" edittype="normal"/>
+                <Cell col="7" text="bind:2001" textAlign="right" edittype="normal"/>
+                <Cell col="8" text="bind:2002" textAlign="right" edittype="normal"/>
+                <Cell col="9" text="bind:2003" textAlign="right" edittype="normal"/>
+                <Cell col="10" text="bind:2004" textAlign="right" edittype="normal"/>
+                <Cell col="11" text="bind:2005" textAlign="right" edittype="normal"/>
+                <Cell col="12" text="bind:2006" textAlign="right" edittype="normal"/>
+                <Cell col="13" text="bind:2007" textAlign="right" edittype="normal"/>
+                <Cell col="14" text="bind:2008" textAlign="right" edittype="normal"/>
+                <Cell col="15" text="bind:2009" textAlign="right" edittype="normal"/>
+                <Cell col="16" text="bind:2010" textAlign="right" edittype="normal"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="ds00">
+        <ColumnInfo>
+          <Column id="2000" type="STRING" size="256"/>
+          <Column id="2001" type="STRING" size="256"/>
+          <Column id="2002" type="STRING" size="256"/>
+          <Column id="2003" type="STRING" size="256"/>
+          <Column id="2004" type="STRING" size="256"/>
+          <Column id="2005" type="STRING" size="256"/>
+          <Column id="2006" type="STRING" size="256"/>
+          <Column id="2007" type="STRING" size="256"/>
+          <Column id="2008" type="STRING" size="256"/>
+          <Column id="2009" type="STRING" size="256"/>
+          <Column id="2010" type="STRING" size="256"/>
+          <Column id="continent" type="STRING" size="256"/>
+          <Column id="country" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="2000">7.5</Col>
+            <Col id="2001">7</Col>
+            <Col id="2002">8.9</Col>
+            <Col id="2003">8.6</Col>
+            <Col id="2004">8</Col>
+            <Col id="2005">8.8</Col>
+            <Col id="2006">6.8</Col>
+            <Col id="2007">17.9</Col>
+            <Col id="2008">4.7</Col>
+            <Col id="2009">6.7</Col>
+            <Col id="2010">7.4</Col>
+            <Col id="continent">Asia</Col>
+            <Col id="country">Bhutan</Col>
+          </Row>
+          <Row>
+            <Col id="2000">2.8</Col>
+            <Col id="2001">2.7</Col>
+            <Col id="2002">3.9</Col>
+            <Col id="2003">2.9</Col>
+            <Col id="2004">0.5</Col>
+            <Col id="2005">0.4</Col>
+            <Col id="2006">4.4</Col>
+            <Col id="2007">0.2</Col>
+            <Col id="2008">-1.9</Col>
+            <Col id="2009">-1.8</Col>
+            <Col id="2010">2.6</Col>
+            <Col id="continent">Asia</Col>
+            <Col id="country">Brunei</Col>
+          </Row>
+          <Row>
+            <Col id="2000">8.8</Col>
+            <Col id="2001">8</Col>
+            <Col id="2002">6.7</Col>
+            <Col id="2003">8.5</Col>
+            <Col id="2004">10.3</Col>
+            <Col id="2005">13.3</Col>
+            <Col id="2006">10.8</Col>
+            <Col id="2007">10.2</Col>
+            <Col id="2008">6.7</Col>
+            <Col id="2009">0.1</Col>
+            <Col id="2010">6</Col>
+            <Col id="continent">Asia</Col>
+            <Col id="country">Cambodia</Col>
+          </Row>
+          <Row>
+            <Col id="2000">8.4</Col>
+            <Col id="2001">8.3</Col>
+            <Col id="2002">9.1</Col>
+            <Col id="2003">10</Col>
+            <Col id="2004">10.1</Col>
+            <Col id="2005">11.3</Col>
+            <Col id="2006">12.7</Col>
+            <Col id="2007">14.2</Col>
+            <Col id="2008">9.6</Col>
+            <Col id="2009">9.2</Col>
+            <Col id="2010">10.4</Col>
+            <Col id="continent">Asia</Col>
+            <Col id="country">China</Col>
+          </Row>
+          <Row>
+            <Col id="2000">5</Col>
+            <Col id="2001">4</Col>
+            <Col id="2002">2.1</Col>
+            <Col id="2003">1.9</Col>
+            <Col id="2004">4.2</Col>
+            <Col id="2005">3.9</Col>
+            <Col id="2006">4.1</Col>
+            <Col id="2007">5.1</Col>
+            <Col id="2008">3.6</Col>
+            <Col id="2009">-1.7</Col>
+            <Col id="2010">1.1</Col>
+            <Col id="continent">Asia</Col>
+            <Col id="country">Cyprus</Col>
+          </Row>
+          <Row>
+            <Col id="2000">1.8</Col>
+            <Col id="2001">4.8</Col>
+            <Col id="2002">5.5</Col>
+            <Col id="2003">11.1</Col>
+            <Col id="2004">5.9</Col>
+            <Col id="2005">9.6</Col>
+            <Col id="2006">9.4</Col>
+            <Col id="2007">12.3</Col>
+            <Col id="2008">2.3</Col>
+            <Col id="2009">-3.8</Col>
+            <Col id="2010">6.3</Col>
+            <Col id="continent">Asia</Col>
+            <Col id="country">Georgia</Col>
+          </Row>
+          <Row>
+            <Col id="2000">8</Col>
+            <Col id="2001">0.5</Col>
+            <Col id="2002">1.8</Col>
+            <Col id="2003">3</Col>
+            <Col id="2004">8.5</Col>
+            <Col id="2005">7.1</Col>
+            <Col id="2006">7</Col>
+            <Col id="2007">6.4</Col>
+            <Col id="2008">2.3</Col>
+            <Col id="2009">-2.7</Col>
+            <Col id="2010">7</Col>
+            <Col id="continent">Asia</Col>
+            <Col id="country">Hong Kong</Col>
+          </Row>
+          <Row>
+            <Col id="2000">4</Col>
+            <Col id="2001">4.9</Col>
+            <Col id="2002">3.9</Col>
+            <Col id="2003">7.9</Col>
+            <Col id="2004">7.8</Col>
+            <Col id="2005">9.3</Col>
+            <Col id="2006">9.3</Col>
+            <Col id="2007">9.8</Col>
+            <Col id="2008">3.9</Col>
+            <Col id="2009">8.2</Col>
+            <Col id="2010">9.6</Col>
+            <Col id="continent">Asia</Col>
+            <Col id="country">India</Col>
+          </Row>
+          <Row>
+            <Col id="2000">4.9</Col>
+            <Col id="2001">3.6</Col>
+            <Col id="2002">4.5</Col>
+            <Col id="2003">4.8</Col>
+            <Col id="2004">5</Col>
+            <Col id="2005">5.7</Col>
+            <Col id="2006">5.5</Col>
+            <Col id="2007">6.3</Col>
+            <Col id="2008">6</Col>
+            <Col id="2009">4.6</Col>
+            <Col id="2010">6.2</Col>
+            <Col id="continent">Asia</Col>
+            <Col id="country">Indonesia</Col>
+          </Row>
+          <Row>
+            <Col id="2000">5.1</Col>
+            <Col id="2001">3.7</Col>
+            <Col id="2002">7.5</Col>
+            <Col id="2003">7.1</Col>
+            <Col id="2004">5.1</Col>
+            <Col id="2005">4.6</Col>
+            <Col id="2006">5.9</Col>
+            <Col id="2007">7.8</Col>
+            <Col id="2008">2.3</Col>
+            <Col id="2009">1.8</Col>
+            <Col id="2010"/>
+            <Col id="continent">Asia</Col>
+            <Col id="country">Iran</Col>
+          </Row>
+          <Row>
+            <Col id="2000">9.3</Col>
+            <Col id="2001">-0.2</Col>
+            <Col id="2002">-0.6</Col>
+            <Col id="2003">1.5</Col>
+            <Col id="2004">4.8</Col>
+            <Col id="2005">4.9</Col>
+            <Col id="2006">5.6</Col>
+            <Col id="2007">5.5</Col>
+            <Col id="2008">4</Col>
+            <Col id="2009">0.8</Col>
+            <Col id="2010">4.8</Col>
+            <Col id="continent">Asia</Col>
+            <Col id="country">Israel</Col>
+          </Row>
+          <Row>
+            <Col id="2000">2.3</Col>
+            <Col id="2001">0.4</Col>
+            <Col id="2002">0.3</Col>
+            <Col id="2003">1.7</Col>
+            <Col id="2004">2.4</Col>
+            <Col id="2005">1.3</Col>
+            <Col id="2006">1.7</Col>
+            <Col id="2007">2.2</Col>
+            <Col id="2008">-1</Col>
+            <Col id="2009">-5.5</Col>
+            <Col id="2010">4.4</Col>
+            <Col id="continent">Asia</Col>
+            <Col id="country">Japan</Col>
+          </Row>
+          <Row>
+            <Col id="2000">4.2</Col>
+            <Col id="2001">5.3</Col>
+            <Col id="2002">5.8</Col>
+            <Col id="2003">4.2</Col>
+            <Col id="2004">8.6</Col>
+            <Col id="2005">8.1</Col>
+            <Col id="2006">8.1</Col>
+            <Col id="2007">8.2</Col>
+            <Col id="2008">7.2</Col>
+            <Col id="2009">5.5</Col>
+            <Col id="2010">2.3</Col>
+            <Col id="continent">Asia</Col>
+            <Col id="country">Jordan</Col>
+          </Row>
+          <Row>
+            <Col id="2000">9.8</Col>
+            <Col id="2001">13.5</Col>
+            <Col id="2002">9.8</Col>
+            <Col id="2003">9.3</Col>
+            <Col id="2004">9.6</Col>
+            <Col id="2005">9.7</Col>
+            <Col id="2006">10.7</Col>
+            <Col id="2007">8.9</Col>
+            <Col id="2008">3.3</Col>
+            <Col id="2009">1.2</Col>
+            <Col id="2010">7.3</Col>
+            <Col id="continent">Asia</Col>
+            <Col id="country">Kazakhstan</Col>
+          </Row>
+          <Row>
+            <Col id="2000">4.7</Col>
+            <Col id="2001">0.7</Col>
+            <Col id="2002">3</Col>
+            <Col id="2003">17.3</Col>
+            <Col id="2004">10.2</Col>
+            <Col id="2005">10.6</Col>
+            <Col id="2006">5.2</Col>
+            <Col id="2007">4.4</Col>
+            <Col id="2008">5</Col>
+            <Col id="2009">-5.2</Col>
+            <Col id="2010">3.4</Col>
+            <Col id="continent">Asia</Col>
+            <Col id="country">Kuwait</Col>
+          </Row>
+          <Row>
+            <Col id="2000">5.4</Col>
+            <Col id="2001">5.3</Col>
+            <Col id="2002">0</Col>
+            <Col id="2003">7</Col>
+            <Col id="2004">7</Col>
+            <Col id="2005">-0.2</Col>
+            <Col id="2006">3.1</Col>
+            <Col id="2007">8.5</Col>
+            <Col id="2008">8.4</Col>
+            <Col id="2009">2.9</Col>
+            <Col id="2010">-1.4</Col>
+            <Col id="continent">Asia</Col>
+            <Col id="country">Kyrgyzstan</Col>
+          </Row>
+          <Row>
+            <Col id="2000">5.8</Col>
+            <Col id="2001">5.8</Col>
+            <Col id="2002">5.9</Col>
+            <Col id="2003">6.1</Col>
+            <Col id="2004">6.4</Col>
+            <Col id="2005">7.1</Col>
+            <Col id="2006">8.6</Col>
+            <Col id="2007">7.6</Col>
+            <Col id="2008">7.8</Col>
+            <Col id="2009">7.5</Col>
+            <Col id="2010">8.5</Col>
+            <Col id="continent">Asia</Col>
+            <Col id="country">Laos</Col>
+          </Row>
+          <Row>
+            <Col id="2000">8.9</Col>
+            <Col id="2001">0.5</Col>
+            <Col id="2002">5.4</Col>
+            <Col id="2003">5.8</Col>
+            <Col id="2004">6.8</Col>
+            <Col id="2005">5.3</Col>
+            <Col id="2006">5.8</Col>
+            <Col id="2007">6.5</Col>
+            <Col id="2008">4.8</Col>
+            <Col id="2009">-1.6</Col>
+            <Col id="2010">7.2</Col>
+            <Col id="continent">Asia</Col>
+            <Col id="country">Malaysia</Col>
+          </Row>
+          <Row>
+            <Col id="2000">4.8</Col>
+            <Col id="2001">3.5</Col>
+            <Col id="2002">6</Col>
+            <Col id="2003">16.1</Col>
+            <Col id="2004">10.3</Col>
+            <Col id="2005">-6.8</Col>
+            <Col id="2006">19.6</Col>
+            <Col id="2007">10.6</Col>
+            <Col id="2008">12.2</Col>
+            <Col id="2009">-4.7</Col>
+            <Col id="2010">5.7</Col>
+            <Col id="continent">Asia</Col>
+            <Col id="country">Maldives</Col>
+          </Row>
+          <Row>
+            <Col id="2000">1.1</Col>
+            <Col id="2001">3</Col>
+            <Col id="2002">4.7</Col>
+            <Col id="2003">7</Col>
+            <Col id="2004">10.6</Col>
+            <Col id="2005">7.3</Col>
+            <Col id="2006">8.6</Col>
+            <Col id="2007">10.2</Col>
+            <Col id="2008">8.9</Col>
+            <Col id="2009">-1.3</Col>
+            <Col id="2010">6.4</Col>
+            <Col id="continent">Asia</Col>
+            <Col id="country">Mongolia</Col>
+          </Row>
+          <Row>
+            <Col id="2000">13.7</Col>
+            <Col id="2001">11.3</Col>
+            <Col id="2002">12</Col>
+            <Col id="2003">13.8</Col>
+            <Col id="2004">13.6</Col>
+            <Col id="2005"/>
+            <Col id="2006"/>
+            <Col id="2007"/>
+            <Col id="2008"/>
+            <Col id="2009"/>
+            <Col id="2010"/>
+            <Col id="continent">Asia</Col>
+            <Col id="country">Myanmar</Col>
+          </Row>
+          <Row>
+            <Col id="2000">6.2</Col>
+            <Col id="2001">4.8</Col>
+            <Col id="2002">0.1</Col>
+            <Col id="2003">3.9</Col>
+            <Col id="2004">4.7</Col>
+            <Col id="2005">3.5</Col>
+            <Col id="2006">3.4</Col>
+            <Col id="2007">3.4</Col>
+            <Col id="2008">6.1</Col>
+            <Col id="2009">4.5</Col>
+            <Col id="2010">4.8</Col>
+            <Col id="continent">Asia</Col>
+            <Col id="country">Nepal</Col>
+          </Row>
+          <Row>
+            <Col id="2000">5.4</Col>
+            <Col id="2001">7.5</Col>
+            <Col id="2002">2.6</Col>
+            <Col id="2003">0.3</Col>
+            <Col id="2004">3.4</Col>
+            <Col id="2005">4</Col>
+            <Col id="2006">5.5</Col>
+            <Col id="2007">6.8</Col>
+            <Col id="2008">12.8</Col>
+            <Col id="2009">1.1</Col>
+            <Col id="2010">4</Col>
+            <Col id="continent">Asia</Col>
+            <Col id="country">Oman</Col>
+          </Row>
+          <Row>
+            <Col id="2000">4.3</Col>
+            <Col id="2001">2</Col>
+            <Col id="2002">3.2</Col>
+            <Col id="2003">4.8</Col>
+            <Col id="2004">7.4</Col>
+            <Col id="2005">7.7</Col>
+            <Col id="2006">6.2</Col>
+            <Col id="2007">5.7</Col>
+            <Col id="2008">1.6</Col>
+            <Col id="2009">3.6</Col>
+            <Col id="2010">4.1</Col>
+            <Col id="continent">Asia</Col>
+            <Col id="country">Pakistan</Col>
+          </Row>
+          <Row>
+            <Col id="2000">4.4</Col>
+            <Col id="2001">2.9</Col>
+            <Col id="2002">3.6</Col>
+            <Col id="2003">5</Col>
+            <Col id="2004">6.7</Col>
+            <Col id="2005">4.8</Col>
+            <Col id="2006">5.2</Col>
+            <Col id="2007">6.6</Col>
+            <Col id="2008">4.2</Col>
+            <Col id="2009">1.1</Col>
+            <Col id="2010">7.6</Col>
+            <Col id="continent">Asia</Col>
+            <Col id="country">the Philippines</Col>
+          </Row>
+          <Row>
+            <Col id="2000"/>
+            <Col id="2001">3.3</Col>
+            <Col id="2002">7.1</Col>
+            <Col id="2003">3.5</Col>
+            <Col id="2004">20.8</Col>
+            <Col id="2005">7.6</Col>
+            <Col id="2006">18.6</Col>
+            <Col id="2007">18</Col>
+            <Col id="2008">17.7</Col>
+            <Col id="2009">12</Col>
+            <Col id="2010">16.6</Col>
+            <Col id="continent">Asia</Col>
+            <Col id="country">Qatar</Col>
+          </Row>
+          <Row>
+            <Col id="2000">4.9</Col>
+            <Col id="2001">0.5</Col>
+            <Col id="2002">0.1</Col>
+            <Col id="2003">7.7</Col>
+            <Col id="2004">5.3</Col>
+            <Col id="2005">5.6</Col>
+            <Col id="2006">3.2</Col>
+            <Col id="2007">2</Col>
+            <Col id="2008">4.2</Col>
+            <Col id="2009">0.1</Col>
+            <Col id="2010">4.6</Col>
+            <Col id="continent">Asia</Col>
+            <Col id="country">Saudi Arabia</Col>
+          </Row>
+          <Row>
+            <Col id="2000">9</Col>
+            <Col id="2001">-1.2</Col>
+            <Col id="2002">4.2</Col>
+            <Col id="2003">4.6</Col>
+            <Col id="2004">9.2</Col>
+            <Col id="2005">7.4</Col>
+            <Col id="2006">8.8</Col>
+            <Col id="2007">8.9</Col>
+            <Col id="2008">1.7</Col>
+            <Col id="2009">-1</Col>
+            <Col id="2010">14.8</Col>
+            <Col id="continent">Asia</Col>
+            <Col id="country">Singapore</Col>
+          </Row>
+          <Row>
+            <Col id="2000">6</Col>
+            <Col id="2001">-1.5</Col>
+            <Col id="2002">4</Col>
+            <Col id="2003">5.9</Col>
+            <Col id="2004">5.4</Col>
+            <Col id="2005">6.2</Col>
+            <Col id="2006">7.7</Col>
+            <Col id="2007">6.8</Col>
+            <Col id="2008">6</Col>
+            <Col id="2009">3.5</Col>
+            <Col id="2010">8</Col>
+            <Col id="continent">Asia</Col>
+            <Col id="country">Sri Lanka</Col>
+          </Row>
+          <Row>
+            <Col id="2000">2.7</Col>
+            <Col id="2001">5.2</Col>
+            <Col id="2002">5.9</Col>
+            <Col id="2003">0.6</Col>
+            <Col id="2004">6.9</Col>
+            <Col id="2005">6.2</Col>
+            <Col id="2006">5</Col>
+            <Col id="2007">5.7</Col>
+            <Col id="2008">4.5</Col>
+            <Col id="2009">6</Col>
+            <Col id="2010">3.2</Col>
+            <Col id="continent">Asia</Col>
+            <Col id="country">Syria</Col>
+          </Row>
+          <Row>
+            <Col id="2000">5.8</Col>
+            <Col id="2001">-1.7</Col>
+            <Col id="2002">5.3</Col>
+            <Col id="2003">3.7</Col>
+            <Col id="2004">6.2</Col>
+            <Col id="2005">4.7</Col>
+            <Col id="2006">5.4</Col>
+            <Col id="2007">6</Col>
+            <Col id="2008">0.7</Col>
+            <Col id="2009">-1.8</Col>
+            <Col id="2010">10.7</Col>
+            <Col id="continent">Asia</Col>
+            <Col id="country">Taiwan</Col>
+          </Row>
+          <Row>
+            <Col id="2000">4.8</Col>
+            <Col id="2001">2.2</Col>
+            <Col id="2002">5.3</Col>
+            <Col id="2003">7.1</Col>
+            <Col id="2004">6.3</Col>
+            <Col id="2005">4.6</Col>
+            <Col id="2006">5.1</Col>
+            <Col id="2007">5</Col>
+            <Col id="2008">2.5</Col>
+            <Col id="2009">-2.3</Col>
+            <Col id="2010">7.8</Col>
+            <Col id="continent">Asia</Col>
+            <Col id="country">Thailand</Col>
+          </Row>
+          <Row>
+            <Col id="2000">6.8</Col>
+            <Col id="2001">-5.7</Col>
+            <Col id="2002">6.2</Col>
+            <Col id="2003">5.3</Col>
+            <Col id="2004">9.4</Col>
+            <Col id="2005">8.4</Col>
+            <Col id="2006">6.9</Col>
+            <Col id="2007">4.7</Col>
+            <Col id="2008">0.7</Col>
+            <Col id="2009">-4.8</Col>
+            <Col id="2010">9.2</Col>
+            <Col id="continent">Asia</Col>
+            <Col id="country">Turkey</Col>
+          </Row>
+          <Row>
+            <Col id="2000">6.8</Col>
+            <Col id="2001">6.9</Col>
+            <Col id="2002">7.1</Col>
+            <Col id="2003">7.3</Col>
+            <Col id="2004">7.8</Col>
+            <Col id="2005">8.4</Col>
+            <Col id="2006">8.2</Col>
+            <Col id="2007">8.5</Col>
+            <Col id="2008">6.3</Col>
+            <Col id="2009">5.3</Col>
+            <Col id="2010">6.8</Col>
+            <Col id="continent">Asia</Col>
+            <Col id="country">Vietnam</Col>
+          </Row>
+          <Row>
+            <Col id="2000">6.2</Col>
+            <Col id="2001">3.8</Col>
+            <Col id="2002">3.9</Col>
+            <Col id="2003">3.7</Col>
+            <Col id="2004">4</Col>
+            <Col id="2005">5.6</Col>
+            <Col id="2006">3.2</Col>
+            <Col id="2007">3.3</Col>
+            <Col id="2008">3.6</Col>
+            <Col id="2009">3.9</Col>
+            <Col id="2010">7.7</Col>
+            <Col id="continent">Asia</Col>
+            <Col id="country">Yemen</Col>
+          </Row>
+          <Row>
+            <Col id="2000">5.2</Col>
+            <Col id="2001">1.8</Col>
+            <Col id="2002">2.9</Col>
+            <Col id="2003">1.9</Col>
+            <Col id="2004">3.1</Col>
+            <Col id="2005">3</Col>
+            <Col id="2006">2.8</Col>
+            <Col id="2007">2.2</Col>
+            <Col id="2008">0.7</Col>
+            <Col id="2009">-2.8</Col>
+            <Col id="2010">3.2</Col>
+            <Col id="continent">North America</Col>
+            <Col id="country">Canada</Col>
+          </Row>
+          <Row>
+            <Col id="2000">6.6</Col>
+            <Col id="2001">-0.2</Col>
+            <Col id="2002">0.8</Col>
+            <Col id="2003">1.4</Col>
+            <Col id="2004">4.1</Col>
+            <Col id="2005">3.2</Col>
+            <Col id="2006">5.2</Col>
+            <Col id="2007">3.3</Col>
+            <Col id="2008">1.2</Col>
+            <Col id="2009">-6.2</Col>
+            <Col id="2010">5.5</Col>
+            <Col id="continent">North America</Col>
+            <Col id="country">Mexico</Col>
+          </Row>
+          <Row>
+            <Col id="2000">4.2</Col>
+            <Col id="2001">1.1</Col>
+            <Col id="2002">1.8</Col>
+            <Col id="2003">2.6</Col>
+            <Col id="2004">3.5</Col>
+            <Col id="2005">3.1</Col>
+            <Col id="2006">2.7</Col>
+            <Col id="2007">1.9</Col>
+            <Col id="2008">-0.4</Col>
+            <Col id="2009">-3.5</Col>
+            <Col id="2010">3</Col>
+            <Col id="continent">North America</Col>
+            <Col id="country">USA</Col>
+          </Row>
+          <Row>
+            <Col id="2000">1.5</Col>
+            <Col id="2001">2.2</Col>
+            <Col id="2002">2.5</Col>
+            <Col id="2003">5.1</Col>
+            <Col id="2004">7</Col>
+            <Col id="2005">4.2</Col>
+            <Col id="2006">13.3</Col>
+            <Col id="2007">-9.6</Col>
+            <Col id="2008">1.5</Col>
+            <Col id="2009">-10.3</Col>
+            <Col id="2010">-8.9</Col>
+            <Col id="continent">South America</Col>
+            <Col id="country">Antigua and Barbuda</Col>
+          </Row>
+          <Row>
+            <Col id="2000">-0.8</Col>
+            <Col id="2001">-4.4</Col>
+            <Col id="2002">-10.9</Col>
+            <Col id="2003">8.8</Col>
+            <Col id="2004">9</Col>
+            <Col id="2005">9.2</Col>
+            <Col id="2006">8.5</Col>
+            <Col id="2007">8.7</Col>
+            <Col id="2008">6.8</Col>
+            <Col id="2009">0.9</Col>
+            <Col id="2010">9.2</Col>
+            <Col id="continent">South America</Col>
+            <Col id="country">Argentina</Col>
+          </Row>
+          <Row>
+            <Col id="2000">4.1</Col>
+            <Col id="2001">2.6</Col>
+            <Col id="2002">2.7</Col>
+            <Col id="2003">-1.3</Col>
+            <Col id="2004">0.9</Col>
+            <Col id="2005">3.4</Col>
+            <Col id="2006">2.5</Col>
+            <Col id="2007">1.4</Col>
+            <Col id="2008">-2.3</Col>
+            <Col id="2009">-4.9</Col>
+            <Col id="2010">0.2</Col>
+            <Col id="continent">South America</Col>
+            <Col id="country">the Bahamas</Col>
+          </Row>
+          <Row>
+            <Col id="2000">2.3</Col>
+            <Col id="2001">-5.1</Col>
+            <Col id="2002">-3.5</Col>
+            <Col id="2003">2</Col>
+            <Col id="2004">3.7</Col>
+            <Col id="2005">3.2</Col>
+            <Col id="2006">3.4</Col>
+            <Col id="2007">0.5</Col>
+            <Col id="2008">0.2</Col>
+            <Col id="2009">-5.3</Col>
+            <Col id="2010"/>
+            <Col id="continent">South America</Col>
+            <Col id="country">Barbados</Col>
+          </Row>
+          <Row>
+            <Col id="2000">13</Col>
+            <Col id="2001">5</Col>
+            <Col id="2002">5.1</Col>
+            <Col id="2003">9.3</Col>
+            <Col id="2004">4.6</Col>
+            <Col id="2005">3</Col>
+            <Col id="2006">4.7</Col>
+            <Col id="2007">1.3</Col>
+            <Col id="2008">3.5</Col>
+            <Col id="2009">0</Col>
+            <Col id="2010">2.9</Col>
+            <Col id="continent">South America</Col>
+            <Col id="country">Belize</Col>
+          </Row>
+          <Row>
+            <Col id="2000">2.5</Col>
+            <Col id="2001">1.7</Col>
+            <Col id="2002">2.5</Col>
+            <Col id="2003">2.7</Col>
+            <Col id="2004">4.2</Col>
+            <Col id="2005">4.4</Col>
+            <Col id="2006">4.8</Col>
+            <Col id="2007">4.6</Col>
+            <Col id="2008">6.1</Col>
+            <Col id="2009">3.4</Col>
+            <Col id="2010">4.1</Col>
+            <Col id="continent">South America</Col>
+            <Col id="country">Bolivia</Col>
+          </Row>
+          <Row>
+            <Col id="2000">4.3</Col>
+            <Col id="2001">1.3</Col>
+            <Col id="2002">2.7</Col>
+            <Col id="2003">1.1</Col>
+            <Col id="2004">5.7</Col>
+            <Col id="2005">3.2</Col>
+            <Col id="2006">4</Col>
+            <Col id="2007">6.1</Col>
+            <Col id="2008">5.2</Col>
+            <Col id="2009">-0.3</Col>
+            <Col id="2010">7.5</Col>
+            <Col id="continent">South America</Col>
+            <Col id="country">Brazil</Col>
+          </Row>
+          <Row>
+            <Col id="2000">4.5</Col>
+            <Col id="2001">3.4</Col>
+            <Col id="2002">2.2</Col>
+            <Col id="2003">3.9</Col>
+            <Col id="2004">6</Col>
+            <Col id="2005">4.3</Col>
+            <Col id="2006">5.7</Col>
+            <Col id="2007">5.2</Col>
+            <Col id="2008">3.3</Col>
+            <Col id="2009">-1</Col>
+            <Col id="2010">6.1</Col>
+            <Col id="continent">South America</Col>
+            <Col id="country">Chile</Col>
+          </Row>
+          <Row>
+            <Col id="2000">4.4</Col>
+            <Col id="2001">1.7</Col>
+            <Col id="2002">2.5</Col>
+            <Col id="2003">3.9</Col>
+            <Col id="2004">5.3</Col>
+            <Col id="2005">4.7</Col>
+            <Col id="2006">6.7</Col>
+            <Col id="2007">6.9</Col>
+            <Col id="2008">3.5</Col>
+            <Col id="2009">1.7</Col>
+            <Col id="2010">4</Col>
+            <Col id="continent">South America</Col>
+            <Col id="country">Colombia</Col>
+          </Row>
+          <Row>
+            <Col id="2000">1.8</Col>
+            <Col id="2001">1.1</Col>
+            <Col id="2002">2.9</Col>
+            <Col id="2003">6.4</Col>
+            <Col id="2004">4.3</Col>
+            <Col id="2005">5.9</Col>
+            <Col id="2006">8.8</Col>
+            <Col id="2007">7.9</Col>
+            <Col id="2008">2.7</Col>
+            <Col id="2009">-1</Col>
+            <Col id="2010">4.7</Col>
+            <Col id="continent">South America</Col>
+            <Col id="country">Costa Rica</Col>
+          </Row>
+          <Row>
+            <Col id="2000">-2.3</Col>
+            <Col id="2001">-0.2</Col>
+            <Col id="2002">-1.8</Col>
+            <Col id="2003">7.6</Col>
+            <Col id="2004">3.3</Col>
+            <Col id="2005">-0.4</Col>
+            <Col id="2006">4.6</Col>
+            <Col id="2007">3.9</Col>
+            <Col id="2008">7.8</Col>
+            <Col id="2009">-0.7</Col>
+            <Col id="2010">0.3</Col>
+            <Col id="continent">South America</Col>
+            <Col id="country">Commonwealth of Dominica</Col>
+          </Row>
+          <Row>
+            <Col id="2000">5.7</Col>
+            <Col id="2001">1.8</Col>
+            <Col id="2002">5.8</Col>
+            <Col id="2003">-0.3</Col>
+            <Col id="2004">1.3</Col>
+            <Col id="2005">9.3</Col>
+            <Col id="2006">10.7</Col>
+            <Col id="2007">8.5</Col>
+            <Col id="2008">5.3</Col>
+            <Col id="2009">3.5</Col>
+            <Col id="2010">7.8</Col>
+            <Col id="continent">South America</Col>
+            <Col id="country">the Dominican Republic</Col>
+          </Row>
+          <Row>
+            <Col id="2000">2.8</Col>
+            <Col id="2001">5.3</Col>
+            <Col id="2002">5.1</Col>
+            <Col id="2003">3.3</Col>
+            <Col id="2004">8.8</Col>
+            <Col id="2005">5.7</Col>
+            <Col id="2006">4.8</Col>
+            <Col id="2007">2</Col>
+            <Col id="2008">7.2</Col>
+            <Col id="2009">0.4</Col>
+            <Col id="2010">3.6</Col>
+            <Col id="continent">South America</Col>
+            <Col id="country">Ecuador</Col>
+          </Row>
+          <Row>
+            <Col id="2000">2.2</Col>
+            <Col id="2001">1.7</Col>
+            <Col id="2002">2.3</Col>
+            <Col id="2003">2.3</Col>
+            <Col id="2004">1.9</Col>
+            <Col id="2005">3.6</Col>
+            <Col id="2006">3.9</Col>
+            <Col id="2007">3.8</Col>
+            <Col id="2008">1.3</Col>
+            <Col id="2009">-3.1</Col>
+            <Col id="2010">1.4</Col>
+            <Col id="continent">South America</Col>
+            <Col id="country">El Salvador</Col>
+          </Row>
+          <Row>
+            <Col id="2000">3.6</Col>
+            <Col id="2001">2.3</Col>
+            <Col id="2002">3.9</Col>
+            <Col id="2003">2.5</Col>
+            <Col id="2004">3.2</Col>
+            <Col id="2005">3.3</Col>
+            <Col id="2006">5.4</Col>
+            <Col id="2007">6.3</Col>
+            <Col id="2008">3.3</Col>
+            <Col id="2009">0.5</Col>
+            <Col id="2010">2.9</Col>
+            <Col id="continent">South America</Col>
+            <Col id="country">Guatemala</Col>
+          </Row>
+          <Row>
+            <Col id="2000">-1.4</Col>
+            <Col id="2001">2.2</Col>
+            <Col id="2002">1.1</Col>
+            <Col id="2003">-1</Col>
+            <Col id="2004">3.3</Col>
+            <Col id="2005">-2</Col>
+            <Col id="2006">5.1</Col>
+            <Col id="2007">7</Col>
+            <Col id="2008">2</Col>
+            <Col id="2009">3.3</Col>
+            <Col id="2010">4.4</Col>
+            <Col id="continent">South America</Col>
+            <Col id="country">Guyana</Col>
+          </Row>
+          <Row>
+            <Col id="2000">0.9</Col>
+            <Col id="2001">-1</Col>
+            <Col id="2002">-0.3</Col>
+            <Col id="2003">0.4</Col>
+            <Col id="2004">-3.5</Col>
+            <Col id="2005">1.8</Col>
+            <Col id="2006">2.3</Col>
+            <Col id="2007">3.3</Col>
+            <Col id="2008">0.8</Col>
+            <Col id="2009">2.9</Col>
+            <Col id="2010">-5.4</Col>
+            <Col id="continent">South America</Col>
+            <Col id="country">Haiti</Col>
+          </Row>
+          <Row>
+            <Col id="2000">5.7</Col>
+            <Col id="2001">2.7</Col>
+            <Col id="2002">3.8</Col>
+            <Col id="2003">4.5</Col>
+            <Col id="2004">6.2</Col>
+            <Col id="2005">6.1</Col>
+            <Col id="2006">6.6</Col>
+            <Col id="2007">6.2</Col>
+            <Col id="2008">4.2</Col>
+            <Col id="2009">-2.1</Col>
+            <Col id="2010">2.8</Col>
+            <Col id="continent">South America</Col>
+            <Col id="country">Honduras</Col>
+          </Row>
+          <Row>
+            <Col id="2000">0.9</Col>
+            <Col id="2001">1.3</Col>
+            <Col id="2002">1</Col>
+            <Col id="2003">5</Col>
+            <Col id="2004">1.4</Col>
+            <Col id="2005">1</Col>
+            <Col id="2006">3.2</Col>
+            <Col id="2007">0.6</Col>
+            <Col id="2008">-1.7</Col>
+            <Col id="2009">-2.6</Col>
+            <Col id="2010">-0.6</Col>
+            <Col id="continent">South America</Col>
+            <Col id="country">Jamaica</Col>
+          </Row>
+          <Row>
+            <Col id="2000">4.1</Col>
+            <Col id="2001">3</Col>
+            <Col id="2002">0.8</Col>
+            <Col id="2003">2.5</Col>
+            <Col id="2004">5.3</Col>
+            <Col id="2005">4.3</Col>
+            <Col id="2006">4.2</Col>
+            <Col id="2007">3.6</Col>
+            <Col id="2008">2.8</Col>
+            <Col id="2009">-1.5</Col>
+            <Col id="2010">4.5</Col>
+            <Col id="continent">South America</Col>
+            <Col id="country">Nicaragua</Col>
+          </Row>
+          <Row>
+            <Col id="2000">2.7</Col>
+            <Col id="2001">0.6</Col>
+            <Col id="2002">2.2</Col>
+            <Col id="2003">4.2</Col>
+            <Col id="2004">7.5</Col>
+            <Col id="2005">7.2</Col>
+            <Col id="2006">8.5</Col>
+            <Col id="2007">12.1</Col>
+            <Col id="2008">10.1</Col>
+            <Col id="2009">3.2</Col>
+            <Col id="2010">8.3</Col>
+            <Col id="continent">South America</Col>
+            <Col id="country">Panama</Col>
+          </Row>
+          <Row>
+            <Col id="2000">-3.3</Col>
+            <Col id="2001">2.1</Col>
+            <Col id="2002">0</Col>
+            <Col id="2003">3.8</Col>
+            <Col id="2004">4.1</Col>
+            <Col id="2005">2.9</Col>
+            <Col id="2006">4.3</Col>
+            <Col id="2007">6.8</Col>
+            <Col id="2008">5.8</Col>
+            <Col id="2009">-3.8</Col>
+            <Col id="2010">15</Col>
+            <Col id="continent">South America</Col>
+            <Col id="country">Paraguay</Col>
+          </Row>
+          <Row>
+            <Col id="2000">3</Col>
+            <Col id="2001">0.2</Col>
+            <Col id="2002">5</Col>
+            <Col id="2003">4</Col>
+            <Col id="2004">5</Col>
+            <Col id="2005">6.8</Col>
+            <Col id="2006">7.7</Col>
+            <Col id="2007">8.9</Col>
+            <Col id="2008">9.8</Col>
+            <Col id="2009">0.8</Col>
+            <Col id="2010">8.8</Col>
+            <Col id="continent">South America</Col>
+            <Col id="country">Peru</Col>
+          </Row>
+          <Row>
+            <Col id="2000">2.8</Col>
+            <Col id="2001">2</Col>
+            <Col id="2002">1</Col>
+            <Col id="2003">0.5</Col>
+            <Col id="2004">7.6</Col>
+            <Col id="2005">5.6</Col>
+            <Col id="2006">5.5</Col>
+            <Col id="2007">-4.9</Col>
+            <Col id="2008">4</Col>
+            <Col id="2009">-5.6</Col>
+            <Col id="2010">-2.7</Col>
+            <Col id="continent">South America</Col>
+            <Col id="country">St. Kitts and Nevis</Col>
+          </Row>
+          <Row>
+            <Col id="2000">0</Col>
+            <Col id="2001">-5.1</Col>
+            <Col id="2002">3.1</Col>
+            <Col id="2003">2</Col>
+            <Col id="2004">5.6</Col>
+            <Col id="2005">4.3</Col>
+            <Col id="2006">5.9</Col>
+            <Col id="2007">1.2</Col>
+            <Col id="2008">5.4</Col>
+            <Col id="2009">-16.9</Col>
+            <Col id="2010">4.4</Col>
+            <Col id="continent">South America</Col>
+            <Col id="country">Saint Lucia</Col>
+          </Row>
+          <Row>
+            <Col id="2000">1.8</Col>
+            <Col id="2001">2.2</Col>
+            <Col id="2002">3.8</Col>
+            <Col id="2003">3.1</Col>
+            <Col id="2004">6.6</Col>
+            <Col id="2005">2.1</Col>
+            <Col id="2006">9.5</Col>
+            <Col id="2007">3.1</Col>
+            <Col id="2008">-0.6</Col>
+            <Col id="2009">-2.3</Col>
+            <Col id="2010">-1.8</Col>
+            <Col id="continent">South America</Col>
+            <Col id="country">Saint Vincent and the Grenadines</Col>
+          </Row>
+          <Row>
+            <Col id="2000">6.1</Col>
+            <Col id="2001">4.1</Col>
+            <Col id="2002">8</Col>
+            <Col id="2003">14.4</Col>
+            <Col id="2004">7.9</Col>
+            <Col id="2005">5.8</Col>
+            <Col id="2006">13.2</Col>
+            <Col id="2007">4.8</Col>
+            <Col id="2008">2.7</Col>
+            <Col id="2009">-3.3</Col>
+            <Col id="2010">0</Col>
+            <Col id="continent">South America</Col>
+            <Col id="country">Trinidad and Tobago</Col>
+          </Row>
+          <Row>
+            <Col id="2000">-1.9</Col>
+            <Col id="2001">-3.8</Col>
+            <Col id="2002">-7.7</Col>
+            <Col id="2003">0.8</Col>
+            <Col id="2004">5</Col>
+            <Col id="2005">7.5</Col>
+            <Col id="2006">4.1</Col>
+            <Col id="2007">6.5</Col>
+            <Col id="2008">7.2</Col>
+            <Col id="2009">2.4</Col>
+            <Col id="2010">8.9</Col>
+            <Col id="continent">South America</Col>
+            <Col id="country">Uruguay</Col>
+          </Row>
+          <Row>
+            <Col id="2000">3.7</Col>
+            <Col id="2001">3.4</Col>
+            <Col id="2002">-8.9</Col>
+            <Col id="2003">-7.8</Col>
+            <Col id="2004">18.3</Col>
+            <Col id="2005">10.3</Col>
+            <Col id="2006">9.9</Col>
+            <Col id="2007">8.8</Col>
+            <Col id="2008">5.3</Col>
+            <Col id="2009">-3.2</Col>
+            <Col id="2010">-1.5</Col>
+            <Col id="continent">South America</Col>
+            <Col id="country">Venezuela</Col>
+          </Row>
+          <Row>
+            <Col id="2000">7.3</Col>
+            <Col id="2001">7</Col>
+            <Col id="2002">2.9</Col>
+            <Col id="2003">5.7</Col>
+            <Col id="2004">5.9</Col>
+            <Col id="2005">5.5</Col>
+            <Col id="2006">5</Col>
+            <Col id="2007">5.9</Col>
+            <Col id="2008">7.7</Col>
+            <Col id="2009">3.3</Col>
+            <Col id="2010">3.5</Col>
+            <Col id="continent">Europe</Col>
+            <Col id="country">Albania</Col>
+          </Row>
+          <Row>
+            <Col id="2000">3.7</Col>
+            <Col id="2001">0.9</Col>
+            <Col id="2002">1.7</Col>
+            <Col id="2003">0.9</Col>
+            <Col id="2004">2.6</Col>
+            <Col id="2005">2.4</Col>
+            <Col id="2006">3.7</Col>
+            <Col id="2007">3.7</Col>
+            <Col id="2008">1.4</Col>
+            <Col id="2009">-3.8</Col>
+            <Col id="2010">2.3</Col>
+            <Col id="continent">Europe</Col>
+            <Col id="country">Austria</Col>
+          </Row>
+          <Row>
+            <Col id="2000">5.8</Col>
+            <Col id="2001">4.7</Col>
+            <Col id="2002">5</Col>
+            <Col id="2003">7</Col>
+            <Col id="2004">11.4</Col>
+            <Col id="2005">9.4</Col>
+            <Col id="2006">10</Col>
+            <Col id="2007">8.6</Col>
+            <Col id="2008">10.2</Col>
+            <Col id="2009">0.2</Col>
+            <Col id="2010">7.7</Col>
+            <Col id="continent">Europe</Col>
+            <Col id="country">Belarus</Col>
+          </Row>
+          <Row>
+            <Col id="2000">3.7</Col>
+            <Col id="2001">0.8</Col>
+            <Col id="2002">1.4</Col>
+            <Col id="2003">0.8</Col>
+            <Col id="2004">3.3</Col>
+            <Col id="2005">1.8</Col>
+            <Col id="2006">2.7</Col>
+            <Col id="2007">2.9</Col>
+            <Col id="2008">1</Col>
+            <Col id="2009">-2.8</Col>
+            <Col id="2010">2.2</Col>
+            <Col id="continent">Europe</Col>
+            <Col id="country">Belgium</Col>
+          </Row>
+          <Row>
+            <Col id="2000">5.7</Col>
+            <Col id="2001">4.2</Col>
+            <Col id="2002">4.7</Col>
+            <Col id="2003">5.5</Col>
+            <Col id="2004">6.7</Col>
+            <Col id="2005">6.4</Col>
+            <Col id="2006">6.6</Col>
+            <Col id="2007">6.4</Col>
+            <Col id="2008">6.2</Col>
+            <Col id="2009">-5.5</Col>
+            <Col id="2010">0.4</Col>
+            <Col id="continent">Europe</Col>
+            <Col id="country">Bulgaria</Col>
+          </Row>
+          <Row>
+            <Col id="2000">3.8</Col>
+            <Col id="2001">3.7</Col>
+            <Col id="2002">4.9</Col>
+            <Col id="2003">5.4</Col>
+            <Col id="2004">4.1</Col>
+            <Col id="2005">4.3</Col>
+            <Col id="2006">4.9</Col>
+            <Col id="2007">5.1</Col>
+            <Col id="2008">2.2</Col>
+            <Col id="2009">-6</Col>
+            <Col id="2010">-1.2</Col>
+            <Col id="continent">Europe</Col>
+            <Col id="country">Croatia</Col>
+          </Row>
+          <Row>
+            <Col id="2000">4.2</Col>
+            <Col id="2001">3.1</Col>
+            <Col id="2002">2.1</Col>
+            <Col id="2003">3.8</Col>
+            <Col id="2004">4.7</Col>
+            <Col id="2005">6.8</Col>
+            <Col id="2006">7</Col>
+            <Col id="2007">5.7</Col>
+            <Col id="2008">3.1</Col>
+            <Col id="2009">-4.7</Col>
+            <Col id="2010">2.7</Col>
+            <Col id="continent">Europe</Col>
+            <Col id="country">the Czech Republic</Col>
+          </Row>
+          <Row>
+            <Col id="2000">3.5</Col>
+            <Col id="2001">0.7</Col>
+            <Col id="2002">0.5</Col>
+            <Col id="2003">0.4</Col>
+            <Col id="2004">2.3</Col>
+            <Col id="2005">2.4</Col>
+            <Col id="2006">3.4</Col>
+            <Col id="2007">1.6</Col>
+            <Col id="2008">-0.8</Col>
+            <Col id="2009">-5.8</Col>
+            <Col id="2010">1.3</Col>
+            <Col id="continent">Europe</Col>
+            <Col id="country">Denmark</Col>
+          </Row>
+          <Row>
+            <Col id="2000">9.7</Col>
+            <Col id="2001">6.3</Col>
+            <Col id="2002">6.6</Col>
+            <Col id="2003">7.8</Col>
+            <Col id="2004">6.3</Col>
+            <Col id="2005">8.9</Col>
+            <Col id="2006">10.1</Col>
+            <Col id="2007">7.5</Col>
+            <Col id="2008">-3.7</Col>
+            <Col id="2009">-14.3</Col>
+            <Col id="2010">2.3</Col>
+            <Col id="continent">Europe</Col>
+            <Col id="country">Estonia</Col>
+          </Row>
+          <Row>
+            <Col id="2000">5.3</Col>
+            <Col id="2001">2.3</Col>
+            <Col id="2002">1.8</Col>
+            <Col id="2003">2</Col>
+            <Col id="2004">4.1</Col>
+            <Col id="2005">2.9</Col>
+            <Col id="2006">4.4</Col>
+            <Col id="2007">5.3</Col>
+            <Col id="2008">0.3</Col>
+            <Col id="2009">-8.4</Col>
+            <Col id="2010">3.7</Col>
+            <Col id="continent">Europe</Col>
+            <Col id="country">Finland</Col>
+          </Row>
+          <Row>
+            <Col id="2000">3.7</Col>
+            <Col id="2001">1.8</Col>
+            <Col id="2002">0.9</Col>
+            <Col id="2003">0.9</Col>
+            <Col id="2004">2.5</Col>
+            <Col id="2005">1.8</Col>
+            <Col id="2006">2.5</Col>
+            <Col id="2007">2.3</Col>
+            <Col id="2008">-0.1</Col>
+            <Col id="2009">-3.1</Col>
+            <Col id="2010">1.7</Col>
+            <Col id="continent">Europe</Col>
+            <Col id="country">France</Col>
+          </Row>
+          <Row>
+            <Col id="2000">3.1</Col>
+            <Col id="2001">1.5</Col>
+            <Col id="2002">0</Col>
+            <Col id="2003">-0.4</Col>
+            <Col id="2004">1.2</Col>
+            <Col id="2005">0.7</Col>
+            <Col id="2006">3.7</Col>
+            <Col id="2007">3.3</Col>
+            <Col id="2008">1.1</Col>
+            <Col id="2009">-5.1</Col>
+            <Col id="2010">3.7</Col>
+            <Col id="continent">Europe</Col>
+            <Col id="country">Germany</Col>
+          </Row>
+          <Row>
+            <Col id="2000">4.5</Col>
+            <Col id="2001">4.2</Col>
+            <Col id="2002">3.4</Col>
+            <Col id="2003">5.9</Col>
+            <Col id="2004">4.4</Col>
+            <Col id="2005">2.3</Col>
+            <Col id="2006">5.5</Col>
+            <Col id="2007">3</Col>
+            <Col id="2008">-0.2</Col>
+            <Col id="2009">-3.3</Col>
+            <Col id="2010">-3.5</Col>
+            <Col id="continent">Europe</Col>
+            <Col id="country">Greece</Col>
+          </Row>
+          <Row>
+            <Col id="2000">4.2</Col>
+            <Col id="2001">3.7</Col>
+            <Col id="2002">4.5</Col>
+            <Col id="2003">3.9</Col>
+            <Col id="2004">4.8</Col>
+            <Col id="2005">4</Col>
+            <Col id="2006">3.9</Col>
+            <Col id="2007">0.1</Col>
+            <Col id="2008">0.9</Col>
+            <Col id="2009">-6.8</Col>
+            <Col id="2010">1.3</Col>
+            <Col id="continent">Europe</Col>
+            <Col id="country">Hungary</Col>
+          </Row>
+          <Row>
+            <Col id="2000">4.3</Col>
+            <Col id="2001">3.9</Col>
+            <Col id="2002">0.1</Col>
+            <Col id="2003">2.4</Col>
+            <Col id="2004">7.8</Col>
+            <Col id="2005">7.2</Col>
+            <Col id="2006">4.7</Col>
+            <Col id="2007">6</Col>
+            <Col id="2008">1.3</Col>
+            <Col id="2009">-6.8</Col>
+            <Col id="2010">-4</Col>
+            <Col id="continent">Europe</Col>
+            <Col id="country">Iceland</Col>
+          </Row>
+          <Row>
+            <Col id="2000"/>
+            <Col id="2001">4.8</Col>
+            <Col id="2002">5.9</Col>
+            <Col id="2003">4.2</Col>
+            <Col id="2004">4.5</Col>
+            <Col id="2005">5.3</Col>
+            <Col id="2006">5.3</Col>
+            <Col id="2007">5.2</Col>
+            <Col id="2008">-3</Col>
+            <Col id="2009">-7</Col>
+            <Col id="2010">-0.4</Col>
+            <Col id="continent">Europe</Col>
+            <Col id="country">Ireland</Col>
+          </Row>
+          <Row>
+            <Col id="2000">3.7</Col>
+            <Col id="2001">1.9</Col>
+            <Col id="2002">0.5</Col>
+            <Col id="2003">0</Col>
+            <Col id="2004">1.7</Col>
+            <Col id="2005">0.9</Col>
+            <Col id="2006">2.2</Col>
+            <Col id="2007">1.7</Col>
+            <Col id="2008">-1.2</Col>
+            <Col id="2009">-5.5</Col>
+            <Col id="2010">1.8</Col>
+            <Col id="continent">Europe</Col>
+            <Col id="country">Italy</Col>
+          </Row>
+          <Row>
+            <Col id="2000">6.9</Col>
+            <Col id="2001">8</Col>
+            <Col id="2002">6.5</Col>
+            <Col id="2003">7.2</Col>
+            <Col id="2004">8.7</Col>
+            <Col id="2005">10.6</Col>
+            <Col id="2006">12.2</Col>
+            <Col id="2007">10</Col>
+            <Col id="2008">-4.2</Col>
+            <Col id="2009">-18</Col>
+            <Col id="2010">-0.3</Col>
+            <Col id="continent">Europe</Col>
+            <Col id="country">Latvia</Col>
+          </Row>
+          <Row>
+            <Col id="2000">3.3</Col>
+            <Col id="2001">6.7</Col>
+            <Col id="2002">6.9</Col>
+            <Col id="2003">10.2</Col>
+            <Col id="2004">7.4</Col>
+            <Col id="2005">7.8</Col>
+            <Col id="2006">7.8</Col>
+            <Col id="2007">9.8</Col>
+            <Col id="2008">2.9</Col>
+            <Col id="2009">-14.7</Col>
+            <Col id="2010">1.3</Col>
+            <Col id="continent">Europe</Col>
+            <Col id="country">Lithuania</Col>
+          </Row>
+          <Row>
+            <Col id="2000">8.4</Col>
+            <Col id="2001">2.5</Col>
+            <Col id="2002">4.1</Col>
+            <Col id="2003">1.5</Col>
+            <Col id="2004">4.4</Col>
+            <Col id="2005">5.4</Col>
+            <Col id="2006">5</Col>
+            <Col id="2007">6.6</Col>
+            <Col id="2008">0.8</Col>
+            <Col id="2009">-5.3</Col>
+            <Col id="2010">2.7</Col>
+            <Col id="continent">Europe</Col>
+            <Col id="country">Luxembourg 2)</Col>
+          </Row>
+          <Row>
+            <Col id="2000">4.5</Col>
+            <Col id="2001">-4.5</Col>
+            <Col id="2002">0.9</Col>
+            <Col id="2003">2.8</Col>
+            <Col id="2004">4.6</Col>
+            <Col id="2005">4.4</Col>
+            <Col id="2006">5</Col>
+            <Col id="2007">6.1</Col>
+            <Col id="2008">5</Col>
+            <Col id="2009">-0.9</Col>
+            <Col id="2010">1.8</Col>
+            <Col id="continent">Europe</Col>
+            <Col id="country">Macedonia</Col>
+          </Row>
+          <Row>
+            <Col id="2000">6.8</Col>
+            <Col id="2001">-1.5</Col>
+            <Col id="2002">2.8</Col>
+            <Col id="2003">0.1</Col>
+            <Col id="2004">-0.5</Col>
+            <Col id="2005">3.7</Col>
+            <Col id="2006">2.2</Col>
+            <Col id="2007">4.3</Col>
+            <Col id="2008">4.4</Col>
+            <Col id="2009">-2.7</Col>
+            <Col id="2010">2.7</Col>
+            <Col id="continent">Europe</Col>
+            <Col id="country">Malta</Col>
+          </Row>
+          <Row>
+            <Col id="2000">3.9</Col>
+            <Col id="2001">1.9</Col>
+            <Col id="2002">0.1</Col>
+            <Col id="2003">0.3</Col>
+            <Col id="2004">2.2</Col>
+            <Col id="2005">2</Col>
+            <Col id="2006">3.4</Col>
+            <Col id="2007">3.9</Col>
+            <Col id="2008">1.8</Col>
+            <Col id="2009">-3.5</Col>
+            <Col id="2010">1.7</Col>
+            <Col id="continent">Europe</Col>
+            <Col id="country">the Netherlands</Col>
+          </Row>
+          <Row>
+            <Col id="2000">3.3</Col>
+            <Col id="2001">2</Col>
+            <Col id="2002">1.5</Col>
+            <Col id="2003">1</Col>
+            <Col id="2004">4</Col>
+            <Col id="2005">2.6</Col>
+            <Col id="2006">2.5</Col>
+            <Col id="2007">2.7</Col>
+            <Col id="2008">0</Col>
+            <Col id="2009">-1.7</Col>
+            <Col id="2010">0.7</Col>
+            <Col id="continent">Europe</Col>
+            <Col id="country">Norway</Col>
+          </Row>
+          <Row>
+            <Col id="2000">4.3</Col>
+            <Col id="2001">1.2</Col>
+            <Col id="2002">1.4</Col>
+            <Col id="2003">3.9</Col>
+            <Col id="2004">5.3</Col>
+            <Col id="2005">3.6</Col>
+            <Col id="2006">6.2</Col>
+            <Col id="2007">6.8</Col>
+            <Col id="2008">5.1</Col>
+            <Col id="2009">1.6</Col>
+            <Col id="2010">3.9</Col>
+            <Col id="continent">Europe</Col>
+            <Col id="country">Poland</Col>
+          </Row>
+          <Row>
+            <Col id="2000">3.9</Col>
+            <Col id="2001">2</Col>
+            <Col id="2002">0.8</Col>
+            <Col id="2003">-0.9</Col>
+            <Col id="2004">1.6</Col>
+            <Col id="2005">0.8</Col>
+            <Col id="2006">1.4</Col>
+            <Col id="2007">2.4</Col>
+            <Col id="2008">0</Col>
+            <Col id="2009">-2.9</Col>
+            <Col id="2010">1.4</Col>
+            <Col id="continent">Europe</Col>
+            <Col id="country">Portugal</Col>
+          </Row>
+          <Row>
+            <Col id="2000">2.1</Col>
+            <Col id="2001">5.7</Col>
+            <Col id="2002">5.1</Col>
+            <Col id="2003">5.2</Col>
+            <Col id="2004">8.4</Col>
+            <Col id="2005">4.2</Col>
+            <Col id="2006">7.9</Col>
+            <Col id="2007">6</Col>
+            <Col id="2008">9.4</Col>
+            <Col id="2009">-8.5</Col>
+            <Col id="2010">0.9</Col>
+            <Col id="continent">Europe</Col>
+            <Col id="country">Romania</Col>
+          </Row>
+          <Row>
+            <Col id="2000">10</Col>
+            <Col id="2001">5.1</Col>
+            <Col id="2002">4.7</Col>
+            <Col id="2003">7.3</Col>
+            <Col id="2004">7.2</Col>
+            <Col id="2005">6.4</Col>
+            <Col id="2006">8.2</Col>
+            <Col id="2007">8.5</Col>
+            <Col id="2008">5.2</Col>
+            <Col id="2009">-7.8</Col>
+            <Col id="2010">4.3</Col>
+            <Col id="continent">Europe</Col>
+            <Col id="country">Russia</Col>
+          </Row>
+          <Row>
+            <Col id="2000">2.2</Col>
+            <Col id="2001">5.6</Col>
+            <Col id="2002">0.3</Col>
+            <Col id="2003">3.9</Col>
+            <Col id="2004">4.6</Col>
+            <Col id="2005">2.3</Col>
+            <Col id="2006">3.9</Col>
+            <Col id="2007">3.5</Col>
+            <Col id="2008">1.9</Col>
+            <Col id="2009"/>
+            <Col id="2010"/>
+            <Col id="continent">Europe</Col>
+            <Col id="country">San Marino</Col>
+          </Row>
+          <Row>
+            <Col id="2000">1.4</Col>
+            <Col id="2001">3.5</Col>
+            <Col id="2002">4.6</Col>
+            <Col id="2003">4.8</Col>
+            <Col id="2004">5.1</Col>
+            <Col id="2005">6.7</Col>
+            <Col id="2006">8.3</Col>
+            <Col id="2007">10.5</Col>
+            <Col id="2008">5.8</Col>
+            <Col id="2009">-4.9</Col>
+            <Col id="2010">4.2</Col>
+            <Col id="continent">Europe</Col>
+            <Col id="country">Slovakia</Col>
+          </Row>
+          <Row>
+            <Col id="2000">4.3</Col>
+            <Col id="2001">2.9</Col>
+            <Col id="2002">3.8</Col>
+            <Col id="2003">2.9</Col>
+            <Col id="2004">4.4</Col>
+            <Col id="2005">4</Col>
+            <Col id="2006">5.8</Col>
+            <Col id="2007">6.9</Col>
+            <Col id="2008">3.6</Col>
+            <Col id="2009">-8</Col>
+            <Col id="2010">1.4</Col>
+            <Col id="continent">Europe</Col>
+            <Col id="country">Slovenia</Col>
+          </Row>
+          <Row>
+            <Col id="2000">5</Col>
+            <Col id="2001">3.7</Col>
+            <Col id="2002">2.7</Col>
+            <Col id="2003">3.1</Col>
+            <Col id="2004">3.3</Col>
+            <Col id="2005">3.6</Col>
+            <Col id="2006">4.1</Col>
+            <Col id="2007">3.5</Col>
+            <Col id="2008">0.9</Col>
+            <Col id="2009">-3.7</Col>
+            <Col id="2010">-0.1</Col>
+            <Col id="continent">Europe</Col>
+            <Col id="country">Spain</Col>
+          </Row>
+          <Row>
+            <Col id="2000">4.5</Col>
+            <Col id="2001">1.3</Col>
+            <Col id="2002">2.5</Col>
+            <Col id="2003">2.3</Col>
+            <Col id="2004">4.2</Col>
+            <Col id="2005">3.2</Col>
+            <Col id="2006">4.3</Col>
+            <Col id="2007">3.3</Col>
+            <Col id="2008">-0.6</Col>
+            <Col id="2009">-5</Col>
+            <Col id="2010">6.2</Col>
+            <Col id="continent">Europe</Col>
+            <Col id="country">Sweden</Col>
+          </Row>
+          <Row>
+            <Col id="2000">3.6</Col>
+            <Col id="2001">1.2</Col>
+            <Col id="2002">0.4</Col>
+            <Col id="2003">-0.2</Col>
+            <Col id="2004">2.5</Col>
+            <Col id="2005">2.6</Col>
+            <Col id="2006">3.6</Col>
+            <Col id="2007">3.6</Col>
+            <Col id="2008">2.1</Col>
+            <Col id="2009">-1.9</Col>
+            <Col id="2010">2.7</Col>
+            <Col id="continent">Europe</Col>
+            <Col id="country">Switzerland</Col>
+          </Row>
+          <Row>
+            <Col id="2000">4.5</Col>
+            <Col id="2001">3.2</Col>
+            <Col id="2002">2.7</Col>
+            <Col id="2003">3.5</Col>
+            <Col id="2004">3</Col>
+            <Col id="2005">2.1</Col>
+            <Col id="2006">2.6</Col>
+            <Col id="2007">3.5</Col>
+            <Col id="2008">-1.1</Col>
+            <Col id="2009">-4.4</Col>
+            <Col id="2010">2.1</Col>
+            <Col id="continent">Europe</Col>
+            <Col id="country">the United Kingdom</Col>
+          </Row>
+          <Row>
+            <Col id="2000">3</Col>
+            <Col id="2001">3.1</Col>
+            <Col id="2002">14.5</Col>
+            <Col id="2003">3.3</Col>
+            <Col id="2004">11.2</Col>
+            <Col id="2005">18.3</Col>
+            <Col id="2006">20.7</Col>
+            <Col id="2007">22.6</Col>
+            <Col id="2008">13.8</Col>
+            <Col id="2009">2.4</Col>
+            <Col id="2010">3.4</Col>
+            <Col id="continent">Africa</Col>
+            <Col id="country">Angola</Col>
+          </Row>
+          <Row>
+            <Col id="2000">5.8</Col>
+            <Col id="2001">5</Col>
+            <Col id="2002">4.5</Col>
+            <Col id="2003">3.9</Col>
+            <Col id="2004">3.1</Col>
+            <Col id="2005">2.9</Col>
+            <Col id="2006">4.1</Col>
+            <Col id="2007">4.6</Col>
+            <Col id="2008">5.1</Col>
+            <Col id="2009">3.8</Col>
+            <Col id="2010">3</Col>
+            <Col id="continent">Africa</Col>
+            <Col id="country">Benin</Col>
+          </Row>
+          <Row>
+            <Col id="2000">5.9</Col>
+            <Col id="2001">3.5</Col>
+            <Col id="2002">9</Col>
+            <Col id="2003">6.3</Col>
+            <Col id="2004">6</Col>
+            <Col id="2005">1.6</Col>
+            <Col id="2006">5.1</Col>
+            <Col id="2007">4.8</Col>
+            <Col id="2008">2.9</Col>
+            <Col id="2009">-4.8</Col>
+            <Col id="2010">7</Col>
+            <Col id="continent">Africa</Col>
+            <Col id="country">Botswana</Col>
+          </Row>
+          <Row>
+            <Col id="2000">1.8</Col>
+            <Col id="2001">6.6</Col>
+            <Col id="2002">4.7</Col>
+            <Col id="2003">8</Col>
+            <Col id="2004">4.6</Col>
+            <Col id="2005">8.7</Col>
+            <Col id="2006">6.8</Col>
+            <Col id="2007">3.6</Col>
+            <Col id="2008">5.8</Col>
+            <Col id="2009">3</Col>
+            <Col id="2010">7.9</Col>
+            <Col id="continent">Africa</Col>
+            <Col id="country">Burkina Faso</Col>
+          </Row>
+          <Row>
+            <Col id="2000">-0.9</Col>
+            <Col id="2001">2.1</Col>
+            <Col id="2002">4.4</Col>
+            <Col id="2003">-1.2</Col>
+            <Col id="2004">4.8</Col>
+            <Col id="2005">0.9</Col>
+            <Col id="2006">5.4</Col>
+            <Col id="2007">4.8</Col>
+            <Col id="2008">5</Col>
+            <Col id="2009">3.5</Col>
+            <Col id="2010">3.8</Col>
+            <Col id="continent">Africa</Col>
+            <Col id="country">Burundi</Col>
+          </Row>
+          <Row>
+            <Col id="2000">4.2</Col>
+            <Col id="2001">4.5</Col>
+            <Col id="2002">4</Col>
+            <Col id="2003">4</Col>
+            <Col id="2004">3.7</Col>
+            <Col id="2005">2.3</Col>
+            <Col id="2006">3.2</Col>
+            <Col id="2007">3.5</Col>
+            <Col id="2008">2.9</Col>
+            <Col id="2009">2</Col>
+            <Col id="2010">3.2</Col>
+            <Col id="continent">Africa</Col>
+            <Col id="country">Cameroon</Col>
+          </Row>
+          <Row>
+            <Col id="2000">16.8</Col>
+            <Col id="2001">6.1</Col>
+            <Col id="2002">5.3</Col>
+            <Col id="2003">4.7</Col>
+            <Col id="2004">4.3</Col>
+            <Col id="2005">6.5</Col>
+            <Col id="2006">10.1</Col>
+            <Col id="2007">8.6</Col>
+            <Col id="2008">6.2</Col>
+            <Col id="2009">3.7</Col>
+            <Col id="2010">5.2</Col>
+            <Col id="continent">Africa</Col>
+            <Col id="country">Cape Verde</Col>
+          </Row>
+          <Row>
+            <Col id="2000">2.3</Col>
+            <Col id="2001">0.3</Col>
+            <Col id="2002">-0.6</Col>
+            <Col id="2003">-7.6</Col>
+            <Col id="2004">1</Col>
+            <Col id="2005">2.4</Col>
+            <Col id="2006">3.8</Col>
+            <Col id="2007">3.7</Col>
+            <Col id="2008">2</Col>
+            <Col id="2009">1.7</Col>
+            <Col id="2010">3.3</Col>
+            <Col id="continent">Africa</Col>
+            <Col id="country">Central African Republic</Col>
+          </Row>
+          <Row>
+            <Col id="2000">7.6</Col>
+            <Col id="2001">3.8</Col>
+            <Col id="2002">4.6</Col>
+            <Col id="2003">0.8</Col>
+            <Col id="2004">3.5</Col>
+            <Col id="2005">7.8</Col>
+            <Col id="2006">6.1</Col>
+            <Col id="2007">-1.6</Col>
+            <Col id="2008">5.6</Col>
+            <Col id="2009">7.5</Col>
+            <Col id="2010">8.8</Col>
+            <Col id="continent">Africa</Col>
+            <Col id="country">Congo</Col>
+          </Row>
+          <Row>
+            <Col id="2000">-6.9</Col>
+            <Col id="2001">-2.1</Col>
+            <Col id="2002">3.5</Col>
+            <Col id="2003">5.8</Col>
+            <Col id="2004">6.6</Col>
+            <Col id="2005">7.8</Col>
+            <Col id="2006">5.6</Col>
+            <Col id="2007">6.3</Col>
+            <Col id="2008">6.2</Col>
+            <Col id="2009">2.8</Col>
+            <Col id="2010">7.2</Col>
+            <Col id="continent">Africa</Col>
+            <Col id="country">Democratic Republic of the Congo</Col>
+          </Row>
+          <Row>
+            <Col id="2000">5.4</Col>
+            <Col id="2001">3.5</Col>
+            <Col id="2002">2.4</Col>
+            <Col id="2003">3.2</Col>
+            <Col id="2004">4.1</Col>
+            <Col id="2005">4.5</Col>
+            <Col id="2006">6.8</Col>
+            <Col id="2007">7.1</Col>
+            <Col id="2008">7.2</Col>
+            <Col id="2009">4.7</Col>
+            <Col id="2010">5.1</Col>
+            <Col id="continent">Africa</Col>
+            <Col id="country">Egypt</Col>
+          </Row>
+          <Row>
+            <Col id="2000">6.1</Col>
+            <Col id="2001">8.3</Col>
+            <Col id="2002">1.5</Col>
+            <Col id="2003">-2.2</Col>
+            <Col id="2004">13.6</Col>
+            <Col id="2005">11.8</Col>
+            <Col id="2006">10.8</Col>
+            <Col id="2007">11.5</Col>
+            <Col id="2008">10.8</Col>
+            <Col id="2009">8.8</Col>
+            <Col id="2010">9.9</Col>
+            <Col id="continent">Africa</Col>
+            <Col id="country">Ethiopia</Col>
+          </Row>
+          <Row>
+            <Col id="2000">3.7</Col>
+            <Col id="2001">4</Col>
+            <Col id="2002">4.5</Col>
+            <Col id="2003">5.2</Col>
+            <Col id="2004">5.6</Col>
+            <Col id="2005">5.9</Col>
+            <Col id="2006">6.4</Col>
+            <Col id="2007">6.5</Col>
+            <Col id="2008">8.4</Col>
+            <Col id="2009">4</Col>
+            <Col id="2010">8</Col>
+            <Col id="continent">Africa</Col>
+            <Col id="country">Ghana</Col>
+          </Row>
+          <Row>
+            <Col id="2000">7.5</Col>
+            <Col id="2001">0.2</Col>
+            <Col id="2002">-7.1</Col>
+            <Col id="2003">-0.6</Col>
+            <Col id="2004">2.2</Col>
+            <Col id="2005">3.5</Col>
+            <Col id="2006">2.1</Col>
+            <Col id="2007">3.2</Col>
+            <Col id="2008">3.2</Col>
+            <Col id="2009">3</Col>
+            <Col id="2010">3.5</Col>
+            <Col id="continent">Africa</Col>
+            <Col id="country">Guinea-Bissau</Col>
+          </Row>
+          <Row>
+            <Col id="2000">0.6</Col>
+            <Col id="2001">3.8</Col>
+            <Col id="2002">0.5</Col>
+            <Col id="2003">2.9</Col>
+            <Col id="2004">5.1</Col>
+            <Col id="2005">5.9</Col>
+            <Col id="2006">6.3</Col>
+            <Col id="2007">7</Col>
+            <Col id="2008">1.5</Col>
+            <Col id="2009">2.6</Col>
+            <Col id="2010">5.6</Col>
+            <Col id="continent">Africa</Col>
+            <Col id="country">Kenya</Col>
+          </Row>
+          <Row>
+            <Col id="2000">5.7</Col>
+            <Col id="2001">4.2</Col>
+            <Col id="2002">1.1</Col>
+            <Col id="2003">4.3</Col>
+            <Col id="2004">2.3</Col>
+            <Col id="2005">2.7</Col>
+            <Col id="2006">4.3</Col>
+            <Col id="2007">4.7</Col>
+            <Col id="2008">5.4</Col>
+            <Col id="2009">2.9</Col>
+            <Col id="2010">5.6</Col>
+            <Col id="continent">Africa</Col>
+            <Col id="country">Lesotho</Col>
+          </Row>
+          <Row>
+            <Col id="2000">3.7</Col>
+            <Col id="2001">-4.3</Col>
+            <Col id="2002">-1.3</Col>
+            <Col id="2003">13</Col>
+            <Col id="2004">4.4</Col>
+            <Col id="2005">9.9</Col>
+            <Col id="2006">5.9</Col>
+            <Col id="2007">6</Col>
+            <Col id="2008">3.8</Col>
+            <Col id="2009">2.1</Col>
+            <Col id="2010"/>
+            <Col id="continent">Africa</Col>
+            <Col id="country">Libya</Col>
+          </Row>
+          <Row>
+            <Col id="2000">4.8</Col>
+            <Col id="2001">6</Col>
+            <Col id="2002">-12.7</Col>
+            <Col id="2003">9.8</Col>
+            <Col id="2004">5.3</Col>
+            <Col id="2005">4.6</Col>
+            <Col id="2006">5</Col>
+            <Col id="2007">6.2</Col>
+            <Col id="2008">7.1</Col>
+            <Col id="2009">-4.6</Col>
+            <Col id="2010">1.6</Col>
+            <Col id="continent">Africa</Col>
+            <Col id="country">Madagascar</Col>
+          </Row>
+          <Row>
+            <Col id="2000">1.6</Col>
+            <Col id="2001">-5</Col>
+            <Col id="2002">1.7</Col>
+            <Col id="2003">5.5</Col>
+            <Col id="2004">5.5</Col>
+            <Col id="2005">2.6</Col>
+            <Col id="2006">7.7</Col>
+            <Col id="2007">5.8</Col>
+            <Col id="2008">8.3</Col>
+            <Col id="2009">9</Col>
+            <Col id="2010">6.5</Col>
+            <Col id="continent">Africa</Col>
+            <Col id="country">Malawi</Col>
+          </Row>
+          <Row>
+            <Col id="2000">3.2</Col>
+            <Col id="2001">12.1</Col>
+            <Col id="2002">4.2</Col>
+            <Col id="2003">7.4</Col>
+            <Col id="2004">2.2</Col>
+            <Col id="2005">6.1</Col>
+            <Col id="2006">5.3</Col>
+            <Col id="2007">4.3</Col>
+            <Col id="2008">5</Col>
+            <Col id="2009">4.5</Col>
+            <Col id="2010">5.8</Col>
+            <Col id="continent">Africa</Col>
+            <Col id="country">Mali</Col>
+          </Row>
+          <Row>
+            <Col id="2000">9</Col>
+            <Col id="2001">2.6</Col>
+            <Col id="2002">2.1</Col>
+            <Col id="2003">3.7</Col>
+            <Col id="2004">5.7</Col>
+            <Col id="2005">1.2</Col>
+            <Col id="2006">3.9</Col>
+            <Col id="2007">5.9</Col>
+            <Col id="2008">5.5</Col>
+            <Col id="2009">3</Col>
+            <Col id="2010">4.1</Col>
+            <Col id="continent">Africa</Col>
+            <Col id="country">Mauritius</Col>
+          </Row>
+          <Row>
+            <Col id="2000">1.6</Col>
+            <Col id="2001">7.6</Col>
+            <Col id="2002">3.3</Col>
+            <Col id="2003">6.3</Col>
+            <Col id="2004">4.8</Col>
+            <Col id="2005">3</Col>
+            <Col id="2006">7.8</Col>
+            <Col id="2007">2.7</Col>
+            <Col id="2008">5.6</Col>
+            <Col id="2009">4.8</Col>
+            <Col id="2010">3.7</Col>
+            <Col id="continent">Africa</Col>
+            <Col id="country">Morocco</Col>
+          </Row>
+          <Row>
+            <Col id="2000">1.1</Col>
+            <Col id="2001">11.9</Col>
+            <Col id="2002">8.8</Col>
+            <Col id="2003">6</Col>
+            <Col id="2004">7.9</Col>
+            <Col id="2005">9.6</Col>
+            <Col id="2006">6.3</Col>
+            <Col id="2007">7.3</Col>
+            <Col id="2008">6.8</Col>
+            <Col id="2009">6.3</Col>
+            <Col id="2010">6.8</Col>
+            <Col id="continent">Africa</Col>
+            <Col id="country">Mozambique</Col>
+          </Row>
+          <Row>
+            <Col id="2000">3.5</Col>
+            <Col id="2001">1.2</Col>
+            <Col id="2002">4.8</Col>
+            <Col id="2003">4.2</Col>
+            <Col id="2004">12.3</Col>
+            <Col id="2005">2.5</Col>
+            <Col id="2006">7.1</Col>
+            <Col id="2007">5.4</Col>
+            <Col id="2008">3.4</Col>
+            <Col id="2009">-0.4</Col>
+            <Col id="2010">6.6</Col>
+            <Col id="continent">Africa</Col>
+            <Col id="country">Namibia</Col>
+          </Row>
+          <Row>
+            <Col id="2000">-1.4</Col>
+            <Col id="2001">7.1</Col>
+            <Col id="2002">3</Col>
+            <Col id="2003">5.3</Col>
+            <Col id="2004">0.1</Col>
+            <Col id="2005">4.5</Col>
+            <Col id="2006">5.8</Col>
+            <Col id="2007">3.4</Col>
+            <Col id="2008">8.7</Col>
+            <Col id="2009">-0.9</Col>
+            <Col id="2010">8</Col>
+            <Col id="continent">Africa</Col>
+            <Col id="country">Niger</Col>
+          </Row>
+          <Row>
+            <Col id="2000">5.4</Col>
+            <Col id="2001">3.1</Col>
+            <Col id="2002">1.5</Col>
+            <Col id="2003">10.3</Col>
+            <Col id="2004">10.6</Col>
+            <Col id="2005">5.4</Col>
+            <Col id="2006">6.2</Col>
+            <Col id="2007">6.4</Col>
+            <Col id="2008">6</Col>
+            <Col id="2009">7</Col>
+            <Col id="2010">7.8</Col>
+            <Col id="continent">Africa</Col>
+            <Col id="country">Nigeria</Col>
+          </Row>
+          <Row>
+            <Col id="2000">3.2</Col>
+            <Col id="2001">4.6</Col>
+            <Col id="2002">0.7</Col>
+            <Col id="2003">6.7</Col>
+            <Col id="2004">5.9</Col>
+            <Col id="2005">5.6</Col>
+            <Col id="2006">2.5</Col>
+            <Col id="2007">4.9</Col>
+            <Col id="2008">3.7</Col>
+            <Col id="2009">2.1</Col>
+            <Col id="2010">4.1</Col>
+            <Col id="continent">Africa</Col>
+            <Col id="country">Senegal</Col>
+          </Row>
+          <Row>
+            <Col id="2000">4.3</Col>
+            <Col id="2001">-2.3</Col>
+            <Col id="2002">1.2</Col>
+            <Col id="2003">-5.9</Col>
+            <Col id="2004">-2.9</Col>
+            <Col id="2005">7.5</Col>
+            <Col id="2006">9.3</Col>
+            <Col id="2007">9.6</Col>
+            <Col id="2008">-1</Col>
+            <Col id="2009">0.5</Col>
+            <Col id="2010">6.7</Col>
+            <Col id="continent">Africa</Col>
+            <Col id="country">Seychelles</Col>
+          </Row>
+          <Row>
+            <Col id="2000">3.8</Col>
+            <Col id="2001">18.2</Col>
+            <Col id="2002">27.5</Col>
+            <Col id="2003">9.3</Col>
+            <Col id="2004">7.5</Col>
+            <Col id="2005">7.2</Col>
+            <Col id="2006">7.3</Col>
+            <Col id="2007">6.4</Col>
+            <Col id="2008">5.5</Col>
+            <Col id="2009">3.2</Col>
+            <Col id="2010">4.9</Col>
+            <Col id="continent">Africa</Col>
+            <Col id="country">Sierra Leone</Col>
+          </Row>
+          <Row>
+            <Col id="2000">4.2</Col>
+            <Col id="2001">2.7</Col>
+            <Col id="2002">3.7</Col>
+            <Col id="2003">2.9</Col>
+            <Col id="2004">4.6</Col>
+            <Col id="2005">5.3</Col>
+            <Col id="2006">5.6</Col>
+            <Col id="2007">5.5</Col>
+            <Col id="2008">3.6</Col>
+            <Col id="2009">-1.5</Col>
+            <Col id="2010">2.9</Col>
+            <Col id="continent">Africa</Col>
+            <Col id="country">South Africa</Col>
+          </Row>
+          <Row>
+            <Col id="2000">1.8</Col>
+            <Col id="2001">1.2</Col>
+            <Col id="2002">1.8</Col>
+            <Col id="2003">2.2</Col>
+            <Col id="2004">2.9</Col>
+            <Col id="2005">2.5</Col>
+            <Col id="2006">3.3</Col>
+            <Col id="2007">3.5</Col>
+            <Col id="2008">2.4</Col>
+            <Col id="2009">1.2</Col>
+            <Col id="2010">2</Col>
+            <Col id="continent">Africa</Col>
+            <Col id="country">Swaziland</Col>
+          </Row>
+          <Row>
+            <Col id="2000">4.9</Col>
+            <Col id="2001">6</Col>
+            <Col id="2002">7.2</Col>
+            <Col id="2003">6.9</Col>
+            <Col id="2004">7.8</Col>
+            <Col id="2005">7.4</Col>
+            <Col id="2006">6.7</Col>
+            <Col id="2007">7.1</Col>
+            <Col id="2008">7.4</Col>
+            <Col id="2009">6</Col>
+            <Col id="2010">7</Col>
+            <Col id="continent">Africa</Col>
+            <Col id="country">Tanzania</Col>
+          </Row>
+          <Row>
+            <Col id="2000">-0.8</Col>
+            <Col id="2001">-1.6</Col>
+            <Col id="2002">-0.9</Col>
+            <Col id="2003">5</Col>
+            <Col id="2004">2.1</Col>
+            <Col id="2005">1.2</Col>
+            <Col id="2006">4.1</Col>
+            <Col id="2007">2.3</Col>
+            <Col id="2008">2.4</Col>
+            <Col id="2009">3.2</Col>
+            <Col id="2010">3.7</Col>
+            <Col id="continent">Africa</Col>
+            <Col id="country">Togo</Col>
+          </Row>
+          <Row>
+            <Col id="2000">4.3</Col>
+            <Col id="2001">4.8</Col>
+            <Col id="2002">1.7</Col>
+            <Col id="2003">5.5</Col>
+            <Col id="2004">6</Col>
+            <Col id="2005">4</Col>
+            <Col id="2006">5.7</Col>
+            <Col id="2007">6.3</Col>
+            <Col id="2008">4.5</Col>
+            <Col id="2009">3.1</Col>
+            <Col id="2010">3</Col>
+            <Col id="continent">Africa</Col>
+            <Col id="country">Tunisia</Col>
+          </Row>
+          <Row>
+            <Col id="2000">3.6</Col>
+            <Col id="2001">4.9</Col>
+            <Col id="2002">3.3</Col>
+            <Col id="2003">5.1</Col>
+            <Col id="2004">5.4</Col>
+            <Col id="2005">5.3</Col>
+            <Col id="2006">6.2</Col>
+            <Col id="2007">6.2</Col>
+            <Col id="2008">5.7</Col>
+            <Col id="2009">6.4</Col>
+            <Col id="2010">7.6</Col>
+            <Col id="continent">Africa</Col>
+            <Col id="country">Zambia</Col>
+          </Row>
+          <Row>
+            <Col id="2000">-3.1</Col>
+            <Col id="2001">1.4</Col>
+            <Col id="2002">-8.9</Col>
+            <Col id="2003">-17</Col>
+            <Col id="2004">-5.8</Col>
+            <Col id="2005">-5.7</Col>
+            <Col id="2006">-3.5</Col>
+            <Col id="2007">-3.7</Col>
+            <Col id="2008">-17.7</Col>
+            <Col id="2009">6</Col>
+            <Col id="2010">9</Col>
+            <Col id="continent">Africa</Col>
+            <Col id="country">Zimbabwe</Col>
+          </Row>
+          <Row>
+            <Col id="2000">4</Col>
+            <Col id="2001">2.1</Col>
+            <Col id="2002">3.9</Col>
+            <Col id="2003">3.3</Col>
+            <Col id="2004">4.2</Col>
+            <Col id="2005">3</Col>
+            <Col id="2006">3.1</Col>
+            <Col id="2007">3.6</Col>
+            <Col id="2008">3.8</Col>
+            <Col id="2009">1.4</Col>
+            <Col id="2010">2.3</Col>
+            <Col id="continent">Oceania</Col>
+            <Col id="country">Australia</Col>
+          </Row>
+          <Row>
+            <Col id="2000">-1.7</Col>
+            <Col id="2001">2</Col>
+            <Col id="2002">3.2</Col>
+            <Col id="2003">1</Col>
+            <Col id="2004">5.3</Col>
+            <Col id="2005">0.7</Col>
+            <Col id="2006">1.8</Col>
+            <Col id="2007">-0.9</Col>
+            <Col id="2008">1</Col>
+            <Col id="2009">-1.3</Col>
+            <Col id="2010">-0.2</Col>
+            <Col id="continent">Oceania</Col>
+            <Col id="country">Fiji</Col>
+          </Row>
+          <Row>
+            <Col id="2000">2.6</Col>
+            <Col id="2001">3.6</Col>
+            <Col id="2002">4.9</Col>
+            <Col id="2003">4.3</Col>
+            <Col id="2004">3.8</Col>
+            <Col id="2005">3.3</Col>
+            <Col id="2006">0.8</Col>
+            <Col id="2007">3</Col>
+            <Col id="2008">-1.5</Col>
+            <Col id="2009">-0.5</Col>
+            <Col id="2010">1.9</Col>
+            <Col id="continent">Oceania</Col>
+            <Col id="country">New Zealand</Col>
+          </Row>
+          <Row>
+            <Col id="2000">-2.5</Col>
+            <Col id="2001">-0.1</Col>
+            <Col id="2002">-0.2</Col>
+            <Col id="2003">2.2</Col>
+            <Col id="2004">2.7</Col>
+            <Col id="2005">3.6</Col>
+            <Col id="2006">2.6</Col>
+            <Col id="2007">7.2</Col>
+            <Col id="2008">6.7</Col>
+            <Col id="2009">5.5</Col>
+            <Col id="2010">8</Col>
+            <Col id="continent">Oceania</Col>
+            <Col id="country">Papua New Guinea</Col>
+          </Row>
+          <Row>
+            <Col id="2000">-14.3</Col>
+            <Col id="2001">-8</Col>
+            <Col id="2002">-2.8</Col>
+            <Col id="2003">6.5</Col>
+            <Col id="2004">4.9</Col>
+            <Col id="2005">5.4</Col>
+            <Col id="2006">6.9</Col>
+            <Col id="2007">10.7</Col>
+            <Col id="2008">7.3</Col>
+            <Col id="2009">-1.2</Col>
+            <Col id="2010">7</Col>
+            <Col id="continent">Oceania</Col>
+            <Col id="country">Solomon Islands</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.1"><![CDATA[this.getSparklineData = function(row) {
+	var data = [];
+	
+	for (var i = 0, len = 11; i < len; i++) 
+	{
+		data.push(this.ds00.getColumn(row, new String(2000 + i)));
+	}
+	
+	return data;
+};]]></Script>
+  </Form>
+</FDL>

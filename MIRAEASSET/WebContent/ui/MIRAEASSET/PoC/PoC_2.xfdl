@@ -1,0 +1,1400 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.0">
+  <Form id="PoC_2" width="1280" height="720">
+    <Layouts>
+      <Layout height="720" mobileorientation="landscape" width="1280">
+        <Tab id="Tab00" taborder="0" tabindex="0" left="8" top="8" right="8" bottom="224">
+          <Tabpages>
+            <Tabpage id="Tabpage1" text="All">
+              <Layouts>
+                <Layout>
+                  <Grid id="Grid00" taborder="0" left="0" top="0" right="0" bottom="0" binddataset="dsAll">
+                    <Formats>
+                      <Format id="default">
+                        <Columns>
+                          <Column size="52"/>
+                          <Column size="80"/>
+                          <Column size="80"/>
+                          <Column size="80"/>
+                          <Column size="80"/>
+                          <Column size="80"/>
+                          <Column size="80"/>
+                          <Column size="80"/>
+                          <Column size="40"/>
+                          <Column size="40"/>
+                          <Column size="80"/>
+                          <Column size="80"/>
+                          <Column size="80"/>
+                          <Column size="80"/>
+                          <Column size="80"/>
+                          <Column size="80"/>
+                          <Column size="80"/>
+                          <Column size="80"/>
+                          <Column size="80"/>
+                          <Column size="80"/>
+                          <Column size="80"/>
+                          <Column size="80"/>
+                          <Column size="80"/>
+                          <Column size="80"/>
+                          <Column size="80"/>
+                          <Column size="80"/>
+                          <Column size="80"/>
+                          <Column size="80"/>
+                          <Column size="80"/>
+                        </Columns>
+                        <Rows>
+                          <Row size="24" band="head"/>
+                          <Row size="24"/>
+                        </Rows>
+                        <Band id="head">
+                          <Cell text="Quick"/>
+                          <Cell col="1" text="ROUTE"/>
+                          <Cell col="2" text="SIDE"/>
+                          <Cell col="3" text="SYMBOL"/>
+                          <Cell col="4" text="TOTAL"/>
+                          <Cell col="5" text="FLAG"/>
+                          <Cell col="6" text="TOTALVAL"/>
+                          <Cell col="7" text="OPENVAL"/>
+                          <Cell col="8" text="ON"/>
+                          <Cell col="9" text="OFF"/>
+                          <Cell col="10" text="LQNT"/>
+                          <Cell col="11" text="POSIT"/>
+                          <Cell col="12" text="BOX"/>
+                          <Cell col="13" text="BIDS"/>
+                          <Cell col="14" text="LURINEX"/>
+                          <Cell col="15" text="IOIS"/>
+                          <Cell col="16" text="SHOWIOIS"/>
+                          <Cell col="17" text="UNGENCY"/>
+                          <Cell col="18" text="LAST"/>
+                          <Cell col="19" text="ADV"/>
+                          <Cell col="20" text="RODADV"/>
+                          <Cell col="21" text="SPREADBPS"/>
+                          <Cell col="22" text="DVCAPSON"/>
+                          <Cell col="23" text="ESMAILS"/>
+                          <Cell col="24" text="CORPACT"/>
+                          <Cell col="25" text="NEWS"/>
+                          <Cell col="26" text="ALPHATOCLOSE"/>
+                          <Cell col="27" text="STALPHA"/>
+                          <Cell col="28" text="ALPHASTATEGY"/>
+                        </Band>
+                        <Band id="body">
+                          <Cell displaytype="imagecontrol" edittype="none" cssclass="expr:SIDE == &quot;SELL&quot; ? 'Expr_Case_Background_Orange' : 'Expr_Case_Background_Blue'" background="url('imagerc::img_grd_quick.png') no-repeat center center"/>
+                          <Cell col="1" text="bind:ROUTE" cssclass="expr:SIDE == &quot;SELL&quot; ? 'Expr_Case_Background_Orange' : 'Expr_Case_Background_Blue'" padding="0px 0px 0px 22px" background="url('imagerc::img_WF_route.png') no-repeat left center"/>
+                          <Cell col="2" text="bind:SIDE" cssclass="expr:SIDE == &quot;SELL&quot; ? 'Expr_Case_Background_Orange' : 'Expr_Case_Background_Blue'"/>
+                          <Cell col="3" text="bind:SYMBOL" cssclass="expr:SIDE == &quot;SELL&quot; ? 'Expr_Case_Background_Orange' : 'Expr_Case_Background_Blue'"/>
+                          <Cell col="4" text="bind:TOTAL" cssclass="expr:SIDE == &quot;SELL&quot; ? 'Expr_Case_Background_Orange' : 'Expr_Case_Background_Blue'"/>
+                          <Cell col="5" text="bind:FLAG" cssclass="expr:SIDE == &quot;SELL&quot; ? 'Expr_Case_Background_Orange' : 'Expr_Case_Background_Blue'" displaytype="imagecontrol"/>
+                          <Cell col="6" text="bind:TOTALVAL" cssclass="expr:SIDE == &quot;SELL&quot; ? 'Expr_Case_Background_Orange' : 'Expr_Case_Background_Blue'"/>
+                          <Cell col="7" text="bind:OPENVAL" cssclass="expr:SIDE == &quot;SELL&quot; ? 'Expr_Case_Background_Orange' : 'Expr_Case_Background_Blue'"/>
+                          <Cell col="8" text="ON" displaytype="buttoncontrol" edittype="button" cssclass="expr:SIDE == &quot;SELL&quot; ? 'Expr_Case_Background_Orange' : 'Expr_Case_Background_Blue'"/>
+                          <Cell col="9" text="OFF" displaytype="buttoncontrol" edittype="button" cssclass="expr:SIDE == &quot;SELL&quot; ? 'Expr_Case_Background_Orange' : 'Expr_Case_Background_Blue'"/>
+                          <Cell col="10" text="bind:LQNT" cssclass="expr:SIDE == &quot;SELL&quot; ? 'Expr_Case_Background_Orange' : 'Expr_Case_Background_Blue'" displaytype="imagecontrol" background="url('imagerc::img_grd_lqnt.png') no-repeat center center"/>
+                          <Cell col="11" text="bind:POSIT" cssclass="expr:SIDE == &quot;SELL&quot; ? 'Expr_Case_Background_Orange' : 'Expr_Case_Background_Blue'" displaytype="imagecontrol" background="url('imagerc::img_grd_posit.png') no-repeat center center"/>
+                          <Cell col="12" text="bind:BOX" cssclass="expr:SIDE == &quot;SELL&quot; ? 'Expr_Case_Background_Orange' : 'Expr_Case_Background_Blue'"/>
+                          <Cell col="13" text="bind:BIDS" cssclass="expr:SIDE == &quot;SELL&quot; ? 'Expr_Case_Background_Orange' : 'Expr_Case_Background_Blue'" displaytype="imagecontrol" background="url('imagerc::img_grd_bids.png') no-repeat center center"/>
+                          <Cell col="14" text="bind:LURINEX" cssclass="expr:SIDE == &quot;SELL&quot; ? 'Expr_Case_Background_Orange' : 'Expr_Case_Background_Blue'"/>
+                          <Cell col="15" text="bind:IOIS" cssclass="expr:SIDE == &quot;SELL&quot; ? 'Expr_Case_Background_Orange' : 'Expr_Case_Background_Blue'" displaytype="progressbarcontrol" progressbarsmooth="true" progressbarblocksize="10"/>
+                          <Cell col="16" text="Show ]O[s" displaytype="buttoncontrol" edittype="button" cssclass="expr:SIDE == &quot;SELL&quot; ? 'Expr_Case_Background_Orange' : 'Expr_Case_Background_Blue'"/>
+                          <Cell col="17" text="bind:UNGENCY" cssclass="expr:SIDE == &quot;SELL&quot; ? 'Expr_Case_Background_Orange' : 'Expr_Case_Background_Blue'"/>
+                          <Cell col="18" text="bind:LAST" cssclass="expr:LAST == 5.63 ? 'Expr_Case_Background_bRed' : LAST == 17.53 ? 'Expr_Case_Background_bOrange' : 'Expr_Case_Background_Yellow'"/>
+                          <Cell col="19" text="bind:ADV" cssclass="expr:SIDE == &quot;SELL&quot; ? 'Expr_Case_Background_Orange' : 'Expr_Case_Background_Blue'"/>
+                          <Cell col="20" text="bind:RODADV" cssclass="expr:SIDE == &quot;SELL&quot; ? 'Expr_Case_Background_Orange' : 'Expr_Case_Background_Blue'"/>
+                          <Cell col="21" text="bind:SPREADBPS" cssclass="expr:SIDE == &quot;SELL&quot; ? 'Expr_Case_Background_Orange' : 'Expr_Case_Background_Blue'"/>
+                          <Cell col="22" text="bind:DVCAPSON" cssclass="expr:SIDE == &quot;SELL&quot; ? 'Expr_Case_Background_Orange' : 'Expr_Case_Background_Blue'" displaytype="imagecontrol"/>
+                          <Cell col="23" text="bind:ESMAILS" cssclass="expr:SIDE == &quot;SELL&quot; ? 'Expr_Case_Background_Orange' : 'Expr_Case_Background_Blue'" displaytype="imagecontrol"/>
+                          <Cell col="24" text="bind:CORPACT" cssclass="expr:SIDE == &quot;SELL&quot; ? 'Expr_Case_Background_Orange' : 'Expr_Case_Background_Blue'" displaytype="imagecontrol"/>
+                          <Cell col="25" text="bind:NEWS" cssclass="expr:SIDE == &quot;SELL&quot; ? 'Expr_Case_Background_Orange' : 'Expr_Case_Background_Blue'" displaytype="imagecontrol"/>
+                          <Cell col="26" text="bind:ALPHATOCLOSE" cssclass="expr:ALPHATOCLOSE &gt; 20 &amp;&amp;  ALPHATOCLOSE &lt; 30 ? 'Expr_Case_Background_bYellow' : ALPHATOCLOSE &gt; 30 &amp;&amp;  ALPHATOCLOSE &lt; 40 ? 'Expr_Case_Background_bsOrange' : ALPHATOCLOSE &gt; 40 ? 'Expr_Case_Background_bRed' : SIDE == &quot;SELL&quot; ? 'Expr_Case_Background_Orange' : 'Expr_Case_Background_Blue'"/>
+                          <Cell col="27" text="bind:STALPHA" cssclass="expr:STALPHA &gt; 20 &amp;&amp;  STALPHA &lt; 30 ? 'Expr_Case_Background_bYellow' : STALPHA &gt; 30 &amp;&amp;  STALPHA &lt; 40 ? 'Expr_Case_Background_bsOrange' : STALPHA &gt; 40 ? 'Expr_Case_Background_bRed' : SIDE == &quot;SELL&quot; ? 'Expr_Case_Background_Orange' : 'Expr_Case_Background_Blue'"/>
+                          <Cell col="28" text="bind:ALPHASTATEGY" cssclass="expr:SIDE == &quot;SELL&quot; ? 'Expr_Case_Background_Orange' : 'Expr_Case_Background_Blue'"/>
+                        </Band>
+                      </Format>
+                    </Formats>
+                  </Grid>
+                </Layout>
+              </Layouts>
+            </Tabpage>
+            <Tabpage id="Tabpage2" text="All Open"/>
+            <Tabpage id="Tabpage3" text="All Working">
+              <Layouts>
+                <Layout/>
+              </Layouts>
+            </Tabpage>
+            <Tabpage id="Tabpage4" text="All Completed">
+              <Layouts>
+                <Layout/>
+              </Layouts>
+            </Tabpage>
+            <Tabpage id="Tabpage5" text="My Open">
+              <Layouts>
+                <Layout/>
+              </Layouts>
+            </Tabpage>
+            <Tabpage id="Tabpage6" text="Equity Desk">
+              <Layouts>
+                <Layout/>
+              </Layouts>
+            </Tabpage>
+            <Tabpage id="Tabpage7" text="Americas">
+              <Layouts>
+                <Layout/>
+              </Layouts>
+            </Tabpage>
+            <Tabpage id="Tabpage8" text="APAC">
+              <Layouts>
+                <Layout/>
+              </Layouts>
+            </Tabpage>
+            <Tabpage id="Tabpage9" text="EMEA">
+              <Layouts>
+                <Layout/>
+              </Layouts>
+            </Tabpage>
+            <Tabpage id="Tabpage10" text="SplitMerge">
+              <Layouts>
+                <Layout/>
+              </Layouts>
+            </Tabpage>
+            <Tabpage id="Tabpage11" text="AutoRouted">
+              <Layouts>
+                <Layout/>
+              </Layouts>
+            </Tabpage>
+            <Tabpage id="Tabpage12" text="Worked Manualy">
+              <Layouts>
+                <Layout/>
+              </Layouts>
+            </Tabpage>
+            <Tabpage id="Tabpage13" text="Futures">
+              <Layouts>
+                <Layout/>
+              </Layouts>
+            </Tabpage>
+            <Tabpage id="Tabpage14" text="Options Desk">
+              <Layouts>
+                <Layout/>
+              </Layouts>
+            </Tabpage>
+            <Tabpage id="Tabpage15" text="FK">
+              <Layouts>
+                <Layout/>
+              </Layouts>
+            </Tabpage>
+            <Tabpage id="Tabpage16" text="OTC">
+              <Layouts>
+                <Layout/>
+              </Layouts>
+            </Tabpage>
+            <Tabpage id="Tabpage17" text="Fixed Income Desk">
+              <Layouts>
+                <Layout/>
+              </Layouts>
+            </Tabpage>
+            <Tabpage id="Tabpage18" text="Roll&amp;Spreads">
+              <Layouts>
+                <Layout/>
+              </Layouts>
+            </Tabpage>
+          </Tabpages>
+        </Tab>
+        <Tab id="Tab00_00" taborder="1" tabindex="0" left="8" top="Tab00:8" bottom="8" width="50.63%">
+          <Tabpages>
+            <Tabpage id="Tabpage1" text="All">
+              <Layouts>
+                <Layout>
+                  <Grid id="Grid00" taborder="0" left="0" top="0" right="0" bottom="0" binddataset="dsSub01">
+                    <Formats>
+                      <Format id="default">
+                        <Columns>
+                          <Column size="80"/>
+                          <Column size="80"/>
+                          <Column size="80"/>
+                          <Column size="80"/>
+                          <Column size="80"/>
+                          <Column size="80"/>
+                          <Column size="80"/>
+                          <Column size="80"/>
+                          <Column size="80"/>
+                          <Column size="80"/>
+                          <Column size="80"/>
+                          <Column size="80"/>
+                          <Column size="80"/>
+                          <Column size="80"/>
+                          <Column size="80"/>
+                        </Columns>
+                        <Rows>
+                          <Row size="24" band="head"/>
+                          <Row size="24"/>
+                        </Rows>
+                        <Band id="head">
+                          <Cell text="SYMBOL"/>
+                          <Cell col="1" text="ORDQTY"/>
+                          <Cell col="2" text="BORDERPROVIDER"/>
+                          <Cell col="3" text="AGESTRATEGY"/>
+                          <Cell col="4" text="EXCITY"/>
+                          <Cell col="5" text="AVG"/>
+                          <Cell col="6" text="EXEC"/>
+                          <Cell col="7" text="STATUS"/>
+                          <Cell col="8" text="REPLACE"/>
+                          <Cell col="9" text="QUCKCHANGE"/>
+                          <Cell col="10" text="FILS"/>
+                          <Cell col="11" text="TIF"/>
+                          <Cell col="12" text="PERIFSINCESENCE"/>
+                          <Cell col="13" text="LASTTYPE"/>
+                          <Cell col="14" text="PARTIPATION"/>
+                        </Band>
+                        <Band id="body">
+                          <Cell text="bind:SYMBOL" cssclass="Expr_Case_Background_Orange"/>
+                          <Cell col="1" text="bind:ORDQTY" cssclass="Expr_Case_Background_Orange"/>
+                          <Cell col="2" text="bind:BORDERPROVIDER" cssclass="Expr_Case_Background_Orange"/>
+                          <Cell col="3" text="bind:AGESTRATEGY" cssclass="Expr_Case_Background_Orange"/>
+                          <Cell col="4" text="bind:EXCITY" cssclass="Expr_Case_Background_Orange"/>
+                          <Cell col="5" text="bind:AVG" cssclass="Expr_Case_Background_Orange"/>
+                          <Cell col="6" text="bind:EXEC" displaytype="progressbarcontrol" progressbarsmooth="true" progressbarblocksize="10" cssclass="Expr_Case_Background_Orange"/>
+                          <Cell col="7" text="bind:STATUS" cssclass="Expr_Case_Background_Orange"/>
+                          <Cell col="8" text="bind:REPLACE" cssclass="Expr_Case_Background_Orange"/>
+                          <Cell col="9" text="bind:QUCKCHANGE" cssclass="Expr_Case_Background_Orange"/>
+                          <Cell col="10" text="bind:FILS" cssclass="Expr_Case_Background_Orange" background="url('imagerc::img_grd_find.png') no-repeat left center" padding="0px 0px 0px 20px"/>
+                          <Cell col="11" text="bind:TIF" cssclass="Expr_Case_Background_Orange"/>
+                          <Cell col="12" text="bind:PERIFSINCESENCE" cssclass="Expr_Case_Background_Orange"/>
+                          <Cell col="13" text="bind:LASTTYPE" cssclass="Expr_Case_Background_Orange"/>
+                          <Cell col="14" text="bind:PARTIPATION" cssclass="Expr_Case_Background_Orange"/>
+                        </Band>
+                      </Format>
+                    </Formats>
+                  </Grid>
+                </Layout>
+              </Layouts>
+            </Tabpage>
+            <Tabpage id="Tabpage2" text="My Open"/>
+            <Tabpage id="Tabpage3" text="My Completed">
+              <Layouts>
+                <Layout/>
+              </Layouts>
+            </Tabpage>
+            <Tabpage id="Tabpage4" text="My Filed">
+              <Layouts>
+                <Layout/>
+              </Layouts>
+            </Tabpage>
+          </Tabpages>
+        </Tab>
+        <Tab id="Tab00_00_00" taborder="2" tabindex="0" left="Tab00_00:8" top="Tab00:8" bottom="8" width="47.50%">
+          <Tabpages>
+            <Tabpage id="Tabpage1" text="All">
+              <Layouts>
+                <Layout>
+                  <Grid id="Grid00" taborder="0" left="0" top="0" right="0" bottom="0" binddataset="dsSub02">
+                    <Formats>
+                      <Format id="default">
+                        <Columns>
+                          <Column size="80"/>
+                          <Column size="80"/>
+                          <Column size="80"/>
+                          <Column size="80"/>
+                          <Column size="80"/>
+                          <Column size="80"/>
+                          <Column size="80"/>
+                          <Column size="80"/>
+                          <Column size="80"/>
+                          <Column size="80"/>
+                          <Column size="80"/>
+                          <Column size="80"/>
+                        </Columns>
+                        <Rows>
+                          <Row size="24" band="head"/>
+                          <Row size="24"/>
+                        </Rows>
+                        <Band id="head">
+                          <Cell text="CANCEL"/>
+                          <Cell col="1" text="SPLIT"/>
+                          <Cell col="2" text="RESTRIBUTION"/>
+                          <Cell col="3" text="SYMBOL"/>
+                          <Cell col="4" text="ORDQTY"/>
+                          <Cell col="5" text="EXEC"/>
+                          <Cell col="6" text="EXECQTY"/>
+                          <Cell col="7" text="AVGPRX"/>
+                          <Cell col="8" text="ORDPRX"/>
+                          <Cell col="9" text="ORDTYPE"/>
+                          <Cell col="10" text="SENDTYPE"/>
+                          <Cell col="11" text="ORDSTAGE"/>
+                        </Band>
+                        <Band id="body">
+                          <Cell text="Cancel" displaytype="normal" edittype="none" cssclass="Expr_Case_Background_Orange" background="url('imagerc::img_grd_cancel.png') no-repeat left center" padding="0px 0px 0px 20px"/>
+                          <Cell col="1" text="Split" displaytype="normal" edittype="none" cssclass="Expr_Case_Background_Orange" background="url('imagerc::img_grd_split.png') no-repeat left center" padding="0px 0px 0px 20px"/>
+                          <Cell col="2" text="bind:RESTRIBUTION" cssclass="Expr_Case_Background_Orange"/>
+                          <Cell col="3" text="bind:SYMBOL" cssclass="Expr_Case_Background_Orange"/>
+                          <Cell col="4" text="bind:ORDQTY" cssclass="Expr_Case_Background_Orange"/>
+                          <Cell col="5" text="bind:EXEC" displaytype="progressbarcontrol" progressbarsmooth="true" progressbarblocksize="10" cssclass="Expr_Case_Background_Orange"/>
+                          <Cell col="6" text="bind:EXECQTY" cssclass="Expr_Case_Background_Orange"/>
+                          <Cell col="7" text="bind:AVGPRX" cssclass="Expr_Case_Background_Orange"/>
+                          <Cell col="8" text="bind:ORDPRX" cssclass="Expr_Case_Background_Orange"/>
+                          <Cell col="9" text="bind:ORDTYPE" cssclass="Expr_Case_Background_Orange"/>
+                          <Cell col="10" text="bind:SENDTYPE" cssclass="Expr_Case_Background_Orange"/>
+                          <Cell col="11" text="bind:ORDSTAGE" cssclass="Expr_Case_Background_Orange"/>
+                        </Band>
+                      </Format>
+                    </Formats>
+                  </Grid>
+                </Layout>
+              </Layouts>
+            </Tabpage>
+            <Tabpage id="Tabpage2" text="Staged"/>
+            <Tabpage id="Tabpage3" text="Canceled">
+              <Layouts>
+                <Layout/>
+              </Layouts>
+            </Tabpage>
+            <Tabpage id="Tabpage4" text="Rejects">
+              <Layouts>
+                <Layout/>
+              </Layouts>
+            </Tabpage>
+          </Tabpages>
+        </Tab>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="dsAll">
+        <ColumnInfo>
+          <Column id="ROUTE" type="STRING" size="256"/>
+          <Column id="SIDE" type="STRING" size="256"/>
+          <Column id="SYMBOL" type="STRING" size="256"/>
+          <Column id="TOTAL" type="STRING" size="256"/>
+          <Column id="FLAG" type="STRING" size="256"/>
+          <Column id="TOTALVAL" type="STRING" size="256"/>
+          <Column id="OPENVAL" type="STRING" size="256"/>
+          <Column id="ON" type="STRING" size="256"/>
+          <Column id="OFF" type="STRING" size="256"/>
+          <Column id="LQNT" type="STRING" size="256"/>
+          <Column id="POSIT" type="STRING" size="256"/>
+          <Column id="BOX" type="STRING" size="256"/>
+          <Column id="BIDS" type="STRING" size="256"/>
+          <Column id="LURINEX" type="STRING" size="256"/>
+          <Column id="IOIS" type="STRING" size="256"/>
+          <Column id="SHOWIOIS" type="STRING" size="256"/>
+          <Column id="UNGENCY" type="STRING" size="256"/>
+          <Column id="LAST" type="BIGDECIMAL" size="256"/>
+          <Column id="ADV" type="STRING" size="256"/>
+          <Column id="RODADV" type="STRING" size="256"/>
+          <Column id="SPREADBPS" type="STRING" size="256"/>
+          <Column id="DVCAPSON" type="STRING" size="256"/>
+          <Column id="ESMAILS" type="STRING" size="256"/>
+          <Column id="CORPACT" type="STRING" size="256"/>
+          <Column id="NEWS" type="STRING" size="256"/>
+          <Column id="ALPHATOCLOSE" type="STRING" size="256"/>
+          <Column id="STALPHA" type="STRING" size="256"/>
+          <Column id="ALPHASTATEGY" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="ROUTE">ROUTE</Col>
+            <Col id="SIDE">SELL</Col>
+            <Col id="SYMBOL">BP.L</Col>
+            <Col id="TOTAL">705600</Col>
+            <Col id="TOTALVAL">8000</Col>
+            <Col id="OPENVAL">8000</Col>
+            <Col id="UNGENCY">Medium</Col>
+            <Col id="LAST">5.63</Col>
+            <Col id="ADV">%2.28</Col>
+            <Col id="RODADV">%6.15</Col>
+            <Col id="SPREADBPS">12.17</Col>
+            <Col id="ALPHATOCLOSE">-1.00</Col>
+            <Col id="STALPHA">-1.00</Col>
+            <Col id="ALPHASTATEGY">Muri.M</Col>
+            <Col id="FLAG">imagerc::img_flag_uk.png</Col>
+          </Row>
+          <Row>
+            <Col id="ROUTE">ROUTE</Col>
+            <Col id="SIDE">BUY</Col>
+            <Col id="SYMBOL">BSX.N</Col>
+            <Col id="TOTAL">8000</Col>
+            <Col id="TOTALVAL">66000</Col>
+            <Col id="OPENVAL">66000</Col>
+            <Col id="UNGENCY">Low</Col>
+            <Col id="LAST">30.45</Col>
+            <Col id="ADV">%0.25</Col>
+            <Col id="RODADV">%4.57</Col>
+            <Col id="SPREADBPS">37.84</Col>
+            <Col id="ALPHATOCLOSE">-3.00</Col>
+            <Col id="STALPHA">-3.00</Col>
+            <Col id="ALPHASTATEGY">BacHowd</Col>
+            <Col id="FLAG">imagerc::img_flag_usa.png</Col>
+          </Row>
+          <Row>
+            <Col id="ROUTE">ROUTE</Col>
+            <Col id="SIDE">SELL</Col>
+            <Col id="SYMBOL">CAT.N</Col>
+            <Col id="TOTAL">66000</Col>
+            <Col id="TOTALVAL">78000</Col>
+            <Col id="OPENVAL">311400</Col>
+            <Col id="UNGENCY">High</Col>
+            <Col id="LAST">126.82</Col>
+            <Col id="ADV">%5.20</Col>
+            <Col id="RODADV">%108.28</Col>
+            <Col id="SPREADBPS">57.74</Col>
+            <Col id="ALPHATOCLOSE">10.00</Col>
+            <Col id="STALPHA">10.00</Col>
+            <Col id="ALPHASTATEGY">AlphaR</Col>
+            <Col id="FLAG">imagerc::img_flag_usa.png</Col>
+          </Row>
+          <Row>
+            <Col id="ROUTE">ROUTE</Col>
+            <Col id="SIDE">BUY</Col>
+            <Col id="SYMBOL">CAT.N</Col>
+            <Col id="TOTAL">78000</Col>
+            <Col id="TOTALVAL">45000</Col>
+            <Col id="OPENVAL">56000</Col>
+            <Col id="UNGENCY">Low</Col>
+            <Col id="LAST">126.92</Col>
+            <Col id="ADV">%6.15</Col>
+            <Col id="RODADV">%15.60</Col>
+            <Col id="SPREADBPS">57.73</Col>
+            <Col id="ALPHATOCLOSE">-3.00</Col>
+            <Col id="STALPHA">-3.00</Col>
+            <Col id="ALPHASTATEGY">Bacidbad</Col>
+            <Col id="FLAG">imagerc::img_flag_usa.png</Col>
+          </Row>
+          <Row>
+            <Col id="ROUTE">ROUTE</Col>
+            <Col id="SIDE">BUY</Col>
+            <Col id="SYMBOL">CNR.TO</Col>
+            <Col id="TOTAL">45000</Col>
+            <Col id="TOTALVAL">582500</Col>
+            <Col id="OPENVAL">1024800</Col>
+            <Col id="UNGENCY">High</Col>
+            <Col id="LAST">100.30</Col>
+            <Col id="ADV">%4.57</Col>
+            <Col id="RODADV">%135.19</Col>
+            <Col id="SPREADBPS">19.58</Col>
+            <Col id="ALPHATOCLOSE">20.00</Col>
+            <Col id="STALPHA">20.00</Col>
+            <Col id="ALPHASTATEGY">AlphaS</Col>
+            <Col id="FLAG">imagerc::img_flag_canada.png</Col>
+          </Row>
+          <Row>
+            <Col id="ROUTE">ROUTE</Col>
+            <Col id="SIDE">SELL</Col>
+            <Col id="SYMBOL">CONG.DE</Col>
+            <Col id="TOTAL">582500</Col>
+            <Col id="TOTALVAL">83430</Col>
+            <Col id="OPENVAL">705600</Col>
+            <Col id="UNGENCY">Medium</Col>
+            <Col id="LAST">215.65</Col>
+            <Col id="ADV">%108.28</Col>
+            <Col id="RODADV">%29.03</Col>
+            <Col id="SPREADBPS">24.57</Col>
+            <Col id="ALPHATOCLOSE">1.00</Col>
+            <Col id="STALPHA">1.00</Col>
+            <Col id="ALPHASTATEGY">10PctXLAM</Col>
+            <Col id="FLAG">imagerc::img_flag_germany.png</Col>
+            <Col id="ESMAILS">imagerc::img_grd_esmalis.png</Col>
+            <Col id="NEWS">imagerc::img_grd_news.png</Col>
+          </Row>
+          <Row>
+            <Col id="ROUTE">ROUTE</Col>
+            <Col id="SIDE">BUY</Col>
+            <Col id="SYMBOL">CONG.DE</Col>
+            <Col id="TOTAL">83430</Col>
+            <Col id="TOTALVAL">406000</Col>
+            <Col id="OPENVAL">8000</Col>
+            <Col id="UNGENCY">High</Col>
+            <Col id="LAST">215.55</Col>
+            <Col id="ADV">%15.60</Col>
+            <Col id="RODADV">%7.14</Col>
+            <Col id="SPREADBPS">24.57</Col>
+            <Col id="ALPHATOCLOSE">7.00</Col>
+            <Col id="STALPHA">7.00</Col>
+            <Col id="ALPHASTATEGY">XGPocPOM</Col>
+            <Col id="FLAG">imagerc::img_flag_germany.png</Col>
+            <Col id="ESMAILS">imagerc::img_grd_esmalis.png</Col>
+          </Row>
+          <Row>
+            <Col id="ROUTE">ROUTE</Col>
+            <Col id="SIDE">BUY</Col>
+            <Col id="SYMBOL">CP.TO</Col>
+            <Col id="TOTAL">406000</Col>
+            <Col id="TOTALVAL">311400</Col>
+            <Col id="OPENVAL">66000</Col>
+            <Col id="UNGENCY">Medium</Col>
+            <Col id="LAST">206.14</Col>
+            <Col id="ADV">%135.19</Col>
+            <Col id="RODADV">%314.91</Col>
+            <Col id="SPREADBPS">63.62</Col>
+            <Col id="ALPHATOCLOSE">1.00</Col>
+            <Col id="STALPHA">1.00</Col>
+            <Col id="ALPHASTATEGY">10PotXlAOM</Col>
+            <Col id="FLAG">imagerc::img_flag_canada.png</Col>
+          </Row>
+          <Row>
+            <Col id="ROUTE">ROUTE</Col>
+            <Col id="SIDE">BUY</Col>
+            <Col id="SYMBOL">DD.N</Col>
+            <Col id="TOTAL">311400</Col>
+            <Col id="TOTALVAL">56000</Col>
+            <Col id="OPENVAL">705600</Col>
+            <Col id="UNGENCY">Low</Col>
+            <Col id="LAST">12.25</Col>
+            <Col id="ADV">%29.03</Col>
+            <Col id="RODADV">%3.79</Col>
+            <Col id="SPREADBPS">0.73</Col>
+            <Col id="ALPHATOCLOSE">0.73</Col>
+            <Col id="STALPHA">0.73</Col>
+            <Col id="ALPHASTATEGY">Muri.M</Col>
+            <Col id="FLAG">imagerc::img_flag_usa.png</Col>
+          </Row>
+          <Row>
+            <Col id="ROUTE">ROUTE</Col>
+            <Col id="SIDE">BUY</Col>
+            <Col id="SYMBOL">DUK.N</Col>
+            <Col id="TOTAL">56000</Col>
+            <Col id="TOTALVAL">1024800</Col>
+            <Col id="OPENVAL">8000</Col>
+            <Col id="UNGENCY">High</Col>
+            <Col id="LAST">84.57</Col>
+            <Col id="ADV">%7.14</Col>
+            <Col id="RODADV">%17.44</Col>
+            <Col id="SPREADBPS">13.59</Col>
+            <Col id="ALPHATOCLOSE">10.52</Col>
+            <Col id="STALPHA">10.52</Col>
+            <Col id="ALPHASTATEGY">BacHowd</Col>
+            <Col id="FLAG">imagerc::img_flag_usa.png</Col>
+            <Col id="LQNT"/>
+          </Row>
+          <Row>
+            <Col id="ROUTE">ROUTE</Col>
+            <Col id="SIDE">SELL</Col>
+            <Col id="SYMBOL">ELE.MC</Col>
+            <Col id="TOTAL">1024800</Col>
+            <Col id="TOTALVAL">705600</Col>
+            <Col id="OPENVAL">66000</Col>
+            <Col id="UNGENCY">High</Col>
+            <Col id="LAST">19.65</Col>
+            <Col id="ADV">%314.91</Col>
+            <Col id="RODADV">%14.59</Col>
+            <Col id="SPREADBPS">1.05</Col>
+            <Col id="ALPHATOCLOSE">1.05</Col>
+            <Col id="STALPHA">1.05</Col>
+            <Col id="ALPHASTATEGY">AlphaR</Col>
+            <Col id="FLAG">imagerc::img_flag_spain.png</Col>
+            <Col id="LQNT"/>
+            <Col id="DVCAPSON">imagerc::img_grd_dvCaps.png</Col>
+            <Col id="ESMAILS">imagerc::img_grd_esmalis.png</Col>
+          </Row>
+          <Row>
+            <Col id="ROUTE">ROUTE</Col>
+            <Col id="SIDE">BUY</Col>
+            <Col id="SYMBOL">EMR.N</Col>
+            <Col id="TOTAL">705600</Col>
+            <Col id="TOTALVAL">8000</Col>
+            <Col id="OPENVAL">8000</Col>
+            <Col id="UNGENCY">High</Col>
+            <Col id="LAST">17.53</Col>
+            <Col id="ADV">%3.79</Col>
+            <Col id="RODADV">%0.79</Col>
+            <Col id="SPREADBPS">23.57</Col>
+            <Col id="ALPHATOCLOSE">32.00</Col>
+            <Col id="STALPHA">32.00</Col>
+            <Col id="ALPHASTATEGY">Bacidbad</Col>
+            <Col id="FLAG">imagerc::img_flag_usa.png</Col>
+            <Col id="LQNT"/>
+            <Col id="CORPACT">imagerc::img_grd_capAct.png</Col>
+          </Row>
+          <Row>
+            <Col id="ROUTE">ROUTE</Col>
+            <Col id="SIDE">BUY</Col>
+            <Col id="SYMBOL">ENB.TO</Col>
+            <Col id="TOTAL">8000</Col>
+            <Col id="TOTALVAL">66000</Col>
+            <Col id="OPENVAL">66000</Col>
+            <Col id="UNGENCY">Medium</Col>
+            <Col id="LAST">30.45</Col>
+            <Col id="ADV">%17.44</Col>
+            <Col id="RODADV">%17.44</Col>
+            <Col id="SPREADBPS">56.36</Col>
+            <Col id="ALPHATOCLOSE">11.00</Col>
+            <Col id="STALPHA">11.00</Col>
+            <Col id="ALPHASTATEGY">AlphaS</Col>
+            <Col id="FLAG">imagerc::img_flag_canada.png</Col>
+            <Col id="LQNT"/>
+          </Row>
+          <Row>
+            <Col id="ROUTE">ROUTE</Col>
+            <Col id="SIDE">SELL</Col>
+            <Col id="SYMBOL">ENI.MI</Col>
+            <Col id="TOTAL">66000</Col>
+            <Col id="TOTALVAL">8000</Col>
+            <Col id="OPENVAL">311400</Col>
+            <Col id="UNGENCY">Medium</Col>
+            <Col id="LAST">126.82</Col>
+            <Col id="ADV">%14.59</Col>
+            <Col id="RODADV">%14.59</Col>
+            <Col id="SPREADBPS">47.84</Col>
+            <Col id="ALPHATOCLOSE">13.00</Col>
+            <Col id="STALPHA">13.00</Col>
+            <Col id="ALPHASTATEGY">10PctXLAM</Col>
+            <Col id="FLAG">imagerc::img_flag_italy.png</Col>
+            <Col id="LQNT"/>
+          </Row>
+          <Row>
+            <Col id="ROUTE">ROUTE</Col>
+            <Col id="SIDE">BUY</Col>
+            <Col id="SYMBOL">G.TO</Col>
+            <Col id="TOTAL">78000</Col>
+            <Col id="TOTALVAL">66000</Col>
+            <Col id="OPENVAL">56000</Col>
+            <Col id="UNGENCY">Medium</Col>
+            <Col id="LAST">126.92</Col>
+            <Col id="ADV">%0.79</Col>
+            <Col id="RODADV">%0.79</Col>
+            <Col id="SPREADBPS">9.50</Col>
+            <Col id="ALPHATOCLOSE">22.00</Col>
+            <Col id="STALPHA">22.00</Col>
+            <Col id="ALPHASTATEGY">XGPocPOM</Col>
+            <Col id="FLAG">imagerc::img_flag_canada.png</Col>
+            <Col id="LQNT"/>
+          </Row>
+          <Row>
+            <Col id="ROUTE">ROUTE</Col>
+            <Col id="SIDE">BUY</Col>
+            <Col id="SYMBOL">GEN.CO</Col>
+            <Col id="TOTAL">45000</Col>
+            <Col id="TOTALVAL">78000</Col>
+            <Col id="OPENVAL">1024800</Col>
+            <Col id="UNGENCY">Medium</Col>
+            <Col id="LAST">100.30</Col>
+            <Col id="ADV">%2.28</Col>
+            <Col id="RODADV">%6.15</Col>
+            <Col id="SPREADBPS">12.17</Col>
+            <Col id="ALPHATOCLOSE">34.00</Col>
+            <Col id="STALPHA">34.00</Col>
+            <Col id="ALPHASTATEGY">10PotXlAOM</Col>
+            <Col id="FLAG">imagerc::img_flag_denmark.png</Col>
+            <Col id="LQNT"/>
+          </Row>
+          <Row>
+            <Col id="ROUTE">ROUTE</Col>
+            <Col id="SIDE">SELL</Col>
+            <Col id="SYMBOL">GM.N</Col>
+            <Col id="TOTAL">582500</Col>
+            <Col id="TOTALVAL">45000</Col>
+            <Col id="OPENVAL">705600</Col>
+            <Col id="UNGENCY">Medium</Col>
+            <Col id="LAST">215.65</Col>
+            <Col id="ADV">%0.25</Col>
+            <Col id="RODADV">%4.57</Col>
+            <Col id="SPREADBPS">37.84</Col>
+            <Col id="ALPHATOCLOSE">65.00</Col>
+            <Col id="STALPHA">65.00</Col>
+            <Col id="ALPHASTATEGY">Muri.M</Col>
+            <Col id="LQNT"/>
+            <Col id="FLAG">imagerc::img_flag_germany.png</Col>
+          </Row>
+          <Row>
+            <Col id="ROUTE">ROUTE</Col>
+            <Col id="SIDE">SELL</Col>
+            <Col id="SYMBOL">GSK.L</Col>
+            <Col id="TOTAL">83430</Col>
+            <Col id="TOTALVAL">582500</Col>
+            <Col id="OPENVAL">8000</Col>
+            <Col id="UNGENCY">High</Col>
+            <Col id="LAST">215.55</Col>
+            <Col id="ADV">%5.20</Col>
+            <Col id="RODADV">%108.28</Col>
+            <Col id="SPREADBPS">57.74</Col>
+            <Col id="ALPHATOCLOSE">63.00</Col>
+            <Col id="STALPHA">63.00</Col>
+            <Col id="ALPHASTATEGY">BacHowd</Col>
+            <Col id="IOIS">40</Col>
+            <Col id="LQNT"/>
+            <Col id="DVCAPSON">imagerc::img_grd_dvCaps.png</Col>
+            <Col id="ESMAILS">imagerc::img_grd_esmalis.png</Col>
+            <Col id="FLAG">imagerc::img_flag_canada.png</Col>
+          </Row>
+          <Row>
+            <Col id="ROUTE">ROUTE</Col>
+            <Col id="SIDE">SELL</Col>
+            <Col id="SYMBOL">HEIN.AS</Col>
+            <Col id="TOTAL">406000</Col>
+            <Col id="TOTALVAL">83430</Col>
+            <Col id="OPENVAL">66000</Col>
+            <Col id="UNGENCY">Medium</Col>
+            <Col id="LAST">206.14</Col>
+            <Col id="ADV">%6.15</Col>
+            <Col id="RODADV">%15.60</Col>
+            <Col id="SPREADBPS">57.73</Col>
+            <Col id="ALPHATOCLOSE">-3.00</Col>
+            <Col id="STALPHA">-3.00</Col>
+            <Col id="ALPHASTATEGY">AlphaR</Col>
+            <Col id="LQNT"/>
+            <Col id="DVCAPSON">imagerc::img_grd_dvCaps.png</Col>
+            <Col id="ESMAILS">imagerc::img_grd_esmalis.png</Col>
+            <Col id="FLAG">imagerc::img_flag_usa.png</Col>
+          </Row>
+          <Row>
+            <Col id="ROUTE">ROUTE</Col>
+            <Col id="SIDE">BUY</Col>
+            <Col id="SYMBOL">HON.N</Col>
+            <Col id="TOTAL">311400</Col>
+            <Col id="TOTALVAL">406000</Col>
+            <Col id="OPENVAL">705600</Col>
+            <Col id="UNGENCY">Low</Col>
+            <Col id="LAST">12.25</Col>
+            <Col id="ADV">%4.57</Col>
+            <Col id="RODADV">%135.19</Col>
+            <Col id="SPREADBPS">19.58</Col>
+            <Col id="ALPHATOCLOSE">10.00</Col>
+            <Col id="STALPHA">10.00</Col>
+            <Col id="ALPHASTATEGY">Bacidbad</Col>
+            <Col id="LQNT"/>
+            <Col id="FLAG">imagerc::img_flag_usa.png</Col>
+          </Row>
+          <Row>
+            <Col id="ROUTE">ROUTE</Col>
+            <Col id="SIDE">BUY</Col>
+            <Col id="SYMBOL">JARD.SI</Col>
+            <Col id="TOTAL">56000</Col>
+            <Col id="TOTALVAL">311400</Col>
+            <Col id="OPENVAL">8000</Col>
+            <Col id="UNGENCY">High</Col>
+            <Col id="LAST">84.57</Col>
+            <Col id="ADV">%108.28</Col>
+            <Col id="RODADV">%29.03</Col>
+            <Col id="SPREADBPS">24.57</Col>
+            <Col id="ALPHATOCLOSE">-3.00</Col>
+            <Col id="STALPHA">-3.00</Col>
+            <Col id="ALPHASTATEGY">AlphaS</Col>
+            <Col id="IOIS">10</Col>
+            <Col id="LQNT"/>
+            <Col id="FLAG">imagerc::img_flag_spain.png</Col>
+          </Row>
+          <Row>
+            <Col id="ROUTE">ROUTE</Col>
+            <Col id="SIDE">BUY</Col>
+            <Col id="SYMBOL">KMB.N</Col>
+            <Col id="TOTAL">1024800</Col>
+            <Col id="TOTALVAL">56000</Col>
+            <Col id="OPENVAL">66000</Col>
+            <Col id="UNGENCY">High</Col>
+            <Col id="LAST">19.65</Col>
+            <Col id="ADV">%15.60</Col>
+            <Col id="RODADV">%7.14</Col>
+            <Col id="SPREADBPS">24.57</Col>
+            <Col id="ALPHATOCLOSE">20.00</Col>
+            <Col id="STALPHA">20.00</Col>
+            <Col id="ALPHASTATEGY">10PctXLAM</Col>
+            <Col id="LQNT"/>
+            <Col id="FLAG">imagerc::img_flag_usa.png</Col>
+          </Row>
+          <Row>
+            <Col id="ROUTE">ROUTE</Col>
+            <Col id="SIDE">SELL</Col>
+            <Col id="SYMBOL">JARD.SI</Col>
+            <Col id="TOTAL">705600</Col>
+            <Col id="TOTALVAL">1024800</Col>
+            <Col id="OPENVAL">8000</Col>
+            <Col id="UNGENCY">High</Col>
+            <Col id="LAST">111.23</Col>
+            <Col id="ADV">%135.19</Col>
+            <Col id="RODADV">%314.91</Col>
+            <Col id="SPREADBPS">63.62</Col>
+            <Col id="ALPHATOCLOSE">1.00</Col>
+            <Col id="STALPHA">1.00</Col>
+            <Col id="ALPHASTATEGY">XGPocPOM</Col>
+            <Col id="FLAG">imagerc::img_flag_canada.png</Col>
+          </Row>
+          <Row>
+            <Col id="ROUTE">ROUTE</Col>
+            <Col id="SIDE">BUY</Col>
+            <Col id="SYMBOL">LLY.N</Col>
+            <Col id="TOTAL">8000</Col>
+            <Col id="TOTALVAL">705600</Col>
+            <Col id="OPENVAL">66000</Col>
+            <Col id="UNGENCY">High</Col>
+            <Col id="LAST">30.45</Col>
+            <Col id="ADV">%29.03</Col>
+            <Col id="RODADV">%3.79</Col>
+            <Col id="SPREADBPS">0.73</Col>
+            <Col id="ALPHATOCLOSE">7.00</Col>
+            <Col id="STALPHA">7.00</Col>
+            <Col id="ALPHASTATEGY">10PotXlAOM</Col>
+            <Col id="IOIS">10</Col>
+            <Col id="FLAG">imagerc::img_flag_italy.png</Col>
+          </Row>
+          <Row>
+            <Col id="ROUTE">ROUTE</Col>
+            <Col id="SIDE">BUY</Col>
+            <Col id="SYMBOL">MCD.N</Col>
+            <Col id="TOTAL">66000</Col>
+            <Col id="TOTALVAL">8000</Col>
+            <Col id="OPENVAL">311400</Col>
+            <Col id="UNGENCY">Medium</Col>
+            <Col id="LAST">126.82</Col>
+            <Col id="ADV">%7.14</Col>
+            <Col id="RODADV">%17.44</Col>
+            <Col id="SPREADBPS">13.59</Col>
+            <Col id="ALPHATOCLOSE">1.00</Col>
+            <Col id="STALPHA">1.00</Col>
+            <Col id="ALPHASTATEGY">Muri.M</Col>
+            <Col id="IOIS">10</Col>
+            <Col id="FLAG">imagerc::img_flag_canada.png</Col>
+          </Row>
+          <Row>
+            <Col id="ROUTE">ROUTE</Col>
+            <Col id="SIDE">BUY</Col>
+            <Col id="SYMBOL">MIMC.N</Col>
+            <Col id="TOTAL">78000</Col>
+            <Col id="TOTALVAL">66000</Col>
+            <Col id="OPENVAL">56000</Col>
+            <Col id="UNGENCY">Low</Col>
+            <Col id="LAST">126.92</Col>
+            <Col id="ADV">%314.91</Col>
+            <Col id="RODADV">%14.59</Col>
+            <Col id="SPREADBPS">1.05</Col>
+            <Col id="ALPHATOCLOSE">0.73</Col>
+            <Col id="STALPHA">0.73</Col>
+            <Col id="ALPHASTATEGY">BacHowd</Col>
+            <Col id="IOIS">10</Col>
+            <Col id="FLAG">imagerc::img_flag_denmark.png</Col>
+          </Row>
+          <Row>
+            <Col id="ROUTE">ROUTE</Col>
+            <Col id="SIDE">BUY</Col>
+            <Col id="SYMBOL">NA.TO</Col>
+            <Col id="TOTAL">45000</Col>
+            <Col id="TOTALVAL">8000</Col>
+            <Col id="OPENVAL">1024800</Col>
+            <Col id="UNGENCY">High</Col>
+            <Col id="LAST">100.30</Col>
+            <Col id="ADV">%3.79</Col>
+            <Col id="RODADV">%0.79</Col>
+            <Col id="SPREADBPS">23.57</Col>
+            <Col id="ALPHATOCLOSE">10.52</Col>
+            <Col id="STALPHA">10.52</Col>
+            <Col id="ALPHASTATEGY">AlphaR</Col>
+            <Col id="IOIS">10</Col>
+            <Col id="FLAG">imagerc::img_flag_germany.png</Col>
+          </Row>
+          <Row>
+            <Col id="ROUTE">ROUTE</Col>
+            <Col id="SIDE">SELL</Col>
+            <Col id="SYMBOL">GSK.L</Col>
+            <Col id="TOTAL">582500</Col>
+            <Col id="TOTALVAL">66000</Col>
+            <Col id="OPENVAL">705600</Col>
+            <Col id="UNGENCY">High</Col>
+            <Col id="LAST">215.65</Col>
+            <Col id="ADV">%17.44</Col>
+            <Col id="RODADV">%17.44</Col>
+            <Col id="SPREADBPS">56.36</Col>
+            <Col id="ALPHATOCLOSE">1.05</Col>
+            <Col id="STALPHA">1.05</Col>
+            <Col id="ALPHASTATEGY">Bacidbad</Col>
+            <Col id="IOIS">10</Col>
+            <Col id="DVCAPSON">imagerc::img_grd_dvCaps.png</Col>
+            <Col id="FLAG">imagerc::img_flag_canada.png</Col>
+          </Row>
+          <Row>
+            <Col id="ROUTE">ROUTE</Col>
+            <Col id="SIDE">BUY</Col>
+            <Col id="SYMBOL">HEIN.AS</Col>
+            <Col id="TOTAL">83430</Col>
+            <Col id="TOTALVAL">78000</Col>
+            <Col id="OPENVAL">8000</Col>
+            <Col id="UNGENCY">High</Col>
+            <Col id="LAST">215.55</Col>
+            <Col id="ADV">%14.59</Col>
+            <Col id="RODADV">%14.59</Col>
+            <Col id="SPREADBPS">47.84</Col>
+            <Col id="ALPHATOCLOSE">32.00</Col>
+            <Col id="STALPHA">32.00</Col>
+            <Col id="ALPHASTATEGY">AlphaS</Col>
+            <Col id="IOIS">10</Col>
+            <Col id="FLAG">imagerc::img_flag_usa.png</Col>
+          </Row>
+          <Row>
+            <Col id="ROUTE">ROUTE</Col>
+            <Col id="SIDE">BUY</Col>
+            <Col id="SYMBOL">HON.N</Col>
+            <Col id="TOTAL">406000</Col>
+            <Col id="TOTALVAL">45000</Col>
+            <Col id="OPENVAL">66000</Col>
+            <Col id="UNGENCY">High</Col>
+            <Col id="LAST">206.14</Col>
+            <Col id="ADV">%0.79</Col>
+            <Col id="RODADV">%0.79</Col>
+            <Col id="SPREADBPS">9.50</Col>
+            <Col id="ALPHATOCLOSE">11.00</Col>
+            <Col id="STALPHA">11.00</Col>
+            <Col id="ALPHASTATEGY">10PctXLAM</Col>
+            <Col id="IOIS">10</Col>
+            <Col id="FLAG">imagerc::img_flag_usa.png</Col>
+          </Row>
+          <Row>
+            <Col id="ROUTE">ROUTE</Col>
+            <Col id="SIDE">SELL</Col>
+            <Col id="SYMBOL">JARD.SI</Col>
+            <Col id="TOTAL">311400</Col>
+            <Col id="TOTALVAL">582500</Col>
+            <Col id="OPENVAL">705600</Col>
+            <Col id="UNGENCY">Medium</Col>
+            <Col id="LAST">12.25</Col>
+            <Col id="ADV">%2.28</Col>
+            <Col id="RODADV">%6.15</Col>
+            <Col id="SPREADBPS">56.36</Col>
+            <Col id="ALPHATOCLOSE">13.00</Col>
+            <Col id="STALPHA">13.00</Col>
+            <Col id="ALPHASTATEGY">XGPocPOM</Col>
+            <Col id="IOIS">10</Col>
+            <Col id="FLAG">imagerc::img_flag_spain.png</Col>
+          </Row>
+          <Row>
+            <Col id="ROUTE">ROUTE</Col>
+            <Col id="SIDE">BUY</Col>
+            <Col id="SYMBOL">KMB.N</Col>
+            <Col id="TOTAL">56000</Col>
+            <Col id="TOTALVAL">83430</Col>
+            <Col id="OPENVAL">8000</Col>
+            <Col id="UNGENCY">Low</Col>
+            <Col id="LAST">84.57</Col>
+            <Col id="ADV">%0.25</Col>
+            <Col id="RODADV">%4.57</Col>
+            <Col id="SPREADBPS">47.84</Col>
+            <Col id="ALPHATOCLOSE">22.00</Col>
+            <Col id="STALPHA">22.00</Col>
+            <Col id="ALPHASTATEGY">10PotXlAOM</Col>
+            <Col id="IOIS">10</Col>
+            <Col id="FLAG">imagerc::img_flag_usa.png</Col>
+          </Row>
+          <Row>
+            <Col id="ROUTE">ROUTE</Col>
+            <Col id="SIDE">BUY</Col>
+            <Col id="SYMBOL">JARD.SI</Col>
+            <Col id="TOTAL">1024800</Col>
+            <Col id="TOTALVAL">406000</Col>
+            <Col id="OPENVAL">66000</Col>
+            <Col id="UNGENCY">High</Col>
+            <Col id="LAST">19.65</Col>
+            <Col id="ADV">%5.20</Col>
+            <Col id="RODADV">%108.28</Col>
+            <Col id="SPREADBPS">9.50</Col>
+            <Col id="ALPHATOCLOSE">34.00</Col>
+            <Col id="STALPHA">34.00</Col>
+            <Col id="ALPHASTATEGY">Muri.M</Col>
+            <Col id="IOIS">10</Col>
+            <Col id="FLAG">imagerc::img_flag_canada.png</Col>
+          </Row>
+          <Row>
+            <Col id="ROUTE">ROUTE</Col>
+            <Col id="SIDE">SELL</Col>
+            <Col id="SYMBOL">LLY.N</Col>
+            <Col id="TOTAL">705600</Col>
+            <Col id="TOTALVAL">311400</Col>
+            <Col id="OPENVAL">8000</Col>
+            <Col id="UNGENCY">High</Col>
+            <Col id="LAST">11.23</Col>
+            <Col id="ADV">%6.15</Col>
+            <Col id="RODADV">%15.60</Col>
+            <Col id="SPREADBPS">12.17</Col>
+            <Col id="ALPHATOCLOSE">65.00</Col>
+            <Col id="STALPHA">65.00</Col>
+            <Col id="ALPHASTATEGY">BacHowd</Col>
+            <Col id="IOIS">10</Col>
+            <Col id="FLAG">imagerc::img_flag_italy.png</Col>
+          </Row>
+          <Row>
+            <Col id="ROUTE">ROUTE</Col>
+            <Col id="SIDE">BUY</Col>
+            <Col id="SYMBOL">MCD.N</Col>
+            <Col id="TOTAL">8000</Col>
+            <Col id="TOTALVAL">56000</Col>
+            <Col id="OPENVAL">66000</Col>
+            <Col id="UNGENCY">High</Col>
+            <Col id="LAST">30.45</Col>
+            <Col id="ADV">%4.57</Col>
+            <Col id="RODADV">%135.19</Col>
+            <Col id="SPREADBPS">37.84</Col>
+            <Col id="ALPHATOCLOSE">63.00</Col>
+            <Col id="STALPHA">63.00</Col>
+            <Col id="ALPHASTATEGY">AlphaR</Col>
+            <Col id="IOIS">10</Col>
+            <Col id="FLAG">imagerc::img_flag_canada.png</Col>
+          </Row>
+          <Row>
+            <Col id="ROUTE">ROUTE</Col>
+            <Col id="SIDE">BUY</Col>
+            <Col id="SYMBOL">MIMC.N</Col>
+            <Col id="TOTAL">66000</Col>
+            <Col id="TOTALVAL">1024800</Col>
+            <Col id="OPENVAL">311400</Col>
+            <Col id="UNGENCY">High</Col>
+            <Col id="LAST">126.82</Col>
+            <Col id="ADV">%108.28</Col>
+            <Col id="RODADV">%29.03</Col>
+            <Col id="SPREADBPS">57.74</Col>
+            <Col id="ALPHATOCLOSE">-3.00</Col>
+            <Col id="STALPHA">-3.00</Col>
+            <Col id="ALPHASTATEGY">Bacidbad</Col>
+            <Col id="FLAG">imagerc::img_flag_denmark.png</Col>
+          </Row>
+          <Row>
+            <Col id="ROUTE">ROUTE</Col>
+            <Col id="SIDE">SELL</Col>
+            <Col id="SYMBOL">NA.TO</Col>
+            <Col id="TOTAL">78000</Col>
+            <Col id="TOTALVAL">705600</Col>
+            <Col id="OPENVAL">56000</Col>
+            <Col id="UNGENCY">Medium</Col>
+            <Col id="LAST">126.92</Col>
+            <Col id="ADV">%15.60</Col>
+            <Col id="RODADV">%7.14</Col>
+            <Col id="SPREADBPS">57.73</Col>
+            <Col id="ALPHATOCLOSE">10.00</Col>
+            <Col id="STALPHA">10.00</Col>
+            <Col id="ALPHASTATEGY">AlphaS</Col>
+            <Col id="FLAG">imagerc::img_flag_germany.png</Col>
+          </Row>
+          <Row>
+            <Col id="ROUTE">ROUTE</Col>
+            <Col id="SIDE">SELL</Col>
+            <Col id="SYMBOL">GM.N</Col>
+            <Col id="TOTAL">45000</Col>
+            <Col id="TOTALVAL">8000</Col>
+            <Col id="OPENVAL">1024800</Col>
+            <Col id="UNGENCY">Low</Col>
+            <Col id="LAST">100.30</Col>
+            <Col id="ADV">%135.19</Col>
+            <Col id="RODADV">%314.91</Col>
+            <Col id="SPREADBPS">19.58</Col>
+            <Col id="ALPHATOCLOSE">-3.00</Col>
+            <Col id="STALPHA">-3.00</Col>
+            <Col id="ALPHASTATEGY">10PctXLAM</Col>
+            <Col id="FLAG">imagerc::img_flag_canada.png</Col>
+          </Row>
+          <Row>
+            <Col id="ROUTE">ROUTE</Col>
+            <Col id="SIDE">SELL</Col>
+            <Col id="SYMBOL">GSK.L</Col>
+            <Col id="TOTAL">582500</Col>
+            <Col id="TOTALVAL">66000</Col>
+            <Col id="OPENVAL">705600</Col>
+            <Col id="UNGENCY">High</Col>
+            <Col id="LAST">215.65</Col>
+            <Col id="ADV">%29.03</Col>
+            <Col id="RODADV">%3.79</Col>
+            <Col id="SPREADBPS">24.57</Col>
+            <Col id="ALPHATOCLOSE">20.00</Col>
+            <Col id="STALPHA">20.00</Col>
+            <Col id="ALPHASTATEGY">XGPocPOM</Col>
+            <Col id="FLAG">imagerc::img_flag_usa.png</Col>
+          </Row>
+          <Row>
+            <Col id="ROUTE">ROUTE</Col>
+            <Col id="SIDE">BUY</Col>
+            <Col id="SYMBOL">HEIN.AS</Col>
+            <Col id="TOTAL">83430</Col>
+            <Col id="TOTALVAL">311400</Col>
+            <Col id="OPENVAL">8000</Col>
+            <Col id="UNGENCY">High</Col>
+            <Col id="LAST">215.55</Col>
+            <Col id="ADV">%7.14</Col>
+            <Col id="RODADV">%17.44</Col>
+            <Col id="SPREADBPS">24.57</Col>
+            <Col id="ALPHATOCLOSE">1.00</Col>
+            <Col id="STALPHA">1.00</Col>
+            <Col id="ALPHASTATEGY">10PotXlAOM</Col>
+            <Col id="FLAG">imagerc::img_flag_usa.png</Col>
+          </Row>
+          <Row>
+            <Col id="ROUTE">ROUTE</Col>
+            <Col id="SIDE">BUY</Col>
+            <Col id="SYMBOL">HON.N</Col>
+            <Col id="TOTAL">406000</Col>
+            <Col id="TOTALVAL">56000</Col>
+            <Col id="OPENVAL">66000</Col>
+            <Col id="UNGENCY">High</Col>
+            <Col id="LAST">206.14</Col>
+            <Col id="ADV">%314.91</Col>
+            <Col id="RODADV">%14.59</Col>
+            <Col id="SPREADBPS">63.62</Col>
+            <Col id="ALPHATOCLOSE">7.00</Col>
+            <Col id="STALPHA">7.00</Col>
+            <Col id="ALPHASTATEGY">Muri.M</Col>
+            <Col id="FLAG">imagerc::img_flag_spain.png</Col>
+          </Row>
+          <Row>
+            <Col id="ROUTE">ROUTE</Col>
+            <Col id="SIDE">BUY</Col>
+            <Col id="SYMBOL">JARD.SI</Col>
+            <Col id="TOTAL">311400</Col>
+            <Col id="TOTALVAL">1024800</Col>
+            <Col id="OPENVAL">705600</Col>
+            <Col id="UNGENCY">High</Col>
+            <Col id="LAST">12.25</Col>
+            <Col id="ADV">%3.79</Col>
+            <Col id="RODADV">%0.79</Col>
+            <Col id="SPREADBPS">0.73</Col>
+            <Col id="ALPHATOCLOSE">1.00</Col>
+            <Col id="STALPHA">1.00</Col>
+            <Col id="ALPHASTATEGY">BacHowd</Col>
+            <Col id="FLAG">imagerc::img_flag_usa.png</Col>
+          </Row>
+          <Row>
+            <Col id="ROUTE">ROUTE</Col>
+            <Col id="SIDE">SELL</Col>
+            <Col id="SYMBOL">KMB.N</Col>
+            <Col id="TOTAL">56000</Col>
+            <Col id="TOTALVAL">705600</Col>
+            <Col id="OPENVAL">8000</Col>
+            <Col id="UNGENCY">Medium</Col>
+            <Col id="LAST">84.57</Col>
+            <Col id="ADV">%17.44</Col>
+            <Col id="RODADV">%17.44</Col>
+            <Col id="SPREADBPS">13.59</Col>
+            <Col id="ALPHATOCLOSE">0.73</Col>
+            <Col id="STALPHA">0.73</Col>
+            <Col id="ALPHASTATEGY">AlphaR</Col>
+            <Col id="FLAG">imagerc::img_flag_canada.png</Col>
+          </Row>
+          <Row>
+            <Col id="ROUTE">ROUTE</Col>
+            <Col id="SIDE">BUY</Col>
+            <Col id="SYMBOL">JARD.SI</Col>
+            <Col id="TOTAL">1024800</Col>
+            <Col id="TOTALVAL">8000</Col>
+            <Col id="OPENVAL">66000</Col>
+            <Col id="UNGENCY">Low</Col>
+            <Col id="LAST">19.65</Col>
+            <Col id="ADV">%14.59</Col>
+            <Col id="RODADV">%14.59</Col>
+            <Col id="SPREADBPS">1.05</Col>
+            <Col id="ALPHATOCLOSE">10.52</Col>
+            <Col id="STALPHA">10.52</Col>
+            <Col id="ALPHASTATEGY">Bacidbad</Col>
+            <Col id="FLAG">imagerc::img_flag_italy.png</Col>
+          </Row>
+          <Row>
+            <Col id="ROUTE">ROUTE</Col>
+            <Col id="SIDE">BUY</Col>
+            <Col id="SYMBOL">LLY.N</Col>
+            <Col id="TOTAL">406000</Col>
+            <Col id="TOTALVAL">66000</Col>
+            <Col id="OPENVAL">66000</Col>
+            <Col id="UNGENCY">High</Col>
+            <Col id="LAST">206.14</Col>
+            <Col id="ADV">%0.79</Col>
+            <Col id="RODADV">%0.79</Col>
+            <Col id="SPREADBPS">23.57</Col>
+            <Col id="ALPHATOCLOSE">1.05</Col>
+            <Col id="STALPHA">1.05</Col>
+            <Col id="ALPHASTATEGY">AlphaS</Col>
+            <Col id="FLAG">imagerc::img_flag_canada.png</Col>
+          </Row>
+          <Row>
+            <Col id="ROUTE">ROUTE</Col>
+            <Col id="SIDE">BUY</Col>
+            <Col id="SYMBOL">MCD.N</Col>
+            <Col id="TOTAL">311400</Col>
+            <Col id="TOTALVAL">705600</Col>
+            <Col id="OPENVAL">705600</Col>
+            <Col id="UNGENCY">High</Col>
+            <Col id="LAST">12.25</Col>
+            <Col id="ADV">%17.44</Col>
+            <Col id="RODADV">%17.44</Col>
+            <Col id="SPREADBPS">56.36</Col>
+            <Col id="ALPHATOCLOSE">32.00</Col>
+            <Col id="STALPHA">32.00</Col>
+            <Col id="ALPHASTATEGY">10PctXLAM</Col>
+            <Col id="FLAG">imagerc::img_flag_denmark.png</Col>
+          </Row>
+          <Row>
+            <Col id="ROUTE">ROUTE</Col>
+            <Col id="SIDE">BUY</Col>
+            <Col id="SYMBOL">MIMC.N</Col>
+            <Col id="TOTAL">56000</Col>
+            <Col id="TOTALVAL">8000</Col>
+            <Col id="OPENVAL">8000</Col>
+            <Col id="UNGENCY">High</Col>
+            <Col id="LAST">84.57</Col>
+            <Col id="ADV">%14.59</Col>
+            <Col id="RODADV">%14.59</Col>
+            <Col id="SPREADBPS">47.84</Col>
+            <Col id="ALPHATOCLOSE">11.00</Col>
+            <Col id="STALPHA">11.00</Col>
+            <Col id="ALPHASTATEGY">XGPocPOM</Col>
+            <Col id="FLAG">imagerc::img_flag_italy.png</Col>
+          </Row>
+          <Row>
+            <Col id="ROUTE">ROUTE</Col>
+            <Col id="SIDE">SELL</Col>
+            <Col id="SYMBOL">NA.TO</Col>
+            <Col id="TOTAL">1024800</Col>
+            <Col id="TOTALVAL">66000</Col>
+            <Col id="OPENVAL">66000</Col>
+            <Col id="UNGENCY">High</Col>
+            <Col id="LAST">19.65</Col>
+            <Col id="ADV">%0.79</Col>
+            <Col id="RODADV">%0.79</Col>
+            <Col id="SPREADBPS">9.50</Col>
+            <Col id="ALPHATOCLOSE">13.00</Col>
+            <Col id="STALPHA">13.00</Col>
+            <Col id="ALPHASTATEGY">10PotXlAOM</Col>
+            <Col id="FLAG">imagerc::img_flag_spain.png</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="dsSub01">
+        <ColumnInfo>
+          <Column id="SYMBOL" type="STRING" size="256"/>
+          <Column id="ORDQTY" type="STRING" size="256"/>
+          <Column id="BORDERPROVIDER" type="STRING" size="256"/>
+          <Column id="AGESTRATEGY" type="STRING" size="256"/>
+          <Column id="EXCITY" type="STRING" size="256"/>
+          <Column id="AVG" type="STRING" size="256"/>
+          <Column id="EXEC" type="STRING" size="256"/>
+          <Column id="STATUS" type="STRING" size="256"/>
+          <Column id="REPLACE" type="STRING" size="256"/>
+          <Column id="QUCKCHANGE" type="STRING" size="256"/>
+          <Column id="FILS" type="STRING" size="256"/>
+          <Column id="TIF" type="STRING" size="256"/>
+          <Column id="PERIFSINCESENCE" type="STRING" size="256"/>
+          <Column id="LASTTYPE" type="STRING" size="256"/>
+          <Column id="PARTIPATION" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="SYMBOL">AS</Col>
+            <Col id="ORDQTY">69600</Col>
+            <Col id="BORDERPROVIDER">BAML</Col>
+            <Col id="AGESTRATEGY">DMA</Col>
+            <Col id="EXCITY">37000</Col>
+            <Col id="AVG">164696</Col>
+            <Col id="EXEC">53</Col>
+            <Col id="STATUS">PARTIALLYFILLED</Col>
+            <Col id="REPLACE">REPLACE</Col>
+            <Col id="QUCKCHANGE">QUICKCHANGE</Col>
+            <Col id="TIF">DAY</Col>
+            <Col id="PERIFSINCESENCE">-0.16460</Col>
+            <Col id="PARTIPATION">64.2361</Col>
+            <Col id="FILS">...</Col>
+          </Row>
+          <Row>
+            <Col id="SYMBOL">AS</Col>
+            <Col id="ORDQTY">617400</Col>
+            <Col id="BORDERPROVIDER">CITI</Col>
+            <Col id="AGESTRATEGY">DAGGER</Col>
+            <Col id="EXCITY">35000</Col>
+            <Col id="AVG">165046</Col>
+            <Col id="EXEC">5</Col>
+            <Col id="STATUS">PARTIALLYFILLED</Col>
+            <Col id="REPLACE">REPLACE</Col>
+            <Col id="QUCKCHANGE">QUICKCHANGE</Col>
+            <Col id="TIF">DAY</Col>
+            <Col id="PERIFSINCESENCE">-0.16505</Col>
+            <Col id="PARTIPATION">63.1769</Col>
+            <Col id="FILS">...</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="dsSub02">
+        <ColumnInfo>
+          <Column id="CANCEL" type="STRING" size="256"/>
+          <Column id="SPLIT" type="STRING" size="256"/>
+          <Column id="RESTRIBUTION" type="STRING" size="256"/>
+          <Column id="SYMBOL" type="STRING" size="256"/>
+          <Column id="ORDQTY" type="STRING" size="256"/>
+          <Column id="EXEC" type="INT" size="256"/>
+          <Column id="EXECQTY" type="STRING" size="256"/>
+          <Column id="AVGPRX" type="STRING" size="256"/>
+          <Column id="ORDPRX" type="STRING" size="256"/>
+          <Column id="ORDTYPE" type="STRING" size="256"/>
+          <Column id="SENDTYPE" type="STRING" size="256"/>
+          <Column id="ORDSTAGE" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="SYMBOL">HEIN.AS</Col>
+            <Col id="ORDQTY">196000</Col>
+            <Col id="EXEC">10</Col>
+            <Col id="EXECQTY">20571</Col>
+            <Col id="AVGPRX">16.48</Col>
+            <Col id="ORDPRX">0.00</Col>
+            <Col id="ORDTYPE">MARKET</Col>
+            <Col id="SENDTYPE">112821</Col>
+            <Col id="ORDSTAGE">PARTIAL</Col>
+            <Col id="CANCEL">Cancel</Col>
+            <Col id="SPLIT">Split</Col>
+          </Row>
+          <Row>
+            <Col id="RESTRIBUTION">BARC</Col>
+            <Col id="SYMBOL">HEIN.AS</Col>
+            <Col id="ORDQTY">392000</Col>
+            <Col id="EXEC">10</Col>
+            <Col id="EXECQTY">41143</Col>
+            <Col id="AVGPRX">16.48</Col>
+            <Col id="ORDPRX">0.00</Col>
+            <Col id="ORDTYPE">MARKET</Col>
+            <Col id="SENDTYPE">112821</Col>
+            <Col id="ORDSTAGE">PARTIAL</Col>
+            <Col id="CANCEL">Cancel</Col>
+            <Col id="SPLIT">Split</Col>
+          </Row>
+          <Row>
+            <Col id="SYMBOL">HEIN.AS</Col>
+            <Col id="ORDQTY">99000</Col>
+            <Col id="EXEC">10</Col>
+            <Col id="EXECQTY">10296</Col>
+            <Col id="AVGPRX">16.48</Col>
+            <Col id="ORDPRX">0.00</Col>
+            <Col id="ORDTYPE">MARKET</Col>
+            <Col id="SENDTYPE">112822</Col>
+            <Col id="ORDSTAGE">PARTIAL</Col>
+            <Col id="CANCEL">Cancel</Col>
+            <Col id="SPLIT">Split</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.1"><![CDATA[/************************************************************************************************
+* 01. 업무구분 : 공통 - 공통
+* 02. 화면명   : 요건 2
+* 03. 화면설명 : 
+* 04. 작성일   : 2019.11.12
+* 05. 작성자   : 안주환
+* 06. 수정이력 :
+***********************************************************************************************
+*     수정일          이  름    사유
+***********************************************************************************************
+*     
+************************************************************************************************/
+
+/************************************************************************************************
+* 공통 라이브러리 INCLUDE 영역
+************************************************************************************************/
+
+
+/************************************************************************************************
+* 전역 변수 영역
+************************************************************************************************/
+
+/************************************************************************************************
+* FORM 영역
+************************************************************************************************/
+
+
+/************************************************************************************************
+* FORM 공통 FUNCTION 영역
+************************************************************************************************/
+
+
+/************************************************************************************************
+* TRANSACTION 및 추가 FUNCTION 영역
+************************************************************************************************/
+
+
+/************************************************************************************************
+* 각 COMPONENT 별 EVENT 영역
+************************************************************************************************/
+]]></Script>
+  </Form>
+</FDL>

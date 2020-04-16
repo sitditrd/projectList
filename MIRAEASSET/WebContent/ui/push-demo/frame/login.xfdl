@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.0">
+  <Form id="login" width="1024" height="768" onsize="login_onsize" onload="login_onload">
+    <Layouts>
+      <Layout height="768" mobileorientation="landscape" width="1024">
+        <Div id="Div00" taborder="1" left="0" top="0" width="1024" height="768">
+          <Layouts>
+            <Layout>
+              <Static id="Static01" taborder="0" left="132" top="128" width="761" height="524" cssclass="sta_WF_loginBox" text=""/>
+              <Edit id="Edit00" taborder="1" left="282" top="343" width="460" height="52" displaynulltext="아이디" tabstop="true" cssclass="edit_WF_login"/>
+              <Edit id="Edit01" taborder="2" left="282" top="404" width="460" height="52" displaynulltext="비밀번호" password="true" cssclass="edit_WF_login"/>
+              <Button id="btn_login" taborder="3" text="LOGIN" left="282" top="475" width="460" height="60" cssclass="btn_WF_login" onclick="btn_login_onclick"/>
+              <Static id="Static02" taborder="4" left="375" top="239" width="275" height="74" cssclass="sta_WF_loginLogo"/>
+              <Static id="Static03" taborder="5" left="125" top="68" width="140" height="60" text="LOGIN" cssclass="sta_WF_loginTitle"/>
+            </Layout>
+          </Layouts>
+        </Div>
+      </Layout>
+    </Layouts>
+    <Script type="xscript5.1"><![CDATA[
+this.login_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
+{
+	this.moveToCenter(obj.width, obj.height);
+};
+
+this.login_onsize = function(obj:nexacro.Form,e:nexacro.SizeEventInfo)
+{
+	this.moveToCenter(e.cx, e.cy);
+};
+
+this.btn_login_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	var objApp = nexacro.getApplication();
+	objApp.mainframe.VFrameSet.set_separatesize("0,70,30,*,30");
+};
+
+this.moveToCenter = function(x, y)
+{
+	var l = (x/2)-(this.Div00.width/2);
+	var t = (y/2)-(this.Div00.height/2);
+	
+	if (l < 0)	l = 0;
+	if (t < 0)	t = 0;
+	
+	this.Div00.move(l, t);
+	
+	this.resetScroll();
+};]]></Script>
+  </Form>
+</FDL>

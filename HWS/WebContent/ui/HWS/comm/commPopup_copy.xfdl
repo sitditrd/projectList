@@ -1,0 +1,102 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.0">
+  <Form id="commPopup" width="980" height="596" titletext="공통팝업" scrollbartype="none none" scrolltype="none" onload="commPopup_onload">
+    <Layouts>
+      <Layout height="596" mobileorientation="landscape" width="980">
+        <Static id="Static03_01" taborder="15" text="" left="7" top="245" width="234" height="121" border="1px solid" background="#a8a8a8" color="white"/>
+        <Static id="Static02_01_00" taborder="10" text="Piot1: " left="12" top="248" width="223" height="42" background="#a8a8a8" color="white" border="0px none,0px none,1px solid black" font="normal bold 10pt/normal &quot;Arial&quot;"/>
+        <Static id="Static00" taborder="0" left="0" top="0" right="0" background="#515151" font="normal bold 16pt/normal &quot;Baskerville Old Face&quot;" height="36" color="#5ccbf4"/>
+        <Static id="Static01" taborder="1" text="" left="0" top="565" height="31" background="#c4c4c4" color="white" font="normal 700 16pt/normal &quot;Baskerville Old Face&quot;" right="0"/>
+        <Button id="btn_Close" taborder="2" text="닫기" top="569" width="72" height="22" right="9" escapebutton="true" onclick="comm_Click" cssclass="btn_WF_btnY"/>
+        <Button id="btn_Confirm" taborder="3" text="확인" top="569" width="72" height="22" right="89" onclick="comm_Click" cssclass="btn_WF_btnY"/>
+        <Static id="stc_Exit" taborder="4" text="x" left="960" top="8" width="13" height="18" font="normal 700 13pt/normal &quot;Arial&quot;" color="white" onclick="comm_Click"/>
+        <WebBrowser id="WebBrowser00" left="249" top="44" right="7" taborder="5" height="513"/>
+        <Combo id="Combo00" taborder="6" text="Indexed" left="47" top="254" width="96" height="27" background="transparent" border="0px none,0px none,0px none,0px none transparent" font="normal bold 10pt/normal &quot;Arial&quot;"/>
+        <Static id="Static02" taborder="7" text="" left="8" top="98" width="232" height="147" background="#a8a8a8"/>
+        <Static id="Static02_00" taborder="8" text="" left="8" top="211" width="232" height="26" background="#a8a8a8" color="white"/>
+        <Combo id="Combo00_01" taborder="9" text="Price" left="69" top="291" width="163" height="27" background="transparent" border="0px none,0px none,0px none,0px none transparent" font="normal bold 10pt/normal &quot;Arial&quot;"/>
+        <Static id="Static02_01_00_00" taborder="11" text="Piot" left="198" top="219" width="35" height="25" color="white" font="normal bold 10pt/normal &quot;Arial&quot;"/>
+        <Static id="Static02_01_00_00_00" taborder="12" text="Serires 1: " left="11" top="289" width="65" height="34" font="normal bold 10pt/normal &quot;Arial&quot;"/>
+        <Static id="Static03" taborder="13" text="  CHARTS" left="8" top="46" width="232" height="26" background="#848484" color="white" font="normal bold 10pt/normal &quot;Arial&quot;"/>
+        <Static id="Static03_00" taborder="14" text="" left="7" top="374" width="234" height="121" border="1px solid" background="#a8a8a8" color="white"/>
+        <Button id="Button00" taborder="16" text="&lt;&lt;" left="209" top="46" width="31" height="26"/>
+        <Static id="Static03_02" taborder="17" text="  PLOT OPTIONS" left="8" top="72" width="232" height="26" background="#848484" color="white" font="normal bold 10pt/normal &quot;Arial&quot;"/>
+        <Button id="Button00_00" taborder="18" text="&lt;&lt;" left="209" top="72" width="31" height="26"/>
+        <Static id="Static02_01_00_00_01" taborder="19" text="Series" left="175" top="328" width="57" height="25" color="white" font="normal bold 10pt/normal &quot;Arial&quot;"/>
+        <Static id="Static02_01_00_00_01_00" taborder="20" text="Series" left="175" top="461" width="57" height="25" color="white" font="normal bold 10pt/normal &quot;Arial&quot;"/>
+        <Combo id="Combo00_01_01" taborder="21" text="Volume" left="69" top="427" width="163" height="27" background="transparent" border="0px none,0px none,0px none,0px none transparent" font="normal bold 10pt/normal &quot;Arial&quot;"/>
+        <Static id="Static02_01_00_00_00_00" taborder="22" text="Serires 1: " left="13" top="426" width="65" height="34" font="normal bold 10pt/normal &quot;Arial&quot;"/>
+        <Static id="Static02_01_00_01" taborder="23" text="Piot2: " left="12" top="380" width="225" height="41" background="#a8a8a8" color="white" font="normal bold 10pt/normal &quot;Arial&quot;" border="0px none,0px none,1px solid black"/>
+        <Combo id="Combo00_02" taborder="24" text="Absolute" left="47" top="385" width="104" height="27" background="transparent" border="0px none,0px none,0px none,0px none transparent" font="normal bold 10pt/normal &quot;Arial&quot;"/>
+        <Static id="Static03_03" taborder="25" text="  DRAWING" left="8" top="531" width="232" height="26" background="#848484" color="white" font="normal bold 10pt/normal &quot;Arial&quot;"/>
+        <Button id="Button00_01" taborder="26" text="&lt;&lt;" left="209" top="531" width="31" height="26"/>
+        <Static id="Static04" taborder="27" text="Piots" left="17" top="219" width="43" height="19" color="white" font="normal bold 10pt/normal &quot;Arial&quot;"/>
+        <Static id="Static04_00" taborder="28" text="Compare" left="17" top="107" width="59" height="19" color="white" font="normal bold 10pt/normal &quot;Arial&quot;"/>
+        <Edit id="Edit00" taborder="29" left="16" top="133" width="176" height="22" value="AIR-USA" text="AIR-USA"/>
+        <Combo id="Combo00_01_00" taborder="30" text="Price" left="197" top="133" width="17" height="22" background="transparent" border="0px none,0px none,0px none,0px none transparent" font="normal bold 10pt/normal &quot;Arial&quot;"/>
+        <Static id="Static05" taborder="31" text="+" left="187" top="223" width="14" height="13" font="normal bold 10pt/normal &quot;Arial&quot;" color="green"/>
+        <Static id="Static05_00" taborder="32" text="+" left="165" top="331" width="16" height="18" font="normal bold 10pt/normal &quot;Arial&quot;" color="green"/>
+        <Static id="Static05_00_00" taborder="33" text="+" left="165" top="464" width="16" height="18" font="normal bold 10pt/normal &quot;Arial&quot;" color="green"/>
+      </Layout>
+    </Layouts>
+    <Script type="xscript5.1"><![CDATA[/************************************************************************************************
+* 01. 업무구분 : 공통 - 공통
+* 02. 화면명   : 팝업샘플
+* 03. 화면설명 : 
+* 04. 작성일   : 2018.11.11
+* 05. 작성자   : 안주환
+* 06. 수정이력 :
+***********************************************************************************************
+*     수정일          이  름    사유
+***********************************************************************************************
+*     
+************************************************************************************************/
+
+/************************************************************************************************
+* 공통 라이브러리 INCLUDE 영역
+************************************************************************************************/
+include "lib::lib_Form.xjs";
+include "lib::CommUtil.xjs"; 	
+include "lib::ext_CommEco.xjs";	
+
+/************************************************************************************************
+* 전역 변수 영역
+************************************************************************************************/
+
+/************************************************************************************************
+* FORM 영역
+************************************************************************************************/
+this.commPopup_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
+{
+	this.WebBrowser00.set_url("http://localhost/MIRAEASSET/service/rChart/Samples/History_2D_Line.html");
+};
+
+/************************************************************************************************
+* FORM 공통 FUNCTION 영역
+************************************************************************************************/
+
+
+/************************************************************************************************
+* TRANSACTION 및 추가 FUNCTION 영역
+************************************************************************************************/
+
+/************************************************************************************************
+* 각 COMPONENT 별 EVENT 영역
+************************************************************************************************/
+this.comm_Click = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	switch(obj.name)
+	{
+		case "btn_Close" : 
+			this.commUtil.popupClose("");
+			break;
+			
+		case "stc_Exit" : 
+			this.commUtil.popupClose("");
+			break;
+	}
+};
+
+]]></Script>
+  </Form>
+</FDL>

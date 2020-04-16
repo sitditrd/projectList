@@ -1,0 +1,89 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.0">
+  <Form id="sub00" width="440" height="270">
+    <Layouts>
+      <Layout height="270" mobileorientation="landscape" width="440">
+        <Static id="Static06" taborder="0" text="Select Customer Type" left="5" top="4" width="150" height="30" cssclass="sta_WF_title02"/>
+        <Static id="Static36" taborder="1" top="39" cssclass="sta_WF_box01" right="10" left="5" bottom="36"/>
+        <Radio id="rdo_customerType" taborder="2" left="16" top="48" width="404" height="173" innerdataset="ds_customerType" codecolumn="Column0" datacolumn="Column1" rowcount="6" columncount="0"/>
+        <Button id="btn_exit" taborder="3" text="Exit" cssclass="btn_WF_basic04" width="60" right="10" height="24" bottom="5" onclick="btn_exit_onclick"/>
+        <Button id="btn_clear" taborder="4" text="Clear" cssclass="btn_WF_basic04" width="60" right="74" height="24" bottom="5" onclick="btn_clear_onclick"/>
+        <Button id="btn_ok" taborder="5" text="OK" cssclass="btn_WF_basic05" width="60" right="138" height="24" bottom="5" onclick="btn_ok_onclick"/>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="ds_customerType">
+        <ColumnInfo>
+          <Column id="Column0" type="STRING" size="256"/>
+          <Column id="Column1" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="Column0">02</Col>
+            <Col id="Column1">Individual Customer</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">03</Col>
+            <Col id="Column1">Joint Venture Company</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">04</Col>
+            <Col id="Column1">Private Business Owner</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">05</Col>
+            <Col id="Column1">Foreign Investment Company</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">06</Col>
+            <Col id="Column1">Household</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">07</Col>
+            <Col id="Column1">State Enterprise</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">08</Col>
+            <Col id="Column1">Cooperative</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">09</Col>
+            <Col id="Column1">Financial Institution</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">10</Col>
+            <Col id="Column1">Stock Company</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">11</Col>
+            <Col id="Column1">Government &amp; Public Institution</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">12</Col>
+            <Col id="Column1">Company Limited</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">13</Col>
+            <Col id="Column1">Organization</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.1"><![CDATA[
+this.btn_clear_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.rdo_customerType.set_index(-1);
+};
+
+this.btn_exit_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.close();
+};
+
+this.btn_ok_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.close("OK");
+};
+]]></Script>
+  </Form>
+</FDL>

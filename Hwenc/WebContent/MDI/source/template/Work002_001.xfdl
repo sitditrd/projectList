@@ -1,0 +1,115 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.0">
+  <Form id="Work002_001" width="1240" height="818" titletext="지급품의" scrolltype="none" onload="WF_MainForm_onload">
+    <Layouts>
+      <Layout height="818" mobileorientation="landscape" width="1240">
+        <Div id="Div00" taborder="0" top="0" height="21" right="0" text="" width="500" formscrollbartype="none none" formscrolltype="none">
+          <Layouts>
+            <Layout>
+              <Button id="Button04" taborder="4" text="찾기" top="0" height="21" right="45" width="42"/>
+              <Button id="Button03" taborder="1" text="입력" top="0" height="21" right="180" width="42"/>
+              <Button id="Button02" taborder="2" text="삭제" top="0" height="21" right="135" width="42"/>
+              <Button id="Button01" taborder="3" text="저장" top="0" height="21" right="90" width="42"/>
+              <Button id="Button00" taborder="5" text="출력" top="0" height="21" right="0" width="42"/>
+              <Button id="Button05" taborder="0" text="일괄출력" top="0" height="21" right="225" width="64" cssclass="btn_WF_SubAction"/>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Div id="Div02" taborder="1" left="0" top="0" width="600" height="19" url="template::WF_LocationForm.xfdl" formscrollbartype="none none" formscrolltype="none"/>
+        <Grid id="Grid00" taborder="2" left="0" top="118" bottom="0" autofittype="none" scrolltype="both" scrollbartype="default default" width="615">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="39"/>
+                <Column size="180"/>
+                <Column size="180"/>
+                <Column size="100"/>
+                <Column size="100"/>
+                <Column size="100"/>
+                <Column size="100"/>
+                <Column size="100"/>
+                <Column size="100"/>
+              </Columns>
+              <Rows>
+                <Row size="28" band="head"/>
+                <Row size="26"/>
+                <Row size="26" band="summ"/>
+              </Rows>
+              <Band id="head">
+                <Cell displaytype="checkboxcontrol"/>
+                <Cell col="1" text="업체명"/>
+                <Cell col="2" text="외주공종"/>
+                <Cell col="3" text="품의일자"/>
+                <Cell col="4" text="품의번호"/>
+                <Cell col="5" text="계약현장"/>
+                <Cell col="6" text="계약번호"/>
+                <Cell col="7" text="기성차수"/>
+                <Cell col="8" text="담당자"/>
+              </Band>
+              <Band id="body">
+                <Cell/>
+                <Cell col="1"/>
+                <Cell col="2"/>
+                <Cell col="3"/>
+                <Cell col="4"/>
+                <Cell col="5"/>
+                <Cell col="6"/>
+                <Cell col="7"/>
+                <Cell col="8"/>
+              </Band>
+              <Band id="summary">
+                <Cell text="0건" displaytype="text"/>
+                <Cell col="1"/>
+                <Cell col="2"/>
+                <Cell col="3"/>
+                <Cell col="4"/>
+                <Cell col="5"/>
+                <Cell col="6"/>
+                <Cell col="7"/>
+                <Cell col="8"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Static id="Static31" taborder="3" text="지급품의" left="0" top="100" width="93" height="13" cssclass="sta_WF_Mtitle" fittocontents="width"/>
+        <Tab id="Tab00" taborder="4" tabindex="0" left="625" top="118" onchanged="Tab00_onchanged" onmouseenter="Tab00_onmouseup" right="0" bottom="0">
+          <Tabpages>
+            <Tabpage id="Tabpage1" text="지급품의" url="template::Work002_001_Tab01.xfdl"/>
+            <Tabpage id="Tabpage2" text="공제내역"/>
+            <Tabpage id="Tabpage3" text="지금품의누계"/>
+          </Tabpages>
+        </Tab>
+        <Div id="Div04" taborder="5" left="0" top="27" height="64" cssclass="div_WF_Search" right="0" formscrollbartype="none" formscrolltype="none">
+          <Layouts>
+            <Layout>
+              <Static id="Static125" taborder="0" text="계약현장" left="403" top="12" width="93" height="13" cssclass="sta_WF_SeaFieldLabel" fittocontents="width"/>
+              <Button id="Button00" taborder="1" cssclass="btn_WF_SubAction, btn_WF_SearchIcon" right="12" width="40" top="8" bottom="8"/>
+              <Edit id="Edit00" taborder="2" left="859" top="8" width="314" height="21" text="Width - 314"/>
+              <Static id="Static00" taborder="3" text="계약번호" left="794" top="12" width="93" height="13" cssclass="sta_WF_SeaFieldLabel" fittocontents="width"/>
+              <Static id="Static09" taborder="4" text="회사구분" left="12" top="12" width="93" height="13" cssclass="sta_WF_SeaFieldLabel" fittocontents="width"/>
+              <Static id="Static01" taborder="5" text="담당사번" left="12" top="37" width="93" height="13" cssclass="sta_WF_SeaFieldLabel" fittocontents="width"/>
+              <Edit id="Edit04" taborder="6" left="469" top="8" width="79" height="21" leftbase="" topbase="" bottombase="" rightbase="" widthbase="" heightbase="" text="C909000" enable="true" onchanged="Edit04_onchanged" readonly="false" cssclass="edl_WF_MCpadding"/>
+              <Button id="Button01" taborder="7" left="528" top="9" height="19" cssclass="btn_WF_Search" enable="true" width="19"/>
+              <Edit id="Edit05" taborder="8" left="551" top="8" width="232" height="21" readonly="true"/>
+              <Combo id="Combo01" taborder="9" text="가나다라마바사" left="77" top="8" width="314" height="21" innerdataset="ds_combo" datacolumn="data" codecolumn="code" index="2" value="c0003" scrollbarsize="5" type="dropdown" onitemchanged="Combo00_onitemchanged" readonly="true"/>
+              <Edit id="Edit01" taborder="10" left="77" top="33" width="79" height="21" leftbase="" topbase="" bottombase="" rightbase="" widthbase="" heightbase="" text="C909000" enable="true" onchanged="Edit04_onchanged" readonly="false" cssclass="edl_WF_MCpadding"/>
+              <Button id="Button02" taborder="11" left="136" top="34" height="19" cssclass="btn_WF_Search" enable="true" width="19"/>
+              <Edit id="Edit02" taborder="12" left="159" top="33" width="232" height="21" readonly="true"/>
+              <Static id="Static02" taborder="13" text="품의일자" left="403" top="37" width="93" height="13" cssclass="sta_WF_SeaFieldLabel" fittocontents="width"/>
+              <Static id="Static20" taborder="14" text="~" left="620" top="33" width="12" height="21"/>
+              <Calendar id="Calendar00" taborder="15" left="633" top="33" width="150" height="21" usetrailingday="true" dateformat="yyyy-MM-dd" type="normal"/>
+              <Calendar id="Calendar01" taborder="16" left="469" top="33" width="150" height="21" usetrailingday="true" dateformat="yyyy-MM-dd" type="normal"/>
+            </Layout>
+          </Layouts>
+        </Div>
+      </Layout>
+    </Layouts>
+    <Objects/>
+    <Script type="xscript5.1"><![CDATA[
+this.Div04_TextArea01_onchanged = function(obj:nexacro.TextArea,e:nexacro.ChangeEventInfo)
+{
+	
+};
+]]></Script>
+  </Form>
+</FDL>

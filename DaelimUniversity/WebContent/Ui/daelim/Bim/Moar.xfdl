@@ -1,0 +1,216 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.0">
+  <Form id="Motsys" width="824" height="608" titletext="New Form">
+    <Layouts>
+      <Layout height="608" mobileorientation="landscape" width="824">
+        <Tab id="tab_SearchType" taborder="1" tabindex="0" left="8" top="12" right="8" height="62">
+          <Tabpages>
+            <Tabpage id="tpg_SearchType" text="검색조건">
+              <Layouts>
+                <Layout>
+                  <Static id="stc_SchoolYear" taborder="1" text="학년도" top="4" width="88" height="22" textAlign="center" left="4" cssclass="sta_WF_label03"/>
+                  <Static id="stc_Semester" taborder="2" text="학기" top="4" width="88" height="22" textAlign="center" left="182" cssclass="sta_WF_label03"/>
+                  <Static id="stc_Semester00" taborder="5" text="시스템" top="4" width="88" height="22" textAlign="center" left="360" cssclass="sta_WF_label03"/>
+                  <Edit id="edt_SchoolYear" taborder="5" top="4" width="88" height="22" value="2018" text="2018" left="91" readonly="true" cssclass="edit_WF_edit01"/>
+                  <Combo id="cmb_SemesterData2" top="4" width="88" height="22" value="0" text="2학기" left="269" innerdataset="innerdataset" codecolumn="codecolumn" datacolumn="datacolumn" index="0">
+                    <Dataset id="innerdataset">
+                      <ColumnInfo>
+                        <Column id="codecolumn" size="256"/>
+                        <Column id="datacolumn" size="256"/>
+                      </ColumnInfo>
+                      <Rows>
+                        <Row>
+                          <Col id="codecolumn">0</Col>
+                          <Col id="datacolumn">2학기</Col>
+                        </Row>
+                      </Rows>
+                    </Dataset>
+                  </Combo>
+                  <Combo id="cmb_SemesterData00" taborder="4" top="4" width="104" height="22" innerdataset="innerdataset" codecolumn="codecolumn" datacolumn="datacolumn" value="0" index="0" text="성적시스템" left="447">
+                    <Dataset id="innerdataset">
+                      <ColumnInfo>
+                        <Column id="codecolumn" size="256"/>
+                        <Column id="datacolumn" size="256"/>
+                      </ColumnInfo>
+                      <Rows>
+                        <Row>
+                          <Col id="codecolumn">0</Col>
+                          <Col id="datacolumn">성적시스템</Col>
+                        </Row>
+                      </Rows>
+                    </Dataset>
+                  </Combo>
+                </Layout>
+              </Layouts>
+            </Tabpage>
+          </Tabpages>
+        </Tab>
+        <Tab id="tab_Data" taborder="0" tabindex="0" left="8" top="tab_SearchType:8" right="8" bottom="4">
+          <Tabpages>
+            <Tabpage id="tpg_Data" text="Data">
+              <Layouts>
+                <Layout>
+                  <Grid id="grd_Data" taborder="0" left="4" top="4" right="4" bottom="4" cellmovingtype="col" cellsizingtype="col" autofittype="col" binddataset="dsOutput">
+                    <Formats>
+                      <Format id="default">
+                        <Columns>
+                          <Column size="50"/>
+                          <Column size="100"/>
+                          <Column size="200"/>
+                          <Column size="80"/>
+                          <Column size="80"/>
+                          <Column size="80"/>
+                          <Column size="80"/>
+                          <Column size="400"/>
+                        </Columns>
+                        <Rows>
+                          <Row size="24" band="head"/>
+                          <Row size="24"/>
+                        </Rows>
+                        <Band id="head">
+                          <Cell text="No"/>
+                          <Cell col="1" text="시스템"/>
+                          <Cell col="2" text="학사력구분"/>
+                          <Cell col="3" text="시작일자"/>
+                          <Cell col="4" text="시작시간"/>
+                          <Cell col="5" text="종료일자"/>
+                          <Cell col="6" text="종료시간"/>
+                          <Cell col="7" text="비고"/>
+                        </Band>
+                        <Band id="body">
+                          <Cell expr="currow + 1"/>
+                          <Cell col="1" displaytype="combocontrol" combodataset="ds_CD_SYSTEM_CODE" combocodecol="CODE" combodatacol="CAPTION" text="bind:SYSTEM_CODE"/>
+                          <Cell col="2" displaytype="combocontrol" combodataset="ds_CD_BACHELOR_ABILITY_TYPE" combocodecol="CODE" combodatacol="CAPTION" text="bind:BACHELOR_ABILITY_TYPE"/>
+                          <Cell col="3" displaytype="mask" maskedittype="string" maskeditformat="####-##-##" edittype="date" text="bind:START_DATE"/>
+                          <Cell col="4" text="bind:START_TIME"/>
+                          <Cell col="5" displaytype="mask" maskedittype="string" maskeditformat="####-##-##" edittype="date" text="bind:END_DATE"/>
+                          <Cell col="6" text="bind:END_TIME"/>
+                          <Cell col="7" text="bind:REMARK"/>
+                        </Band>
+                      </Format>
+                    </Formats>
+                  </Grid>
+                </Layout>
+              </Layouts>
+            </Tabpage>
+          </Tabpages>
+        </Tab>
+        <Button id="btn_Search" taborder="2" text="조회" top="8" width="72" height="24" right="11" onclick="comm_Click" cssclass="btn_WF_basic07"/>
+      </Layout>
+    </Layouts>
+    <Script type="xscript5.1"><![CDATA[/************************************************************************************************
+* 01. 업무구분 : 
+* 02. 화면명   : 성적학사력관리 ()
+* 03. 화면설명 : 
+* 04. 작성일   : 2019.02.07
+* 05. 작성자   : 안주환
+* 06. 수정이력 :
+***********************************************************************************************
+*     수정일          이  름    사유
+***********************************************************************************************
+*     
+************************************************************************************************/
+
+/************************************************************************************************
+* 공통 라이브러리 INCLUDE 영역
+************************************************************************************************/
+include "Script::CommUtil.xjs"; 	
+include "Script::ext_CommEco.xjs";
+
+/************************************************************************************************
+* 전역 변수 영역
+************************************************************************************************/
+
+/************************************************************************************************
+* FORM 영역
+************************************************************************************************/
+
+/************************************************************************************************
+* FORM 공통 FUNCTION 영역
+************************************************************************************************/
+
+
+/************************************************************************************************
+* TRANSACTION 및 추가 FUNCTION 영역
+************************************************************************************************/
+this.fnSearch = function()
+{	
+	var dsName = "MOTSYS";
+	
+	this.transaction
+	(
+		"Select"
+	   ,"svc::DaelimUniversity/Service/select.jsp?dsName=" + dsName
+	   ,""
+	   ,"dsOutput=dsOutput"
+	   ,""
+	   ,"fn_callback"
+	);
+};
+
+this.fn_callback = function(svcId, nErrorCode, sErrMsg) 
+{
+	if(nErrorCode < 0)
+	{
+		this.alert(svcId + ":" + sErrMsg); //실패시 sErrMsg를 띄운다.
+	} 
+	else
+	{	
+		if(svcId == "Select")
+		{
+			//trace(this.dsOutput.saveXML()); //Console에 기록된 Dataset ColumnInfo를 복사한다.
+		} 
+	}
+}
+
+/************************************************************************************************
+* 각 COMPONENT 별 EVENT 영역
+************************************************************************************************/
+this.comm_Click = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	switch(obj.name)
+	{
+		case "btn_Search" : 
+			this.fnSearch();
+			break;
+	}
+};]]></Script>
+    <Objects>
+      <Dataset id="dsOutput">
+        <ColumnInfo>
+          <Column id="SYSTEM_CODE" type="bigdecimal" size="39"/>
+          <Column id="BACHELOR_ABILITY_TYPE" type="bigdecimal" size="39"/>
+          <Column id="START_DATE" type="string" size="10"/>
+          <Column id="START_TIME" type="string" size="10"/>
+          <Column id="END_DATE" type="string" size="10"/>
+          <Column id="END_TIME" type="string" size="10"/>
+          <Column id="REMARK" type="string" size="200"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_CD_SYSTEM_CODE">
+        <ColumnInfo>
+          <Column id="CODE" type="STRING" size="256"/>
+          <Column id="CAPTION" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="CODE">0</Col>
+            <Col id="CAPTION">성적시스템</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="ds_CD_BACHELOR_ABILITY_TYPE">
+        <ColumnInfo>
+          <Column id="CODE" type="STRING" size="256"/>
+          <Column id="CAPTION" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="CODE">0</Col>
+            <Col id="CAPTION">성적입력기간</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+    </Objects>
+  </Form>
+</FDL>

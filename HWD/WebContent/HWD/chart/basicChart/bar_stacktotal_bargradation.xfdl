@@ -1,0 +1,163 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.0">
+  <Form id="StackedColumn" width="768" height="480" titletext="New Form">
+    <Layouts>
+      <Layout height="480" mobileorientation="landscape" width="768">
+        <BasicChart id="BasicChart00" taborder="0" left="0" top="0" right="0" bottom="0" binddataset="Dataset00" categorycolumn="bind:category" enableanimation="false" stacktotalshadowstyle="" stacktotalvisible="true">
+          <Contents><![CDATA[{
+	"title": {
+		"id": "title",
+		"text": "Bar Chart",
+		"textfont": "20pt/normal '맑은 고딕'",
+		"padding": "0px 0px 5px"
+	},
+	"legend": {
+		"id": "legend",
+		"padding": "3px 10px 3px 10px",
+		"itemtextfont": "9pt '맑은 고딕'",
+		"itemtextcolor": "#4c4c4c",
+		"itemautofit": "false",
+		"align": "topcenter",
+		"horizontalitemgap": "20",
+		"linestyle": "1px solid #DDDDDD"
+	},
+	"tooltip": {
+		"id": "tooltip",
+		"background": "#4b4b4b",
+		"linestyle": "0px none",
+		"textcolor": "white",
+		"textfont": "10pt/normal '맑은 고딕'",
+		"padding": "5px"
+	},
+	"board": {
+		"id": "board"
+	},
+	"categoryaxis": {
+		"id": "categoryaxis",
+		"titletext": "categoryaxis",
+		"titletextcolor": "#4c4c4c",
+		"titletextfont": "bold 12pt '맑은 고딕'",
+		"labeltextcolor": "#6f6f6f",
+		"labeltextfont": "11pt '맑은 고딕'",
+		"axislinestyle": "1px solid #525252",
+		"ticklinestyle": "1px solid #525252",
+		"boardlinestyle": "1px solid #d0d0d0"
+	},
+	"seriesset": [
+		{
+			"id": "series0",
+			"titletext": "Q1",
+			"barvisible": true,
+			"barsize": "65",
+			"itemtextvisible": "true",
+			"itemtextcolor": "white",
+			"itemtextfont": "bold 10pt 'Verdana'",
+			"valuecolumn": "bind:d1",
+			"stacktype": "normal",
+			"barfillstyle": "red",
+			"linevisible": "false",
+			"barlinestyle": "1px solid white",
+			"baritemtextposition": "middle",
+			"stacktotalvisible": "true",
+			"stacktotaltextcolor": "black",
+			"stacktotalshadowstyle": "2px 2px 3px darkgray",
+			"stacktotallinestyle": "1px solid gray",
+			"autogradation": "center"
+		},
+		{
+			"id": "series1",
+			"titletext": "Q2",
+			"barvisible": true,
+			"barsize": "65",
+			"itemtextvisible": true,
+			"itemtextcolor": "white",
+			"itemtextfont": "bold 10pt 'Verdana'",
+			"valuecolumn": "bind:d2",
+			"stacktype": "normal",
+			"barfillstyle": "green",
+			"barlinestyle": "1px solid white",
+			"stacktotalvisible": "true",
+			"stacktotallinestyle": "1px solid gray",
+			"autogradation": "center"
+		},
+		{
+			"id": "series2",
+			"titletext": "Q3",
+			"barvisible": true,
+			"barsize": "65",
+			"itemtextvisible": true,
+			"itemtextcolor": "white",
+			"itemtextfont": "bold 10pt 'Verdana'",
+			"valuecolumn": "bind:d3",
+			"stacktype": "normal",
+			"barfillstyle": "blue",
+			"barlinestyle": "1px solid white",
+			"stacktotalvisible": "true",
+			"stacktotallinestyle": "1px solid gray",
+			"autogradation": "center"
+		}
+	],
+	"valueaxes": [
+		{
+			"id": "valueaxis0",
+			"titletext": "valueaxis",
+			"boardlinevisible": true,
+			"boardlinestyle": "1px solid #d0d0d0",
+			"labeltextcolor": "#6f6f6f",
+			"labeltextfont": "10pt/normal '맑은 고딕'",
+			"titletextcolor": "#4c4c4c",
+			"titletextfont": "bold 12pt '맑은 고딕'",
+			"ticklinestyle": "1px solid #525252",
+			"axislinestyle": "1px solid #525252",
+			"autotickscale": "5",
+			"tickinterval": "3"
+		}
+	]
+}]]></Contents>
+        </BasicChart>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="Dataset00">
+        <ColumnInfo>
+          <Column id="category" type="STRING" size="256"/>
+          <Column id="d1" type="BIGDECIMAL" size="256"/>
+          <Column id="d2" type="BIGDECIMAL" size="256"/>
+          <Column id="d3" type="BIGDECIMAL" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="category">John</Col>
+            <Col id="d1">5.33</Col>
+            <Col id="d2">2.33</Col>
+            <Col id="d3">3.32</Col>
+          </Row>
+          <Row>
+            <Col id="category">James</Col>
+            <Col id="d1">3.42</Col>
+            <Col id="d2">2.23</Col>
+            <Col id="d3">4.22</Col>
+          </Row>
+          <Row>
+            <Col id="category">Hooper</Col>
+            <Col id="d1">4.23</Col>
+            <Col id="d2">3.23</Col>
+            <Col id="d3">4.99</Col>
+          </Row>
+          <Row>
+            <Col id="category">Luke</Col>
+            <Col id="d1">7.99</Col>
+            <Col id="d2">2.98</Col>
+            <Col id="d3">2.35</Col>
+          </Row>
+          <Row>
+            <Col id="category">Ryu</Col>
+            <Col id="d1">2.75</Col>
+            <Col id="d2">1.02</Col>
+            <Col id="d3">5.24</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+    </Objects>
+  </Form>
+</FDL>

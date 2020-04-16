@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<XCSS version="1.0"><![CDATA[.Grid.grd_LF_menu .body .row .cell .celltreeitem .treeitemimage[userstatus=collapse]
+{
+	background : url('theme://images/img_WF_Treecollapse1.png') no-repeat center;
+}
+.Grid.grd_LF_menu .body .row .cell .celltreeitem .treeitemimage[userstatus=expand]
+{
+	background : url('theme://images/img_WF_Treeexpand1.png') no-repeat center;
+}.Grid .body .row .cell.cell_gray,
+.Grid .body .row .cell.cell_gray[status=disabled],
+.Grid .body .row .cell.cell_gray[status=mouseover],
+.Grid .body .row .cell.cell_gray[status=focused],
+.Grid .body .row .cell.cell_gray[status=readonly],
+.Grid .body .row .cell.cell_gray[userstatus=selected]
+{
+	-nexa-background-odd : #efefef;
+	background : #efefef;
+}
+]]></XCSS>

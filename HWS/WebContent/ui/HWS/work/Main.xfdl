@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.0">
+  <Form id="work01" width="824" height="608" titletext="New Form">
+    <Layouts>
+      <Layout height="608" mobileorientation="landscape" width="824">
+        <Static id="Static00" taborder="0" left="0" bottom="0" height="88" right="0" cssclass="sta_WF_mainBottom"/>
+        <Static id="Static01" taborder="1" left="194" top="152" width="457" height="130" cssclass="sta_WF_mainLogo"/>
+        <Static id="Static02" taborder="2" text="SOLLABO System" left="193" top="267" width="438" height="70" cssclass="sta_WF_mainTitle"/>
+      </Layout>
+    </Layouts>
+  </Form>
+</FDL>

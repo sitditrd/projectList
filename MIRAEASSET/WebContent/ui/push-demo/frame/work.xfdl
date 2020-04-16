@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.0">
+  <Form id="work" width="1600" height="840" onload="work_onload">
+    <Layouts>
+      <Layout height="840" mobileorientation="landscape" width="1600">
+        <Div id="divContents" taborder="0" left="0" top="0" right="0" bottom="0" minwidth="1600" maxwidth="" minheight="840" maxheight=""/>
+      </Layout>
+    </Layouts>
+    <Script type="xscript5.1"><![CDATA[
+this.work_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
+{
+	this.divContents.set_url(this.parent.menuUrl);
+};
+]]></Script>
+  </Form>
+</FDL>

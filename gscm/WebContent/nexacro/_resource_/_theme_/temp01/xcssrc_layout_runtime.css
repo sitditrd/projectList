@@ -1,0 +1,4701 @@
+﻿
+        
+.nexainput.nexaleftalign
+{
+  text-align:left;
+}
+.nexainput.nexarightalign
+{
+  text-align:right;
+}
+.nexainput.nexacenteralign
+{
+  text-align:center;
+}
+
+.nexacontentsbox.nexaleftalign
+{
+  text-align:left;
+}
+.nexacontentsbox.nexarightalign
+{
+  text-align:right;
+}
+.nexacontentsbox.nexacenteralign
+{
+  text-align:center;
+}
+.celltreeline
+{
+  border : 1px dotted #999999;
+}
+.Edit, .MaskEdit, .TextArea, .EditControl, .MaskEditControl, .TextAreaControl
+{
+  cursor:text;
+}
+.Button .nexacontentsbox, .ButtonControl .nexacontentsbox
+{
+  text-align:center;
+}
+
+.FileDownload  .nexacontentsbox, .FileDownloadControl .nexacontentsbox
+{
+  text-align:center;
+}
+
+.IconTextControl .nexacontentsbox, .IconControl .nexacontentsbox
+{
+  text-align:center;
+}
+
+.DatePickerDayItemControl .nexacontentsbox, .DatePickerWeekItemControl .nexacontentsbox, .TitleBarButtonControl .nexacontentsbox
+{
+  text-align:center;
+}
+
+.MainFrame, .VScrollBarControl, .HScrollBarControl
+{
+  cursor:default;
+}
+.nexainput
+{
+  cursor:inherit;
+}
+
+.Div.div_WF_box01
+{
+	background : #f6f6f6;
+	border : 1px solid #c7c7c7;
+}
+.Div.div_WF_box02
+{
+	background : #f6f9ff;
+	border : 2px solid #6598ff;
+}
+.Static.sta_WF_box03
+{
+	background : #fef5f3;
+	border : 1px solid #ffa99b;
+	color : #222222;
+	font : 9pt Malgun Gothic,Arial,Gulim;
+}
+.Static.sta_WF_box03 .nexacontentsbox
+{
+	text-align : left;
+	vertical-align : middle;
+}
+.Static.sta_WF_box01L
+{
+	background : #f6f6f6;
+	border : 1px solid #c7c7c7;
+}
+.Static.sta_WF_box01L .nexacontentsbox
+{
+	text-align : left;
+}
+.Static.sta_WF_box01R
+{
+	background : #f6f6f6;
+	font : 12px "Arial","Malgun gothic","Gulim";
+	border : 1px solid #c7c7c7;
+}
+.Static.sta_WF_box01R .nexacontentsbox
+{
+	text-align : right;
+}
+.Static.sta_WF_box01C
+{
+	background : #f6f6f6;
+	border : 1px solid #c7c7c7;
+}
+.Static.sta_WF_box01C .nexacontentsbox
+{
+	text-align : center;
+}
+.Static.sta_WF_box01impR
+{
+	background : url('./../../../_resource_/_images_/img_WF_import.png') no-repeat left top #f6f6f6;
+	border : 1px solid #c7c7c7;
+}
+.Static.sta_WF_box01impR .nexacontentsbox
+{
+	text-align : right;
+}
+.Static.sta_WF_box02L
+{
+	background : #ffffff;
+	border : 1px solid #c7c7c7;
+}
+.Static.sta_WF_box02L .nexacontentsbox
+{
+	text-align : left;
+}
+.Static.sta_WF_box03L
+{
+	background : #f3f8ff;
+	border : 1px solid #c7c7c7;
+}
+.Static.sta_WF_box03L .nexacontentsbox
+{
+	text-align : left;
+}
+.Static.sta_WF_box04L
+{
+	background : #e7eaee;
+	border : 1px solid #c7c7c7;
+}
+.Static.sta_WF_box04L .nexacontentsbox
+{
+	text-align : left;
+}
+.Static.sta_WF_label01L
+{
+	font : 12px "Arial","Gulim","Malgun Gothic";
+}
+.Static.sta_WF_label01L .nexacontentsbox
+{
+	text-align : left;
+}
+.Static.sta_WF_label01R
+{
+	font : 12px "Arial","Gulim","Malgun Gothic";
+}
+.Static.sta_WF_label01R .nexacontentsbox
+{
+	text-align : right;
+}
+.Static.sta_WF_label01C
+{
+	font : 12px "Arial","Gulim","Malgun Gothic";
+}
+.Static.sta_WF_label01C .nexacontentsbox
+{
+	text-align : center;
+}
+.Button.btn_WF_basic01
+{
+	background : #124286;
+	color : #ffffff;
+	cursor : pointer;
+	border : 0px none;
+}
+.Button.btn_WF_basic01 .nexacontentsbox
+{
+	text-align : center;
+}
+.Button.btn_WF_basic02
+{
+	background : #f3750f;
+	color : #ffffff;
+	cursor : pointer;
+	border : 0px none;
+}
+.Button.btn_WF_basic02 .nexacontentsbox
+{
+	text-align : center;
+}
+.Button.btn_WF_basic03
+{
+	background : #555555;
+	color : #ffffff;
+	cursor : pointer;
+	border : 0px none;
+}
+.Button.btn_WF_basic03 .nexacontentsbox
+{
+	text-align : center;
+}
+.Button.btn_WF_basic04
+{
+	background : #e3eeff;
+	color : #222222;
+	cursor : pointer;
+	border : 1px solid #6092e7;
+}
+.Button.btn_WF_basic04 .nexacontentsbox
+{
+	text-align : center;
+}
+.Grid.grd_WF_cellC .body .row .cell
+{
+	color : #222222;
+	border : 1px solid #c7c7c7;
+}
+.Grid.grd_WF_cellC .body .row .cell .nexacontentsbox
+{
+	text-align : center;
+}
+.Grid.grd_WF_basic01
+{
+	background : #ffffff;
+	border : 1px solid #c7c7c7;
+}
+.Grid.grd_WF_basic01 .head .row .cell
+{
+	font : bold 12px "Gulim";
+	color : #ffffff;
+	background : #6d6e72;
+	border : 1px solid #c7c7c7,0px none;
+}
+.Grid.grd_WF_basic01 .head .row .cell .nexacontentsbox
+{
+	text-align : center;
+}
+.Grid.grd_WF_basic01 .body .row .cell
+{
+	color : #222222;
+	border : 1px solid #c7c7c7,0px none;
+}
+.Grid .body .row .cell.cell_WF_SumBg1
+{
+	background : #efe5f5;
+	font : bold 10pt "Arial";
+	color : #222222;
+}
+.Grid .body .row .cell.cell_WF_SumBg1.oddcell
+{
+	background : #efe5f5;
+}
+.Grid .body .row .cell.cell_WF_SumBg2
+{
+	background : #E8F5E9;
+	font : bold 10pt "Arial";
+	color : #222222;
+}
+.Grid .body .row .cell.cell_WF_SumBg2.oddcell
+{
+	background : #E8F5E9;
+}
+.Button.btn_WF_pagingFirst
+{
+	background : url('./../../../_resource_/_images_/btn_WF_first.png') no-repeat center center #ffffff;
+	cursor : pointer;
+	border : 1px solid #c7c7c7;
+}
+.Button.btn_WF_pagingLast
+{
+	background : url('./../../../_resource_/_images_/btn_WF_last.png') no-repeat center center #ffffff;
+	cursor : pointer;
+	border : 1px solid #c7c7c7;
+}
+.Button.btn_WF_pagingPrev
+{
+	background : url('./../../../_resource_/_images_/btn_WF_prev.png') no-repeat center center #ffffff;
+	cursor : pointer;
+	border : 1px solid #c7c7c7;
+}
+.Button.btn_WF_pagingNext
+{
+	background : url('./../../../_resource_/_images_/btn_WF_next.png') no-repeat center center #ffffff;
+	cursor : pointer;
+	border : 1px solid #c7c7c7;
+}
+.Button.btn_WF_pagingNum
+{
+	background : transparent;
+	color : #222222;
+	cursor : pointer;
+	font : bold 12px "Arial","Gulim";
+	border : 0px none;
+}
+.Button.btn_WF_pagingNum .nexacontentsbox
+{
+	text-align : center;
+}
+.Button.btn_WF_gridUp
+{
+	background : url('./../../../_resource_/_images_/img_WF_gridUp.png') no-repeat center center #f1f1f1;
+	cursor : pointer;
+	border : 1px solid #c7c7c7;
+}
+.Button.btn_WF_gridDown
+{
+	background : url('./../../../_resource_/_images_/img_WF_gridDown.png') no-repeat center center #f1f1f1;
+	cursor : pointer;
+	border : 1px solid #c7c7c7;
+}
+.Button.btn_WF_tabMenu01
+{
+	background : #f8f8f8;
+	color : #222222;
+	cursor : pointer;
+	border : 1px solid #c7c7c7;
+}
+.Button.btn_WF_tabMenu01 .nexacontentsbox
+{
+	text-align : left;
+}
+.Div.div_WF_tabBox
+{
+	background : #f3f7ff;
+	border : 1px solid #86aceb;
+}
+.Button.btn_WF_tabClose
+{
+	background : url('./../../../_resource_/_images_/btn_close_N.png') no-repeat center center;
+	cursor : pointer;
+	border : 0px none;
+}
+.Static.sta_TP_bg01
+{
+	background : #124286;
+}
+.Static.sta_TP_logo
+{
+	background : url('./../../../_resource_/_images_/img_TP_logo.png') no-repeat center center;
+}
+.Button.btn_TP_menu
+{
+	background : url('./../../../_resource_/_images_/img_TP_menuLine.png') no-repeat center right #124286;
+	color : #ffffff;
+	cursor : pointer;
+	font : 14px "Arial","Nanum Gothic";
+	border : 0px none;
+}
+.Button.btn_TP_menu .nexacontentsbox
+{
+	text-align : center;
+}
+.Button.btn_TP_menuIcon
+{
+	background : url('./../../../_resource_/_images_/img_TP_menuIcon.png') no-repeat center center #124286;
+	cursor : pointer;
+	border : 1px solid #234c9a;
+}
+.Static.sta_LF_bg01
+{
+	background : #f6f6f6;
+	border : 0px none, 1px solid #c7c7c7, 0px none, 0px none;
+}
+.Static.sta_LF_pic
+{
+	background : url('./../../../_resource_/_images_/img_LF_pic01.png') no-repeat center top #f6f6f6;
+	font : 14px "Arial","Malgun Gothic";
+	border : 1px solid #c7c7c7;
+}
+.Static.sta_LF_pic .nexacontentsbox
+{
+	text-align : center;
+	vertical-align : bottom;
+}
+.Static.sta_LF_icon01
+{
+	background : url('./../../../_resource_/_images_/img_LF_tabIcon01.png') no-repeat center center #f6f6f6;
+	cursor : pointer;
+	border : 1px solid #c7c7c7;
+}
+.Static.sta_LF_icon02
+{
+	background : url('./../../../_resource_/_images_/img_LF_tabIcon02.png') no-repeat center center #f6f6f6;
+	cursor : pointer;
+	border : 1px solid #c7c7c7;
+}
+.Static.sta_LF_icon03
+{
+	background : url('./../../../_resource_/_images_/img_LF_tabIcon03.png') no-repeat center center #f6f6f6;
+	cursor : pointer;
+	border : 1px solid #c7c7c7;
+}
+.Button.btn_LF_menu
+{
+	background : url('./../../../_resource_/_images_/img_LF_icon_N.png') no-repeat right center #f6f6f6;
+	color : #222222;
+	cursor : pointer;
+	border : 0px none, 0px none,1px solid #c7c7c7, 0px none;
+}
+.Button.btn_LF_menu .nexacontentsbox
+{
+	text-align : left;
+}
+.Grid.grd_LF_menu
+{
+	background : #f6f6f6;
+	border : 0px none;
+}
+.Grid.grd_LF_menu .body .row .cell
+{
+	color : #222222;
+	font : 12px "Gulim";
+	border : 0px none, 0px none, 1px solid #c7c7c7, 0px none;
+}
+.Static.sta_mdi_bg01
+{
+	background : #efefef;
+	border : 1px solid #c7c7c7, 0px none;
+}
+.Static.sta_mdi_home
+{
+	background : url('./../../../_resource_/_images_/img_mdi_home.png') no-repeat center center;
+	cursor : pointer;
+	border : 1px solid #c7c7c7, 1px solid #c7c7c7, 1px solid #c7c7c7, 0px none;
+}
+.Button.btn_mdi_mdiBtn
+{
+	background : #efefef;
+	color : #222222;
+	cursor : pointer;
+	font : 12px "Arial","Malgun Gothic";
+	border : 1px solid #c7c7c7;
+}
+.Button.btn_mdi_mdiBtn .nexacontentsbox
+{
+	text-align : left;
+}
+.Button.btn_mdi_close
+{
+	background : url('./../../../_resource_/_images_/btn_close_N.png') no-repeat center center;
+	cursor : pointer;
+	border : 0px none;
+}
+.Button.btn_mdi_tabClose
+{
+	background : url('./../../../_resource_/_images_/btn_mdi_tabClose.png') no-repeat center center;
+	cursor : pointer;
+	border : 0px none;
+}
+.Button.btn_mdi_tabNext
+{
+	background : url('./../../../_resource_/_images_/btn_WF_next.png') no-repeat center center;
+	cursor : pointer;
+	border : 0px none,1px solid #d1d1d1;
+}
+.Button.btn_mdi_tabPrev
+{
+	background : url('./../../../_resource_/_images_/btn_WF_prev.png') no-repeat center center;
+	cursor : pointer;
+	border : 0px none,1px solid #d1d1d1;
+}
+.Static.sta_BT_bg01
+{
+	background : #dcdcdc;
+	border : 1px solid #c7c7c7, 0px none, 0px none, 0px none;
+}
+.Static.sta_BT_alarm
+{
+	background : url('./../../../_resource_/_images_/img_BT_alram.png') no-repeat left center;
+	font : 12px "Gulim";
+}
+.Static.sta_WF_title01
+{
+	font : bold 14px "Malgun Gothic";
+}
+.Static.sta_WF_title01 .nexacontentsbox
+{
+	text-align : left;
+}
+.Static.sta_WF_title02
+{
+	background : url('./../../../_resource_/_images_/img_WF_title02.png') no-repeat left center;
+	font : bold 13px "Malgun Gothic";
+}
+.Static.sta_WF_title02 .nexacontentsbox
+{
+	text-align : left;
+}
+.Button.btn_WF_search01
+{
+	background : transparent;
+	cursor : pointer;
+	border : 0px none;
+	-nexa-edge : url('./../../../_resource_/_images_/btn_WF_search01.png') 0px 0px;
+}
+.Button.btn_WF_apply01
+{
+	background : url('./../../../_resource_/_images_/img_WF_apply01.png') no-repeat left center #124286;
+	color : #ffffff;
+	cursor : pointer;
+	border : 0px none;
+}
+.Button.btn_WF_apply01 .nexacontentsbox
+{
+	text-align : center;
+}
+.Button.btn_WF_reset01
+{
+	background : url('./../../../_resource_/_images_/img_WF_reset01.png') no-repeat left center #555555;
+	color : #ffffff;
+	cursor : pointer;
+	border : 0px none;
+}
+.Button.btn_WF_reset01 .nexacontentsbox
+{
+	text-align : center;
+}
+.Button.btn_WF_search02
+{
+	background : url('./../../../_resource_/_images_/btn_WF_search02.png') no-repeat center center;
+	cursor : pointer;
+	border : 0px none;
+}
+.Button.btn_WF_up
+{
+	background : url('./../../../_resource_/_images_/btn_WF_up.png') no-repeat center center #6598ff;
+	cursor : pointer;
+	border : 0px none;
+}
+.Button.btn_WF_down
+{
+	background : url('./../../../_resource_/_images_/btn_WF_down.png') no-repeat center center #6598ff;
+	cursor : pointer;
+	border : 0px none;
+}
+.Button.btn_WF_expand
+{
+	background : url('./../../../_resource_/_images_/btn_WF_expand.png') no-repeat center center transparent;
+	cursor : pointer;
+	border : 0px none;
+}
+.Button.btn_WF_fold
+{
+	background : url('./../../../_resource_/_images_/btn_WF_fold.png') no-repeat center center transparent;
+	cursor : pointer;
+	border : 0px none;
+}
+.Static.sta_WF_foldingTle
+{
+	background : #f6f9ff;
+	font : normal 700 12px "Malgun Gothic";
+	border : 1px solid #86aceb;
+}
+.Static.sta_WF_foldingTle .nexacontentsbox
+{
+	text-align : left;
+}
+.Static.sta_WF_foldingBox
+{
+	background : #ffffff;
+}
+.Static.sta_WF_foldingBox .nexacontentsbox
+{
+	text-align : left;
+	vertical-align : top;
+	-nexa-word-wrap : char;
+}
+.Button.btn_WF_excel
+{
+	background : url('./../../../_resource_/_images_/btn_WF_excel.png') no-repeat left center #f6f6f6;
+	cursor : pointer;
+	border : 1px solid #c7c7c7;
+	color : #333333;
+}
+.Button.btn_WF_excel .nexacontentsbox
+{
+	text-align : left;
+}
+.Button.btn_WF_hancel
+{
+	background : url('./../../../_resource_/_images_/btn_WF_hancel.png') no-repeat left center #f6f6f6;
+	cursor : pointer;
+	border : 1px solid #c7c7c7;
+}
+.Button.btn_WF_hancel .nexacontentsbox
+{
+	text-align : left;
+}
+.Button.btn_WF_iconPort01
+{
+	background : url('./../../../_resource_/_images_/img_WF_iconPort01.png') no-repeat right top #5182e5;
+	cursor : pointer;
+	border : 0px none;
+	color : #ffffff;
+	font : bold 16pt Malgun Gothic;
+}
+.Button.btn_WF_iconPort01 .nexacontentsbox
+{
+	text-align : center;
+	vertical-align : bottom;
+}
+.Button.btn_WF_iconPort02
+{
+	background : url('./../../../_resource_/_images_/img_WF_iconPort02.png') no-repeat right bottom #819cf2;
+	cursor : pointer;
+	border : 0px none;
+	color : #ffffff;
+	font : bold 16pt Malgun Gothic;
+}
+.Button.btn_WF_iconPort02 .nexacontentsbox
+{
+	text-align : left;
+	vertical-align : top;
+}
+.Button.btn_WF_iconPort03
+{
+	background : url('./../../../_resource_/_images_/img_WF_iconPort03.png') no-repeat right bottom #818cf2;
+	cursor : pointer;
+	border : 0px none;
+	color : #ffffff;
+	font : bold 16pt Malgun Gothic;
+}
+.Button.btn_WF_iconPort03 .nexacontentsbox
+{
+	text-align : left;
+	vertical-align : top;
+}
+.Button.btn_WF_iconPort04
+{
+	background : url('./../../../_resource_/_images_/img_WF_iconPort04.png') no-repeat right bottom #8981f2;
+	cursor : pointer;
+	border : 0px none;
+	color : #ffffff;
+	font : bold 16pt Malgun Gothic;
+}
+.Button.btn_WF_iconPort04 .nexacontentsbox
+{
+	text-align : left;
+	vertical-align : top;
+}
+.Button.btn_WF_iconPort05
+{
+	background : url('./../../../_resource_/_images_/img_WF_iconPort05.png') no-repeat left bottom #519ae5;
+	cursor : pointer;
+	border : 0px none;
+	color : #ffffff;
+	font : bold 16pt Malgun Gothic;
+}
+.Button.btn_WF_iconPort05 .nexacontentsbox
+{
+	text-align : right;
+	vertical-align : top;
+}
+.Button.btn_WF_iconPort06
+{
+	background : url('./../../../_resource_/_images_/img_WF_iconPort06.png') no-repeat left bottom #57b2dd;
+	cursor : pointer;
+	border : 0px none;
+	color : #ffffff;
+	font : bold 16pt Malgun Gothic;
+}
+.Button.btn_WF_iconPort06 .nexacontentsbox
+{
+	text-align : right;
+	vertical-align : top;
+}
+.Button.btn_WF_iconPort07
+{
+	background : url('./../../../_resource_/_images_/img_WF_iconPort07.png') no-repeat left top #759ceb;
+	cursor : pointer;
+	border : 0px none;
+	color : #ffffff;
+	font : bold 16pt Malgun Gothic;
+}
+.Button.btn_WF_iconPort07 .nexacontentsbox
+{
+	text-align : right;
+	vertical-align : bottom;
+}
+.Button.btn_WF_iconPort08
+{
+	background : url('./../../../_resource_/_images_/img_WF_iconPort08.png') no-repeat left top #75a7eb;
+	cursor : pointer;
+	border : 0px none;
+	color : #ffffff;
+	font : bold 16pt Malgun Gothic;
+}
+.Button.btn_WF_iconPort08 .nexacontentsbox
+{
+	text-align : right;
+	vertical-align : bottom;
+}
+.Button.btn_WF_iconPort09
+{
+	background : url('./../../../_resource_/_images_/img_WF_iconPort09.png') no-repeat right top #9480dd;
+	cursor : pointer;
+	border : 0px none;
+	color : #ffffff;
+	font : bold 16pt Malgun Gothic;
+}
+.Button.btn_WF_iconPort09 .nexacontentsbox
+{
+	text-align : left;
+	vertical-align : bottom;
+}
+.Static.sta_pop_title01
+{
+	background : #124286;
+	color : #ffffff;
+	font : bold 13px "Arial","Malgun Gothic";
+}
+.Static.sta_pop_bg01
+{
+	background : #ffffff;
+	border : 1px solid #124286;
+}
+.Button.btn_pop_close
+{
+	background : url('./../../../_resource_/_images_/btn_pop_close.png') no-repeat center center transparent;
+	cursor : pointer;
+	border : 0px none;
+}
+.Static.sta_grd_move
+{
+	background : #fef5f3;
+	border : 2px dotted #124286;
+	border-radius : 0px;
+	color : #124286;
+	font : 9pt Malgun Gothic,Arial,Gulim;
+}
+.Edit.ed_basic01
+{
+	background : #ffffff;
+	border : 1px solid #9c9c9c;
+	border-radius : 2px;
+	color : #222222;
+	font : 10pt Malgun Gothic;
+	padding : 0px 7px 0px 7px;
+}
+.Edit.ed_basic01 .nexainput
+{
+	text-align : left;
+}
+.Edit.ed_basic01 .nexacontentsbox
+{
+	text-align : left;
+}
+.Edit.ed_basic02
+{
+	background : #fef5f3;
+	border : 1px solid #ff6c54;
+	border-radius : 2px;
+	color : #d8351a;
+	font : 10pt Malgun Gothic;
+	padding : 0px 7px 0px 7px;
+}
+.Edit.ed_basic02 .nexainput
+{
+	text-align : left;
+}
+.Edit.ed_basic02 .nexacontentsbox
+{
+	text-align : left;
+}
+.MaskEdit.msk_basic01
+{
+	background : #ffffff;
+	border : 1px solid #9c9c9c;
+	border-radius : 2px;
+	color : #222222;
+	font : 10pt Malgun Gothic;
+	padding : 0px 7px 0px 7px;
+}
+.MaskEdit.msk_basic01 .nexainput
+{
+	text-align : right;
+}
+.MaskEdit.msk_basic01 .nexacontentsbox
+{
+	text-align : right;
+}
+.MaskEdit.msk_basic02
+{
+	background : #fef5f3;
+	border : 1px solid #ff6c54;
+	color : #d8351a;
+	font : 10pt Malgun Gothic;
+	padding : 0px 7px 0px 7px;
+}
+.MaskEdit.msk_basic02 .nexainput
+{
+	text-align : right;
+}
+.MaskEdit.msk_basic02 .nexacontentsbox
+{
+	text-align : right;
+}
+.Grid.grd_basic01
+{
+	background : transparent;
+	border : 1px solid #9c9c9c;
+	color : #222222;
+}
+.Grid.grd_basic01 .summary .row .cell .nexacontentsbox
+{
+	text-align : center;
+	vertical-align : middle;
+}
+.Grid.grd_basic01 .head
+{
+	background : #efefef;
+	border : 0px none;
+}
+.Grid.grd_basic01 .head .row .cell
+{
+	background : transparent;
+	color : #222222;
+	font : bold 10pt Malgun Gothic,Arial,Gulim;
+	border : 1px solid #9c9c9c;
+}
+.Grid.grd_basic01 .head .row .cell.oddcell
+{
+	color : #222222;
+}
+.Grid.grd_basic01 .head .row .cell .nexacontentsbox
+{
+	vertical-align : middle;
+	text-align : center;
+}
+.Grid.grd_basic01 .body
+{
+	background : #ffffff;
+	border : 0px none;
+}
+.Grid.grd_basic01 .body .row .cell
+{
+	background : #ffffff;
+	color : #222222;
+	border : 1px solid #9c9c9c;
+}
+.Grid.grd_basic01 .body .row .cell .nexacontentsbox
+{
+	text-align : center;
+	vertical-align : middle;
+}
+.Grid.grd_basic01 .body .row .cell.oddcell
+{
+	background : #f7f7f7;
+	color : #222222;
+}
+.Grid.grd_basic01 .body .row .cell .celledit
+{
+	background : #ffffff;
+	border : 1px solid #9c9c9c;
+	border-radius : 2px;
+	color : #222222;
+	font : 10pt Malgun Gothic;
+	padding : 0px 7px 0px 7px;
+}
+.Grid.grd_basic01 .body .row .cell .celledit .nexainput
+{
+	text-align : left;
+}
+.Grid.grd_basic01 .body .row .cell .celledit .nexacontentsbox
+{
+	text-align : left;
+}
+.Grid.grd_basic01 .body .row .cell .cellmaskedit
+{
+	background : #ffffff;
+	border : 1px solid #9c9c9c;
+	border-radius : 2px;
+	color : #222222;
+	font : 10pt Malgun Gothic;
+	padding : 0px 7px 0px 7px;
+}
+.Grid.grd_basic01 .body .row .cell .cellmaskedit .nexainput
+{
+	text-align : right;
+}
+.Grid.grd_basic01 .body .row .cell .cellmaskedit .nexacontentsbox
+{
+	text-align : right;
+}
+.Grid.grd_basic01 .body .row .cell .celltextarea
+{
+	background : url('./../../../_resource_/_images_/img_cp_textarea.png') no-repeat right bottom #ffffff;
+	border : 1px solid #9c9c9c;
+	border-radius : 2px;
+	color : #222222;
+	padding : 7px 7px 7px 7px;
+}
+.Grid.grd_basic01 .body .row .cell .celltextarea .nexatextarea
+{
+	text-align : left;
+}
+.Grid.grd_basic01 .body .row .cell .celltextarea .nexacontentsbox
+{
+	text-align : left;
+}
+.Grid.grd_basic01 .body .row .cell .cellbutton
+{
+	background : #e1897b;
+	border : 1px solid #d16959;
+	border-radius : 3px;
+	font : 9pt Malgun Gothic,Arial,Gulim;
+	color : #ffffff;
+	cursor : pointer;
+}
+.Grid.grd_basic01 .body .row .cell .cellbutton .nexacontentsbox
+{
+	text-align : center;
+	vertical-align : middle;
+}
+.Grid.grd_basic01 .body .row .cell .cellcheckbox
+{
+	background : transparent;
+	border : 0px none;
+	color : #222222;
+	cursor : pointer;
+	font : 10pt Malgun Gothic,Arial;
+}
+.Grid.grd_basic01 .body .row .cell .cellcheckbox .nexacontentsbox
+{
+	text-align : left;
+	vertical-align : middle;
+}
+.Grid.grd_basic01 .body .row .cell .cellcombo
+{
+	background : #ffffff;
+	border : 1px solid #9c9c9c;
+	border-radius : 0px;
+	color : #222222;
+}
+.Grid.grd_basic01 .body .row .cell .cellcombo .comboedit
+{
+	background : transparent;
+	border : 0px none;
+	border-radius : 0px;
+	color : #222222;
+	padding : 0px 4px 0px 4px;
+}
+.Grid.grd_basic01 .body .row .cell .cellcombo .comboedit .nexainput
+{
+	text-align : left;
+}
+.Grid.grd_basic01 .body .row .cell .cellcombo .comboedit .nexacontentsbox
+{
+	text-align : left;
+}
+.Grid.grd_basic01 .body .row .cell .cellcombo .dropbutton .nexacontentsbox
+{
+	text-align : center;
+	vertical-align : middle;
+}
+.ListBoxControl.popupGridgrd_basic01bodyrowcellcellcombocombolist.dummy.dummy.dummy.dummy.dummy.dummy
+{
+	border : 1px solid #9c9c9c;
+	border-radius : 0px;
+	color : #222222;
+}
+.ListBoxControl.popupGridgrd_basic01bodyrowcellcellcombocombolist.dummy.dummy.dummy.dummy.dummy.dummy .listboxitem
+{
+	background : #ffffff;
+	border : 0px none;
+}
+.Grid.grd_basic01 .body .row .cell .cellcalendar
+{
+	background : #ffffff;
+	border : 1px solid #9c9c9c;
+	border-radius : 2px;
+	color : #222222;
+}
+.Grid.grd_basic01 .body .row .cell .cellcalendar .datepicker .body .dayitem
+{
+	border : 0px none;
+	border-radius : 0px;
+	color : #222222;
+}
+.DatePickerControl.popupGridgrd_basic01bodyrowcellcellcalendardatepicker .body .dayitem
+{
+	border : 0px none;
+	border-radius : 0px;
+	color : #222222;
+}
+.Grid.grd_basic01 .body .row .cell .cellcalendar .calendaredit
+{
+	background : #ffffff;
+	border : 0px none;
+	font : 9pt Malgun Gothic,Arial,Gulim;
+	padding : 0px 7px 0px 7px;
+}
+.Grid.grd_basic01 .body .row .cell .cellcalendar .dropbutton
+{
+	background : transparent;
+	border : 0px none;
+}
+.Grid.grd_basic01 .body .row .cell .cellcalendar .dropbutton .nexacontentsbox
+{
+	text-align : center;
+	vertical-align : middle;
+}
+.Grid.grd_basic01 .body .row .cell .cellcalendar .calendarspinupbutton
+{
+	border : 0px none;
+}
+.Grid.grd_basic01 .body .row .cell .cellcalendar .calendarspinupbutton .nexacontentsbox
+{
+	text-align : center;
+	vertical-align : middle;
+}
+.Grid.grd_basic01 .body .row .cell .cellcalendar .calendarspindownbutton
+{
+	border : 0px none;
+}
+.Grid.grd_basic01 .body .row .cell .cellcalendar .calendarspindownbutton .nexacontentsbox
+{
+	text-align : center;
+	vertical-align : middle;
+}
+.Grid.grd_basic01 .body .row .cell .cellcalendar .datepicker
+{
+	border : 1px solid #9c9c9c;
+	border-radius : 0px;
+	font : 9pt Malgun Gothic,Arial,Gulim;
+	color : #222222;
+	color : #222222;
+	border : 0px none;
+	font : 9pt Malgun Gothic,Arial,Gulim;
+	color : #222222;
+	font : 11pt Arial,Gulim;
+	border : 0px none;
+	border-radius : 0px;
+	border : 0px none;
+	border-radius : 0px;
+	color : #222222;
+	font : 9pt Arial,Gulim;
+	color : #222222;
+	border : 1px solid #9a88a7;
+	border-radius : 0px;
+	font : 9pt Arial,Gulim;
+	color : #c1c1c1;
+	border : 0px none;
+	font : 9pt Arial,Gulim;
+	color : #222222;
+	border : 0px none;
+	color : #f55136;
+	font : 9pt Arial,Gulim;
+}
+.DatePickerControl.popupGridgrd_basic01bodyrowcellcellcalendardatepicker
+{
+	border : 1px solid #9c9c9c;
+	border-radius : 0px;
+	font : 9pt Malgun Gothic,Arial,Gulim;
+	color : #222222;
+	color : #222222;
+	border : 0px none;
+	font : 9pt Malgun Gothic,Arial,Gulim;
+	color : #222222;
+	font : 11pt Arial,Gulim;
+	border : 0px none;
+	border-radius : 0px;
+	border : 0px none;
+	border-radius : 0px;
+	color : #222222;
+	font : 9pt Arial,Gulim;
+	color : #222222;
+	border : 1px solid #9a88a7;
+	border-radius : 0px;
+	font : 9pt Arial,Gulim;
+	color : #c1c1c1;
+	border : 0px none;
+	font : 9pt Arial,Gulim;
+	color : #222222;
+	border : 0px none;
+	color : #f55136;
+	font : 9pt Arial,Gulim;
+}
+.Grid.grd_basic01 .vscrollbar
+{
+	background : #e8e8e8;
+	border : 1px solid #9c9c9c, 0px none;
+	border-radius : 0px;
+}
+.Grid.grd_basic01 .hscrollbar
+{
+	background : #e8e8e8;
+	border : 0px none, 1px solid #9c9c9c;
+	border-radius : 0px;
+}
+.Static.sta_cp_box01
+{
+	background : #f7f7f7;
+	border : 1px solid #cbcbcb;
+	color : #222222;
+	font : 16pt Arial,Malgun gothic;
+}
+.Static.sta_cp_static
+{
+	-nexa-edge : URL('./../../../_resource_/_images_/img_WF_static.png') 0px 0px;
+	color : #ffffff;
+}
+.Static.sta_cp_static .nexacontentsbox
+{
+	text-align : center;
+	vertical-align : middle;
+}
+.ImageViewer.imv_cp_imageViewer
+{
+	background : url('./../../../_resource_/_images_/img_WF_imgeveiwer.png') no-repeat center center #ffffff;
+}
+.Div.div_basic01
+{
+	background : #ffffff;
+	border : 1px solid #9c9c9c;
+	border-radius : 2px;
+	color : #222222;
+}
+.GroupBox.grb_basic01
+{
+	background : #ffffff;
+	border : 1px solid #9c9c9c;
+	border-radius : 3px;
+	color : #222222;
+	font : 10pt Malgun Gothic,Arial;
+}
+.GroupBox.grb_basic01 .groupboxtitle
+{
+	background : #ffffff;
+}
+.GroupBox.grb_basic01 .groupboxtitle .nexacontentsbox
+{
+	vertical-align : middle;
+}
+.Static.sta_menu_bg
+{
+	background : #f7f7f7;
+	border : 1px solid #cbcbcb;
+}
+.Static.sta_menu_icon
+{
+	background : url('./../../../_resource_/_images_/ico_cp_menu.png') no-repeat left center;
+	color : #222222;
+	font : 13pt Arial;
+}
+.Static.sta_menu_icon .nexacontentsbox
+{
+	text-align : left;
+	vertical-align : middle;
+}
+.Tab.tab_basic01
+{
+	background : transparent;
+	border : 1px solid #cbcbcb;
+	border-radius : 0px;
+	color : #222222;
+	cursor : pointer;
+	font : 10pt Malgun Gothic,Arial;
+}
+.Tab.tab_basic01 .tabbuttonitemTabtab_basic01
+{
+	background : #f7f7f7;
+	border : 1px solid #cbcbcb;
+	border-radius : 0px;
+}
+.ProgressBar.prg_basic01
+{
+	background : #cbcbcb;
+	border : 1px solid #929292;
+	color : #ffffff;
+}
+.ProgressBar.prg_basic01 .progressbaritem
+{
+	background : linear-gradient(to right, #ff6c54 0%, #f55136 0%);
+}
+.Button.btn_cp_popDiv
+{
+	background : #e1897b;
+	border : 1px solid #d16959;
+	border-radius : 0px;
+	color : #ffffff;
+	cursor : pointer;
+	font : 11pt Malgun Gothic,Arial,Gulim;
+	box-shadow : 0px 3px 1px rgba(207,207,207,1);
+}
+.Button.btn_cp_popDiv .nexacontentsbox
+{
+	text-align : center;
+	vertical-align : middle;
+}
+.Button.btn_cp_popMenu
+{
+	background : #b19fbd;
+	border : 1px solid #9c80ae;
+	border-radius : 0px;
+	color : #ffffff;
+	cursor : pointer;
+	font : 11pt Malgun Gothic,Arial,Gulim;
+	box-shadow : 0px 3px 1px rgba(207,207,207,1);
+}
+.Button.btn_cp_popMenu .nexacontentsbox
+{
+	text-align : center;
+	vertical-align : middle;
+}
+.FileDownload.filedown_basic01
+{
+	background : url('./../../../_resource_/_images_/btn_cp_fileDownload.png') no-repeat left center #e8e8e8;
+	border : 1px solid #cbcbcb;
+	border-radius : 0px;
+	color : #333333;
+	cursor : pointer;
+	font : 11pt Arial,Malgun gothic;
+}
+.FileDownload.filedown_basic01 .nexacontentsbox
+{
+	text-align : left;
+	vertical-align : middle;
+}
+.FileUpload.fileup_basic01
+{
+	background : transparent;
+	border : 0px none;
+	border-radius : 0px;
+	color : rgba(138,140,157,1);
+	cursor : pointer;
+	font : 10pt Arial,Malgun gothic;
+}
+.FileUpload.fileup_basic01 .fileuploaditem .fileuploaditembutton
+{
+	background : url('./../../../_resource_/_images_/btn_cp_fileUpload.png') no-repeat right center #e8e8e8;
+	border : 1px solid #cbcbcb;
+	border-radius : 0px;
+	color : #222222;
+	font : 11pt Arial,Malgun gothic;
+}
+.FileUpload.fileup_basic01 .fileuploaditem .fileuploaditemedit
+{
+	background : #ffffff;
+	border : 1px solid #cbcbcb, 0px none, 1px solid #cbcbcb, 1px solid #cbcbcb;
+	border-radius : 0px;
+	color : #222222;
+	font : 9pt Arial,Malgun gothic;
+	padding : 0px 5px 0px 5px;
+}
+.Static.sta_cp_imageViewer
+{
+	background : #e1897b;
+	border : 1px solid #d16959;
+	border-radius : 20px;
+	color : #ffffff;
+	font : 9pt Malgun Gothci,Arial;
+}
+.Static.sta_cp_imageViewer .nexacontentsbox
+{
+	text-align : center;
+	vertical-align : middle;
+}
+.Button.btn_cp_basic01
+{
+	background : #d97a6a;
+	border : 1px solid #c66151;
+	border-radius : 0px;
+	color : #ffffff;
+	cursor : pointer;
+	font : 10pt Malgun Gothic,Arial,Gulim;
+}
+.Button.btn_cp_basic01 .nexacontentsbox
+{
+	text-align : center;
+	vertical-align : middle;
+}
+.Button.btn_cp_basic03
+{
+	background : #d8d8d8;
+	border : 1px solid #b9b9b9;
+	border-radius : 0px;
+	color : #222222;
+	cursor : pointer;
+	font : 10pt Malgun Gothic,Arial,Gulim;
+}
+.Button.btn_cp_basic03 .nexacontentsbox
+{
+	text-align : center;
+	vertical-align : middle;
+}
+.Button.btn_cp_basic02
+{
+	background : #9a88a7;
+	border : 1px solid #836c93;
+	border-radius : 0px;
+	color : #ffffff;
+	cursor : pointer;
+	font : 10pt Malgun Gothic,Arial,Gulim;
+}
+.Button.btn_cp_basic02 .nexacontentsbox
+{
+	text-align : center;
+	vertical-align : middle;
+}
+.Static.sta_cp_box02
+{
+	background : #f7f7f7;
+	border : 1px solid #cbcbcb;
+	color : #222222;
+	font : bold 12pt Arial,Malgun gothic;
+}
+.GroupBox.grb_basic01 .groupboxcontents
+{
+	background : #ffffff;
+	border : 1px solid #d6d4d5;
+}
+.Radio.rdo_basic01
+{
+	background : transparent;
+	border : 0px none;
+	color : #222222;
+	cursor : pointer;
+	font : 10pt Malgun Gothic,Arial;
+}
+.Static.sta_cp_Combo
+{
+	background : url('./../../../_resource_/_images_/img_cp_viewCombo.png') no-repeat left center;
+}
+.Combo.cmb_basic01
+{
+	background : #ffffff;
+	border : 1px solid #9c9c9c;
+	border-radius : 2px;
+	color : #222222;
+}
+.Combo.cmb_basic01 .comboedit
+{
+	background : transparent;
+	border : 0px none;
+	border-radius : 0px;
+	color : #222222;
+	padding : 0px 4px 0px 4px;
+}
+.Combo.cmb_basic01 .comboedit .nexainput
+{
+	text-align : left;
+}
+.Combo.cmb_basic01 .comboedit .nexacontentsbox
+{
+	text-align : left;
+}
+.Combo.cmb_basic01 .dropbutton
+{
+	border : 0px none;
+	cursor : pointer;
+}
+.Combo.cmb_basic01 .dropbutton .nexacontentsbox
+{
+	text-align : center;
+	vertical-align : middle;
+}
+.ListBoxControl.popupCombocmb_basic01combolist.dummy.dummy
+{
+	border : 1px solid #9c9c9c;
+	border-radius : 0px;
+	color : #222222;
+}
+.ListBoxControl.popupCombocmb_basic01combolist.dummy.dummy .listboxitem
+{
+	background : #ffffff;
+	border : 0px none;
+}
+.Calendar.cal_basic01
+{
+	background : #ffffff;
+	border : 1px solid #9c9c9c;
+	border-radius : 2px;
+	color : #222222;
+}
+.Calendar.cal_basic01 .datepicker .body .dayitem
+{
+	border : 0px none;
+	border-radius : 0px;
+	color : #222222;
+}
+.DatePickerControl.popupCalendarcal_basic01datepicker .body .dayitem
+{
+	border : 0px none;
+	border-radius : 0px;
+	color : #222222;
+}
+.Calendar.cal_basic01 .calendaredit
+{
+	background : #ffffff;
+	border : 0px none;
+	font : 9pt Malgun Gothic,Arial,Gulim;
+	padding : 0px 7px 0px 7px;
+}
+.Calendar.cal_basic01 .dropbutton
+{
+	background : transparent;
+	border : 0px none;
+	cursor : pointer;
+}
+.Calendar.cal_basic01 .dropbutton .nexacontentsbox
+{
+	text-align : center;
+	vertical-align : middle;
+}
+.Calendar.cal_basic01 .calendarspinupbutton
+{
+	border : 0px none;
+}
+.Calendar.cal_basic01 .calendarspinupbutton .nexacontentsbox
+{
+	text-align : center;
+	vertical-align : middle;
+}
+.Calendar.cal_basic01 .calendarspindownbutton
+{
+	border : 0px none;
+}
+.Calendar.cal_basic01 .calendarspindownbutton .nexacontentsbox
+{
+	text-align : center;
+	vertical-align : middle;
+}
+.Calendar.cal_basic01 .datepicker
+{
+	border : 1px solid #9c9c9c;
+	border-radius : 0px;
+	font : 9pt Malgun Gothic,Arial,Gulim;
+	color : #222222;
+	color : #222222;
+	border : 0px none;
+	font : 9pt Malgun Gothic,Arial,Gulim;
+	color : #222222;
+	font : 11pt Arial,Gulim;
+	border : 0px none;
+	border-radius : 0px;
+	border : 0px none;
+	border-radius : 0px;
+	color : #222222;
+	font : 9pt Arial,Gulim;
+	color : #222222;
+	border : 1px solid #9a88a7;
+	border-radius : 0px;
+	font : 9pt Arial,Gulim;
+	color : #c1c1c1;
+	border : 0px none;
+	font : 9pt Arial,Gulim;
+	color : #222222;
+	border : 0px none;
+	color : #ff6c54;
+	font : 9pt Arial,Gulim;
+}
+.DatePickerControl.popupCalendarcal_basic01datepicker
+{
+	border : 1px solid #9c9c9c;
+	border-radius : 0px;
+	font : 9pt Malgun Gothic,Arial,Gulim;
+	color : #222222;
+	color : #222222;
+	border : 0px none;
+	font : 9pt Malgun Gothic,Arial,Gulim;
+	color : #222222;
+	font : 11pt Arial,Gulim;
+	border : 0px none;
+	border-radius : 0px;
+	border : 0px none;
+	border-radius : 0px;
+	color : #222222;
+	font : 9pt Arial,Gulim;
+	color : #222222;
+	border : 1px solid #9a88a7;
+	border-radius : 0px;
+	font : 9pt Arial,Gulim;
+	color : #c1c1c1;
+	border : 0px none;
+	font : 9pt Arial,Gulim;
+	color : #222222;
+	border : 0px none;
+	color : #ff6c54;
+	font : 9pt Arial,Gulim;
+}
+.Button.CalendarWeekDropButton
+{
+	background : url('./../../../_resource_/_images_/btn_WF_Calendar.png') no-repeat center center transparent;
+	border : 0px none;
+}
+.PopupDiv.CalendarWeekDatePicker
+{
+	background : #124286;
+	border : 1px solid #c7c7c7;
+}
+.Button.CalendarWeekPrevButton
+{
+	background : url('./images/btn_WF_Calprev.png') no-repeat center center transparent;
+	border : 0px none;
+}
+.Button.CalendarWeekNextButton
+{
+	background : url('./images/btn_WF_Calnext.png') no-repeat center center transparent;
+	border : 0px none;
+}
+.Edit.CalendarWeekEdit
+{
+	background : #124286;
+	color : #ffffff;
+	font : bold 12px "Gulim";
+	border : 0px none;
+}
+.Grid .body .row .cell.CalendarWeekWeekColor
+{
+	background : #f3f3f3;
+	color : #115fac;
+}
+.Grid .body .row .cell.CalendarWeekGrayColor
+{
+	color : #cccccc;
+}
+.Grid .body .row .cell.CalendarWeekDayColor
+{
+	color : #333333;
+}
+.Grid .body .row .cell.CalendarWeekSunColor
+{
+	color : #d40009;
+}
+.Grid .body .row .cell.CalendarWeekSatColor
+{
+	color : #d40009;
+}
+.Grid .body .row .cell.CalendarWeekTodayColor
+{
+	color : red;
+}
+.Grid .body .row .cell.CalendarWeekSelectColor
+{
+	background : #f9eb78;
+}
+.Edit.MultiComboEdit
+{
+	background : #ffffff;
+	border : 0px none;
+	padding : 1px 9px 0px 9px;
+}
+.Button.MultiComboButton
+{
+	background : url('./images/cmb_WF_Drop.png') no-repeat center center transparent;
+	border : 0px none;
+}
+.PopupDiv.MultiComboPopupDiv
+{
+	background : #dfdfdf;
+	border : 1px solid #c7c7c7;
+}
+.Div.div_WF_splitter
+{
+	background : url('./../../../_resource_/_images_/img_WF_splitter.png') no-repeat left center #ffffff;
+}
+.StandardGrid .head .row .cell.HeadStatus
+{
+	font : bold 12px "Gulim";
+	color : #ffffff;
+	background : #6d6e72;
+	border : 0px none, 1px solid #c7c7c7, 1px solid #c7c7c7, 1px solid #c7c7c7;
+}
+.StandardGrid .head .row .cell.HeadStatus .nexacontentsbox
+{
+	text-align : center;
+}
+.StandardGrid .body .row .cell.RowStatus
+{
+	background : #e6f3ff;
+	border : 0px none, 1px solid #c7c7c7, 1px solid #c7c7c7, 1px solid #c7c7c7;
+}
+.StandardGrid .body .row .cell.Dimension
+{
+	background : #e6f3ff;
+	border : 0px none, 1px solid #c7c7c7, 1px solid #c7c7c7, 1px solid #c7c7c7;
+}
+.StandardGrid .body .row .cell.Dimension .nexacontentsbox
+{
+	text-align : left;
+}
+.StandardGrid .body .row .cell.MonthColor
+{
+	background : #fff6cf;
+	color : #222222;
+	border : 0px none, 1px solid #c7c7c7, 1px solid #c7c7c7, 1px solid #c7c7c7;
+}
+.StandardGrid .body .row .cell.MonthColor .nexacontentsbox
+{
+	text-align : right;
+}
+.StandardGrid .body .row .cell.PrevWeekColor
+{
+	background : #d9d9d9;
+	color : #222222;
+	border : 0px none, 1px solid #c7c7c7, 1px solid #c7c7c7, 1px solid #c7c7c7;
+}
+.StandardGrid .body .row .cell.PrevWeekColor .nexacontentsbox
+{
+	text-align : right;
+}
+.StandardGrid .body .row .cell.NextWeekColor
+{
+	background : #eff8ff;
+	color : #222222;
+	border : 0px none, 1px solid #c7c7c7, 1px solid #c7c7c7, 1px solid #c7c7c7;
+}
+.StandardGrid .body .row .cell.NextWeekColor .nexacontentsbox
+{
+	text-align : right;
+}
+.StandardGrid .body .row .cell.TotalColor
+{
+	background : #e9e1bd;
+	color : #222222;
+	border : 0px none, 1px solid #c7c7c7, 1px solid #c7c7c7, 1px solid #c7c7c7;
+}
+.StandardGrid .body .row .cell.TotalColor .nexacontentsbox
+{
+	text-align : right;
+}
+.Button.btn_WF_basic01[status=focused]
+{
+	background : #124286;
+	color : #ffffff;
+	cursor : pointer;
+	border : 0px none;
+}
+.Button.btn_WF_basic01[status=focused] .nexacontentsbox
+{
+	text-align : center;
+}
+.Button.btn_WF_basic01[status=mouseover]
+{
+	background : #2e6be5;
+	color : #ffffff;
+	border : 0px none;
+}
+.Button.btn_WF_basic01[status=mouseover] .nexacontentsbox
+{
+	text-align : center;
+}
+.Button.btn_WF_basic02[status=focused]
+{
+	background : #f3750f;
+	color : #ffffff;
+	cursor : pointer;
+	border : 0px none;
+}
+.Button.btn_WF_basic02[status=focused] .nexacontentsbox
+{
+	text-align : center;
+}
+.Button.btn_WF_basic02[status=mouseover]
+{
+	background : #f98b32;
+	color : #ffffff;
+	border : 0px none;
+}
+.Button.btn_WF_basic02[status=mouseover] .nexacontentsbox
+{
+	text-align : center;
+}
+.Button.btn_WF_basic03[status=focused]
+{
+	background : #555555;
+	color : #ffffff;
+	cursor : pointer;
+	border : 0px none;
+}
+.Button.btn_WF_basic03[status=focused] .nexacontentsbox
+{
+	text-align : center;
+}
+.Button.btn_WF_basic03[status=mouseover]
+{
+	background : #666666;
+	color : #ffffff;
+	border : 0px none;
+}
+.Button.btn_WF_basic03[status=mouseover] .nexacontentsbox
+{
+	text-align : center;
+}
+.Button.btn_WF_basic04[status=focused]
+{
+	background : #e3eeff;
+	color : #222222;
+	cursor : pointer;
+	border : 1px solid #6092e7;
+}
+.Button.btn_WF_basic04[status=focused] .nexacontentsbox
+{
+	text-align : center;
+}
+.Button.btn_WF_basic04[status=mouseover]
+{
+	background : #d4e3f9;
+	color : #222222;
+	border : 1px solid #6092e7;
+}
+.Button.btn_WF_basic04[status=mouseover] .nexacontentsbox
+{
+	text-align : center;
+}
+.Grid.grd_WF_basic01 .body .row .cell[status=mouseover]
+{
+	background : #efefef;
+}
+.Button.btn_WF_pagingFirst[status=focused]
+{
+	background : url('./../../../_resource_/_images_/btn_WF_first.png') no-repeat center center #ffffff;
+	cursor : pointer;
+	border : 1px solid #c7c7c7;
+}
+.Button.btn_WF_pagingFirst[status=mouseover]
+{
+	background : url('./../../../_resource_/_images_/btn_WF_first.png') no-repeat center center #f6f6f6;
+	cursor : pointer;
+	border : 1px solid #c7c7c7;
+}
+.Button.btn_WF_pagingLast[status=focused]
+{
+	background : url('./../../../_resource_/_images_/btn_WF_last.png') no-repeat center center #ffffff;
+	cursor : pointer;
+	border : 1px solid #c7c7c7;
+}
+.Button.btn_WF_pagingLast[status=mouseover]
+{
+	background : url('./../../../_resource_/_images_/btn_WF_last.png') no-repeat center center #f6f6f6;
+	cursor : pointer;
+	border : 1px solid #c7c7c7;
+}
+.Button.btn_WF_pagingPrev[status=focused]
+{
+	background : url('./../../../_resource_/_images_/btn_WF_prev.png') no-repeat center center #ffffff;
+	cursor : pointer;
+	border : 1px solid #c7c7c7;
+}
+.Button.btn_WF_pagingPrev[status=mouseover]
+{
+	background : url('./../../../_resource_/_images_/btn_WF_prev.png') no-repeat center center #f6f6f6;
+	cursor : pointer;
+	border : 1px solid #c7c7c7;
+}
+.Button.btn_WF_pagingNext[status=focused]
+{
+	background : url('./../../../_resource_/_images_/btn_WF_next.png') no-repeat center center #ffffff;
+	cursor : pointer;
+	border : 1px solid #c7c7c7;
+}
+.Button.btn_WF_pagingNext[status=mouseover]
+{
+	background : url('./../../../_resource_/_images_/btn_WF_next.png') no-repeat center center #f6f6f6;
+	cursor : pointer;
+	border : 1px solid #c7c7c7;
+}
+.Button.btn_WF_pagingNum[status=focused]
+{
+	background : transparent;
+	color : #222222;
+	cursor : pointer;
+	font : bold 12px "Arial","Gulim";
+	border : 0px none;
+}
+.Button.btn_WF_pagingNum[status=focused] .nexacontentsbox
+{
+	text-align : center;
+}
+.Button.btn_WF_pagingNum[status=mouseover]
+{
+	background : transparent;
+	color : #124286;
+	cursor : pointer;
+	font : bold 12px "Arial","Gulim";
+	border : 0px none;
+}
+.Button.btn_WF_pagingNum[status=mouseover] .nexacontentsbox
+{
+	text-align : center;
+	text-decoration : underline;
+}
+.Button.btn_WF_gridUp[status=focused]
+{
+	background : url('./../../../_resource_/_images_/img_WF_gridUp.png') no-repeat center center #f1f1f1;
+	cursor : pointer;
+	border : 1px solid #c7c7c7;
+}
+.Button.btn_WF_gridUp[status=mouseover]
+{
+	background : url('./../../../_resource_/_images_/img_WF_gridUp.png') no-repeat center center #e5e5e5;
+	cursor : pointer;
+	border : 1px solid #c7c7c7;
+}
+.Button.btn_WF_gridDown[status=focused]
+{
+	background : url('./../../../_resource_/_images_/img_WF_gridDown.png') no-repeat center center #f1f1f1;
+	cursor : pointer;
+	border : 1px solid #c7c7c7;
+}
+.Button.btn_WF_gridDown[status=mouseover]
+{
+	background : url('./../../../_resource_/_images_/img_WF_gridDown.png') no-repeat center center #e5e5e5;
+	cursor : pointer;
+	border : 1px solid #c7c7c7;
+}
+.Button.btn_WF_tabMenu01[status=focused]
+{
+	background : #f8f8f8;
+	color : #222222;
+	cursor : pointer;
+	border : 1px solid #c7c7c7;
+}
+.Button.btn_WF_tabMenu01[status=focused] .nexacontentsbox
+{
+	text-align : left;
+}
+.Button.btn_WF_tabMenu01[status=mouseover]
+{
+	background : #efefef;
+	cursor : pointer;
+	border : 1px solid #c7c7c7;
+}
+.Button.btn_WF_tabMenu01[status=mouseover] .nexacontentsbox
+{
+	text-align : left;
+}
+.Button.btn_WF_tabClose[status=mouseover]
+{
+	background : url('./../../../_resource_/_images_/btn_close_N.png') no-repeat center center;
+	cursor : pointer;
+	border : 0px none;
+}
+.Button.btn_WF_tabClose[status=focused]
+{
+	background : url('./../../../_resource_/_images_/btn_close_N.png') no-repeat center center;
+	cursor : pointer;
+	border : 0px none;
+}
+.Button.btn_TP_menu[status=focused]
+{
+	background : url('./../../../_resource_/_images_/img_TP_menuLine.png') no-repeat center right #124286;
+	color : #ffffff;
+	cursor : pointer;
+	font : 14px "Arial","Nanum Gothic";
+	border : 0px none;
+}
+.Button.btn_TP_menu[status=focused] .nexacontentsbox
+{
+	text-align : center;
+}
+.Button.btn_TP_menu[status=mouseover]
+{
+	background : url('./../../../_resource_/_images_/img_TP_menuLine.png') no-repeat center right #0d3a7b;
+	color : #ffffff;
+	border : 0px none;
+}
+.Button.btn_TP_menu[status=mouseover] .nexacontentsbox
+{
+	text-align : center;
+}
+.Button.btn_TP_menuIcon[status=focused]
+{
+	background : url('./../../../_resource_/_images_/img_TP_menuIcon.png') no-repeat center center #124286;
+	cursor : pointer;
+	border : 1px solid #234c9a;
+}
+.Button.btn_TP_menuIcon[status=mouseover]
+{
+	background : url('./../../../_resource_/_images_/img_TP_menuIcon.png') no-repeat center center #2b57ae;
+	cursor : pointer;
+	border : 1px solid #234c9a;
+}
+.Button.btn_LF_menu[status=focused]
+{
+	background : url('./../../../_resource_/_images_/img_LF_icon_N.png') no-repeat right center #f6f6f6;
+	color : #222222;
+	cursor : pointer;
+	border : 0px none, 0px none,1px solid #c7c7c7, 0px none;
+}
+.Button.btn_LF_menu[status=focused] .nexacontentsbox
+{
+	text-align : left;
+}
+.Button.btn_LF_menu[status=mouseover]
+{
+	background : url('./../../../_resource_/_images_/img_LF_icon_S.png') no-repeat right center #124286;
+	color : #ffffff;
+	border : 0px none, 0px none,1px solid #c7c7c7, 0px none;
+}
+.Button.btn_mdi_mdiBtn[status=focused]
+{
+	background : #efefef;
+	color : #222222;
+	cursor : pointer;
+	font : 12px "Arial","Malgun Gothic";
+	border : 1px solid #c7c7c7;
+}
+.Button.btn_mdi_mdiBtn[status=focused] .nexacontentsbox
+{
+	text-align : left;
+}
+.Button.btn_mdi_mdiBtn[status=mouseover]
+{
+	background : #f1f6ff;
+	color : #222222;
+	cursor : pointer;
+	font : 12px "Arial","Malgun Gothic";
+	border : 1px solid #c7c7c7;
+}
+.Button.btn_mdi_mdiBtn[status=mouseover] .nexacontentsbox
+{
+	text-align : left;
+}
+.Button.btn_mdi_close[status=focused]
+{
+	background : url('./../../../_resource_/_images_/btn_close_N.png') no-repeat center center;
+	cursor : pointer;
+	border : 0px none;
+}
+.Button.btn_mdi_close[status=mouseover]
+{
+	background : url('./../../../_resource_/_images_/btn_close_N.png') no-repeat center center #e4e4e4;
+	cursor : pointer;
+	border : 0px none;
+}
+.Button.btn_mdi_tabClose[status=focused]
+{
+	background : url('./../../../_resource_/_images_/btn_mdi_tabClose.png') no-repeat center center;
+	cursor : pointer;
+	border : 0px none;
+}
+.Button.btn_mdi_tabClose[status=mouseover]
+{
+	background : url('./../../../_resource_/_images_/btn_mdi_tabClose.png') no-repeat center center #e4e4e4;
+	cursor : pointer;
+	border : 0px none;
+}
+.Button.btn_mdi_tabNext[status=focused]
+{
+	background : url('./../../../_resource_/_images_/btn_WF_next.png') no-repeat center center;
+	cursor : pointer;
+	border : 0px none,1px solid #d1d1d1;
+}
+.Button.btn_mdi_tabNext[status=mouseover]
+{
+	background : url('./../../../_resource_/_images_/btn_WF_next.png') no-repeat center center #e4e4e4;
+	cursor : pointer;
+	border : 0px none,1px solid #d1d1d1;
+}
+.Button.btn_mdi_tabPrev[status=focused]
+{
+	background : url('./../../../_resource_/_images_/btn_WF_prev.png') no-repeat center center;
+	cursor : pointer;
+	border : 0px none,1px solid #d1d1d1;
+}
+.Button.btn_mdi_tabPrev[status=mouseover]
+{
+	background : url('./../../../_resource_/_images_/btn_WF_prev.png') no-repeat center center #e4e4e4;
+	cursor : pointer;
+	border : 0px none,1px solid #d1d1d1;
+}
+.Button.btn_WF_search01[status=focused]
+{
+	background : transparent;
+	cursor : pointer;
+	border : 0px none;
+	-nexa-edge : url('./../../../_resource_/_images_/btn_WF_search01.png') 0px 0px;
+}
+.Button.btn_WF_search01[status=mouseover]
+{
+	background : transparent;
+	cursor : pointer;
+	border : 0px none;
+	-nexa-edge : url('./../../../_resource_/_images_/btn_WF_search01_O.png') 0px 0px;
+}
+.Button.btn_WF_apply01[status=focused]
+{
+	background : url('./../../../_resource_/_images_/img_WF_apply01.png') no-repeat left center #124286;
+	color : #ffffff;
+	cursor : pointer;
+	border : 0px none;
+}
+.Button.btn_WF_apply01[status=focused] .nexacontentsbox
+{
+	text-align : center;
+}
+.Button.btn_WF_apply01[status=mouseover]
+{
+	background : url('./../../../_resource_/_images_/img_WF_apply01.png') no-repeat left center #0e3770;
+	color : #ffffff;
+	border : 0px none;
+}
+.Button.btn_WF_apply01[status=mouseover] .nexacontentsbox
+{
+	text-align : center;
+}
+.Button.btn_WF_reset01[status=focused]
+{
+	background : url('./../../../_resource_/_images_/img_WF_reset01.png') no-repeat left center #555555;
+	color : #ffffff;
+	cursor : pointer;
+	border : 0px none;
+}
+.Button.btn_WF_reset01[status=focused] .nexacontentsbox
+{
+	text-align : center;
+}
+.Button.btn_WF_reset01[status=mouseover]
+{
+	background : url('./../../../_resource_/_images_/img_WF_reset01.png') no-repeat left center #666666;
+	color : #ffffff;
+	border : 0px none;
+}
+.Button.btn_WF_reset01[status=mouseover] .nexacontentsbox
+{
+	text-align : center;
+}
+.Button.btn_WF_search02[status=focused]
+{
+	background : url('./../../../_resource_/_images_/btn_WF_search02.png') no-repeat center center;
+	cursor : pointer;
+	border : 0px none;
+}
+.Button.btn_WF_search02[status=mouseover]
+{
+	background : url('./../../../_resource_/_images_/btn_WF_search02.png') no-repeat center center #f6f6f6;
+	cursor : pointer;
+	border : 0px none;
+}
+.Button.btn_WF_up[status=focused]
+{
+	background : url('./../../../_resource_/_images_/btn_WF_up.png') no-repeat center center #6598ff;
+	cursor : pointer;
+	border : 0px none;
+}
+.Button.btn_WF_up[status=mouseover]
+{
+	background : url('./../../../_resource_/_images_/btn_WF_up.png') no-repeat center center #528bff;
+	cursor : pointer;
+	border : 0px none;
+}
+.Button.btn_WF_down[status=focused]
+{
+	background : url('./../../../_resource_/_images_/btn_WF_down.png') no-repeat center center #6598ff;
+	cursor : pointer;
+	border : 0px none;
+}
+.Button.btn_WF_down[status=mouseover]
+{
+	background : url('./../../../_resource_/_images_/btn_WF_down.png') no-repeat center center #528bff;
+	cursor : pointer;
+	border : 0px none;
+}
+.Button.btn_WF_expand[status=focused]
+{
+	background : url('./../../../_resource_/_images_/btn_WF_expand.png') no-repeat center center transparent;
+	cursor : pointer;
+	border : 0px none;
+}
+.Button.btn_WF_expand[status=mouseover]
+{
+	background : url('./../../../_resource_/_images_/btn_WF_expand_O.png') no-repeat center center #e9f0ff;
+	cursor : pointer;
+	border : 0px none;
+}
+.Button.btn_WF_fold[status=focused]
+{
+	background : url('./../../../_resource_/_images_/btn_WF_fold.png') no-repeat center center transparent;
+	cursor : pointer;
+	border : 0px none;
+}
+.Button.btn_WF_fold[status=mouseover]
+{
+	background : url('./../../../_resource_/_images_/btn_WF_fold_O.png') no-repeat center center #e9f0ff;
+	cursor : pointer;
+	border : 0px none;
+}
+.Button.btn_WF_excel[status=focused]
+{
+	background : url('./../../../_resource_/_images_/btn_WF_excel.png') no-repeat left center #f6f6f6;
+	cursor : pointer;
+	border : 1px solid #c7c7c7;
+	color : #333333;
+}
+.Button.btn_WF_excel[status=focused] .nexacontentsbox
+{
+	text-align : left;
+}
+.Button.btn_WF_excel[status=mouseover]
+{
+	background : url('./../../../_resource_/_images_/btn_WF_excel.png') no-repeat left center #ececec;
+	cursor : pointer;
+	border : 1px solid #c7c7c7;
+}
+.Button.btn_WF_excel[status=mouseover] .nexacontentsbox
+{
+	text-align : left;
+}
+.Button.btn_WF_hancel[status=focused]
+{
+	background : url('./../../../_resource_/_images_/btn_WF_hancel.png') no-repeat left center #f6f6f6;
+	cursor : pointer;
+	border : 1px solid #c7c7c7;
+}
+.Button.btn_WF_hancel[status=focused] .nexacontentsbox
+{
+	text-align : left;
+}
+.Button.btn_WF_hancel[status=mouseover]
+{
+	background : url('./../../../_resource_/_images_/btn_WF_hancel.png') no-repeat left center #ececec;
+	cursor : pointer;
+	border : 1px solid #c7c7c7;
+}
+.Button.btn_WF_hancel[status=mouseover] .nexacontentsbox
+{
+	text-align : left;
+}
+.Button.btn_WF_iconPort01[status=focused]
+{
+	background : url('./../../../_resource_/_images_/img_WF_iconPort01.png') no-repeat right top #5182e5;
+	cursor : pointer;
+	border : 0px none;
+	color : #ffffff;
+	font : bold 16pt Malgun Gothic;
+}
+.Button.btn_WF_iconPort01[status=focused] .nexacontentsbox
+{
+	text-align : center;
+	vertical-align : bottom;
+}
+.Button.btn_WF_iconPort01[status=mouseover]
+{
+	background : url('./../../../_resource_/_images_/img_WF_iconPort01.png') no-repeat right top #3f72d9;
+	cursor : pointer;
+	border : 0px none;
+	color : #ffffff;
+	font : bold 16pt Malgun Gothic;
+}
+.Button.btn_WF_iconPort01[status=mouseover] .nexacontentsbox
+{
+	text-align : center;
+	vertical-align : bottom;
+}
+.Button.btn_WF_iconPort02[status=focused]
+{
+	background : url('./../../../_resource_/_images_/img_WF_iconPort02.png') no-repeat right bottom #819cf2;
+	cursor : pointer;
+	border : 0px none;
+	color : #ffffff;
+	font : bold 16pt Malgun Gothic;
+}
+.Button.btn_WF_iconPort02[status=focused] .nexacontentsbox
+{
+	text-align : left;
+	vertical-align : top;
+}
+.Button.btn_WF_iconPort02[status=mouseover]
+{
+	background : url('./../../../_resource_/_images_/img_WF_iconPort02.png') no-repeat right bottom #6887eb;
+	cursor : pointer;
+	border : 0px none;
+	color : #ffffff;
+	font : bold 16pt Malgun Gothic;
+}
+.Button.btn_WF_iconPort02[status=mouseover] .nexacontentsbox
+{
+	text-align : left;
+	vertical-align : top;
+}
+.Button.btn_WF_iconPort03[status=focused]
+{
+	background : url('./../../../_resource_/_images_/img_WF_iconPort03.png') no-repeat right bottom #818cf2;
+	cursor : pointer;
+	border : 0px none;
+	color : #ffffff;
+	font : bold 16pt Malgun Gothic;
+}
+.Button.btn_WF_iconPort03[status=focused] .nexacontentsbox
+{
+	text-align : left;
+	vertical-align : top;
+}
+.Button.btn_WF_iconPort03[status=mouseover]
+{
+	background : url('./../../../_resource_/_images_/img_WF_iconPort03.png') no-repeat right bottom #6c78e6;
+	cursor : pointer;
+	border : 0px none;
+	color : #ffffff;
+	font : bold 16pt Malgun Gothic;
+}
+.Button.btn_WF_iconPort03[status=mouseover] .nexacontentsbox
+{
+	text-align : left;
+	vertical-align : top;
+}
+.Button.btn_WF_iconPort04[status=focused]
+{
+	background : url('./../../../_resource_/_images_/img_WF_iconPort04.png') no-repeat right bottom #8981f2;
+	cursor : pointer;
+	border : 0px none;
+	color : #ffffff;
+	font : bold 16pt Malgun Gothic;
+}
+.Button.btn_WF_iconPort04[status=focused] .nexacontentsbox
+{
+	text-align : left;
+	vertical-align : top;
+}
+.Button.btn_WF_iconPort04[status=mouseover]
+{
+	background : url('./../../../_resource_/_images_/img_WF_iconPort04.png') no-repeat right bottom #716ad9;
+	cursor : pointer;
+	border : 0px none;
+	color : #ffffff;
+	font : bold 16pt Malgun Gothic;
+}
+.Button.btn_WF_iconPort04[status=mouseover] .nexacontentsbox
+{
+	text-align : left;
+	vertical-align : top;
+}
+.Button.btn_WF_iconPort05[status=focused]
+{
+	background : url('./../../../_resource_/_images_/img_WF_iconPort05.png') no-repeat left bottom #519ae5;
+	cursor : pointer;
+	border : 0px none;
+	color : #ffffff;
+	font : bold 16pt Malgun Gothic;
+}
+.Button.btn_WF_iconPort05[status=focused] .nexacontentsbox
+{
+	text-align : right;
+	vertical-align : top;
+}
+.Button.btn_WF_iconPort05[status=mouseover]
+{
+	background : url('./../../../_resource_/_images_/img_WF_iconPort05.png') no-repeat left bottom #408ad6;
+	cursor : pointer;
+	border : 0px none;
+	color : #ffffff;
+	font : bold 16pt Malgun Gothic;
+}
+.Button.btn_WF_iconPort05[status=mouseover] .nexacontentsbox
+{
+	text-align : right;
+	vertical-align : top;
+}
+.Button.btn_WF_iconPort06[status=focused]
+{
+	background : url('./../../../_resource_/_images_/img_WF_iconPort06.png') no-repeat left bottom #57b2dd;
+	cursor : pointer;
+	border : 0px none;
+	color : #ffffff;
+	font : bold 16pt Malgun Gothic;
+}
+.Button.btn_WF_iconPort06[status=focused] .nexacontentsbox
+{
+	text-align : right;
+	vertical-align : top;
+}
+.Button.btn_WF_iconPort06[status=mouseover]
+{
+	background : url('./../../../_resource_/_images_/img_WF_iconPort06.png') no-repeat left bottom #449bc4;
+	cursor : pointer;
+	border : 0px none;
+	color : #ffffff;
+	font : bold 16pt Malgun Gothic;
+}
+.Button.btn_WF_iconPort06[status=mouseover] .nexacontentsbox
+{
+	text-align : right;
+	vertical-align : top;
+}
+.Button.btn_WF_iconPort07[status=focused]
+{
+	background : url('./../../../_resource_/_images_/img_WF_iconPort07.png') no-repeat left top #759ceb;
+	cursor : pointer;
+	border : 0px none;
+	color : #ffffff;
+	font : bold 16pt Malgun Gothic;
+}
+.Button.btn_WF_iconPort07[status=focused] .nexacontentsbox
+{
+	text-align : right;
+	vertical-align : bottom;
+}
+.Button.btn_WF_iconPort07[status=mouseover]
+{
+	background : url('./../../../_resource_/_images_/img_WF_iconPort07.png') no-repeat left top #5f88da;
+	cursor : pointer;
+	border : 0px none;
+	color : #ffffff;
+	font : bold 16pt Malgun Gothic;
+}
+.Button.btn_WF_iconPort07[status=mouseover] .nexacontentsbox
+{
+	text-align : right;
+	vertical-align : bottom;
+}
+.Button.btn_WF_iconPort08[status=focused]
+{
+	background : url('./../../../_resource_/_images_/img_WF_iconPort08.png') no-repeat left top #75a7eb;
+	cursor : pointer;
+	border : 0px none;
+	color : #ffffff;
+	font : bold 16pt Malgun Gothic;
+}
+.Button.btn_WF_iconPort08[status=focused] .nexacontentsbox
+{
+	text-align : right;
+	vertical-align : bottom;
+}
+.Button.btn_WF_iconPort08[status=mouseover]
+{
+	background : url('./../../../_resource_/_images_/img_WF_iconPort08.png') no-repeat left top #6496d9;
+	cursor : pointer;
+	border : 0px none;
+	color : #ffffff;
+	font : bold 16pt Malgun Gothic;
+}
+.Button.btn_WF_iconPort08[status=mouseover] .nexacontentsbox
+{
+	text-align : right;
+	vertical-align : bottom;
+}
+.Button.btn_WF_iconPort09[status=focused]
+{
+	background : url('./../../../_resource_/_images_/img_WF_iconPort09.png') no-repeat right top #9480dd;
+	cursor : pointer;
+	border : 0px none;
+	color : #ffffff;
+	font : bold 16pt Malgun Gothic;
+}
+.Button.btn_WF_iconPort09[status=focused] .nexacontentsbox
+{
+	text-align : left;
+	vertical-align : bottom;
+}
+.Button.btn_WF_iconPort09[status=mouseover]
+{
+	background : url('./../../../_resource_/_images_/img_WF_iconPort09.png') no-repeat right top #8570d3;
+	cursor : pointer;
+	border : 0px none;
+	color : #ffffff;
+	font : bold 16pt Malgun Gothic;
+}
+.Button.btn_WF_iconPort09[status=mouseover] .nexacontentsbox
+{
+	text-align : left;
+	vertical-align : bottom;
+}
+.Button.btn_pop_close[status=mouseover]
+{
+	background : url('./../../../_resource_/_images_/btn_pop_close.png') no-repeat center center transparent;
+	cursor : pointer;
+	border : 0px none;
+}
+.Button.btn_pop_close[status=focused]
+{
+	background : url('./../../../_resource_/_images_/btn_pop_close.png') no-repeat center center transparent;
+	cursor : pointer;
+	border : 0px none;
+}
+.Edit.ed_basic01[status=mouseover]
+{
+	background : #fef5f3;
+	border : 1px solid #ff6c54;
+	color : #d8351a;
+}
+.Edit.ed_basic01[status=focused]
+{
+	background : #fef5f3;
+	border : 1px solid #ff6c54;
+	color : #d8351a;
+}
+.Edit.ed_basic02[status=mouseover]
+{
+	background : #fef5f3;
+	border : 1px solid #ff6c54;
+	border-radius : 2px;
+	color : #d8351a;
+	font : 10pt Malgun Gothic;
+	padding : 0px 7px 0px 7px;
+}
+.Edit.ed_basic02[status=mouseover] .nexainput
+{
+	text-align : left;
+}
+.Edit.ed_basic02[status=mouseover] .nexacontentsbox
+{
+	text-align : left;
+}
+.Edit.ed_basic02[status=focused]
+{
+	background : #fef5f3;
+	border : 1px solid #ff6c54;
+	border-radius : 2px;
+	color : #d8351a;
+	font : 10pt Malgun Gothic;
+	padding : 0px 7px 0px 7px;
+}
+.Edit.ed_basic02[status=focused] .nexainput
+{
+	text-align : left;
+}
+.Edit.ed_basic02[status=focused] .nexacontentsbox
+{
+	text-align : left;
+}
+.MaskEdit.msk_basic01[status=mouseover]
+{
+	background : #fef5f3;
+	border : 1px solid #ff6c54;
+	color : #d8351a;
+}
+.MaskEdit.msk_basic01[status=focused]
+{
+	background : #fef5f3;
+	border : 1px solid #ff6c54;
+	color : #d8351a;
+}
+.MaskEdit.msk_basic02[status=mouseover]
+{
+	background : #fef5f3;
+	border : 1px solid #ff6c54;
+	color : #d8351a;
+	font : 10pt Malgun Gothic;
+	padding : 0px 7px 0px 7px;
+}
+.MaskEdit.msk_basic02[status=mouseover] .nexainput
+{
+	text-align : right;
+}
+.MaskEdit.msk_basic02[status=mouseover] .nexacontentsbox
+{
+	text-align : right;
+}
+.MaskEdit.msk_basic02[status=focused]
+{
+	background : #fef5f3;
+	border : 1px solid #ff6c54;
+	color : #d8351a;
+	font : 10pt Malgun Gothic;
+	padding : 0px 7px 0px 7px;
+}
+.MaskEdit.msk_basic02[status=focused] .nexainput
+{
+	text-align : right;
+}
+.MaskEdit.msk_basic02[status=focused] .nexacontentsbox
+{
+	text-align : right;
+}
+.Grid.grd_basic01 .head[status=mouseover]
+{
+	background : #efefef;
+	border : 0px none;
+}
+.Grid.grd_basic01 .head[status=focused]
+{
+	background : #efefef;
+	border : 0px none;
+}
+.Grid.grd_basic01 .head .row .cell[status=mouseover]
+{
+	background : transparent;
+	color : #222222;
+	font : bold 10pt Malgun Gothic,Arial,Gulim;
+	border : 1px solid #9c9c9c;
+}
+.Grid.grd_basic01 .head .row .cell.oddcell[status=mouseover]
+{
+	color : #222222;
+}
+.Grid.grd_basic01 .head .row .cell[status=mouseover] .nexacontentsbox
+{
+	vertical-align : middle;
+	text-align : center;
+}
+.Grid.grd_basic01 .head .row .cell[status=focused]
+{
+	background : transparent;
+	color : #222222;
+	font : bold 10pt Malgun Gothic,Arial,Gulim;
+	border : 1px solid #9c9c9c;
+}
+.Grid.grd_basic01 .head .row .cell.oddcell[status=focused]
+{
+	color : #222222;
+}
+.Grid.grd_basic01 .head .row .cell[status=focused] .nexacontentsbox
+{
+	vertical-align : middle;
+	text-align : center;
+}
+.Grid.grd_basic01 .body[status=focused]
+{
+	background : #ffffff;
+	border : 0px none;
+}
+.Grid.grd_basic01 .body .row .cell[status=focused]
+{
+	background : #ffffff;
+	color : #222222;
+	border : 1px solid #9c9c9c;
+}
+.Grid.grd_basic01 .body .row .cell[status=focused] .nexacontentsbox
+{
+	text-align : center;
+	vertical-align : middle;
+}
+.Grid.grd_basic01 .body .row .cell.oddcell[status=focused]
+{
+	background : #f7f7f7;
+	color : #222222;
+}
+.Grid.grd_basic01 .body .row .cell[status=mouseover]
+{
+	background : #fef5f3;
+	color : #d8351a;
+}
+.Grid.grd_basic01 .body .row .cell.oddcell[status=mouseover]
+{
+	background : #fef5f3;
+	color : #d8351a;
+}
+.Grid.grd_basic01 .body .row .cell .celledit[status=mouseover]
+{
+	background : #fef5f3;
+	border : 1px solid #ff6c54;
+	color : #d8351a;
+}
+.Grid.grd_basic01 .body .row .cell .celledit[status=focused]
+{
+	background : #fef5f3;
+	border : 1px solid #ff6c54;
+	color : #d8351a;
+}
+.Grid.grd_basic01 .body .row .cell .cellmaskedit[status=mouseover]
+{
+	background : #fef5f3;
+	border : 1px solid #ff6c54;
+	color : #d8351a;
+}
+.Grid.grd_basic01 .body .row .cell .cellmaskedit[status=focused]
+{
+	background : #fef5f3;
+	border : 1px solid #ff6c54;
+	color : #d8351a;
+}
+.Grid.grd_basic01 .body .row .cell .celltextarea[status=mouseover]
+{
+	background : url('./../../../_resource_/_images_/img_cp_textarea.png') no-repeat right bottom #ffffff;
+	border : 1px solid #9c9c9c;
+	color : #222222;
+}
+.Grid.grd_basic01 .body .row .cell .celltextarea[status=focused]
+{
+	background : url('./../../../_resource_/_images_/img_cp_textarea.png') no-repeat right bottom #ffffff;
+	border : 1px solid #9c9c9c;
+	color : #222222;
+}
+.Grid.grd_basic01 .body .row .cell .cellbutton[status=mouseover]
+{
+	background : #d97a6a;
+	border : 1px solid #c66151;
+}
+.Grid.grd_basic01 .body .row .cell .cellcombo[status=mouseover]
+{
+	background : #ffffff;
+	border : 1px solid #ff6c54;
+	color : #222222;
+}
+.Grid.grd_basic01 .body .row .cell .cellcombo[status=focused]
+{
+	color : #222222;
+}
+.Grid.grd_basic01 .body .row .cell .cellcombo .comboedit[status=mouseover]
+{
+	border : 0px none;
+	color : #222222;
+}
+.Grid.grd_basic01 .body .row .cell .cellcombo .comboedit[status=focused]
+{
+	border : 0px none;
+	color : #222222;
+}
+.Grid.grd_basic01 .body .row .cell .cellcombo .dropbutton[status=mouseover] .nexacontentsbox
+{
+	text-align : center;
+	vertical-align : middle;
+}
+.ListBoxControl.popupGridgrd_basic01bodyrowcellcellcombocombolist.dummy.dummy.dummy.dummy.dummy.dummy .listboxitem[status=mouseover]
+{
+	background : #f0f0f0;
+}
+.Grid.grd_basic01 .body .row .cell .cellcalendar[status=mouseover]
+{
+	background : #ffffff;
+	border : 1px solid #9c9c9c;
+}
+.Grid.grd_basic01 .body .row .cell .cellcalendar .datepicker .body .dayitem[status=mouseover]
+{
+	background : #e8e8e8;
+	border : 0px none;
+	font : 9pt Malgun Gothic,Arial,Gulim;
+	color : #222222;
+}
+.DatePickerControl.popupGridgrd_basic01bodyrowcellcellcalendardatepicker .body .dayitem[status=mouseover]
+{
+	background : #e8e8e8;
+	border : 0px none;
+	font : 9pt Malgun Gothic,Arial,Gulim;
+	color : #222222;
+}
+.Grid.grd_basic01 .body .row .cell .cellcalendar .calendaredit[status=focused]
+{
+	background : #ff6c54;
+	color : #ffffff;
+}
+.Grid.grd_basic01 .body .row .cell .cellcalendar .dropbutton[status=mouseover] .nexacontentsbox
+{
+	text-align : center;
+	vertical-align : middle;
+}
+.Grid.grd_basic01 .body .row .cell .cellcalendar .calendarspindownbutton[status=mouseover] .nexacontentsbox
+{
+	text-align : center;
+	vertical-align : middle;
+}
+.Grid.grd_basic01 .body .row .cell .cellcalendar .datepicker[status=mouseover]
+{
+	background : #e8e8e8;
+	color : #ffffff;
+	font : 9pt Arial,Gulim;
+}
+.DatePickerControl.popupGridgrd_basic01bodyrowcellcellcalendardatepicker[status=mouseover]
+{
+	background : #e8e8e8;
+	color : #ffffff;
+	font : 9pt Arial,Gulim;
+}
+.Tab.tab_basic01[status=mouseover]
+{
+	color : #222222;
+	cursor : pointer;
+}
+.Tab.tab_basic01 .tabbuttonitemTabtab_basic01[status=mouseover]
+{
+	background : #efefef;
+	border : 1px solid #cbcbcb;
+}
+.Tab.tab_basic01[status=focused]
+{
+	color : #d8351a;
+}
+.Tab.tab_basic01 .tabbuttonitemTabtab_basic01[status=focused]
+{
+	background : #ffffff;
+	border : 1px solid #cbcbcb,1px solid #cbcbcb,0px none;
+	color : #d8351a;
+}
+.Button.btn_cp_popDiv[status=focused]
+{
+	background : #e1897b;
+	border : 1px solid #d16959;
+	border-radius : 0px;
+	color : #ffffff;
+	cursor : pointer;
+	font : 11pt Malgun Gothic,Arial,Gulim;
+	box-shadow : 0px 3px 1px rgba(207,207,207,1);
+}
+.Button.btn_cp_popDiv[status=focused] .nexacontentsbox
+{
+	text-align : center;
+	vertical-align : middle;
+}
+.Button.btn_cp_popDiv[status=mouseover]
+{
+	background : #d97a6a;
+	border : 1px solid #c66151;
+	border-radius : 0px;
+	color : #ffffff;
+	cursor : pointer;
+	font : 11pt Malgun Gothic,Arial,Gulim;
+	box-shadow : 0px 3px 1px rgba(207,207,207,1);
+}
+.Button.btn_cp_popDiv[status=mouseover] .nexacontentsbox
+{
+	text-align : center;
+	vertical-align : middle;
+}
+.Button.btn_cp_popMenu[status=focused]
+{
+	background : #b19fbd;
+	border : 1px solid #9c80ae;
+	border-radius : 0px;
+	color : #ffffff;
+	cursor : pointer;
+	font : 11pt Malgun Gothic,Arial,Gulim;
+	box-shadow : 0px 3px 1px rgba(207,207,207,1);
+}
+.Button.btn_cp_popMenu[status=focused] .nexacontentsbox
+{
+	text-align : center;
+	vertical-align : middle;
+}
+.Button.btn_cp_popMenu[status=mouseover]
+{
+	background : #9a88a7;
+	border : 1px solid #836c93;
+	border-radius : 0px;
+	color : #ffffff;
+	cursor : pointer;
+	font : 11pt Malgun Gothic,Arial,Gulim;
+	box-shadow : 0px 3px 1px rgba(207,207,207,1);
+}
+.Button.btn_cp_popMenu[status=mouseover] .nexacontentsbox
+{
+	text-align : center;
+	vertical-align : middle;
+}
+.FileDownload.filedown_basic01[status=mouseover]
+{
+	background : url('./../../../_resource_/_images_/btn_cp_fileDownload.png') no-repeat left center #e8e8e8;
+	border : 1px solid #cbcbcb;
+	border-radius : 0px;
+	color : #333333;
+	cursor : pointer;
+	font : 11pt Arial,Malgun gothic;
+}
+.FileDownload.filedown_basic01[status=mouseover] .nexacontentsbox
+{
+	text-align : left;
+	vertical-align : middle;
+}
+.FileDownload.filedown_basic01[status=focused]
+{
+	background : url('./../../../_resource_/_images_/btn_cp_fileDownload.png') no-repeat left center #e8e8e8;
+	border : 1px solid #cbcbcb;
+	border-radius : 0px;
+	color : #333333;
+	cursor : pointer;
+	font : 11pt Arial,Malgun gothic;
+}
+.FileDownload.filedown_basic01[status=focused] .nexacontentsbox
+{
+	text-align : left;
+	vertical-align : middle;
+}
+.FileUpload.fileup_basic01 .fileuploaditem .fileuploaditembutton[status=mouseover]
+{
+	background : url('./../../../_resource_/_images_/btn_cp_fileUpload.png') no-repeat right center #e8e8e8;
+	border : 1px solid #cbcbcb;
+	border-radius : 0px;
+	color : #222222;
+	font : 11pt Arial,Malgun gothic;
+}
+.FileUpload.fileup_basic01 .fileuploaditem .fileuploaditembutton[status=focused]
+{
+	background : url('./../../../_resource_/_images_/btn_cp_fileUpload.png') no-repeat right center #e8e8e8;
+	border : 1px solid #cbcbcb;
+	border-radius : 0px;
+	color : #222222;
+	font : 11pt Arial,Malgun gothic;
+}
+.Button.btn_cp_basic01[status=mouseover]
+{
+	background : #d97a6a;
+	border : 1px solid #c66151;
+	border-radius : 0px;
+	color : #ffffff;
+	cursor : pointer;
+	font : 10pt Malgun Gothic,Arial,Gulim;
+}
+.Button.btn_cp_basic01[status=mouseover] .nexacontentsbox
+{
+	text-align : center;
+	vertical-align : middle;
+}
+.Button.btn_cp_basic01[status=focused]
+{
+	background : #d97a6a;
+	border : 1px solid #c66151;
+	border-radius : 0px;
+	color : #ffffff;
+	cursor : pointer;
+	font : 10pt Malgun Gothic,Arial,Gulim;
+}
+.Button.btn_cp_basic01[status=focused] .nexacontentsbox
+{
+	text-align : center;
+	vertical-align : middle;
+}
+.Button.btn_cp_basic03[status=mouseover]
+{
+	background : #d8d8d8;
+	border : 1px solid #b9b9b9;
+	border-radius : 0px;
+	color : #222222;
+	cursor : pointer;
+	font : 10pt Malgun Gothic,Arial,Gulim;
+}
+.Button.btn_cp_basic03[status=mouseover] .nexacontentsbox
+{
+	text-align : center;
+	vertical-align : middle;
+}
+.Button.btn_cp_basic03[status=focused]
+{
+	background : #d8d8d8;
+	border : 1px solid #b9b9b9;
+	border-radius : 0px;
+	color : #222222;
+	cursor : pointer;
+	font : 10pt Malgun Gothic,Arial,Gulim;
+}
+.Button.btn_cp_basic03[status=focused] .nexacontentsbox
+{
+	text-align : center;
+	vertical-align : middle;
+}
+.Button.btn_cp_basic02[status=mouseover]
+{
+	background : #9a88a7;
+	border : 1px solid #836c93;
+	border-radius : 0px;
+	color : #ffffff;
+	cursor : pointer;
+	font : 10pt Malgun Gothic,Arial,Gulim;
+}
+.Button.btn_cp_basic02[status=mouseover] .nexacontentsbox
+{
+	text-align : center;
+	vertical-align : middle;
+}
+.Button.btn_cp_basic02[status=focused]
+{
+	background : #9a88a7;
+	border : 1px solid #836c93;
+	border-radius : 0px;
+	color : #ffffff;
+	cursor : pointer;
+	font : 10pt Malgun Gothic,Arial,Gulim;
+}
+.Button.btn_cp_basic02[status=focused] .nexacontentsbox
+{
+	text-align : center;
+	vertical-align : middle;
+}
+.Combo.cmb_basic01[status=mouseover]
+{
+	background : #ffffff;
+	border : 1px solid #ff6c54;
+	color : #222222;
+}
+.Combo.cmb_basic01[status=focused]
+{
+	color : #222222;
+}
+.Combo.cmb_basic01 .comboedit[status=mouseover]
+{
+	border : 0px none;
+	color : #222222;
+}
+.Combo.cmb_basic01 .comboedit[status=focused]
+{
+	border : 0px none;
+	color : #222222;
+}
+.Combo.cmb_basic01 .dropbutton[status=mouseover] .nexacontentsbox
+{
+	text-align : center;
+	vertical-align : middle;
+}
+.ListBoxControl.popupCombocmb_basic01combolist.dummy.dummy .listboxitem[status=mouseover]
+{
+	background : #f0f0f0;
+}
+.Calendar.cal_basic01[status=mouseover]
+{
+	background : #ffffff;
+	border : 1px solid #9c9c9c;
+}
+.Calendar.cal_basic01[status=focused]
+{
+	background : #ffffff;
+	border : 1px solid #9c9c9c;
+}
+.Calendar.cal_basic01 .datepicker .body .dayitem[status=mouseover]
+{
+	background : #e8e8e8;
+	border : 0px none;
+	font : 9pt Malgun Gothic,Arial,Gulim;
+	color : #222222;
+}
+.DatePickerControl.popupCalendarcal_basic01datepicker .body .dayitem[status=mouseover]
+{
+	background : #e8e8e8;
+	border : 0px none;
+	font : 9pt Malgun Gothic,Arial,Gulim;
+	color : #222222;
+}
+.Calendar.cal_basic01 .datepicker .body .dayitem[status=focused]
+{
+	background : #e8e8e8;
+	border : 0px none;
+	font : 9pt Malgun Gothic,Arial,Gulim;
+	color : #222222;
+}
+.DatePickerControl.popupCalendarcal_basic01datepicker .body .dayitem[status=focused]
+{
+	background : #e8e8e8;
+	border : 0px none;
+	font : 9pt Malgun Gothic,Arial,Gulim;
+	color : #222222;
+}
+.Calendar.cal_basic01 .calendaredit[status=focused]
+{
+	background : #ff6c54;
+	color : #ffffff;
+}
+.Calendar.cal_basic01 .dropbutton[status=mouseover] .nexacontentsbox
+{
+	text-align : center;
+	vertical-align : middle;
+}
+.Calendar.cal_basic01 .calendarspindownbutton[status=mouseover] .nexacontentsbox
+{
+	text-align : center;
+	vertical-align : middle;
+}
+.Calendar.cal_basic01 .datepicker[status=mouseover]
+{
+	background : #e8e8e8;
+	color : #ffffff;
+	font : 9pt Arial,Gulim;
+}
+.DatePickerControl.popupCalendarcal_basic01datepicker[status=mouseover]
+{
+	background : #e8e8e8;
+	color : #ffffff;
+	font : 9pt Arial,Gulim;
+}
+.Button.CalendarWeekDropButton[status=mouseover]
+{
+	background : url('./../../../_resource_/_images_/btn_WF_Calendar.png') no-repeat center center transparent;
+	border : 0px none;
+}
+.Button.CalendarWeekDropButton[status=focused]
+{
+	background : url('./../../../_resource_/_images_/btn_WF_Calendar.png') no-repeat center center transparent;
+	border : 0px none;
+}
+.Button.CalendarWeekPrevButton[status=mouseover]
+{
+	background : url('./images/btn_WF_Calprev.png') no-repeat center center transparent;
+	border : 0px none;
+}
+.Button.CalendarWeekPrevButton[status=focused]
+{
+	background : url('./images/btn_WF_Calprev.png') no-repeat center center transparent;
+	border : 0px none;
+}
+.Button.CalendarWeekNextButton[status=mouseover]
+{
+	background : url('./images/btn_WF_Calnext.png') no-repeat center center transparent;
+	border : 0px none;
+}
+.Button.CalendarWeekNextButton[status=focused]
+{
+	background : url('./images/btn_WF_Calnext.png') no-repeat center center transparent;
+	border : 0px none;
+}
+.Edit.CalendarWeekEdit[status=readonly]
+{
+	background : #124286;
+	color : #ffffff;
+	font : bold 12px "Gulim";
+	border : 0px none;
+}
+.Edit.MultiComboEdit[status=readonly]
+{
+	background : #ffffff;
+	border : 0px none;
+	padding : 1px 9px 0px 9px;
+}
+.Button.MultiComboButton[status=mouseover]
+{
+	background : url('./images/cmb_WF_Drop.png') no-repeat center center transparent;
+	border : 0px none;
+}
+.Button.MultiComboButton[status=focused]
+{
+	background : url('./images/cmb_WF_Drop.png') no-repeat center center transparent;
+	border : 0px none;
+}
+.Button.btn_WF_basic01[userstatus=selected]
+{
+	background : #124286;
+	color : #ffffff;
+	cursor : pointer;
+	border : 0px none;
+}
+.Button.btn_WF_basic01[userstatus=selected] .nexacontentsbox
+{
+	text-align : center;
+}
+.Button.btn_WF_basic01[userstatus=pushed]
+{
+	background : #2b57ae;
+	color : #ffffff;
+	border : 0px none;
+}
+.Button.btn_WF_basic01[userstatus=pushed] .nexacontentsbox
+{
+	text-align : center;
+}
+.Button.btn_WF_basic02[userstatus=selected]
+{
+	background : #f3750f;
+	color : #ffffff;
+	cursor : pointer;
+	border : 0px none;
+}
+.Button.btn_WF_basic02[userstatus=selected] .nexacontentsbox
+{
+	text-align : center;
+}
+.Button.btn_WF_basic02[userstatus=pushed]
+{
+	background : #e46b09;
+	color : #ffffff;
+	border : 0px none;
+}
+.Button.btn_WF_basic02[userstatus=pushed] .nexacontentsbox
+{
+	text-align : center;
+}
+.Button.btn_WF_basic03[userstatus=selected]
+{
+	background : #555555;
+	color : #ffffff;
+	cursor : pointer;
+	border : 0px none;
+}
+.Button.btn_WF_basic03[userstatus=selected] .nexacontentsbox
+{
+	text-align : center;
+}
+.Button.btn_WF_basic03[userstatus=pushed]
+{
+	background : #464646;
+	color : #ffffff;
+	border : 0px none;
+}
+.Button.btn_WF_basic03[userstatus=pushed] .nexacontentsbox
+{
+	text-align : center;
+}
+.Button.btn_WF_basic04[userstatus=selected]
+{
+	background : #e3eeff;
+	color : #222222;
+	cursor : pointer;
+	border : 1px solid #6092e7;
+}
+.Button.btn_WF_basic04[userstatus=selected] .nexacontentsbox
+{
+	text-align : center;
+}
+.Button.btn_WF_basic04[userstatus=pushed]
+{
+	background : #c4d8f5;
+	color : #222222;
+	border : 1px solid #a4adc0;
+}
+.Button.btn_WF_basic04[userstatus=pushed] .nexacontentsbox
+{
+	text-align : center;
+}
+.Grid.grd_WF_basic01 .body .row .cell[userstatus=selected]
+{
+	background : #f6f9ff;
+	color : #124286;
+}
+.Button.btn_WF_pagingFirst[userstatus=selected]
+{
+	background : url('./../../../_resource_/_images_/btn_WF_first.png') no-repeat center center #ffffff;
+	cursor : pointer;
+	border : 1px solid #c7c7c7;
+}
+.Button.btn_WF_pagingFirst[userstatus=pushed]
+{
+	background : url('./../../../_resource_/_images_/btn_WF_first.png') no-repeat center center #f6f6f6;
+	cursor : pointer;
+	border : 1px solid #c7c7c7;
+}
+.Button.btn_WF_pagingLast[userstatus=selected]
+{
+	background : url('./../../../_resource_/_images_/btn_WF_last.png') no-repeat center center #ffffff;
+	cursor : pointer;
+	border : 1px solid #c7c7c7;
+}
+.Button.btn_WF_pagingLast[userstatus=pushed]
+{
+	background : url('./../../../_resource_/_images_/btn_WF_last.png') no-repeat center center #f6f6f6;
+	cursor : pointer;
+	border : 1px solid #c7c7c7;
+}
+.Button.btn_WF_pagingPrev[userstatus=selected]
+{
+	background : url('./../../../_resource_/_images_/btn_WF_prev.png') no-repeat center center #ffffff;
+	cursor : pointer;
+	border : 1px solid #c7c7c7;
+}
+.Button.btn_WF_pagingPrev[userstatus=pushed]
+{
+	background : url('./../../../_resource_/_images_/btn_WF_prev.png') no-repeat center center #f6f6f6;
+	cursor : pointer;
+	border : 1px solid #c7c7c7;
+}
+.Button.btn_WF_pagingNext[userstatus=selected]
+{
+	background : url('./../../../_resource_/_images_/btn_WF_next.png') no-repeat center center #ffffff;
+	cursor : pointer;
+	border : 1px solid #c7c7c7;
+}
+.Button.btn_WF_pagingNext[userstatus=pushed]
+{
+	background : url('./../../../_resource_/_images_/btn_WF_next.png') no-repeat center center #f6f6f6;
+	cursor : pointer;
+	border : 1px solid #c7c7c7;
+}
+.Button.btn_WF_pagingNum[userstatus=selected]
+{
+	background : transparent;
+	color : #222222;
+	cursor : pointer;
+	font : bold 12px "Arial","Gulim";
+	border : 0px none;
+}
+.Button.btn_WF_pagingNum[userstatus=selected] .nexacontentsbox
+{
+	text-align : center;
+}
+.Button.btn_WF_pagingNum[userstatus=pushed]
+{
+	background : transparent;
+	color : #124286;
+	cursor : pointer;
+	font : bold 12px "Arial","Gulim";
+	border : 0px none;
+}
+.Button.btn_WF_pagingNum[userstatus=pushed] .nexacontentsbox
+{
+	text-align : center;
+	text-decoration : underline;
+}
+.Button.btn_WF_gridUp[userstatus=selected]
+{
+	background : url('./../../../_resource_/_images_/img_WF_gridUp.png') no-repeat center center #f1f1f1;
+	cursor : pointer;
+	border : 1px solid #c7c7c7;
+}
+.Button.btn_WF_gridUp[userstatus=pushed]
+{
+	background : url('./../../../_resource_/_images_/img_WF_gridUp.png') no-repeat center center #e5e5e5;
+	cursor : pointer;
+	border : 1px solid #c7c7c7;
+}
+.Button.btn_WF_gridDown[userstatus=selected]
+{
+	background : url('./../../../_resource_/_images_/img_WF_gridDown.png') no-repeat center center #f1f1f1;
+	cursor : pointer;
+	border : 1px solid #c7c7c7;
+}
+.Button.btn_WF_gridDown[userstatus=pushed]
+{
+	background : url('./../../../_resource_/_images_/img_WF_gridDown.png') no-repeat center center #e5e5e5;
+	cursor : pointer;
+	border : 1px solid #c7c7c7;
+}
+.Button.btn_WF_tabMenu01[userstatus=selected]
+{
+	background : #f8f8f8;
+	color : #222222;
+	cursor : pointer;
+	border : 1px solid #c7c7c7;
+}
+.Button.btn_WF_tabMenu01[userstatus=selected] .nexacontentsbox
+{
+	text-align : left;
+}
+.Button.btn_WF_tabMenu01[userstatus=pushed]
+{
+	background : #efefef;
+	cursor : pointer;
+	border : 1px solid #c7c7c7;
+}
+.Button.btn_WF_tabMenu01[userstatus=pushed] .nexacontentsbox
+{
+	text-align : left;
+}
+.Button.btn_WF_tabClose[userstatus=pushed]
+{
+	background : url('./../../../_resource_/_images_/btn_close_N.png') no-repeat center center;
+	cursor : pointer;
+	border : 0px none;
+}
+.Button.btn_WF_tabClose[userstatus=selected]
+{
+	background : url('./../../../_resource_/_images_/btn_close_N.png') no-repeat center center;
+	cursor : pointer;
+	border : 0px none;
+}
+.Button.btn_TP_menu[userstatus=selected]
+{
+	background : url('./../../../_resource_/_images_/img_TP_menuLine.png') no-repeat center right #124286;
+	color : #ffffff;
+	cursor : pointer;
+	font : 14px "Arial","Nanum Gothic";
+	border : 0px none;
+}
+.Button.btn_TP_menu[userstatus=selected] .nexacontentsbox
+{
+	text-align : center;
+}
+.Button.btn_TP_menu[userstatus=pushed]
+{
+	background : url('./../../../_resource_/_images_/img_TP_menuLine.png') no-repeat center right #0d3a7b;
+	color : #ffffff;
+	border : 0px none;
+}
+.Button.btn_TP_menu[userstatus=pushed] .nexacontentsbox
+{
+	text-decoration : underline;
+	text-align : center;
+}
+.Button.btn_TP_menuIcon[userstatus=selected]
+{
+	background : url('./../../../_resource_/_images_/img_TP_menuIcon.png') no-repeat center center #124286;
+	cursor : pointer;
+	border : 1px solid #234c9a;
+}
+.Button.btn_TP_menuIcon[userstatus=pushed]
+{
+	background : url('./../../../_resource_/_images_/img_TP_menuIcon.png') no-repeat center center #2b57ae;
+	cursor : pointer;
+	border : 1px solid #234c9a;
+}
+.Button.btn_LF_menu[userstatus=selected]
+{
+	background : url('./../../../_resource_/_images_/img_LF_icon_N.png') no-repeat right center #f6f6f6;
+	color : #222222;
+	cursor : pointer;
+	border : 0px none, 0px none,1px solid #c7c7c7, 0px none;
+}
+.Button.btn_LF_menu[userstatus=selected] .nexacontentsbox
+{
+	text-align : left;
+}
+.Button.btn_LF_menu[userstatus=pushed]
+{
+	background : url('./../../../_resource_/_images_/img_LF_icon_S.png') no-repeat right center #124286;
+	color : #ffffff;
+	border : 0px none, 0px none,1px solid #c7c7c7, 0px none;
+}
+.Grid.grd_LF_menu .body .row .cell[userstatus=selected]
+{
+	background : #dde9f8;
+	color : #124286;
+	font : bold 12px "Gulim";
+}
+.Button.btn_mdi_mdiBtn[userstatus=selected]
+{
+	background : #efefef;
+	color : #222222;
+	cursor : pointer;
+	font : 12px "Arial","Malgun Gothic";
+	border : 1px solid #c7c7c7;
+}
+.Button.btn_mdi_mdiBtn[userstatus=selected] .nexacontentsbox
+{
+	text-align : left;
+}
+.Button.btn_mdi_mdiBtn[userstatus=pushed]
+{
+	background : #f1f6ff;
+	color : #222222;
+	cursor : pointer;
+	font : 12px "Arial","Malgun Gothic";
+	border : 1px solid #c7c7c7;
+}
+.Button.btn_mdi_mdiBtn[userstatus=pushed] .nexacontentsbox
+{
+	text-align : left;
+}
+.Button.btn_mdi_close[userstatus=selected]
+{
+	background : url('./../../../_resource_/_images_/btn_close_N.png') no-repeat center center;
+	cursor : pointer;
+	border : 0px none;
+}
+.Button.btn_mdi_close[userstatus=pushed]
+{
+	background : url('./../../../_resource_/_images_/btn_close_N.png') no-repeat center center #e4e4e4;
+	cursor : pointer;
+	border : 0px none;
+}
+.Button.btn_mdi_tabClose[userstatus=selected]
+{
+	background : url('./../../../_resource_/_images_/btn_mdi_tabClose.png') no-repeat center center;
+	cursor : pointer;
+	border : 0px none;
+}
+.Button.btn_mdi_tabClose[userstatus=pushed]
+{
+	background : url('./../../../_resource_/_images_/btn_mdi_tabClose.png') no-repeat center center #e4e4e4;
+	cursor : pointer;
+	border : 0px none;
+}
+.Button.btn_mdi_tabNext[userstatus=selected]
+{
+	background : url('./../../../_resource_/_images_/btn_WF_next.png') no-repeat center center;
+	cursor : pointer;
+	border : 0px none,1px solid #d1d1d1;
+}
+.Button.btn_mdi_tabNext[userstatus=pushed]
+{
+	background : url('./../../../_resource_/_images_/btn_WF_next.png') no-repeat center center #e4e4e4;
+	cursor : pointer;
+	border : 0px none,1px solid #d1d1d1;
+}
+.Button.btn_mdi_tabPrev[userstatus=selected]
+{
+	background : url('./../../../_resource_/_images_/btn_WF_prev.png') no-repeat center center;
+	cursor : pointer;
+	border : 0px none,1px solid #d1d1d1;
+}
+.Button.btn_mdi_tabPrev[userstatus=pushed]
+{
+	background : url('./../../../_resource_/_images_/btn_WF_prev.png') no-repeat center center #e4e4e4;
+	cursor : pointer;
+	border : 0px none,1px solid #d1d1d1;
+}
+.Button.btn_WF_search01[userstatus=selected]
+{
+	background : transparent;
+	cursor : pointer;
+	border : 0px none;
+	-nexa-edge : url('./../../../_resource_/_images_/btn_WF_search01.png') 0px 0px;
+}
+.Button.btn_WF_search01[userstatus=pushed]
+{
+	background : transparent;
+	cursor : pointer;
+	border : 0px none;
+	-nexa-edge : url('./../../../_resource_/_images_/btn_WF_search01_O.png') 0px 0px;
+}
+.Button.btn_WF_apply01[userstatus=selected]
+{
+	background : url('./../../../_resource_/_images_/img_WF_apply01.png') no-repeat left center #124286;
+	color : #ffffff;
+	cursor : pointer;
+	border : 0px none;
+}
+.Button.btn_WF_apply01[userstatus=selected] .nexacontentsbox
+{
+	text-align : center;
+}
+.Button.btn_WF_apply01[userstatus=pushed]
+{
+	background : url('./../../../_resource_/_images_/img_WF_apply01.png') no-repeat left center #092b59;
+	color : #ffffff;
+	border : 0px none;
+}
+.Button.btn_WF_apply01[userstatus=pushed] .nexacontentsbox
+{
+	text-align : center;
+}
+.Button.btn_WF_reset01[userstatus=selected]
+{
+	background : url('./../../../_resource_/_images_/img_WF_reset01.png') no-repeat left center #555555;
+	color : #ffffff;
+	cursor : pointer;
+	border : 0px none;
+}
+.Button.btn_WF_reset01[userstatus=selected] .nexacontentsbox
+{
+	text-align : center;
+}
+.Button.btn_WF_reset01[userstatus=pushed]
+{
+	background : url('./../../../_resource_/_images_/img_WF_reset01.png') no-repeat left center #464646;
+	color : #ffffff;
+	border : 0px none;
+}
+.Button.btn_WF_reset01[userstatus=pushed] .nexacontentsbox
+{
+	text-align : center;
+	text-decoration : underline;
+}
+.Button.btn_WF_search02[userstatus=selected]
+{
+	background : url('./../../../_resource_/_images_/btn_WF_search02.png') no-repeat center center;
+	cursor : pointer;
+	border : 0px none;
+}
+.Button.btn_WF_search02[userstatus=pushed]
+{
+	background : url('./../../../_resource_/_images_/btn_WF_search02.png') no-repeat center center #f6f6f6;
+	cursor : pointer;
+	border : 0px none;
+}
+.Button.btn_WF_up[userstatus=selected]
+{
+	background : url('./../../../_resource_/_images_/btn_WF_up.png') no-repeat center center #6598ff;
+	cursor : pointer;
+	border : 0px none;
+}
+.Button.btn_WF_up[userstatus=pushed]
+{
+	background : url('./../../../_resource_/_images_/btn_WF_up.png') no-repeat center center #528bff;
+	cursor : pointer;
+	border : 0px none;
+}
+.Button.btn_WF_down[userstatus=selected]
+{
+	background : url('./../../../_resource_/_images_/btn_WF_down.png') no-repeat center center #6598ff;
+	cursor : pointer;
+	border : 0px none;
+}
+.Button.btn_WF_down[userstatus=pushed]
+{
+	background : url('./../../../_resource_/_images_/btn_WF_down.png') no-repeat center center #528bff;
+	cursor : pointer;
+	border : 0px none;
+}
+.Button.btn_WF_expand[userstatus=selected]
+{
+	background : url('./../../../_resource_/_images_/btn_WF_expand.png') no-repeat center center transparent;
+	cursor : pointer;
+	border : 0px none;
+}
+.Button.btn_WF_expand[userstatus=pushed]
+{
+	background : url('./../../../_resource_/_images_/btn_WF_expand_O.png') no-repeat center center #e9f0ff;
+	cursor : pointer;
+	border : 0px none;
+}
+.Button.btn_WF_fold[userstatus=selected]
+{
+	background : url('./../../../_resource_/_images_/btn_WF_fold.png') no-repeat center center transparent;
+	cursor : pointer;
+	border : 0px none;
+}
+.Button.btn_WF_fold[userstatus=pushed]
+{
+	background : url('./../../../_resource_/_images_/btn_WF_fold_O.png') no-repeat center center #e9f0ff;
+	cursor : pointer;
+	border : 0px none;
+}
+.Button.btn_WF_excel[userstatus=selected]
+{
+	background : url('./../../../_resource_/_images_/btn_WF_excel.png') no-repeat left center #f6f6f6;
+	cursor : pointer;
+	border : 1px solid #c7c7c7;
+	color : #333333;
+}
+.Button.btn_WF_excel[userstatus=selected] .nexacontentsbox
+{
+	text-align : left;
+}
+.Button.btn_WF_excel[userstatus=pushed]
+{
+	background : url('./../../../_resource_/_images_/btn_WF_excel.png') no-repeat left center #ececec;
+	cursor : pointer;
+	border : 1px solid #c7c7c7;
+}
+.Button.btn_WF_excel[userstatus=pushed] .nexacontentsbox
+{
+	text-align : left;
+}
+.Button.btn_WF_hancel[userstatus=selected]
+{
+	background : url('./../../../_resource_/_images_/btn_WF_hancel.png') no-repeat left center #f6f6f6;
+	cursor : pointer;
+	border : 1px solid #c7c7c7;
+}
+.Button.btn_WF_hancel[userstatus=selected] .nexacontentsbox
+{
+	text-align : left;
+}
+.Button.btn_WF_hancel[userstatus=pushed]
+{
+	background : url('./../../../_resource_/_images_/btn_WF_hancel.png') no-repeat left center #ececec;
+	cursor : pointer;
+	border : 1px solid #c7c7c7;
+}
+.Button.btn_WF_hancel[userstatus=pushed] .nexacontentsbox
+{
+	text-align : left;
+}
+.Button.btn_WF_iconPort01[userstatus=selected]
+{
+	background : url('./../../../_resource_/_images_/img_WF_iconPort01.png') no-repeat right top #5182e5;
+	cursor : pointer;
+	border : 0px none;
+	color : #ffffff;
+	font : bold 16pt Malgun Gothic;
+}
+.Button.btn_WF_iconPort01[userstatus=selected] .nexacontentsbox
+{
+	text-align : center;
+	vertical-align : bottom;
+}
+.Button.btn_WF_iconPort01[userstatus=pushed]
+{
+	background : url('./../../../_resource_/_images_/img_WF_iconPort01.png') no-repeat right top #5088f9;
+	cursor : pointer;
+	border : 5px dashed #2c5cbe;
+	color : #ffffff;
+	font : bold 16pt Malgun Gothic;
+}
+.Button.btn_WF_iconPort01[userstatus=pushed] .nexacontentsbox
+{
+	text-align : center;
+	vertical-align : bottom;
+}
+.Button.btn_WF_iconPort02[userstatus=selected]
+{
+	background : url('./../../../_resource_/_images_/img_WF_iconPort02.png') no-repeat right bottom #819cf2;
+	cursor : pointer;
+	border : 0px none;
+	color : #ffffff;
+	font : bold 16pt Malgun Gothic;
+}
+.Button.btn_WF_iconPort02[userstatus=selected] .nexacontentsbox
+{
+	text-align : left;
+	vertical-align : top;
+}
+.Button.btn_WF_iconPort02[userstatus=pushed]
+{
+	background : url('./../../../_resource_/_images_/img_WF_iconPort02.png') no-repeat right bottom #7492ef;
+	cursor : pointer;
+	border : 5px dashed #4f70db;
+	color : #ffffff;
+	font : bold 16pt Malgun Gothic;
+}
+.Button.btn_WF_iconPort02[userstatus=pushed] .nexacontentsbox
+{
+	text-align : left;
+	vertical-align : top;
+}
+.Button.btn_WF_iconPort03[userstatus=selected]
+{
+	background : url('./../../../_resource_/_images_/img_WF_iconPort03.png') no-repeat right bottom #818cf2;
+	cursor : pointer;
+	border : 0px none;
+	color : #ffffff;
+	font : bold 16pt Malgun Gothic;
+}
+.Button.btn_WF_iconPort03[userstatus=selected] .nexacontentsbox
+{
+	text-align : left;
+	vertical-align : top;
+}
+.Button.btn_WF_iconPort03[userstatus=pushed]
+{
+	background : url('./../../../_resource_/_images_/img_WF_iconPort03.png') no-repeat right bottom #7580ea;
+	cursor : pointer;
+	border : 5px dashed #5d69da;
+	color : #ffffff;
+	font : bold 16pt Malgun Gothic;
+}
+.Button.btn_WF_iconPort03[userstatus=pushed] .nexacontentsbox
+{
+	text-align : left;
+	vertical-align : top;
+}
+.Button.btn_WF_iconPort04[userstatus=selected]
+{
+	background : url('./../../../_resource_/_images_/img_WF_iconPort04.png') no-repeat right bottom #8981f2;
+	cursor : pointer;
+	border : 0px none;
+	color : #ffffff;
+	font : bold 16pt Malgun Gothic;
+}
+.Button.btn_WF_iconPort04[userstatus=selected] .nexacontentsbox
+{
+	text-align : left;
+	vertical-align : top;
+}
+.Button.btn_WF_iconPort04[userstatus=pushed]
+{
+	background : url('./../../../_resource_/_images_/img_WF_iconPort04.png') no-repeat right bottom #7e76e8;
+	cursor : pointer;
+	border : 5px dashed #5f57ce;
+	color : #ffffff;
+	font : bold 16pt Malgun Gothic;
+}
+.Button.btn_WF_iconPort04[userstatus=pushed] .nexacontentsbox
+{
+	text-align : left;
+	vertical-align : top;
+}
+.Button.btn_WF_iconPort05[userstatus=selected]
+{
+	background : url('./../../../_resource_/_images_/img_WF_iconPort05.png') no-repeat left bottom #519ae5;
+	cursor : pointer;
+	border : 0px none;
+	color : #ffffff;
+	font : bold 16pt Malgun Gothic;
+}
+.Button.btn_WF_iconPort05[userstatus=selected] .nexacontentsbox
+{
+	text-align : right;
+	vertical-align : top;
+}
+.Button.btn_WF_iconPort05[userstatus=pushed]
+{
+	background : url('./../../../_resource_/_images_/img_WF_iconPort05.png') no-repeat left bottom #4993de;
+	cursor : pointer;
+	border : 5px dashed #2c74be;
+	color : #ffffff;
+	font : bold 16pt Malgun Gothic;
+}
+.Button.btn_WF_iconPort05[userstatus=pushed] .nexacontentsbox
+{
+	text-align : right;
+	vertical-align : top;
+}
+.Button.btn_WF_iconPort06[userstatus=selected]
+{
+	background : url('./../../../_resource_/_images_/img_WF_iconPort06.png') no-repeat left bottom #57b2dd;
+	cursor : pointer;
+	border : 0px none;
+	color : #ffffff;
+	font : bold 16pt Malgun Gothic;
+}
+.Button.btn_WF_iconPort06[userstatus=selected] .nexacontentsbox
+{
+	text-align : right;
+	vertical-align : top;
+}
+.Button.btn_WF_iconPort06[userstatus=pushed]
+{
+	background : url('./../../../_resource_/_images_/img_WF_iconPort06.png') no-repeat left bottom #4ea8d2;
+	cursor : pointer;
+	border : 5px dashed #378bb3;
+	color : #ffffff;
+	font : bold 16pt Malgun Gothic;
+}
+.Button.btn_WF_iconPort06[userstatus=pushed] .nexacontentsbox
+{
+	text-align : right;
+	vertical-align : top;
+}
+.Button.btn_WF_iconPort07[userstatus=selected]
+{
+	background : url('./../../../_resource_/_images_/img_WF_iconPort07.png') no-repeat left top #759ceb;
+	cursor : pointer;
+	border : 0px none;
+	color : #ffffff;
+	font : bold 16pt Malgun Gothic;
+}
+.Button.btn_WF_iconPort07[userstatus=selected] .nexacontentsbox
+{
+	text-align : right;
+	vertical-align : bottom;
+}
+.Button.btn_WF_iconPort07[userstatus=pushed]
+{
+	background : url('./../../../_resource_/_images_/img_WF_iconPort07.png') no-repeat left top #6e96e7;
+	cursor : pointer;
+	border : 5px dashed #4c73c3;
+	color : #ffffff;
+	font : bold 16pt Malgun Gothic;
+}
+.Button.btn_WF_iconPort07[userstatus=pushed] .nexacontentsbox
+{
+	text-align : right;
+	vertical-align : bottom;
+}
+.Button.btn_WF_iconPort08[userstatus=selected]
+{
+	background : url('./../../../_resource_/_images_/img_WF_iconPort08.png') no-repeat left top #75a7eb;
+	cursor : pointer;
+	border : 0px none;
+	color : #ffffff;
+	font : bold 16pt Malgun Gothic;
+}
+.Button.btn_WF_iconPort08[userstatus=selected] .nexacontentsbox
+{
+	text-align : right;
+	vertical-align : bottom;
+}
+.Button.btn_WF_iconPort08[userstatus=pushed]
+{
+	background : url('./../../../_resource_/_images_/img_WF_iconPort08.png') no-repeat left top #6a9de2;
+	cursor : pointer;
+	border : 5px dashed #5282c2;
+	color : #ffffff;
+	font : bold 16pt Malgun Gothic;
+}
+.Button.btn_WF_iconPort08[userstatus=pushed] .nexacontentsbox
+{
+	text-align : right;
+	vertical-align : bottom;
+}
+.Button.btn_WF_iconPort09[userstatus=selected]
+{
+	background : url('./../../../_resource_/_images_/img_WF_iconPort09.png') no-repeat right top #9480dd;
+	cursor : pointer;
+	border : 0px none;
+	color : #ffffff;
+	font : bold 16pt Malgun Gothic;
+}
+.Button.btn_WF_iconPort09[userstatus=selected] .nexacontentsbox
+{
+	text-align : left;
+	vertical-align : bottom;
+}
+.Button.btn_WF_iconPort09[userstatus=pushed]
+{
+	background : url('./../../../_resource_/_images_/img_WF_iconPort09.png') no-repeat right top #8a75d6;
+	cursor : pointer;
+	border : 5px dashed #6f59c2;
+	color : #ffffff;
+	font : bold 16pt Malgun Gothic;
+}
+.Button.btn_WF_iconPort09[userstatus=pushed] .nexacontentsbox
+{
+	text-align : left;
+	vertical-align : bottom;
+}
+.Button.btn_pop_close[userstatus=pushed]
+{
+	background : url('./../../../_resource_/_images_/btn_pop_close.png') no-repeat center center transparent;
+	cursor : pointer;
+	border : 0px none;
+}
+.Button.btn_pop_close[userstatus=selected]
+{
+	background : url('./../../../_resource_/_images_/btn_pop_close.png') no-repeat center center transparent;
+	cursor : pointer;
+	border : 0px none;
+}
+.Grid.grd_basic01 .body .row .cell[userstatus=selected]
+{
+	background : #fce6e2;
+	color : #ff6c54;
+	border : 1px solid #9c9c9c;
+}
+.Grid.grd_basic01 .body .row .cell .cellbutton[userstatus=pushed]
+{
+	background : #d97a6a;
+	border : 1px solid #c66151;
+}
+.Grid.grd_basic01 .body .row .cell .cellcombo .dropbutton[userstatus=pushed] .nexacontentsbox
+{
+	text-align : center;
+	vertical-align : middle;
+}
+.ListBoxControl.popupGridgrd_basic01bodyrowcellcellcombocombolist.dummy.dummy.dummy.dummy.dummy.dummy .listboxitem[userstatus=selected]
+{
+	background : #fce6e2;
+}
+.Grid.grd_basic01 .body .row .cell .cellcalendar .datepicker .body .dayitem[userstatus=selected]
+{
+	background : #ff6c54;
+	border : 0px none;
+	font : 9pt Malgun Gothic,Arial,Gulim;
+	color : #ffffff;
+}
+.DatePickerControl.popupGridgrd_basic01bodyrowcellcellcalendardatepicker .body .dayitem[userstatus=selected]
+{
+	background : #ff6c54;
+	border : 0px none;
+	font : 9pt Malgun Gothic,Arial,Gulim;
+	color : #ffffff;
+}
+.Grid.grd_basic01 .body .row .cell .cellcalendar .calendarspindownbutton[userstatus=pushed] .nexacontentsbox
+{
+	text-align : center;
+	vertical-align : middle;
+}
+.Tab.tab_basic01 .tabbuttonitemTabtab_basic01[userstatus=selected]
+{
+	background : #ffffff;
+	border : 1px solid #cbcbcb,1px solid #cbcbcb,0px none;
+	color : #d8351a;
+}
+.Button.btn_cp_popDiv[userstatus=selected]
+{
+	background : #e1897b;
+	border : 1px solid #d16959;
+	border-radius : 0px;
+	color : #ffffff;
+	cursor : pointer;
+	font : 11pt Malgun Gothic,Arial,Gulim;
+	box-shadow : 0px 3px 1px rgba(207,207,207,1);
+}
+.Button.btn_cp_popDiv[userstatus=selected] .nexacontentsbox
+{
+	text-align : center;
+	vertical-align : middle;
+}
+.Button.btn_cp_popDiv[userstatus=pushed]
+{
+	background : #d97a6a;
+	border : 1px solid #c66151;
+	border-radius : 0px;
+	color : #ffffff;
+	cursor : pointer;
+	font : 11pt Malgun Gothic,Arial,Gulim;
+	box-shadow : 0px 3px 1px rgba(207,207,207,1);
+}
+.Button.btn_cp_popDiv[userstatus=pushed] .nexacontentsbox
+{
+	text-align : center;
+	vertical-align : middle;
+}
+.Button.btn_cp_popMenu[userstatus=selected]
+{
+	background : #b19fbd;
+	border : 1px solid #9c80ae;
+	border-radius : 0px;
+	color : #ffffff;
+	cursor : pointer;
+	font : 11pt Malgun Gothic,Arial,Gulim;
+	box-shadow : 0px 3px 1px rgba(207,207,207,1);
+}
+.Button.btn_cp_popMenu[userstatus=selected] .nexacontentsbox
+{
+	text-align : center;
+	vertical-align : middle;
+}
+.Button.btn_cp_popMenu[userstatus=pushed]
+{
+	background : #9a88a7;
+	border : 1px solid #836c93;
+	border-radius : 0px;
+	color : #ffffff;
+	cursor : pointer;
+	font : 11pt Malgun Gothic,Arial,Gulim;
+	box-shadow : 0px 3px 1px rgba(207,207,207,1);
+}
+.Button.btn_cp_popMenu[userstatus=pushed] .nexacontentsbox
+{
+	text-align : center;
+	vertical-align : middle;
+}
+.FileDownload.filedown_basic01[userstatus=pushed]
+{
+	background : url('./../../../_resource_/_images_/btn_cp_fileDownload.png') no-repeat left center #d8d8d8;
+}
+.FileUpload.fileup_basic01 .fileuploaditem .fileuploaditembutton[userstatus=pushed]
+{
+	background : url('./../../../_resource_/_images_/btn_cp_fileUpload.png') no-repeat right center #d8d8d8;
+}
+.Button.btn_cp_basic01[userstatus=pushed]
+{
+	background : #d97a6a;
+	border : 1px solid #c66151;
+	border-radius : 0px;
+	color : #ffffff;
+	cursor : pointer;
+	font : 10pt Malgun Gothic,Arial,Gulim;
+}
+.Button.btn_cp_basic01[userstatus=pushed] .nexacontentsbox
+{
+	text-align : center;
+	vertical-align : middle;
+}
+.Button.btn_cp_basic01[userstatus=selected]
+{
+	background : #d97a6a;
+	border : 1px solid #c66151;
+	border-radius : 0px;
+	color : #ffffff;
+	cursor : pointer;
+	font : 10pt Malgun Gothic,Arial,Gulim;
+}
+.Button.btn_cp_basic01[userstatus=selected] .nexacontentsbox
+{
+	text-align : center;
+	vertical-align : middle;
+}
+.Button.btn_cp_basic03[userstatus=pushed]
+{
+	background : #d8d8d8;
+	border : 1px solid #b9b9b9;
+	border-radius : 0px;
+	color : #222222;
+	cursor : pointer;
+	font : 10pt Malgun Gothic,Arial,Gulim;
+}
+.Button.btn_cp_basic03[userstatus=pushed] .nexacontentsbox
+{
+	text-align : center;
+	vertical-align : middle;
+}
+.Button.btn_cp_basic03[userstatus=selected]
+{
+	background : #d8d8d8;
+	border : 1px solid #b9b9b9;
+	border-radius : 0px;
+	color : #222222;
+	cursor : pointer;
+	font : 10pt Malgun Gothic,Arial,Gulim;
+}
+.Button.btn_cp_basic03[userstatus=selected] .nexacontentsbox
+{
+	text-align : center;
+	vertical-align : middle;
+}
+.Button.btn_cp_basic02[userstatus=pushed]
+{
+	background : #9a88a7;
+	border : 1px solid #836c93;
+	border-radius : 0px;
+	color : #ffffff;
+	cursor : pointer;
+	font : 10pt Malgun Gothic,Arial,Gulim;
+}
+.Button.btn_cp_basic02[userstatus=pushed] .nexacontentsbox
+{
+	text-align : center;
+	vertical-align : middle;
+}
+.Button.btn_cp_basic02[userstatus=selected]
+{
+	background : #9a88a7;
+	border : 1px solid #836c93;
+	border-radius : 0px;
+	color : #ffffff;
+	cursor : pointer;
+	font : 10pt Malgun Gothic,Arial,Gulim;
+}
+.Button.btn_cp_basic02[userstatus=selected] .nexacontentsbox
+{
+	text-align : center;
+	vertical-align : middle;
+}
+.Combo.cmb_basic01 .dropbutton[userstatus=pushed] .nexacontentsbox
+{
+	text-align : center;
+	vertical-align : middle;
+}
+.ListBoxControl.popupCombocmb_basic01combolist.dummy.dummy .listboxitem[userstatus=selected]
+{
+	background : #fce6e2;
+	color : #d8351a;
+}
+.Calendar.cal_basic01 .datepicker .body .dayitem[userstatus=selected]
+{
+	background : #ff6c54;
+	border : 0px none;
+	font : 9pt Malgun Gothic,Arial,Gulim;
+	color : #ffffff;
+}
+.DatePickerControl.popupCalendarcal_basic01datepicker .body .dayitem[userstatus=selected]
+{
+	background : #ff6c54;
+	border : 0px none;
+	font : 9pt Malgun Gothic,Arial,Gulim;
+	color : #ffffff;
+}
+.Calendar.cal_basic01 .calendarspindownbutton[userstatus=pushed] .nexacontentsbox
+{
+	text-align : center;
+	vertical-align : middle;
+}
+.Button.CalendarWeekDropButton[userstatus=pushed]
+{
+	background : url('./../../../_resource_/_images_/btn_WF_Calendar.png') no-repeat center center transparent;
+	border : 0px none;
+}
+.Button.CalendarWeekDropButton[userstatus=selected]
+{
+	background : url('./../../../_resource_/_images_/btn_WF_Calendar.png') no-repeat center center transparent;
+	border : 0px none;
+}
+.Button.CalendarWeekPrevButton[userstatus=pushed]
+{
+	background : url('./images/btn_WF_Calprev.png') no-repeat center center transparent;
+	border : 0px none;
+}
+.Button.CalendarWeekPrevButton[userstatus=selected]
+{
+	background : url('./images/btn_WF_Calprev.png') no-repeat center center transparent;
+	border : 0px none;
+}
+.Button.CalendarWeekNextButton[userstatus=pushed]
+{
+	background : url('./images/btn_WF_Calnext.png') no-repeat center center transparent;
+	border : 0px none;
+}
+.Button.CalendarWeekNextButton[userstatus=selected]
+{
+	background : url('./images/btn_WF_Calnext.png') no-repeat center center transparent;
+	border : 0px none;
+}
+.Button.MultiComboButton[userstatus=pushed]
+{
+	background : url('./images/cmb_WF_Drop.png') no-repeat center center transparent;
+	border : 0px none;
+}
+.Button.MultiComboButton[userstatus=selected]
+{
+	background : url('./images/cmb_WF_Drop.png') no-repeat center center transparent;
+	border : 0px none;
+}
+.StandardGrid .body .row .cell[userstatus=selected]
+{
+	background : #efefef;
+	color : #3366cc;
+}
+.Button.btn_WF_basic01[status=disabled]
+{
+	background : #cbcbcb;
+	color : #aaaaaa;
+	border : 0px none;
+}
+.Button.btn_WF_basic01[status=disabled] .nexacontentsbox
+{
+	text-align : center;
+}
+.Button.btn_WF_basic02[status=disabled]
+{
+	background : #cbcbcb;
+	color : #aaaaaa;
+	border : 0px none;
+}
+.Button.btn_WF_basic02[status=disabled] .nexacontentsbox
+{
+	text-align : center;
+}
+.Button.btn_WF_basic03[status=disabled]
+{
+	background : #cbcbcb;
+	color : #aaaaaa;
+	border : 0px none;
+}
+.Button.btn_WF_basic03[status=disabled] .nexacontentsbox
+{
+	text-align : center;
+}
+.Button.btn_WF_basic04[status=disabled]
+{
+	background : #cbcbcb;
+	color : #aaaaaa;
+	border : 0px none;
+}
+.Button.btn_WF_basic04[status=disabled] .nexacontentsbox
+{
+	text-align : center;
+}
+.Grid.grd_WF_basic01 .body .row .cell[status=disabled]
+{
+	color : #999999;
+}
+.Button.btn_WF_pagingFirst[status=disabled]
+{
+	background : url('./../../../_resource_/_images_/btn_WF_first_D.png') no-repeat center center #e9e9e9;
+	cursor : pointer;
+	border : 1px solid #c7c7c7;
+}
+.Button.btn_WF_pagingLast[status=disabled]
+{
+	background : url('./../../../_resource_/_images_/btn_WF_last_D.png') no-repeat center center #e9e9e9;
+	cursor : pointer;
+	border : 1px solid #c7c7c7;
+}
+.Button.btn_WF_pagingPrev[status=disabled]
+{
+	background : url('./../../../_resource_/_images_/btn_WF_prev_D.png') no-repeat center center #e9e9e9;
+	cursor : pointer;
+	border : 1px solid #c7c7c7;
+}
+.Button.btn_WF_pagingNext[status=disabled]
+{
+	background : url('./../../../_resource_/_images_/btn_WF_next_D.png') no-repeat center center #e9e9e9;
+	cursor : pointer;
+	border : 1px solid #c7c7c7;
+}
+.Button.btn_WF_pagingNum[status=disabled]
+{
+	background : transparent;
+	color : #222222;
+	cursor : pointer;
+	font : bold 12px "Arial","Gulim";
+	border : 0px none;
+}
+.Button.btn_WF_pagingNum[status=disabled] .nexacontentsbox
+{
+	text-align : center;
+}
+.Button.btn_WF_gridUp[status=disabled]
+{
+	background : url('./../../../_resource_/_images_/img_WF_gridUp_D.png') no-repeat center center #dddddd;
+	cursor : pointer;
+	border : 1px solid #aaaaaa;
+}
+.Button.btn_WF_gridDown[status=disabled]
+{
+	background : url('./../../../_resource_/_images_/img_WF_gridDown_D.png') no-repeat center center #dddddd;
+	cursor : pointer;
+	border : 1px solid #aaaaaa;
+}
+.Button.btn_WF_tabMenu01[status=disabled]
+{
+	background : #f6f9ff;
+	color : #222222;
+	cursor : pointer;
+	border : 1px solid #86aceb,1px solid #86aceb,1px solid #f6f9ff,1px solid #86aceb;
+}
+.Button.btn_WF_tabMenu01[status=disabled] .nexacontentsbox
+{
+	text-align : left;
+}
+.Button.btn_WF_tabClose[status=disabled]
+{
+	background : url('./../../../_resource_/_images_/btn_close_N.png') no-repeat center center;
+	cursor : pointer;
+	border : 0px none;
+}
+.Button.btn_TP_menu[status=disabled]
+{
+	background : url('./../../../_resource_/_images_/img_TP_menuLine.png') no-repeat center right #124286;
+	border : 0px none;
+	color : #859edc;
+}
+.Button.btn_TP_menuIcon[status=disabled]
+{
+	background : url('./../../../_resource_/_images_/img_TP_menuIcon.png') no-repeat center center #124286;
+	cursor : pointer;
+	border : 1px solid #234c9a;
+}
+.Button.btn_LF_menu[status=disabled]
+{
+	background : url('./../../../_resource_/_images_/img_LF_icon_D.png') no-repeat right center #f6f6f6;
+	color : #aaaaaa;
+	cursor : pointer;
+	border : 0px none, 0px none,1px solid #c7c7c7, 0px none;
+}
+.Button.btn_LF_menu[status=disabled] .nexacontentsbox
+{
+	text-align : left;
+}
+.Button.btn_mdi_mdiBtn[status=disabled]
+{
+	background : #ffffff;
+	color : #222222;
+	cursor : pointer;
+	font : bold 12px "Arial","Malgun Gothic";
+	border : 1px solid #c7c7c7,1px solid #c7c7c7,1px solid #ffffff,1px solid #c7c7c7;
+}
+.Button.btn_mdi_mdiBtn[status=disabled] .nexacontentsbox
+{
+	text-align : left;
+}
+.Button.btn_mdi_close[status=disabled]
+{
+	background : url('./../../../_resource_/_images_/btn_close_D.png') no-repeat center center;
+	cursor : pointer;
+	border : 0px none;
+}
+.Button.btn_mdi_tabClose[status=disabled]
+{
+	background : url('./../../../_resource_/_images_/btn_mdi_tabClose_D.png') no-repeat center center;
+	cursor : pointer;
+	border : 0px none;
+}
+.Button.btn_mdi_tabNext[status=disabled]
+{
+	background : url('./../../../_resource_/_images_/btn_WF_next_D.png') no-repeat center center;
+	cursor : pointer;
+	border : 0px none,1px solid #d1d1d1;
+}
+.Button.btn_mdi_tabPrev[status=disabled]
+{
+	background : url('./../../../_resource_/_images_/btn_WF_prev_D.png') no-repeat center center;
+	cursor : pointer;
+	border : 0px none,1px solid #d1d1d1;
+}
+.Button.btn_WF_search01[status=disabled]
+{
+	background : transparent;
+	cursor : pointer;
+	border : 0px none;
+	-nexa-edge : url('./../../../_resource_/_images_/btn_WF_search01_O.png') 0px 0px;
+}
+.Button.btn_WF_apply01[status=disabled]
+{
+	background : url('./../../../_resource_/_images_/img_WF_apply01_D.png') no-repeat left center #dddddd;
+	color : #aaaaaa;
+	border : 0px none;
+}
+.Button.btn_WF_apply01[status=disabled] .nexacontentsbox
+{
+	text-align : center;
+}
+.Button.btn_WF_reset01[status=disabled]
+{
+	background : url('./../../../_resource_/_images_/img_WF_reset01_D.png') no-repeat left center #dddddd;
+	color : #aaaaaa;
+	border : 0px none;
+}
+.Button.btn_WF_reset01[status=disabled] .nexacontentsbox
+{
+	text-align : center;
+}
+.Button.btn_WF_search02[status=disabled]
+{
+	background : url('./../../../_resource_/_images_/btn_WF_search02_D.png') no-repeat center center;
+	cursor : pointer;
+	border : 0px none;
+}
+.Button.btn_WF_up[status=disabled]
+{
+	background : url('./../../../_resource_/_images_/btn_WF_up_D.png') no-repeat center center #e4e4e4;
+	cursor : pointer;
+	border : 0px none;
+}
+.Button.btn_WF_down[status=disabled]
+{
+	background : url('./../../../_resource_/_images_/btn_WF_down_D.png') no-repeat center center #e4e4e4;
+	cursor : pointer;
+	border : 0px none;
+}
+.Button.btn_WF_expand[status=disabled]
+{
+	background : url('./../../../_resource_/_images_/btn_WF_expand_D.png') no-repeat center center transparent;
+	cursor : pointer;
+	border : 0px none;
+}
+.Button.btn_WF_fold[status=disabled]
+{
+	background : url('./../../../_resource_/_images_/btn_WF_fold_D.png') no-repeat center center transparent;
+	cursor : pointer;
+	border : 0px none;
+}
+.Button.btn_WF_excel[status=disabled]
+{
+	background : url('./../../../_resource_/_images_/btn_WF_excel_D.png') no-repeat left center #dedede;
+	cursor : pointer;
+	border : 1px solid #c7c7c7;
+}
+.Button.btn_WF_excel[status=disabled] .nexacontentsbox
+{
+	text-align : left;
+}
+.Button.btn_WF_hancel[status=disabled]
+{
+	background : url('./../../../_resource_/_images_/btn_WF_hancel_D.png') no-repeat left center #dedede;
+	cursor : pointer;
+	border : 1px solid #c7c7c7;
+}
+.Button.btn_WF_hancel[status=disabled] .nexacontentsbox
+{
+	text-align : left;
+}
+.Button.btn_WF_iconPort01[status=disabled]
+{
+	background : url('./../../../_resource_/_images_/img_WF_iconPort01.png') no-repeat right top #5182e5;
+	cursor : pointer;
+	border : 0px none;
+	color : #ffffff;
+	font : bold 16pt Malgun Gothic;
+}
+.Button.btn_WF_iconPort01[status=disabled] .nexacontentsbox
+{
+	text-align : center;
+	vertical-align : bottom;
+}
+.Button.btn_WF_iconPort02[status=disabled]
+{
+	background : url('./../../../_resource_/_images_/img_WF_iconPort02.png') no-repeat right bottom #819cf2;
+	cursor : pointer;
+	border : 0px none;
+	color : #ffffff;
+	font : bold 16pt Malgun Gothic;
+}
+.Button.btn_WF_iconPort02[status=disabled] .nexacontentsbox
+{
+	text-align : left;
+	vertical-align : top;
+}
+.Button.btn_WF_iconPort03[status=disabled]
+{
+	background : url('./../../../_resource_/_images_/img_WF_iconPort03.png') no-repeat right bottom #818cf2;
+	cursor : pointer;
+	border : 0px none;
+	color : #ffffff;
+	font : bold 16pt Malgun Gothic;
+}
+.Button.btn_WF_iconPort03[status=disabled] .nexacontentsbox
+{
+	text-align : left;
+	vertical-align : top;
+}
+.Button.btn_WF_iconPort04[status=disabled]
+{
+	background : url('./../../../_resource_/_images_/img_WF_iconPort04.png') no-repeat right bottom #8981f2;
+	cursor : pointer;
+	border : 0px none;
+	color : #ffffff;
+	font : bold 16pt Malgun Gothic;
+}
+.Button.btn_WF_iconPort04[status=disabled] .nexacontentsbox
+{
+	text-align : left;
+	vertical-align : top;
+}
+.Button.btn_WF_iconPort05[status=disabled]
+{
+	background : url('./../../../_resource_/_images_/img_WF_iconPort05.png') no-repeat left bottom #519ae5;
+	cursor : pointer;
+	border : 0px none;
+	color : #ffffff;
+	font : bold 16pt Malgun Gothic;
+}
+.Button.btn_WF_iconPort05[status=disabled] .nexacontentsbox
+{
+	text-align : right;
+	vertical-align : top;
+}
+.Button.btn_WF_iconPort06[status=disabled]
+{
+	background : url('./../../../_resource_/_images_/img_WF_iconPort06.png') no-repeat left bottom #57b2dd;
+	cursor : pointer;
+	border : 0px none;
+	color : #ffffff;
+	font : bold 16pt Malgun Gothic;
+}
+.Button.btn_WF_iconPort06[status=disabled] .nexacontentsbox
+{
+	text-align : right;
+	vertical-align : top;
+}
+.Button.btn_WF_iconPort07[status=disabled]
+{
+	background : url('./../../../_resource_/_images_/img_WF_iconPort07.png') no-repeat left top #759ceb;
+	cursor : pointer;
+	border : 0px none;
+	color : #ffffff;
+	font : bold 16pt Malgun Gothic;
+}
+.Button.btn_WF_iconPort07[status=disabled] .nexacontentsbox
+{
+	text-align : right;
+	vertical-align : bottom;
+}
+.Button.btn_WF_iconPort08[status=disabled]
+{
+	background : url('./../../../_resource_/_images_/img_WF_iconPort08.png') no-repeat left top #75a7eb;
+	cursor : pointer;
+	border : 0px none;
+	color : #ffffff;
+	font : bold 16pt Malgun Gothic;
+}
+.Button.btn_WF_iconPort08[status=disabled] .nexacontentsbox
+{
+	text-align : right;
+	vertical-align : bottom;
+}
+.Button.btn_WF_iconPort09[status=disabled]
+{
+	background : url('./../../../_resource_/_images_/img_WF_iconPort09.png') no-repeat right top #9480dd;
+	cursor : pointer;
+	border : 0px none;
+	color : #ffffff;
+	font : bold 16pt Malgun Gothic;
+}
+.Button.btn_WF_iconPort09[status=disabled] .nexacontentsbox
+{
+	text-align : left;
+	vertical-align : bottom;
+}
+.Button.btn_pop_close[status=disabled]
+{
+	background : url('./../../../_resource_/_images_/btn_pop_close.png') no-repeat center center transparent;
+	cursor : pointer;
+	border : 0px none;
+}
+.Edit.ed_basic01[status=disabled]
+{
+	background : #dddddd;
+	border : 1px solid #aaaaaa;
+	color : #aaaaaa;
+}
+.MaskEdit.msk_basic01[status=disabled]
+{
+	background : #dddddd;
+	border : 1px solid #aaaaaa;
+	color : #aaaaaa;
+}
+.Grid.grd_basic01 .body .row .cell[status=disabled]
+{
+	background : #ffffff;
+	color : #6e6e63;
+}
+.Grid.grd_basic01 .body .row .cell.oddcell[status=disabled]
+{
+	background : rgba(229,229,229,0.4);
+}
+.Grid.grd_basic01 .body .row .cell .celledit[status=disabled]
+{
+	background : #dddddd;
+	border : 1px solid #aaaaaa;
+	color : #aaaaaa;
+}
+.Grid.grd_basic01 .body .row .cell .cellmaskedit[status=disabled]
+{
+	background : #dddddd;
+	border : 1px solid #aaaaaa;
+	color : #aaaaaa;
+}
+.Grid.grd_basic01 .body .row .cell .celltextarea[status=disabled]
+{
+	background : #dddddd;
+	border : 1px solid #aaaaaa;
+	color : #aaaaaa;
+}
+.Grid.grd_basic01 .body .row .cell .cellbutton[status=disabled]
+{
+	background : #dddddd;
+	border : 1px solid #aaaaaa;
+	color : #aaaaaa;
+}
+.Grid.grd_basic01 .body .row .cell .cellcheckbox[status=disabled]
+{
+	color : #aaaaaa;
+}
+.Grid.grd_basic01 .body .row .cell .cellcombo[status=disabled]
+{
+	background : #dddddd;
+	border : 1px solid #aaaaaa;
+	color : #aaaaaa;
+}
+.Grid.grd_basic01 .body .row .cell .cellcombo .comboedit[status=disabled]
+{
+	background : #dddddd;
+	border : 0px none;
+	color : #aaaaaa;
+}
+.Grid.grd_basic01 .body .row .cell .cellcombo .dropbutton[status=disabled] .nexacontentsbox
+{
+	text-align : center;
+	vertical-align : middle;
+}
+.ListBoxControl.popupGridgrd_basic01bodyrowcellcellcombocombolist.dummy.dummy.dummy.dummy.dummy.dummy[status=disabled]
+{
+	background : #dddddd;
+	border : 0px none;
+	color : #aaaaaa;
+}
+.Grid.grd_basic01 .body .row .cell .cellcalendar[status=disabled]
+{
+	background : #dddddd;
+	border : 1px solid #aaaaaa;
+	color : #aaaaaa;
+}
+.Grid.grd_basic01 .body .row .cell .cellcalendar .datepicker .body .dayitem[status=disabled]
+{
+	background : #dddddd;
+	color : #aaaaaa;
+}
+.DatePickerControl.popupGridgrd_basic01bodyrowcellcellcalendardatepicker .body .dayitem[status=disabled]
+{
+	background : #dddddd;
+	color : #aaaaaa;
+}
+.Grid.grd_basic01 .body .row .cell .cellcalendar .calendarspinupbutton[status=disabled] .nexacontentsbox
+{
+	text-align : center;
+	vertical-align : middle;
+}
+.Grid.grd_basic01 .body .row .cell .cellcalendar .calendarspindownbutton[status=disabled] .nexacontentsbox
+{
+	text-align : center;
+	vertical-align : middle;
+}
+.GroupBox.grb_basic01[status=disabled]
+{
+	background : #dddddd;
+	border : 1px solid #aaaaaa;
+	color : #aaaaaa;
+}
+.Tab.tab_basic01[status=disabled]
+{
+	border : 1px solid #b4b4b4;
+	color : #b4b4b4;
+}
+.Tab.tab_basic01 .tabbuttonitemTabtab_basic01[status=disabled]
+{
+	border : 1px solid #b4b4b4;
+	background : #d6d6d6;
+}
+.ProgressBar.prg_basic01[status=disabled]
+{
+	background : #dddddd;
+	border : 1px solid #aaaaaa;
+	color : #f7f7f7;
+}
+.Button.btn_cp_popDiv[status=disabled]
+{
+	background : #dddddd;
+	border : 1px solid #aaaaaa;
+	border-radius : 0px;
+	color : #aaaaaa;
+	cursor : pointer;
+	font : 11pt Malgun Gothic,Arial,Gulim;
+	box-shadow : 0px 3px 1px rgba(207,207,207,1);
+}
+.Button.btn_cp_popDiv[status=disabled] .nexacontentsbox
+{
+	text-align : center;
+	vertical-align : middle;
+}
+.Button.btn_cp_popMenu[status=disabled]
+{
+	background : #dddddd;
+	border : 1px solid #aaaaaa;
+	border-radius : 0px;
+	color : #aaaaaa;
+	cursor : pointer;
+	font : 11pt Malgun Gothic,Arial,Gulim;
+	box-shadow : 0px 3px 1px rgba(207,207,207,1);
+}
+.Button.btn_cp_popMenu[status=disabled] .nexacontentsbox
+{
+	text-align : center;
+	vertical-align : middle;
+}
+.FileDownload.filedown_basic01[status=disabled]
+{
+	background : #dddddd;
+	border : 1px solid #aaaaaa;
+	color : #aaaaaa;
+}
+.FileUpload.fileup_basic01 .fileuploaditem .fileuploaditembutton[status=disabled]
+{
+	background : #dddddd;
+	border : 1px solid #aaaaaa;
+	color : #aaaaaa;
+}
+.FileUpload.fileup_basic01 .fileuploaditem .fileuploaditemedit[status=disabled]
+{
+	background : #dddddd;
+	border : 1px solid #aaaaaa;
+	color : #aaaaaa;
+}
+.Button.btn_cp_basic01[status=disabled]
+{
+	background : #d97a6a;
+	border : 1px solid #c66151;
+	border-radius : 0px;
+	color : #ffffff;
+	cursor : pointer;
+	font : 10pt Malgun Gothic,Arial,Gulim;
+}
+.Button.btn_cp_basic01[status=disabled] .nexacontentsbox
+{
+	text-align : center;
+	vertical-align : middle;
+}
+.Button.btn_cp_basic03[status=disabled]
+{
+	background : #d8d8d8;
+	border : 1px solid #b9b9b9;
+	border-radius : 0px;
+	color : #222222;
+	cursor : pointer;
+	font : 10pt Malgun Gothic,Arial,Gulim;
+}
+.Button.btn_cp_basic03[status=disabled] .nexacontentsbox
+{
+	text-align : center;
+	vertical-align : middle;
+}
+.Button.btn_cp_basic02[status=disabled]
+{
+	background : #9a88a7;
+	border : 1px solid #836c93;
+	border-radius : 0px;
+	color : #ffffff;
+	cursor : pointer;
+	font : 10pt Malgun Gothic,Arial,Gulim;
+}
+.Button.btn_cp_basic02[status=disabled] .nexacontentsbox
+{
+	text-align : center;
+	vertical-align : middle;
+}
+.GroupBox.grb_basic01 .groupboxcontents[status=disabled]
+{
+	background : #efefef;
+}
+.Radio.rdo_basic01[status=disabled]
+{
+	color : #b4b4b4;
+}
+.Combo.cmb_basic01[status=disabled]
+{
+	background : #dddddd;
+	border : 1px solid #aaaaaa;
+	color : #aaaaaa;
+}
+.Combo.cmb_basic01 .comboedit[status=disabled]
+{
+	background : #dddddd;
+	border : 0px none;
+	color : #aaaaaa;
+}
+.Combo.cmb_basic01 .dropbutton[status=disabled] .nexacontentsbox
+{
+	text-align : center;
+	vertical-align : middle;
+}
+.ListBoxControl.popupCombocmb_basic01combolist.dummy.dummy[status=disabled]
+{
+	background : #dddddd;
+	border : 0px none;
+	color : #aaaaaa;
+}
+.Calendar.cal_basic01[status=disabled]
+{
+	background : #dddddd;
+	border : 1px solid #aaaaaa;
+	color : #aaaaaa;
+}
+.Calendar.cal_basic01 .datepicker .body .dayitem[status=disabled]
+{
+	background : #dddddd;
+	color : #aaaaaa;
+}
+.DatePickerControl.popupCalendarcal_basic01datepicker .body .dayitem[status=disabled]
+{
+	background : #dddddd;
+	color : #aaaaaa;
+}
+.Calendar.cal_basic01 .calendaredit[status=disabled]
+{
+	background : #dddddd;
+	color : #aaaaaa;
+}
+.Calendar.cal_basic01 .calendarspinupbutton[status=disabled] .nexacontentsbox
+{
+	text-align : center;
+	vertical-align : middle;
+}
+.Calendar.cal_basic01 .calendarspindownbutton[status=disabled] .nexacontentsbox
+{
+	text-align : center;
+	vertical-align : middle;
+}
+.Button.CalendarWeekDropButton[status=disabled]
+{
+	background : url('./../../../_resource_/_images_/btn_WF_Calendar.png') no-repeat center center transparent;
+	border : 0px none;
+}
+.Button.CalendarWeekPrevButton[status=disabled]
+{
+	background : url('./images/btn_WF_Calprev.png') no-repeat center center transparent;
+	border : 0px none;
+}
+.Button.CalendarWeekNextButton[status=disabled]
+{
+	background : url('./images/btn_WF_Calnext.png') no-repeat center center transparent;
+	border : 0px none;
+}
+.Button.MultiComboButton[status=disabled]
+{
+	background : url('./images/cmb_WF_Drop.png') no-repeat center center transparent;
+	border : 0px none;
+}
+.Grid.grd_basic01 .body .row .cell[status=focused][userstatus=selected]
+{
+	background : #fce6e2;
+	color : #ff6c54;
+	border : 1px solid #9c9c9c;
+}
+.Grid.grd_basic01 .body .row .cell[status=disabled][userstatus=selected]
+{
+	background : #ffffff;
+	color : #6e6e63;
+}

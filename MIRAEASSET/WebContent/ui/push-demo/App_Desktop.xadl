@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ADL version="2.0">
+  <Application id="App_Desktop" screenid="Desktop_screen">
+    <Layout>
+      <MainFrame id="mainframe" showtitlebar="true" showstatusbar="false" width="1280" height="1000" titletext="미래에셋자산운용 POC" openalign="center middle" showcascadetitletext="false" openstatus="maximize">
+        <VFrameSet id="VFrameSet" separatesize="*,0,0,0,0" showtitlebar="false">
+          <Frames>
+            <ChildFrame id="LoginFrame" formurl="frame::login.xfdl" showcascadetitletext="false" dragmovetype="none" showtitlebar="false"/>
+            <ChildFrame id="TopFrame" formurl="frame::top.xfdl" showcascadetitletext="false" dragmovetype="none" showtitlebar="false"/>
+            <ChildFrame id="OpenMenuFrame" formurl="frame::openMenu.xfdl" showtitlebar="false" dragmovetype="none" showcascadetitletext="false"/>
+            <HFrameSet id="HFrameSet" showcascadetitletext="false" separatesize="180,*" showtitlebar="false">
+              <Frames>
+                <ChildFrame id="LeftFrame" formurl="frame::left.xfdl" showcascadetitletext="false" showtitlebar="false" dragmovetype="none"/>
+                <FrameSet id="MDIFrameSet" showtitlebar="false" showcascadetitletext="false">
+                  <Frames>
+                    <ChildFrame id="HomeFrame" formurl="frame::home.xfdl" dragmovetype="none" showtitlebar="false" showcascadetitletext="false" openstatus="maximize"/>
+                  </Frames>
+                </FrameSet>
+              </Frames>
+            </HFrameSet>
+            <ChildFrame id="BottomFrame" formurl="frame::bottom.xfdl" showcascadetitletext="false" showtitlebar="false" dragmovetype="none"/>
+          </Frames>
+        </VFrameSet>
+      </MainFrame>
+    </Layout>
+    <Style url="xcssrc::style.xcss"/>
+  </Application>
+</ADL>

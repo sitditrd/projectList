@@ -1,0 +1,332 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.0">
+  <Form id="w_cmccusstch01" width="824" height="608" titletext="New Form">
+    <Layouts>
+      <Layout height="608" mobileorientation="landscape" width="824">
+        <Grid id="Grid00" taborder="0" left="10" top="130" right="10" bottom="34" binddataset="ds_detail" autofittype="col">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+              </Columns>
+              <Rows>
+                <Row band="head" size="24"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="customerNo"/>
+                <Cell col="1" text="last"/>
+                <Cell col="2" text="shortName"/>
+                <Cell col="3" text="nickName"/>
+                <Cell col="4" text="catalogKind"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:customerNo"/>
+                <Cell col="1" text="bind:last"/>
+                <Cell col="2" text="bind:shortName"/>
+                <Cell col="3" text="bind:nickName"/>
+                <Cell col="4" text="bind:catalogKind"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Button id="btn_detail" taborder="1" text="Details" left="10" width="66" cssclass="btn_WF_basic01" height="24" bottom="0" onclick="btn_detail_onclick"/>
+        <Button id="btn_new" taborder="2" text="New" left="79" width="52" cssclass="btn_WF_basic01" height="24" bottom="0" onclick="btn_new_onclick"/>
+        <Button id="Button03" taborder="3" text="Update" left="134" width="68" cssclass="btn_WF_basic01" height="24" bottom="0"/>
+        <Button id="Button04" taborder="4" text="Print" left="205" width="54" cssclass="btn_WF_basic01" height="24" bottom="0"/>
+        <Button id="Button05" taborder="5" text="Relationship" left="262" width="90" cssclass="btn_WF_basic01" height="24" bottom="0"/>
+        <Button id="Button06" taborder="6" text="Signature/Photo" left="355" width="112" cssclass="btn_WF_basic01" height="24" bottom="0"/>
+        <Button id="Button07" taborder="7" text="Signature History" left="470" width="114" cssclass="btn_WF_basic01" height="24" bottom="0"/>
+        <Button id="Button09" taborder="8" text="Exit" cssclass="btn_WF_basic04" width="60" right="10" height="24" bottom="0"/>
+        <Static id="Static35" taborder="9" left="10" top="10" height="108" cssclass="sta_WF_box01" right="10"/>
+        <Static id="Static00" taborder="10" text="Branch" left="17" top="18" width="120" height="30" cssclass="sta_WF_label01"/>
+        <Edit id="Edit00" taborder="11" left="136" top="21" width="62" height="25" value="1500" text="1500"/>
+        <Static id="Static01" taborder="12" text="Search Criteria" left="17" top="48" width="120" height="30" cssclass="sta_WF_label01"/>
+        <Static id="Static02" taborder="13" text="Search For" left="17" top="78" width="120" height="30" cssclass="sta_WF_label01"/>
+        <Edit id="Edit02" taborder="14" left="136" top="81" width="220" height="25"/>
+        <Combo id="Combo00" taborder="15" text="Ha Noi Branch" left="203" top="21" width="153" height="25" innerdataset="innerdataset" codecolumn="codecolumn" datacolumn="datacolumn" index="0" value="1500">
+          <Dataset id="innerdataset">
+            <ColumnInfo>
+              <Column id="codecolumn" size="256"/>
+              <Column id="datacolumn" size="256"/>
+            </ColumnInfo>
+            <Rows>
+              <Row>
+                <Col id="codecolumn">1500</Col>
+                <Col id="datacolumn">Ha Noi Branch</Col>
+              </Row>
+              <Row>
+                <Col id="codecolumn">1600</Col>
+                <Col id="datacolumn">Da nang Branch</Col>
+              </Row>
+            </Rows>
+          </Dataset>
+        </Combo>
+        <Combo id="cbo_criteria" taborder="16" left="136" top="51" width="220" height="25" innerdataset="ds_criteria" codecolumn="Column0" datacolumn="Column1" index="0" text="Short name" value="01"/>
+        <Static id="Static03" taborder="17" text="Transaction Date" left="385" top="18" width="158" height="30" cssclass="sta_WF_label01"/>
+        <Static id="Static04" taborder="18" text="Transaction Status" left="385" top="48" width="158" height="30" cssclass="sta_WF_label01"/>
+        <Static id="Static05" taborder="19" text="Customer Type" left="385" top="78" width="158" height="30" cssclass="sta_WF_label01"/>
+        <Combo id="cbo_customerType" taborder="20" left="529" top="81" width="182" height="25" innerdataset="ds_customerType" codecolumn="Column0" datacolumn="Column1" index="0" text="All Customer Type" value="01"/>
+        <Calendar id="Calendar00" taborder="21" left="529" top="21" width="124" height="25" showmonthspin="false" type="spin"/>
+        <Static id="Static06" taborder="22" text="~" left="661" top="23" width="16" height="20"/>
+        <Calendar id="Calendar01" taborder="23" left="679" top="21" width="124" height="25" showmonthspin="false" type="spin"/>
+        <Radio id="Radio00" taborder="24" left="529" top="52" width="222" height="22" innerdataset="innerdataset" codecolumn="codecolumn" datacolumn="datacolumn" rowcount="1" index="0" text="Normal" value="0">
+          <Dataset id="innerdataset">
+            <ColumnInfo>
+              <Column id="codecolumn" size="256"/>
+              <Column id="datacolumn" size="256"/>
+            </ColumnInfo>
+            <Rows>
+              <Row>
+                <Col id="codecolumn">0</Col>
+                <Col id="datacolumn">Normal</Col>
+              </Row>
+              <Row>
+                <Col id="codecolumn">1</Col>
+                <Col id="datacolumn">Invalid</Col>
+              </Row>
+              <Row>
+                <Col id="codecolumn">2</Col>
+                <Col id="datacolumn">All</Col>
+              </Row>
+            </Rows>
+          </Dataset>
+        </Radio>
+        <Button id="Button00" taborder="25" text="Search" left="737" top="53" width="66" height="25" cssclass="btn_WF_basic02"/>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="ds_criteria">
+        <ColumnInfo>
+          <Column id="Column0" type="STRING" size="256"/>
+          <Column id="Column1" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="Column0">01</Col>
+            <Col id="Column1">Short name</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">02</Col>
+            <Col id="Column1">Customer Number</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">03</Col>
+            <Col id="Column1">Full name</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">04</Col>
+            <Col id="Column1">Nick name</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">05</Col>
+            <Col id="Column1">Phone number</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">06</Col>
+            <Col id="Column1">Address</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">07</Col>
+            <Col id="Column1">Register No</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">08</Col>
+            <Col id="Column1">Passport No</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">09</Col>
+            <Col id="Column1">Driver No</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">10</Col>
+            <Col id="Column1">Reference No (Old Customer Number)</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">11</Col>
+            <Col id="Column1">Bank Code</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">12</Col>
+            <Col id="Column1">Last Update</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">13</Col>
+            <Col id="Column1">Business No</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">14</Col>
+            <Col id="Column1">Establish no</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">15</Col>
+            <Col id="Column1">Tax No</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">16</Col>
+            <Col id="Column1">District</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">17</Col>
+            <Col id="Column1">Commune</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">18</Col>
+            <Col id="Column1">Nationality No</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="ds_customerType">
+        <ColumnInfo>
+          <Column id="Column0" type="STRING" size="256"/>
+          <Column id="Column1" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="Column0">01</Col>
+            <Col id="Column1">All Customer Type</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">02</Col>
+            <Col id="Column1">Individual Customer</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">03</Col>
+            <Col id="Column1">Joint Venture Company</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">04</Col>
+            <Col id="Column1">Private Business Owner</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">05</Col>
+            <Col id="Column1">Foreign Investment Company</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">06</Col>
+            <Col id="Column1">Household</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">07</Col>
+            <Col id="Column1">State Enterprise</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">08</Col>
+            <Col id="Column1">Cooperative</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">09</Col>
+            <Col id="Column1">Financial Institution</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">10</Col>
+            <Col id="Column1">Stock Company</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">11</Col>
+            <Col id="Column1">Government &amp; Public Institution</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">12</Col>
+            <Col id="Column1">Company Limited</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">13</Col>
+            <Col id="Column1">Organization</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="ds_detail">
+        <ColumnInfo>
+          <Column id="customerNo" type="STRING" size="256"/>
+          <Column id="last" type="STRING" size="256"/>
+          <Column id="shortName" type="STRING" size="256"/>
+          <Column id="nickName" type="STRING" size="256"/>
+          <Column id="catalogKind" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="customerNo">aaa111</Col>
+            <Col id="nickName">YOUNGSTEEL K</Col>
+          </Row>
+          <Row>
+            <Col id="customerNo">bbb222</Col>
+            <Col id="nickName">MIZMIZ</Col>
+          </Row>
+          <Row>
+            <Col id="customerNo">ccc333</Col>
+            <Col id="nickName">COCOCO</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.1"><![CDATA[/************************
+ *  Script Include
+ *************************/
+include "lib::lib_Form.xjs";
+
+this.btn_detail_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.openPopupList("detail");
+};
+
+this.btn_new_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	var sPopupId = "Select";
+	var oArg = {
+		objArguments : ""
+	};
+	var sUrl = "poc::sub00.xfdl";
+	var sPopupCallback = "popupCallback";
+	var sPopupWidth = 440;
+	var sPopupHeight = 270;
+	var oTarget = this;
+	var sPopupTitle = "Customer Select";
+	var sPopupStatus = true;
+	this.gfn_openModalPopup(sPopupId, oArg, sUrl, sPopupCallback, sPopupWidth, sPopupHeight, oTarget, sPopupTitle, "", "");
+};
+
+this.openPopupList = function (strType)
+{
+	var arrCustromer = new Array();
+	
+	if(strType == "detail"){
+		arrCustromer = "0744-001034570";
+	}
+	
+	var sPopupId = "Main";
+	var oArg = {
+		objType		 : strType,
+		objArguments : arrCustromer
+	};
+	var sUrl = "poc::sub01.xfdl";
+	var sPopupCallback = "popupCallback";
+	var sPopupWidth = 824;
+	var sPopupHeight = 608;
+	var oTarget = this;
+	var sPopupTitle = "Customer Main";
+	var sPopupStatus = true;
+	this.gfn_openModalPopup(sPopupId, oArg, sUrl, sPopupCallback, sPopupWidth, sPopupHeight, oTarget, sPopupTitle, "", "");
+};
+
+this.popupCallback = function (sFormId, sArg)
+{
+	if (sFormId == "Select") 
+	{
+		if (sArg == "OK") 
+		{
+			this.openPopupList("new");
+		}
+	}else if(sFormId == "Main")
+	{
+		
+	}
+};
+
+]]></Script>
+  </Form>
+</FDL>

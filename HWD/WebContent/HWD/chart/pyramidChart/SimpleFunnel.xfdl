@@ -1,0 +1,80 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.0">
+  <Form id="SimplePyramid" width="768" height="480" titletext="New Form">
+    <Layouts>
+      <Layout height="480" mobileorientation="landscape" width="768">
+        <PyramidChart id="PyramidChart00" taborder="0" left="0" top="0" right="0" bottom="0" binddataset="ds_browser_lanking" categorycolumn="bind:value" graphtype="funnel">
+          <Contents><![CDATA[{
+	"title": {
+		"id": "title",
+		"text": "Pyramid Chart",
+		"textfont": "20pt/normal '맑은 고딕'",
+		"padding": "0px 0px 5px"
+	},
+	"tooltip": {
+		"id": "tooltip",
+		"background": "#4b4b4b",
+		"linestyle": "0px none",
+		"textcolor": "#ffffff",
+		"textfont": "10pt/normal '맑은 고딕'",
+		"padding": "5px"
+	},
+	"board": {
+		"id": "board"
+	},
+	"seriesset": [
+		{
+			"id": "series0",
+			"margintopdown": 10,
+			"graphratio": 60,
+			"linestyle": "2px solid #ffffff",
+			"itemtextvisible": true,
+			"itemtextfont": "10pt/normal '맑은 고딕'",
+			"valuecolumn": "bind:value",
+			"graphhalign": "center",
+			"itemtextguidesize": "30",
+			"autogradation": "none",
+			"marginleftright": "20",
+			"itemtext": "expr:Browser"
+		}
+	]
+}]]></Contents>
+        </PyramidChart>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="ds_browser_lanking">
+        <ColumnInfo>
+          <Column id="Browser" type="STRING" size="256"/>
+          <Column id="value" type="FLOAT" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="Browser">Edge</Col>
+            <Col id="value">1000</Col>
+          </Row>
+          <Row>
+            <Col id="Browser">IE</Col>
+            <Col id="value">200</Col>
+          </Row>
+          <Row>
+            <Col id="Browser">Opera</Col>
+            <Col id="value">400</Col>
+          </Row>
+          <Row>
+            <Col id="Browser">Firefox</Col>
+            <Col id="value">600</Col>
+          </Row>
+          <Row>
+            <Col id="Browser">Safari</Col>
+            <Col id="value">100</Col>
+          </Row>
+          <Row>
+            <Col id="Browser">Chrome</Col>
+            <Col id="value">180</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+    </Objects>
+  </Form>
+</FDL>

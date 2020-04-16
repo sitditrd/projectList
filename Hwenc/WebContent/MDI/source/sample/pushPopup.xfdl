@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.0">
+  <Form id="pushPopup" width="570" height="170" titletext="New Form" onload="pushPopup_onload" onclose="pushPopup_onclose">
+    <Layouts>
+      <Layout height="170" mobileorientation="landscape" width="570">
+        <Grid id="grd00" taborder="0" left="5" top="5" autofittype="none" binddataset="ds00" bottom="40" right="5">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="146"/>
+                <Column size="412"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="종류"/>
+                <Cell col="1" text="수신메세지"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:TOPIC_ID"/>
+                <Cell col="1" text="bind:DATA_01"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Button id="btn00" taborder="1" text="확인" left="228" top="136" width="108" onclick="btn00_onclick" bottom="5"/>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="ds00">
+        <ColumnInfo>
+          <Column id="TOPIC_ID" type="STRING" size="256"/>
+          <Column id="DATA_01" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="TOPIC_ID"/>
+            <Col id="DATA_01"/>
+          </Row>
+        </Rows>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.1"><![CDATA[var objDs = nexacro.getApplication().gdsMessage;
+this.pushPopup_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
+{
+	this.ds00.appendData(objDs);
+};
+
+this.btn00_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.close();
+};
+
+this.pushPopup_onclose = function(obj:nexacro.Form,e:nexacro.CloseEventInfo)
+{
+	this.ds00.clearData();
+};
+]]></Script>
+  </Form>
+</FDL>

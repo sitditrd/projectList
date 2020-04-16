@@ -1,0 +1,286 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.1.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.1.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.2.xsd">
+
+	<!-- namespace에서 mvc를 추가해주고 아래와 같은 과정을 수행한다. -->
+	<mvc:annotation-driven></mvc:annotation-driven>
+
+	<!-- [1] DataSource빈 선언 -->
+	<!-- oracle.properties를 사용해도 되고 안해도 된다. (개인취향) -->
+	<bean id="dataSource"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="oracle.jdbc.OracleDriver" />
+		<property name="url" value="jdbc:oracle:thin://@14.63.224.112:1521:xe" />
+		<property name="username" value="FINALPROJECT" />
+		<property name="password" value="a1234" />
+	</bean>
+
+	<!-- [2] SqlSessionFactoryBean 빈 선언 -->
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="mapperLocations">
+			<list>
+				<value>classpath:config/MemberMapper.xml</value>
+				<value>classpath:config/NoticeMapper.xml</value>
+				<value>classpath:config/BoardMapper.xml</value>
+				<value>classpath:config/AdminMapper.xml</value>
+				<value>classpath:config/TicketMapper.xml</value>
+				<value>classpath:config/PlaneMapper.xml</value>
+				<value>classpath:config/StopoverMapper.xml</value>
+				<value>classpath:config/ReserveMapper.xml</value>
+				<value>classpath:config/PlaneModelMapper.xml</value>
+				<value>classpath:config/CancelMapper.xml</value>
+			</list>
+		</property>
+	</bean>
+
+	<!-- [3] SqlSessionTemplate 빈 선언 -->
+	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg ref="sqlSessionFactory" />
+	</bean>
+
+	<!-- [4] TransactionManager 빈 선언 -->
+	<bean id="transactionManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+
+	<!-- [5] 선언적 트랜잭션(tx:advice) 선언 -->
+	<tx:advice id="txAdvice" transaction-manager="transactionManager">
+		<tx:attributes>
+			<tx:method name="*Process" rollback-for="java.lang.Exception" />
+		</tx:attributes>
+	</tx:advice>
+
+	<!-- [6] 트랜잭션 설정 -->
+	<aop:config>
+		<aop:advisor advice-ref="txAdvice"
+			pointcut="execution(* service.*ServiceImp.*Process(..))" />
+	</aop:config>
+
+	<!-- 참조대는 순서대로 Bean을 선언한다. -->
+
+	<!-- MemberDAO Bean 선언 -->
+	<!-- [7] DAO 빈 선언 -->
+	<bean id="memberdao" class="dao.MemberDaoImp">
+		<property name="sqlSession" ref="sqlSession" />
+	</bean>
+
+	<!-- [8] Service 빈 선언 -->
+	<bean id="memberservice" class="service.MemberServiceImp">
+		<property name="dao" ref="memberdao" />
+	</bean>
+
+	<!-- NoticeDAO Bean 선언 -->
+	<bean id="noticedao" class="dao.NoticeDaoImp">
+		<property name="sqlSession" ref="sqlSession" />
+	</bean>
+
+	<bean id="noticeservice" class="service.NoticeServiceImp">
+		<property name="noticedao" ref="noticedao" />
+	</bean>
+
+	<!-- BoardDAO Bean 선언 -->
+	<bean id="boarddao" class="dao.BoardDaoImp">
+		<property name="sqlSession" ref="sqlSession"></property>
+	</bean>
+
+	<bean id="boardservice" class="service.BoardServiceImp">
+		<property name="boarddao" ref="boarddao"></property>
+	</bean>
+
+	<!-- AdminDAO Bean 선언 -->
+	<bean id="admindao" class="dao.AdminDaoImp">
+		<property name="sqlSession" ref="sqlSession"></property>
+	</bean>
+
+	<bean id="adminservice" class="service.AdminServiceImp">
+		<property name="admindao" ref="admindao"></property>
+	</bean>
+
+	<!-- TicketDAO Bean 선언 -->
+	<bean id="ticketdao" class="dao.TicketDaoImp">
+		<property name="sqlSession" ref="sqlSession"></property>
+	</bean>
+
+	<bean id="ticketservice" class="service.TicketServiceImp">
+		<property name="ticketdao" ref="ticketdao"></property>
+	</bean>
+
+	<!-- PlaneDAO Bean 선언 -->
+	<bean id="planedao" class="dao.PlaneDaoImp">
+		<property name="sqlSession" ref="sqlSession"></property>
+	</bean>
+
+	<bean id="planeservice" class="service.PlaneServiceImp">
+		<property name="planedao" ref="planedao"></property>
+	</bean>
+
+	<!-- StopDAO Bean 선언 -->
+	<bean id="stopdao" class="dao.StopDaoImp">
+		<property name="sqlSession" ref="sqlSession"></property>
+	</bean>
+
+	<bean id="stopservice" class="service.StopServiceImp">
+		<property name="stopdao" ref="stopdao"></property>
+	</bean>
+
+	<!-- ReserveDAO Bean 선언 -->
+	<bean id="reservedao" class="dao.ReserveDaoImp">
+		<property name="sqlSession" ref="sqlSession"></property>
+	</bean>
+
+	<bean id="reserveservice" class="service.ReserveServiceImp">
+		<property name="reservedao" ref="reservedao"></property>
+	</bean>
+	
+	<!-- PlaneModelDAO Bean 선언 -->
+	<bean id="planemodeldao" class="dao.PlaneModelDaoImp">
+		<property name="sqlSession" ref="sqlSession"></property>
+	</bean>
+	
+	<bean id="planemodelservice" class="service.PlaneModelServiceImp">
+		<property name="planemodeldao" ref="planemodeldao"></property>
+	</bean>
+	
+	<!-- CancelDAO Bean 선언 -->
+	<bean id="canceldao" class="dao.CancelDaoImp">
+		<property name="sqlSession" ref="sqlSession"></property>
+	</bean>
+	
+	<bean id="cancelservice" class="service.CancelServiceImp">
+		<property name="canceldao" ref="canceldao"></property>
+	</bean>
+	
+	<!-- 파일 업로드 시작 -->
+	<!-- 첨부 파일의 임시기적장치 경로 설정 -->
+	<bean id="uploadDirResource" class="org.springframework.core.io.FileSystemResource">
+		<constructor-arg value="./src/main/webapp/files/" />
+	</bean>
+
+	<!-- 첨부파일일때는 아래의 것이 반드시 들어가야 하고 id는 반드시 multipartResolver와 같이 작성해주어야 한다. -->
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="uploadTempDir" ref="uploadDirResource" />
+		<property name="maxUploadSize" value="1000000000" />
+	</bean>
+	<!-- 파일 업로드 끝 -->
+
+	<!-- Controller 시작 -->
+	<!-- Main Controller -->
+	<bean class="controller.AirlineController" />
+
+	<!-- Login Controller -->
+	<bean class="controller.LoginController">
+		<property name="service" ref="memberservice"></property>
+	</bean>
+
+	<!-- Register Controller -->
+	<bean class="controller.RegisterController">
+		<property name="service" ref="memberservice"></property>
+	</bean>
+
+	<!-- Find Controller -->
+	<bean class="controller.FindController">
+		<property name="service" ref="memberservice"></property>
+	</bean>
+
+	<!-- Notice Controller -->
+	<bean class="controller.NoticeController">
+		<property name="service" ref="noticeservice"></property>
+	</bean>
+
+	<!-- Board Controller -->
+	<bean class="controller.BoardController">
+		<property name="service" ref="boardservice"></property>
+	</bean>
+
+	<!-- Admin Controller -->
+	<bean class="controller.AdminController">
+		<property name="service" ref="adminservice"></property>
+	</bean>
+
+	<!-- Search Controller -->
+	<bean class="controller.SearchController">
+	</bean>
+
+	<!-- Ticket Controller -->
+	<bean class="controller.TicketController">
+		<property name="service" ref="ticketservice"></property>
+		<property name="planeservice" ref="planeservice"></property>
+		<property name="stopservice" ref="stopservice"></property>
+		<property name="planemodelservice" ref="planemodelservice"></property>
+	</bean>
+
+	<!-- Reservation Controller -->
+	<bean class="controller.ReservationController">
+		<property name="service" ref="ticketservice"></property>
+		<property name="planeservice" ref="planeservice"></property>
+		<property name="planemodelservice" ref="planemodelservice"></property>
+		<property name="stopservice" ref="stopservice"></property>
+		<property name="reserveservice" ref="reserveservice"></property>
+	</bean>
+
+	<!-- MemberInfo Controller -->
+	<bean class="controller.MemberInfoController">
+		<property name="service" ref="memberservice"></property>
+	</bean>
+
+	<!-- Mypage Controller -->
+	<bean class="controller.MypageController">
+		<property name="rservice" ref="reserveservice" />
+		<property name="mservice" ref="memberservice" />
+		<property name="cancelservice" ref="cancelservice"/>
+	</bean>
+	
+	<!-- Admin Controller -->
+	<bean class="controller.AdminPageController">
+		<property name="rservice" ref="reserveservice"/>
+		<property name="mservice" ref="memberservice"/>
+		<property name="cancelservice" ref="cancelservice"/>
+	</bean>
+	
+	<!-- Weather Controller -->
+	<bean class="controller.WeatherController">
+	
+	</bean>
+	
+	<!-- Controller 끝 -->
+
+	<!-- interceptor -->
+	<mvc:interceptors>
+		<!-- boardlist.do가 실행되기 전에 무조건 interceptor.LoginInterceptor가 먼저 
+			실행된다. -->
+		<mvc:interceptor>
+			<mvc:mapping path="/boardlist.do" />
+			<bean class="interceptor.LoginInterceptor" />
+		</mvc:interceptor>
+	</mvc:interceptors>
+
+	<!-- 다운로드 뷰 빈 선언 -->
+	<bean id="download" class="view.BoardDownLoadView">
+		<property name="dao" ref="noticedao" />
+	</bean>
+
+	<bean id="download2" class="view.BoardDownLoadView2">
+		<property name="dao" ref="boarddao" />
+	</bean>
+
+	<!-- [10] View 빈 선언 -->
+	<bean class="org.springframework.web.servlet.view.BeanNameViewResolver">
+		<property name="order" value="1" />
+	</bean>
+
+	<bean
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="/WEB-INF/" />
+		<property name="suffix" value=".jsp" />
+		<property name="order" value="2" />
+	</bean>
+
+</beans>

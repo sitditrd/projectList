@@ -1,0 +1,1281 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Script type="xscript5.1"><![CDATA[/************************************************************************************************
+* Name     	: comLib_Util.xjs
+* Title    	: Util 관련 함수
+* Desc     	: Util 관련 함수
+* 작성자	: 투비소프트
+* 작성일	: 2018-04-05
+*************************************************************************************************
+*      수정일          이름          사유
+*************************************************************************************************
+*    2018.04.05        투비소프트       최초작성
+************************************************************************************************/
+
+/************************************************************************************************
+ ● gfn_decode                  : decode문 처리
+ ● gfn_isURL                   : 입력값이 URL Type인지 체크하는 함수
+ ● gfn_isEmail                 : 입력값이 e-mail Type인지 체크하는 함수
+ ● gfn_isPhone                 : 입력값이 전화번호 format 인지 체크하는 함수
+ ● gfn_isJuminNo               : 입력값이 주민등록번호 format 인지 체크하는 함수
+ ● gfn_isNum                   : 문자열이 숫자형식에 맞는지 여부 체크
+ ● gfn_setDistinct             : Array에 있는 값들을 Distinct(중복제거)한다.
+ ● gfn_findArray               : 1차원 배열에서 입력된 문자열이 있는 index를 반환
+ ● gfn_findArray2              : 2차원 배열에서 입력된 문자열이 있는 index를 반환
+ ● gfn_isArray                 : value의 Array 여부 반환.
+ ● gfn_lookup                  : 주어진 대상을 포함한 상위 범위로 지정된 이름에 최초로 일치하는 component, object 반환
+ ● gfn_getUniqueId             : 유일한 ID 를 반환
+ ● gfn_setUserProperty         : 주어진 Component, object 에 사용자 속성을 추가한다.
+ ● gfn_getUserProperty         : 주어진 Component, object 에서 사용자 정의 속성값을 얻어온다.
+ ● gfn_deleteUserProperty      : 주어진 Component, object 에서 지정된 사용자 정의 속성을 제거한다.
+ ● gfn_limitInputText          : EDIT에서 글자입력제한(onchar 이벤트에서사용)
+                                  전화번호 형식처럼 숫자와 대쉬(-)만 받을수 있도록 처리
+ ● gfn_createWebBorwserComp    : Filedownload 시 WebBrowser 컴포넌트 동적 생성
+*************************************************************************************************/
+
+/************************************************************************************************
+ * Function Name : gfn_decode
+ * Description   : Grid에서 expression으로  표현할때 gfn_decode 문처럼 사용할 수 있는 기능.
+ * Arguments     : strVal - 조건 변수
+                   values - 조건 값
+                   ture   - true일때 값
+                   false  - false일때 값
+ * Return        : gfn_decode 조건에 맞는 값 리턴.
+*************************************************************************************************/
+this.gfn_decode = function ()
+{
+	var varRtnValue = null;
+	var arrArgument = this.gfn_decode.arguments;
+	var varValue    = arrArgument[0];
+	var bIsDefault  = false;
+	var nCount      = 0;
+
+	if ((arrArgument.length % 2) == 0) 
+	{
+		nCount     = arrArgument.length - 1;
+		bIsDefault = true;
+	}
+	else 
+	{
+		nCount     = arrArgument.length;
+		bIsDefault = false;
+	}
+
+	for (var i = 1; i < nCount; i += 2) 
+	{
+		if (varValue == arrArgument[i]) {
+			varRtnValue = arrArgument[i + 1];
+			i = nCount;
+		}
+	}
+
+	if (varRtnValue == null && bIsDefault) {
+		varRtnValue = arrArgument[arrArgument.length - 1];
+	}
+
+	return varRtnValue;
+}
+
+/************************************************************************************************
+ * Function Name : gfn_isURL
+ * Description   : 입력값이 URL Type인지 체크하는 함수
+ * Arguments     : strValue - 경로
+ * Return        : boolean
+*************************************************************************************************/
+this.gfn_isURL = function (strValue)
+{
+	if (this.gfn_isNull(strValue)) 
+	{
+		return false;
+	}
+	else if (strValue.indexOf(".") == -1) 
+	{
+		return false;
+	}
+	else 
+	{
+		return true;
+	}
+}
+
+/************************************************************************************************
+ * Function Name : gfn_isEmail
+ * Description   : 입력값이 e-mail Type인지 체크하는 함수
+ * Arguments     : strValue - 값
+ * Return        : boolean
+*************************************************************************************************/
+this.gfn_isEmail = function (strValue)
+{
+	if (this.gfn_isNull(strValue)) {
+		return false;
+	}
+
+	var nIndexOfAt  = strValue.indexOf("@");
+	var nIndexOfDot = strValue.indexOf(".");
+	var nLength     = strValue.length;
+
+	// "@" 이 하나도 없거나 맨 끝에 위치한  경우
+	if (nIndexOfAt <= 0 || nIndexOfAt == nLength) {
+		return false;
+	}
+
+	// "." 이 하나도 없거나 맨 끝에 위치한 경우
+	if (nIndexOfDot <= 0 || nIndexOfDot == nLength) {
+		return false;
+	}
+
+	// "@"이 두개 이상 존재하는 경우
+	if (strValue.indexOf("@", nIndexOfAt + 1) != -1) {
+		return false;
+	}
+
+	// ".@" 인 경우 또는 "@."인 경우
+	if (strValue.substr(nIndexOfAt - 1, 1) == "." || strValue.substr(nIndexOfAt + 1, 1) == ".") {
+		return false;
+	}
+
+	// "@" 이후에 "."이 존재하지 않는 경우
+	if (strValue.indexOf(".", (nIndexOfAt + 2)) == -1) {
+		return false;
+	}
+
+	// 공백문자가 존재하는 경우
+	if (strValue.indexOf(" ") != -1) {
+		return false;
+	}
+
+	return true;
+}
+
+/************************************************************************************************
+ * Function Name : gfn_isPhone
+ * Description   : 입력값이 전화번호 format 인지 체크하는 함수
+ * Arguments     : strValue - 값
+ * Return        : boolean
+*************************************************************************************************/
+this.gfn_isPhone = function (strValue)
+{
+	// null 이거나 "-"이 존재하지 않는 경우
+	if (this.gfn_isNull(strValue) || (!this.gfn_isNull(strValue) && strValue.indexOf("-") == -1)) 
+	{
+		return false;
+	}
+	else if (strValue.indexOf(".") >= 0) 
+	{
+		return false;
+	}
+	else 
+	{
+		// "-" 사이의 값이 숫자가 아닌 경우
+		var arrNumbers = strValue.split("-");
+		
+		for (var i = 0; i < arrNumbers.length; i++) 
+		{
+			if (!nexacro.isNumeric(arrNumbers[i])) {
+				return false;
+			}
+		}
+	}
+	
+	return true;
+}
+
+/************************************************************************************************
+ * Function Name : gfn_isJuminNo
+ * Description   : 입력값이 주민등록번호 format 인지 체크하는 함수
+ * Arguments     : strValue - 값
+ * Return        : boolean
+*************************************************************************************************/
+this.gfn_isJuminNo = function(strValue)
+{
+	if(this.gfn_isNull(strValue)) {
+		return false;
+	}
+
+	//strValue = strValue.split("-").join(""); //"-" 없이 입력값이 넘어와서 주석
+
+	if(strValue.length != 13) {
+		this.gfn_alert("msg.err.juminNo");
+		//alert("주민번호가 유효하지 않습니다.");
+		return false;
+	}
+
+	var validDay          = strValue.substr(0, 6);
+	var validNo           = strValue.substr(6);
+	var validDigit        = [2, 3, 4, 5, 6, 7, 8, 9, 2, 3, 4, 5];
+	var dayExpression     = new RegExp(/^[0-9]{2}(0[1-9]|1[012])(0[1-9]|[12][0-9]|3[0-1])$/);
+	var noExpression      = new RegExp(/^[0-9]{7}$/);
+	var foreignExpression = new RegExp(/^[5-8]{1}[0-9]{6}$/);
+
+// 	if(!dayExpression.test(validDay)) {
+// 		this.gfn_alert("msg.err.juminNo");
+// 		//alert("주민번호가 유효하지 않습니다.");
+// 		return false;
+// 	}
+// 
+// 	if(!noExpression.test(validNo)) {
+// 		this.gfn_alert("msg.err.juminNo");
+// 		//alert("주민번호가 유효하지 않습니다.");
+// 		return false;
+// 	}
+
+	var sum = 0;
+	
+	for (var index = 0; index < 12; index++) 
+	{
+		sum += parseInt(strValue.substr(index, 1)) * validDigit[index];
+	}
+	
+	sum = (11 - (sum % 11)) % 10;
+
+	if (foreignExpression.test(validNo)) {
+		sum = (sum + 2) % 10;
+	}
+
+	if (sum == strValue.substr(12, 1)) 
+	{
+		return true;
+	}
+	else 
+	{
+		return false;
+	}
+}
+ 
+/************************************************************************************************
+ * Function Name : gfn_isNum
+ * Description   : 문자열이 숫자형식에 맞는지 여부 체크
+ * Arguments     : strValue - 체크할 문자열숫자 ( 예 : "-1234.56" ) (단, ","가 들어있으면 안 됨)
+ * Return        : boolean
+*************************************************************************************************/
+this.gfn_isNum = function (sNum)
+{
+	var c;
+	var point_cnt = 0;
+	var ret       = true;
+
+	if (this.gfn_isNull(sNum)) {
+		return false;
+	}
+
+	for (var i = 0; i < sNum.length; i++) 
+	{
+		c = sNum.charAt(i);
+		
+		if (i == 0 && (c == "+" || c == "-")) 
+		{
+		}
+		else if (c >= "0" && c <= "9") 
+		{
+		}
+		else if (c == ".") 
+		{
+			point_cnt++;
+			if (point_cnt > 1) {
+				ret = false;
+				break;
+			}
+		}
+		else 
+		{
+			ret = false;
+			break;
+		}
+	}
+
+	return ret;
+}
+
+/************************************************************************************************
+ * Function Name : gfn_setDistinct
+ * Description   : Array에 있는 값들을 Distinct(중복제거)한다.
+ * Arguments     : aOrg - 중복을 제거할 원래 Array ( 예 : (1,1,2,2,3,4,5) )
+ * Return        : Array 중복이 제거된 Array ( 예 : (1,2,3,4,5) )
+*************************************************************************************************/
+this.gfn_setDistinct = function (aOrg)
+{
+	var i, j;
+	var flag;
+	var vDist;
+	var aDist = new Array();
+
+	if (this.gfn_isNull(aOrg)) {
+		return aDist;
+	}
+
+	for (i = 0; i < aOrg.length; i++) 
+	{
+		vDist = aOrg[i];
+		flag  = false;
+		
+		for (j = 0; j < aDist.length; j++) 
+		{
+			if ("x" + aDist[j] == "x" + vDist) {
+				flag = true;
+				break;
+			}
+		}
+		
+		if (flag == false) {
+			aDist.getSetter(aDist.length).set(vDist);
+		}
+	}
+
+	return aDist;
+}
+
+/************************************************************************************************
+ * Function Name : gfn_findArray
+ * Description   : 1차원 배열에서 입력된 문자열이 있는 index를 반환
+ * Arguments     : ArrObj - 1차원 배열
+                   strKey - 검색할 문자열
+ * Return        : Integer 찾은 배열 index
+*************************************************************************************************/
+this.gfn_findArray = function (ArrObj, strKey)
+{
+	for (var i = 0; i = ArrObj.length; i++) 
+	{
+		if (strKey == ArrObj[i]) {
+			return i;
+		}
+	}
+	
+	return -1;
+}
+
+/************************************************************************************************
+ * Function Name : gfn_findArray2
+ * Description   : 2차원 배열에서 입력된 문자열이 있는 index를 반환
+ * Arguments     : Arr2Obj - 2차원 배열
+                   strKey  - 검색할 문자열
+                   index   - 검색할 차원
+ * Return        : Integer 찾은 배열 index
+*************************************************************************************************/
+this.gfn_findArray2 = function (Arr2Obj, strKey, index)
+{
+	for (var i = 0; i < Arr2Obj.length; i++) 
+	{
+		if (strKey == Arr2Obj[i][index]) {
+			return i;
+		}
+	}
+	
+	return -1;
+}
+
+/************************************************************************************************
+ * Function Name : gfn_getFileExt
+ * Description   : 파일 확장자를 가져온다.
+ * Arguments     : strFileName - 파일명
+ * Return        : String 파일확장자
+*************************************************************************************************/
+this.gfn_getFileExt = function (strFileName)
+{
+	strFileName = "" + strFileName;
+	
+	var arrFileName = strFileName.split(".");
+	var strFileExt  = arrFileName[arrFileName.length - 1];
+
+	return strFileExt.trim();
+}
+
+/************************************************************************************************
+ * Function Name : gfn_getFileName
+ * Description   : 파일 경로에서 파일명만 가져온다.
+ * Arguments     : strFilePath - 파일경로
+ * Return        : String 파일명
+*************************************************************************************************/
+this.gfn_getFileName = function (strFilePath)
+{
+	var strFileName = "";
+
+	strFilePath = this.gfn_toString(strFilePath);
+	
+	for (var i = 0; i < strFilePath.length; i++) 
+	{
+		if (this.gfn_right(strFilePath, i + 1).indexOf("\\") > -1) {
+			break;
+		}
+		
+		if (this.gfn_right(strFilePath, i + 1).indexOf("\/") > -1) {
+			break;
+		}
+		
+		strFileName = this.gfn_right(strFilePath, i + 1);
+	}
+
+	return strFileName;
+}
+
+/************************************************************************************************
+ * Function Name : gfn_getFilePath
+ * Description   : 파일경로에서 파일명을 제외한 파일경로를 가져온다.
+ * Arguments     : sPath - 파일경로
+ * Return        : String 파일명을 제외한 파일경로
+*************************************************************************************************/
+this.gfn_getFilePath = function (sPath)
+{
+	var filename;
+
+	if (this.gfn_isNull(sPath)) {
+		return "";
+	}
+
+	filename = this.gfn_getFileName(sPath, true);
+	
+	if (filename == null) {
+		return null;
+	}
+
+	return sPath.substr(0, sPath.length - filename.length);
+}
+
+/************************************************************************************************
+ * Function Name : gfn_addUploadFile
+ * Description   : 업로드하기 위해 선택한 파일을 FileUpload컴포턴트와 innerdataset에 연결된 Dataset에 설정한다. 
+                   (참고)Runtime버전과 다르게 코딩
+                   (주의)dsFile의 칼럼은 "filePath", "nmFile", "sizeFile", "fileUploadName"으로 구성되어야 한다.
+ * Arguments     : fupList FileUpload 컴포넌트
+                   dsFile FileUpload컴포턴트의 innerdataset에 연결된 Dataset
+                   args FileUpload component 처리시 추가 옵션 배열
+                   - args.syscolname : 로컬시스템 파일 경로?? html5 보안상 로컬 처리안됨.
+				   - args.orgcolname : 로컬 파일명.
+				   - args.compheight : tem 추가시 current button position.
+ * Return        : target Dataset rowposition
+*************************************************************************************************/
+this.gfn_addUploadFile = function (fupList:FileUpload, dsFile:Dataset, args) 
+{
+	var strFileName;
+	var nRow;
+	
+	//선택한 파일이 없으면 FileDialog로 선택
+	if (this.gfn_isNull(fupList.value)) return null;
+
+	try 
+	{
+		//업로드 파일정보를 데이터셋에 설정
+		strFileName = this.gfn_getFileName(fupList.value);
+		
+		nRow = dsFile.addRow();
+
+		if (args.syscolname)
+			dsFile.setColumn(nRow, args.syscolname, fupList.value);
+		
+		if (args.orgcolname)
+			dsFile.setColumn(nRow, args.orgcolname, strFileName);
+		
+		fupList.appendItem();
+	}
+	catch (e)
+	{
+		this.alert(e.message);
+	}
+	
+	return nRow;
+}
+
+/************************************************************************************************
+ * Function Name : gfn_isArray
+ * Description   : value의 Array 여부 반환.
+ * Arguments     : value 확인할 value.
+ * Return        : Array 여부.
+*************************************************************************************************/
+this.gfn_isArray = function(value) 
+{
+	return Object.prototype.toString.call( value ) === '[object Array]';
+}
+
+/************************************************************************************************
+ * Function Name : gfn_lookup
+ * Description   : 주어진 대상을 포함한 상위 범위로 지정된 이름에 최초로 일치하는 component, object 반환
+ * Arguments     : p 찾을 대상
+                   name 찾을 대상 이름
+ * Return        : 검색된 component, object
+*************************************************************************************************/
+this.gfn_lookup = function(p, name)
+{
+	var o;
+	while (p)
+	{		
+		o = p.components;
+		if ( o && o[name] ) return o[name];
+		
+		o = p.objects;
+		if ( o && o[name] ) return o[name];
+		
+		p = p.parent;
+	}
+	
+	return null;
+}
+
+/************************************************************************************************
+ * Function Name : gfn_getUniqueId
+ * Description   : 유일한 ID 를 반환
+ * Arguments     : prefix id 앞에 붙일 문자열
+ * Return        : id
+*************************************************************************************************/
+this._ALPHA_CHAR_CODES = [48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 65, 66, 67, 68, 69, 70];		
+
+this.gfn_getUniqueId = function(prefix)
+{
+	if (this.gfn_isEmpty(prefix)) prefix = "";
+	
+	var pThis = this;
+	var seq   = 0;
+	var seq0;
+	
+	var tmpArray = new Array(36);
+	var idx      = -1;
+	
+	while (seq < 8) 
+	{
+		tmpArray[++idx] = pThis._ALPHA_CHAR_CODES[Math.floor(Math.random() * 16)];
+		seq++;
+	}
+	
+	seq = 0;
+	
+	while (seq < 3) 
+	{
+		tmpArray[++idx] = 95;
+		seq0            = 0;
+		
+		while (seq0 < 4) 
+		{
+			tmpArray[++idx] = pThis._ALPHA_CHAR_CODES[Math.floor(Math.random() * 16)];
+			seq0++;
+		}
+		seq++;
+	}
+	
+	tmpArray[++idx] = 95;
+	
+	var tmpStr = new Date().getTime();
+	tmpStr     = ("0000000" + tmpStr.toString(16).toUpperCase()).substr(-8);
+	seq        = 0;
+	
+	while (seq < 8) 
+	{
+		tmpArray[++idx] = tmpStr.charCodeAt(seq);
+		seq++;
+	}
+	
+	seq = 0;
+	
+	while (seq < 4) 
+	{
+		tmpArray[++idx] = pThis._ALPHA_CHAR_CODES[Math.floor(Math.random() * 16)];
+		seq++;
+	}
+	
+	return prefix + String.fromCharCode.apply(null, tmpArray);		
+}
+
+/************************************************************************************************
+ * Function Name : gfn_getUniqueId
+ * Description   : EDIT에서 글자입력제한(onchar 이벤트에서사용)
+                   전화번호 형식처럼 숫자와 대쉬(-)만 받을수 있도록 처리
+ * Arguments     : obj:Edit
+                   e:CharEventInfo
+ * Return        : boolean
+*************************************************************************************************/
+this.gfn_limitInputText = function(obj, e)
+{
+	var objRegExp = new RegExp("[^0-9-\]", "g");
+	var objResult = objRegExp.exec(e.chartext);
+
+	if (objResult) 
+	{
+		return false;
+	}
+	else 
+	{
+		return true;
+	}
+}
+
+/************************************************************************************************
+ * Function Name : gfn_createWebBorwserComponent
+ * Description   : Filedownload 시 WebBrowser 컴포넌트 동적 생성
+ * Arguments     : obj : 현재 Form
+ * Return        : WebBrowser 컴포넌트
+*************************************************************************************************/
+this.gfn_createWebBorwserComp = function(obj) 
+{
+	var compName = "Comp_WebBrowser"+obj.name;
+	var nSeq     = Math.random();
+	
+	compName = compName + nSeq;
+	
+	var compWebBrowser = obj.components[compName];
+	
+	if (obj.isValidObject(compName)) {
+		compName = compName+nSeq;
+	}
+    
+	compWebBrowser = new WebBrowser();  
+	compWebBrowser.init(compName, "absolute", 0, 0, 0, 0, null, null);
+
+	obj.addChild(compName, compWebBrowser);
+	compWebBrowser.show();
+
+	return compWebBrowser;
+}
+
+/**
+* NBSS (New Business Support System) version 1.0
+*
+*  Copyright ⓒ 2015 kt corp. All rights reserved.
+*
+*  This is a proprietary software of kt corp, and you may not use this file except in
+*  compliance with license agreement with kt corp. Any redistribution or use of this
+*  software, with or without modification shall be strictly prohibited without prior written
+*  approval of kt corp, and the copyright notice above does not evidence any actual or
+*  intended publication of such software.
+*
+*  @MenuPath 
+*  @FileName LIB_FILE
+*  @Creator UI-SA
+*  @CreateDate 2015.04.30
+*  @LastModifier 
+*  @LastModifyDate 
+*  @Version 1.0
+*  @Outline File 관련 공통 함수 모음
+*  @Desction 
+* 			1) File 관련 공통 함수 모음
+* 
+* 
+************** 소스 수정 이력 *************************************************
+*    date          Modifier            Description
+*******************************************************************************
+*  2015.04.30       UI-SA             최초 생성
+*******************************************************************************
+*/
+
+this.GC_FILETYPE_DOC   = ",txt,gul,hwp,doc,docx,xls,xlsx,ppt,pptx,pdf,";
+this.GC_FILETYPE_IMAGE = ",jpg,jpeg,gif,png,tif,bmp,";
+this.GC_FILETYPE_ALL   = this.GC_FILETYPE_DOC+this.GC_FILETYPE_IMAGE;
+this.GC_FILEUPLOAD_OBJ = {};
+ 
+/**
+ * @class      	첨부파일공통에서 사용하는 업무모듈별로 대상 서버 URL 이 틀려 첨부파일대상 서비스 URL DATAGROUP을 찾아 그값을 리턴한다. 
+ *
+ * @param 		{String} 업무구분자
+ * @since       2015.08.05
+ * @author      최현수
+ * @return 		{String} DATAGROUP 명 
+ */ 
+this.gfn_getFileUploadTargetServer = function(sBizType)
+{
+    var nrow = application.GDSL_M_URL_INFO.findRow("DATAGROUP", "FILE_"+sBizType);
+    
+    // 대상업무구분에 대한 서비스가 없으면 기본 첨부파일서비스 DATA그룹을 사용하도록 한다. 
+    if( nrow == -1 )
+    {
+        nrow = application.GDSL_M_URL_INFO.findRow("DATAGROUP", "FILE_DEFAULT");    
+    }
+    
+    return application.GDSL_M_URL_INFO.getColumn(nrow, "DATAGROUP");
+}
+ 
+/**
+ * @class    첨부파일 공통 DIV 를 설정한다. 
+ * @param 	 {Div}     첨부파일공통 Div 대상
+ * @param 	 {Boolean} 편집가능여부 (true:등록/수정, false:다운로드전용)
+ * @param 	 {String}  업무구분코드
+ * @param 	 {String}  첨부파일ID
+ * @param 	 {Object}  추가옵션{ maxfilesize: 첨부파일최대용량, maxfilecount: 첨부파일갯수, filetype: 첨부파일종료(all:기본값, image:이미지, doc:문서, 사용자정의)}
+ * @return 	 N/A
+ */
+this.gfn_setAttachFile = function(oDiv, bEditMode, sBizType, oDataset, oOptions)
+{    
+    oDiv.set_async(false);
+    oDiv.set_url("CCP::UCCP_ATTACHFILE.xfdl");
+    oDiv.initAttach(bEditMode, sBizType, oDataset, oOptions);
+    
+    // 화면에서는 그 테두리가 없으면 구분하기 힘들어서 보더를 두고 공통에서 이를 재거해준다.
+    oDiv.style.set_border("0 none #808080ff"); 
+    oDiv.style.set_bordertype("normal 0 0"); 
+}
+ 
+ 
+/**
+ * @class    FileOpenDialog 를 이용한 파일의 선택처리 및 선택한 파일의 정보를 리턴한다.
+ *
+ * @param 	 {String}   콜백처리함수
+ * @param 	 {String}   파일오픈창 제목
+ * @param 	 {String}   파일오픈모드
+ * @param 	 {String}   파일오픈 초기 디렉토리경로
+ * @param 	 {String}   파일오픈 초기 파일명 
+ * @return 	 {Array}    {filename, filesize, path, fullpath, binarydata} 을 Array 로 리턴한다. 
+ * @since    2015.06.02
+ * @author   최현수
+ */
+this.gfn_fileDialogOpen = function(strCallback, strTitle, constOpenMode, strInitialPath, strFileName)
+{
+    var rtnval = new Array();
+    
+    var filedialog;
+    if(this.isValidObject("FileDialog") == false) 
+	{ 
+		filedialog = new FileDialog("FileDialog", this);
+    }
+    filedialog.set_async(false);    
+    
+    if( this.gfn_isNull(constOpenMode) ) constOpenMode = FileDialog.LOAD;
+    
+	filedialog.addEventHandler
+	(
+        "onclose", 
+        function(filedialog, event)
+        {
+            for(var i=0;i<event.virtualfiles.length;i++)
+            {
+                var vfile = new VirtualFile();   
+                vfile.fileindex = i;
+                vfile.set_async(false);
+                vfile.addEventHandler
+                (
+                    "onsuccess", 
+                    function(vfileobj, vevent)
+                    {
+                        if( vevent.reason == 3 )
+                        {
+                            vfileobj.binarydata = vevent.binarydata;
+                        }
+                        else if( vevent.reason == 9 )
+                        {
+                            vfileobj.filesize = vevent.filesize;
+                            
+                            var filedata = 
+                            {
+                                  filename  : vfileobj.filename
+                                , binarydata: vfileobj.binarydata 
+                                , filesize  : vfileobj.filesize 
+                                , path      : vfileobj.path
+                                , fullpath  : vevent.fullpath
+                            };
+                            rtnval.push(vfileobj);
+
+                            // 읽은 마지막번처리후 콜백함수를 호출한다. 넥사가 Event의 Sync처리 방식이 아니라 이벤트의 흐름으로 catch 해야한다. 
+                            if( i == event.virtualfiles.length-1 )
+                            {
+                                eval("this."+strCallback+"(rtnval);");
+                            }
+                        }
+                    },                
+                    this
+                );
+                
+                vfile.open(event.virtualfiles[i].fullpath, VirtualFile.openRead|VirtualFile.openBinary);
+                vfile.read();
+                vfile.getFileSize();
+            }
+        }, 
+        this
+	);
+	
+    filedialog.open(strTitle, constOpenMode, strInitialPath, strFileName);
+} 
+
+
+/**
+ * @class    첨부파일의 확장자 정합성첵크를 한다. 
+ *
+ * @param 	 {String}   첨부파일종류 (image, doc, all, 또는 사용자지정"jpg,gif"와 같은형식)
+ * @param 	 {String}   첨부파일명 
+ * @return 	 {Boolean}  
+ * @since    2015.07.16
+ * @author   최현수
+ */
+this.gfn_checkFileExt = function(strFileType, strFileName)
+{
+    // 첨부파일 확장자에 의한 처리 
+    var buff     = strFileName.split(".");
+    var fileext  = buff[buff.length-1].toLowerCase();
+    var filetype = strFileType.toLowerCase();
+    
+    // 전체 
+    if( filetype == "all" )
+    {
+        if( this.GC_FILETYPE_ALL.indexOf(fileext+",") == -1 )
+        {
+            this.gfn_showMsgBox("COME0009");
+            return false;
+        }
+        else         
+            return true;
+    }
+    // 이미지만
+    else if( filetype == "image" )
+    {
+        if( this.GC_FILETYPE_IMAGE.indexOf(","+fileext+",") == -1 )
+        {
+            this.gfn_showMsgBox("COME0009");
+            return false;
+        }
+        else         
+            return true;
+    }
+    // 문서만 
+    else if( filetype == "doc" )
+    {
+        if( this.GC_FILETYPE_DOC.indexOf(","+fileext+",") == -1 )
+        {
+            this.gfn_showMsgBox("COME0009");
+            return false;
+        }
+        else         
+            return true;
+    }
+    // 사용자 지정 
+    else 
+    {
+        var checkrule = ","+filetype+",";
+        if( checkrule.indexOf(","+fileext+",") == -1 )
+        {
+            this.gfn_showMsgBox("COME0009");
+            return false;
+        }
+        else         
+            return true;
+    }
+    
+    return false;
+}
+
+/**
+ * @class    첨부파일을 공통으로 업로드한다. 처리후 콜백함수를 호출하는데 이때 입력값은 첨부파일결과를 JSON Object로 던져준다.
+ *
+ * @param 	 {String}   첨부파일경로 "CRM::/fax/", "EDU" 와 같이 설정한다. 
+ * @param 	 {Object}   첨부파일옵션 {maxFileSize, madFileSize, fileType} 의 첨부파일옵션
+ * @param 	 {String}   첨부파일처리후 콜백처리함수명
+ * @return 	 N/A  
+ * @since    2015.07.16
+ * @author   최현수
+ */
+this.gfn_fileUpload = function(strFilePath, objFileOption, strCallback)
+{
+    var localFileName = "";
+    var objFileData   = {};
+
+    // 첨부파일옵션을 설정한다. 대소문자구분없이 소문자로 변경한다. 
+    var fileoption = {filepath:strFilePath};    
+    for(var name in objFileOption)
+    {
+        fileoption[name.toLowerCase()] = objFileOption[name];
+        
+        // 파일다이얼로그를 사용하지 않고 직접 설정한 파일을 올릴때 
+        if( name.toLowerCase() == "uploadfilename" )
+        {
+            localFileName = objFileOption[name];
+        }
+    }    
+    
+    this.GC_FILEUPLOAD_OBJ.callback = strCallback;
+    this.GC_FILEUPLOAD_OBJ.option   = fileoption;
+    
+    // 파일선택다이얼로그를 뛰운다. 
+    if( this.gfn_isNull(localFileName) )
+    {    
+        this.gfn_fileDialogOpen("gfn_fileUploadCallback", "파일선택", FileDialog.LOAD);
+    }
+    // 직접선택한 파일로 바로 서버에 올려버린다. 
+    else
+    {
+        var vfile = new VirtualFile();   
+        vfile.set_async(false);
+        vfile.addEventHandler
+        (
+            "onsuccess", 
+            function(vfileobj, vevent)
+            {
+                if( vevent.reason == 3 )
+                {
+                    vfileobj.binarydata = vevent.binarydata;
+                }
+                else if( vevent.reason == 9 )
+                {
+                    vfileobj.filesize = vevent.filesize;
+                                        
+                    var filedata = 
+                    {
+                          filename  : vfileobj.filename
+                        , binarydata: vfileobj.binarydata 
+                        , filesize  : vfileobj.filesize 
+                        , path      : vfileobj.path
+                        , fullpath  : vevent.fullpath
+                    };
+                    
+                    var filelist = new Array();
+                    filelist.push(filedata);
+                    
+                    this.gfn_fileUploadCallback(filelist); 
+                }
+            },                
+            this
+        );
+        
+        vfile.open(localFileName, VirtualFile.openRead|VirtualFile.openBinary);
+        vfile.read();
+        vfile.getFileSize();                               
+    }
+}
+
+/**
+ * @class    첨부파일업로드 파일선택후 콜백처리 (개발자 사용금지)
+ *
+ * @param 	 {Object}  gfn_fileDialogOpen 를 통한 선택파일정보 JSON Object
+ * @return 	 N/A  
+ * @since    2015.07.16
+ * @author   최현수
+ */
+this.gfn_fileUploadCallback = function(objFileData)
+{
+    var filedata = objFileData[0];
+    
+    // 첨부파일확장자 첵크 
+    if( !this.gfn_isNull(this.GC_FILEUPLOAD_OBJ.option.filetype) )
+    {
+        if( this.gfn_checkFileExt(this.GC_FILEUPLOAD_OBJ.option.filetype, filedata.filename) == false )
+        {
+            return;
+        }
+    }
+    
+    // 첨부파일 개별파일 사이즈 처리 
+    if( !this.gfn_isNull(this.GC_FILEUPLOAD_OBJ.option.madfilesize) )
+    {
+        if( this.GC_FILEUPLOAD_OBJ.option.madfilesize < filedata.filesize/1024/1000 )
+        {
+            // 첨부파일의 사이즈는 ${}M Byte를 초과 할 수 없습니다.
+            this.gfn_showMsgBox("COME0011", this.GC_FILEUPLOAD_OBJ.option.madfilesize);
+            return;
+        }
+    }
+
+    // 첨부파일 총합계 사이즈 처리 
+    if( !this.gfn_isNull(this.GC_FILEUPLOAD_OBJ.option.maxfilesize) )
+    {
+        if( this.GC_FILEUPLOAD_OBJ.option.maxfilesize < filedata.filesize/1024/1000 )
+        {
+            // 첨부파일의 사이즈는 ${}M Byte를 초과 할 수 없습니다.
+            this.gfn_showMsgBox("COME0011", this.GC_FILEUPLOAD_OBJ.option.maxfilesize);
+            return;
+        }
+    }
+
+    var buff     = filedata.filename.split(".");
+    var fileext  = buff[buff.length-1].toLowerCase();
+    
+    var fileuploaddataset = new Dataset();  
+    this.addChild("COMMON_FILE_UPLOAD_DATASET", fileuploaddataset); 
+    fileuploaddataset.set_name("COMMON_FILE_UPLOAD_DATASET");        
+    fileuploaddataset.addColumn("file_id",       "STRING");     
+    fileuploaddataset.addColumn("file_seq",      "INT");        
+    fileuploaddataset.addColumn("file_nm",       "STRING");     
+    fileuploaddataset.addColumn("file_size",     "INT");        
+    fileuploaddataset.addColumn("file_kbsize",   "BIGDECIMAL"); 
+    fileuploaddataset.addColumn("file_ext",      "STRING");     
+    fileuploaddataset.addColumn("file_contents", "BLOB");       
+    fileuploaddataset.addColumn("local_path",    "STRING");     
+    fileuploaddataset.addColumn("file_path",     "STRING");     
+    fileuploaddataset.addColumn("rowstatus",     "STRING");     
+    fileuploaddataset.addColumn("error_code",     "STRING");    
+    fileuploaddataset.addColumn("error_msg",     "STRING");
+    fileuploaddataset.addColumn("user_id",     	 "STRING");
+    
+    fileuploaddataset.addRow();
+    fileuploaddataset.setColumn(0, "user_id",       application.G_USER_ID);
+    fileuploaddataset.setColumn(0, "file_id",       "");
+    fileuploaddataset.setColumn(0, "file_seq",      "");
+    fileuploaddataset.setColumn(0, "file_nm",       filedata.filename);
+    fileuploaddataset.setColumn(0, "file_size",     filedata.filesize );
+    fileuploaddataset.setColumn(0, "file_ext",      fileext);
+    fileuploaddataset.setColumn(0, "file_contents", filedata.binarydata);
+    fileuploaddataset.setColumn(0, "local_path",    filedata.fullpath);
+    fileuploaddataset.setColumn(0, "rowstatus",     "C");
+    
+    var inds    = "ds_attach=COMMON_FILE_UPLOAD_DATASET:A";
+    var outds   = "COMMON_FILE_UPLOAD_DATASET=ds_attachResult";
+    var options = "";
+    var biztype = "";
+    
+    // 첨부파일의 경로를 설정한다. 
+    if( !this.gfn_isNull(this.GC_FILEUPLOAD_OBJ.option.filepath) )
+    {
+        var buff = this.GC_FILEUPLOAD_OBJ.option.filepath.split("::");
+        biztype = buff[0];
+        
+        if( buff.length == 1 )
+        {
+            options = 
+            {
+                arbitrarykey: {bizType: buff[0]}
+            };
+        }
+        else
+        {
+            options = 
+            {
+                arbitrarykey: {bizType: buff[0], filePath:buff[1]}
+            };
+        }        
+    }
+    
+    this.gfn_transaction("saveFile", this.gfn_getFileUploadTargetServer(biztype)+"::fileUploadDownload.save", inds, outds, "", false, true, options);   
+     
+    // 처리결과 Object로 처리해서 callback 함수를 콜한다. 
+    var callback = this.GC_FILEUPLOAD_OBJ.callback;
+    var rtnval   = this.gfn_convertJSON(fileuploaddataset, 0);    
+    
+    if( !this.gfn_isNull(callback) )
+    {
+        // fn_callback('uploadfile') 과 같은경우 
+        if( callback.indexOf(")") != -1 ) 
+        {
+            var newcallback = nexacro.replaceAll(callback, ")", ", rtnval);");
+            eval("this."+newcallback);
+        }
+        else 
+        {
+            eval("this."+callback+"(rtnval);");        
+        }
+    }    
+    
+    // 동적데이터셋을 삭제한다. 
+    this.removeChild("COMMON_FILE_UPLOAD_DATASET");
+}
+
+
+
+/**
+ * @class    첨부파일다운로드를 처리한다. 
+ *
+ * @param 	 {String}  업무구분 및 파일경로구분  B2B::/fax/ 등과 같은 설정 
+ * @param 	 {String}  서버경로 
+ * @param 	 {String}  첨부파일명
+ * @param 	 {String}  콜백처리함수명 "fn_callback",  "fn_callback('afterdownload')" 와 같이 사용가능하고 인자값으로 저장한 파일명을 argument로 넘겨준다.
+ * @return 	 N/A  
+ * @since    2015.07.16
+ * @author   최현수
+ */
+this.fv_fileOpen; 
+this.gfn_fileDownload = function(strFilePath, strServerPath, strDownloadFileName, strCallback)
+{
+    // 다운로드된 파일을 실행하시겠습니까?
+    this.fv_fileOpen = this.gfn_showMsgBox("NBSS-Q003");
+    if(this.fv_fileOpen == "CANCEL") return;
+    
+    var downloaddataset = this.lookup("COMM_FILE_DOWNLOAD_DATASET");
+    if( this.gfn_isNull(downloaddataset) )
+    {
+        downloaddataset = new Dataset();
+        this.addChild("COMM_FILE_DOWNLOAD_DATASET", downloaddataset); 
+        downloaddataset.set_name("COMM_FILE_DOWNLOAD_DATASET");        
+        downloaddataset.addColumn("file_nm",       "STRING");     
+        downloaddataset.addColumn("file_path",     "STRING");     
+        downloaddataset.addColumn("file_contents", "BLOB");    
+        downloaddataset.addColumn("error_code",    "STRING");     
+        downloaddataset.addColumn("error_msg",     "STRING");
+        downloaddataset.addColumn("user_id",       "STRING");
+    }
+    
+    // 다운로드 대상정보 설정     
+    downloaddataset.clearData();
+    downloaddataset.addRow();
+    downloaddataset.setColumn(0, "user_id",   application.G_USER_ID);
+    downloaddataset.setColumn(0, "file_nm",   strDownloadFileName);
+    downloaddataset.setColumn(0, "file_path", strServerPath);
+    
+    // 업무구분 및 경로 설정 
+    var options = "";    
+    var biztype = "";
+    if( !this.gfn_isNull(strFilePath) )
+    {
+        var buff = strFilePath.split("::");
+        biztype = buff[0];
+        
+        if( buff.length == 1 )
+        {
+            options = 
+            {
+                arbitrarykey: {bizType: buff[0]}
+            };
+        }
+        else
+        {
+            options = 
+            {
+                arbitrarykey: {bizType: buff[0], filePath:buff[1]}
+            };
+        }        
+    }    
+    
+    var inds    = "ds_attachDownload=COMM_FILE_DOWNLOAD_DATASET:A";
+    var outds   = "COMM_FILE_DOWNLOAD_DATASET=ds_attachDownload";    
+    this.gfn_transaction("download", this.gfn_getFileUploadTargetServer(biztype)+"::fileUploadDownload.download", inds, outds, "", false, true, options);
+    
+    var filedialog   = new FileDialog();
+    filedialog.set_async(false);    
+        
+	filedialog.addEventHandler
+	(
+        "onclose", 
+        function(filedialog, filedialogevent)
+        {
+            // 취소 
+            if( filedialogevent.reason == 0 ) 
+            {
+                ;
+            }
+            // 확인 
+            else if( filedialogevent.reason == 2 ) 
+            {
+                var vfile = new VirtualFile();
+                
+                vfile.addEventHandler("onsuccess", 
+                    function(virtualfile, vfileevent)
+                    {
+                        if( vfileevent.reason == 1 )
+                        {
+                            virtualfile.write(downloaddataset.getColumn(0,"file_contents"));  
+                        }
+                        else if( vfileevent.reason == 6 )
+                        {
+                            virtualfile.close();
+                            
+                            if(this.fv_fileOpen == "YES")
+                            {
+								// space로 인해 " 로 묶어 줌
+								system.execShell("\"" + virtualfile.fullpath + "\""); 
+							}
+                            
+                            // 콜백함수를 호출한다.                             
+                            var rtnval = virtualfile.fullpath;
+                            if( !this.gfn_isNull(strCallback) )
+                            {
+                                // fn_callback('uploadfile') 과 같은경우 
+                                if( strCallback.indexOf(")") != -1 ) 
+                                {
+                                    var newcallback = nexacro.replaceAll(strCallback, ")", ", rtnval);");
+                                    eval("this."+newcallback);
+                                }
+                                else 
+                                {
+                                    eval("this."+callback+"(rtnval);");        
+                                }
+                            }                             
+                        }
+                    }, this
+                );
+                
+                vfile.open(filedialogevent.virtualfiles[0].fullpath, VirtualFile.openWrite|VirtualFile.openBinary);
+            }            
+        },
+        this
+    );
+    
+	var sExt = strDownloadFileName.split(".");
+	filedialog.set_filter( sExt[1].toUpperCase() + " File(*."+sExt[1]+")|*."+sExt[1]+"|All(*.*)|*.*|" );
+    
+    filedialog.open("저장", FileDialog.SAVE , "", strDownloadFileName);		      
+}
+
+/**
+ * @class    첨부파일을 삭제한다. 
+ *
+ * @param 	 {String}  업무구분 및 파일경로구분  B2B::/fax/ 등과 같은 설정 
+ * @param 	 {String}  서버경로 
+ * @param 	 {String}  콜백처리함수명 "fn_callback",  "fn_callback('afterdelete')" 와 같이 사용가능하고 인자값으로 
+ *                     콜백처리는함수의 파라미터는 strServerFilePath, bDeleteSuccess 의 값을 넘겨준다. 
+ * @return 	 N/A  
+ * @since    2015.07.16
+ * @author   최현수
+ */
+this.gfn_fileDelete = function(strBizFilePath, strServerFilePath, strCallback)
+{
+    var filedeletedataset = new Dataset();  
+    this.addChild("COMMON_FILE_DELETE_DATASET", filedeletedataset); 
+    filedeletedataset.set_name("COMMON_FILE_DELETE_DATASET");        
+    filedeletedataset.addColumn("file_id",       "STRING");     
+    filedeletedataset.addColumn("file_seq",      "INT");        
+    filedeletedataset.addColumn("file_nm",       "STRING");     
+    filedeletedataset.addColumn("file_size",     "INT");        
+    filedeletedataset.addColumn("file_kbsize",   "BIGDECIMAL"); 
+    filedeletedataset.addColumn("file_ext",      "STRING");     
+    filedeletedataset.addColumn("file_contents", "BLOB");       
+    filedeletedataset.addColumn("local_path",    "STRING");     
+    filedeletedataset.addColumn("file_path",     "STRING");     
+    filedeletedataset.addColumn("rowstatus",     "STRING");     
+    filedeletedataset.addColumn("error_code",    "STRING");    
+    filedeletedataset.addColumn("error_msg",     "STRING");
+    filedeletedataset.addColumn("user_id",     	 "STRING");
+    
+    filedeletedataset.addRow();
+    filedeletedataset.setColumn(0, "user_id", application.G_USER_ID);
+    filedeletedataset.setColumn(0, "file_path", strServerFilePath);
+    filedeletedataset.setColumn(0, "rowstatus", "D");
+    
+    // 로우의 상태를 삭제로 처리한다. 
+    filedeletedataset.set_enableevent(false);
+    filedeletedataset.set_updatecontrol(false);
+    filedeletedataset.setRowType(0, Dataset.ROWTYPE_UPDATE);
+    
+    var inds    = "ds_attach=COMMON_FILE_DELETE_DATASET:A";
+    var outds   = "COMMON_FILE_DELETE_DATASET=ds_attachResult";
+    var options = "";
+    var biztype = "";
+    
+    // 첨부파일의 경로를 설정한다. 
+    if( !this.gfn_isNull(strBizFilePath) )
+    {
+        var buff = strBizFilePath.split("::");
+        biztype = buff[0];
+        
+        if( buff.length == 1 )
+        {
+            options = 
+            {
+                arbitrarykey: {bizType: buff[0]}
+            };
+        }
+        else
+        {
+            options = 
+            {
+                arbitrarykey: {bizType: buff[0], filePath:buff[1]}
+            };
+        }        
+    }
+    
+    this.gfn_transaction("saveFile", this.gfn_getFileUploadTargetServer(biztype)+"::fileUploadDownload.saveAll", inds, outds, "", false, true, options);    
+    
+    // 처리결과 Object로 처리해서 callback 함수를 콜한다. 
+    var bDeleteSuccess;    
+    if( filedeletedataset.getRowCount() > 0 )
+    {
+        bDeleteSuccess = true;    
+    }
+    else
+    {
+        bDeleteSuccess = false;    
+    }
+    
+    if( !this.gfn_isNull(strCallback) )
+    {
+        // fn_callback('deletefile') 과 같은경우 
+        if( strCallback.indexOf(")") != -1 ) 
+        {
+            var newcallback = nexacro.replaceAll(strCallback, ")", ", strServerFilePath, bDeleteSuccess);");
+            eval("this."+newcallback);
+        }
+        else 
+        {
+            eval("this."+callback+"(strServerFilePath, bDeleteSuccess);");        
+        }
+    }    
+    
+    // 동적데이터셋을 삭제한다. 
+    this.removeChild("COMMON_FILE_DELETE_DATASET");
+}]]></Script>

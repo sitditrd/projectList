@@ -1,0 +1,142 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.0">
+  <Form id="GaugeChart_" width="768" height="480" titletext="New Form">
+    <Layouts>
+      <Layout height="480" mobileorientation="landscape" width="768">
+        <GaugeChart id="GaugeChart00" taborder="0" left="0.91%" top="0.83%" gaugetype="circular" binddataset="ds_total" categorycolumn="bind:Column0" right="1.04%" bottom="0.83%" background="#000000" ondrawend="GaugeChart00_ondrawend">
+          <Contents><![CDATA[{
+	"title": {
+		"id": "title",
+		"text": "total response rate",
+		"textfont": "20pt/normal '맑은 고딕'",
+		"padding": "0px 0px 5px",
+		"textcolor": "#529f41",
+		"visible": "false"
+	},
+	"legend": {
+		"id": "legend",
+		"padding": "3px 10px 3px 10px",
+		"itemtextfont": "9pt '맑은 고딕'",
+		"itemtextcolor": "#4c4c4c",
+		"visible": false
+	},
+	"tooltip": {
+		"id": "tooltip",
+		"background": "#4b4b4b",
+		"linestyle": "0px none",
+		"textcolor": "#ffffff",
+		"textfont": "10pt/normal '맑은 고딕'",
+		"padding": "5px"
+	},
+	"board": {
+		"id": "board"
+	},
+	"valueaxes": [
+		{
+			"id": "valueaxis0",
+			"labeltextcolor": "#6f6f6f",
+			"labeltextfont": "10pt '맑은 고딕'",
+			"axislinestyle": "1px solid #d0d0d0",
+			"tickmin": "0",
+			"tickmax": "100",
+			"visible": "false"
+		}
+	],
+	"seriesset": [
+		{
+			"id": "series0",
+			"titletext": "series",
+			"itemtextvisible": "true",
+			"itemtextcolor": "white",
+			"itemtextfont": "bold 30pt '맑은 고딕'",
+			"valuecolumn": "bind:Column1",
+			"barsize": "100",
+			"innerradius": "70",
+			"startangle": "0",
+			"endangle": "360",
+			"radius": "100",
+			"barfillstyle": "red",
+			"barlinestyle": "0px solid #529f41",
+			"fillstyle": "white",
+			"linestyle": "1px solid #529f41",
+			"itemtextmask": "###%",
+			"baropacity": "1",
+			"opacity": "1"
+		}
+	]
+}]]></Contents>
+        </GaugeChart>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="ds_total">
+        <ColumnInfo>
+          <Column id="Column0" type="STRING" size="256"/>
+          <Column id="Column1" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="Column0">total</Col>
+            <Col id="Column1">70</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="ds_male">
+        <ColumnInfo>
+          <Column id="Column0" type="STRING" size="256"/>
+          <Column id="Column1" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="Column0">male</Col>
+            <Col id="Column1">81</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="ds_female">
+        <ColumnInfo>
+          <Column id="Column0" type="STRING" size="256"/>
+          <Column id="Column1" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="Column0">female</Col>
+            <Col id="Column1">93</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.1"><![CDATA[
+this.GaugeChart00_ondrawend = function(obj:nexacro._ChartBase,e:nexacro.ChartDrawEndEventInfo)
+{
+	var pathData;
+	var pos = obj.getSeriesPointPos(0, 0);
+	var width = 5;
+	var sangle,eangle;
+	var p0, p1, p2, p3;
+	var innerw = pos.radius * (obj.seriesset[0].innerradius*0.01);
+
+	for(var i=0;i<360;i+=10)
+	{
+		sangle = ((i - (width / 2)) * (Math.PI / 180));
+		eangle = ((i + (width / 2)) * (Math.PI / 180));
+		
+		p0 = (Math.sin(sangle) * pos.radius + pos.centerx) + " " + (-Math.cos(sangle) * pos.radius + pos.centery);
+		p1 = (Math.sin(eangle) * pos.radius + pos.centerx) + " " + (-Math.cos(eangle) * pos.radius + pos.centery);	
+		p2 = (Math.sin(sangle) * innerw + pos.centerx) + " " + (-Math.cos(sangle) * innerw + pos.centery);
+		p3 = (Math.sin(eangle) * innerw + pos.centerx) + " " + (-Math.cos(eangle) * innerw + pos.centery);
+		
+		la = " 0";
+		pathData = "M" + p0 + " A" + pos.radius + " " + pos.radius + " 1 0 1 " + p1;
+		pathData += " L" + p3 + " A" + innerw + " " + innerw + " 1 0 0 " + p2 + " Z";
+		
+		item = obj.addUserControl("itempath_" + i, "path");
+		item.setPathData(pathData);
+		item.set_fillstyle("black");	
+
+	}
+	obj.userControlDraw();		
+};
+]]></Script>
+  </Form>
+</FDL>

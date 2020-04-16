@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="hanwha01" width="1260" height="870" titletext="New Form">
+    <Layouts>
+      <Layout height="870" mobileorientation="landscape" width="1260">
+        <Static id="Static00" taborder="0" left="0" height="60" cssclass="sta_WF_mainBtn" right="0" bottom="0"/>
+        <Static id="Static01" taborder="1" text="최초 시작 시간" left="20" width="120" height="20" cssclass="sta_WF_hwLabel" bottom="31"/>
+        <Edit id="Edit00" taborder="2" left="180" width="120" height="20" value="00:00:00.000" text="00:00:00.000" bottom="31"/>
+        <Static id="Static01_00" taborder="3" text="총 수행 시간 표시" left="330" width="120" height="20" cssclass="sta_WF_hwLabel" bottom="31"/>
+        <Edit id="Edit00_00" taborder="4" left="460" width="120" height="20" bottom="31"/>
+        <Static id="Static01_00_00" taborder="5" text="최종 렌더링 완료 시간" left="20" width="147" height="20" cssclass="sta_WF_hwLabel" bottom="8"/>
+        <Edit id="Edit00_00_00" taborder="6" left="180" width="120" height="20" bottom="8"/>
+        <Button id="Button00" taborder="7" text="값 초기화" width="80" height="30" cssclass="btn_WF_hwBtn01" bottom="15" right="93"/>
+        <Button id="Button01" taborder="8" text="값 세팅" width="80" height="30" cssclass="btn_WF_hwBtn01" bottom="15" right="10"/>
+        <Static id="Static02" taborder="9" left="10" top="5" height="30" right="10" cssclass="sta_WF_process"/>
+        <Static id="Static03" taborder="10" left="10" top="39" height="76" right="10" cssclass="sta_WF_box06" onclick="Static03_onclick" text=""/>
+        <Static id="Static04" taborder="11" text="계약일자" left="28" top="49" width="65" height="26" onclick="Static04_onclick" cssclass="sta_WF_condition02"/>
+        <Static id="Static04_00" taborder="12" text="조직구분" left="377" top="49" width="62" height="26" onclick="Static04_onclick" cssclass="sta_WF_condition02"/>
+        <Edit id="Edit01_00" taborder="13" left="542" top="49" width="93" height="26" text="LA2001" readonly="true"/>
+        <Button id="Button02_00" taborder="14" left="612" top="49" width="26" height="26" cssclass="btn_WF_Search"/>
+        <Static id="Static04_01" taborder="15" text="영업가족" top="49" width="71" height="26" onclick="Static04_onclick" cssclass="sta_WF_condition02" left="889"/>
+        <Edit id="Edit01_01" taborder="16" top="79" width="98" height="26" value="80123" text="80123" readonly="true" left="212"/>
+        <Button id="Button02_01" taborder="17" cssclass="btn_WF_SearchSmall" left="311" top="79" width="30" height="26"/>
+        <Static id="Static04_02" taborder="18" text="검색조건" left="28" top="79" width="65" height="26" onclick="Static04_onclick" cssclass="sta_WF_condition02"/>
+        <Calendar id="Calendar00" taborder="19" left="95" top="49" width="115" height="26" value="20191101" dateformat="yyyy-MM-dd "/>
+        <Static id="Static05" taborder="20" text="~" left="210" top="49" width="26" height="26"/>
+        <Calendar id="Calendar00_00" taborder="21" left="226" top="49" width="115" height="26" value="20101104" dateformat="yyyy-MM-dd "/>
+        <Combo id="Combo00" taborder="22" text="전체" left="450" top="49" width="90" height="26" value="" index="-1"/>
+        <Edit id="Edit01_01_00_00_01" taborder="23" text="80123" readonly="true" left="636" top="49" width="100" height="26"/>
+        <CheckBox id="CheckBox00" taborder="24" text="대리점통합" left="742" top="49" width="94" height="26" readonly="true"/>
+        <Combo id="Combo00_00" taborder="25" text="전체" left="954" top="49" width="106" height="26" value="" index="-1"/>
+        <Button id="btn_Search" taborder="26" text="조회" top="80" height="24" right="61" cssclass="btn_WF_hwBtn04" width="40" onclick="comm_Click"/>
+        <Button id="Button02_01_00_00_00_00_02_01_00" taborder="27" text="수정" top="80" height="24" right="19" cssclass="btn_WF_hwBtn03" width="40" onclick="comm_Click"/>
+        <Combo id="Combo00_00_00" taborder="28" text="선택" left="95" top="79" width="115" height="26" value="" index="-1"/>
+        <Static id="Static04_00_00" taborder="29" text="모니터링" left="377" top="79" width="62" height="26" onclick="Static04_onclick" cssclass="sta_WF_condition02"/>
+        <Combo id="Combo00_01" taborder="30" text="전체" left="450" top="79" width="90" height="26" value="" index="-1"/>
+        <CheckBox id="CheckBox00_00" taborder="31" text="모니터링오류검증" left="546" top="79" width="140" height="26"/>
+        <Static id="Static00_00" taborder="32" text="완전판매 모티터링 현황 조회" left="10" top="130" width="200" height="30" cssclass="sta_WF_title02"/>
+        <Grid id="Grid00" taborder="33" left="10" top="164" right="10" cssclass="grd_WF_hwGrd03" bottom="70" autosizebandtype="allband" autosizingtype="col" cellsizingtype="col" binddataset="dsJsonList">
+          <Formats>
+            <Format id="default"/>
+          </Formats>
+        </Grid>
+      </Layout>
+    </Layouts>
+    <Script type="xscript5.1"><![CDATA[this.comm_Click = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	switch(obj.name)
+	{
+		case "btn_Search" :
+		
+		this.dsJsonList.clearData();
+			
+		var sUrl = nexacro.getProjectPath() + "file/LageData.json";
+		this.setWaitCursor(true, true);
+		this.ajax(sUrl,
+		{
+			dataType : "JSON",
+			callback: function(errorcode, response)
+			{
+				this.setWaitCursor(false, false); 
+				//trace(response.pectSlCrstList);
+				this.dsJsonList.loadJSON(response.pectSlCrstList);
+				this.Grid00.createFormat();
+			}
+		});
+		
+		break;
+	}
+};]]></Script>
+    <Objects>
+      <Dataset id="dsJsonList"/>
+    </Objects>
+  </Form>
+</FDL>

@@ -1,0 +1,18 @@
+﻿{
+	"name": "JSONAdp",
+	"version": "17.0.0.1",
+	"description": "nexacro platform JSONAdp Protocol Library",
+	"license": "",
+	"objInfo": [	
+
+	],
+	"scripts": [
+    "JSONAdp/JSONAdp.js"
+	],
+	"designscripts": [
+
+	],
+	"help": "",
+	"resources": ""
+}
+//# sourceURL=JSONAdp.json

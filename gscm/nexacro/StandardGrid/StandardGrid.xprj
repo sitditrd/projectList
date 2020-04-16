@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project type="module" version="2.0">
+  <ObjInfo>
+    <File url="metainfo\StandardGrid.info"/>
+  </ObjInfo>
+  <Scripts>
+    <File url="StandardGrid.js"/>
+  </Scripts>
+  <DesignScripts>
+    <File url="Design\DesignStandardGrid.js"/>
+  </DesignScripts>
+  <CSSInfo>
+    <PropertyInfo/>
+  </CSSInfo>
+  <StatusInfo/>
+  <MethodInfo/>
+  <EventHandlerInfo/>
+</Project>

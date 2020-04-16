@@ -1,0 +1,300 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.0">
+  <Form id="w_cmccusstch01" width="824" height="820" titletext="Inward Remittance Transfer Other Bank">
+    <Layouts>
+      <Layout height="820" mobileorientation="landscape" width="824">
+        <Button id="Button01" taborder="0" text="Swift Message" left="10" width="100" cssclass="btn_WF_basic01" height="24" bottom="30"/>
+        <Button id="Button09" taborder="1" text="Exit" cssclass="btn_WF_basic04" width="60" right="10" height="24" bottom="30"/>
+        <Button id="Button14" taborder="2" text="Clear" cssclass="btn_WF_basic04" width="60" right="73" height="24" bottom="30"/>
+        <Button id="Button15" taborder="3" text="OK" cssclass="btn_WF_basic05" width="60" right="136" height="24" bottom="30"/>
+        <Button id="Button02" taborder="4" text="Unsettled" left="113" width="66" cssclass="btn_WF_basic01" height="24" bottom="30"/>
+        <Tab id="Tab00" taborder="5" tabindex="0" left="8" top="450" height="300" right="8">
+          <Tabpages>
+            <Tabpage id="Tabpage1" text="Transaction">
+              <Layouts>
+                <Layout>
+                  <Static id="Static37" taborder="0" top="5" cssclass="sta_WF_box01" text="" right="1" left="1" height="230"/>
+                  <Static id="Static15" taborder="1" text="Remitting Bank" left="7" top="21" width="115" height="25" cssclass="sta_WF_label01"/>
+                  <Static id="Static00" taborder="2" text="Reimbursing Bank" left="7" top="49" width="125" height="25" cssclass="sta_WF_label01"/>
+                  <Edit id="Edit33" taborder="3" left="138" top="49" width="105" height="25"/>
+                  <Button id="Button16" taborder="4" left="245" top="49" width="25" height="25" cssclass="btn_WF_down"/>
+                  <Button id="Button00" taborder="5" left="245" top="21" width="25" height="25" cssclass="btn_WF_down"/>
+                  <Edit id="Edit00" taborder="6" left="138" top="21" width="105" height="25"/>
+                  <Static id="Static01" taborder="7" text="Reciever Bank" left="7" top="77" width="125" height="25" cssclass="sta_WF_label01"/>
+                  <Edit id="Edit01" taborder="8" left="138" top="77" width="105" height="25"/>
+                  <Button id="Button01" taborder="9" left="245" top="77" width="25" height="25" cssclass="btn_WF_down"/>
+                  <Static id="Static02" taborder="10" text="Ordering" left="7" top="105" width="125" height="25" cssclass="sta_WF_label01"/>
+                  <Edit id="Edit02" taborder="11" left="138" top="105" width="318" height="25"/>
+                  <Edit id="Edit03" taborder="12" left="138" top="133" width="318" height="25"/>
+                  <Edit id="Edit04" taborder="13" left="138" top="161" width="318" height="25"/>
+                  <Edit id="Edit05" taborder="14" left="138" top="189" width="657" height="25"/>
+                  <Static id="Static03" taborder="15" text="Beneficiary" left="7" top="133" width="125" height="25" cssclass="sta_WF_label01"/>
+                  <Static id="Static04" taborder="16" text="Beneficiary a/c" left="7" top="161" width="125" height="25" cssclass="sta_WF_label01"/>
+                  <Edit id="Edit06" taborder="17" left="271" top="21" width="233" height="25"/>
+                  <Edit id="Edit07" taborder="18" left="271" top="49" width="233" height="25"/>
+                  <Edit id="Edit08" taborder="19" left="271" top="77" width="233" height="25"/>
+                  <Static id="Static06" taborder="20" text="Details of Charge" left="522" top="21" width="125" height="25" cssclass="sta_WF_label01"/>
+                  <Static id="Static07" taborder="21" text="Message Key" left="522" top="49" width="125" height="25" cssclass="sta_WF_label01"/>
+                  <Static id="Static08" taborder="22" text="Their Trans. Date" left="522" top="77" width="125" height="25" cssclass="sta_WF_label01"/>
+                  <Combo id="Combo08" taborder="23" left="651" top="21" width="144" height="25" value="" index="-1" text="SHA"/>
+                  <Edit id="Edit09" taborder="24" left="651" top="49" width="144" height="25"/>
+                  <Edit id="Edit10" taborder="25" left="651" top="77" width="144" height="25" value="0000/00/00" text="0000/00/00"/>
+                  <Static id="Static09" taborder="26" text="Their Reference" left="522" top="105" width="115" height="25" cssclass="sta_WF_label01"/>
+                  <Edit id="Edit11" taborder="27" left="651" top="105" width="144" height="25" text="0000/00/00"/>
+                  <Static id="Static10" taborder="28" text="Country Code" left="472" top="133" width="95" height="25" cssclass="sta_WF_label01"/>
+                  <Edit id="Edit12" taborder="29" left="577" top="133" width="46" height="25" text="1" textAlign="center"/>
+                  <Button id="Button02" taborder="30" left="625" top="134" width="23" height="23" cssclass="btn_WF_down"/>
+                  <Edit id="Edit13" taborder="31" left="651" top="133" width="144" height="25" text="0000/00/00"/>
+                </Layout>
+              </Layouts>
+            </Tabpage>
+            <Tabpage id="Tabpage2" text="BOK">
+              <Layouts>
+                <Layout>
+                  <Static id="Static37" taborder="0" top="10" cssclass="sta_WF_box01" text="" right="1" left="1" height="250"/>
+                  <Static id="Static16" taborder="1" text="외환전산망" left="5" top="21" width="133" height="25" cssclass="sta_WF_label01" textAlign="right"/>
+                  <Static id="Static00" taborder="2" text="송금방식수출" left="5" top="49" width="133" height="25" cssclass="sta_WF_label01" textAlign="right"/>
+                  <Static id="Static01" taborder="3" text="가격조건" left="5" top="77" width="133" height="25" cssclass="sta_WF_label01" textAlign="right"/>
+                  <Combo id="Combo08" taborder="4" left="148" top="21" width="95" height="25" value="" index="-1"/>
+                  <Combo id="Combo00" taborder="5" left="148" top="49" width="95" height="25" value="" index="-1"/>
+                  <Combo id="Combo01" taborder="6" left="148" top="77" width="75" height="25" value="" index="-1"/>
+                  <Calendar id="Calendar01" taborder="7" left="246" top="21" width="145" height="25" dateformat="yyyy-MM-dd" displaynulltext="2018-08-22" font="normal 8pt/normal &quot;Arial&quot;" type="normal" buttonsize="15 15"/>
+                  <Edit id="Edit39" taborder="8" left="226" top="77" width="165" height="25"/>
+                  <Static id="Static02" taborder="9" text="HS CODE" left="402" top="77" width="107" height="25" cssclass="sta_WF_label01" textAlign="right"/>
+                  <Static id="Static03" taborder="10" text="수출신고서" left="402" top="49" width="107" height="25" cssclass="sta_WF_label01" textAlign="right"/>
+                  <Static id="Static04" taborder="11" text="사유코드" left="402" top="21" width="107" height="25" cssclass="sta_WF_label01" textAlign="right"/>
+                  <Combo id="Combo02" taborder="12" left="517" top="21" width="76" height="25" value="" index="-1"/>
+                  <Edit id="Edit00" taborder="13" left="596" top="21" width="190" height="25"/>
+                  <Edit id="Edit02" taborder="14" left="517" top="77" width="65" height="25" text="KRW"/>
+                  <Button id="Button03" taborder="15" left="584" top="77" width="25" height="25" cssclass="btn_WF_down"/>
+                  <Edit id="Edit04" taborder="16" left="611" top="77" width="176" height="25"/>
+                  <Static id="Static14" taborder="17" left="31" top="113" height="132" cssclass="sta_WF_box02" text="" width="765"/>
+                  <Static id="Static05" taborder="18" text="수&#13;&#10;취&#13;&#10;인&#13;&#10;정&#13;&#10;보" left="8" top="121" width="20" height="116" cssclass="sta_WF_label01" textAlign="center"/>
+                  <Static id="Static06" taborder="19" text="주민번호구분" left="35" top="177" width="103" height="25" cssclass="sta_WF_label01" textAlign="right"/>
+                  <Static id="Static07" taborder="20" text="기업규모구분" left="35" top="149" width="103" height="25" cssclass="sta_WF_label01" textAlign="right"/>
+                  <Static id="Static08" taborder="21" text="거래주체성격" left="35" top="121" width="103" height="25" cssclass="sta_WF_label01" textAlign="right"/>
+                  <Static id="Static09" taborder="22" text="주민사업번호" left="35" top="205" width="103" height="25" cssclass="sta_WF_label01" textAlign="right"/>
+                  <Combo id="Combo03" taborder="23" left="148" top="121" width="75" height="25" value="" index="-1"/>
+                  <Edit id="Edit01" taborder="24" left="226" top="121" width="165" height="25"/>
+                  <Combo id="Combo04" taborder="25" left="148" top="149" width="75" height="25" value="" index="-1"/>
+                  <Edit id="Edit03" taborder="26" left="226" top="149" width="165" height="25"/>
+                  <Combo id="Combo05" taborder="27" left="148" top="177" width="75" height="25" value="" index="-1"/>
+                  <Edit id="Edit05" taborder="28" left="226" top="177" width="165" height="25"/>
+                  <Combo id="Combo06" taborder="29" left="148" top="205" width="75" height="25" value="" index="-1"/>
+                  <Edit id="Edit06" taborder="30" left="226" top="205" width="165" height="25"/>
+                  <Static id="Static10" taborder="31" text="거주성" left="406" top="121" width="103" height="25" cssclass="sta_WF_label01" textAlign="right"/>
+                  <Static id="Static11" taborder="32" text="소재지" left="406" top="149" width="103" height="25" cssclass="sta_WF_label01" textAlign="right"/>
+                  <Static id="Static12" taborder="33" text="국적" left="406" top="177" width="103" height="25" cssclass="sta_WF_label01" textAlign="right"/>
+                  <Combo id="Combo07" taborder="34" left="510" top="121" width="81" height="25" value="" index="-1"/>
+                  <Edit id="Edit07" taborder="35" left="594" top="121" width="195" height="25"/>
+                  <Edit id="Edit08" taborder="36" left="510" top="177" width="55" height="25" text="KRW"/>
+                  <Button id="Button00" taborder="37" left="567" top="177" width="25" height="25" cssclass="btn_WF_down"/>
+                  <Edit id="Edit09" taborder="38" left="594" top="177" width="195" height="25"/>
+                  <Button id="Button01" taborder="39" text="Third Cust Info" left="623" width="96" cssclass="btn_WF_basic03" height="24" bottom="58" enable="false"/>
+                  <Button id="Button02" taborder="40" text="복수거래" left="723" width="66" cssclass="btn_WF_basic03" height="24" bottom="58"/>
+                </Layout>
+              </Layouts>
+            </Tabpage>
+          </Tabpages>
+        </Tab>
+        <Static id="Static17" taborder="6" left="10" top="10" height="420" cssclass="sta_WF_box01" text="" right="10"/>
+        <Static id="Static03" taborder="7" text="Transaction Number" left="18" top="24" width="165" height="25" cssclass="sta_WF_label01"/>
+        <Static id="Static04" taborder="8" text="Remitting Amount" left="18" top="54" width="165" height="25" cssclass="sta_WF_label01"/>
+        <Static id="Static05" taborder="9" text="Payment Currency" left="18" top="84" width="165" height="25" cssclass="sta_WF_label01"/>
+        <Edit id="Edit02" taborder="10" left="170" top="54" width="56" height="25" text="KRW"/>
+        <Button id="Button03" taborder="11" left="228" top="54" width="25" height="25" cssclass="btn_WF_down"/>
+        <Edit id="Edit03" taborder="12" left="170" top="24" width="115" height="25"/>
+        <Edit id="Edit04" taborder="13" left="254" top="54" width="116" height="25"/>
+        <Edit id="Edit05" taborder="14" left="170" top="84" width="56" height="25" text="KRW"/>
+        <Button id="Button04" taborder="15" left="228" top="84" width="25" height="25" cssclass="btn_WF_down"/>
+        <Static id="Static06" taborder="16" text="Domestic/Overseas" left="289" top="24" width="165" height="25" cssclass="sta_WF_label01"/>
+        <Combo id="Combo03" taborder="17" text="Overseas" left="427" top="24" width="94" height="25" value="" index="-1"/>
+        <CheckBox id="CheckBox00" taborder="18" text="MT103" left="534" top="24" width="69" height="25"/>
+        <CheckBox id="CheckBox01" taborder="19" text="MT202C" left="601" top="24" width="69" height="25"/>
+        <CheckBox id="CheckBox02" taborder="20" text="MT191" left="677" top="24" width="69" height="25"/>
+        <CheckBox id="CheckBox03" taborder="21" text="MT199" left="744" top="24" width="69" height="25"/>
+        <Edit id="Edit06" taborder="22" left="373" top="54" width="96" height="25"/>
+        <Edit id="Edit07" taborder="23" left="472" top="54" width="96" height="25"/>
+        <Static id="Static07" taborder="24" text="Receive Date" left="578" top="54" width="110" height="25" cssclass="sta_WF_label01" textAlign="right"/>
+        <Static id="Static08" taborder="25" text="Payment Date" left="578" top="84" width="110" height="25" cssclass="sta_WF_label01" textAlign="right"/>
+        <Static id="Static09" taborder="26" text="Degree" left="578" top="114" width="110" height="25" cssclass="sta_WF_label01" textAlign="right"/>
+        <Calendar id="Calendar00" taborder="27" left="687" top="54" width="116" height="25" dateformat="yyyy-MM-dd" displaynulltext="2018-08-22" font="normal 8pt/normal &quot;Arial&quot;" type="normal" buttonsize="15 15"/>
+        <Calendar id="Calendar01" taborder="28" left="687" top="84" width="116" height="25" dateformat="yyyy-MM-dd" displaynulltext="2018-08-22" font="normal 8pt/normal &quot;Arial&quot;" type="normal" buttonsize="15 15"/>
+        <Combo id="Combo04" taborder="29" left="687" top="114" width="116" height="25" value="" index="-1" text="14:30"/>
+        <Static id="Static10" taborder="30" text="[Basic Rate]" left="339" top="84" width="85" height="25" cssclass="sta_WF_label01"/>
+        <Button id="Button06" taborder="31" left="429" width="25" cssclass="btn_WF_btnDrop" height="25" top="84"/>
+        <Edit id="Edit08" taborder="32" left="453" top="84" width="115" height="25"/>
+        <Combo id="Combo05" taborder="33" left="170" top="111" width="95" height="25" value="" index="-1"/>
+        <Edit id="Edit09" taborder="34" left="267" top="111" width="146" height="25"/>
+        <Edit id="Edit10" taborder="35" left="416" top="111" width="152" height="25"/>
+        <Static id="Static11" taborder="36" text="Format" left="103" top="138" width="63" height="25" cssclass="sta_WF_label01" textAlign="right"/>
+        <Edit id="Edit11" taborder="37" left="170" top="138" width="95" height="25"/>
+        <Button id="Button07" taborder="38" left="267" top="138" width="25" height="25" cssclass="btn_WF_down"/>
+        <Edit id="Edit12" taborder="39" left="293" top="138" width="64" height="25"/>
+        <Edit id="Edit13" taborder="40" left="360" top="138" width="208" height="25"/>
+        <Combo id="Combo06" taborder="41" left="18" top="138" width="85" height="25" value="" index="-1"/>
+        <Static id="Static12" taborder="42" text="Commission Details" left="17" top="175" width="170" height="30" cssclass="sta_WF_title02"/>
+        <Edit id="Edit00" taborder="43" left="16" top="208" width="45" height="25" text="KRW"/>
+        <Button id="Button00" taborder="44" left="64" top="208" width="25" height="25" cssclass="btn_WF_down"/>
+        <Edit id="Edit01" taborder="45" left="91" top="208" width="65" height="25" text="KRW"/>
+        <Edit id="Edit14" taborder="46" left="159" top="208" width="95" height="25" text="KRW"/>
+        <Edit id="Edit15" taborder="47" left="257" top="208" width="45" height="25" text="KRW"/>
+        <Edit id="Edit16" taborder="48" left="305" top="208" width="96" height="25" text="KRW"/>
+        <Edit id="Edit17" taborder="49" left="403" top="208" width="45" height="25" text="KRW"/>
+        <Edit id="Edit18" taborder="50" left="451" top="208" width="95" height="25" text="KRW"/>
+        <Button id="Button08" taborder="51" text="-" left="553" width="15" cssclass="btn_WF_basic01" height="15" top="213"/>
+        <Edit id="Edit19" taborder="52" left="16" top="235" width="45" height="25" text="KRW"/>
+        <Button id="Button10" taborder="53" left="64" top="235" width="25" height="25" cssclass="btn_WF_down"/>
+        <Edit id="Edit20" taborder="54" left="91" top="235" width="65" height="25" text="KRW"/>
+        <Edit id="Edit21" taborder="55" left="159" top="235" width="95" height="25" text="KRW"/>
+        <Edit id="Edit22" taborder="56" left="257" top="235" width="45" height="25" text="KRW"/>
+        <Edit id="Edit23" taborder="57" left="305" top="235" width="96" height="25" text="KRW"/>
+        <Edit id="Edit24" taborder="58" left="403" top="235" width="45" height="25" text="KRW"/>
+        <Edit id="Edit25" taborder="59" left="451" top="235" width="95" height="25" text="KRW"/>
+        <Button id="Button11" taborder="60" text="-" left="553" width="15" cssclass="btn_WF_basic01" height="15" top="240"/>
+        <Edit id="Edit26" taborder="61" left="16" top="262" width="45" height="25" text="KRW"/>
+        <Button id="Button12" taborder="62" left="64" top="262" width="25" height="25" cssclass="btn_WF_down"/>
+        <Edit id="Edit27" taborder="63" left="91" top="262" width="65" height="25" text="KRW"/>
+        <Edit id="Edit28" taborder="64" left="159" top="262" width="95" height="25" text="KRW"/>
+        <Edit id="Edit29" taborder="65" left="257" top="262" width="45" height="25" text="KRW"/>
+        <Edit id="Edit30" taborder="66" left="305" top="262" width="96" height="25" text="KRW"/>
+        <Edit id="Edit31" taborder="67" left="403" top="262" width="45" height="25" text="KRW"/>
+        <Edit id="Edit32" taborder="68" left="451" top="262" width="95" height="25" text="KRW"/>
+        <Button id="Button13" taborder="69" text="-" left="553" width="15" cssclass="btn_WF_basic01" height="15" top="267"/>
+        <Combo id="Combo00" taborder="70" left="16" top="289" width="140" height="25" value="" index="-1"/>
+        <Static id="Static00" taborder="71" text="Format" left="160" top="289" width="63" height="25" cssclass="sta_WF_label01" textAlign="right"/>
+        <Edit id="Edit33" taborder="72" left="221" top="289" width="104" height="25"/>
+        <Button id="Button16" taborder="73" left="327" top="289" width="25" height="25" cssclass="btn_WF_down"/>
+        <Edit id="Edit34" taborder="74" left="353" top="289" width="60" height="25"/>
+        <Edit id="Edit35" taborder="75" left="415" top="289" width="153" height="25"/>
+        <Static id="Static01" taborder="76" text="Special Rate" left="600" top="175" width="170" height="30" cssclass="sta_WF_title02"/>
+        <Combo id="Combo01" taborder="77" left="600" top="231" width="203" height="25" value="" index="-1"/>
+        <Edit id="Edit36" taborder="78" left="600" top="265" width="202" height="24"/>
+        <Static id="Static42" taborder="79" left="586" top="185" width="1" height="130" cssclass="sta_WF_LineDot"/>
+        <Static id="Static13" taborder="80" text="USD EQUIV." left="17" top="328" width="170" height="30" cssclass="sta_WF_title02"/>
+        <Static id="Static15" taborder="81" text="[Basic Rate]" left="93" top="359" width="85" height="25" cssclass="sta_WF_label01"/>
+        <Button id="Button17" taborder="82" left="17" width="25" cssclass="btn_WF_btnDrop" height="25" top="387"/>
+        <Edit id="Edit37" taborder="83" left="41" top="387" width="144" height="25"/>
+        <Combo id="Combo02" taborder="84" left="188" top="359" width="95" height="25" value="" index="-1"/>
+        <Combo id="Combo07" taborder="85" left="286" top="359" width="95" height="25" value="" index="-1"/>
+        <Edit id="Edit38" taborder="86" left="384" top="359" width="95" height="25"/>
+        <Static id="Static16" taborder="87" text="Total Amount" left="493" top="359" width="133" height="25" cssclass="sta_WF_label01" textAlign="right"/>
+        <Combo id="Combo08" taborder="88" left="188" top="387" width="95" height="25" value="" index="-1"/>
+        <Edit id="Edit39" taborder="89" left="286" top="387" width="135" height="25"/>
+        <Edit id="Edit40" taborder="90" left="424" top="387" width="55" height="25"/>
+        <Edit id="Edit41" taborder="91" left="625" top="359" width="177" height="25"/>
+        <Edit id="Edit42" taborder="92" left="625" top="387" width="177" height="25"/>
+        <Edit id="Edit43" taborder="93" left="481" top="387" width="95" height="25"/>
+        <Edit id="Edit44" taborder="94" left="578" top="387" width="45" height="25" value="USD" text="USD"/>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="ds_criteria">
+        <ColumnInfo>
+          <Column id="Column0" type="STRING" size="256"/>
+          <Column id="Column1" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="Column0">Short name</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">Customer Number</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">Full name</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">Nick name</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">Phone number</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">Address</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">Register No</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">Passport No</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">Driver No</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">Reference No (Old Customer Number)</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">Bank Code</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">Last Update</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">Business No</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">Establish no</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">Tax No</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">District</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">Commune</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">Nationality No</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="ds_customerType">
+        <ColumnInfo>
+          <Column id="Column0" type="STRING" size="256"/>
+          <Column id="Column1" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="Column0">Individual Customer</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">Private Business Owner</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">Household</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">Cooperative</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">Stock Company</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">Company Limited</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">Joint Venture Company</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">Foreign Investment Company</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">State Enterprise</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">Financial Institution</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">Government &amp; Public Institution</Col>
+          </Row>
+          <Row>
+            <Col id="Column0">Organization</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+    </Objects>
+  </Form>
+</FDL>

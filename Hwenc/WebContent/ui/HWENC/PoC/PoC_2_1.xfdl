@@ -1,0 +1,94 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.0">
+  <Form id="PoC_2_1" width="1010" height="691" titletext="Javascript Library 연동" onload="PoC_2_1_onload">
+    <Layouts>
+      <Layout height="691" mobileorientation="landscape" width="1010">
+        <Static id="Static01" taborder="0" text="3rd Party 연동" cssclass="sta_WF_title02" left="8" top="8" width="421" height="26"/>
+        <Div id="div_tail01" taborder="1" left="10" top="40" height="120" text="Div00" background="red" right="10">
+          <Layouts>
+            <Layout>
+              <Button id="Button00" taborder="0" text="..." top="6" width="32" height="26" onclick="Button_onclick" right="10" cssclass="btn_WF_basic02"/>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Div id="div_tail02" taborder="2" left="10" top="167" height="120" text="Div00" background="yellow" right="10">
+          <Layouts>
+            <Layout>
+              <Button id="Button00" taborder="0" text="..." top="6" width="32" height="26" onclick="Button_onclick" right="10" cssclass="btn_WF_basic02"/>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Div id="div_tail03" taborder="3" left="10" top="293" height="120" background="blue" text="Div00" right="10">
+          <Layouts>
+            <Layout>
+              <Button id="Button00" taborder="0" text="..." top="6" height="26" onclick="Button_onclick" width="32" right="10" cssclass="btn_WF_basic02"/>
+            </Layout>
+          </Layouts>
+        </Div>
+      </Layout>
+    </Layouts>
+    <Script type="xscript5.1"><![CDATA[include "lib::CommUtil.xjs";
+
+this.status = "normal";
+
+this.PoC_2_1_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
+{
+	this.fn_initAni();
+};
+
+this.Button_onclick = function(obj:nexacro.Button,  e:nexacro.ClickEventInfo)
+{		
+	this.fn_runAni(obj.parent.parent);
+};
+
+this.fn_initAni = function ()
+{
+	var i;
+	var objDiv;	
+	for(i=1;i<4;i++)
+	{
+		objDiv = this.components["div_tail0"+i];		
+		objDiv.orgLeft = objDiv.left;		
+		objDiv.orgTop = objDiv.top;
+		objDiv.orgWidth = objDiv.width;
+		objDiv.orgHeight = objDiv.height;
+	}
+	this.divRight.orgLeft = this.divRight.left;
+	this.divRight.orgTop = this.divRight.top;
+	this.divRight.orgWidth = this.divRight.width;
+	this.divRight.orgHeight = this.divRight.height;
+};
+
+this.fn_runAni = function (obj)
+{	
+	var i;
+	var objDiv;
+	var nTop = this.Static01.getOffsetHeight() + 8;
+	var nLeft = 8;
+	var nMaxHeight = 350;
+	var nMinHeight = 50;
+	
+	for(i=1;i<4;i++)
+	{		
+		objDiv = this.components["div_tail0"+i];		
+		//objDiv.set_top(nTop);
+		$(this.jquerid(objDiv)).animate({"left" : "8px"}, {"duration":1000, "queue": false}).animate({"top" : nTop} );
+
+		if(objDiv.name==obj.name)
+		{
+			$(this.jquerid(objDiv)).animate({"height" : "350px"}, {"duration":1000, "queue": false});
+			//objDiv.set_height(nMaxHeight);
+			nTop = nTop+nMaxHeight+7;			
+
+		}else
+		{
+			$(this.jquerid(objDiv)).animate({"height" : "50px"}, {"duration":1000, "queue": false});
+			//objDiv.set_height(nMinHeight);
+			nTop = nTop+nMinHeight+7;
+		}
+	} 
+};    
+
+]]></Script>
+  </Form>
+</FDL>

@@ -1,0 +1,136 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.0">
+  <Form id="Edu_Popup_01" width="800" height="600" titletext="팝업화면" onload="Edu_Popup_01_onload">
+    <Layouts>
+      <Layout height="600" mobileorientation="landscape" width="800">
+        <Grid id="Grid00" taborder="0" left="8" top="40" right="8" bottom="8" binddataset="dsOutput" oncelldblclick="Grid00_oncelldblclick" autofittype="col" onkeydown="Grid00_onkeydown">
+          <Formats>
+            <Format id="default"/>
+          </Formats>
+        </Grid>
+        <Button id="btn_Search" taborder="1" text="조회" top="8" width="72" height="22" right="89" onclick="comm_Click"/>
+        <Button id="btn_Close" taborder="2" text="닫기" top="8" width="72" height="22" right="8" escapebutton="true" onclick="comm_Click"/>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="dsOutput"/>
+    </Objects>
+    <Script type="xscript5.1"><![CDATA[/************************************************************************************************
+* 01. 업무구분 : 공통 - 공통
+* 02. 화면명   : 팝업화면
+* 03. 화면설명 : 
+* 04. 작성일   : 2019.05.22
+* 05. 작성자   : 안주환
+* 06. 수정이력 :
+***********************************************************************************************
+*     수정일          이  름    사유
+***********************************************************************************************
+*     
+************************************************************************************************/
+
+/************************************************************************************************
+* 공통 라이브러리 INCLUDE 영역
+************************************************************************************************/
+include "Script::CommUtil.xjs"; 	
+include "Script::ext_CommEco.xjs";
+
+/************************************************************************************************
+* 전역 변수 영역
+************************************************************************************************/
+
+/************************************************************************************************
+* FORM 영역
+************************************************************************************************/
+this.Edu_Popup_01_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
+{
+	this.fnSearch(this.parent.CM_CODE);
+};
+
+/************************************************************************************************
+* FORM 공통 FUNCTION 영역
+************************************************************************************************/
+this.fnReturnOne = function(row, colId, colVal, type)
+{
+	var dsReturn = new nexacro.Dataset();
+	dsReturn.assign(this.dsOutput);
+	dsReturn.clearData();
+	
+	var newrow = dsReturn.addRow();
+	dsReturn.copyRow(newrow, this.dsOutput, row);
+	
+	var objInfo = {
+				  	 "colId" : colId,
+				     "colVal" : colVal,
+				     "type" : type
+				  }
+				 
+	var sArgument = {	
+					   dsReturn : dsReturn,
+				       "clickCellInfo" : objInfo
+					}; 
+					
+	this.commUtil.popupClose(sArgument);
+}
+
+/************************************************************************************************
+* TRANSACTION 및 추가 FUNCTION 영역
+************************************************************************************************/
+this.fnSearch = function(CM_CODE)
+{
+	this.transaction
+	(
+		"select"
+	   ,"http://14.63.224.112/gscm/service/edu/select2.jsp?CM_CODE=" + CM_CODE
+	   ,""
+	   ,"dsOutput=dsOutput"
+	   ,""
+	   ,"fnCallBack"
+	)
+};
+
+this.fnCallBack = function(svcId, errCode, errMsg)
+{
+	if(errCode < 0)
+	{
+		alert("errCode : " + errCode + "\n" + "errMsg : " + errMsg);
+	}
+	else
+	{
+		if(svcId == "select")
+		{
+			this.Grid00.createFormat();
+		}
+	}
+};
+
+/************************************************************************************************
+* 각 COMPONENT 별 EVENT 영역
+************************************************************************************************/
+this.comm_Click = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	switch(obj.name)
+	{
+		case "btn_Search" : 
+			this.fnSearch(this.parent.CM_CODE);
+			break;
+		case "btn_Close" : 
+			this.commUtil.popupClose("");
+			break;
+	}
+};
+
+//특정 CE
+this.Grid00_oncelldblclick = function(obj:nexacro.Grid,e:nexacro.GridClickEventInfo)
+{
+	this.fnReturnOne(obj.currentrow, this.parent.colId, this.dsOutput.getColumn(e.row, this.dsOutput.getColID(e.col)), "dbclick");
+};
+
+this.Grid00_onkeydown = function(obj:nexacro.Grid,e:nexacro.KeyEventInfo)
+{
+	if(e.keycode == 13)
+	{
+		this.fnReturnOne(this.dsOutput.rowposition, "", "", "keydown");
+	}
+};]]></Script>
+  </Form>
+</FDL>

@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ADL version="2.0">
+  <Application id="App_Desktop" screenid="Desktop_screen" licenseurl="http://14.63.224.112/SkInnovation/license/nexacro17_client_license.xml">
+    <Layout>
+      <MainFrame id="mainframe" showtitlebar="true" showstatusbar="true" width="1280" height="720">
+        <ChildFrame id="ChildFrame00" formurl="Work::sample_01.xfdl" showtitlebar="false"/>
+      </MainFrame>
+    </Layout>
+    <Style url="xcssrc::style.xcss"/>
+  </Application>
+</ADL>

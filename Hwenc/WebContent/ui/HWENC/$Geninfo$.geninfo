@@ -1,0 +1,83 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <GenInfo version="1.1">
+    <Rule>
+      <ENV rule_version="1.05"/>
+      <ADL rule_version="1.14"/>
+      <FDL rule_version="1.04"/>
+      <XCSS rule_version="1.03"/>
+      <Script rule_version="1.02"/>
+    </Rule>
+    <Info project="C:\Users\투비소프트\eclipse-workspace\Hwenc\WebContent\ui\HWENC\" generated="C:\Users\투비소프트\eclipse-workspace\Hwenc\WebContent\packageA\">
+      <File url="typedefinition.xml" checksum="20190905171737" errormsg=""/>
+      <File url="appvariables.xml" checksum="20190904132849" errormsg=""/>
+      <File url="environment.xml" checksum="20190906182907" errormsg=""/>
+      <File url="_resource_\_theme_\blue\theme.xcss" checksum="20200114101355" errormsg=""/>
+      <File url="App_Desktop.xadl" checksum="20190905172950" errormsg=""/>
+      <File url="_resource_\_xcss_\EduProject.xcss" checksum="20190904100754" errormsg=""/>
+      <File url="_resource_\_xcss_\layout.xcss" checksum="20190909090538" errormsg=""/>
+      <File url="FrameBase\frmAll.xfdl" checksum="20200114101224" errormsg=""/>
+      <File url="PoC\poc_main.xfdl" checksum="20190719102053" errormsg=""/>
+      <File url="Base\po0702.xfdl" checksum="20190904100747" errormsg=""/>
+      <File url="Base\poc02.xfdl" checksum="20190904100747" errormsg=""/>
+      <File url="Base\poc02_Gantt.xfdl" checksum="20190904100747" errormsg=""/>
+      <File url="PoC\PoC_2_1.xfdl" checksum="20190905173529" errormsg=""/>
+      <File url="PoC\PoC_3_1.xfdl" checksum="20190916133704" errormsg=""/>
+      <File url="PoC\PoC_4_1.xfdl" checksum="20190916112753" errormsg=""/>
+      <File url="PoC\PoC_5_1.xfdl" checksum="20190906164959" errormsg=""/>
+      <File url="PoC\PoC_6.xfdl" checksum="20190905170428" errormsg=""/>
+      <File url="PoC\PoC_1.xfdl" checksum="20190905094852" errormsg=""/>
+      <File url="PoC\PoC_7.xfdl" checksum="20190919134016" errormsg=""/>
+      <File url="lib\comLib_Comm.xjs" checksum="20190725133132" errormsg=""/>
+      <File url="lib\CommUtil.xjs" checksum="20190919133954" errormsg=""/>
+      <File url="lib\ext_CommEco.xjs" checksum="20190911101116" errormsg=""/>
+      <File url="PoC\PoC_2_2.xfdl" checksum="20190905174253" errormsg=""/>
+      <File url="PoC\PoC_2_3.xfdl" checksum="20190905161049" errormsg=""/>
+      <File url="PoC\PoC_2_1_2.xfdl" checksum="20190904142230" errormsg=""/>
+      <File url="PoC\PoC_2_2_2.xfdl" checksum="20190904143846" errormsg=""/>
+      <File url="lib\lib_Form.xjs" checksum="20190416112531" errormsg=""/>
+      <File url="lib\lib_String.xjs" checksum="20190416112531" errormsg=""/>
+      <File url="comm\np_jQuery_animate_position.xfdl" checksum="20190619163641" errormsg=""/>
+      <File url="comm\np_jQuery_animate_positionDiv.xfdl" checksum="20190619162247" errormsg=""/>
+      <File url="comm\rChart.xfdl" checksum="20190904154802" errormsg=""/>
+      <File url="comm\rChartPop.xfdl" checksum="20190904145050" errormsg=""/>
+      <File url="comm\rMateChart2.xfdl" checksum="20190904145114" errormsg=""/>
+      <File url="lib\rMateChartH5.xjs" checksum="20190523125831" errormsg=""/>
+      <File url="lib\rMateChartH5License.xjs" checksum="20190523125831" errormsg=""/>
+      <File url="PoC\PoC_3_2.xfdl" checksum="20190909182332" errormsg=""/>
+      <File url="PoC\PoC_3_3.xfdl" checksum="20190910170611" errormsg=""/>
+      <File url="PoC\PoC_3_4.xfdl" checksum="20190911101946" errormsg=""/>
+      <File url="PoC\PoC_3_1_copy2.xfdl" checksum="20190904163433" errormsg=""/>
+      <File url="PoC\PoC_1_1.xfdl" checksum="20190905094758" errormsg=""/>
+      <File url="lib\excel.xjs" checksum="20190911104551" errormsg=""/>
+      <File url="PoC\PoC_4_2.xfdl" checksum="20190905161524" errormsg=""/>
+      <File url="comm\ActiveForm.xfdl" checksum="20190726141917" errormsg=""/>
+      <File url="comm\ActiveForm2.xfdl" checksum="20190726141813" errormsg=""/>
+      <File url="PoC\PoC_5_2.xfdl" checksum="20190910174855" errormsg=""/>
+      <File url="PoC\PoC_5_3.xfdl" checksum="20190917120314" errormsg=""/>
+      <File url="comm\comGridFilterDiv.xfdl" checksum="20190402113323" errormsg=""/>
+      <File url="comm\comGridSortPop.xfdl" checksum="20190402113323" errormsg=""/>
+      <File url="_resource_\_xcss_\pivot.xcss" checksum="20190618095911" errormsg=""/>
+      <File url="_resource_\_xcss_\pivotContentsEditor.xcss" checksum="20190618095911" errormsg=""/>
+      <File url="sample\Arrangement.xfdl" checksum="20190523125833" errormsg=""/>
+      <File url="sample\CategoryGrid.xfdl" checksum="20190905172020" errormsg=""/>
+      <File url="sample\Component.xfdl" checksum="20190718143841" errormsg=""/>
+      <File url="sample\Components_step.xfdl" checksum="20190523125833" errormsg=""/>
+      <File url="sample\Dynamic.xfdl" checksum="20190523125833" errormsg=""/>
+      <File url="sample\DynamicTree.xfdl" checksum="20190905172024" errormsg=""/>
+      <File url="sample\MenuList.xfdl" checksum="20190523125833" errormsg=""/>
+      <File url="sample\pivot.xfdl" checksum="20190905172332" errormsg=""/>
+      <File url="sample\Portlet.xfdl" checksum="20190523125833" errormsg=""/>
+      <File url="lib\comLib_Data.xjs" checksum="20190618095908" errormsg=""/>
+      <File url="lib\comLib_Date.xjs" checksum="20190618095908" errormsg=""/>
+      <File url="lib\comLib_Form.xjs" checksum="20190618095908" errormsg=""/>
+      <File url="lib\comLib_Grid.xjs" checksum="20190618095908" errormsg=""/>
+      <File url="lib\comLib_String.xjs" checksum="20190618095908" errormsg=""/>
+      <File url="lib\comLib_Util.xjs" checksum="20190618095908" errormsg=""/>
+      <File url="lib\comLib_Validation.xjs" checksum="20190618095908" errormsg=""/>
+      <File url="PoC\test.xfdl" checksum="20190906155636" errormsg=""/>
+      <File url="PoC\Z201908_2019080089-np_Grid_UseRadioOnGrid.xfdl" checksum="20190906170900" errormsg=""/>
+      <File url="PoC\component_css_test.xfdl" checksum="20190906165934" errormsg=""/>
+    </Info>
+  </GenInfo>
+</root>

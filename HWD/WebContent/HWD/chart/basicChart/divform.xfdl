@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.0">
+  <Form id="divform" width="1280" height="720" titletext="New Form">
+    <Layouts>
+      <Layout height="720" mobileorientation="landscape" width="1280">
+        <Div id="Div00" taborder="0" text="Div00" left="60" top="261" width="1120" height="389" url="BasicChart::GroupedStackBar.xfdl"/>
+      </Layout>
+    </Layouts>
+  </Form>
+</FDL>

@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="poc01" width="840" height="220" titletext="속성변경" onload="poc01_onload" onbeforeclose="poc01_onbeforeclose" ontimer="poc01_ontimer">
+    <Layouts>
+      <Layout height="220" mobileorientation="landscape" width="840">
+        <Static id="Static28" taborder="0" text="Issue Date" left="18" top="19" width="110" height="25" cssclass="sta_WF_label01"/>
+        <Calendar id="Calendar04" taborder="1" left="130" top="19" width="132" height="25" dateformat="yyyy-MM-dd" displaynulltext="2018-08-22" font="normal 8pt/normal &quot;Arial&quot;" type="normal" buttonsize="21 21" onchanged="Common_onchanged"/>
+        <Static id="Static00" taborder="2" text="Applicant" left="18" top="49" width="110" height="25" cssclass="sta_WF_label01"/>
+        <Static id="Static01" taborder="3" text="Beneficiary" left="18" top="109" width="110" height="25" cssclass="sta_WF_label01"/>
+        <Static id="Static02" taborder="4" text="L/C Amount" left="18" top="79" width="110" height="25" cssclass="sta_WF_label01"/>
+        <Edit id="Edit10" taborder="5" left="130" top="49" width="105" height="25" onchanged="Common_onchanged"/>
+        <Button id="Button00" taborder="6" left="237" top="49" width="25" height="25" cssclass="btn_WF_basic04" text="S"/>
+        <Combo id="Combo01" taborder="7" text="Combo00" left="130" top="79" width="70" height="25" onitemchanged="Common_onchanged"/>
+        <Edit id="Edit00" taborder="8" left="203" top="79" width="113" height="25" onchanged="Common_onchanged"/>
+        <Static id="Static14" taborder="9" text="More/Less" left="334" top="79" width="80" height="25" cssclass="sta_WF_label01"/>
+        <Edit id="Edit26" taborder="10" left="464" top="79" width="38" height="25" onchanged="Common_onchanged"/>
+        <Static id="Static15" taborder="11" text="/" left="456" top="79" width="10" height="25"/>
+        <Edit id="Edit24" taborder="12" left="414" top="79" width="38" height="25" onchanged="Common_onchanged"/>
+        <Edit id="Edit01" taborder="13" left="130" top="109" width="372" height="25" onchanged="Common_onchanged"/>
+        <Static id="Static17" taborder="14" text="Receive Date" left="277" top="19" width="110" height="25" cssclass="sta_WF_label01"/>
+        <Calendar id="Calendar02" taborder="15" left="370" top="19" width="148" height="25" dateformat="yyyy-MM-dd" displaynulltext="2018-08-22" font="normal 8pt/normal &quot;Arial&quot;" type="normal" buttonsize="21 21" onchanged="Common_onchanged"/>
+        <Edit id="Edit14" taborder="16" left="265" top="49" width="552" height="25" onchanged="Common_onchanged"/>
+        <Static id="Static18" taborder="17" text="EDI Msg No." left="533" top="19" width="110" height="25" cssclass="sta_WF_label01"/>
+        <Edit id="Edit15" taborder="18" left="642" top="19" width="175" height="25" onchanged="Common_onchanged"/>
+        <Static id="Static19" taborder="19" text="Credit Line No." left="533" top="79" width="110" height="25" cssclass="sta_WF_label01"/>
+        <Edit id="Edit16" taborder="20" left="642" top="79" width="148" height="25" onchanged="Common_onchanged"/>
+        <Button id="Button01" taborder="21" left="792" top="79" width="25" height="25" cssclass="btn_WF_basic04" text="S"/>
+        <Static id="Static20" taborder="22" text="Country" left="533" top="109" width="110" height="25" cssclass="sta_WF_label01"/>
+        <Combo id="Combo06" taborder="23" text="Combo00" left="642" top="108" width="175" height="25" onitemchanged="Common_onchanged"/>
+        <Static id="Static06" taborder="24" text="Available WIth" left="18" top="139" width="110" height="25" cssclass="sta_WF_label01"/>
+        <Static id="Static12" taborder="25" text="Expiry Date" left="18" top="169" width="110" height="25" cssclass="sta_WF_label01"/>
+        <Button id="Button02" taborder="26" left="237" top="139" width="25" height="25" cssclass="btn_WF_basic04" text="S"/>
+        <Edit id="Edit02" taborder="27" left="130" top="139" width="105" height="25" onchanged="Common_onchanged"/>
+        <Edit id="Edit03" taborder="28" left="265" top="139" width="237" height="25"/>
+        <Calendar id="Calendar00" taborder="29" left="130" top="168" width="132" height="25" dateformat="yyyy-MM-dd" displaynulltext="2018-08-22" font="normal 8pt/normal &quot;Arial&quot;" type="normal" buttonsize="21 21" onchanged="Common_onchanged"/>
+        <Static id="Static21" taborder="30" text="By" left="533" top="139" width="110" height="25" cssclass="sta_WF_label01"/>
+        <Combo id="Combo07" taborder="31" text="Combo00" left="642" top="138" width="175" height="25" onitemchanged="Common_onchanged"/>
+        <Static id="Static22" taborder="32" text="Expiry Place" left="277" top="169" width="110" height="24" cssclass="sta_WF_label01"/>
+        <Edit id="Edit17" taborder="33" left="370" top="169" width="447" height="24" onchanged="Common_onchanged"/>
+      </Layout>
+    </Layouts>
+    <Objects/>
+    <Script type="xscript5.1"><![CDATA[
+this.Common_onchanged = function(obj:nexacro.Edit,e:nexacro.ChangeEventInfo)
+{
+	this.getOwnerFrame().form.fnUpdated();
+};
+]]></Script>
+  </Form>
+</FDL>

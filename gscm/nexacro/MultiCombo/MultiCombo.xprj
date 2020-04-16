@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project type="module" version="2.0">
+  <ObjInfo>
+    <File url="metainfo\MultiCombo.info"/>
+  </ObjInfo>
+  <Scripts>
+    <File url="MultiCombo.js"/>
+  </Scripts>
+  <DesignScripts>
+    <File url="Design\DesignMultiCombo.js"/>
+  </DesignScripts>
+  <CSSInfo>
+    <PropertyInfo/>
+  </CSSInfo>
+  <StatusInfo/>
+  <MethodInfo/>
+  <EventHandlerInfo/>
+</Project>

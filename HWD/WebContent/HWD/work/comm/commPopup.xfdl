@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="commPopup" width="1000" height="622" titletext="New Form" onload="commPopup_onload">
+    <Layouts>
+      <Layout height="622" width="1000">
+        <Div id="divWork" taborder="0" left="0" top="0" right="0" bottom="0" text="" async="false" onvscroll="divWork_onvscroll">
+          <Layouts>
+            <Layout/>
+          </Layouts>
+        </Div>
+      </Layout>
+    </Layouts>
+    <Script type="xscript5.1"><![CDATA[this.commPopup_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
+{
+	this.strMenuId = this.parent.menuId;
+	this.strMenuUrl = this.parent.menuUrl;
+	
+	this.divWork.set_url(this.strMenuUrl);
+	
+	var pForm = nexacro.getApplication().mainframe.VFrameSet.Main.form
+	pForm.fv_EndTime = this.gfn_CheckTime();
+	pForm.fv_DiffTime = this.gfn_diffTime(pForm.fv_StartTime, pForm.fv_EndTime, "ss");
+	pForm.Dataset02.setColumn(3, "Column0", pForm.fv_DiffTime)
+};
+]]></Script>
+  </Form>
+</FDL>

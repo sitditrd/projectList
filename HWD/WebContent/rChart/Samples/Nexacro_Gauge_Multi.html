@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="Content-Script-Type" content="text/javascript" />
+<meta http-equiv="Content-Style-Type" content="text/css" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<title>rMate Chart for HTML5 - Bar chart</title>
+<!-- rMateChartH5 에서 사용하는 스타일 -->
+<link rel="stylesheet" type="text/css"
+	href="../rMateChartH5/Assets/Css/rMateChartH5.css" />
+
+<!-- IE7, 8 에서 차트 생성하고자 하는 경우 -->
+<!--[if IE]><script language="javascript" type="text/javascript" src="../rMateChartH5/JS/excanvas.js"></script><![endif]-->
+
+<!-- rMateChartH5 라이센스 -->
+<script language="javascript" type="text/javascript"
+	src="../LicenseKey/rMateChartH5License.js"></script>
+
+<!-- 실제적인 rMateChartH5 라이브러리 -->
+<script language="javascript" type="text/javascript"
+	src="../rMateChartH5/JS/rMateGaugeChartH5.js"></script>
+
+<!-- rMateChartH5 테마 js -->
+<script type="text/javascript"
+	src="../rMateChartH5/Assets/Theme/theme.js"></script>
+
+<script type="text/javascript">
+    // -----------------------차트 설정 시작-----------------------
+
+    // rMate 차트 생성 준비가 완료된 상태 시 호출할 함수를 지정합니다.
+    var chartVars1 = "rMateOnLoadCallFunction=chartReadyHandler1";
+    var chartVars2 = "rMateOnLoadCallFunction=chartReadyHandler2";
+    var chartVars3 = "rMateOnLoadCallFunction=chartReadyHandler3";
+    var chartVars4 = "rMateOnLoadCallFunction=chartReadyHandler4";
+    var chartVars5 = "rMateOnLoadCallFunction=chartReadyHandler5";
+    var chartVars6 = "rMateOnLoadCallFunction=chartReadyHandler6";
+    var chartVars7 = "rMateOnLoadCallFunction=chartReadyHandler7";
+    var chartVars8 = "rMateOnLoadCallFunction=chartReadyHandler8";
+
+    // rMateChart 를 생성합니다.
+    // 파라메터 (순서대로) 
+    //  1. 차트의 id ( 임의로 지정하십시오. ) 
+    //  2. 차트가 위치할 div 의 id (즉, 차트의 부모 div 의 id 입니다.)
+    //  3. 차트 생성 시 필요한 환경 변수들의 묶음인 chartVars
+    //  4. 차트의 가로 사이즈 (생략 가능, 생략 시 100%)
+    //  5. 차트의 세로 사이즈 (생략 가능, 생략 시 100%)
+    rMateChartH5.create("chart1", "chartHolder1", chartVars1, "100%", "100%");
+
+    rMateChartH5.create("chart2", "chartHolder2", chartVars2, "100%", "100%");
+
+     rMateChartH5.create("chart3", "chartHolder3", chartVars3, "100%", "100%");
+
+     rMateChartH5.create("chart4", "chartHolder4", chartVars4, "100%", "100%");
+
+     rMateChartH5.create("chart5", "chartHolder5", chartVars5, "100%", "100%");
+
+     rMateChartH5.create("chart6", "chartHolder6", chartVars6, "100%", "100%");
+
+     rMateChartH5.create("chart7", "chartHolder7", chartVars7, "100%", "100%");
+
+     rMateChartH5.create("chart8", "chartHolder8", chartVars8, "100%", "100%");
+
+    // 차트의 속성인 rMateOnLoadCallFunction 으로 설정된 함수.
+    // rMate 차트 준비가 완료된 경우 이 함수가 호출됩니다.
+    // 이 함수를 통해 차트에 레이아웃과 데이터를 삽입합니다.
+    // 파라메터 : id - rMateChartH5.create() 사용 시 사용자가 지정한 id 입니다.
+    function chartReadyHandler1(id)
+    {
+	document.getElementById(id).setLayout(layoutStr);
+	document.getElementById(id).setData(chartData1);
+    }
+
+    function chartReadyHandler2(id)
+    {
+	document.getElementById(id).setLayout(layoutStr);
+	document.getElementById(id).setData(chartData2);
+    }
+
+    function chartReadyHandler3(id)
+    {
+	document.getElementById(id).setLayout(layoutStr);
+	document.getElementById(id).setData(chartData3);
+    }
+
+    function chartReadyHandler4(id)
+    {
+	document.getElementById(id).setLayout(layoutStr);
+	document.getElementById(id).setData(chartData4);
+    }
+
+    function chartReadyHandler5(id)
+    {
+	document.getElementById(id).setLayout(layoutStr);
+	document.getElementById(id).setData(chartData5);
+    }
+
+    function chartReadyHandler6(id)
+    {
+	document.getElementById(id).setLayout(layoutStr);
+	document.getElementById(id).setData(chartData6);
+    }
+
+    function chartReadyHandler7(id)
+    {
+	document.getElementById(id).setLayout(layoutStr);
+	document.getElementById(id).setData(chartData7);
+    }
+
+    function chartReadyHandler8(id)
+    {
+	document.getElementById(id).setLayout(layoutStr);
+	document.getElementById(id).setData(chartData8);
+    }
+
+    // 스트링 형식으로 레이아웃 정의.
+    var layoutStr = '<rMateChart backgroundColor="#cccccc"  borderStyle="none">'
+	    + '<Options>'
+	    + '<Caption text=""/>'
+	    + '</Options>'
+	    + '<CurrencyFormatter id="cft" currencySymbol="%" precision="0" alignSymbol="right"/>'
+	    + '<Gauge height="150" formatter="{cft}" innerRatio="0.85" labelJsFunction="valueLabelFunc" foregroundColors="[#f6a44c]" backgroundColors="[#e8d7c9]" minimum="0" maximum="200" startAngle="-90" minimumAngle="0" maximumAngle="180" color="#333333" fontSize="13" verticalOriginRatio="0.7" labelYOffset="-50">'
+	    + '<backgroundElements>'
+	    + '<CanvasElement>'
+	    + '<Label fontSize="5" height="17" color="#888888" horizontalCenter="0" verticalCenter="35" text="HALF SIMPLE GAUGE"/>'
+	    + '</CanvasElement>' 
+	    + '</backgroundElements>' 
+	    + '</Gauge>'
+	    + '</rMateChart>';
+
+    // 차트 데이터
+    var chartData1 =
+    [ 81 ];
+
+    //수치 라벨 사용자 정의 함수
+    function valueFunc(value)
+    {
+	return value.toFixed(0) + "%";
+    }
+
+    //차트 데이터
+    var chartData2 =
+    [ 52 ];
+
+    var chartData3 =
+    [ 21 ];
+
+    var chartData4 =
+    [ 100 ];
+
+    var chartData5 =
+    [ 22 ];
+
+    var chartData6 =
+    [ 11 ];
+
+    var chartData7 =
+    [ 98 ];
+
+    var chartData8 =
+    [ 74 ];
+    /**
+     * rMateChartH5 3.0이후 버전에서 제공하고 있는 테마기능을 사용하시려면 아래 내용을 설정하여 주십시오.
+     * 테마 기능을 사용하지 않으시려면 아래 내용은 삭제 혹은 주석처리 하셔도 됩니다.
+     *
+     * -- rMateChartH5.themes에 등록되어있는 테마 목록 --
+     * - simple
+     * - cyber
+     * - modern
+     * - lovely
+     * - pastel
+     * -------------------------------------------------
+     *
+     * rMateChartH5.themes 변수는 theme.js에서 정의하고 있습니다.
+     */
+    rMateChartH5.registerTheme(rMateChartH5.themes);
+
+    // -----------------------차트 설정 끝 -----------------------
+</script>
+<!-- 샘플 작동을 위한 css와 js -->
+<script type="text/javascript" src="./Web/JS/common.js"></script>
+<script type="text/javascript" src="./Web/JS/sample_util.js"></script>
+<link rel="stylesheet" type="text/css" href="./Web/sample.css" />
+
+<!-- SyntaxHighlighter -->
+<script type="text/javascript" src="./Web/syntax/shCore.js"></script>
+<script type="text/javascript" src="./Web/syntax/shBrushJScript.js"></script>
+<link type="text/css" rel="stylesheet"
+	href="./Web/syntax/shCoreDefault.css" />
+</head>
+<body>
+	<div id="content1" style="height:100%; width:100%;">
+		<div style="width: 25%; height:100px; float:left; padding:10px" id="chartHolder1"></div>
+		<div style="width: 25%; height:100px; float:left; padding:10px" id="chartHolder2"></div>
+		<div style="width: 25%; height:100px; float:left; padding:10px" id="chartHolder3"></div>
+		<div style="width: 25%; height:100px; float:left; padding:10px" id="chartHolder4"></div>
+	</div>
+	<div id="content2" style="height:100%; width:100%;">
+		<div style="width: 25%; height:100px; float:left; padding:10px" id="chartHolder5"></div>
+		<div style="width: 25%; height:100px; float:left; padding:10px" id="chartHolder6"></div>
+		<div style="width: 25%; height:100px; float:left; padding:10px" id="chartHolder7"></div>
+		<div style="width: 25%; height:100px; float:left; padding:10px" id="chartHolder8"></div>
+	</div>
+</body>
+</html>

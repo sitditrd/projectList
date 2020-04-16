@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.0">
+  <Form id="Work001_002_Tab01" width="963" height="720" titletext="개인별 옵션등록 Tab01" scrollbartype="none none" scrolltype="none">
+    <Layouts>
+      <Layout height="720" mobileorientation="landscape" width="963">
+        <Div id="Div00" taborder="0" left="12" top="12" right="12" bottom="12" formscrollbartype="none" text="">
+          <Layouts>
+            <Layout>
+              <Grid id="Grid00" taborder="0" left="0" top="0" right="0" bottom="0" autofittype="col" scrolltype="vertical">
+                <Formats>
+                  <Format id="default">
+                    <Columns>
+                      <Column size="45"/>
+                      <Column size="180"/>
+                      <Column size="60"/>
+                      <Column size="60"/>
+                      <Column size="180"/>
+                    </Columns>
+                    <Rows>
+                      <Row size="28" band="head"/>
+                      <Row size="26"/>
+                    </Rows>
+                    <Band id="head">
+                      <Cell text="번호"/>
+                      <Cell col="1" text="옵션항목"/>
+                      <Cell col="2" text="적용평형"/>
+                      <Cell col="3" text="선택코드"/>
+                      <Cell col="4" text="선택"/>
+                    </Band>
+                    <Band id="body">
+                      <Cell/>
+                      <Cell col="1"/>
+                      <Cell col="2"/>
+                      <Cell col="3"/>
+                      <Cell col="4"/>
+                    </Band>
+                  </Format>
+                </Formats>
+              </Grid>
+            </Layout>
+          </Layouts>
+        </Div>
+      </Layout>
+    </Layouts>
+  </Form>
+</FDL>

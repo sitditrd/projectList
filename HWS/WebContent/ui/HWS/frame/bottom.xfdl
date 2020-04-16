@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="bottom" width="1024" height="30">
+    <Layouts>
+      <Layout width="1024" height="30" screenid="Desktop_screen">
+        <Static id="Static00" taborder="0" text="2020.03.02 09:22:23 조회완료" left="0" top="0" right="0" bottom="0" cssclass="sta_BF_bg"/>
+      </Layout>
+    </Layouts>
+  </Form>
+</FDL>

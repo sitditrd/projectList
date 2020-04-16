@@ -1,0 +1,300 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.0">
+  <Form id="frmTop" width="1024" height="64" titletext="Top Frame" onload="frmTop_onload" scrolltype="none" scrollbartype="none">
+    <Layouts>
+      <Layout height="64" mobileorientation="landscape" width="1024">
+        <Div id="div_top" taborder="0" left="0" top="0" height="64" right="0" minwidth="1278" maxwidth="" background="#e7590b" formscrollbartype="none none" formscrolltype="none">
+          <Layouts>
+            <Layout>
+              <Button id="btn_leftMenu" taborder="0" left="9" top="15" width="34" height="34" cssclass="btn_TF_LeftOpen" onclick="div_top_btn_leftMenu_onclick"/>
+              <ImageViewer id="img_logo" taborder="1" left="65" top="12" width="134" height="40" cssclass="img_TF_Bg" image="url('theme://images/img_top_logo02.png')"/>
+              <Button id="btn_pre" taborder="5" top="17" width="30" height="30" cssclass="btn_TF_MenuLspin" enable="true" right="186"/>
+              <Button id="btn_next" taborder="6" top="17" height="30" cssclass="btn_TF_MenuRspin" width="30" right="152"/>
+              <Button id="btn_logOut" taborder="7" top="17" width="30" height="30" cssclass="btn_TF_LogOut" right="109" onclick="div_top_btn_logOut_onclick"/>
+              <Button id="btn_sysConfig" taborder="8" top="17" width="30" height="30" cssclass="btn_TF_Setting" right="70"/>
+              <ImageViewer id="img_userInfo" taborder="9" top="14" width="37" height="37" right="19" stretch="fixaspectratio" image="url('theme://images/testPersonPhoto.jpg')" imagealign="center middle" cssclass="img_TF_Person"/>
+              <ImageViewer id="img_user" taborder="10" top="0" width="46" height="64" cssclass="img_TF_Bg" image="url('theme://images/img_TF_personMask.png')" right="15"/>
+              <ImageViewer id="img_userBg" taborder="11" top="38" width="14" height="16" cssclass="img_TF_Bg" image="url('theme://images/img_TF_personIcon.png')" right="17"/>
+              <Button id="btn_userInfo" taborder="12" top="13" width="39" height="40" cssclass="btn_TF_Trans" onclick="div_top_btn_userInfo_onclick" right="18"/>
+              <Div id="div_topBtn" taborder="13" left="220" top="0" height="64" right="225">
+                <Layouts>
+                  <Layout/>
+                </Layouts>
+              </Div>
+            </Layout>
+          </Layouts>
+        </Div>
+        <PopupDiv id="pdiv_leftFrame" visible="false" left="20" top="116" width="280" height="730" enable="true" url="frame::left.xfdl"/>
+        <PopupDiv id="pdiv_userInfo" left="866" top="97" width="148" height="154" background="#373737">
+          <Layouts>
+            <Layout>
+              <ImageViewer id="img_usr" taborder="0" left="22" top="12" width="12" height="12" cssclass="img_TF_Bg" image="url('theme://images/img_TF_popupIcon.png')"/>
+              <Static id="sta_logInUser" taborder="1" text="홍길동 님" left="39" top="8" width="57" height="18" cssclass="sta_TF_LoginName" fittocontents="width"/>
+              <Grid id="grd_userInfo" taborder="2" left="0" top="34" right="0" bottom="0" cssclass="grd_TF_LogPopup" autofittype="col" binddataset="ds_userInfo">
+                <Formats>
+                  <Format id="default">
+                    <Columns>
+                      <Column size="48"/>
+                    </Columns>
+                    <Rows>
+                      <Row size="32"/>
+                    </Rows>
+                    <Band id="body">
+                      <Cell displaytype="normal" text="bind:MENU_NM"/>
+                    </Band>
+                  </Format>
+                </Formats>
+              </Grid>
+            </Layout>
+          </Layouts>
+        </PopupDiv>
+      </Layout>
+    </Layouts>
+    <Script type="xscript5.1"><![CDATA[
+this.frmTop_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
+{
+	this.div_top.form.div_topBtn.form.set_scrollbartype("none");
+	//this.initTopMenu();
+};
+
+this.initTopMenu = function ()
+{
+	var objApp = nexacro.getApplication();
+	objApp.gdsMenu.filter("LVL<1");
+	
+	var nMenuCnt = this.ds_menu.copyData(objApp.gdsMenu, true);
+	//objApp.gdsMenu.filter("");
+	var nWidth = 80, nHeight = 40;
+	var nLeft = 20;
+	var nTop = 10;
+	var topObj, topId, topName, topGrpId;
+	var preTopId;
+	
+	for(var i = 0; i<nMenuCnt; i++){
+		topObj = new Button();
+		topId = this.ds_menu.getColumn(i,"MENU_ID");
+		topName = this.ds_menu.getColumn(i,"MENU_NM");
+		topGrpId = this.ds_menu.getColumn(i,"GROUP_ID");
+		topObj.init("btn_"+topId, (i == 0 ? nLeft : preTopId + ":20px"), nTop, nWidth, nHeight);
+		
+		topObj.menuid = topId;
+		topObj.menunm = topName;
+		topObj.grpid = topGrpId;
+		topObj.set_fittocontents("width");
+		topObj.set_text(topName);
+		topObj.set_cssclass("btn_TF_Menu");
+		topObj.setEventHandler("onclick", this.btn_menu_onclick, this);
+		
+		this.div_top.form.div_topBtn.addChild("btn_"+topId,topObj);
+		topObj.show();
+		
+		preTopId = "btn_"+topId;
+	}
+};
+
+this.btn_menu_onclick = function (obj:Button, e:ClickEventInfo)
+{
+	obj.set_cssclass("btn_TF_MenuPix");
+	
+	for(var i=0;i<this.ds_menu.getRowCount();i++){
+		var sBtnId = "btn_" + this.ds_menu.getColumn(i, "MENU_ID");
+		if(sBtnId != obj.id){
+			this.div_top.form.div_topBtn.form[sBtnId].set_cssclass("btn_TF_Menu");
+		}
+	}
+	
+	this.pdiv_leftFrame.form.btn_leftMenu_onclick();
+	this.pdiv_leftFrame.form.fnChangeMenu(obj.menuid, obj.menunm, obj.grpid);
+	
+	this.div_top_btn_leftMenu_onclick(this.div_top.form.btn_leftMenu);
+};
+
+this.div_top_btn_leftMenu_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	var objApp = nexacro.getApplication();
+	var nXpos = 0, nYpos = this.height;
+	var nWidth = this.pdiv_leftFrame.width;
+	var nMdiHeight = objApp.mainframe.VFrameSet.OpenMenuFrame.getOffsetHeight();
+	var nHeight = nexacro.toNumber(objApp.mainframe.VFrameSet.getOffsetHeight()) - nexacro.toNumber(nMdiHeight);
+	
+	this.pdiv_leftFrame.trackPopupByComponent(this, nXpos, nYpos, nWidth, nHeight, null, false);
+};
+
+this.div_top_btn_logOut_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	try
+	{
+		var objApp = nexacro.getApplication();
+		var objForm = objApp.mainframe.VFrameSet.OpenMenuFrame.form;
+		objForm.components["btn_closeAll"].click();
+		objApp.mainframe.VFrameSet.set_separatesize("*,0,0,0,0");
+	}
+	catch (err)
+	{
+		trace("[Error] in frame::top.xfdl logout : " + err.message);
+	}
+	//Xpush 접속 끊기
+	objApp.mainframe.VFrameSet.LoginFrame.form.XPush00.disconnect();
+};
+
+this.div_top_btn_userInfo_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	var nXpos = 0;
+	var nYpos = obj.height;
+	
+	this.pdiv_userInfo.trackPopupByComponent(obj, nXpos, nYpos);
+};
+
+this.fnOpenMenu = function(menuId, aSend, sNew, sText)
+{
+	var objApp = nexacro.getApplication();
+	var nRow = objApp.gdsMenu.findRow("MENU_ID", menuId);
+
+	if (nRow < 0) return;
+
+	var menuNm = objApp.gdsMenu.getColumn(nRow, "MENU_NM");
+	var menuUrl = objApp.gdsMenu.getColumn(nRow, "MENU_URL");
+	
+	if (!menuUrl)	return;
+	
+	var objChildFrame;
+	var winId = "win_" + menuId;
+
+	objChildFrame = objApp.mainframe.VFrameSet.MDIFrameSet[winId];
+
+	if (objChildFrame && sNew != true)
+	{
+		objChildFrame.setFocus();
+
+		if (aSend && aSend != null)
+		{
+			objChildFrame.form.all["fnLinkSearch"].call(objChildFrame.form, aSend);
+		}
+
+		return;
+	}
+
+	if (sNew)
+	{
+		var openCnt = objApp.gdsOpenMenu.getCaseCount("MENU_ID=='" + menuId + "'");
+
+		for (var i = 0; i < (openCnt + 1); i++)
+		{
+			var tmp_winId = winId;
+			tmp_winId = tmp_winId + "_temp_" + (i + 1);
+
+			if (objApp.gdsOpenMenu.findRow("WIN_ID", tmp_winId) == -1)
+			{
+				winId = tmp_winId;
+				openCnt = (i + 1);
+				break;
+			}
+		}
+
+		if (sText != undefined && sText != null)
+		{
+			menuNm += " (" + openCnt + ")";
+		}
+		else
+		{
+			menuNm += " (" + sText + ")";
+		}
+	}
+	else
+	{
+		var nTempRow = objApp.gdsOpenMenu.findRow("WIN_ID", winId);
+		
+		if (nTempRow != -1)
+		{
+			objApp.mainframe.VFrameSet.MDIFrameSet[winId] && objApp.mainframe.VFrameSet.MDIFrameSet[winId].setFocus();
+			return;
+		}
+	}
+
+	objChildFrame = new ChildFrame();
+
+	objChildFrame.init(winId, 0, 0, 824, 608);
+
+	objChildFrame.set_formurl("frame::work.xfdl");
+	objChildFrame.set_resizable(true);
+	objChildFrame.set_openstatus("maximize");
+	objChildFrame.set_showtitlebar(false);
+	objChildFrame.set_showcascadetitletext(false);
+
+	objChildFrame.menuId = menuId;
+	objChildFrame.menuNm = menuNm;
+	objChildFrame.menuUrl = menuUrl;
+	objChildFrame.aSend = aSend;
+
+	objChildFrame.addEventHandler("onactivate", this.workFrame_onactivate, this);
+	objChildFrame.addEventHandler("onclose", this.workFrame_onclose, this);
+
+	objApp.mainframe.VFrameSet.MDIFrameSet.addChild(winId, objChildFrame);
+
+	objChildFrame.show();
+	
+	var nFromRow = objApp.gdsMenu.findRow("MENU_ID", menuId);
+	var nToRow = objApp.gdsOpenMenu.addRow();
+	
+	objApp.gdsOpenMenu.copyRow(nToRow, objApp.gdsMenu, nFromRow);
+	objApp.gdsOpenMenu.setColumn(nToRow, "WIN_ID", winId);
+	
+	try
+	{
+		var objForm = objApp.mainframe.VFrameSet.OpenMenuFrame.form;
+		objForm["fnAddTabPage"].call(objForm, winId, menuNm);
+	}
+	catch (err)
+	{
+		trace("[Error] in frame::top.xfdl fnOpenMenu : " + err.message);
+	}
+};
+
+this.workFrame_onactivate = function(obj: ChildFrame, e: nexacro.ActivateEventInfo)
+{
+	try
+	{
+		var objApp = nexacro.getApplication();
+		var objForm = objApp.mainframe.VFrameSet.OpenMenuFrame.form;
+		objForm["fnActiveTabPage"].call(objForm, obj.name);
+	}
+	catch (err)
+	{
+		trace("[Error] in frame::top.xfdl workFrame_onactivate : " + err.message);
+	}
+};
+
+this.workFrame_onclose = function(obj: ChildFrame, e: nexacro.CloseEventInfo)
+{
+	if (e.fromobject.name.substr(0, 4) != "win_")	return;
+	
+	try
+	{
+		var objApp = nexacro.getApplication();
+		var objForm = objApp.mainframe.VFrameSet.OpenMenuFrame.form;
+		objForm["fnDeleteTabpage"].call(objForm, obj.name);
+	}
+	catch (err)
+	{
+		trace("[Error] in frame::top.xfdl workFrame_onclose : " + err.message);
+	}
+};]]></Script>
+    <Objects>
+      <Dataset id="ds_menu"/>
+      <Dataset id="ds_userInfo">
+        <ColumnInfo>
+          <Column id="MENU_ID" type="STRING" size="256"/>
+          <Column id="MENU_NM" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="MENU_NM">비밀번호변경</Col>
+          </Row>
+          <Row>
+            <Col id="MENU_NM">사용자정보변경</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+    </Objects>
+  </Form>
+</FDL>

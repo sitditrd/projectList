@@ -1,0 +1,262 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="Multi_Popup" width="420" height="302" titletext=" Task Information" scrolltype="none" scrollbartype="none none" onload="Multi_Popup_onload">
+    <Layouts>
+      <Layout height="302" mobileorientation="landscape" width="420">
+        <Static id="stc_Id" taborder="0" text="ID" left="10" top="10" width="103" height="30" font="normal bold 10pt/normal &quot;Arial&quot;"/>
+        <Static id="stc_MileStone" taborder="10" text="MileStone" left="10" top="238" width="103" height="30" font="normal bold 10pt/normal &quot;Arial&quot;"/>
+        <Static id="stc_Notice" taborder="6" text="Notice" left="10" top="162" width="103" height="30" font="normal bold 10pt/normal &quot;Arial&quot;"/>
+        <Static id="stc_StartDay" taborder="2" text="StartDay" left="10" top="48" width="103" height="30" font="normal bold 10pt/normal &quot;Arial&quot;"/>
+        <Static id="stc_EndDay" taborder="4" text="EndDay" left="10" top="86" width="103" height="30" font="normal bold 10pt/normal &quot;Arial&quot;"/>
+        <Edit id="edt_Notice" taborder="7" left="123" top="168" height="30" width="287" enable="true"/>
+        <Static id="Static01" taborder="14" text="" left="0" top="276" right="0" height="26" background="#101597" color="white" font="normal 700 16pt/normal &quot;Baskerville Old Face&quot;"/>
+        <Button id="btn_Close" taborder="13" text="닫기" top="280" width="64" height="18" right="4" escapebutton="true" onclick="comm_Click" font="normal 9pt/normal &quot;Arial&quot;" cssclass="btn_WF_basic05"/>
+        <Button id="btn_Confirm" taborder="12" text="확인" top="280" width="64" height="18" right="71" onclick="comm_Click" font="normal 9pt/normal &quot;Arial&quot;" cssclass="btn_WF_basic02"/>
+        <Static id="stc_Progress" taborder="8" text="Progress" left="10" top="200" width="103" height="30" font="normal bold 10pt/normal &quot;Arial&quot;"/>
+        <Edit id="edt_Progress" taborder="9" left="123" top="207" width="287" height="30" inputtype="number" onkeydown="edt_Filter_onkeydown" onkeyup="edt_Filter_onkeyup"/>
+        <Edit id="edt_Id" taborder="1" left="123" top="10" height="30" width="287" inputtype="english" inputmode="upper" imemode="alpha,full" enable="false"/>
+        <CheckBox id="chb_MileStone" taborder="11" text="" left="124" top="247" width="14" height="16" onchanged="chb_MileStone_onchanged"/>
+        <Calendar id="cal_StartDay" taborder="3" left="123" top="48" width="287" height="30" dateformat="yyyy-MM-dd "/>
+        <Calendar id="cal_EndDay" taborder="5" left="123" top="86" width="287" height="30" dateformat="yyyy-MM-dd "/>
+        <Calendar id="cal_Temp" taborder="15" left="128" top="675" width="120" height="30" visible="false"/>
+        <Edit id="edt_Temp" taborder="16" left="0" top="675" width="120" height="30" visible="false"/>
+        <Static id="stc_TaskType" taborder="17" text="TaskType" left="10" top="124" width="103" height="30" font="normal bold 10pt/normal &quot;Arial&quot;"/>
+        <Combo id="cmb_TaskType" taborder="18" text="Normal_Task" left="123" top="126" width="286" height="32" innerdataset="innerdataset" codecolumn="codecolumn" datacolumn="datacolumn" value="0" index="0">
+          <Dataset id="innerdataset">
+            <ColumnInfo>
+              <Column id="codecolumn" size="256"/>
+              <Column id="datacolumn" size="256"/>
+            </ColumnInfo>
+            <Rows>
+              <Row>
+                <Col id="codecolumn">NT</Col>
+                <Col id="datacolumn">Normal_Task</Col>
+              </Row>
+              <Row>
+                <Col id="codecolumn">ST</Col>
+                <Col id="datacolumn">Summary_Task</Col>
+              </Row>
+            </Rows>
+          </Dataset>
+        </Combo>
+        <Combo id="cmb_Temp" taborder="19" text="" left="256" top="675" width="120" height="30"/>
+      </Layout>
+    </Layouts>
+    <Script type="xscript5.1"><![CDATA[/************************************************************************************************
+* 01. 업무구분 : 공통 
+* 02. 화면명   : TaskInformation 
+* 03. 화면설명 : 
+* 04. 작성일   : 2020.04.02
+* 05. 작성자   : 안주환
+* 06. 수정이력 :
+***********************************************************************************************
+*     수정일          이  름    사유
+***********************************************************************************************
+*     
+************************************************************************************************/
+
+/************************************************************************************************
+* 공통 라이브러리 INCLUDE 영역
+************************************************************************************************/
+include "lib::comLib_Comm.xjs"
+include "lib::CommUtil.xjs"; 	
+
+/************************************************************************************************
+* 전역 변수 영역
+************************************************************************************************/
+this.calFlag = 0;
+this.proFlag = 0;
+
+/************************************************************************************************
+* FORM 영역
+************************************************************************************************/
+this.Multi_Popup_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
+{	
+	this.fnInitForm();
+};
+
+/************************************************************************************************
+* FORM 공통 FUNCTION 영역
+************************************************************************************************/
+this.fnInitForm = function()
+{
+	//ID값 생성(Unique ID값 - UUID)
+	var strId = this.fnGetUniqueId();
+	this.edt_Id.set_value(strId);
+};
+
+this.fnUniqueId = function()
+{
+	return ((1 + Math.random()) * 0x10000 | 0).toString(16).substring(1);
+};
+	
+this.fnGetUniqueId = function()
+{
+    return this.fnUniqueId() + this.fnUniqueId() + '-' + this.fnUniqueId() + '-' + this.fnUniqueId() + '-' + this.fnUniqueId() + '-' + this.fnUniqueId() + this.fnUniqueId() + this.fnUniqueId();
+};
+
+this.fnGetMsg = function()
+{
+	var msgAry = new Array();
+	
+	if(nexacro.toNumber(this.cal_StartDay.value) >  nexacro.toNumber(this.cal_EndDay.value))
+	{
+		alert("시작일은 종료일보다 클 수 없습니다.");
+		this.cal_StartDay.setFocus();
+		return;
+	}
+	
+	if(this.gfn_Null(this.cal_StartDay.value))
+		msgAry.push("startDay를 선택해 주십시오.\n");
+	if(this.gfn_Null(this.cal_EndDay.value))
+		msgAry.push("endDay를 선택해 주십시오.\n");
+	if(this.gfn_Null(this.edt_Notice.value))
+		msgAry.push("notice를 작성해 주십시오.\n");
+	if(this.gfn_Null(this.edt_Progress.value))
+		msgAry.push("progress를 표시해 주십시오.\n");
+	if(this.gfn_Null(this.cmb_TaskType.value))
+		msgAry.push("taskType을 표시해 주십시오.\n");
+	if(this.gfn_Null(this.chb_MileStone.value))
+		msgAry.push("mileStone을 지정해 주십시오.\n");	
+	
+	return msgAry.join(", ");
+};
+
+this.fnGetReturn = function()
+{	
+	var sArgument = {	
+						ID 			: this.edt_Id.value,
+						startDay 	: this.cal_StartDay.value,
+						endDay 		: this.cal_EndDay.value,
+						notice 		: this.edt_Notice.value,
+						progress 	: this.edt_Progress.value,
+						taskType 	: this.cmb_TaskType.value,
+						mileStone 	: this.chb_MileStone.value ? 1 : 0
+					}; 
+					
+	this.commUtil.popupClose(sArgument);
+};
+
+/************************************************************************************************
+* TRANSACTION 및 추가 FUNCTION 영역
+************************************************************************************************/
+
+
+/************************************************************************************************
+* 각 COMPONENT 별 EVENT 영역
+************************************************************************************************/
+this.comm_Click = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	switch(obj.name)
+	{
+		case "btn_Confirm" :
+			var nMsg = this.fnGetMsg();
+			
+			if(!this.gfn_Null(nMsg))
+			{
+				if(nMsg.length > 0)
+					alert(nMsg);
+				return;
+			}
+			
+			this.fnGetReturn();
+		break;
+			
+		case "btn_Close" : 
+			this.commUtil.popupClose("");
+		break;
+			
+		case "btn_Exit" : 
+			this.commUtil.popupClose("");
+		break;
+	}
+};
+
+this.chb_MileStone_onchanged = function(obj:nexacro.CheckBox,e:nexacro.CheckBoxChangedEventInfo)
+{
+	//마일스톤일 때
+	if(obj.value == 1)
+	{
+		if(!this.gfn_Null(this.cal_EndDay.value))
+		{
+			this.cal_Temp.set_value(this.cal_EndDay.value); 
+			this.cal_EndDay.set_value(this.cal_StartDay.value);
+			this.cal_EndDay.set_enable(false);
+		}
+		else
+		{
+			if(this.gfn_Null(this.cal_StartDay.value))
+			{
+				alert("startDay를 입력해주세요");
+				this.chb_MileStone.set_value(0);
+				return;
+			}
+			else
+			{
+				this.calFlag = 1;
+				this.cal_EndDay.set_value(this.cal_StartDay.value);
+				this.cal_EndDay.set_enable(false);
+			}
+		}
+		
+		if(!this.gfn_Null(this.edt_Progress.value))
+		{
+			this.edt_Temp.set_value(this.edt_Progress.value)
+			this.edt_Progress.set_value(100);
+			this.edt_Progress.set_enable(false);
+		}
+		else
+		{
+			this.proFlag = 1;
+			this.edt_Progress.set_value(100);
+			this.edt_Progress.set_enable(false);
+		}
+		
+		if(!this.gfn_Null(this.cmb_TaskType.value))
+		{
+			this.cmb_Temp.set_value(this.cmb_TaskType.value);
+			this.cmb_TaskType.set_value(0);
+			this.cmb_TaskType.set_enable(false);
+		}
+	}
+	//마일스톤이 아닐 때
+	else
+	{
+		if(!this.gfn_Null(this.cal_Temp.value))
+		{
+			this.cal_EndDay.set_value(this.cal_Temp.value);
+			this.cal_EndDay.set_enable(true);
+		}
+		
+		if(!this.gfn_Null(this.edt_Temp.value))
+		{
+			this.edt_Progress.set_value(this.edt_Temp.value);
+			this.edt_Progress.set_enable(true);
+		}
+		
+		if(!this.gfn_Null(this.cmb_Temp.value))
+		{
+			this.cmb_TaskType.set_value(this.cmb_Temp.value);
+			this.cmb_TaskType.set_enable(true);
+		}
+		
+		if(this.calFlag == 1)
+		{
+			this.calFlag = 0;
+			this.cal_EndDay.set_value("");
+			this.cal_EndDay.set_enable(true);
+		}
+		
+		if(this.proFlag = 1)
+		{
+			this.proFlag = 0;
+			this.edt_Progress.set_value("");
+			this.edt_Progress.set_enable(true);
+		}
+	}
+};]]></Script>
+    <Objects>
+      <Dataset id="dsSchedule"/>
+    </Objects>
+  </Form>
+</FDL>

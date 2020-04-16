@@ -1,0 +1,237 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.0">
+  <Form id="LayoutGuide_03" width="1278" height="951" titletext="Search Area Layout Guide 01" scrolltype="vertical" scrollbartype="auto auto">
+    <Layouts>
+      <Layout height="951" mobileorientation="landscape" width="1278">
+        <Static id="Static01" taborder="0" text="Search Area Layout Guide 01" left="0" top="0" height="50" leftbase="" topbase="" bottombase="" rightbase="" widthbase="" heightbase="" background="#d1d1d1" border="1px solid #cccccc" textAlign="center" onclick="Static46_onclick" right="0" font="12px/normal verdana" letterSpacing="0px"/>
+        <Div id="Div00" taborder="1" left="19" top="116" height="39" cssclass="div_WF_Search" right="19" formscrollbartype="none" formscrolltype="none">
+          <Layouts>
+            <Layout>
+              <Button id="Button00" taborder="1" cssclass="btn_WF_SubAction, btn_WF_SearchIcon" right="12" width="40" top="8" bottom="8"/>
+              <Static id="Static125" taborder="0" text="가나다라" left="247" top="12" width="93" height="13" cssclass="sta_WF_SeaFieldLabel" fittocontents="width"/>
+              <Edit id="Edit20" taborder="2" left="312" top="8" width="158" height="21" value="Width - 158" text="Width - 158"/>
+              <Edit id="Edit00" taborder="3" left="547" top="8" width="158" height="21" value="Width - 158" text="Width - 158"/>
+              <Static id="Static00" taborder="4" text="가나다라" left="482" top="12" width="93" height="13" cssclass="sta_WF_SeaFieldLabel" fittocontents="width"/>
+              <Edit id="Edit01" taborder="5" left="782" top="8" width="158" height="21" value="Width - 158" text="Width - 158"/>
+              <Static id="Static01" taborder="6" text="가나다라" left="717" top="12" width="93" height="13" cssclass="sta_WF_SeaFieldLabel" fittocontents="width"/>
+              <Edit id="Edit02" taborder="7" left="1017" top="8" width="158" height="21" value="Width - 158" text="Width - 158"/>
+              <Static id="Static02" taborder="8" text="가나다라" left="952" top="12" width="93" height="13" cssclass="sta_WF_SeaFieldLabel" fittocontents="width"/>
+              <Static id="Static03" taborder="9" text="가나다라" left="12" top="12" width="93" height="13" cssclass="sta_WF_SeaFieldLabel" fittocontents="width"/>
+              <Edit id="Edit03" taborder="10" left="77" top="8" width="158" height="21" value="Width - 158" text="Width - 158"/>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Static id="Static75" taborder="2" text="1줄 검색 - 기본 스타일  5단" left="19" top="94" width="406" height="16" leftbase="" topbase="" bottombase="" rightbase="" widthbase="" heightbase="" color="#b7b7b7" onclick="Static46_onclick"/>
+        <Div id="Div01" taborder="3" left="19" top="332" height="39" cssclass="div_WF_Search" right="19" formscrollbartype="none" formscrolltype="none">
+          <Layouts>
+            <Layout>
+              <Button id="Button00" taborder="1" cssclass="btn_WF_SubAction, btn_WF_SearchIcon" right="12" width="40" top="8" bottom="8"/>
+              <Static id="Static125" taborder="0" text="가나다라" left="247" top="12" width="93" height="13" cssclass="sta_WF_SeaFieldLabel" fittocontents="width"/>
+              <Edit id="Edit20" taborder="2" left="312" top="8" width="158" height="21" value="Width - 158" text="Width - 158"/>
+              <Edit id="Edit00" taborder="3" left="547" top="8" width="158" height="21" value="Width - 158" text="Width - 158"/>
+              <Static id="Static00" taborder="4" text="가나다라" left="482" top="12" width="93" height="13" cssclass="sta_WF_SeaFieldLabel" fittocontents="width"/>
+              <Edit id="Edit01" taborder="5" left="782" top="8" width="158" height="21" value="Width - 158" text="Width - 158"/>
+              <Static id="Static01" taborder="6" text="가나다라" left="717" top="12" width="93" height="13" cssclass="sta_WF_SeaFieldLabel" fittocontents="width"/>
+              <Edit id="Edit02" taborder="7" left="1017" top="8" width="158" height="21" value="Width - 158" text="Width - 158"/>
+              <Static id="Static02" taborder="8" text="가나다라" left="952" top="12" width="93" height="13" cssclass="sta_WF_SeaFieldLabel" fittocontents="width"/>
+              <Static id="Static03" taborder="9" text="가나다라마바사아" left="12" top="12" width="98" height="13" cssclass="sta_WF_SeaFieldLabel" fittocontents="width"/>
+              <Edit id="Edit03" taborder="10" left="121" top="8" width="114" height="21" value="가변사이즈 적용가능" text="가변사이즈 적용가능"/>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Static id="Static02" taborder="4" text="1줄 검색 - 기본 스타일 :  라벨 글자수에 따른 스타일 적용 가능 다만 컴퍼넌트와 필드라벨 사이의 거리는 11px로 한다" left="19" top="310" width="700" height="16" leftbase="" topbase="" bottombase="" rightbase="" widthbase="" heightbase="" color="#b7b7b7" onclick="Static46_onclick"/>
+        <Static id="Static03" taborder="5" left="130" top="332" width="11" height="39" background="#ff1414" opacity="0.5" text="11" font="normal 11px/normal &quot;Arial&quot;" color="#ffffff" visible="false"/>
+        <Div id="Div02" taborder="6" left="19" top="406" height="39" cssclass="div_WF_Search" right="19" formscrollbartype="none" formscrolltype="none">
+          <Layouts>
+            <Layout>
+              <Button id="Button00" taborder="1" cssclass="btn_WF_SubAction, btn_WF_SearchIcon" right="12" width="40" top="8" bottom="8"/>
+              <Static id="Static125" taborder="0" text="가나다라" left="247" top="12" width="93" height="13" cssclass="sta_WF_SeaFieldLabel" fittocontents="width"/>
+              <Edit id="Edit20" taborder="2" left="312" top="8" width="193" height="21" value="가변사이즈 적용가능" text="가변사이즈 적용가능"/>
+              <Edit id="Edit00" taborder="3" left="582" top="8" width="357" height="21" value="가변사이즈 적용가능" text="가변사이즈 적용가능"/>
+              <Static id="Static00" taborder="4" text="가나다라" left="517" top="12" width="93" height="13" cssclass="sta_WF_SeaFieldLabel" fittocontents="width"/>
+              <Static id="Static04" taborder="5" text="가나다라마바사아" left="12" top="12" width="98" height="13" cssclass="sta_WF_SeaFieldLabel" fittocontents="width"/>
+              <Edit id="Edit01" taborder="6" left="121" top="8" width="114" height="21" value="가변사이즈 적용가능" text="가변사이즈 적용가능"/>
+              <Static id="Static06" taborder="7" left="235" top="-1" width="12" height="39" background="#ff1414" opacity="0.5" text="12" font="normal 11px/normal &quot;Arial&quot;" color="#ffffff" visible="false"/>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Static id="Static05" taborder="7" text="1줄 검색 - 변형스타일(프리)  : 검색필드 갯수에 따른 스타일 - 검색조건이 1줄일 경우만 적용" left="19" top="381" width="444" height="22" leftbase="" topbase="" bottombase="" rightbase="" widthbase="" heightbase="" color="#b7b7b7" onclick="Static46_onclick"/>
+        <Static id="Static06" taborder="8" left="525" top="406" width="12" height="39" background="#ff1414" opacity="0.5" text="12" font="normal 11px/normal &quot;Arial&quot;" color="#ffffff" visible="false"/>
+        <Div id="Div03" taborder="9" left="19" top="188" height="39" cssclass="div_WF_Search" right="19" formscrollbartype="none" formscrolltype="none">
+          <Layouts>
+            <Layout>
+              <Button id="Button00" taborder="1" cssclass="btn_WF_SubAction, btn_WF_SearchIcon" right="12" width="40" top="8" bottom="8"/>
+              <Static id="Static125" taborder="0" text="가나다라" left="306" top="12" width="93" height="13" cssclass="sta_WF_SeaFieldLabel" fittocontents="width"/>
+              <Edit id="Edit20" taborder="2" left="371" top="8" width="216" height="21" value="Width - 216" text="Width - 216"/>
+              <Edit id="Edit00" taborder="3" left="664" top="8" width="217" height="21" value="Width - 217" text="Width - 217"/>
+              <Static id="Static00" taborder="4" text="가나다라" left="599" top="12" width="93" height="13" cssclass="sta_WF_SeaFieldLabel" fittocontents="width"/>
+              <Edit id="Edit01" taborder="5" left="958" top="8" width="216" height="21" value="Width - 216" text="Width - 216"/>
+              <Static id="Static01" taborder="6" text="가나다라" left="893" top="12" width="93" height="13" cssclass="sta_WF_SeaFieldLabel" fittocontents="width"/>
+              <Static id="Static07" taborder="7" text="가나다라" left="12" top="12" width="93" height="13" cssclass="sta_WF_SeaFieldLabel" fittocontents="width"/>
+              <Edit id="Edit02" taborder="8" left="77" top="8" width="217" height="21" value="Width - 217" text="Width - 217"/>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Static id="Static08" taborder="10" text="1줄 검색 - 기본 스타일  4단" left="19" top="166" width="146" height="16" leftbase="" topbase="" bottombase="" rightbase="" widthbase="" heightbase="" color="#b7b7b7" onclick="Static46_onclick"/>
+        <Div id="Div04" taborder="11" left="19" top="260" height="39" cssclass="div_WF_Search" right="19" formscrollbartype="none" formscrolltype="none">
+          <Layouts>
+            <Layout>
+              <Button id="Button00" taborder="1" cssclass="btn_WF_SubAction, btn_WF_SearchIcon" right="12" width="40" top="8" bottom="8"/>
+              <Static id="Static125" taborder="0" text="가나다라" left="403" top="12" width="93" height="13" cssclass="sta_WF_SeaFieldLabel" fittocontents="width"/>
+              <Edit id="Edit20" taborder="2" left="468" top="8" width="314" height="21" value="Width - 314" text="Width - 314" onchanged="Div04_Edit20_onchanged"/>
+              <Edit id="Edit00" taborder="3" left="859" top="8" width="314" height="21" value="Width - 314" text="Width - 314"/>
+              <Static id="Static00" taborder="4" text="가나다라" left="794" top="12" width="93" height="13" cssclass="sta_WF_SeaFieldLabel" fittocontents="width"/>
+              <Static id="Static09" taborder="5" text="가나다라" left="12" top="12" width="93" height="13" cssclass="sta_WF_SeaFieldLabel" fittocontents="width"/>
+              <Edit id="Edit03" taborder="6" left="77" top="8" width="314" height="21" value="Width - 314" text="Width - 314"/>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Static id="Static10" taborder="12" text="1줄 검색 - 기본 스타일  3단" left="19" top="238" width="146" height="16" leftbase="" topbase="" bottombase="" rightbase="" widthbase="" heightbase="" color="#b7b7b7" onclick="Static46_onclick"/>
+        <Static id="Static12" taborder="13" text="2줄 이상검색 - 기본 스타일  5단 - 높이값은 1줄 추가 될때마다 25 px씩 늘어나며 줄의 간격은 4px로 한다." left="19" top="488" width="529" height="16" leftbase="" topbase="" bottombase="" rightbase="" widthbase="" heightbase="" color="#b7b7b7" onclick="Static46_onclick"/>
+        <Static id="Static13" taborder="14" text="H39" left="1153" top="406" width="40" height="39" background="#b89bfc" opacity="0.5" enable="true" visible="false" textAlign="center" color="black"/>
+        <Div id="Div05" taborder="15" left="19" top="513" height="64" cssclass="div_WF_Search" right="19" formscrollbartype="none" formscrolltype="none">
+          <Layouts>
+            <Layout>
+              <Button id="Button00" taborder="1" cssclass="btn_WF_SubAction, btn_WF_SearchIcon" right="12" width="40" top="8" bottom="8"/>
+              <Static id="Static125" taborder="0" text="가나다라" left="247" top="12" width="93" height="13" cssclass="sta_WF_SeaFieldLabel" fittocontents="width"/>
+              <Edit id="Edit20" taborder="2" left="312" top="8" width="158" height="21" value="Width - 158" text="Width - 158"/>
+              <Edit id="Edit00" taborder="3" left="547" top="8" width="158" height="21" value="Width - 158" text="Width - 158"/>
+              <Static id="Static00" taborder="4" text="가나다라" left="482" top="12" width="93" height="13" cssclass="sta_WF_SeaFieldLabel" fittocontents="width"/>
+              <Edit id="Edit01" taborder="5" left="782" top="8" width="158" height="21" value="Width - 158" text="Width - 158"/>
+              <Static id="Static01" taborder="6" text="가나다라" left="717" top="12" width="93" height="13" cssclass="sta_WF_SeaFieldLabel" fittocontents="width"/>
+              <Edit id="Edit02" taborder="7" left="1017" top="8" width="158" height="21" value="Width - 158" text="Width - 158"/>
+              <Static id="Static02" taborder="8" text="가나다라" left="952" top="12" width="93" height="13" cssclass="sta_WF_SeaFieldLabel" fittocontents="width"/>
+              <Static id="Static03" taborder="9" text="가나다라" left="12" top="12" width="93" height="13" cssclass="sta_WF_SeaFieldLabel" fittocontents="width"/>
+              <Edit id="Edit03" taborder="10" left="77" top="8" width="158" height="21" value="Width - 158" text="Width - 158"/>
+              <Static id="Static04" taborder="11" text="가나다라" left="12" top="37" width="93" height="13" cssclass="sta_WF_SeaFieldLabel" fittocontents="width"/>
+              <Edit id="Edit04" taborder="12" left="77" top="33" width="158" height="21" text="Width - 158"/>
+              <Static id="Static05" taborder="13" text="가나다라" left="247" top="37" width="93" height="13" cssclass="sta_WF_SeaFieldLabel" fittocontents="width"/>
+              <Edit id="Edit05" taborder="14" left="312" top="33" width="158" height="21" text="Width - 158"/>
+              <Static id="Static06" taborder="15" text="가나다라" left="482" top="37" width="93" height="13" cssclass="sta_WF_SeaFieldLabel" fittocontents="width"/>
+              <Edit id="Edit06" taborder="16" left="547" top="33" width="158" height="21" text="Width - 158"/>
+              <Static id="Static07" taborder="17" text="가나다라" left="717" top="37" width="93" height="13" cssclass="sta_WF_SeaFieldLabel" fittocontents="width"/>
+              <Edit id="Edit07" taborder="18" left="782" top="33" width="158" height="21" text="Width - 158"/>
+              <Static id="Static08" taborder="19" text="가나다라" left="952" top="37" width="93" height="13" cssclass="sta_WF_SeaFieldLabel" fittocontents="width"/>
+              <Edit id="Edit08" taborder="20" left="1017" top="33" width="158" height="21" text="Width - 158"/>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Div id="Div06" taborder="16" left="19" top="587" height="89" cssclass="div_WF_Search" right="19" formscrollbartype="none" formscrolltype="none">
+          <Layouts>
+            <Layout>
+              <Button id="Button00" taborder="1" cssclass="btn_WF_SubAction, btn_WF_SearchIcon" right="12" width="40" top="8" bottom="8"/>
+              <Static id="Static125" taborder="0" text="가나다라" left="247" top="12" width="93" height="13" cssclass="sta_WF_SeaFieldLabel" fittocontents="width"/>
+              <Edit id="Edit20" taborder="2" left="312" top="8" width="158" height="21" value="Width - 158" text="Width - 158"/>
+              <Edit id="Edit00" taborder="3" left="547" top="8" width="158" height="21" value="Width - 158" text="Width - 158"/>
+              <Static id="Static00" taborder="4" text="가나다라" left="482" top="12" width="93" height="13" cssclass="sta_WF_SeaFieldLabel" fittocontents="width"/>
+              <Edit id="Edit01" taborder="5" left="782" top="8" width="158" height="21" value="Width - 158" text="Width - 158"/>
+              <Static id="Static01" taborder="6" text="가나다라" left="717" top="12" width="93" height="13" cssclass="sta_WF_SeaFieldLabel" fittocontents="width"/>
+              <Edit id="Edit02" taborder="7" left="1017" top="8" width="158" height="21" value="Width - 158" text="Width - 158"/>
+              <Static id="Static02" taborder="8" text="가나다라" left="952" top="12" width="93" height="13" cssclass="sta_WF_SeaFieldLabel" fittocontents="width"/>
+              <Static id="Static03" taborder="9" text="가나다라" left="12" top="12" width="93" height="13" cssclass="sta_WF_SeaFieldLabel" fittocontents="width"/>
+              <Edit id="Edit03" taborder="10" left="77" top="8" width="158" height="21" value="Width - 158" text="Width - 158"/>
+              <Static id="Static04" taborder="11" text="가나다라" left="12" top="37" width="93" height="13" cssclass="sta_WF_SeaFieldLabel" fittocontents="width"/>
+              <Edit id="Edit04" taborder="12" left="77" top="33" width="158" height="21" text="Width - 158"/>
+              <Static id="Static05" taborder="13" text="가나다라" left="247" top="37" width="93" height="13" cssclass="sta_WF_SeaFieldLabel" fittocontents="width"/>
+              <Edit id="Edit05" taborder="14" left="312" top="33" width="158" height="21" text="Width - 158"/>
+              <Static id="Static06" taborder="15" text="가나다라" left="482" top="37" width="93" height="13" cssclass="sta_WF_SeaFieldLabel" fittocontents="width"/>
+              <Edit id="Edit06" taborder="16" left="547" top="33" width="158" height="21" text="Width - 158"/>
+              <Static id="Static07" taborder="17" text="가나다라" left="717" top="37" width="93" height="13" cssclass="sta_WF_SeaFieldLabel" fittocontents="width"/>
+              <Edit id="Edit07" taborder="18" left="782" top="33" width="158" height="21" text="Width - 158"/>
+              <Static id="Static08" taborder="19" text="가나다라" left="952" top="37" width="93" height="13" cssclass="sta_WF_SeaFieldLabel" fittocontents="width"/>
+              <Edit id="Edit08" taborder="20" left="1017" top="33" width="158" height="21" text="Width - 158"/>
+              <Static id="Static09" taborder="21" text="가나다라" left="12" top="62" width="93" height="13" cssclass="sta_WF_SeaFieldLabel" fittocontents="width"/>
+              <Edit id="Edit09" taborder="22" left="77" top="58" width="158" height="21" text="Width - 158"/>
+              <Static id="Static10" taborder="23" text="가나다라" left="247" top="62" width="93" height="13" cssclass="sta_WF_SeaFieldLabel" fittocontents="width"/>
+              <Edit id="Edit10" taborder="24" left="312" top="58" width="158" height="21" text="Width - 158"/>
+              <Static id="Static11" taborder="25" text="가나다라" left="482" top="62" width="93" height="13" cssclass="sta_WF_SeaFieldLabel" fittocontents="width"/>
+              <Edit id="Edit11" taborder="26" left="547" top="58" width="158" height="21" text="Width - 158"/>
+              <Static id="Static12" taborder="27" text="가나다라" left="717" top="62" width="93" height="13" cssclass="sta_WF_SeaFieldLabel" fittocontents="width"/>
+              <Edit id="Edit12" taborder="28" left="782" top="58" width="158" height="21" text="Width - 158"/>
+              <Static id="Static13" taborder="29" text="가나다라" left="952" top="62" width="93" height="13" cssclass="sta_WF_SeaFieldLabel" fittocontents="width"/>
+              <Edit id="Edit13" taborder="30" left="1017" top="58" width="158" height="21" text="Width - 158"/>
+              <Static id="Static14" taborder="31" text="H89" left="1133" top="-1" width="40" height="89" background="#b89bfc" opacity="0.5" enable="true" visible="false" textAlign="center" color="black"/>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Div id="Div07" taborder="17" left="19" top="844" height="64" cssclass="div_WF_Search" right="19" formscrollbartype="none" formscrolltype="none">
+          <Layouts>
+            <Layout>
+              <Button id="Button00" taborder="1" cssclass="btn_WF_SubAction, btn_WF_SearchIcon" right="12" width="40" top="8" bottom="8"/>
+              <Static id="Static125" taborder="0" text="가나다라마바사아" left="247" top="12" width="98" height="13" cssclass="sta_WF_SeaFieldLabel" fittocontents="width"/>
+              <Edit id="Edit20" taborder="2" left="356" top="8" width="114" height="21" value="Width - 114" text="Width - 114"/>
+              <Edit id="Edit00" taborder="3" left="536" top="8" width="169" height="21" value="Width - 169" text="Width - 169"/>
+              <Static id="Static00" taborder="4" text="가나다" left="482" top="12" width="43" height="13" cssclass="sta_WF_SeaFieldLabel" fittocontents="width"/>
+              <Edit id="Edit01" taborder="5" left="760" top="8" width="180" height="21" value="Width - 180" text="Width - 180"/>
+              <Static id="Static01" taborder="6" text="가나" left="717" top="12" width="32" height="13" cssclass="sta_WF_SeaFieldLabel" fittocontents="width"/>
+              <Edit id="Edit02" taborder="7" left="1017" top="8" width="158" height="21" value="Width - 158" text="Width - 158"/>
+              <Static id="Static02" taborder="8" text="가나다라.." left="952" top="12" width="58" height="13" cssclass="sta_WF_SeaFieldLabel" fittocontents="width" tooltiptext="가나다라마바사아자차카타파하"/>
+              <Static id="Static03" taborder="9" text="가나" left="12" top="12" width="32" height="13" cssclass="sta_WF_SeaFieldLabel" fittocontents="width"/>
+              <Edit id="Edit03" taborder="10" left="77" top="8" width="158" height="21" value="Width - 158" text="Width - 158"/>
+              <Static id="Static04" taborder="11" text="가나다라" left="12" top="37" width="54" height="13" cssclass="sta_WF_SeaFieldLabel" fittocontents="width"/>
+              <Edit id="Edit04" taborder="12" left="77" top="33" width="158" height="21" text="Width - 158"/>
+              <Static id="Static05" taborder="13" text="가나다라" left="247" top="37" width="54" height="13" cssclass="sta_WF_SeaFieldLabel" fittocontents="width"/>
+              <Edit id="Edit05" taborder="14" left="356" top="33" width="114" height="21" text="Width - 114"/>
+              <Static id="Static06" taborder="15" text="가나다" left="482" top="37" width="43" height="13" cssclass="sta_WF_SeaFieldLabel" fittocontents="width" onclick="Div07_Static06_onclick"/>
+              <Edit id="Edit06" taborder="16" left="536" top="33" width="169" height="21" text="Width - 169"/>
+              <Static id="Static07" taborder="17" text="가나" left="717" top="37" width="32" height="13" cssclass="sta_WF_SeaFieldLabel" fittocontents="width"/>
+              <Edit id="Edit07" taborder="18" left="760" top="33" width="180" height="21" text="Width - 180"/>
+              <Static id="Static08" taborder="19" text="가나다라" left="952" top="37" width="54" height="13" cssclass="sta_WF_SeaFieldLabel" fittocontents="width"/>
+              <Edit id="Edit08" taborder="20" left="1017" top="33" width="158" height="21" text="Width - 158"/>
+              <Static id="Static10" taborder="21" left="525" top="-1" width="11" height="30" background="#ff1414" opacity="0.5" text="11" font="normal 11px/normal &quot;Arial&quot;" color="#ffffff" visible="false"/>
+              <Static id="Static11" taborder="22" left="749" top="-1" width="11" height="30" background="#ff1414" opacity="0.5" text="11" font="normal 11px/normal &quot;Arial&quot;" color="#ffffff" visible="false"/>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Static id="Static00" taborder="18" text="2줄 이상검색 - 라벨글자수에 따른 스타일 : 라벨 글자수에 따라 컴퍼넌트의 길이가 결정된다." left="19" top="820" width="446" height="16" leftbase="" topbase="" bottombase="" rightbase="" widthbase="" heightbase="" color="#b7b7b7" onclick="Static46_onclick"/>
+        <Static id="Static04" taborder="19" left="365" top="844" width="11" height="30" background="#ff1414" opacity="0.5" text="11" font="normal 11px/normal &quot;Arial&quot;" color="#ffffff" visible="false"/>
+        <Static id="Static07" taborder="20" text="H64" left="1153" top="513" width="40" height="64" background="#b89bfc" opacity="0.5" enable="true" visible="false" textAlign="center" color="black"/>
+        <Div id="Div08" taborder="21" left="18" top="738" height="64" cssclass="div_WF_Search" right="20" formscrollbartype="none" formscrolltype="none">
+          <Layouts>
+            <Layout>
+              <Button id="Button00" taborder="1" cssclass="btn_WF_SubAction, btn_WF_SearchIcon" right="12" width="40" top="8" bottom="8"/>
+              <Static id="Static125" taborder="0" text="가나다라" left="306" top="12" width="93" height="13" cssclass="sta_WF_SeaFieldLabel" fittocontents="width"/>
+              <Edit id="Edit20" taborder="2" left="371" top="8" width="216" height="21" value="Width - 216" text="Width - 216"/>
+              <Edit id="Edit00" taborder="3" left="664" top="8" width="217" height="21" value="Width - 217" text="Width - 217"/>
+              <Static id="Static00" taborder="4" text="가나다라" left="599" top="12" width="93" height="13" cssclass="sta_WF_SeaFieldLabel" fittocontents="width"/>
+              <Edit id="Edit01" taborder="5" left="958" top="8" width="216" height="21" value="Width - 216" text="Width - 216"/>
+              <Static id="Static01" taborder="6" text="가나다라" left="893" top="12" width="93" height="13" cssclass="sta_WF_SeaFieldLabel" fittocontents="width"/>
+              <Static id="Static07" taborder="7" text="가나다라" left="12" top="12" width="93" height="13" cssclass="sta_WF_SeaFieldLabel" fittocontents="width"/>
+              <Edit id="Edit02" taborder="8" left="77" top="8" width="217" height="21" value="Width - 217" text="Width - 217"/>
+              <Static id="Static02" taborder="9" text="가나다라" left="12" top="37" width="93" height="13" cssclass="sta_WF_SeaFieldLabel" fittocontents="width"/>
+              <Edit id="Edit03" taborder="10" left="77" top="33" width="217" height="21" text="Width - 217"/>
+              <Static id="Static03" taborder="11" text="가나다라" left="306" top="37" width="93" height="13" cssclass="sta_WF_SeaFieldLabel" fittocontents="width"/>
+              <Edit id="Edit04" taborder="12" left="371" top="33" width="216" height="21" text="Width - 216"/>
+              <Static id="Static04" taborder="13" text="가나다라" left="599" top="37" width="93" height="13" cssclass="sta_WF_SeaFieldLabel" fittocontents="width"/>
+              <Edit id="Edit05" taborder="14" left="664" top="33" width="217" height="21" text="Width - 217"/>
+              <Static id="Static05" taborder="15" text="가나다라" left="893" top="37" width="93" height="13" cssclass="sta_WF_SeaFieldLabel" fittocontents="width"/>
+              <Edit id="Edit06" taborder="16" left="958" top="33" width="216" height="21" text="Width - 216"/>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Static id="Static09" taborder="22" text="2줄 이상 검색 - 1줄 기본 스타일에서 '단' 별로 1줄씩 추가 된다." left="18" top="716" width="303" height="16" leftbase="" topbase="" bottombase="" rightbase="" widthbase="" heightbase="" color="#b7b7b7" onclick="Static46_onclick"/>
+      </Layout>
+    </Layouts>
+    <Script type="xscript5.1"><![CDATA[
+this.Static07_onclick = function(obj:nexacro.Static,e:nexacro.ClickEventInfo)
+{
+	
+};
+
+this.Static12_onclick = function(obj:nexacro.Static,e:nexacro.ClickEventInfo)
+{
+	
+};
+
+this.Div04_Edit20_onchanged = function(obj:nexacro.Edit,e:nexacro.ChangeEventInfo)
+{
+	
+};
+
+this.Div07_Static06_onclick = function(obj:nexacro.Static,e:nexacro.ClickEventInfo)
+{
+	
+};
+]]></Script>
+  </Form>
+</FDL>

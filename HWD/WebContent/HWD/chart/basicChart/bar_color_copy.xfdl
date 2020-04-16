@@ -1,0 +1,154 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.0">
+  <Form id="ColumnAndLine" width="768" height="500" titletext="New Form">
+    <Layouts>
+      <Layout height="500" mobileorientation="landscape" width="768">
+        <BasicChart id="BasicChart00" taborder="0" left="0" top="0" right="0" bottom="0" binddataset="Dataset00" categorycolumn="bind:name" bargrouping="false" enableanimation="false">
+          <Contents><![CDATA[{
+	"title": {
+		"id": "title",
+		"text": "지역별 찬성률",
+		"textfont": "14pt/normal '맑은 고딕'",
+		"padding": "0px 0px 5px",
+		"textcolor": "gray"
+	},
+	"legend": {
+		"id": "legend",
+		"padding": "3px 10px 3px 10px",
+		"itemtextfont": "9pt '맑은 고딕'",
+		"itemtextcolor": "#4c4c4c",
+		"visible": false
+	},
+	"hrangebar": {
+		"id": "hrangebar",
+		"trackbarpadding": "1px",
+		"background": "#eaeaea",
+		"linestyle": "1px solid #d5d5d5",
+		"trackbarlinestyle": "0px none",
+		"trackbarfillstyle": "#c9c9c9",
+		"size": "12",
+		"visible": false
+	},
+	"vrangebar": {
+		"id": "vrangebar",
+		"trackbarpadding": "1px",
+		"background": "#eaeaea",
+		"linestyle": "1px solid #d5d5d5",
+		"trackbarlinestyle": "0px none",
+		"trackbarfillstyle": "#c9c9c9",
+		"size": "12",
+		"visible": false
+	},
+	"tooltip": {
+		"id": "tooltip",
+		"background": "#4b4b4b",
+		"linestyle": "0px none",
+		"textcolor": "white",
+		"textfont": "10pt/normal '맑은 고딕'",
+		"padding": "5px"
+	},
+	"board": {
+		"id": "board",
+		"visible": "false"
+	},
+	"categoryaxis": {
+		"id": "categoryaxis",
+		"titletextcolor": "#4c4c4c",
+		"titletextfont": "bold 12pt '맑은 고딕'",
+		"labeltextcolor": "#6f6f6f",
+		"labeltextfont": "11pt '맑은 고딕'",
+		"axislinestyle": "0px solid #525252",
+		"ticklinestyle": "0px solid #525252",
+		"boardlinestyle": "1px solid #d0d0d0"
+	},
+	"seriesset": [
+		{
+			"id": "series0",
+			"titletext": "series",
+			"barvisible": true,
+			"barsize": "50",
+			"itemtextvisible": "false",
+			"itemtextcolor": "#003860",
+			"itemtextfont": "bold 12pt '맑은 고딕'",
+			"valuecolumn": "bind:data",
+			"barfillstyle": "#86B5BC,#E30513,#1C1C1B,#86BC24,#E5007D,#2F8DCD,#F9D900,#F6A200,#BCBCBC",
+			"baropacity": "1",
+			"barlinestyle": "0px solid transparent",
+			"autogradation": "center"
+		}
+	],
+	"valueaxes": [
+		{
+			"id": "valueaxis0",
+			"boardlinevisible": "true",
+			"boardlinestyle": "1px solid #d0d0d0",
+			"labeltextfont": "10pt/normal '맑은 고딕'",
+			"titletextcolor": "#4c4c4c",
+			"titletextfont": "bold 12pt '맑은 고딕'",
+			"ticklinestyle": "0px solid #525252",
+			"axislinestyle": "0px solid #525252",
+			"labeltextcolor": "gray",
+			"visible": "true",
+			"autotickscale": "10",
+			"labelmask": "##%"
+		}
+	]
+}]]></Contents>
+        </BasicChart>
+        <Button id="Button00" taborder="1" text="Button00" left="543" top="14" width="165" height="28" onclick="Button00_onclick"/>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="Dataset00">
+        <ColumnInfo>
+          <Column id="data" type="BIGDECIMAL" size="256"/>
+          <Column id="name" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="data">33.2</Col>
+            <Col id="name">서울</Col>
+          </Row>
+          <Row>
+            <Col id="data">14.5</Col>
+            <Col id="name">대전</Col>
+          </Row>
+          <Row>
+            <Col id="data">11.8</Col>
+            <Col id="name">대구</Col>
+          </Row>
+          <Row>
+            <Col id="data">10.2</Col>
+            <Col id="name">광주</Col>
+          </Row>
+          <Row>
+            <Col id="data">12.3</Col>
+            <Col id="name">부산</Col>
+          </Row>
+          <Row>
+            <Col id="data">9.2</Col>
+            <Col id="name">전주</Col>
+          </Row>
+          <Row>
+            <Col id="data">4.7</Col>
+            <Col id="name">인천</Col>
+          </Row>
+          <Row>
+            <Col id="data">1.1</Col>
+            <Col id="name">경기</Col>
+          </Row>
+          <Row>
+            <Col id="data">4.9</Col>
+            <Col id="name">강원</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.1"><![CDATA[
+this.Button00_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.reload();
+};
+]]></Script>
+  </Form>
+</FDL>

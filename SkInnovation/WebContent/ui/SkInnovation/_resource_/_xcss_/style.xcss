@@ -1,0 +1,164 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<XCSS version="1.0"><![CDATA[/**********************Grid***********************************************/
+.Grid
+{
+	background : #ffffff;
+	-nexa-border : 2px solid #e0002a, 1px solid #b7b1b2, 1px solid #b7b1b2, 1px solid #b7b1b2;
+}
+
+/*-----------------------------------head------------------------------------*/
+.Grid .head .row .cell
+{
+	font : bold 12px Gulim;
+	color : #2f2f2f;
+	background : #f7f7f7;
+	-nexa-border : 1px solid #cacaca;
+	-nexa-padding : 4px 4px 4px 4px;
+	-nexa-text-align : center;
+}
+
+.Grid .head .row .cell[status=disabled]
+{
+	color : #999999;
+}
+
+.Grid .body .row .cell[status=disabled][userstatus=selected]
+{
+	background : #f0f0f0;
+}
+.Grid .body .row .cell
+{
+	color : #333333;
+	-nexa-border : 1px solid #dbdee2;
+	-nexa-padding : 4px 4px 4px 4px;
+}
+
+.Grid .body .row .cell[status=mouseover]
+{
+	background : #f8f8f8;
+}
+
+.Grid .body .row .cell[userstatus=selected]
+{
+	background : #fff4f5;
+}
+
+.Grid .body .row .cell[status=disabled]
+{
+	color : #999999;
+}
+/**********************GroupBox***********************************************/
+.GroupBox .groupboxtitle
+{
+	font : bold 12px Gulim;
+	color : #e0002a;
+}
+.Static.sta_WF_boxBg
+{
+	background : #f0f0f0;
+}
+.Static.sta_WF_label
+{
+	font : bold 12px Gulim;
+}
+.Static.sta_WF_infoBox
+{
+	background : #fff7eb;
+	-nexa-padding : 10px;
+	color : #333333;
+	
+}
+.Static.sta_WF_logo
+{
+	background : url('imagerc::img_WF_logo.png') no-repeat left center;	
+}
+.Static.sta_WF_markWhite
+{
+	background : #ffffff;
+	-nexa-border : 1px solid #777777;	
+	color : #333333;
+}
+.Static.sta_WF_markBlue
+{
+	background : #96ecf1;
+	-nexa-border : 1px solid #209c9a;
+	color : #333333;
+}
+.Static.sta_WF_markRed
+{
+	background : #f5bab6;
+	-nexa-border : 1px solid #d97069;
+	color : #333333;
+	
+}
+
+/**********************Button***********************************************/
+
+.Button.btn_WF_btnWhite,.Button.btn_WF_btnWhite[status=focused]
+{
+	background : #ffffff;
+	-nexa-border : 1px solid #777777;
+	color : #333333;
+	font : bold 12px/normal Gulim;
+	cursor : pointer;
+}
+.Button.btn_WF_btnWhite[status=mouseover],.Button.btn_WF_btnWhite[userstatus=pushed],.Button.btn_WF_btnWhite[userstatus=selected]
+{
+	-nexa-border : 1px solid #585858;
+	background : #f9f9f9;
+}
+.Button.btn_WF_btnRed,.Button.btn_WF_btnRed[status=focused]
+{
+	background : #ffffff;
+	-nexa-border : 1px solid #e0002a;
+	color : #555555;
+	font : bold 12px/normal Gulim;	
+	cursor : pointer;
+}
+.Button.btn_WF_btnRed[status=mouseover],.Button.btn_WF_btnRed[userstatus=pushed],.Button.btn_WF_btnRed[userstatus=selected]
+{
+	-nexa-border : 0px none;
+	background : #f9f9f9;
+}
+.Button.btn_WF_btnInitial,.Button.btn_WF_btnInitial[status=focused]
+{
+	background : url('imagerc::btn_WF_initialize.png') no-repeat left center #ffffff;
+	-nexa-border : 1px solid #e0002a;
+	color : #555555;
+	font : bold 12px/normal Gulim;	
+	cursor : pointer;
+	-nexa-padding : 0px 0px 0px 6px;
+}
+.Button.btn_WF_btnInitial[status=mouseover],.Button.btn_WF_btnInitial[userstatus=pushed],.Button.btn_WF_btnInitial[userstatus=selected]
+{
+	background : url('imagerc::btn_WF_initialize.png') no-repeat left center #fffafb;
+	-nexa-border : 1px solid #e0002a;
+}
+.Button.btn_WF_btnSearch,.Button.btn_WF_btnSearch[status=focused]
+{
+	background : url('imagerc::btn_WF_search.png') no-repeat left center #ffffff;
+	-nexa-border : 1px solid #e0002a;
+	color : #555555;
+	font : bold 12px/normal Gulim;	
+	cursor : pointer;
+	-nexa-padding : 0px 0px 0px 6px;
+}
+.Button.btn_WF_btnSearch[status=mouseover],.Button.btn_WF_btnSearch[userstatus=pushed],.Button.btn_WF_btnSearch[userstatus=selected]
+{
+	background : url('imagerc::btn_WF_search.png') no-repeat left center #fffafb;
+	-nexa-border : 1px solid #e0002a;
+}
+.Button.btn_WF_btnExp,.Button.btn_WF_btnExp[status=focused]
+{
+	background : url('imagerc::btn_WF_doc.png') no-repeat left center #ffffff;
+	-nexa-border : 1px solid #e0002a;
+	color : #555555;
+	font : bold 12px/normal Gulim;	
+	cursor : pointer;
+	-nexa-padding : 0px 0px 0px 4px;
+}
+.Button.btn_WF_btnExp[status=mouseover],.Button.btn_WF_btnExp[userstatus=pushed],.Button.btn_WF_btnExp[userstatus=selected]
+{
+	background : url('imagerc::btn_WF_doc.png') no-repeat left center #fffafb;
+	-nexa-border : 1px solid #e0002a;
+}]]></XCSS>

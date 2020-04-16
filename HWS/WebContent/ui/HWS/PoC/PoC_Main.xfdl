@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="PoC_Main" width="1024" height="718" titletext="메인화면">
+    <Layouts>
+      <Layout height="718" mobileorientation="landscape" width="1024" screenid="">
+        <Static id="Static01" taborder="1" left="0" top="129" background="url('imagerc::img_WF_mainImg_bg.png') repeat-x left center" right="0" bottom="0"/>
+        <Static id="Static00" taborder="0" left="0" top="129" right="0" cssclass="sta_WF_mainImg" text="" bottom="0"/>
+        <Static id="Static02" taborder="2" left="0" top="16.57%" height="90" cssclass="sta_WF_mainLogo" right="0" text=""/>
+      </Layout>
+      <Layout name="Layout0" width="480" height="680" mobileorientation="landscape" screenid="">
+        <Static id="Static00" left="0" top="156" right="0" bottom="374"/>
+      </Layout>
+    </Layouts>
+  </Form>
+</FDL>

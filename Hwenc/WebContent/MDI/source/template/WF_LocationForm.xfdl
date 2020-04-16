@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.0">
+  <Form id="WF_LocationForm" width="950" height="21" titletext="현재위치" scrollbartype="none none" scrolltype="none">
+    <Layouts>
+      <Layout height="21" mobileorientation="landscape" width="950">
+        <Button id="Button22" taborder="0" left="0" top="3" height="16" cssclass="btn_WF_Btitle" defaultbutton="true" tabstop="false" width="13"/>
+        <Static id="Static121" taborder="1" text="소메뉴타이틀" left="19" top="-1" height="20" cssclass="sta_WF_Btitle" fittocontents="width" width="78"/>
+        <Static id="Static132" taborder="2" text="HOME &gt; 대메뉴 &gt; 중메뉴 &gt; 소메뉴" left="Static121:16" top="2" height="13" cssclass="sta_WF_Location" fittocontents="width" width="164"/>
+        <Button id="Button30" taborder="3" left="Static132:4" top="0" width="21" height="21" cssclass="btn_WF_Help"/>
+      </Layout>
+    </Layouts>
+  </Form>
+</FDL>

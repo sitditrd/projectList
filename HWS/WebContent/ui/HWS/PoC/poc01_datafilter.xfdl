@@ -1,0 +1,407 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="w_dpsvusp00000" width="428" height="670" titletext="New Form" onload="w_dpsvusp00000_onload">
+    <Layouts>
+      <Layout height="670" mobileorientation="portrait" width="428">
+        <Button id="Button09" taborder="0" text="Exit" cssclass="btn_WF_basic05" width="80" right="10" height="30" bottom="33" onclick="Button09_onclick" escapebutton="true"/>
+        <Button id="Button05" taborder="1" text="OK" cssclass="btn_WF_basic02" width="80" right="93" height="30" bottom="33" onclick="Button05_onclick"/>
+        <Tab id="Tab00" taborder="2" tabindex="0" left="10" top="10" right="10" bottom="80" multiline="true" tabjustify="false" cssclass="tab_WF_multi">
+          <Tabpages>
+            <Tabpage id="Tabpage1" text="General">
+              <Layouts>
+                <Layout>
+                  <Static id="Static06" taborder="0" text="조회조건 (나머지는 탭은 dummy)" left="5" top="3" width="396" height="30" cssclass="sta_WF_title01"/>
+                  <Static id="Static36" taborder="1" top="33" height="477" cssclass="sta_WF_box01" left="5" right="5"/>
+                  <Static id="Static02" taborder="2" text="Number" left="12" top="43" width="140" height="30" cssclass="sta_WF_label02"/>
+                  <Static id="Static03" taborder="3" text="Description" left="12" top="300" width="140" height="30" cssclass="sta_WF_label02"/>
+                  <Static id="Static03_00" taborder="4" text="Nominator" left="12" top="162" width="140" height="30" cssclass="sta_WF_label02"/>
+                  <CheckBox id="des_95" taborder="5" text="2UEx CBR" left="22" top="329" width="150" height="20"/>
+                  <CheckBox id="des_OCC" taborder="6" text="RCK OCC" left="21" top="355" width="150" height="20"/>
+                  <CheckBox id="des_CAP" taborder="7" text="CAP ROK OC" left="224" top="355" width="150" height="20"/>
+                  <CheckBox id="des_1ROK" taborder="8" text="ROK ASIC" left="225" top="329" width="150" height="20"/>
+                  <CheckBox id="nomi_RKTMSL" taborder="9" text="RKTMSL MDMMSL" left="22" top="197" width="150" height="20"/>
+                  <CheckBox id="nomi_135SP" taborder="10" text="135SP" left="22" top="226" width="150" height="20"/>
+                  <CheckBox id="nomi_170" taborder="11" text="170" left="22" top="255" width="150" height="20"/>
+                  <CheckBox id="nomi_245" taborder="12" text="245" left="225" top="226" width="150" height="20"/>
+                  <CheckBox id="nomi_240" taborder="13" text="240" left="225" top="197" width="150" height="20"/>
+                  <CheckBox id="CX" taborder="14" text="CX" left="22" top="81" width="60" height="20"/>
+                  <CheckBox id="GK" taborder="15" text="GK" left="182" top="81" width="60" height="20"/>
+                  <CheckBox id="HR" taborder="16" text="HR" left="262" top="81" width="60" height="20"/>
+                  <CheckBox id="GG" taborder="17" text="GG" left="102" top="81" width="60" height="20"/>
+                  <CheckBox id="HS" taborder="18" text="HS" left="22" top="113" width="60" height="20"/>
+                  <CheckBox id="WU" taborder="19" text="WU" left="182" top="113" width="60" height="20"/>
+                  <CheckBox id="PX" taborder="20" text="PX" left="102" top="113" width="60" height="20"/>
+                  <CheckBox id="CheckBox00" taborder="21" text="전체선택" left="21" top="468" width="127" height="32" onchanged="Tab00_Tabpage1_CheckBox00_onchanged"/>
+                </Layout>
+              </Layouts>
+            </Tabpage>
+            <Tabpage id="Tabpage2" text="Individual" enable="true">
+              <Layouts>
+                <Layout>
+                  <Static id="Static37" taborder="24" top="5" height="510" cssclass="sta_WF_box01" text="" left="1" right="1"/>
+                  <Static id="Static18" taborder="0" text="Holding Percentage (%)" left="8" top="13" width="178" height="30" cssclass="sta_WF_label01"/>
+                  <Edit id="Edit11" taborder="1" left="180" top="16" width="90" height="25" text="2016/06/21"/>
+                  <Static id="Static20" taborder="2" text="DBA Name" left="8" top="43" width="140" height="30" cssclass="sta_WF_label01"/>
+                  <Static id="Static22" taborder="3" text="Major Product" left="8" top="73" width="168" height="30" cssclass="sta_WF_label01"/>
+                  <Static id="Static28" taborder="4" text="Fiscal Year End (Month)" left="8" top="173" width="183" height="30" cssclass="sta_WF_label01"/>
+                  <Static id="Static30" taborder="5" text="Number of Employees" left="8" top="203" width="168" height="30" cssclass="sta_WF_label01"/>
+                  <Edit id="Edit23" taborder="6" left="180" top="206" width="210" height="25"/>
+                  <Edit id="Edit07" taborder="7" left="180" top="46" width="210" height="25" value="YOUNG STEEL KOREA CO.,LTD." text="YOUNG STEEL KOREA CO.,LTD."/>
+                  <Static id="Static08" taborder="8" text="Registered Flag" left="8" top="143" width="140" height="30" cssclass="sta_WF_label01"/>
+                  <Radio id="Radio01" taborder="9" left="181" top="146" width="130" height="25" onitemchanged="Radio00_onitemchanged" innerdataset="resident_flag" codecolumn="code" datacolumn="data" direction="vertical"/>
+                  <Static id="Static10" taborder="10" text="Total Assets" left="8" top="233" width="140" height="30" cssclass="sta_WF_label01"/>
+                  <Edit id="Edit05" taborder="11" left="180" top="76" width="210" height="25"/>
+                  <Combo id="Combo02" taborder="12" text="Combo00" left="180" top="176" width="210" height="25"/>
+                  <Edit id="Edit06" taborder="13" left="180" top="236" width="210" height="25"/>
+                  <Static id="Static01" taborder="14" text="Net Income" left="8" top="263" width="140" height="30" cssclass="sta_WF_label01"/>
+                  <Static id="Static03" taborder="15" text="Parent Company Name" left="8" top="293" width="168" height="30" cssclass="sta_WF_label01"/>
+                  <Edit id="Edit08" taborder="16" left="180" top="266" width="210" height="25" text="YOUNG STEEL KOREA CO.,LTD."/>
+                  <Edit id="Edit13" taborder="17" left="180" top="296" width="210" height="25"/>
+                  <Static id="Static06" taborder="18" text="Tax amount" left="8" top="323" width="168" height="30" cssclass="sta_WF_label01"/>
+                  <Edit id="Edit17" taborder="19" left="180" top="326" width="210" height="25"/>
+                  <Static id="Static14" taborder="20" text="Actual Capital" left="8" top="413" width="140" height="30" cssclass="sta_WF_label01"/>
+                  <Edit id="Edit21" taborder="21" left="180" top="416" width="210" height="25" text="YOUNG STEEL KOREA CO.,LTD."/>
+                  <Static id="Static24" taborder="22" text="Business Scope Type" left="8" top="443" width="178" height="30" cssclass="sta_WF_label01"/>
+                  <Combo id="Combo05" taborder="23" text="Combo00" left="180" top="446" width="210" height="25"/>
+                </Layout>
+              </Layouts>
+            </Tabpage>
+            <Tabpage id="Tabpage3" text="Corporation">
+              <Layouts>
+                <Layout>
+                  <Static id="Static37" taborder="0" top="0" cssclass="sta_WF_box01" text="" left="0" right="0" bottom="0"/>
+                  <Static id="Static15" taborder="1" text="Organization Type" left="8" top="13" width="177" height="30" cssclass="sta_WF_label01"/>
+                  <Combo id="Combo06" taborder="2" text="Combo00" left="190" top="16" width="205" height="25"/>
+                  <Static id="Static17" taborder="3" text="Operation Type" left="8" top="43" width="173" height="30" cssclass="sta_WF_label01"/>
+                  <Static id="Static19" taborder="4" text="Local DBA Name" left="8" top="73" width="140" height="30" cssclass="sta_WF_label01"/>
+                  <Static id="Static21" taborder="5" text="Representative" left="8" top="103" width="177" height="30" cssclass="sta_WF_label01"/>
+                  <Static id="Static23" taborder="6" text="Business Line Type&#13;&#10;(Local)" left="8" top="138" width="195" height="30" cssclass="sta_WF_label01"/>
+                  <Static id="Static27" taborder="7" text="Incorporatioin Date" left="8" top="203" width="188" height="30" cssclass="sta_WF_label01"/>
+                  <Static id="Static29" taborder="8" text="Tatal Number of Shapes" left="8" top="233" width="176" height="30" cssclass="sta_WF_label01"/>
+                  <Edit id="Edit22" taborder="9" left="190" top="236" width="205" height="25"/>
+                  <Combo id="Combo00" taborder="10" text="Combo00" left="190" top="46" width="205" height="25"/>
+                  <Static id="Static07" taborder="11" text="Business Scale Type" left="8" top="173" width="177" height="30" cssclass="sta_WF_label01"/>
+                  <Static id="Static09" taborder="12" text="Net Worth" left="8" top="263" width="140" height="30" cssclass="sta_WF_label01"/>
+                  <Edit id="Edit09" taborder="13" left="278" top="266" width="117" height="25"/>
+                  <Edit id="Edit01" taborder="14" left="190" top="76" width="205" height="25" password="true" value="abcdef" text="abcdef"/>
+                  <Edit id="Edit02" taborder="15" left="190" top="106" width="205" height="25" password="true" value="abcdef" text="abcdef"/>
+                  <Edit id="Edit03" taborder="16" left="190" top="136" width="100" height="25" value="370101" text="370101"/>
+                  <Edit id="Edit04" taborder="17" left="293" top="136" width="102" height="25" value="WHOLESALER(IRON AND STEEL)" text="WHOLESALER(IRON AND STEEL)"/>
+                  <Combo id="Combo01" taborder="18" text="Combo00" left="190" top="176" width="205" height="25"/>
+                  <Calendar id="Calendar00" taborder="19" left="190" top="206" width="205" height="25" type="spin"/>
+                  <Combo id="Combo04" taborder="20" text="Combo00" left="190" top="266" width="85" height="25"/>
+                  <Static id="Static00" taborder="21" text="Net Sales" left="8" top="293" width="140" height="30" cssclass="sta_WF_label01"/>
+                  <Static id="Static02" taborder="22" text="Operatioin Country" left="8" top="323" width="177" height="30" cssclass="sta_WF_label01"/>
+                  <Edit id="Edit10" taborder="23" left="190" top="296" width="205" height="25"/>
+                  <Edit id="Edit12" taborder="24" left="190" top="326" width="36" height="25" value="KR" text="KR"/>
+                  <Edit id="Edit14" taborder="25" left="229" top="326" width="166" height="25" value="REPUBLIC OF KOREA" text="REPUBLIC OF KOREA"/>
+                  <Static id="Static04" taborder="26" text="Parent company Country" left="8" top="353" width="177" height="30" cssclass="sta_WF_label01"/>
+                  <Edit id="Edit15" taborder="27" left="190" top="356" width="36" height="25" value="JP" text="JP"/>
+                  <Edit id="Edit16" taborder="28" left="229" top="356" width="166" height="25" value="JAPAN" text="JAPAN"/>
+                  <Static id="Static11" taborder="29" text="Number of Locations" left="8" top="383" width="177" height="30" cssclass="sta_WF_label01"/>
+                  <MaskEdit id="MaskEdit00" taborder="30" left="190" top="386" width="205" height="25" value="1"/>
+                  <Static id="Static12" taborder="31" text="Ownership Corporation" left="8" top="413" width="177" height="30" cssclass="sta_WF_label01"/>
+                  <Edit id="Edit18" taborder="32" left="190" top="416" width="100" height="25"/>
+                  <Edit id="Edit19" taborder="33" left="293" top="416" width="102" height="25"/>
+                  <Static id="Static13" taborder="34" text="Legal Capital" left="8" top="443" width="140" height="30" cssclass="sta_WF_label01"/>
+                  <Edit id="Edit20" taborder="35" left="190" top="446" width="205" height="25"/>
+                  <Static id="Static16" taborder="36" text="Cash Turnover Per Month" left="8" top="473" width="173" height="30" cssclass="sta_WF_label01"/>
+                  <Combo id="Combo03" taborder="37" text="Combo00" left="190" top="476" width="205" height="25"/>
+                </Layout>
+              </Layouts>
+            </Tabpage>
+            <Tabpage id="Tabpage4" text="Address&amp;Tel">
+              <Layouts>
+                <Layout>
+                  <Static id="Static36" taborder="0" top="4" height="88" cssclass="sta_WF_box01" left="1" right="1"/>
+                  <Static id="Static00" taborder="1" text="Mailing Address" left="9" top="18" width="162" height="30" cssclass="sta_WF_label01"/>
+                  <Static id="Static04" taborder="2" text="Cellular Phone No" left="9" top="48" width="140" height="30" cssclass="sta_WF_label01"/>
+                  <Edit id="Edit03" taborder="3" left="150" top="51" width="240" height="25"/>
+                  <Static id="Static06" taborder="4" top="102" height="350" cssclass="sta_WF_box01" left="1" right="1"/>
+                  <Static id="Static12" taborder="5" text="Line #1" left="20" top="172" width="77" height="30" cssclass="sta_WF_label01"/>
+                  <Edit id="Edit10" taborder="6" left="96" top="175" width="262" height="25"/>
+                  <Static id="Static14" taborder="7" text="Local Address" left="14" top="147" width="140" height="30" cssclass="sta_WF_label02"/>
+                  <Combo id="Combo04" taborder="8" text="Combo00" left="150" top="21" width="240" height="25"/>
+                  <Static id="Static03" taborder="9" text="Address Type" left="11" top="113" width="162" height="30" cssclass="sta_WF_label01"/>
+                  <Combo id="Combo05" taborder="10" text="Combo00" left="120" top="116" width="238" height="25"/>
+                  <Edit id="Edit16" taborder="11" left="96" top="205" width="262" height="25"/>
+                  <Static id="Static32" taborder="12" text="Line #2" left="20" top="202" width="77" height="30" cssclass="sta_WF_label01"/>
+                  <Static id="Static33" taborder="13" text="Line #3" left="20" top="232" width="77" height="30" cssclass="sta_WF_label01"/>
+                  <Edit id="Edit18" taborder="14" left="96" top="235" width="262" height="25"/>
+                  <Static id="Static25" taborder="15" text="Line #1" left="20" top="292" width="77" height="30" cssclass="sta_WF_label01"/>
+                  <Edit id="Edit14" taborder="16" left="96" top="295" width="262" height="25"/>
+                  <Static id="Static26" taborder="17" text="English Address" left="14" top="267" width="140" height="30" cssclass="sta_WF_label02"/>
+                  <Edit id="Edit19" taborder="18" left="96" top="325" width="262" height="25"/>
+                  <Static id="Static34" taborder="19" text="Line #2" left="20" top="322" width="77" height="30" cssclass="sta_WF_label01"/>
+                  <Static id="Static38" taborder="20" text="Line #3" left="20" top="352" width="77" height="30" cssclass="sta_WF_label01"/>
+                  <Edit id="Edit24" taborder="21" left="96" top="355" width="262" height="25"/>
+                  <Static id="Static11" taborder="22" text="*Remark" left="13" top="402" width="59" height="31" cssclass="sta_WF_Helptxt"/>
+                </Layout>
+              </Layouts>
+            </Tabpage>
+            <Tabpage id="Tabpage5" text="Contact Person">
+              <Layouts>
+                <Layout>
+                  <Static id="Static36" taborder="0" top="0" cssclass="sta_WF_box01" left="0" right="1" onclick="Tab00_Tabpage5_Static36_onclick" bottom="0" text=""/>
+                  <Static id="Static00" taborder="1" text="Full Name" left="10" top="19" width="162" height="30" cssclass="sta_WF_label01"/>
+                  <Static id="Static04" taborder="2" text="Title" left="10" top="49" width="140" height="30" cssclass="sta_WF_label01"/>
+                  <Edit id="Edit03" taborder="3" left="127" top="22" width="256" height="25"/>
+                  <Combo id="Combo04" taborder="4" text="Combo00" left="127" top="52" width="256" height="25"/>
+                  <Static id="Static26" taborder="5" text="Bus. Part" left="12" top="258" width="140" height="30" cssclass="sta_WF_label02"/>
+                  <TextArea id="TextArea00" taborder="6" top="352" width="254" height="115" right="31"/>
+                  <CheckBox id="CheckBox00" taborder="7" text="F/X" left="23" top="294" width="125" height="20"/>
+                  <Static id="Static03" taborder="8" text="Issued By" left="10" top="79" width="140" height="30" cssclass="sta_WF_label01"/>
+                  <Edit id="Edit01" taborder="9" left="127" top="82" width="68" height="25"/>
+                  <Edit id="Edit02" taborder="10" left="198" top="82" width="185" height="25"/>
+                  <Static id="Static07" taborder="11" text="Department" left="10" top="109" width="162" height="30" cssclass="sta_WF_label01"/>
+                  <Edit id="Edit04" taborder="12" left="127" top="112" width="256" height="25"/>
+                  <Static id="Static08" taborder="13" text="Cellular phone&#13;&#10;No." left="10" top="143" width="162" height="30" cssclass="sta_WF_label01"/>
+                  <Edit id="Edit05" taborder="14" left="127" top="142" width="256" height="25"/>
+                  <Static id="Static43" taborder="15" text="Tel" left="10" top="192" width="140" height="30" cssclass="sta_WF_label01"/>
+                  <Edit id="Edit32" taborder="16" left="127" top="195" width="65" height="25"/>
+                  <Edit id="Edit33" taborder="17" left="195" top="195" width="65" height="25"/>
+                  <Edit id="Edit34" taborder="18" left="263" top="195" width="72" height="25"/>
+                  <Edit id="Edit35" taborder="19" left="338" top="195" width="43" height="25"/>
+                  <Edit id="Edit36" taborder="20" left="127" top="225" width="65" height="25"/>
+                  <Edit id="Edit37" taborder="21" left="195" top="225" width="65" height="25"/>
+                  <Edit id="Edit38" taborder="22" left="263" top="225" width="72" height="25"/>
+                  <Static id="Static44" taborder="23" text="Fax" left="10" top="222" width="140" height="30" cssclass="sta_WF_label01"/>
+                  <Static id="Static45" taborder="24" text="Country" left="128" top="171" width="64" height="25" cssclass="sta_WF_alignCenter"/>
+                  <Static id="Static46" taborder="25" text="Area" left="198" top="171" width="64" height="25" cssclass="sta_WF_alignCenter"/>
+                  <Static id="Static47" taborder="26" text="No" left="272" top="171" width="64" height="25" cssclass="sta_WF_alignCenter"/>
+                  <Static id="Static48" taborder="27" text="Ext." left="346" top="171" width="44" height="25" cssclass="sta_WF_alignCenter"/>
+                  <CheckBox id="CheckBox01" taborder="28" text="Derivative" left="162" top="294" width="125" height="20"/>
+                  <CheckBox id="CheckBox03" taborder="29" text="Deposit" left="23" top="318" width="125" height="20"/>
+                  <CheckBox id="CheckBox04" taborder="30" text="Imp./Exp." left="162" top="318" width="125" height="20"/>
+                </Layout>
+              </Layouts>
+            </Tabpage>
+            <Tabpage id="Tabpage6" text="info">
+              <Layouts>
+                <Layout>
+                  <Static id="Static36" taborder="33" top="0" cssclass="sta_WF_box01" left="0" right="1" onclick="Tab00_Tabpage5_Static36_onclick" bottom="0" text=""/>
+                  <Static id="Static01" taborder="0" text="Email Address" left="9" top="15" width="140" height="30" cssclass="sta_WF_label01"/>
+                  <Edit id="Edit02" taborder="1" left="136" top="18" width="240" height="25"/>
+                  <Static id="Static13" taborder="2" text="Province" left="10" top="169" width="140" height="30" cssclass="sta_WF_label01"/>
+                  <Edit id="Edit13" taborder="3" left="128" top="172" width="67" height="25"/>
+                  <Static id="Static02" taborder="4" text="Pager No" left="9" top="45" width="140" height="30" cssclass="sta_WF_label01"/>
+                  <Edit id="Edit15" taborder="5" left="136" top="48" width="240" height="25"/>
+                  <Static id="Static31" taborder="6" text="Wrong Address" left="10" top="110" width="140" height="30" cssclass="sta_WF_label01"/>
+                  <Edit id="Edit25" taborder="7" left="198" top="172" width="193" height="25"/>
+                  <Static id="Static39" taborder="8" text="District" left="10" top="199" width="140" height="30" cssclass="sta_WF_label01"/>
+                  <Edit id="Edit26" taborder="9" left="128" top="202" width="67" height="25"/>
+                  <Edit id="Edit27" taborder="10" left="198" top="202" width="193" height="25"/>
+                  <Static id="Static40" taborder="11" text="Commune/Ward" left="10" top="229" width="140" height="30" cssclass="sta_WF_label01"/>
+                  <Edit id="Edit28" taborder="12" left="128" top="232" width="67" height="25"/>
+                  <Edit id="Edit29" taborder="13" left="198" top="232" width="193" height="25"/>
+                  <Static id="Static41" taborder="14" text="Zip" left="10" top="259" width="140" height="30" cssclass="sta_WF_label01"/>
+                  <Edit id="Edit30" taborder="15" left="128" top="262" width="67" height="25"/>
+                  <Edit id="Edit31" taborder="16" left="198" top="262" width="193" height="25"/>
+                  <Static id="Static43" taborder="17" text="Tel" left="10" top="319" width="140" height="30" cssclass="sta_WF_label01"/>
+                  <Edit id="Edit32" taborder="18" left="126" top="322" width="67" height="25"/>
+                  <Edit id="Edit33" taborder="19" left="196" top="322" width="67" height="25"/>
+                  <Edit id="Edit34" taborder="20" left="266" top="322" width="75" height="25"/>
+                  <Edit id="Edit36" taborder="21" left="126" top="352" width="67" height="25"/>
+                  <Edit id="Edit37" taborder="22" left="196" top="352" width="67" height="25"/>
+                  <Edit id="Edit38" taborder="23" left="266" top="352" width="75" height="25"/>
+                  <Static id="Static44" taborder="24" text="Fax" left="10" top="349" width="140" height="30" cssclass="sta_WF_label01"/>
+                  <Static id="Static45" taborder="25" text="Country" left="127" top="298" width="64" height="25" cssclass="sta_WF_alignCenter"/>
+                  <Static id="Static46" taborder="26" text="Area" left="197" top="298" width="64" height="25" cssclass="sta_WF_alignCenter"/>
+                  <Static id="Static47" taborder="27" text="No" left="271" top="298" width="64" height="25" cssclass="sta_WF_alignCenter"/>
+                  <Radio id="Radio02" taborder="28" left="128" top="113" width="130" height="25" onitemchanged="Radio00_onitemchanged" innerdataset="resident_flag" codecolumn="code" datacolumn="data" direction="vertical"/>
+                  <Button id="Button11" taborder="29" text="Add" left="96" top="464" width="73" height="24" cssclass="btn_WF_basic06"/>
+                  <Button id="Button12" taborder="30" text="Modify" left="172" top="464" width="73" height="24" cssclass="btn_WF_basic06"/>
+                  <Button id="Button13" taborder="31" text="Remove" left="248" top="464" width="73" height="24" cssclass="btn_WF_basic06"/>
+                  <Button id="Button14" taborder="32" text="Reset" top="464" width="73" height="24" cssclass="btn_WF_basic06" left="324"/>
+                </Layout>
+              </Layouts>
+            </Tabpage>
+            <Tabpage id="Tabpage7" text="Extra">
+              <Layouts>
+                <Layout>
+                  <Static id="Static06" taborder="0" text="Customer Name" left="5" top="3" width="150" height="30" cssclass="sta_WF_title01"/>
+                  <Static id="Static36" taborder="1" top="36" height="122" cssclass="sta_WF_box01" left="5" right="5"/>
+                  <Static id="Static37" taborder="2" top="170" cssclass="sta_WF_box01" text="" right="5" left="5" height="288"/>
+                  <Static id="Static15" taborder="3" text="Status" left="12" top="178" width="170" height="30" cssclass="sta_WF_label01"/>
+                  <Static id="Static17" taborder="4" text="Customer Status" left="12" top="208" width="170" height="30" cssclass="sta_WF_label01"/>
+                  <Edit id="Edit11" taborder="5" left="190" top="210" width="85" height="25" value="2016/06/21" text="2016/06/21"/>
+                  <Static id="Static19" taborder="6" text="Location Country" left="12" top="238" width="170" height="30" cssclass="sta_WF_label01"/>
+                  <Edit id="Edit12" taborder="7" left="190" top="241" width="38" height="25" value="KR" text="KR"/>
+                  <Static id="Static21" taborder="8" text="Customer Deposit Type" left="12" top="268" width="170" height="30" cssclass="sta_WF_label01"/>
+                  <Static id="Static23" taborder="9" text="Financial Institutioin Type" left="12" top="298" width="170" height="30" cssclass="sta_WF_label01"/>
+                  <Static id="Static27" taborder="10" text="Transaction Bank Name" left="12" top="358" width="170" height="30" cssclass="sta_WF_label01"/>
+                  <Edit id="Edit20" taborder="11" left="190" top="361" width="205" height="25"/>
+                  <Static id="Static29" taborder="12" text="BIS Rate" left="12" top="388" width="170" height="30" cssclass="sta_WF_label01"/>
+                  <Edit id="Edit22" taborder="13" left="190" top="391" width="205" height="25"/>
+                  <CheckBox id="CheckBox00" taborder="14" text="VIP" left="283" top="186" width="118" height="20"/>
+                  <Static id="Static00" taborder="15" text="ABBR Customer Name" left="18" top="66" width="162" height="30" cssclass="sta_WF_label01"/>
+                  <Edit id="Edit01" taborder="16" left="180" top="69" width="215" height="25"/>
+                  <Static id="Static02" taborder="17" text="English Name" left="12" top="43" width="140" height="30" cssclass="sta_WF_label02"/>
+                  <Static id="Static03" taborder="18" text="Korean Name" left="12" top="96" width="140" height="30" cssclass="sta_WF_label02"/>
+                  <Static id="Static04" taborder="19" text="Customer Name" left="18" top="119" width="140" height="30" cssclass="sta_WF_label01"/>
+                  <Edit id="Edit03" taborder="20" left="180" top="122" width="215" height="25"/>
+                  <CheckBox id="CheckBox01" taborder="21" text="Black Customer" left="283" top="209" width="118" height="20"/>
+                  <Edit id="Edit04" taborder="22" left="190" top="180" width="85" height="25" value="3300" text="3300"/>
+                  <Edit id="Edit05" taborder="23" left="230" top="241" width="165" height="25" value="REPUBLIC OF KOREA" text="REPUBLIC OF KOREA"/>
+                  <Combo id="Combo01" taborder="24" text="Combo00" left="190" top="301" width="205" height="25"/>
+                  <Edit id="Edit08" taborder="25" left="190" top="271" width="205" height="25"/>
+                  <Static id="Static07" taborder="26" text="Resident Flag (Local)" left="12" top="328" width="170" height="30" cssclass="sta_WF_label01"/>
+                  <Radio id="Radio00" taborder="27" left="190" top="331" width="130" height="25" onitemchanged="Radio00_onitemchanged" innerdataset="resident_flag" codecolumn="code" datacolumn="data" direction="vertical"/>
+                  <Static id="Static09" taborder="28" text="Tax Type (Local)" left="12" top="418" width="170" height="30" cssclass="sta_WF_label01"/>
+                  <Edit id="Edit09" taborder="29" left="190" top="421" width="205" height="25"/>
+                </Layout>
+              </Layouts>
+            </Tabpage>
+            <Tabpage id="Tabpage8" text="Filter Condition">
+              <Layouts>
+                <Layout>
+                  <Static id="Static15" taborder="0" text="Organization Type" left="8" top="13" width="177" height="30" cssclass="sta_WF_label01"/>
+                  <Combo id="Combo06" taborder="1" text="Combo00" left="190" top="16" width="205" height="25"/>
+                  <Static id="Static17" taborder="2" text="Operation Type" left="8" top="43" width="173" height="30" cssclass="sta_WF_label01"/>
+                  <Static id="Static19" taborder="3" text="Local DBA Name" left="8" top="73" width="140" height="30" cssclass="sta_WF_label01"/>
+                  <Static id="Static21" taborder="4" text="Representative" left="8" top="103" width="177" height="30" cssclass="sta_WF_label01"/>
+                  <Static id="Static23" taborder="5" text="Business Line Type&#13;&#10;(Local)" left="8" top="138" width="195" height="30" cssclass="sta_WF_label01"/>
+                  <Static id="Static27" taborder="6" text="Incorporatioin Date" left="8" top="203" width="188" height="30" cssclass="sta_WF_label01"/>
+                  <Static id="Static29" taborder="7" text="Tatal Number of Shapes" left="8" top="233" width="176" height="30" cssclass="sta_WF_label01"/>
+                  <Edit id="Edit22" taborder="8" left="190" top="236" width="205" height="25"/>
+                  <Combo id="Combo00" taborder="9" text="Combo00" left="190" top="46" width="205" height="25"/>
+                  <Static id="Static07" taborder="10" text="Business Scale Type" left="8" top="173" width="177" height="30" cssclass="sta_WF_label01"/>
+                  <Static id="Static09" taborder="11" text="Net Worth" left="8" top="263" width="140" height="30" cssclass="sta_WF_label01"/>
+                  <Edit id="Edit09" taborder="12" left="278" top="266" width="117" height="25"/>
+                  <Edit id="Edit01" taborder="13" left="190" top="76" width="205" height="25" password="true" value="abcdef" text="abcdef"/>
+                  <Edit id="Edit02" taborder="14" left="190" top="106" width="205" height="25" password="true" value="abcdef" text="abcdef"/>
+                  <Edit id="Edit03" taborder="15" left="190" top="136" width="100" height="25" value="370101" text="370101"/>
+                  <Edit id="Edit04" taborder="16" left="293" top="136" width="102" height="25" value="WHOLESALER(IRON AND STEEL)" text="WHOLESALER(IRON AND STEEL)"/>
+                  <Combo id="Combo01" taborder="17" text="Combo00" left="190" top="176" width="205" height="25"/>
+                  <Calendar id="Calendar00" taborder="18" left="190" top="206" width="205" height="25" type="spin"/>
+                  <Combo id="Combo04" taborder="19" text="Combo00" left="190" top="266" width="85" height="25"/>
+                  <Static id="Static00" taborder="20" text="Net Sales" left="8" top="293" width="140" height="30" cssclass="sta_WF_label01"/>
+                  <Static id="Static02" taborder="21" text="Operatioin Country" left="8" top="323" width="177" height="30" cssclass="sta_WF_label01"/>
+                  <Edit id="Edit10" taborder="22" left="190" top="296" width="205" height="25"/>
+                  <Edit id="Edit12" taborder="23" left="190" top="326" width="36" height="25" value="KR" text="KR"/>
+                  <Edit id="Edit14" taborder="24" left="229" top="326" width="166" height="25" value="REPUBLIC OF KOREA" text="REPUBLIC OF KOREA"/>
+                  <Static id="Static04" taborder="25" text="Parent company Country" left="8" top="353" width="177" height="30" cssclass="sta_WF_label01"/>
+                  <Edit id="Edit15" taborder="26" left="190" top="356" width="36" height="25" value="JP" text="JP"/>
+                  <Edit id="Edit16" taborder="27" left="229" top="356" width="166" height="25" value="JAPAN" text="JAPAN"/>
+                  <Static id="Static11" taborder="28" text="Number of Locations" left="8" top="383" width="177" height="30" cssclass="sta_WF_label01"/>
+                  <MaskEdit id="MaskEdit00" taborder="29" left="190" top="386" width="205" height="25" value="1"/>
+                  <Static id="Static12" taborder="30" text="Ownership Corporation" left="8" top="413" width="177" height="30" cssclass="sta_WF_label01"/>
+                  <Edit id="Edit18" taborder="31" left="190" top="416" width="100" height="25"/>
+                  <Edit id="Edit19" taborder="32" left="293" top="416" width="102" height="25"/>
+                  <Static id="Static13" taborder="33" text="Legal Capital" left="8" top="443" width="140" height="30" cssclass="sta_WF_label01"/>
+                  <Edit id="Edit20" taborder="34" left="190" top="446" width="205" height="25"/>
+                  <Static id="Static16" taborder="35" text="Cash Turnover Per Month" left="8" top="473" width="173" height="30" cssclass="sta_WF_label01"/>
+                  <Combo id="Combo03" taborder="36" text="Combo00" left="190" top="476" width="205" height="25"/>
+                </Layout>
+              </Layouts>
+            </Tabpage>
+          </Tabpages>
+        </Tab>
+      </Layout>
+    </Layouts>
+    <Script type="xscript5.1"><![CDATA[
+this.Button09_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.close();
+};
+
+this.Button05_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	//자장
+	nexacro.setPrivateProfile("DataFilterCond", this.dsCond.saveXML());
+	//로컬저장
+// 	var rtn = "";
+// 	for(var i = 0 ; i < this.dsDataSelected.rowcount ; i++)
+// 	{
+// 		rtn += this.dsDataSelected.getColumn(i, "code") + ", ";
+// 	}
+// 	rtn = rtn.substr(0, rtn.length -2);
+//	this.close(this.dsDataSelected);
+	this.opener.lookupFunc("fn_popCallback").call("DataFilter", this.dsCond, this);
+};
+
+this.Tab00_Tabpage4_TextArea00_onchanged = function(obj:nexacro.TextArea,e:nexacro.ChangeEventInfo)
+{
+	
+};
+
+this.Tab00_Tabpage1_CheckBox00_onchanged = function(obj:nexacro.CheckBox,e:nexacro.CheckBoxChangedEventInfo)
+{
+	var bValue = e.postvalue;
+	
+	for(var i = 0 ; i < this.dsCond.colcount ;i++)
+	{
+		//edit제외
+		//if(i !=7 && i!=8) 
+		this.dsCond.setColumn(0, i, bValue);
+	}
+};
+
+this.w_dpsvusp00000_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
+{
+	this.dsCond.loadXML(nexacro.getPrivateProfile("DataFilterCond"));
+};
+]]></Script>
+    <Objects>
+      <Dataset id="resident_flag">
+        <ColumnInfo>
+          <Column id="code" type="STRING" size="256"/>
+          <Column id="data" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="code">1</Col>
+            <Col id="data">Yes</Col>
+          </Row>
+          <Row>
+            <Col id="code">2</Col>
+            <Col id="data">No</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="dsCond">
+        <ColumnInfo>
+          <Column id="CX" type="STRING" size="256"/>
+          <Column id="GG" type="STRING" size="256"/>
+          <Column id="GK" type="STRING" size="256"/>
+          <Column id="HR" type="STRING" size="256"/>
+          <Column id="HS" type="STRING" size="256"/>
+          <Column id="PX" type="STRING" size="256"/>
+          <Column id="WU" type="STRING" size="256"/>
+          <Column id="nomi_RKTMSL" type="STRING" size="256"/>
+          <Column id="nomi_240" type="STRING" size="256"/>
+          <Column id="nomi_135SP" type="STRING" size="256"/>
+          <Column id="nomi_245" type="STRING" size="256"/>
+          <Column id="nomi_170" type="STRING" size="256"/>
+          <Column id="des_CBR" type="STRING" size="256"/>
+          <Column id="des_ASIC" type="STRING" size="256"/>
+          <Column id="des_OCC" type="STRING" size="256"/>
+          <Column id="des_CAP" type="STRING" size="256"/>
+          <Column id="All" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row/>
+        </Rows>
+      </Dataset>
+    </Objects>
+    <Bind>
+      <BindItem id="item0" compid="Tab00.Tabpage1.form.CX" propid="value" datasetid="dsCond" columnid="CX"/>
+      <BindItem id="item1" compid="Tab00.Tabpage1.form.GG" propid="value" datasetid="dsCond" columnid="GG"/>
+      <BindItem id="item2" compid="Tab00.Tabpage1.form.GK" propid="value" datasetid="dsCond" columnid="GK"/>
+      <BindItem id="item5" compid="Tab00.Tabpage1.form.des_OCC" propid="value" datasetid="dsCond" columnid="des_OCC"/>
+      <BindItem id="item8" compid="Tab00.Tabpage1.form.des_CAP" propid="value" datasetid="dsCond" columnid="des_CAP"/>
+      <BindItem id="item10" compid="Tab00.Tabpage1.form.des_1ROK" propid="value" datasetid="dsCond" columnid="des_ASIC"/>
+      <BindItem id="item12" compid="Tab00.Tabpage1.form.nomi_RKTMSL" propid="value" datasetid="dsCond" columnid="nomi_RKTMSL"/>
+      <BindItem id="item13" compid="Tab00.Tabpage1.form.nomi_135SP" propid="value" datasetid="dsCond" columnid="nomi_135SP"/>
+      <BindItem id="item14" compid="Tab00.Tabpage1.form.nomi_170" propid="value" datasetid="dsCond" columnid="nomi_170"/>
+      <BindItem id="item15" compid="Tab00.Tabpage1.form.nomi_245" propid="value" datasetid="dsCond" columnid="nomi_245"/>
+      <BindItem id="item16" compid="Tab00.Tabpage1.form.nomi_240" propid="value" datasetid="dsCond" columnid="nomi_240"/>
+      <BindItem id="item17" compid="Tab00.Tabpage1.form.HR" propid="value" datasetid="dsCond" columnid="HR"/>
+      <BindItem id="item18" compid="Tab00.Tabpage1.form.HS" propid="value" datasetid="dsCond" columnid="HS"/>
+      <BindItem id="item19" compid="Tab00.Tabpage1.form.WU" propid="value" datasetid="dsCond" columnid="WU"/>
+      <BindItem id="item20" compid="Tab00.Tabpage1.form.PX" propid="value" datasetid="dsCond" columnid="PX"/>
+      <BindItem id="item3" compid="Tab00.Tabpage1.form.des_95" propid="value" datasetid="dsCond" columnid="des_CBR"/>
+      <BindItem id="item4" compid="Tab00.Tabpage1.form.CheckBox00" propid="value" datasetid="dsCond" columnid="All"/>
+    </Bind>
+  </Form>
+</FDL>
